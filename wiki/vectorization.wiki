@@ -1,0 +1,9 @@
+#Standard vectorization algorithm.
+
+= Vectorization algorithms =
+
+I was a little surprised that I did not find a Java library with vectorization algorithm and an appropriate license. So I just wrote one myself.
+
+= Details =
+
+I actually wrote a class hierarchy of vectorization algorithms
