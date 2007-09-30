@@ -6,4 +6,4 @@ I was a little surprised that I did not find a Java library with vectorization a
 
 = Details =
 
-I actually wrote a class hierarchy of vectorization algorithms
+It is actually a class hierarchy of vectorization algorithms.
