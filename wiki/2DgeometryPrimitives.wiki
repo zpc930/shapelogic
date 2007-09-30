@@ -3,11 +3,9 @@
 = 2D geometry primitives =
 
 The goal for these new classes for 2D geometry primitives is:
-  * Simple classes for doing affine 2D geometry that is works as closely with standard libraries as possible.
-  * Build on top of Java AWT Point classes.
+  * Simple classes for doing affine 2D geometry that works as closely with standard libraries as possible
+  * Builds on top of Java AWT Point classes
 
-For anything more complicated use the good mathematic libraries:
+For anything more complicated use these comprehensive existing mathematics libraries:
   * [http://commons.apache.org/math/ commons-math]
   * [http://dsd.lbl.gov/~hoschek/colt/ colt]
-
-These math libraries were too heavyweight to work with simple affine plane geometry.
