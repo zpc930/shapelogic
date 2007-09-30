@@ -4,14 +4,8 @@
 
 When starting my work I was trying to find a good library for this 2D geometry primitives.
 I did not find anything that fit my needs too well.
-There are good math libraries, colt and commons-math.
+There are good math libraries, [http://dsd.lbl.gov/~hoschek/colt/ colt] and [http://commons.apache.org/math/ commons-math], but they are too heavyweight to work with simple affine plane geometry.
+
 Java has some very elementary points in awt.
 
 So I decided to build on top of Java awt.
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
