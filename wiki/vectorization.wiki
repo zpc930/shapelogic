@@ -2,8 +2,8 @@
 
 = Vectorization algorithms =
 
-Simple algorithm for transforming a bitmap lines into vector lines, with commercially friendly license.
+Simple algorithm for transforming bitmap lines into vector lines, with a commercially friendly license.
 
 = Different implementations =
 
-It is actually a class hierarchy of different vectorization algorithms.
+This is a class hierarchy of different vectorization algorithms.
