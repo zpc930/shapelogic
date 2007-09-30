@@ -2,4 +2,4 @@
 
 = Color segmentation algorithm =
 
-This starts with a color picture and end with one.
+This starts with a color picture and ends with one.
