@@ -2,10 +2,12 @@
 
 = 2D geometry primitives =
 
-When starting my work I was trying to find a good library for this 2D geometry primitives.
-I did not find anything that fit my needs too well.
-There are good math libraries, [http://dsd.lbl.gov/~hoschek/colt/ colt] and [http://commons.apache.org/math/ commons-math], but they are too heavyweight to work with simple affine plane geometry.
+The goal for these new classes for 2D geometry primitives is:
+  * Simple classes for doing affine 2D geometry that is works as closely with standard libraries as possible.
+  * Build on top of Java AWT Point classes.
 
-Java has some very elementary points in awt.
+For anything more complicated use the good mathematic libraries:
+  * [http://commons.apache.org/math/ commons-math]
+  * [http://dsd.lbl.gov/~hoschek/colt/ colt]
 
-So I decided to build on top of Java awt.
+These math libraries were too heavyweight to work with simple affine plane geometry.
