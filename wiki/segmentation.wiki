@@ -1,5 +1,5 @@
-#A standard color segmentation algorithm.
+#A standard color and gray scale segmentation algorithm.
 
-= Color segmentation algorithm =
+= Color and gray scale segmentation algorithm =
 
-This starts with a color picture and ends with one.
+Segmentation algorithm that works on both RGB and 8 bit gray scale images.
