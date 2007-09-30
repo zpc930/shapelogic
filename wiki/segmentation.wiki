@@ -2,4 +2,4 @@
 
 = Color and gray scale segmentation algorithm =
 
-Segmentation algorithm that works on both RGB and 8 bit gray scale images.
+The segmentation algorithm works on both RGB and 8 bit gray scale images.
