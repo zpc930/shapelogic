@@ -2,8 +2,8 @@
 
 = Vectorization algorithms =
 
-I was a little surprised that I did not find a Java library with vectorization algorithm and an appropriate license. So I just wrote one myself.
+Simple algorithm for transforming a bitmap lines into vector lines, with commercially friendly license.
 
-= Details =
+= Different implementations =
 
-It is actually a class hierarchy of vectorization algorithms.
+It is actually a class hierarchy of different vectorization algorithms.
