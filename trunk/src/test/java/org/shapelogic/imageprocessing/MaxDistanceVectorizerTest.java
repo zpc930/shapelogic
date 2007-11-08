@@ -322,6 +322,9 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	/** This is an test for new images with problems, should only be used when there are problems*/
 	public void testFailImage() {
+		boolean testFailedIamge=false;
+		if (!testFailedIamge)
+			return;
 		String fileName = "fail";
 		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
