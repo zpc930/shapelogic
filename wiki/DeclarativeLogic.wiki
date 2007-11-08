@@ -1,0 +1,16 @@
+#Declarative goal driven logic engine
+
+= Declarative logic =
+
+ShapeLogic has a declarative goal driven logic engine.
+
+This is to a large extend inspired by the Prolog language.
+
+= Prolog =
+
+Prolog was all the rage in the early 1980, the Japanese 5 generation project was mainly based on Prolog. It turned out that it did not scale well to real world problems. Partly because it was only good at handling symbolic information and not doing computations.
+So Prolog fell out of favor.
+
+I still think programming in Prolog is almost as simple as programming in SQL.
+
+So ShapeLogic is trying to preserve this simplicity of Prolog, while maintaining ability to do efficient numerical calculation.
