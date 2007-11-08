@@ -1,0 +1,30 @@
+#Getting started
+
+= Getting started =
+
+You can use ShapeLogic in different ways:
+  * Development mode
+  * User mode
+
+
+= Development mode =
+
+You need to have [http://maven.apache.org/ Maven 2] installed.
+
+Currently the project is set up to work directly with Eclipse 3.3, but you can use:
+NetBeans, IntelliJ, emacs, vi or notepad.
+
+Check out the code into a local directory.
+
+Run:
+  * *mvn test* runs the unit tests locally
+  * *mvn package* runs the unit tests locally, and if they passes it will create the jar file
+
+= User mode =
+
+You currently need a version of ShapeLogic that has the operations you need compiled in.
+Here are the steps to get it to work with ImageJ:
+  * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/ShapeLogic
+  * Take the jar file for ShapeLogic and move it to that directory: shapelogic_-0.2.jar
+
+When you open ImageJ there will be a ShapeLogic dir with commands in.
