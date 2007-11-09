@@ -9,6 +9,48 @@ This is inspired by
   * AI choice tree
   * Oz language
 
+= Example of logic rules in ShapeLogic =
+Look in the class for example of simple rules: LetterTaskFactory
+
+This rely on 
+[http://commons.apache.org/jexl/ Java Expression Language (JEXL)]
+
+So the vectorizer will put a MultiLinePolygon object into the string 
+"polygon" in a JEXL context.
+
+Then there are rules that go in and look at the object using reflection.
+Here is an example of a simple NumericRule:
+{{{
+NumericRule("A", "pointCount", "polygon.getPoints().size()", 5.),
+}}}
+
+Here is an example of all the rules for a letter:
+{{{
+NumericRule[] numericRulesForA = {
+    new NumericRule("A", POINT_COUNT, POINT_COUNT_EX, 5.),
+    new NumericRule("A", LINE_COUNT, LINE_COUNT_EX, 5.),
+    new NumericRule("A", HORIZONTAL_LINE_COUNT, HORIZONTAL_LINE_COUNT_EX, 1.),
+    new NumericRule("A", VERTICAL_LINE_COUNT, VERTICAL_LINE_COUNT_EX, 0.),
+    new NumericRule("A", END_POINT_COUNT, END_POINT_COUNT_EX, 2.),
+}}}
+
+where
+
+{{{
+POINT_COUNT = "pointCount";
+POINT_COUNT_EX = "polygon.getPoints().size()"
+}}}
+
+All these rules are combined into and AndTask.
+
+A whole letter match will then be an XOrTask with an AndTask for each letter.
+
+== Boolean combinations of filters with parameters ==
+If you need to do more complex boolean combinations of filter on polygons try the following:
+"polygon.getPoints().filter('PointRightOfFilter(0.3) && PointAboveFilter(0.3)')"
+
+This will filter point that are in in the first 30% and top 30%
+
 = Prolog =
 
 == Prolog history ==
