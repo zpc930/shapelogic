@@ -1,4 +1,4 @@
-#ShapeLogic Team
+#Summary ShapeLogic Team
 
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png ShapeLogic Team =
 
