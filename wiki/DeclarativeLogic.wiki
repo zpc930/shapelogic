@@ -47,9 +47,11 @@ A whole letter match will then be an XOrTask with an AndTask for each letter.
 
 == Boolean combinations of filters with parameters ==
 If you need to do more complex boolean combinations of filter on polygons try the following:
+{{{
 "polygon.getPoints().filter('PointRightOfFilter(0.3) && PointAboveFilter(0.3)')"
+}}}
 
-This will filter point that are in in the first 30% and top 30%
+This will filter point that are in in the first 30% and top 30% of the bounding box for the polygon.
 
 = Prolog =
 
