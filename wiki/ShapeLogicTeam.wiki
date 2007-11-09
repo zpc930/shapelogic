@@ -1,6 +1,6 @@
 #ShapeLogic Team
 
-= ShapeLogic Team =
+= http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png ShapeLogic Team =
 
 If you are interested in joining the ShapeLogic development team please contact Sami Badawi AKA sami.nyc
 
