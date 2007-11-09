@@ -1,4 +1,4 @@
-#Standard vectorization algorithm.
+#summary Standard vectorization algorithm.
 
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Vectorization algorithms =
 
