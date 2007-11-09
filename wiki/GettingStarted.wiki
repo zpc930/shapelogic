@@ -1,3 +1,5 @@
+http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png 
+
 #Getting started
 
 = Getting started =
