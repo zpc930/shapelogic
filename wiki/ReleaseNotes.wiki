@@ -1,0 +1,20 @@
+#summary One-sentence summary of this page.
+
+= http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Release notes for ShapeLogic =
+
+ShapeLogic releases:
+
+= 2007-11-08 ShapeLogic release 0.2.0 AKA the Smilla release =
+Named after the most fantastic prematurely born baby.
+The code is released somewhat prematurely, and still needs more cleanup.
+This is the state of code when it was first uploaded to Google Code Hosting.
+Content of 0.2.0:
+  * There is around 14000 lines of Java code
+  * 159 unit test that all works om my local machine. 
+  * Color segmentation
+  * 3 implementations of line vectorizers
+  * Point and line annotation
+  * Rudimentary declarative logic engine
+  * Example of rule database for recognizing capital letters
+  * Maybe half the code is well commented
+  * There are some documentation on the Google Code Hosting page
