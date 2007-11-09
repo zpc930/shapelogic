@@ -20,10 +20,21 @@ I still think programming in Prolog is almost as simple as programming in SQL.
 So ShapeLogic is trying to preserve this simplicity of Prolog, while maintaining ability to do efficient numerical calculation.
 
 == Tree of tasks ==
-ShapeLogic is driven by a tree of tasks.
+ShapeLogic is driven by a tree of tasks. The super class is called BaseTask.
+A task can have sub tasks, but also have a context that inherits from the context of the parent task. But not all tasks have their own context.
 
 = AI choice tree =
 Unlike Prolog ShapeLogic can have multiple values for a name at the same time, and exploring different choices at the same time.
+
+= Simple example of task hierarchy =
+ShapeLogic contains example code for matching letters.
+At the top level of the tree there is an Exclusive or task, XOrTask.
+Under there there is an AndTask for each letter.
+For each AndTask there are several simple property rules, called 
+  *SimpleTask 
+  *SimpleNumericalTask
+
+Each AndTask have its own context that values can be set in, but all the SimpleTask under an AndTask share a context. When a letter finally is chosen then the context from the chosen context is propagated up.
 
 = Oz =
 [http://www.mozart-oz.org/ Oz] is a experimental language boasting:
@@ -32,3 +43,5 @@ Unlike Prolog ShapeLogic can have multiple values for a name at the same time, a
   * Object-oriented programming
   * Constraint programming
   * Fast concurrent programming
+
+The way ShapeLogic is merging contexts when faced with different options is similar to what Oz did. This is currently not fully implemented.
