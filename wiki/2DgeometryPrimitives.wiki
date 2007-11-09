@@ -1,4 +1,4 @@
-#Classes for 2D geometry primitives.
+#summary Classes for 2D geometry primitives.
 
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png 2D geometry primitives =
 
