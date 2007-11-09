@@ -1,6 +1,6 @@
 #Declarative goal driven logic engine
 
-= Declarative logic =
+= http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Declarative logic =
 
 ShapeLogic has a declarative goal driven logic engine.
 
