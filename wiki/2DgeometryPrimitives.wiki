@@ -9,3 +9,24 @@ The goal for these new classes for 2D geometry primitives is:
 For anything more complicated use these comprehensive existing mathematics libraries:
   * [http://commons.apache.org/math/ commons-math]
   * [http://dsd.lbl.gov/~hoschek/colt/ colt]
+
+= 2D geometry primitives main classes =
+  * CPointInt
+  * CPointDouble
+  * CLine
+  * MultiLine
+  * Polygon
+  * MultiLinePolygon
+
+= 2D geometry primitives main interfaces =
+  * IPoint2D
+
+= Annotations =
+There are annotations for both points and lines.
+
+Annotations for points live in 2 enumerations:
+  * PixelType used when working on pixels in a bitmap
+  * PointType used when working on points as coordinates
+
+Annotations for lines live in this enumeration:
+LineType
