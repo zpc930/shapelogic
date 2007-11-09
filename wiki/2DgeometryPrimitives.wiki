@@ -1,6 +1,6 @@
 #Classes for 2D geometry primitives.
 
-= 2D geometry primitives =
+= http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png 2D geometry primitives =
 
 The goal for these new classes for 2D geometry primitives is:
   * Simple classes for doing affine 2D geometry that works as closely with standard libraries as possible
