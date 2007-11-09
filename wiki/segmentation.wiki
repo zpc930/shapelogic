@@ -1,5 +1,5 @@
 #A standard color and gray scale segmentation algorithm.
 
-= Color and gray scale segmentation algorithm =
+= http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Color and gray scale segmentation algorithm =
 
 The segmentation algorithm works on both RGB and 8 bit gray scale images.
