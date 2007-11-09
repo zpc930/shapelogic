@@ -1,6 +1,6 @@
 #Standard vectorization algorithm.
 
-= Vectorization algorithms =
+= http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Vectorization algorithms =
 
 Simple algorithm for transforming bitmap lines into vector lines.
 
