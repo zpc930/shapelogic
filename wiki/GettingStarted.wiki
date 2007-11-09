@@ -10,23 +10,24 @@ You can use ShapeLogic in different ways:
 
 == Steps to get ShapeLogic working from within ImageJ ==
   * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/ShapeLogic
-  * Take the jar file for ShapeLogic, and move it to that directory
+  * Take the jar file for ShapeLogic: shapelogic_-0.2.jar, and move it to that directory
 
 When you open ImageJ there will be a ShapeLogic dir with commands in.
 
-== Java and logic ==
-You currently need a version of ShapeLogic that has the operations you need compiled in.
-
-The goal is to move to having a database with the logical rules you need separate from the jar file, so you do not have to recompile, if you need to use your own rules.
-
-If you compile ShapeLogic yourself it will be placed here:
-
+There not yet binary distribution. When you compile ShapeLogic yourself it will be placed here:
 ./shapelogic/target/shapelogic_-0.2.jar
+
+== Java and logic ==
+If you need to add you own rules to ShapeLogic you need to compile your own version.
+
+The goal is to move to have a database with the logical rules you need separate from the jar file, so you do not have to recompile.
 
 
 = Development mode =
 
-You need to have [http://maven.apache.org/ Maven 2] installed.
+ShapeLogic is build using [http://maven.apache.org/ Maven 2].
+
+This makes several build tasks very easy, so this is the recommended way doing builds, but the code should run fine without Maven.
 
 Currently the project is set up to work directly with Eclipse 3.3, Java 1.6, but you can use: NetBeans, IntelliJ, emacs or vi.
 
