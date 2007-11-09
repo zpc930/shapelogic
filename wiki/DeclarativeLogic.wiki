@@ -4,13 +4,31 @@
 
 ShapeLogic has a declarative goal driven logic engine.
 
-This is to a large extend inspired by the Prolog language.
+This is inspired by
+  * Prolog language
+  * AI choice tree
+  * Oz language
 
 = Prolog =
 
+== Prolog history ==
 Prolog was all the rage in the early 1980, the Japanese 5 generation project was mainly based on Prolog. It turned out that it did not scale well to real world problems. Partly because it was only good at handling symbolic information and not doing computations.
 So Prolog fell out of favor.
 
 I still think programming in Prolog is almost as simple as programming in SQL.
 
 So ShapeLogic is trying to preserve this simplicity of Prolog, while maintaining ability to do efficient numerical calculation.
+
+== Tree of tasks ==
+ShapeLogic is driven by a tree of tasks.
+
+= AI choice tree =
+Unlike Prolog ShapeLogic can have multiple values for a name at the same time, and exploring different choices at the same time.
+
+= Oz =
+[http://www.mozart-oz.org/ Oz] is a experimental language boasting:
+  * Declarative programming
+  * Functional programming
+  * Object-oriented programming
+  * Constraint programming
+  * Fast concurrent programming
