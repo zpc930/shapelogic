@@ -1,8 +1,8 @@
 #Getting started
 
-http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png 
+ 
 
-= Getting started =
+= http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Getting started =
 
 You can use ShapeLogic in different ways:
   * Development mode
