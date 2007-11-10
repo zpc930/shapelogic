@@ -2,7 +2,7 @@
 
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png FAQ wiki page =
 
-Add your content here.
+Add your questions here.
 This page is intended for users to post question. 
 This might be replaced with a regular user list.
 
