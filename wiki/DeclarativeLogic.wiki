@@ -4,19 +4,43 @@
 
 ShapeLogic has a declarative goal driven logic engine.
 
-This is inspired by
+== Influences ==
   * Prolog language
   * AI choice tree
   * Oz language
 
-= Example of logic rules in ShapeLogic =
-Look in the class for example of simple rules: LetterTaskFactory
+= Important ideas =
+  * Tree structure of task and sub tasks
+  * Hierarchical contexts that is binding objects to name
+  * Object hypothesis called OH in the code. OH = any match result
 
-This rely on 
-[http://commons.apache.org/jexl/ Java Expression Language (JEXL)]
+== Context ==
+So the context makes it possible to have the string "Letter" bound to both "A" and "B" at the same time in difference context. The context set up as a hierarchy, like in most programming languages. So names that I bound in a higher context can be seen in a lower one.
+This rely on [http://commons.apache.org/jexl/ Java Expression Language (JEXL)]
+
+== Tree of tasks ==
+ShapeLogic is driven by a tree of tasks. The super class is called BaseTask.
+A task can have sub tasks, but also have a context that inherits from the context of the parent task. But not all tasks have their own context.
+
+== Simple example of task hierarchy ==
+ShapeLogic contains example code for matching letters.
+At the top level of the tree there is an Exclusive or task, XOrTask.
+Under there there is an AndTask for each letter.
+For each AndTask there are several simple property rules, called 
+  * SimpleTask 
+  * SimpleNumericalTask
+
+Each AndTask have its own context that values can be set in, but all the SimpleTask under an AndTask share a context. When a letter finally is chosen then the context from the chosen context is propagated up.
+
+
+== Example of logic rules in ShapeLogic ==
+For example of simple rules look in the classes
+  * LetterTaskFactory
+  * LetterTaskTest
 
 So the vectorizer will put a MultiLinePolygon object into the string 
 "polygon" in a JEXL context.
+
 
 Then there are rules that go in and look at the object using reflection.
 Here is an example of a simple NumericRule:
@@ -53,9 +77,11 @@ If you need to do more complex boolean combinations of filter on polygons try th
 
 This will filter point that are in in the first 30% and top 30% of the bounding box for the polygon.
 
-= Prolog =
+= Influences =
 
-== Prolog history ==
+== Prolog ==
+
+=== Prolog history ===
 Prolog was all the rage in the early 1980, the Japanese 5 generation project was mainly based on Prolog. It turned out that it did not scale well to real world problems. Partly because it was only good at handling symbolic information and not doing computations.
 So Prolog fell out of favor.
 
@@ -63,24 +89,15 @@ I still think programming in Prolog is almost as simple as programming in SQL.
 
 So ShapeLogic is trying to preserve this simplicity of Prolog, while maintaining ability to do efficient numerical calculation.
 
-== Tree of tasks ==
-ShapeLogic is driven by a tree of tasks. The super class is called BaseTask.
-A task can have sub tasks, but also have a context that inherits from the context of the parent task. But not all tasks have their own context.
+ShapeLogic is not using backtracking or unification. 2 of the main components in Prolog.
+But the idea of a program as:
+  * Goals / tasks with sub goals
+  * Horn caluse
 
-= AI choice tree =
+== AI choice tree ==
 Unlike Prolog ShapeLogic can have multiple values for a name at the same time, and exploring different choices at the same time.
 
-= Simple example of task hierarchy =
-ShapeLogic contains example code for matching letters.
-At the top level of the tree there is an Exclusive or task, XOrTask.
-Under there there is an AndTask for each letter.
-For each AndTask there are several simple property rules, called 
-  *SimpleTask 
-  *SimpleNumericalTask
-
-Each AndTask have its own context that values can be set in, but all the SimpleTask under an AndTask share a context. When a letter finally is chosen then the context from the chosen context is propagated up.
-
-= Oz =
+== Oz ==
 [http://www.mozart-oz.org/ Oz] is a experimental language boasting:
   * Declarative programming
   * Functional programming
