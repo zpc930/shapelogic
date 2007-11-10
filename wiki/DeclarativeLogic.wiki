@@ -10,11 +10,11 @@ ShapeLogic has a declarative goal driven logic engine.
   * Oz language
 
 = Important ideas =
-  * Tree structure of task and sub tasks
+  * Tree of task and sub tasks
   * Hierarchical contexts that is binding objects to name
   * Object hypothesis called OH in the code. OH = any match result
 
-== Context ==
+== Hierarchical contexts ==
 So the context makes it possible to have the string "Letter" bound to both "A" and "B" at the same time in difference context. The context set up as a hierarchy, like in most programming languages. So names that I bound in a higher context can be seen in a lower one.
 This rely on [http://commons.apache.org/jexl/ Java Expression Language (JEXL)]
 
@@ -22,8 +22,11 @@ This rely on [http://commons.apache.org/jexl/ Java Expression Language (JEXL)]
 ShapeLogic is driven by a tree of tasks. The super class is called BaseTask.
 A task can have sub tasks, but also have a context that inherits from the context of the parent task. But not all tasks have their own context.
 
-== Simple example of task hierarchy ==
-ShapeLogic contains example code for matching letters.
+== Example of task hierarchy in letter matching ==
+For example of simple rules and task hierarchy look in the classes
+  * LetterTaskFactory
+  * LetterTaskTest
+
 At the top level of the tree there is an Exclusive or task, XOrTask.
 Under there there is an AndTask for each letter.
 For each AndTask there are several simple property rules, called 
@@ -32,11 +35,7 @@ For each AndTask there are several simple property rules, called
 
 Each AndTask have its own context that values can be set in, but all the SimpleTask under an AndTask share a context. When a letter finally is chosen then the context from the chosen context is propagated up.
 
-
-== Example of logic rules in ShapeLogic ==
-For example of simple rules look in the classes
-  * LetterTaskFactory
-  * LetterTaskTest
+== Example of logic rules in letter matching ==
 
 So the vectorizer will put a MultiLinePolygon object into the string 
 "polygon" in a JEXL context.
@@ -66,7 +65,6 @@ POINT_COUNT_EX = "polygon.getPoints().size()"
 }}}
 
 All these rules are combined into and AndTask.
-
 A whole letter match will then be an XOrTask with an AndTask for each letter.
 
 == Boolean combinations of filters with parameters ==
