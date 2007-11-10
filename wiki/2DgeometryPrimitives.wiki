@@ -11,15 +11,15 @@ For anything more complicated use these comprehensive existing mathematics libra
   * [http://dsd.lbl.gov/~hoschek/colt/ colt]
 
 = 2D geometry primitives main classes =
-  * CPointInt
-  * CPointDouble
-  * CLine
-  * MultiLine
-  * Polygon
-  * MultiLinePolygon
+  * *CPointInt* Point based in int
+  * *CPointDouble* Point based in double
+  * *CLine* A straight line with only start and end point
+  * *MultiLine* A curve made up of straight lines
+  * *Polygon* Collection of point and lines
+  * *MultiLinePolygon* Collection of point, lines and multi lines
 
 = 2D geometry primitives main interfaces =
-  * IPoint2D
+  * *IPoint2D* implemented by CPointInt and CPointDouble
 
 = Annotations =
 There are annotations for both points and lines.
