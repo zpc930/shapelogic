@@ -5,8 +5,8 @@
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Getting started =
 
 You can use ShapeLogic in different ways:
-  * Development mode
   * User mode
+  * Development mode
 
 = User mode =
 
@@ -14,7 +14,7 @@ You can use ShapeLogic in different ways:
   * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/ShapeLogic
   * Take the jar file for ShapeLogic: shapelogic_-0.2.jar, and move it to that directory
 
-When you open ImageJ there will be a ShapeLogic dir with commands in.
+When you open ImageJ there will be a ShapeLogic menu with commands in.
 
 There not yet binary distribution. When you compile ShapeLogic yourself it will be placed here:
 ./shapelogic/target/shapelogic_-0.2.jar
@@ -22,7 +22,7 @@ There not yet binary distribution. When you compile ShapeLogic yourself it will 
 == Java and logic ==
 If you need to add you own rules to ShapeLogic you need to compile your own version.
 
-The goal is to move to have a database with the logical rules you need separate from the jar file, so you do not have to recompile.
+The goal is to have a database with the logical rules you need be separate from the jar file, so you do not have to recompile.
 
 
 = Development mode =
@@ -44,7 +44,7 @@ Run:
   * *mvn package* runs the unit tests locally, and if they passes it will create the jar file
 
 
-== Changing JDK version ==
+== Changing JDK version when building with Maven ==
 
 You will have to change the JDK target in pom.xml:
 {{{
