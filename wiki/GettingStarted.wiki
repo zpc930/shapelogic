@@ -16,8 +16,7 @@ You can use ShapeLogic in different ways:
 
 When you open ImageJ there will be a ShapeLogic menu with commands in.
 
-There not yet binary distribution. When you compile ShapeLogic yourself it will be placed here:
-./shapelogic/target/shapelogic_-0.2.jar
+You can get the binary distribution from the download page or compile it yourself.
 
 == Separating Java and logic rules ==
 If you need to add you own rules to ShapeLogic you need to add you changes and compile ShapeLogic.
