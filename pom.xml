@@ -4,7 +4,7 @@
   <groupId>org.shapelogic</groupId>
   <artifactId>shapelogic_</artifactId>
   <name>shapelogic</name>
-  <version>0.2</version>
+  <version>0.3</version>
   <url>http://maven.apache.org</url>
   <build>
     <plugins>
