@@ -1,5 +1,6 @@
 package org.shapelogic.logic;
 
+import org.shapelogic.filter.PointOfTypeFilter;
 import org.shapelogic.imageprocessing.LineType;
 import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.polygon.MultiLinePolygon;
@@ -53,6 +54,7 @@ public class RootTask extends BaseTask {
 			LineType.class,
 			Polygon.class,
 			MultiLinePolygon.class,
+			PointOfTypeFilter.class,
 		};
 		setClassInContext(classes);
 	}

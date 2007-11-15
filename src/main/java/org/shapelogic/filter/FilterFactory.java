@@ -8,6 +8,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.tree.CommonTree;
 import org.shapelogic.filter.FilterParser.filter_return;
+import org.shapelogic.logic.RootTask;
 
 /**
  * 
@@ -186,7 +187,12 @@ public class FilterFactory {
 		else if (VARIABLE_TYPE.equals(tokenText)) {
 			CommonTree child0 = (CommonTree)tree.getChild(0);
 			String text = getTokenText(child0);
-			return text; //XXX this is not correct
+			//XXX not sure if I should use the root context
+			RootTask rootTask = RootTask.getInstance();
+			if (rootTask == null)
+				return null;
+			Object obj = rootTask.findNamedValue(text);
+			return obj;
 		}
 		return null;
 	}
