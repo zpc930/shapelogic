@@ -259,16 +259,16 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 		Map<String, ContextCalculation> contextCalculationMap = getContextCalculationMap();
 		if (contextCalculationMap != null) {
 			ContextCalculation contextCalculation = contextCalculationMap.get(name);
-			if (contextCalculation == null)
-				return findClassValue(name); //XXX maybe give warning
-			try {
-				value = contextCalculation.calculation(this);
-				return value;
-			} catch (Exception e) {
-				e.printStackTrace(); //XXX change
+			if (contextCalculation != null) {
+				try {
+					value = contextCalculation.calculation(this);
+					return value;
+				} catch (Exception e) {
+					e.printStackTrace(); //XXX change
+				}
 			}
 		}
-		return value;
+		return findClassValue(name);
 	}
 
 	public Object findClassValue(String name) {
@@ -282,15 +282,12 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 		int indexOfPeriod = name.indexOf('.');
 		String className = name.substring(0, indexOfPeriod);
 		String rest = name.substring(indexOfPeriod+1);
-		Map<String, ContextCalculation> contextCalculationMap = getContextCalculationMap();
-		if (contextCalculationMap != null) {
-			Object klass1 = getNamedValue(className);
-				if (!(klass1 instanceof Class))
-					return null;
-				Class klass = (Class) klass1;
-				if (klass.isEnum()) {
-					return Enum.valueOf(klass, rest);
-			}
+		Object klass1 = getNamedValue(className);
+			if (!(klass1 instanceof Class))
+				return null;
+			Class klass = (Class) klass1;
+			if (klass.isEnum()) {
+				return Enum.valueOf(klass, rest);
 		}
 		return value;
 	}

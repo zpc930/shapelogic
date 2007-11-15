@@ -2,6 +2,7 @@ package org.shapelogic.imageprocessing;
 
 import ij.process.ByteProcessor;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -131,6 +132,11 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 		pointTypeHardFilter.setConstraint(PointType.HARD_CORNER);
 		assertTrue(1 <= cleanedPolygon.filter(pointTypeHardFilter).size());
 		assertTrue(cleanedPolygon.filter(pointTypeHardFilter).size() < cleanedPolygon.getPoints().size());
+		
+		String hardPointTextFilterExpression = "PointOfTypeFilter(PointType.HARD_CORNER)";
+		Collection<Object> hardPoint = cleanedPolygon.filter(hardPointTextFilterExpression);
+		assertTrue(1 <= hardPoint.size());
+		assertTrue(hardPoint.size() < cleanedPolygon.getPoints().size());
 		
 		IFilter<Polygon,IPoint2D> pointAboveFilter = new PointAboveFilter();
 		double aboveLimit = 0.3;
