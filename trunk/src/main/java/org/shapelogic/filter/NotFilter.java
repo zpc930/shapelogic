@@ -24,8 +24,10 @@ public class NotFilter<BaseClass, Element> extends BaseFilter<BaseClass, Element
 	}
 	
 	@Override
-	public void setup() {
+	public void setup() throws Exception {
 		if (_filter1 != null)
 			_collection = _filter1.getCollection();
+		if (_filter1 != null)
+			_filter1.setup();
 	}
 }
