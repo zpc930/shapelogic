@@ -17,6 +17,7 @@ public class NumericRule {
 	private Long _id;
 	private String _parentOH;
 	private String _name;
+	private String _variable;
 	private String _expression;
 	private Double _expected;
 	
@@ -25,7 +26,8 @@ public class NumericRule {
 		return _id;
 	}
 	
-	public NumericRule(String parentOH, String name, String expression, Double expected) {
+	public NumericRule(String parentOH, String name, String variable, String expression, Double expected) {
+		_variable = variable;
 		_expression = expression; 
 		_name = name;
 		_expected = expected;
@@ -33,7 +35,7 @@ public class NumericRule {
 	}
 
 	public NumericRule() {
-		this(null,null,null,null);
+		this(null,null,null,null,null);
 	}
 
 	public void setId(Long id) {
@@ -79,4 +81,21 @@ public class NumericRule {
 		  " = " + getExpected();
 		return result;
 	}
+
+	public String getVariable() {
+		return _variable;
+	}
+
+	public void setVariable(String variable) {
+		_variable = variable;
+	}
+	
+	public String getVariableAndExpression() {
+		String varAndExpression = "";
+		if (getVariable() != null)
+			varAndExpression = getVariable() + ".";
+		varAndExpression += getExpression();
+		return varAndExpression;
+	}
+
 }

@@ -33,7 +33,6 @@ public class FilterFactory {
 			if (klass != null)
 				filterObject = (IFilter) klass.newInstance();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 			if (filterName.indexOf(".") == -1)
 				return makeFilter(FILTER_PACKAGE + filterName);
 		} catch (InstantiationException e) {
