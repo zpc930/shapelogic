@@ -1,6 +1,6 @@
-#Example Applications showing how to use the ShapeLogic framework
+#summary Example Applications showing how to use the ShapeLogic framework
 
-= Example Applications showing how to use the ShapeLogic framework =
+=  http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Example Applications showing how to use the ShapeLogic framework =
 
 This is a description of example applications that comes with the ShapeLogic framework.
 They should facilitate getting started.
