@@ -4,6 +4,9 @@
 
 ShapeLogic releases:
 
+= Development version  (to be released) =
+  * Fixed problem with logic language for filters.
+
 = 2007-11-08 ShapeLogic release 0.2.0 AKA the Smilla release =
 Named after the most fantastic prematurely born baby.
 The code is released somewhat prematurely, and still needs more cleanup.
