@@ -74,9 +74,9 @@ If you need to do more complex boolean combinations of filter on polygons try th
 "polygon.filter('PointOfTypeFilter(PointType.T_JUNCTION) && PointLeftOfFilter(0.5)').size()"
 }}}
 
-This will filter:
-Points that are in in the right 30% and top 30% of the bounding box for the polygon.
-Points that are in in the left 50% of the bounding box for the polygon and having the annotation T Junction.
+These will filter:
+  * Points that are in in the right 30% and top 30% of the bounding box for the polygon.
+  * Points that are in in the left 50% of the bounding box for the polygon and having the annotation T Junction.
 
 == Logical operators ==
 
