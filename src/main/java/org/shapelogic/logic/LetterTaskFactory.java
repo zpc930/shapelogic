@@ -56,7 +56,7 @@ public class LetterTaskFactory {
 		verticalLineCountTask.setName(VERTICAL_LINE_COUNT);
 		SimpleNumericTask tJunctionPointCountTask = new SimpleNumericTask(letterATask, false,"polygon."+T_JUNCTION_POINT_COUNT_EX,2);
 		tJunctionPointCountTask.setName(T_JUNCTION_POINT_COUNT);
-		SimpleNumericTask tJunctionLeftPointCountTask = new SimpleNumericTask(letterATask, false,"polygon."+T_JUNCTION_LEFT_POINT_COUNT_EX,0);
+		SimpleNumericTask tJunctionLeftPointCountTask = new SimpleNumericTask(letterATask, false,"polygon."+T_JUNCTION_LEFT_POINT_COUNT_EX,1);
 		tJunctionLeftPointCountTask.setName(T_JUNCTION_LEFT_POINT_COUNT);
 		parentTask.setNamedTask(taskName,letterATask);
 		return letterATask;
