@@ -70,10 +70,22 @@ A whole letter match will then be an XOrTask with an AndTask for each letter.
 == Boolean combinations of filters with parameters ==
 If you need to do more complex boolean combinations of filter on polygons try the following:
 {{{
-"polygon.getPoints().filter('PointRightOfFilter(0.3) && PointAboveFilter(0.3)')"
+"polygon.filter('PointRightOfFilter(0.3) && PointAboveFilter(0.3)')"
+"polygon.filter('PointOfTypeFilter(PointType.T_JUNCTION) && PointLeftOfFilter(0.5)').size()"
 }}}
 
-This will filter point that are in in the first 30% and top 30% of the bounding box for the polygon.
+This will filter:
+Points that are in in the right 30% and top 30% of the bounding box for the polygon.
+Points that are in in the left 50% of the bounding box for the polygon and having the annotation T Junction.
+
+== Logical operators ==
+
+Currently ShapeLogic is using the standard Java, C, C++ notation:
+{{{
+  And use &&
+  Or use ||
+  Not use !
+}}}
 
 = Influences =
 
