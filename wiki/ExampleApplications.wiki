@@ -1,0 +1,73 @@
+#Example Application showing how to use the ShapeLogic framework
+
+= Example Application showing how to use the ShapeLogic framework =
+
+This is a description of example applications that comes with the ShapeLogic framework.
+They should facilitate getting started.
+
+= Recognition of Straight capital letters in ShapeLogic 0.2 =
+
+This was a proof of concept used under the development of the logic engine.
+
+This is using very simple properties of a polygon with only straight lines.
+It is counting number of points, lines, vertical line and horizontal lines.
+This is enough to distinguish the different capital letters, but it is pretty brittle.
+
+It works on both letters in both SVN and bitmap format.
+
+== Rules for the letter A ==
+
+{{{
+new NumericRule("A", POINT_COUNT, polygon, POINT_COUNT_EX, 5.),
+new NumericRule("A", LINE_COUNT, polygon, LINE_COUNT_EX, 5.),
+new NumericRule("A", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.),
+new NumericRule("A", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.),
+new NumericRule("A", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.),
+}}}
+
+== How to see letter recognition in action ==
+
+  * Install ShapeLogic under ImageJ
+  * Draw a straight capital letter
+  * Make sure that it is in binary format: inverse sorted gray scale 
+  * Call the skeletonizer / thinner
+  * Go to the ShapeLogic menu select Maximum distance vectorizer
+  * A dialog will appear with the letter that was matched if any
+
+= Recognition of all capital letters in ShapeLogic 0.3 =
+
+The approach to handle curves was not to match with circle arch or Bézier curve.
+Instead line and point are annotated.
+
+== Line annotation in LineType ==
+{{{
+	UNKNOWN,
+	
+	/** Not completely straight */
+	STRAIGHT, //only a start and an end point
+
+	/** only on one side of a line between the start and end point */
+	CURVE_ARCH,
+
+	/** On both sides of a line between the start and end point 
+	 * this is the rest category for lines */
+	WAVE,
+
+	/** Means that this is an arch and that it is concave compared to 1 or both 
+	 * neighbor points, meaning they are on the same side of the line as the 
+	 * arch */
+	CONCAVE_ARCH,
+	
+	/** This line contains an inflection point, meaning the end points have 
+	 * different signed direction changes */
+	INFLECTION_POINT,
+	
+	/** For multi lines, if 2 lines are added together */
+	STRAIGHT_MULTI_LINE, 
+
+}}}
+== Point annotation ==
+So a point can be:
+  * Hard 
+  * Soft
+
