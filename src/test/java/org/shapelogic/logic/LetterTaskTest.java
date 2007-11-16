@@ -108,7 +108,8 @@ public class LetterTaskTest extends TestCase
 			public boolean match() throws Exception {
 				rootTask.setNamedValue(FILE_NAME_KEY, fileName);
 				Polygon rawPolygon = new SVGReader(fileName).getPolygon();
-				Polygon polygon = rawPolygon.cleanUp(true, 0.02);
+				Polygon polygon1 = rawPolygon.cleanUp(true, 0.02);
+				Polygon polygon = polygon1.improve();
 				rootTask.setNamedValue(RAW_POLYGON, rawPolygon);
 				rootTask.setNamedValue(POLYGON, polygon);
 				return true;
@@ -144,6 +145,7 @@ public class LetterTaskTest extends TestCase
 	}
 
 	public void testLetterAMatch() {
+		rootTask = RootTask.getInstance();
 		ExistTasks letterTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
 		letterTask.calc();
 		assertEquals(LogicState.SucceededDone, letterTask.getState());
@@ -162,7 +164,7 @@ public class LetterTaskTest extends TestCase
 	
 	public void oneLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
 		setUpByaddingBaskTask(letter);
-		NumericRule[] rulesArray = LetterTaskFactory.getAllNumericRule();
+		NumericRule[] rulesArray = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		String onlyMatchLetter = null;
 		if (onlyMatchAgainstSelf)
@@ -175,7 +177,7 @@ public class LetterTaskTest extends TestCase
 	public void testAllLetterMatchFromRules() {
 		ExistTasks polygonTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
 		polygonTask.calc();
-		NumericRule[] rulesArray = LetterTaskFactory.getAllNumericRule();
+		NumericRule[] rulesArray = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, null);
 		Object result = letterTask.calc();
@@ -206,7 +208,7 @@ public class LetterTaskTest extends TestCase
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		for (NumericRule rule: LetterTaskFactory.getAllNumericRule()) {
+		for (NumericRule rule: LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON)) {
 			em.persist(rule);
 		}
 		
