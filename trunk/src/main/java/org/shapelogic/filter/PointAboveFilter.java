@@ -15,6 +15,11 @@ public class PointAboveFilter extends PolygonSpatialPointFilter {
 		if (_limit == Double.NaN) 
 			return true;
 		else 
-			return _limit <= point.getY();
+			return point.getY() <= _limit ;
+	}
+
+	@Override
+	protected double coordinateChoser(IPoint2D diagonalVector) {
+		return diagonalVector.getY();
 	}
 }
