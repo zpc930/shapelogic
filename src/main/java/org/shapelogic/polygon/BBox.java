@@ -61,6 +61,15 @@ public class BBox implements GeometricShape2D {
     	IPoint2D diagonal = maxVal.copy().minus(minVal);
     	return diagonal;
     }
+
+    /** A point on the diagonal line 
+     * 
+     * @param fraction 0 -> minVal, 1 -> maxVal, 0.5 -> middle point
+     */
+    public IPoint2D getDiagonalVector(double fraction) {
+    	IPoint2D diagonal = Calculator2D.spannedPoint(minVal, maxVal, fraction);
+    	return diagonal;
+    }
   
     @Override 
     public String toString() {
