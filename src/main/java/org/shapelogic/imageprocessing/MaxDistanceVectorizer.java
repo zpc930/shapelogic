@@ -2,6 +2,7 @@ package org.shapelogic.imageprocessing;
 
 import static org.shapelogic.polygon.Calculator2D.directionBetweenNeighborPoints;
 
+import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Calculator2D;
 import org.shapelogic.util.Constants;
@@ -228,6 +229,7 @@ public class MaxDistanceVectorizer extends BaseVectorizer {
 	@Override
 	protected void internalFactory() {
 		_pixelTypeFinder = new SimplePixelTypeFinder(this);
+		_rulesArrayForLetterMatching = LetterTaskFactory.getSimpleNumericRuleForAllLetters(LetterTaskFactory.POLYGON);
 	}
 
 	@Override

@@ -66,7 +66,10 @@ public class CommonLogicExpressions {
 	public static final String INFLECTION_POINT_COUNT = "inflectionPointCount";
 	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(LineType.INFLECTION_POINT)";
 
-
+	public static final String CURVE_ARCH_COUNT = "curveArchCount";
+	public static final String CURVE_ARCH_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(LineType.CURVE_ARCH)";
+	
+	
 	//Point location and annotation related
 	public static final String T_JUNCTION_LEFT_POINT_COUNT = "tJunctionLeftCount";
 	public static final String T_JUNCTION_LEFT_POINT_COUNT_EX =

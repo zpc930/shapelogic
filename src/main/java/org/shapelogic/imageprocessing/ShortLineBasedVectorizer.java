@@ -2,6 +2,7 @@ package org.shapelogic.imageprocessing;
 
 import static org.shapelogic.polygon.Calculator2D.directionBetweenNeighborPoints;
 
+import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.CircleInterval;
 import org.shapelogic.util.Constants;
@@ -251,6 +252,8 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 	/** All the objects that needs special version should be created here. */
 	protected void internalFactory() {
 		_pixelTypeFinder = new PriorityBasedPixelTypeFinder(this);
+		//Only use the simple rules, not all the annotations are set in these branch of vectorizers
+		_rulesArrayForLetterMatching = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 	}
 
 	/** Get the next point to investigate from _currentPoint
