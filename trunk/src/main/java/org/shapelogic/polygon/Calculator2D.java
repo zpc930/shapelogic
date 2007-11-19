@@ -255,4 +255,13 @@ public class Calculator2D {
 			result -= Math.PI * 2;
 		return result;
 	}
+
+    /** Find a point on a line spanned by 2 other points 
+     * 
+     * @param part 0 -> minVal, 1 -> maxVal, 0.5 -> middle point
+     */
+	static public IPoint2D spannedPoint(IPoint2D point1, IPoint2D point2, double fraction) {
+		IPoint2D spanned = point2.copy().multiply(fraction).add(point1.copy().multiply(1-fraction));
+		return spanned;
+	}
 }
