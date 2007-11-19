@@ -17,4 +17,9 @@ public class PointLeftOfFilter extends PolygonSpatialPointFilter {
 		else 
 			return point.getX() < _limit;
 	}
+
+	@Override
+	protected double coordinateChoser(IPoint2D diagonalVector) {
+		return diagonalVector.getX();
+	}
 }
