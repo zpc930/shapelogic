@@ -104,7 +104,7 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 		assertNull(inflectionPoints);
 		printAnnotaions(polygon);
 		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
-//		assertEquals(fileName,vectorizer.getMatchingOH());
+		assertEquals(fileName,vectorizer.getMatchingOH());
 	}
 
 	public void testD() {

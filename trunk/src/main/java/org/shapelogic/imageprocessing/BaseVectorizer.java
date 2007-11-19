@@ -91,7 +91,8 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 	protected List<Set<IPoint2D> > _endPointsClusters;
 	protected int _firstPointInLineIndex = 0;
 	protected IPixelTypeFinder _pixelTypeFinder; 
-
+	protected NumericRule[] _rulesArrayForLetterMatching;
+	
 	/** To be overridden */
 	public boolean isGuiEnabled() {
 		return false;
@@ -120,8 +121,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		_cleanedupPolygon = adjuster.getCalcValue();
 		_cleanedupPolygon = _cleanedupPolygon.improve(); 
 		rootTask.setNamedValue(POLYGON, _cleanedupPolygon);
-		NumericRule[] rulesArray = LetterTaskFactory.getSimpleNumericRuleForAllLetters(LetterTaskFactory.POLYGON);
-		List<NumericRule> rulesList = Arrays.asList(rulesArray);
+		List<NumericRule> rulesList = Arrays.asList(_rulesArrayForLetterMatching);
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, null);
 		_matchingOH = letterTask.calc();
 		
