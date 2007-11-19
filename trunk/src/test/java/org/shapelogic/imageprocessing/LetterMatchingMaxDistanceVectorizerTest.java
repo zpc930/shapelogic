@@ -193,6 +193,24 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 //		assertEquals(fileName,vectorizer.getMatchingOH());
 	}
 	
+	public void testJ() {
+		String fileName = "J";
+		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		int pixel = bp.get(0,0);
+		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
+		Polygon polygon = vectorizer.getPolygon();
+		Polygon improvedPolygon = polygon.improve(); 
+		AnnotatedShape annotations = improvedPolygon.getAnnotatedShape();
+		Set<GeometricShape2D> endPoints = annotations.getShapesForAnnotation(PointType.END_POINT);
+		System.out.println("End points: " + endPoints);
+		assertEquals(2, endPoints.size());
+		Set<GeometricShape2D> inflectionPoints = annotations.getShapesForAnnotation(LineType.INFLECTION_POINT);
+		assertNull(inflectionPoints);
+		printAnnotaions(polygon);
+		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
+		assertEquals(fileName,vectorizer.getMatchingOH());
+	}
+
 	public void testO() {
 		String fileName = "O";
 		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);

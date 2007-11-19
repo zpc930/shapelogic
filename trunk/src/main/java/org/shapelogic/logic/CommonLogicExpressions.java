@@ -99,7 +99,7 @@ public class CommonLogicExpressions {
 	
 	//Multi line related
 	public static final String MULTI_LINE_COUNT = "multiLineCount";
-	public static final String MULTI_LINE_COUNT_EX = "getMultiLines().size()";
+	public static final String MULTI_LINE_COUNT_EX = "getMultiLines()";
 	
 	//Polygon related
 	public static final String HOLE_COUNT = "holeCount";
