@@ -2,6 +2,9 @@ package org.shapelogic.logic;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,6 +21,7 @@ import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.logic.LogicState;
 import org.shapelogic.logic.RootTask;
 import org.shapelogic.logic.Task;
+import org.shapelogic.polygon.GeometricShape2D;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.polygon.SVGReader;
 
@@ -151,7 +155,16 @@ public class LetterTaskTest extends TestCase
 		assertEquals(LogicState.SucceededDone, letterTask.getState());
 		BaseTask letterATask = LetterTaskFactory.createLetterATask(rootTask);
 		Object result = letterATask.calc();
+		Polygon polygon = (Polygon) rootTask.getNamedValue(POLYGON);
+		printAnnotaions(polygon);
 		assertEquals("A",result);
+	}
+
+	public void printAnnotaions(Polygon polygon) {
+		System.out.println("Print annotations:");
+		Map<Object, Set<GeometricShape2D>> map = polygon.getAnnotatedShape().getMap();
+		for (Entry<Object, Set<GeometricShape2D>> entry: map.entrySet())
+			System.out.println(entry.getKey() +":\n" + entry.getValue());
 	}
 
 	public void testCreateLetterATaskFromRule() {
@@ -160,6 +173,18 @@ public class LetterTaskTest extends TestCase
 		BaseTask letterATask = LetterTaskFactory.createLetterATaskFromRule(rootTask);
 		Object result = letterATask.calc();
 		assertEquals("A",result);
+	}
+	
+	private void oneStraightLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
+		setUpByaddingBaskTask(letter);
+		NumericRule[] rulesArray = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
+		List<NumericRule> rulesList = Arrays.asList(rulesArray);
+		String onlyMatchLetter = null;
+		if (onlyMatchAgainstSelf)
+			onlyMatchLetter = letter;
+		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, onlyMatchLetter);
+		Object result = letterTask.calc();
+		assertEquals(letter,result);
 	}
 	
 	public void oneLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
@@ -194,6 +219,18 @@ public class LetterTaskTest extends TestCase
 			oneLetterMatch(letter,true);
 		for (String letter: lettersToTest)
 			oneLetterMatch(letter,false);
+	}
+	
+	public void testAllStraightLettersMatchFromRules() {
+//		oneLetterMatch("Y",true);
+		String[] lettersToTest = 
+		{"A", "E", "F", "H", "I", "K", "L", "M", "N", "T", "V",  "X", "Y", "Z"};
+		//Missing letters: W
+		String[] ambiguousLettersToTest = {};
+		for (String letter: ambiguousLettersToTest)
+			oneStraightLetterMatch(letter,true);
+		for (String letter: lettersToTest)
+			oneStraightLetterMatch(letter,false);
 	}
 	
 	
