@@ -7,6 +7,7 @@ import java.util.Map;
 import org.shapelogic.entities.NumericRule;
 import static org.shapelogic.util.Constants.FILTER_COUNT_TASK;
 import static org.shapelogic.util.Constants.SIMPLE_NUMERIC_TASK;
+import static org.shapelogic.util.Constants.COUNT_COLLECTION_TASK;
 import static org.shapelogic.logic.CommonLogicExpressions.*;
 
 /** Should create all 
@@ -52,93 +53,93 @@ public class LetterTaskFactory {
 	 */
 	static public NumericRule[] getSimpleNumericRuleForAllStraightLetters(String polygon) {
 		NumericRule[] numericRulesForAll = {
-			new NumericRule("A", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("A", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
 			new NumericRule("A", LINE_COUNT, polygon, LINE_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("A", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("A", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("A", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("E", POINT_COUNT, polygon, POINT_COUNT_EX, 6.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("E", POINT_COUNT, polygon, POINT_COUNT_EX, 6.,COUNT_COLLECTION_TASK),
 			new NumericRule("E", LINE_COUNT, polygon, LINE_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("E", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("E", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("E", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("F", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("F", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
 			new NumericRule("F", LINE_COUNT, polygon, LINE_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("F", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("F", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("F", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("H", POINT_COUNT, polygon, POINT_COUNT_EX, 6.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("H", POINT_COUNT, polygon, POINT_COUNT_EX, 6.,COUNT_COLLECTION_TASK),
 			new NumericRule("H", LINE_COUNT, polygon, LINE_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("H", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("H", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("H", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("I", POINT_COUNT, polygon, POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("I", POINT_COUNT, polygon, POINT_COUNT_EX, 2.,COUNT_COLLECTION_TASK),
 			new NumericRule("I", LINE_COUNT, polygon, LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("I", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("I", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("I", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("K", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("K", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
 			new NumericRule("K", LINE_COUNT, polygon, LINE_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("K", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("K", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("K", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("L", POINT_COUNT, polygon, POINT_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("L", POINT_COUNT, polygon, POINT_COUNT_EX, 3.,COUNT_COLLECTION_TASK),
 			new NumericRule("L", LINE_COUNT, polygon, LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("L", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("L", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("L", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 //			new NumericRule("L", HARD_POINT_COUNT, polygon, HARD_POINT_COUNT_EX, 1.,"SimpleNumericTask"),
 
-			new NumericRule("M", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("M", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
 			new NumericRule("M", LINE_COUNT, polygon, LINE_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("M", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("M", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("M", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("N", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("N", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,COUNT_COLLECTION_TASK),
 			new NumericRule("N", LINE_COUNT, polygon, LINE_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("N", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("N", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("N", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("T", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("T", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,COUNT_COLLECTION_TASK),
 			new NumericRule("T", LINE_COUNT, polygon, LINE_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("T", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("T", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("T", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("V", POINT_COUNT, polygon, POINT_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("V", POINT_COUNT, polygon, POINT_COUNT_EX, 3.,COUNT_COLLECTION_TASK),
 			new NumericRule("V", LINE_COUNT, polygon, LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("V", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("V", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("V", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("W", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("W", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
 			new NumericRule("W", LINE_COUNT, polygon, LINE_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("W", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("W", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("W", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 
 			//Same as W
-			new NumericRule("X", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("X", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
 			new NumericRule("X", LINE_COUNT, polygon, LINE_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("X", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("X", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("X", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			
-			new NumericRule("Y", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("Y", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,COUNT_COLLECTION_TASK),
 			new NumericRule("Y", LINE_COUNT, polygon, LINE_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("Y", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("Y", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("Y", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 
-			new NumericRule("Z", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("Z", POINT_COUNT, polygon, POINT_COUNT_EX, 4.,COUNT_COLLECTION_TASK),
 			new NumericRule("Z", LINE_COUNT, polygon, LINE_COUNT_EX, 3.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("Z", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("Z", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
@@ -154,7 +155,8 @@ public class LetterTaskFactory {
 	 */
 	static public NumericRule[] getSimpleNumericRuleForAllLetters(String polygon) {
 		NumericRule[] numericRulesForAll = {
-			new NumericRule("A", HOLE_COUNT, polygon, HOLE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("A", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
+			new NumericRule("A", HOLE_COUNT, polygon, HOLE_COUNT_EX, 1., SIMPLE_NUMERIC_TASK),
 			new NumericRule("A", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
 			new NumericRule("A", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
 			new NumericRule("A", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 2.,FILTER_COUNT_TASK),
@@ -166,9 +168,24 @@ public class LetterTaskFactory {
 			new NumericRule("B", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
 			new NumericRule("B", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
 			new NumericRule("B", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
-//			new NumericRule("B", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,"SimpleNumericTask"),
+//			new NumericRule("B", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("B", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("B", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
+
+			new NumericRule("C", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("C", T_JUNCTION_POINT_COUNT, polygon, T_JUNCTION_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
+			new NumericRule("C", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
+			new NumericRule("C", INFLECTION_POINT_COUNT, polygon, INFLECTION_POINT_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("C", MULTI_LINE_COUNT, polygon, MULTI_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
+//			new NumericRule("C", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("C", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
+
+			new NumericRule("D", HOLE_COUNT, polygon, HOLE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("D", T_JUNCTION_POINT_COUNT, polygon, T_JUNCTION_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
+			new NumericRule("D", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
+//			new NumericRule("D", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("D", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("D", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 
 			new NumericRule("E", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("E", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),

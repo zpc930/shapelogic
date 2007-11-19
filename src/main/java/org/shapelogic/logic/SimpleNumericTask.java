@@ -18,7 +18,7 @@ public class SimpleNumericTask extends SimpleTask {
 			return true;
 		else if (_calcValue == null)
 			return false;
-		Number excectedValue = (Number) _excected;
+		Number excectedValue = (Number) _expected;
 		Number expressionValue = (Number) _calcValue;
 		return Math.abs(excectedValue.doubleValue() - expressionValue.doubleValue()) < TOLERANCE;
 	}

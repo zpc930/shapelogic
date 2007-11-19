@@ -13,12 +13,12 @@ import org.apache.commons.jexl.ExpressionFactory;
 public class SimpleTask extends BaseTask {
 
 	protected String _expression;
-	protected Object _excected;
+	protected Object _expected;
 
-	public SimpleTask(BaseTask parent, boolean createLocalContext, String expression, Object excectedValue)
+	public SimpleTask(BaseTask parent, boolean createLocalContext, String expression, Object expectedValue)
 	{
 		super(parent, createLocalContext);
-		_excected = excectedValue;
+		_expected = expectedValue; //expected
 		_expression = expression;
 	}
 	
@@ -28,11 +28,11 @@ public class SimpleTask extends BaseTask {
 	/** Can be overridden
 	 */
 	public boolean match() {
-		if (_excected == null && _calcValue == null)
+		if (_expected == null && _calcValue == null)
 			return true;
 		else if (_calcValue == null)
 			return false;
-		return _excected.equals(_calcValue);
+		return _expected.equals(_calcValue);
 	}
 
 	public void setup() {

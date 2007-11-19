@@ -20,4 +20,5 @@ public class Constants {
 
 	public static final String FILTER_COUNT_TASK = "FilterCountTask";
 	public static final String SIMPLE_NUMERIC_TASK = "SimpleNumericTask";
+	public static final String COUNT_COLLECTION_TASK = "CountCollectionTask";
 }
