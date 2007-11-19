@@ -4,6 +4,10 @@ import org.shapelogic.polygon.IPoint2D;
 
 /** Filter points above a given level of the bounding box of a polygon
  * 
+ * The constraint should be between 0 and 1.
+ * 0 is the left point
+ * 1 is the right point
+ * 
  * @author Sami Badawi
  *
  */

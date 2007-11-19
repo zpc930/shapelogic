@@ -5,7 +5,7 @@ import java.util.Set;
 import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.polygon.IPoint2D;
 
-/** 
+/** Filtering based on annotation for points
  * 
  * @author Sami Badawi
  *
