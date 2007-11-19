@@ -20,22 +20,25 @@ public class NumericRule {
 	private String _variable;
 	private String _expression;
 	private Double _expected;
+	private String _className;
 	
 	@Id @GeneratedValue @Column(name = "RULE_ID")
 	public Long getId() {
 		return _id;
 	}
 	
-	public NumericRule(String parentOH, String name, String variable, String expression, Double expected) {
+	public NumericRule(String parentOH, String name, String variable, 
+			String expression, Double expected, String className) {
 		_variable = variable;
 		_expression = expression; 
 		_name = name;
 		_expected = expected;
 		_parentOH = parentOH;
+		_className = className;
 	}
 
 	public NumericRule() {
-		this(null,null,null,null,null);
+		this(null,null,null,null,null,null);
 	}
 
 	public void setId(Long id) {
@@ -96,6 +99,14 @@ public class NumericRule {
 			varAndExpression = getVariable() + ".";
 		varAndExpression += getExpression();
 		return varAndExpression;
+	}
+
+	public String getClassName() {
+		return _className;
+	}
+
+	public void setClassName(String name) {
+		_className = name;
 	}
 
 }

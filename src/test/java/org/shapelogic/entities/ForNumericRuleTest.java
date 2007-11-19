@@ -30,10 +30,10 @@ public class ForNumericRuleTest extends TestCase
 		tx.begin();
 		
 		String OHName = "Sami";
-		NumericRule message = new NumericRule("Sami","number", "person", "number",1d);
+		NumericRule message = new NumericRule("Sami","number", "person", "number",1d, "SimpleNumericTask");
 		em.persist(message);
 		
-		NumericRule message2 = new NumericRule("Sami","age", "person", "age",45d);
+		NumericRule message2 = new NumericRule("Sami","age", "person", "age",45d, "SimpleNumericTask");
 		em.persist(message2);
 		
 		tx.commit();
