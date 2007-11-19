@@ -14,9 +14,6 @@ import org.shapelogic.filter.FilterFactory;
 import org.shapelogic.filter.IFilter;
 import org.shapelogic.logic.LazyCalc;
 
-import static org.shapelogic.util.MapOperations.getPointWithDefault;
-
-
 /** Polygon is the bottom class for polygon works for points on any kind
  * 
  * Almost immutable: you can extend it by adding more
@@ -119,7 +116,7 @@ public class Polygon extends BaseAnnotatedShape
     }
     
     /** this should not be used use addIndependentLine() instead */
-    protected CLine addLine(IPoint2D point1, IPoint2D point2) {
+    public CLine addLine(IPoint2D point1, IPoint2D point2) {
         CLine line = CLine.makeUnordered(point1, point2);
         if (!containsLine(line))
             _lines.add(line);
@@ -458,5 +455,9 @@ public class Polygon extends BaseAnnotatedShape
 		IFilter<Polygon, Element> filterObject = FilterFactory.makeTreeFilter(inputExpression);
 		filterObject.setParent(this);
 		return filterObject.filter();
+	}
+	
+	public int getHoleCount() {
+		return getLines().size() + 1 - getPoints().size();
 	}
 }
