@@ -211,6 +211,41 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 //		assertEquals(fileName,vectorizer.getMatchingOH());
 	}
 	
+	public void testP() {
+		String fileName = "P";
+		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		int pixel = bp.get(0,0);
+		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
+		Polygon polygon = vectorizer.getPolygon();
+		Polygon improvedPolygon = polygon.improve(); 
+		AnnotatedShape annotations = improvedPolygon.getAnnotatedShape();
+		Set<GeometricShape2D> endPoints = annotations.getShapesForAnnotation(PointType.END_POINT);
+		System.out.println("End points: " + endPoints);
+		assertEquals(1, endPoints.size());
+		Set<GeometricShape2D> junctionPoints = annotations.getShapesForAnnotation(PointType.T_JUNCTION);
+		assertEquals(1, junctionPoints.size());
+		printAnnotaions(polygon);
+		assertEquals(fileName,vectorizer.getMatchingOH());
+	}
+
+	public void testR() {
+		String fileName = "R";
+		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		int pixel = bp.get(0,0);
+		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
+		Polygon polygon = vectorizer.getCleanedupPolygon();
+		Polygon improvedPolygon = polygon.improve(); 
+		AnnotatedShape annotations = improvedPolygon.getAnnotatedShape();
+		Set<GeometricShape2D> endPoints = annotations.getShapesForAnnotation(PointType.END_POINT);
+		System.out.println("End points: " + endPoints);
+		assertEquals(2, endPoints.size());
+		Set<GeometricShape2D> junctionPoints = annotations.getShapesForAnnotation(PointType.T_JUNCTION);
+		assertEquals(2, junctionPoints.size());
+		printPolygon(polygon);
+		printAnnotaions(polygon);
+		assertEquals(fileName,vectorizer.getMatchingOH());
+	}
+
 	public void testS() {
 		String fileName = "S";
 		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
