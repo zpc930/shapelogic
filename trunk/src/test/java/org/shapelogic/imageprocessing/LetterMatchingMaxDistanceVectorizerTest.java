@@ -85,7 +85,7 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 		assertTrue(annotations.getAnnotationForShapes(bottomPoint2).contains(PointType.SOFT_POINT));
 		assertTrue(annotations.getAnnotationForShapes(topPoint1).contains(PointType.HARD_CORNER));
 		assertTrue(annotations.getAnnotationForShapes(bottomPoint1).contains(PointType.HARD_CORNER));
-//		assertEquals(fileName,vectorizer.getMatchingOH());
+		assertEquals(fileName,vectorizer.getMatchingOH());
 	}
 	
 	public void testD() {
