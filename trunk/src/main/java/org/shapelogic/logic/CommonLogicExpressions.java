@@ -14,7 +14,7 @@ public class CommonLogicExpressions {
 	
 	//Point related
 	public static final String POINT_COUNT = "pointCount";
-	public static final String POINT_COUNT_EX = "getPoints().size()";
+	public static final String POINT_COUNT_EX = "getPoints()";
 
 	public static final String END_POINT_COUNT = "endPointCount";
 	public static final String END_POINT_COUNT_EX = "getEndPointCount()";
@@ -63,6 +63,9 @@ public class CommonLogicExpressions {
 	public static final String T_JUNCTION_POINT_COUNT = "tJunctionCount";
 	public static final String T_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(PointType.T_JUNCTION)";
 
+	public static final String INFLECTION_POINT_COUNT = "inflectionPointCount";
+	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(LineType.INFLECTION_POINT)";
+
 
 	//Point location and annotation related
 	public static final String T_JUNCTION_LEFT_POINT_COUNT = "tJunctionLeftCount";
@@ -81,7 +84,6 @@ public class CommonLogicExpressions {
 	public static final String END_POINT_TOP_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + TOP_HALF_EX;
 	
-
 	//Line related
 	public static final String LINE_COUNT = "lineCount";
 	public static final String LINE_COUNT_EX = "getLines().size()";
@@ -92,6 +94,9 @@ public class CommonLogicExpressions {
 	public static final String VERTICAL_LINE_COUNT = "verticalLineCount";
 	public static final String VERTICAL_LINE_COUNT_EX = "getVerticalLines().size()";
 	
+	//Multi line related
+	public static final String MULTI_LINE_COUNT = "multiLineCount";
+	public static final String MULTI_LINE_COUNT_EX = "getMultiLines().size()";
 	
 	//Polygon related
 	public static final String HOLE_COUNT = "holeCount";
