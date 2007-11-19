@@ -259,6 +259,22 @@ public class LetterTaskFactory {
 			new NumericRule("N", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,"SimpleNumericTask"),
 			new NumericRule("N", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,"SimpleNumericTask"),
 
+			new NumericRule("P", HOLE_COUNT, polygon, HOLE_COUNT_EX, 1.,"SimpleNumericTask"),
+			new NumericRule("P", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,"SimpleNumericTask"),
+			new NumericRule("P", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 0.,"FilterCountTask"),
+			new NumericRule("P", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 1.,"FilterCountTask"),
+//			new NumericRule("P", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,"SimpleNumericTask"),
+			new NumericRule("P", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,"SimpleNumericTask"),
+			new NumericRule("P", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 1.,"SimpleNumericTask"),
+
+			new NumericRule("R", HOLE_COUNT, polygon, HOLE_COUNT_EX, 1.,"SimpleNumericTask"),
+			new NumericRule("R", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,"SimpleNumericTask"),
+			new NumericRule("R", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 1.,"FilterCountTask"),
+			new NumericRule("R", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 2.,"FilterCountTask"),
+//			new NumericRule("R", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,"SimpleNumericTask"),
+//			new NumericRule("R", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,"SimpleNumericTask"),
+			new NumericRule("R", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,"SimpleNumericTask"),
+
 			new NumericRule("T", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,"SimpleNumericTask"),
 			new NumericRule("T", T_JUNCTION_POINT_COUNT, polygon, T_JUNCTION_POINT_COUNT_EX, 1.,"FilterCountTask"),
 			new NumericRule("T", END_POINT_TOP_POINT_COUNT, polygon, END_POINT_TOP_POINT_COUNT_EX, 2.,"FilterCountTask"),
