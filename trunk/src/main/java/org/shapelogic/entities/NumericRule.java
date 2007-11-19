@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.shapelogic.logic.BaseTask;
+import org.shapelogic.logic.CountCollectionTask;
 import org.shapelogic.logic.FilterCountTask;
 import org.shapelogic.logic.SimpleNumericTask;
 
 import static org.shapelogic.util.Constants.FILTER_COUNT_TASK;
 import static org.shapelogic.util.Constants.SIMPLE_NUMERIC_TASK;
+import static org.shapelogic.util.Constants.COUNT_COLLECTION_TASK;;
 
 @Entity
 @Table(name = "NUMERIC_RULE")
@@ -129,6 +131,10 @@ public class NumericRule {
 		else if (FILTER_COUNT_TASK.equalsIgnoreCase(getClassName())) {
 			task = new FilterCountTask(parentTask, false, getVariable(),getExpression(),getExpected());
 		}
+		else if (COUNT_COLLECTION_TASK.equalsIgnoreCase(getClassName())) {
+			task = new CountCollectionTask(parentTask, false, getVariable(),getExpression(),getExpected());
+		}
+		
 		else { //Default is SIMPLE_NUMERIC_TASK 
 			task = new SimpleNumericTask(parentTask, false, getVariableAndExpression(),getExpected());
 		}
