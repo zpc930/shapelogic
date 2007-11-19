@@ -6,6 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.shapelogic.logic.BaseTask;
+import org.shapelogic.logic.FilterCountTask;
+import org.shapelogic.logic.SimpleNumericTask;
+
+import static org.shapelogic.util.Constants.FILTER_COUNT_TASK;
+import static org.shapelogic.util.Constants.SIMPLE_NUMERIC_TASK;
+
 @Entity
 @Table(name = "NUMERIC_RULE")
 /** Data class for rule to be used with Hibernate  
@@ -107,6 +114,25 @@ public class NumericRule {
 
 	public void setClassName(String name) {
 		_className = name;
+	}
+	
+	/** Create task based on rule
+	 * 
+	 * @param parentTask used for inserting this rule as a child of parent 
+	 * @return
+	 */
+	public BaseTask makeTask(BaseTask parentTask){
+		BaseTask task = null;
+		if (SIMPLE_NUMERIC_TASK.equalsIgnoreCase(getClassName())) {
+			task = new SimpleNumericTask(parentTask, false, getVariableAndExpression(),getExpected());
+		}
+		else if (FILTER_COUNT_TASK.equalsIgnoreCase(getClassName())) {
+			task = new FilterCountTask(parentTask, false, getVariable(),getExpression(),getExpected());
+		}
+		else { //Default is SIMPLE_NUMERIC_TASK 
+			task = new SimpleNumericTask(parentTask, false, getVariableAndExpression(),getExpected());
+		}
+		return task;
 	}
 
 }

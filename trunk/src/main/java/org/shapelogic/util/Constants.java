@@ -17,4 +17,7 @@ public class Constants {
 	public static int[] CYCLE_POINTS_X = {1,  1, 0,  -1, -1, -1, 0, 1};
 	/** What you need to add to the y coordinate to get to the indexed point */
 	public static int[] CYCLE_POINTS_Y = {0, 1, 1, 1,  0,  -1, -1, -1};
+
+	public static final String FILTER_COUNT_TASK = "FilterCountTask";
+	public static final String SIMPLE_NUMERIC_TASK = "SimpleNumericTask";
 }
