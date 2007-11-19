@@ -66,4 +66,8 @@ public interface Task<T> extends TreeNode, JexlContext, LazyCalc<T>, Iterable<Mo
 	String getName();
 	void setName(String name);
 	LogicState getLastSubTaskState();
+	String errorOnFail();
+	void doPrintOnFail();
+	void setPrintOnFail(boolean PrintOnFail);
+	boolean isPrintOnFail();
 }

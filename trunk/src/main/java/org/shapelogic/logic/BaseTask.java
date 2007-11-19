@@ -48,6 +48,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	protected LogicState _lastSubTaskState;
 	protected int _succededSubTasksCount = 0;
 	protected int _failedSubTasksCount = 0;
+	private boolean _printOnFail;
 
 	public BaseTask(BaseTask parent, boolean createLocalContext) {
 		super();
@@ -195,10 +196,11 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 			}
 			else {
 				_state = LogicState.FailedDone;
-				
+				doPrintOnFail();
 			}
 		} catch (Exception e) {
 			_state = LogicState.FailedDone;
+			doPrintOnFail();
 		}
 		return _calcValue; 
 	}
@@ -418,5 +420,26 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 		for (Class klass: classes) {
 			setClassInContext(klass);
 		}
+	}
+
+	@Override
+	public String errorOnFail() {
+		return toString();
+	}
+
+	@Override
+	public void doPrintOnFail() {
+		if (isPrintOnFail())
+			System.out.println(errorOnFail());
+	}
+
+	@Override
+	public boolean isPrintOnFail() {
+		return _printOnFail;
+	}
+
+	@Override
+	public void setPrintOnFail(boolean printOnFail) {
+		_printOnFail = printOnFail;
 	}
 }
