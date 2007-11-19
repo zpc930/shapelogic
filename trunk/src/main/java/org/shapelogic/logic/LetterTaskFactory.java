@@ -77,6 +77,10 @@ public class LetterTaskFactory {
 		return letterATask;
 	}
 	
+	/** Generate all rule that are needed for matching all the straight capital letter 
+	 * 
+	 * @param polygon is a String that contain the context variable that the rules will be applied to
+	 */
 	static public NumericRule[] getSimpleNumericRuleForAllStraightLetters(String polygon) {
 		NumericRule[] numericRulesForAll = {
 			new NumericRule("A", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,"SimpleNumericTask"),
@@ -174,8 +178,10 @@ public class LetterTaskFactory {
 		return numericRulesForAll;
 	}
 	
-	/** Start by changing all the rule for straight capital letters to the new complex rules
+	/** Generate all rule that are needed for matching all the capital letter 
+	 * using new complex filter rules
 	 * 
+	 * @param polygon is a String that contain the context variable that the rules will be applied to
 	 */
 	static public NumericRule[] getSimpleNumericRuleForAllLetters(String polygon) {
 		NumericRule[] numericRulesForAll = {
@@ -272,7 +278,7 @@ public class LetterTaskFactory {
 			new NumericRule("R", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 1.,"FilterCountTask"),
 			new NumericRule("R", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 2.,"FilterCountTask"),
 //			new NumericRule("R", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,"SimpleNumericTask"),
-//			new NumericRule("R", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,"SimpleNumericTask"),
+			new NumericRule("R", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 3.,"SimpleNumericTask"),
 			new NumericRule("R", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,"SimpleNumericTask"),
 
 			new NumericRule("T", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,"SimpleNumericTask"),
