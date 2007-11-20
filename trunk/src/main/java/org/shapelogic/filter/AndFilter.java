@@ -31,7 +31,7 @@ public class AndFilter<BaseClass, Element> extends BaseFilter<BaseClass, Element
 	public void setup()  throws Exception {
 		if (_filter1 != null)
 			_collection = _filter1.getCollection();
-		else if (_filter2 != null)
+		if (_filter2 != null)
 			_collection = _filter2.getCollection();
 		if (_filter1 != null)
 			_filter1.setup();

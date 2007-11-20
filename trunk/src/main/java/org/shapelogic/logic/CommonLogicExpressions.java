@@ -64,6 +64,9 @@ public class CommonLogicExpressions {
 	public static final String T_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(PointType.T_JUNCTION)";
 
 	public static final String INFLECTION_POINT_COUNT = "inflectionPointCount";
+//XXX This does work, but is returning the map of annotations
+//	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getMap()";
+//XXX This does not work, only returns null
 	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(LineType.INFLECTION_POINT)";
 
 	public static final String CURVE_ARCH_COUNT = "curveArchCount";
@@ -86,6 +89,22 @@ public class CommonLogicExpressions {
 	public static final String END_POINT_TOP_POINT_COUNT =  "endpointTopPointCount";
 	public static final String END_POINT_TOP_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + TOP_HALF_EX;
+	
+	public static final String END_POINT_TOP_LEFT_THIRD_POINT_COUNT =  "endpointTopLeftThirdPointCount";
+	public static final String END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + TOP_LEFT_THIRD_EX;
+	
+	public static final String END_POINT_TOP_RIGHT_THIRD_POINT_COUNT =  "endpointTopRightThirdPointCount";
+	public static final String END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + TOP_RIGHT_THIRD_EX;
+	
+	public static final String END_POINT_TOP_RIGHT_HALF_POINT_COUNT =  "endpointTopRightHalfPointCount";
+	public static final String END_POINT_TOP_RIGHT_HALF_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + TOP_RIGHT_HALF_EX;
+	
+	public static final String END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT =  "endpointBottomLeftHalfPointCount";
+	public static final String END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + BOTTOM_LEFT_HALF_EX;
 	
 	//Line related
 	public static final String LINE_COUNT = "lineCount";

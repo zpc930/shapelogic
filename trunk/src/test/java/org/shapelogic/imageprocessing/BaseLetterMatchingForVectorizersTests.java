@@ -320,6 +320,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 		printPolygon(vectorizer.getPolygon());
 		System.out.println("Cleaned up lines");
 		printPolygon(vectorizer.getCleanedupPolygon());
+		printAnnotaions(vectorizer.getCleanedupPolygon());
 		assertTrue(points.contains(topPoint1));
 //		assertTrue(points.contains(bottomPoint1));
 //		assertTrue(points.contains(topPoint2));
