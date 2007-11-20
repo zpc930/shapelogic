@@ -7,6 +7,18 @@ ShapeLogic releases:
 = Development version  (to be released) =
   * Fixed problem with logic language for filters.
 
+= 2007-11-20 ShapeLogic release 0.3.0  AKA All capital letters release =
+
+Content of 0.3.0:
+  * There is around 15000 lines of Java code
+  * 172 unit test that all works om my local machine
+  * Fixed problems with logic language for filters
+  * Fixed several bugs
+  * Letter matching is now extended to work for all capital letters
+
+There are still:
+  * The logic language is having problems with parsing some annotations, so the letter matching is not very robust
+
 = 2007-11-08 ShapeLogic release 0.2.0 AKA the Smilla release =
 Named after the most fantastic prematurely born baby.
 The code is released somewhat prematurely, and still needs more cleanup.
