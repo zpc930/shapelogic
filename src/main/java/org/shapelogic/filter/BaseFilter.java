@@ -41,9 +41,9 @@ public abstract class BaseFilter<BaseClass, Element> implements IFilter<BaseClas
 		List<Element> result = new ArrayList<Element>();
 		try {
 			setup();
-			for (Element line: getCollection()) {
-				if (evaluate(line))
-					result.add(line);
+			for (Element shape: getCollection()) {
+				if (evaluate(shape))
+					result.add(shape);
 			}
 		}
 		catch (Exception ex) {
