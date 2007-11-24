@@ -82,6 +82,6 @@ public class RootTaskTest extends TestCase
 	public void testThatDefaultClassesMethodsAreAccesible() {
 		Boolean expected = Boolean.parseBoolean("true");
 		Object x = rootTask.findNamedValue("Boolean.parseBoolean(\"true\")");
-//		assertEquals(expected, x); //XXX not working
+		assertEquals(expected, x);
 	}
 }

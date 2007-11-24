@@ -9,6 +9,8 @@ import java.util.TreeMap;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import org.apache.commons.jexl.Expression;
+import org.apache.commons.jexl.ExpressionFactory;
 import org.apache.commons.jexl.JexlContext;
 import org.apache.commons.jexl.context.HashMapContext;
 
@@ -254,10 +256,21 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	}
 
 	@Override
+	/** First see if the the value is stored directly as variable
+	 * try to evaluate it in the current context
+	 * Find a context calculation and try to calculate that 
+	 */
 	public Object findNamedValue(String name) {
 		Object value = getNamedValue(name);
 		if (value != null)
 			return value;
+		try {
+			Expression e = ExpressionFactory.createExpression( name );
+			value = e.evaluate(this);
+			if (value != null)
+				return value;
+		} catch (Exception e) {
+		}
 		Map<String, ContextCalculation> contextCalculationMap = getContextCalculationMap();
 		if (contextCalculationMap != null) {
 			ContextCalculation contextCalculation = contextCalculationMap.get(name);
@@ -314,6 +327,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	}
 	
 	@Override
+	/** This only works with exact variable names not */
 	public Object getNamedValue(String name) {
 		Object value = null;
 		if (_localContext != null) {

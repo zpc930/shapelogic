@@ -1,6 +1,9 @@
 package org.shapelogic.logic;
 
-/**   
+/** A calculation that lives in a context
+ * If the calculation has already finished then just take the value
+ * 
+ * In order to create a context calculation override this class 
  * 
  * @author Sami Badawi
  *
@@ -40,5 +43,11 @@ public abstract class ContextCalculation {
 		}
 	}
 
+	/** This should overridden with the calculation that should be done 
+	 * 
+	 * @param context
+	 * @return
+	 * @throws Exception
+	 */
 	public abstract Object calculation(Task context) throws Exception;
 }
