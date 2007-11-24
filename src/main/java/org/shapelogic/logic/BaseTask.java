@@ -270,18 +270,24 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 				}
 			}
 		}
-		return findClassValue(name);
+		return findEnumValue(name);
 	}
 
-	public Object findClassValue(String name) {
+	/** If a named value cannot be found for a String key, instead 
+	 * see if the first part of the string is the name of a class set in the context 
+	 * if it is the name of a class that is an emum then try to see if rest is an legal value 
+	 * 
+	 * @param name input that should be an enum value with the class at first e.g. PointType.T_JUNCTION
+	 * @return null if not an enum value
+	 */
+	public Object findEnumValue(String name) {
 		if (name == null)
 			return null;
-		Object value = getNamedValue(name);
-		if (value != null)
-			return value;
 		if (!Character.isUpperCase(name.charAt(0)))
 			return null;
 		int indexOfPeriod = name.indexOf('.');
+		if (indexOfPeriod<0)
+			return null;
 		String className = name.substring(0, indexOfPeriod);
 		String rest = name.substring(indexOfPeriod+1);
 		Object klass1 = getNamedValue(className);
@@ -291,7 +297,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 			if (klass.isEnum()) {
 				return Enum.valueOf(klass, rest);
 		}
-		return value;
+		return null;
 	}
 
 	@Override
