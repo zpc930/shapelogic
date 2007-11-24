@@ -64,13 +64,10 @@ public class CommonLogicExpressions {
 	public static final String T_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(PointType.T_JUNCTION)";
 
 	public static final String INFLECTION_POINT_COUNT = "inflectionPointCount";
-//XXX This does work, but is returning the map of annotations
-//	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getMap()";
-//XXX This does not work, only returns null
-	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(LineType.INFLECTION_POINT)";
+	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation('LineType.INFLECTION_POINT')";
 
 	public static final String CURVE_ARCH_COUNT = "curveArchCount";
-	public static final String CURVE_ARCH_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(LineType.CURVE_ARCH)";
+	public static final String CURVE_ARCH_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation('LineType.CURVE_ARCH')";
 	
 	
 	//Point location and annotation related
