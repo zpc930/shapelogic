@@ -1,5 +1,6 @@
 package org.shapelogic.polygon;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -68,6 +69,9 @@ public class AnnotatedShapeImplementation implements AnnotatedShape {
 				if (obj != null)
 				result = _map.get(obj);
 			}
+		}
+		if (result == null) {
+			result = Collections.EMPTY_SET;
 		}
 		return result;
 	}

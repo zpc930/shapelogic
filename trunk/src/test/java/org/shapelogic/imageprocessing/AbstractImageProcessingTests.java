@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -79,6 +80,15 @@ public class AbstractImageProcessingTests extends TestCase {
 		System.out.println("Print polygon:");
 		printLines(polygon);
 		printPoints(polygon);
+	}
+	
+	public void assertEmptyCollection(Object obj){
+		if (obj != null) {
+			if (obj instanceof Collection) {
+				Collection coll = (Collection) obj;
+				assertEquals(0, coll.size());
+			} 
+		}
 	}
 	
 }
