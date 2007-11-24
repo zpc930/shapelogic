@@ -101,7 +101,7 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 		System.out.println("End points: " + endPoints);
 		assertEquals(2, endPoints.size());
 		Set<GeometricShape2D> inflectionPoints = annotations.getShapesForAnnotation(LineType.INFLECTION_POINT);
-		assertNull(inflectionPoints);
+		assertEmptyCollection(inflectionPoints);
 		printAnnotaions(polygon);
 		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
 		assertEquals(fileName,vectorizer.getMatchingOH());
@@ -138,7 +138,7 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 		assertTrue(annotations.getAnnotationForShapes(verticalLine).contains(LineType.STRAIGHT));
 		CLine bottomArch = CLine.makeUnordered(bottomPoint1, bottomPoint2);
 		assertTrue(annotations.getAnnotationForShapes(bottomArch).contains(LineType.CURVE_ARCH));
-		assertNull(annotations.getShapesForAnnotation(LineType.INFLECTION_POINT));
+		assertEmptyCollection(annotations.getShapesForAnnotation(LineType.INFLECTION_POINT));
 		assertEquals(1,cleanedPolygon.filter(new FullLengthVerticalFilter()).size());
 		assertEquals(1,cleanedPolygon.filter("org.shapelogic.filter.FullLengthVerticalFilter").size());
 		assertEquals(0,cleanedPolygon.filter("org.shapelogic.filter.FullLengthHorizontalFilter").size());
@@ -221,7 +221,7 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 		System.out.println("End points: " + endPoints);
 		assertEquals(2, endPoints.size());
 		Set<GeometricShape2D> inflectionPoints = annotations.getShapesForAnnotation(LineType.INFLECTION_POINT);
-		assertNull(inflectionPoints);
+		assertEmptyCollection(inflectionPoints);
 		printAnnotaions(polygon);
 		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
 		assertEquals(fileName,vectorizer.getMatchingOH());
@@ -260,7 +260,7 @@ public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingF
 		assertTrue(annotations.getAnnotationForShapes(verticalLine).contains(LineType.CURVE_ARCH));
 		CLine bottomArch = CLine.makeUnordered(bottomPoint1, middlePoint1);
 		assertTrue(annotations.getAnnotationForShapes(bottomArch).contains(LineType.CURVE_ARCH));
-		assertNull(annotations.getShapesForAnnotation(LineType.INFLECTION_POINT));
+		assertEmptyCollection(annotations.getShapesForAnnotation(LineType.INFLECTION_POINT));
 		assertEquals(fileName,vectorizer.getMatchingOH());
 	}
 	
