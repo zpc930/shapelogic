@@ -64,7 +64,9 @@ public class AnnotatedShapeImplementation implements AnnotatedShape {
 		if (result == null) {
 			if (annotation instanceof String) {
 				RootTask rootTask = RootTask.getInstance();
-				result = (Set<GeometricShape2D>) rootTask.findEnumValue((String)annotation);
+				Object obj = rootTask.findEnumValue((String)annotation);
+				if (obj != null)
+				result = _map.get(obj);
 			}
 		}
 		return result;
