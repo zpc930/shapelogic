@@ -44,7 +44,8 @@ public class AnnotatedShapeImplementationTest extends TestCase {
 		assertEquals(annotatedShape,rootTask.findNamedValue(ANNOTATED_SHAPE));
 		String annoationCount = "annotatedShape.getMap().size()";
 		assertEquals(1,rootTask.findNamedValue(annoationCount));
+		assertEquals(PointType.END_POINT, Enum.valueOf(PointType.class, "END_POINT"));
 		String pointCount = "annotatedShape.getShapesForAnnotation(\"PointType.END_POINT\").size()";
-//		assertEquals(1,rootTask.findNamedValue(pointCount));
+		assertEquals(1,rootTask.findNamedValue(pointCount));
 	}
 }
