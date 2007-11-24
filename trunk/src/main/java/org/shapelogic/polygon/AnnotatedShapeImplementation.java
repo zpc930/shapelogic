@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import org.shapelogic.logic.RootTask;
+
 /** Instead putting all logic for AnnotatedShape in all classes implement this
  * Make them adapter for this class
  * 
@@ -52,8 +54,20 @@ public class AnnotatedShapeImplementation implements AnnotatedShape {
 	}
 
 	@Override
+	/** Get a set of all shape that has an annotation
+	 * The annotation will usually be a enum.
+	 * If nothing is return then see if input is a string and try to parse it 
+	 * into an enum value
+	 */
 	public Set<GeometricShape2D> getShapesForAnnotation(Object annotation) {
-		return _map.get(annotation);
+		Set<GeometricShape2D> result = _map.get(annotation);
+		if (result == null) {
+			if (annotation instanceof String) {
+				RootTask rootTask = RootTask.getInstance();
+				result = (Set<GeometricShape2D>) rootTask.findEnumValue((String)annotation);
+			}
+		}
+		return result;
 	}
 
 	@Override
