@@ -1,5 +1,6 @@
 package org.shapelogic.polygon;
 
+import org.shapelogic.imageprocessing.AbstractImageProcessingTests;
 import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.logic.RootTask;
 import org.shapelogic.util.Constants;
@@ -29,7 +30,7 @@ public class AnnotatedShapeImplementationTest extends TestCase {
 		CPointInt p2 = new CPointInt(2,2);
 		Integer ONE = new Integer(1);
 		annotatedShape.putAnnotation(p1, ONE);
-		assertNull(annotatedShape.getShapesForAnnotation(Constants.ZERO));
+		AbstractImageProcessingTests.assertEmptyCollection(annotatedShape.getShapesForAnnotation(Constants.ZERO));
 		assertEquals(1,annotatedShape.getShapesForAnnotation(ONE).size());
 		annotatedShape.putAnnotation(p2, 1);
 		assertEquals(2,annotatedShape.getShapesForAnnotation(1).size());

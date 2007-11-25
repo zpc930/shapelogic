@@ -317,7 +317,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 		polygon.getAnnotatedShape().getMap();
 		Set<GeometricShape2D> shapes = polygon.getAnnotatedShape().getShapesForAnnotation(PointType.HARD_CORNER);
-		assertNull(shapes);
+		assertEmptyCollection(shapes);
 	}
 
 	/** This is an test for new images with problems, should only be used when there are problems*/

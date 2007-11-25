@@ -82,7 +82,7 @@ public class AbstractImageProcessingTests extends TestCase {
 		printPoints(polygon);
 	}
 	
-	public void assertEmptyCollection(Object obj){
+	static public void assertEmptyCollection(Object obj){
 		if (obj != null) {
 			if (obj instanceof Collection) {
 				Collection coll = (Collection) obj;
