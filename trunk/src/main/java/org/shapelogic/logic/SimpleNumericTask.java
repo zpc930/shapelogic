@@ -1,6 +1,6 @@
 package org.shapelogic.logic;
 
-/**   
+/** Does numerical comparison of an expected value and a found value
  * 
  * @author Sami Badawi
  *
