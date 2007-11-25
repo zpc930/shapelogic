@@ -1,5 +1,8 @@
 package org.shapelogic.logic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.logic.ContextCalculation;
 import org.shapelogic.logic.RootTask;
@@ -83,5 +86,17 @@ public class RootTaskTest extends TestCase
 		Boolean expected = Boolean.parseBoolean("true");
 		Object x = rootTask.findNamedValue("Boolean.parseBoolean(\"true\")");
 		assertEquals(expected, x);
+	}
+
+	public void testEscaping() {
+		String key = "Sami's computer";
+		String expected = "Slow";
+		Map<String, String> testMap = new HashMap<String, String>();
+		testMap.put(key,expected);
+		rootTask.setNamedValue("testMap", testMap);
+		Object x = rootTask.findNamedValue("testMap.get(\"Sami\'s computer\")");
+		assertEquals(expected, x);
+		Object y = rootTask.findNamedValue("testMap.get('Sami's computer')");
+//		assertEquals(expected, y); //XXX did not work
 	}
 }
