@@ -1,6 +1,6 @@
 package org.shapelogic.filter;
 
-// $ANTLR 3.0 Filter.g 2007-11-07 20:40:07
+// $ANTLR 3.0 Filter.g 2007-11-26 19:51:45
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -12,28 +12,30 @@ import org.antlr.runtime.tree.*;
 
 public class FilterParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "CONSTRAINT", "STRING", "DOUBLE", "VARIABLE", "AND", "OR", "NOT", "LEFTPAR", "RIGHTPAR", "DQUOTE", "QUOTE", "PERIOD", "MINUS", "NEWLINE", "WS", "LETTER", "DIGIT", "NONE_END", "ID", "NUMBER", "ARGU"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "CONSTRAINT", "STRING", "DOUBLE", "VARIABLE", "AND", "OR", "NOT", "LEFTPAR", "RIGHTPAR", "DOUBLEQUOTE", "QUOTE", "PERIOD", "MINUS", "BACKSPACE", "NEWLINE", "WS", "LETTER", "DIGIT", "NONE_END", "BACKSPACE_SEQUENCE", "ID", "NUMBER", "ARGU"
     };
+    public static final int LETTER=20;
     public static final int PERIOD=15;
-    public static final int LETTER=19;
     public static final int RIGHTPAR=12;
-    public static final int NUMBER=23;
-    public static final int DQUOTE=13;
+    public static final int NUMBER=25;
     public static final int NOT=10;
     public static final int MINUS=16;
-    public static final int ID=22;
+    public static final int ID=24;
     public static final int AND=8;
     public static final int EOF=-1;
+    public static final int DOUBLEQUOTE=13;
     public static final int QUOTE=14;
-    public static final int WS=18;
+    public static final int WS=19;
+    public static final int BACKSPACE=17;
     public static final int VARIABLE=7;
-    public static final int NEWLINE=17;
+    public static final int NEWLINE=18;
     public static final int OR=9;
+    public static final int BACKSPACE_SEQUENCE=23;
     public static final int DOUBLE=6;
     public static final int LEFTPAR=11;
-    public static final int ARGU=24;
-    public static final int NONE_END=21;
-    public static final int DIGIT=20;
+    public static final int ARGU=26;
+    public static final int NONE_END=22;
+    public static final int DIGIT=21;
     public static final int CONSTRAINT=4;
     public static final int STRING=5;
 
@@ -60,7 +62,7 @@ public class FilterParser extends Parser {
     };
 
     // $ANTLR start filter
-    // Filter.g:51:1: filter : orExpr ;
+    // Filter.g:56:1: filter : orExpr ;
     public final filter_return filter() throws RecognitionException {
         filter_return retval = new filter_return();
         retval.start = input.LT(1);
@@ -72,12 +74,12 @@ public class FilterParser extends Parser {
 
 
         try {
-            // Filter.g:51:11: ( orExpr )
-            // Filter.g:51:11: orExpr
+            // Filter.g:56:11: ( orExpr )
+            // Filter.g:56:11: orExpr
             {
             root_0 = (CommonTree)adaptor.nil();
 
-            pushFollow(FOLLOW_orExpr_in_filter334);
+            pushFollow(FOLLOW_orExpr_in_filter388);
             orExpr1=orExpr();
             _fsp--;
 
@@ -108,7 +110,7 @@ public class FilterParser extends Parser {
     };
 
     // $ANTLR start orExpr
-    // Filter.g:53:1: orExpr : andExpr ( OR andExpr )* ;
+    // Filter.g:58:1: orExpr : andExpr ( OR andExpr )* ;
     public final orExpr_return orExpr() throws RecognitionException {
         orExpr_return retval = new orExpr_return();
         retval.start = input.LT(1);
@@ -124,17 +126,17 @@ public class FilterParser extends Parser {
         CommonTree OR3_tree=null;
 
         try {
-            // Filter.g:53:11: ( andExpr ( OR andExpr )* )
-            // Filter.g:53:11: andExpr ( OR andExpr )*
+            // Filter.g:58:11: ( andExpr ( OR andExpr )* )
+            // Filter.g:58:11: andExpr ( OR andExpr )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
-            pushFollow(FOLLOW_andExpr_in_orExpr346);
+            pushFollow(FOLLOW_andExpr_in_orExpr400);
             andExpr2=andExpr();
             _fsp--;
 
             adaptor.addChild(root_0, andExpr2.getTree());
-            // Filter.g:53:19: ( OR andExpr )*
+            // Filter.g:58:19: ( OR andExpr )*
             loop1:
             do {
                 int alt1=2;
@@ -147,14 +149,14 @@ public class FilterParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // Filter.g:53:20: OR andExpr
+            	    // Filter.g:58:20: OR andExpr
             	    {
             	    OR3=(Token)input.LT(1);
-            	    match(input,OR,FOLLOW_OR_in_orExpr349); 
+            	    match(input,OR,FOLLOW_OR_in_orExpr403); 
             	    OR3_tree = (CommonTree)adaptor.create(OR3);
             	    root_0 = (CommonTree)adaptor.becomeRoot(OR3_tree, root_0);
 
-            	    pushFollow(FOLLOW_andExpr_in_orExpr352);
+            	    pushFollow(FOLLOW_andExpr_in_orExpr406);
             	    andExpr4=andExpr();
             	    _fsp--;
 
@@ -193,7 +195,7 @@ public class FilterParser extends Parser {
     };
 
     // $ANTLR start andExpr
-    // Filter.g:55:1: andExpr : notExpr ( AND notExpr )* ;
+    // Filter.g:60:1: andExpr : notExpr ( AND notExpr )* ;
     public final andExpr_return andExpr() throws RecognitionException {
         andExpr_return retval = new andExpr_return();
         retval.start = input.LT(1);
@@ -209,17 +211,17 @@ public class FilterParser extends Parser {
         CommonTree AND6_tree=null;
 
         try {
-            // Filter.g:55:12: ( notExpr ( AND notExpr )* )
-            // Filter.g:55:12: notExpr ( AND notExpr )*
+            // Filter.g:60:12: ( notExpr ( AND notExpr )* )
+            // Filter.g:60:12: notExpr ( AND notExpr )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
-            pushFollow(FOLLOW_notExpr_in_andExpr363);
+            pushFollow(FOLLOW_notExpr_in_andExpr417);
             notExpr5=notExpr();
             _fsp--;
 
             adaptor.addChild(root_0, notExpr5.getTree());
-            // Filter.g:55:20: ( AND notExpr )*
+            // Filter.g:60:20: ( AND notExpr )*
             loop2:
             do {
                 int alt2=2;
@@ -232,14 +234,14 @@ public class FilterParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // Filter.g:55:21: AND notExpr
+            	    // Filter.g:60:21: AND notExpr
             	    {
             	    AND6=(Token)input.LT(1);
-            	    match(input,AND,FOLLOW_AND_in_andExpr366); 
+            	    match(input,AND,FOLLOW_AND_in_andExpr420); 
             	    AND6_tree = (CommonTree)adaptor.create(AND6);
             	    root_0 = (CommonTree)adaptor.becomeRoot(AND6_tree, root_0);
 
-            	    pushFollow(FOLLOW_notExpr_in_andExpr369);
+            	    pushFollow(FOLLOW_notExpr_in_andExpr423);
             	    notExpr7=notExpr();
             	    _fsp--;
 
@@ -278,7 +280,7 @@ public class FilterParser extends Parser {
     };
 
     // $ANTLR start notExpr
-    // Filter.g:57:1: notExpr : ( NOT atom -> ^( NOT atom ) | atom -> atom );
+    // Filter.g:62:1: notExpr : ( NOT atom -> ^( NOT atom ) | atom -> atom );
     public final notExpr_return notExpr() throws RecognitionException {
         notExpr_return retval = new notExpr_return();
         retval.start = input.LT(1);
@@ -295,7 +297,7 @@ public class FilterParser extends Parser {
         RewriteRuleTokenStream stream_NOT=new RewriteRuleTokenStream(adaptor,"token NOT");
         RewriteRuleSubtreeStream stream_atom=new RewriteRuleSubtreeStream(adaptor,"rule atom");
         try {
-            // Filter.g:58:9: ( NOT atom -> ^( NOT atom ) | atom -> atom )
+            // Filter.g:63:9: ( NOT atom -> ^( NOT atom ) | atom -> atom )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -307,19 +309,19 @@ public class FilterParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("57:1: notExpr : ( NOT atom -> ^( NOT atom ) | atom -> atom );", 3, 0, input);
+                    new NoViableAltException("62:1: notExpr : ( NOT atom -> ^( NOT atom ) | atom -> atom );", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // Filter.g:58:9: NOT atom
+                    // Filter.g:63:9: NOT atom
                     {
                     NOT8=(Token)input.LT(1);
-                    match(input,NOT,FOLLOW_NOT_in_notExpr387); 
+                    match(input,NOT,FOLLOW_NOT_in_notExpr441); 
                     stream_NOT.add(NOT8);
 
-                    pushFollow(FOLLOW_atom_in_notExpr389);
+                    pushFollow(FOLLOW_atom_in_notExpr443);
                     atom9=atom();
                     _fsp--;
 
@@ -335,9 +337,9 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 58:18: -> ^( NOT atom )
+                    // 63:18: -> ^( NOT atom )
                     {
-                        // Filter.g:58:21: ^( NOT atom )
+                        // Filter.g:63:21: ^( NOT atom )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(stream_NOT.next(), root_1);
@@ -354,9 +356,9 @@ public class FilterParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // Filter.g:59:9: atom
+                    // Filter.g:64:9: atom
                     {
-                    pushFollow(FOLLOW_atom_in_notExpr407);
+                    pushFollow(FOLLOW_atom_in_notExpr461);
                     atom10=atom();
                     _fsp--;
 
@@ -372,7 +374,7 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 59:14: -> atom
+                    // 64:14: -> atom
                     {
                         adaptor.addChild(root_0, stream_atom.next());
 
@@ -406,7 +408,7 @@ public class FilterParser extends Parser {
     };
 
     // $ANTLR start argument
-    // Filter.g:62:1: argument : ( ARGU -> ^( STRING ARGU ) | NUMBER -> ^( DOUBLE NUMBER ) | ID -> ^( VARIABLE ID ) );
+    // Filter.g:67:1: argument : ( ARGU -> ^( STRING ARGU ) | NUMBER -> ^( DOUBLE NUMBER ) | ID -> ^( VARIABLE ID ) );
     public final argument_return argument() throws RecognitionException {
         argument_return retval = new argument_return();
         retval.start = input.LT(1);
@@ -425,7 +427,7 @@ public class FilterParser extends Parser {
         RewriteRuleTokenStream stream_NUMBER=new RewriteRuleTokenStream(adaptor,"token NUMBER");
 
         try {
-            // Filter.g:63:7: ( ARGU -> ^( STRING ARGU ) | NUMBER -> ^( DOUBLE NUMBER ) | ID -> ^( VARIABLE ID ) )
+            // Filter.g:68:7: ( ARGU -> ^( STRING ARGU ) | NUMBER -> ^( DOUBLE NUMBER ) | ID -> ^( VARIABLE ID ) )
             int alt4=3;
             switch ( input.LA(1) ) {
             case ARGU:
@@ -445,17 +447,17 @@ public class FilterParser extends Parser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("62:1: argument : ( ARGU -> ^( STRING ARGU ) | NUMBER -> ^( DOUBLE NUMBER ) | ID -> ^( VARIABLE ID ) );", 4, 0, input);
+                    new NoViableAltException("67:1: argument : ( ARGU -> ^( STRING ARGU ) | NUMBER -> ^( DOUBLE NUMBER ) | ID -> ^( VARIABLE ID ) );", 4, 0, input);
 
                 throw nvae;
             }
 
             switch (alt4) {
                 case 1 :
-                    // Filter.g:63:7: ARGU
+                    // Filter.g:68:7: ARGU
                     {
                     ARGU11=(Token)input.LT(1);
-                    match(input,ARGU,FOLLOW_ARGU_in_argument425); 
+                    match(input,ARGU,FOLLOW_ARGU_in_argument479); 
                     stream_ARGU.add(ARGU11);
 
 
@@ -469,9 +471,9 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 63:14: -> ^( STRING ARGU )
+                    // 68:14: -> ^( STRING ARGU )
                     {
-                        // Filter.g:63:17: ^( STRING ARGU )
+                        // Filter.g:68:17: ^( STRING ARGU )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(adaptor.create(STRING, "STRING"), root_1);
@@ -488,10 +490,10 @@ public class FilterParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // Filter.g:64:7: NUMBER
+                    // Filter.g:69:7: NUMBER
                     {
                     NUMBER12=(Token)input.LT(1);
-                    match(input,NUMBER,FOLLOW_NUMBER_in_argument443); 
+                    match(input,NUMBER,FOLLOW_NUMBER_in_argument497); 
                     stream_NUMBER.add(NUMBER12);
 
 
@@ -505,9 +507,9 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 64:14: -> ^( DOUBLE NUMBER )
+                    // 69:14: -> ^( DOUBLE NUMBER )
                     {
-                        // Filter.g:64:17: ^( DOUBLE NUMBER )
+                        // Filter.g:69:17: ^( DOUBLE NUMBER )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(adaptor.create(DOUBLE, "DOUBLE"), root_1);
@@ -524,10 +526,10 @@ public class FilterParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // Filter.g:65:7: ID
+                    // Filter.g:70:7: ID
                     {
                     ID13=(Token)input.LT(1);
-                    match(input,ID,FOLLOW_ID_in_argument459); 
+                    match(input,ID,FOLLOW_ID_in_argument513); 
                     stream_ID.add(ID13);
 
 
@@ -541,9 +543,9 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 65:14: -> ^( VARIABLE ID )
+                    // 70:14: -> ^( VARIABLE ID )
                     {
-                        // Filter.g:65:17: ^( VARIABLE ID )
+                        // Filter.g:70:17: ^( VARIABLE ID )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(adaptor.create(VARIABLE, "VARIABLE"), root_1);
@@ -583,7 +585,7 @@ public class FilterParser extends Parser {
     };
 
     // $ANTLR start constraint
-    // Filter.g:67:1: constraint : (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) );
+    // Filter.g:72:1: constraint : (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) );
     public final constraint_return constraint() throws RecognitionException {
         constraint_return retval = new constraint_return();
         retval.start = input.LT(1);
@@ -604,7 +606,7 @@ public class FilterParser extends Parser {
         RewriteRuleTokenStream stream_RIGHTPAR=new RewriteRuleTokenStream(adaptor,"token RIGHTPAR");
         RewriteRuleSubtreeStream stream_argument=new RewriteRuleSubtreeStream(adaptor,"rule argument");
         try {
-            // Filter.g:68:9: (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) )
+            // Filter.g:73:9: (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -619,36 +621,36 @@ public class FilterParser extends Parser {
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("67:1: constraint : (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) );", 5, 1, input);
+                        new NoViableAltException("72:1: constraint : (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) );", 5, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("67:1: constraint : (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) );", 5, 0, input);
+                    new NoViableAltException("72:1: constraint : (name= ID LEFTPAR argument RIGHTPAR -> ^( CONSTRAINT $name argument ) | name= ID -> ^( CONSTRAINT $name) );", 5, 0, input);
 
                 throw nvae;
             }
             switch (alt5) {
                 case 1 :
-                    // Filter.g:68:9: name= ID LEFTPAR argument RIGHTPAR
+                    // Filter.g:73:9: name= ID LEFTPAR argument RIGHTPAR
                     {
                     name=(Token)input.LT(1);
-                    match(input,ID,FOLLOW_ID_in_constraint493); 
+                    match(input,ID,FOLLOW_ID_in_constraint547); 
                     stream_ID.add(name);
 
                     LEFTPAR14=(Token)input.LT(1);
-                    match(input,LEFTPAR,FOLLOW_LEFTPAR_in_constraint495); 
+                    match(input,LEFTPAR,FOLLOW_LEFTPAR_in_constraint549); 
                     stream_LEFTPAR.add(LEFTPAR14);
 
-                    pushFollow(FOLLOW_argument_in_constraint497);
+                    pushFollow(FOLLOW_argument_in_constraint551);
                     argument15=argument();
                     _fsp--;
 
                     stream_argument.add(argument15.getTree());
                     RIGHTPAR16=(Token)input.LT(1);
-                    match(input,RIGHTPAR,FOLLOW_RIGHTPAR_in_constraint499); 
+                    match(input,RIGHTPAR,FOLLOW_RIGHTPAR_in_constraint553); 
                     stream_RIGHTPAR.add(RIGHTPAR16);
 
 
@@ -663,9 +665,9 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 68:43: -> ^( CONSTRAINT $name argument )
+                    // 73:43: -> ^( CONSTRAINT $name argument )
                     {
-                        // Filter.g:68:46: ^( CONSTRAINT $name argument )
+                        // Filter.g:73:46: ^( CONSTRAINT $name argument )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(adaptor.create(CONSTRAINT, "CONSTRAINT"), root_1);
@@ -683,10 +685,10 @@ public class FilterParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // Filter.g:69:9: name= ID
+                    // Filter.g:74:9: name= ID
                     {
                     name=(Token)input.LT(1);
-                    match(input,ID,FOLLOW_ID_in_constraint522); 
+                    match(input,ID,FOLLOW_ID_in_constraint576); 
                     stream_ID.add(name);
 
 
@@ -701,9 +703,9 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 69:17: -> ^( CONSTRAINT $name)
+                    // 74:17: -> ^( CONSTRAINT $name)
                     {
-                        // Filter.g:69:20: ^( CONSTRAINT $name)
+                        // Filter.g:74:20: ^( CONSTRAINT $name)
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(adaptor.create(CONSTRAINT, "CONSTRAINT"), root_1);
@@ -743,7 +745,7 @@ public class FilterParser extends Parser {
     };
 
     // $ANTLR start atom
-    // Filter.g:71:1: atom : ( LEFTPAR orExpr RIGHTPAR -> orExpr | constraint );
+    // Filter.g:76:1: atom : ( LEFTPAR orExpr RIGHTPAR -> orExpr | constraint );
     public final atom_return atom() throws RecognitionException {
         atom_return retval = new atom_return();
         retval.start = input.LT(1);
@@ -763,7 +765,7 @@ public class FilterParser extends Parser {
         RewriteRuleTokenStream stream_RIGHTPAR=new RewriteRuleTokenStream(adaptor,"token RIGHTPAR");
         RewriteRuleSubtreeStream stream_orExpr=new RewriteRuleSubtreeStream(adaptor,"rule orExpr");
         try {
-            // Filter.g:72:5: ( LEFTPAR orExpr RIGHTPAR -> orExpr | constraint )
+            // Filter.g:77:5: ( LEFTPAR orExpr RIGHTPAR -> orExpr | constraint )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -775,25 +777,25 @@ public class FilterParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("71:1: atom : ( LEFTPAR orExpr RIGHTPAR -> orExpr | constraint );", 6, 0, input);
+                    new NoViableAltException("76:1: atom : ( LEFTPAR orExpr RIGHTPAR -> orExpr | constraint );", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // Filter.g:72:5: LEFTPAR orExpr RIGHTPAR
+                    // Filter.g:77:5: LEFTPAR orExpr RIGHTPAR
                     {
                     LEFTPAR17=(Token)input.LT(1);
-                    match(input,LEFTPAR,FOLLOW_LEFTPAR_in_atom545); 
+                    match(input,LEFTPAR,FOLLOW_LEFTPAR_in_atom599); 
                     stream_LEFTPAR.add(LEFTPAR17);
 
-                    pushFollow(FOLLOW_orExpr_in_atom547);
+                    pushFollow(FOLLOW_orExpr_in_atom601);
                     orExpr18=orExpr();
                     _fsp--;
 
                     stream_orExpr.add(orExpr18.getTree());
                     RIGHTPAR19=(Token)input.LT(1);
-                    match(input,RIGHTPAR,FOLLOW_RIGHTPAR_in_atom549); 
+                    match(input,RIGHTPAR,FOLLOW_RIGHTPAR_in_atom603); 
                     stream_RIGHTPAR.add(RIGHTPAR19);
 
 
@@ -807,7 +809,7 @@ public class FilterParser extends Parser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"token retval",retval!=null?retval.tree:null);
 
                     root_0 = (CommonTree)adaptor.nil();
-                    // 72:32: -> orExpr
+                    // 77:32: -> orExpr
                     {
                         adaptor.addChild(root_0, stream_orExpr.next());
 
@@ -818,11 +820,11 @@ public class FilterParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // Filter.g:73:7: constraint
+                    // Filter.g:78:7: constraint
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
-                    pushFollow(FOLLOW_constraint_in_atom564);
+                    pushFollow(FOLLOW_constraint_in_atom618);
                     constraint20=constraint();
                     _fsp--;
 
@@ -851,27 +853,27 @@ public class FilterParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_orExpr_in_filter334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_andExpr_in_orExpr346 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_OR_in_orExpr349 = new BitSet(new long[]{0x0000000000400C00L});
-    public static final BitSet FOLLOW_andExpr_in_orExpr352 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_notExpr_in_andExpr363 = new BitSet(new long[]{0x0000000000000102L});
-    public static final BitSet FOLLOW_AND_in_andExpr366 = new BitSet(new long[]{0x0000000000400C00L});
-    public static final BitSet FOLLOW_notExpr_in_andExpr369 = new BitSet(new long[]{0x0000000000000102L});
-    public static final BitSet FOLLOW_NOT_in_notExpr387 = new BitSet(new long[]{0x0000000000400800L});
-    public static final BitSet FOLLOW_atom_in_notExpr389 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_in_notExpr407 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ARGU_in_argument425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NUMBER_in_argument443 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_argument459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_constraint493 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_LEFTPAR_in_constraint495 = new BitSet(new long[]{0x0000000001C00000L});
-    public static final BitSet FOLLOW_argument_in_constraint497 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_RIGHTPAR_in_constraint499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_constraint522 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LEFTPAR_in_atom545 = new BitSet(new long[]{0x0000000000400C00L});
-    public static final BitSet FOLLOW_orExpr_in_atom547 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_RIGHTPAR_in_atom549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_constraint_in_atom564 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_orExpr_in_filter388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_andExpr_in_orExpr400 = new BitSet(new long[]{0x0000000000000202L});
+    public static final BitSet FOLLOW_OR_in_orExpr403 = new BitSet(new long[]{0x0000000001000C00L});
+    public static final BitSet FOLLOW_andExpr_in_orExpr406 = new BitSet(new long[]{0x0000000000000202L});
+    public static final BitSet FOLLOW_notExpr_in_andExpr417 = new BitSet(new long[]{0x0000000000000102L});
+    public static final BitSet FOLLOW_AND_in_andExpr420 = new BitSet(new long[]{0x0000000001000C00L});
+    public static final BitSet FOLLOW_notExpr_in_andExpr423 = new BitSet(new long[]{0x0000000000000102L});
+    public static final BitSet FOLLOW_NOT_in_notExpr441 = new BitSet(new long[]{0x0000000001000800L});
+    public static final BitSet FOLLOW_atom_in_notExpr443 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_atom_in_notExpr461 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ARGU_in_argument479 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NUMBER_in_argument497 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_argument513 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_constraint547 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_LEFTPAR_in_constraint549 = new BitSet(new long[]{0x0000000007000000L});
+    public static final BitSet FOLLOW_argument_in_constraint551 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_RIGHTPAR_in_constraint553 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_constraint576 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LEFTPAR_in_atom599 = new BitSet(new long[]{0x0000000001000C00L});
+    public static final BitSet FOLLOW_orExpr_in_atom601 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_RIGHTPAR_in_atom603 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_constraint_in_atom618 = new BitSet(new long[]{0x0000000000000002L});
 
 }

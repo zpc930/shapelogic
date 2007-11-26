@@ -14,10 +14,11 @@ tokens {
 	NOT =	 '!';
 	LEFTPAR =	'(';
 	RIGHTPAR =	')';
-	DQUOTE 	=	'"';
+	DOUBLEQUOTE =   '"';
 	QUOTE 	=	'\'';
 	PERIOD 	=	'.';
 	MINUS 	=	'-';
+	BACKSPACE = 	'\\';
 } // define pseudo-operations
 
 /*------------------------------------------------------------------
@@ -36,13 +37,17 @@ fragment
 DIGIT	:	'0'..'9';
 
 fragment
-NONE_END :	('a'..'z'|'A'..'Z'|'_' | '0'..'9' | '.' | '-' | '+' | ';' | ',' | '/' | '\\' | ':');
+NONE_END :	('a'..'z'|'A'..'Z'|'_' | '0'..'9' | '.' | '-' | '+' | ';' | ',' | '/' | ':' );
+
+fragment
+BACKSPACE_SEQUENCE
+	:	BACKSPACE! ( '\'' | '"' | BACKSPACE );
 
 ID  :   	LETTER (LETTER | DIGIT | PERIOD)* ;
 
 NUMBER  :    	MINUS? DIGIT+ (PERIOD DIGIT*)? ;
 
-ARGU :   	QUOTE NONE_END* QUOTE;
+ARGU :   	QUOTE (NONE_END | BACKSPACE_SEQUENCE)* QUOTE | DOUBLEQUOTE (NONE_END | BACKSPACE_SEQUENCE)* DOUBLEQUOTE;
 
 /*------------------------------------------------------------------
  * PARSER RULES

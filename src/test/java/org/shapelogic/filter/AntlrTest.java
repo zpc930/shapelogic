@@ -29,12 +29,11 @@ public class AntlrTest extends TestCase {
 		CommonTree tree = runFile("/tmp/antlrworks/__Test___input.txt");
 	}
 	
-	public void testString() throws Exception {
-		System.out.println("Place 1");
+	/** Test Parsing Of Logical Expression Into AST */
+	public void testParsingOfLogicalExpressionIntoAST() throws Exception {
 		String inputExpression = "a&& b( -1.23 ) || !c('Sami')";
 		CommonTree tree = runString(inputExpression);
 		assertNotNull(tree);
-		System.out.println("Place 2");
 		String exprecte = "(|| (&& (CONSTRAINT a) (CONSTRAINT b -1.23)) (! (CONSTRAINT c 'Sami')))";
 		exprecte = "(|| (&& (CONSTRAINT a) (CONSTRAINT b (DOUBLE -1.23))) (! (CONSTRAINT c (STRING 'Sami'))))";
 
@@ -48,21 +47,83 @@ public class AntlrTest extends TestCase {
 		assertEquals("a" ,getChildToken(tree,new int[] {0,0,0}));
 	}
 	
-	public void testEscape() throws Exception {
-		System.out.println("Place 1");
+	/** Test that parameters are handled correctly */
+	public void testParameters() throws Exception {
+		String parameter = "'Sami'"; 
 		String inputExpression = "c('Sami')";
 		CommonTree tree = runString(inputExpression);
 		assertNotNull(tree);
-		System.out.println("Place 2");
 		String exprecte = "(CONSTRAINT c (STRING 'Sami'))";
-		System.out.println("StringTree: " + tree.toStringTree());
 		assertEquals(exprecte,tree.toStringTree());
 		String tokenText = getTokenText(tree);
 		assertNotNull("Token text should not be null",tokenText);
 		assertEquals(CONSTRAINT ,getTokenText(tree));
 		assertEquals(STRING ,getChildToken(tree,1));
 		assertEquals(STRING ,getChildToken(tree,new int[] {1}));
-		assertEquals("'Sami'" ,getChildToken(tree,new int[] {1,0}));
+		assertEquals(parameter ,getChildToken(tree,new int[] {1,0}));
+	}
+	
+	/** Test that parameters are handled correctly */
+	public void testParametersDoubleQuote() throws Exception {
+		String parameter = "\"Sami\""; 
+		String inputExpression = "c(\"Sami\")";
+		CommonTree tree = runString(inputExpression);
+		assertNotNull(tree);
+		String exprecte = "(CONSTRAINT c (STRING \"Sami\"))";
+		assertEquals(exprecte,tree.toStringTree());
+		String tokenText = getTokenText(tree);
+		assertNotNull("Token text should not be null",tokenText);
+		assertEquals(CONSTRAINT ,getTokenText(tree));
+		assertEquals(STRING ,getChildToken(tree,1));
+		assertEquals(STRING ,getChildToken(tree,new int[] {1}));
+		assertEquals(parameter ,getChildToken(tree,new int[] {1,0}));
+	}
+	
+	/** Test that parameters are handled correctly */
+	public void testEscapeDoubleQuote() throws Exception {
+		String parameter = "\"Sami\""; 
+		String inputExpression = "c(\"Sami\")";
+		CommonTree tree = runString(inputExpression);
+		assertNotNull(tree);
+		String expected = "(CONSTRAINT c (STRING \"Sami\"))";
+		assertEquals(expected,tree.toStringTree());
+		String tokenText = getTokenText(tree);
+		assertNotNull("Token text should not be null",tokenText);
+		assertEquals(CONSTRAINT ,getTokenText(tree));
+		assertEquals(STRING ,getChildToken(tree,1));
+		assertEquals(STRING ,getChildToken(tree,new int[] {1}));
+		assertEquals(parameter ,getChildToken(tree,new int[] {1,0}));
+	}
+	
+	public void testEscape() throws Exception {
+		String parameter = "Sami\'s";
+		System.out.println("parameter:"+parameter);
+		String inputExpression = "c('Sami\\'s')";
+		CommonTree tree = runString(inputExpression);
+		assertNotNull(tree);
+		String expected = "(CONSTRAINT c (STRING 'Sami\\'s'))";
+		System.out.println(tree.toStringTree());
+		assertEquals(expected,tree.toStringTree());
+		String tokenText = getTokenText(tree);
+		assertNotNull("Token text should not be null",tokenText);
+		assertEquals(CONSTRAINT ,getTokenText(tree));
+		assertEquals(STRING ,getChildToken(tree,1));
+		assertEquals(STRING ,getChildToken(tree,new int[] {1}));
+		assertEquals(parameter , FilterFactory.parseCronstraintParameterTree(getChild(tree,1)));
+	}
+	
+	public void testEscapeBackspace() throws Exception {
+		String singleBackslash = "\\";
+		String doubleBackslash = "\\\\";
+		System.out.println("singleBackslash: " + singleBackslash);
+		System.out.println("doubleBackslash: " + doubleBackslash);
+		System.out.println("\"");
+		System.out.println("\\\"");
+		System.out.println("\'");
+		System.out.println("\\\'");
+		assertEquals(singleBackslash,FilterFactory.escapeBackspace(doubleBackslash));
+		assertEquals("\"",FilterFactory.escapeBackspace("\\\""));
+		assertEquals("\'",FilterFactory.escapeBackspace("\\\'"));
 	}
 	
 //Helper methods
