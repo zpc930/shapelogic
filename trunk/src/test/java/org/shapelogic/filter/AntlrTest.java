@@ -22,6 +22,7 @@ public class AntlrTest extends TestCase {
 	public static final String OR = "||";
 	public static final String NOT = "!";
 	public static final String CONSTRAINT = "CONSTRAINT";
+	public static final String STRING = "STRING";
 	
 	/** If I have a grammer in a text file */
 	public void te_stFile() throws Exception {
@@ -38,7 +39,6 @@ public class AntlrTest extends TestCase {
 		exprecte = "(|| (&& (CONSTRAINT a) (CONSTRAINT b (DOUBLE -1.23))) (! (CONSTRAINT c (STRING 'Sami'))))";
 
 		assertEquals(exprecte,tree.toStringTree());
-		assertEquals(exprecte,tree.toStringTree());
 		String tokenText = getTokenText(tree);
 		assertNotNull("Token text should not be null",tokenText);
 		assertEquals(OR ,getTokenText(tree));
@@ -48,17 +48,38 @@ public class AntlrTest extends TestCase {
 		assertEquals("a" ,getChildToken(tree,new int[] {0,0,0}));
 	}
 	
+	public void testEscape() throws Exception {
+		System.out.println("Place 1");
+		String inputExpression = "c('Sami')";
+		CommonTree tree = runString(inputExpression);
+		assertNotNull(tree);
+		System.out.println("Place 2");
+		String exprecte = "(CONSTRAINT c (STRING 'Sami'))";
+		System.out.println("StringTree: " + tree.toStringTree());
+		assertEquals(exprecte,tree.toStringTree());
+		String tokenText = getTokenText(tree);
+		assertNotNull("Token text should not be null",tokenText);
+		assertEquals(CONSTRAINT ,getTokenText(tree));
+		assertEquals(STRING ,getChildToken(tree,1));
+		assertEquals(STRING ,getChildToken(tree,new int[] {1}));
+		assertEquals("'Sami'" ,getChildToken(tree,new int[] {1,0}));
+	}
+	
 //Helper methods
 	
 //Helper tree methods
+	/** Get whole sub tree */
 	private CommonTree getChild(CommonTree tree, int childNumbre){
 		return (CommonTree) tree.getChild(childNumbre);
 	}
 
+	/** Get whole sub tree
+	 * @param childNumbres {0, 2} Means first get the first sub tree, sub tree then the third sub tree under that  
+	 */
 	private CommonTree getChild(CommonTree tree, int[] childNumbres){
 		CommonTree result = tree;
 		for (int index: childNumbres)
-			result = (CommonTree) result.getChild(childNumbres[index]);
+			result = (CommonTree) result.getChild(index);
 		return result;
 	}
 
@@ -70,12 +91,13 @@ public class AntlrTest extends TestCase {
 		return getTokenText(getChild(tree,childNumbre));
 	}
 
+	/** Get is the string after the first parenthesis 
+	 */
 	private String getTokenText(CommonTree tree){
 		if (tree != null) {
 			System.out.println("tree not null");
 			Token token = tree.getToken();
 			if (tree.getToken() != null) {
-				System.out.println("token not null");
 				System.out.println("Token: "+token);
 				System.out.println("Token cannel: "+token.getChannel());
 				System.out.println("Token class: "+token.getClass());
