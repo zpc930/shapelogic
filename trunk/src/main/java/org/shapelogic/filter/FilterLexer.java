@@ -1,6 +1,6 @@
 package org.shapelogic.filter;
 
-// $ANTLR 3.0 Filter.g 2007-11-07 20:40:07
+// $ANTLR 3.0 Filter.g 2007-11-26 19:51:46
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -8,27 +8,29 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class FilterLexer extends Lexer {
-    public static final int LETTER=19;
     public static final int PERIOD=15;
+    public static final int LETTER=20;
     public static final int RIGHTPAR=12;
-    public static final int NUMBER=23;
-    public static final int DQUOTE=13;
+    public static final int NUMBER=25;
     public static final int NOT=10;
     public static final int MINUS=16;
-    public static final int ID=22;
+    public static final int ID=24;
     public static final int AND=8;
-    public static final int Tokens=25;
+    public static final int Tokens=27;
     public static final int EOF=-1;
+    public static final int DOUBLEQUOTE=13;
     public static final int QUOTE=14;
-    public static final int WS=18;
+    public static final int WS=19;
+    public static final int BACKSPACE=17;
     public static final int VARIABLE=7;
-    public static final int NEWLINE=17;
+    public static final int NEWLINE=18;
     public static final int OR=9;
-    public static final int DOUBLE=6;
     public static final int LEFTPAR=11;
-    public static final int ARGU=24;
-    public static final int NONE_END=21;
-    public static final int DIGIT=20;
+    public static final int DOUBLE=6;
+    public static final int BACKSPACE_SEQUENCE=23;
+    public static final int ARGU=26;
+    public static final int NONE_END=22;
+    public static final int DIGIT=21;
     public static final int CONSTRAINT=4;
     public static final int STRING=5;
     public FilterLexer() {;} 
@@ -129,12 +131,12 @@ public class FilterLexer extends Lexer {
     }
     // $ANTLR end RIGHTPAR
 
-    // $ANTLR start DQUOTE
-    public final void mDQUOTE() throws RecognitionException {
+    // $ANTLR start DOUBLEQUOTE
+    public final void mDOUBLEQUOTE() throws RecognitionException {
         try {
-            int _type = DQUOTE;
-            // Filter.g:8:10: ( '\"' )
-            // Filter.g:8:10: '\"'
+            int _type = DOUBLEQUOTE;
+            // Filter.g:8:15: ( '\"' )
+            // Filter.g:8:15: '\"'
             {
             match('\"'); 
 
@@ -145,7 +147,7 @@ public class FilterLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end DQUOTE
+    // $ANTLR end DOUBLEQUOTE
 
     // $ANTLR start QUOTE
     public final void mQUOTE() throws RecognitionException {
@@ -201,14 +203,32 @@ public class FilterLexer extends Lexer {
     }
     // $ANTLR end MINUS
 
+    // $ANTLR start BACKSPACE
+    public final void mBACKSPACE() throws RecognitionException {
+        try {
+            int _type = BACKSPACE;
+            // Filter.g:12:13: ( '\\\\' )
+            // Filter.g:12:13: '\\\\'
+            {
+            match('\\'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end BACKSPACE
+
     // $ANTLR start NEWLINE
     public final void mNEWLINE() throws RecognitionException {
         try {
             int _type = NEWLINE;
-            // Filter.g:28:11: ( ( '\\r' )? '\\n' )
-            // Filter.g:28:11: ( '\\r' )? '\\n'
+            // Filter.g:29:11: ( ( '\\r' )? '\\n' )
+            // Filter.g:29:11: ( '\\r' )? '\\n'
             {
-            // Filter.g:28:11: ( '\\r' )?
+            // Filter.g:29:11: ( '\\r' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -217,7 +237,7 @@ public class FilterLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // Filter.g:28:11: '\\r'
+                    // Filter.g:29:11: '\\r'
                     {
                     match('\r'); 
 
@@ -241,10 +261,10 @@ public class FilterLexer extends Lexer {
     public final void mWS() throws RecognitionException {
         try {
             int _type = WS;
-            // Filter.g:29:10: ( ( ' ' | '\\t' )+ )
-            // Filter.g:29:10: ( ' ' | '\\t' )+
+            // Filter.g:30:10: ( ( ' ' | '\\t' )+ )
+            // Filter.g:30:10: ( ' ' | '\\t' )+
             {
-            // Filter.g:29:10: ( ' ' | '\\t' )+
+            // Filter.g:30:10: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -297,8 +317,8 @@ public class FilterLexer extends Lexer {
     // $ANTLR start LETTER
     public final void mLETTER() throws RecognitionException {
         try {
-            // Filter.g:33:11: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
-            // Filter.g:33:11: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+            // Filter.g:34:11: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
+            // Filter.g:34:11: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -322,8 +342,8 @@ public class FilterLexer extends Lexer {
     // $ANTLR start DIGIT
     public final void mDIGIT() throws RecognitionException {
         try {
-            // Filter.g:36:9: ( '0' .. '9' )
-            // Filter.g:36:9: '0' .. '9'
+            // Filter.g:37:9: ( '0' .. '9' )
+            // Filter.g:37:9: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -338,10 +358,10 @@ public class FilterLexer extends Lexer {
     // $ANTLR start NONE_END
     public final void mNONE_END() throws RecognitionException {
         try {
-            // Filter.g:39:12: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' | '.' | '-' | '+' | ';' | ',' | '/' | '\\\\' | ':' ) )
-            // Filter.g:39:12: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' | '.' | '-' | '+' | ';' | ',' | '/' | '\\\\' | ':' )
+            // Filter.g:40:12: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' | '.' | '-' | '+' | ';' | ',' | '/' | ':' ) )
+            // Filter.g:40:12: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' | '.' | '-' | '+' | ';' | ',' | '/' | ':' )
             {
-            if ( (input.LA(1)>='+' && input.LA(1)<=';')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='\\'||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            if ( (input.LA(1)>='+' && input.LA(1)<=';')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
 
             }
@@ -360,15 +380,41 @@ public class FilterLexer extends Lexer {
     }
     // $ANTLR end NONE_END
 
+    // $ANTLR start BACKSPACE_SEQUENCE
+    public final void mBACKSPACE_SEQUENCE() throws RecognitionException {
+        try {
+            // Filter.g:44:4: ( BACKSPACE ( '\\'' | '\"' | BACKSPACE ) )
+            // Filter.g:44:4: BACKSPACE ( '\\'' | '\"' | BACKSPACE )
+            {
+            mBACKSPACE(); 
+            if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\' ) {
+                input.consume();
+
+            }
+            else {
+                MismatchedSetException mse =
+                    new MismatchedSetException(null,input);
+                recover(mse);    throw mse;
+            }
+
+
+            }
+
+        }
+        finally {
+        }
+    }
+    // $ANTLR end BACKSPACE_SEQUENCE
+
     // $ANTLR start ID
     public final void mID() throws RecognitionException {
         try {
             int _type = ID;
-            // Filter.g:41:10: ( LETTER ( LETTER | DIGIT | PERIOD )* )
-            // Filter.g:41:10: LETTER ( LETTER | DIGIT | PERIOD )*
+            // Filter.g:46:10: ( LETTER ( LETTER | DIGIT | PERIOD )* )
+            // Filter.g:46:10: LETTER ( LETTER | DIGIT | PERIOD )*
             {
             mLETTER(); 
-            // Filter.g:41:17: ( LETTER | DIGIT | PERIOD )*
+            // Filter.g:46:17: ( LETTER | DIGIT | PERIOD )*
             loop3:
             do {
                 int alt3=2;
@@ -416,10 +462,10 @@ public class FilterLexer extends Lexer {
     public final void mNUMBER() throws RecognitionException {
         try {
             int _type = NUMBER;
-            // Filter.g:43:15: ( ( MINUS )? ( DIGIT )+ ( PERIOD ( DIGIT )* )? )
-            // Filter.g:43:15: ( MINUS )? ( DIGIT )+ ( PERIOD ( DIGIT )* )?
+            // Filter.g:48:15: ( ( MINUS )? ( DIGIT )+ ( PERIOD ( DIGIT )* )? )
+            // Filter.g:48:15: ( MINUS )? ( DIGIT )+ ( PERIOD ( DIGIT )* )?
             {
-            // Filter.g:43:15: ( MINUS )?
+            // Filter.g:48:15: ( MINUS )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -428,7 +474,7 @@ public class FilterLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // Filter.g:43:15: MINUS
+                    // Filter.g:48:15: MINUS
                     {
                     mMINUS(); 
 
@@ -437,7 +483,7 @@ public class FilterLexer extends Lexer {
 
             }
 
-            // Filter.g:43:22: ( DIGIT )+
+            // Filter.g:48:22: ( DIGIT )+
             int cnt5=0;
             loop5:
             do {
@@ -451,7 +497,7 @@ public class FilterLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // Filter.g:43:22: DIGIT
+            	    // Filter.g:48:22: DIGIT
             	    {
             	    mDIGIT(); 
 
@@ -467,7 +513,7 @@ public class FilterLexer extends Lexer {
                 cnt5++;
             } while (true);
 
-            // Filter.g:43:29: ( PERIOD ( DIGIT )* )?
+            // Filter.g:48:29: ( PERIOD ( DIGIT )* )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -476,10 +522,10 @@ public class FilterLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // Filter.g:43:30: PERIOD ( DIGIT )*
+                    // Filter.g:48:30: PERIOD ( DIGIT )*
                     {
                     mPERIOD(); 
-                    // Filter.g:43:37: ( DIGIT )*
+                    // Filter.g:48:37: ( DIGIT )*
                     loop6:
                     do {
                         int alt6=2;
@@ -492,7 +538,7 @@ public class FilterLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // Filter.g:43:37: DIGIT
+                    	    // Filter.g:48:37: DIGIT
                     	    {
                     	    mDIGIT(); 
 
@@ -524,39 +570,111 @@ public class FilterLexer extends Lexer {
     public final void mARGU() throws RecognitionException {
         try {
             int _type = ARGU;
-            // Filter.g:45:11: ( QUOTE ( NONE_END )* QUOTE )
-            // Filter.g:45:11: QUOTE ( NONE_END )* QUOTE
-            {
-            mQUOTE(); 
-            // Filter.g:45:17: ( NONE_END )*
-            loop8:
-            do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
+            // Filter.g:50:11: ( QUOTE ( NONE_END | BACKSPACE_SEQUENCE )* QUOTE | DOUBLEQUOTE ( NONE_END | BACKSPACE_SEQUENCE )* DOUBLEQUOTE )
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-                if ( ((LA8_0>='+' && LA8_0<=';')||(LA8_0>='A' && LA8_0<='Z')||LA8_0=='\\'||LA8_0=='_'||(LA8_0>='a' && LA8_0<='z')) ) {
-                    alt8=1;
-                }
+            if ( (LA10_0=='\'') ) {
+                alt10=1;
+            }
+            else if ( (LA10_0=='\"') ) {
+                alt10=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("50:1: ARGU : ( QUOTE ( NONE_END | BACKSPACE_SEQUENCE )* QUOTE | DOUBLEQUOTE ( NONE_END | BACKSPACE_SEQUENCE )* DOUBLEQUOTE );", 10, 0, input);
+
+                throw nvae;
+            }
+            switch (alt10) {
+                case 1 :
+                    // Filter.g:50:11: QUOTE ( NONE_END | BACKSPACE_SEQUENCE )* QUOTE
+                    {
+                    mQUOTE(); 
+                    // Filter.g:50:17: ( NONE_END | BACKSPACE_SEQUENCE )*
+                    loop8:
+                    do {
+                        int alt8=3;
+                        int LA8_0 = input.LA(1);
+
+                        if ( ((LA8_0>='+' && LA8_0<=';')||(LA8_0>='A' && LA8_0<='Z')||LA8_0=='_'||(LA8_0>='a' && LA8_0<='z')) ) {
+                            alt8=1;
+                        }
+                        else if ( (LA8_0=='\\') ) {
+                            alt8=2;
+                        }
 
 
-                switch (alt8) {
-            	case 1 :
-            	    // Filter.g:45:17: NONE_END
-            	    {
-            	    mNONE_END(); 
+                        switch (alt8) {
+                    	case 1 :
+                    	    // Filter.g:50:18: NONE_END
+                    	    {
+                    	    mNONE_END(); 
 
-            	    }
-            	    break;
+                    	    }
+                    	    break;
+                    	case 2 :
+                    	    // Filter.g:50:29: BACKSPACE_SEQUENCE
+                    	    {
+                    	    mBACKSPACE_SEQUENCE(); 
 
-            	default :
-            	    break loop8;
-                }
-            } while (true);
+                    	    }
+                    	    break;
 
-            mQUOTE(); 
+                    	default :
+                    	    break loop8;
+                        }
+                    } while (true);
+
+                    mQUOTE(); 
+
+                    }
+                    break;
+                case 2 :
+                    // Filter.g:50:58: DOUBLEQUOTE ( NONE_END | BACKSPACE_SEQUENCE )* DOUBLEQUOTE
+                    {
+                    mDOUBLEQUOTE(); 
+                    // Filter.g:50:70: ( NONE_END | BACKSPACE_SEQUENCE )*
+                    loop9:
+                    do {
+                        int alt9=3;
+                        int LA9_0 = input.LA(1);
+
+                        if ( ((LA9_0>='+' && LA9_0<=';')||(LA9_0>='A' && LA9_0<='Z')||LA9_0=='_'||(LA9_0>='a' && LA9_0<='z')) ) {
+                            alt9=1;
+                        }
+                        else if ( (LA9_0=='\\') ) {
+                            alt9=2;
+                        }
+
+
+                        switch (alt9) {
+                    	case 1 :
+                    	    // Filter.g:50:71: NONE_END
+                    	    {
+                    	    mNONE_END(); 
+
+                    	    }
+                    	    break;
+                    	case 2 :
+                    	    // Filter.g:50:82: BACKSPACE_SEQUENCE
+                    	    {
+                    	    mBACKSPACE_SEQUENCE(); 
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop9;
+                        }
+                    } while (true);
+
+                    mDOUBLEQUOTE(); 
+
+                    }
+                    break;
 
             }
-
             this.type = _type;
         }
         finally {
@@ -565,76 +683,87 @@ public class FilterLexer extends Lexer {
     // $ANTLR end ARGU
 
     public void mTokens() throws RecognitionException {
-        // Filter.g:1:10: ( AND | OR | NOT | LEFTPAR | RIGHTPAR | DQUOTE | QUOTE | PERIOD | MINUS | NEWLINE | WS | ID | NUMBER | ARGU )
-        int alt9=14;
+        // Filter.g:1:10: ( AND | OR | NOT | LEFTPAR | RIGHTPAR | DOUBLEQUOTE | QUOTE | PERIOD | MINUS | BACKSPACE | NEWLINE | WS | ID | NUMBER | ARGU )
+        int alt11=15;
         switch ( input.LA(1) ) {
         case '&':
             {
-            alt9=1;
+            alt11=1;
             }
             break;
         case '|':
             {
-            alt9=2;
+            alt11=2;
             }
             break;
         case '!':
             {
-            alt9=3;
+            alt11=3;
             }
             break;
         case '(':
             {
-            alt9=4;
+            alt11=4;
             }
             break;
         case ')':
             {
-            alt9=5;
+            alt11=5;
             }
             break;
         case '\"':
             {
-            alt9=6;
+            int LA11_6 = input.LA(2);
+
+            if ( (LA11_6=='\"'||(LA11_6>='+' && LA11_6<=';')||(LA11_6>='A' && LA11_6<='Z')||LA11_6=='\\'||LA11_6=='_'||(LA11_6>='a' && LA11_6<='z')) ) {
+                alt11=15;
+            }
+            else {
+                alt11=6;}
             }
             break;
         case '\'':
             {
-            int LA9_7 = input.LA(2);
+            int LA11_7 = input.LA(2);
 
-            if ( (LA9_7=='\''||(LA9_7>='+' && LA9_7<=';')||(LA9_7>='A' && LA9_7<='Z')||LA9_7=='\\'||LA9_7=='_'||(LA9_7>='a' && LA9_7<='z')) ) {
-                alt9=14;
+            if ( (LA11_7=='\''||(LA11_7>='+' && LA11_7<=';')||(LA11_7>='A' && LA11_7<='Z')||LA11_7=='\\'||LA11_7=='_'||(LA11_7>='a' && LA11_7<='z')) ) {
+                alt11=15;
             }
             else {
-                alt9=7;}
+                alt11=7;}
             }
             break;
         case '.':
             {
-            alt9=8;
+            alt11=8;
             }
             break;
         case '-':
             {
-            int LA9_9 = input.LA(2);
+            int LA11_9 = input.LA(2);
 
-            if ( ((LA9_9>='0' && LA9_9<='9')) ) {
-                alt9=13;
+            if ( ((LA11_9>='0' && LA11_9<='9')) ) {
+                alt11=14;
             }
             else {
-                alt9=9;}
+                alt11=9;}
+            }
+            break;
+        case '\\':
+            {
+            alt11=10;
             }
             break;
         case '\n':
         case '\r':
             {
-            alt9=10;
+            alt11=11;
             }
             break;
         case '\t':
         case ' ':
             {
-            alt9=11;
+            alt11=12;
             }
             break;
         case 'A':
@@ -691,7 +820,7 @@ public class FilterLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            alt9=12;
+            alt11=13;
             }
             break;
         case '0':
@@ -705,17 +834,17 @@ public class FilterLexer extends Lexer {
         case '8':
         case '9':
             {
-            alt9=13;
+            alt11=14;
             }
             break;
         default:
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( AND | OR | NOT | LEFTPAR | RIGHTPAR | DQUOTE | QUOTE | PERIOD | MINUS | NEWLINE | WS | ID | NUMBER | ARGU );", 9, 0, input);
+                new NoViableAltException("1:1: Tokens : ( AND | OR | NOT | LEFTPAR | RIGHTPAR | DOUBLEQUOTE | QUOTE | PERIOD | MINUS | BACKSPACE | NEWLINE | WS | ID | NUMBER | ARGU );", 11, 0, input);
 
             throw nvae;
         }
 
-        switch (alt9) {
+        switch (alt11) {
             case 1 :
                 // Filter.g:1:10: AND
                 {
@@ -752,63 +881,70 @@ public class FilterLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // Filter.g:1:38: DQUOTE
+                // Filter.g:1:38: DOUBLEQUOTE
                 {
-                mDQUOTE(); 
+                mDOUBLEQUOTE(); 
 
                 }
                 break;
             case 7 :
-                // Filter.g:1:45: QUOTE
+                // Filter.g:1:50: QUOTE
                 {
                 mQUOTE(); 
 
                 }
                 break;
             case 8 :
-                // Filter.g:1:51: PERIOD
+                // Filter.g:1:56: PERIOD
                 {
                 mPERIOD(); 
 
                 }
                 break;
             case 9 :
-                // Filter.g:1:58: MINUS
+                // Filter.g:1:63: MINUS
                 {
                 mMINUS(); 
 
                 }
                 break;
             case 10 :
-                // Filter.g:1:64: NEWLINE
+                // Filter.g:1:69: BACKSPACE
+                {
+                mBACKSPACE(); 
+
+                }
+                break;
+            case 11 :
+                // Filter.g:1:79: NEWLINE
                 {
                 mNEWLINE(); 
 
                 }
                 break;
-            case 11 :
-                // Filter.g:1:72: WS
+            case 12 :
+                // Filter.g:1:87: WS
                 {
                 mWS(); 
 
                 }
                 break;
-            case 12 :
-                // Filter.g:1:75: ID
+            case 13 :
+                // Filter.g:1:90: ID
                 {
                 mID(); 
 
                 }
                 break;
-            case 13 :
-                // Filter.g:1:78: NUMBER
+            case 14 :
+                // Filter.g:1:93: NUMBER
                 {
                 mNUMBER(); 
 
                 }
                 break;
-            case 14 :
-                // Filter.g:1:85: ARGU
+            case 15 :
+                // Filter.g:1:100: ARGU
                 {
                 mARGU(); 
 

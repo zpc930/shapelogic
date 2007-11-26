@@ -24,6 +24,7 @@ public class FilterFactory {
 	public static final String DOUBLE_TYPE = "DOUBLE";
 	public static final String VARIABLE_TYPE = "VARIABLE";
 	public static final String FILTER_PACKAGE = "org.shapelogic.filter.";
+	public static final char BACKSPACE = '\\';
 	
 	public static <BaseClass, Element> IFilter<BaseClass, Element> makeFilter(String filterName) {
 		IFilter<BaseClass, Element> filterObject = null;
@@ -167,7 +168,7 @@ public class FilterFactory {
         }
 	}
 
-	private static Object parseCronstraintParameterTree(CommonTree tree) {
+	public static Object parseCronstraintParameterTree(CommonTree tree) {
 		String tokenText = getTokenText(tree);
 		if (tokenText == null)
 			return null;
@@ -175,7 +176,7 @@ public class FilterFactory {
 			CommonTree child0 = (CommonTree)tree.getChild(0);
 			String text = getTokenText(child0);
 			if (text != null && text.length() > 2)
-				return text.substring(1, text.length()-1);
+				return escapeBackspace(text.substring(1, text.length()-1));
 			return null;
 		}
 		else if (DOUBLE_TYPE.equals(tokenText)) {
@@ -194,5 +195,20 @@ public class FilterFactory {
 			return obj;
 		}
 		return null;
+	}
+	
+	/** Replace escaped characters with the character 
+	 * \\ -> \
+	 * \" -> "
+	 * \' -> '
+	 */
+	public static String escapeBackspace(String input) {
+		if (input.indexOf(BACKSPACE) == -1)
+			return input;
+		String result = input;
+		result = result.replaceAll("\\\\\'", "\'");
+		result = result.replaceAll("\\\\\"", "\"");
+		result = result.replaceAll("(\\\\){2}", "\\\\");
+		return result;
 	}
 }
