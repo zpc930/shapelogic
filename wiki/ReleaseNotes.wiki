@@ -4,8 +4,12 @@
 
 ShapeLogic releases:
 
-= Development version  (to be released) =
-  * Fixed problem with logic language for filters.
+= Development version ShapeLogic release 0.8.0 (to be released) =
+  * First alpha quality release
+  * Make letter recognition example more robust
+  * Fix bug so logic language directly can use annotation
+  * Make more general logical expression instead of just equal test at the lowest level
+  * Includes a binary distribution that contains all the dependent jar files, to ease deployment 
 
 = 2007-11-20 ShapeLogic release 0.3.0  AKA All capital letters release =
 
