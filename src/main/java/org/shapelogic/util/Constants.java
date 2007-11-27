@@ -18,10 +18,15 @@ public class Constants {
 	/** What you need to add to the y coordinate to get to the indexed point */
 	public static int[] CYCLE_POINTS_Y = {0, 1, 1, 1,  0,  -1, -1, -1};
 
-	public static final String FILTER_COUNT_TASK = "FilterCountTask";
+	//Equality test tasks
 	public static final String SIMPLE_NUMERIC_TASK = "SimpleNumericTask";
 	public static final String COUNT_COLLECTION_TASK = "CountCollectionTask";
+	public static final String FILTER_COUNT_TASK = "FilterCountTask";
+	
+	//Boolean test tasks
 	public static final String BOOLEAN_TASK = "BooleanTask";
+
+	//Greater test tasks
 	public static final String NUMERIC_GREATER_TASK = "NumericGreaterTask";
 	public static final String FILTER_COUNT_GREATER_TASK = "FilterCountGreaterTask";
 }
