@@ -131,21 +131,27 @@ public class NumericRule {
 	 */
 	public BaseTask makeTask(BaseTask parentTask){
 		BaseTask task = null;
+
+		//Equality test tasks
 		if (SIMPLE_NUMERIC_TASK.equalsIgnoreCase(getClassName())) {
 			task = new SimpleNumericTask(parentTask, false, getVariableAndExpression(),getExpected());
-		}
-		else if (FILTER_COUNT_TASK.equalsIgnoreCase(getClassName())) {
-			task = new FilterCountTask(parentTask, false, getVariable(),getExpression(),getExpected());
 		}
 		else if (COUNT_COLLECTION_TASK.equalsIgnoreCase(getClassName())) {
 			task = new CountCollectionTask(parentTask, false, getVariable(),getExpression(),getExpected());
 		}
+		else if (FILTER_COUNT_TASK.equalsIgnoreCase(getClassName())) {
+			task = new FilterCountTask(parentTask, false, getVariable(),getExpression(),getExpected());
+		}
+		
+		//Greater test tasks
 		else if (NUMERIC_GREATER_TASK.equalsIgnoreCase(getClassName())) {
 			task = new NumericGreaterTask(parentTask, false, getVariableAndExpression(),getExpected());
 		}
 		else if (FILTER_COUNT_GREATER_TASK.equalsIgnoreCase(getClassName())) {
 			task = new FilterCountGreaterTask(parentTask, false, getVariable(),getExpression(),getExpected());
 		}
+		
+		//Boolean test tasks
 		else if (BOOLEAN_TASK.equalsIgnoreCase(getClassName())) {
 			task = new BooleanTask(parentTask, false, getExpression());
 		}
