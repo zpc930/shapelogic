@@ -7,13 +7,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.shapelogic.logic.BaseTask;
+import org.shapelogic.logic.BooleanTask;
 import org.shapelogic.logic.CountCollectionTask;
+import org.shapelogic.logic.FilterCountGreaterTask;
 import org.shapelogic.logic.FilterCountTask;
+import org.shapelogic.logic.NumericGreaterTask;
 import org.shapelogic.logic.SimpleNumericTask;
 
 import static org.shapelogic.util.Constants.FILTER_COUNT_TASK;
 import static org.shapelogic.util.Constants.SIMPLE_NUMERIC_TASK;
-import static org.shapelogic.util.Constants.COUNT_COLLECTION_TASK;;
+import static org.shapelogic.util.Constants.COUNT_COLLECTION_TASK;
+import static org.shapelogic.util.Constants.NUMERIC_GREATER_TASK;
+import static org.shapelogic.util.Constants.FILTER_COUNT_GREATER_TASK;
+import static org.shapelogic.util.Constants.BOOLEAN_TASK;
 
 @Entity
 @Table(name = "NUMERIC_RULE")
@@ -134,7 +140,15 @@ public class NumericRule {
 		else if (COUNT_COLLECTION_TASK.equalsIgnoreCase(getClassName())) {
 			task = new CountCollectionTask(parentTask, false, getVariable(),getExpression(),getExpected());
 		}
-		
+		else if (NUMERIC_GREATER_TASK.equalsIgnoreCase(getClassName())) {
+			task = new NumericGreaterTask(parentTask, false, getVariableAndExpression(),getExpected());
+		}
+		else if (FILTER_COUNT_GREATER_TASK.equalsIgnoreCase(getClassName())) {
+			task = new FilterCountGreaterTask(parentTask, false, getVariable(),getExpression(),getExpected());
+		}
+		else if (BOOLEAN_TASK.equalsIgnoreCase(getClassName())) {
+			task = new BooleanTask(parentTask, false, getExpression());
+		}
 		else { //Default is SIMPLE_NUMERIC_TASK 
 			task = new SimpleNumericTask(parentTask, false, getVariableAndExpression(),getExpected());
 		}
