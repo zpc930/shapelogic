@@ -5,11 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.shapelogic.entities.NumericRule;
-import static org.shapelogic.util.Constants.FILTER_COUNT_TASK;
+
 import static org.shapelogic.util.Constants.SIMPLE_NUMERIC_TASK;
 import static org.shapelogic.util.Constants.COUNT_COLLECTION_TASK;
+import static org.shapelogic.util.Constants.FILTER_COUNT_TASK;
+
 import static org.shapelogic.util.Constants.NUMERIC_GREATER_TASK;
+import static org.shapelogic.util.Constants.COUNT_COLLECTION_GREATER_TASK;
 import static org.shapelogic.util.Constants.FILTER_COUNT_GREATER_TASK;
+
+import static org.shapelogic.util.Constants.BOOLEAN_TASK;
+
 import static org.shapelogic.logic.CommonLogicExpressions.*;
 
 /** Should create all 
@@ -322,19 +328,18 @@ public class LetterTaskFactory {
 //			new NumericRule("Q", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 0.,FILTER_COUNT_GREATER_TASK),
 //			new NumericRule("Q", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
 			new NumericRule("Q", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
-			new NumericRule("Q", MULTI_LINE_COUNT, polygon, MULTI_LINE_COUNT_EX, 2.,COUNT_COLLECTION_TASK),
+			new NumericRule("Q", MULTI_LINE_COUNT, polygon, MULTI_LINE_COUNT_EX, 1.,COUNT_COLLECTION_GREATER_TASK),
 			new NumericRule("Q", CURVE_ARCH_COUNT, polygon, CURVE_ARCH_COUNT_EX, 0.,NUMERIC_GREATER_TASK),
 //			new NumericRule("Q", HARD_POINT_COUNT, polygon, HARD_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
 			new NumericRule("Q", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,NUMERIC_GREATER_TASK),
 			new NumericRule("Q", END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT, polygon, END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT_EX, 0., FILTER_COUNT_GREATER_TASK),
 			
-
 			new NumericRule("R", HOLE_COUNT, polygon, HOLE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
-			new NumericRule("R", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
-			new NumericRule("R", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
+			new NumericRule("R", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 0.,FILTER_COUNT_GREATER_TASK),
+			new NumericRule("R", U_JUNCTION_POINT_COUNT, polygon, U_JUNCTION_POINT_COUNT_EX2, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("R", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 2.,FILTER_COUNT_TASK),
-//			new NumericRule("R", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,"SimpleNumericTask"),
-			new NumericRule("R", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 2.,NUMERIC_GREATER_TASK),
+			//This is because the way that the top point is found as the first scan line point to top line will not always be vertical
+			new NumericRule("R", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,NUMERIC_GREATER_TASK),
 			new NumericRule("R", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("R", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,NUMERIC_GREATER_TASK),
 
@@ -342,11 +347,11 @@ public class LetterTaskFactory {
 			new NumericRule("S", T_JUNCTION_POINT_COUNT, polygon, T_JUNCTION_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
 			new NumericRule("S", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("S", MULTI_LINE_COUNT, polygon, MULTI_LINE_COUNT_EX, 1.,COUNT_COLLECTION_TASK),
-			new NumericRule("S", CURVE_ARCH_COUNT, polygon, CURVE_ARCH_COUNT_EX, 0.,NUMERIC_GREATER_TASK),
 			new NumericRule("S", END_POINT_TOP_RIGHT_HALF_POINT_COUNT, polygon, END_POINT_TOP_RIGHT_HALF_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
 			new NumericRule("S", END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT, polygon, END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
-			new NumericRule("S", INFLECTION_POINT_COUNT, polygon, INFLECTION_POINT_COUNT_EX, 5.,NUMERIC_GREATER_TASK),
+			new NumericRule("S", INFLECTION_POINT_COUNT, polygon, INFLECTION_POINT_COUNT_EX, 0.,NUMERIC_GREATER_TASK),
 			new NumericRule("S", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,NUMERIC_GREATER_TASK),
+			new NumericRule("S", ASPECT_RATIO, polygon, ASPECT_RATIO_EX, 0.5, NUMERIC_GREATER_TASK),
 			
 			new NumericRule("T", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("T", T_JUNCTION_POINT_COUNT, polygon, T_JUNCTION_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
@@ -375,9 +380,9 @@ public class LetterTaskFactory {
 			new NumericRule("V", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("V", MULTI_LINE_COUNT, polygon, MULTI_LINE_COUNT_EX, 1.,COUNT_COLLECTION_TASK),
 			new NumericRule("V", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("V", INFLECTION_POINT_COUNT, polygon, INFLECTION_POINT_COUNT_EX, 0.,COUNT_COLLECTION_TASK),
 
 			new NumericRule("W", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
-			new NumericRule("W", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
 			new NumericRule("W", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
 			new NumericRule("W", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
 			new NumericRule("W", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
@@ -385,20 +390,17 @@ public class LetterTaskFactory {
 			new NumericRule("W", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("W", MULTI_LINE_COUNT, polygon, MULTI_LINE_COUNT_EX, 1.,COUNT_COLLECTION_TASK),
 			new NumericRule("W", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("W", INFLECTION_POINT_COUNT, polygon, INFLECTION_POINT_COUNT_EX, 1.,COUNT_COLLECTION_GREATER_TASK),
 
 			new NumericRule("X", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
-			new NumericRule("X", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
-			new NumericRule("X", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
 			new NumericRule("X", END_POINT_TOP_POINT_COUNT, polygon, END_POINT_TOP_POINT_COUNT_EX, 2.,FILTER_COUNT_TASK),
-			new NumericRule("X", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
+			new NumericRule("X", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 2.,FILTER_COUNT_TASK),
 			new NumericRule("X", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("X", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("X", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 4.,SIMPLE_NUMERIC_TASK),
 			new NumericRule("X", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,SIMPLE_NUMERIC_TASK),
 			
 			new NumericRule("Y", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
-//			new NumericRule("Y", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,"FilterCountTask"),
-//			new NumericRule("Y", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 0.,"FilterCountTask"),
 			new NumericRule("Y", Y_JUNCTION_POINT_COUNT, polygon, Y_JUNCTION_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
 			new NumericRule("Y", END_POINT_TOP_POINT_COUNT, polygon, END_POINT_TOP_POINT_COUNT_EX, 2.,FILTER_COUNT_TASK),
 			new NumericRule("Y", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),

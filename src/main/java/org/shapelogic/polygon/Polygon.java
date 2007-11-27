@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import org.shapelogic.filter.FilterFactory;
 import org.shapelogic.filter.IFilter;
@@ -459,5 +460,24 @@ public class Polygon extends BaseAnnotatedShape
 	
 	public int getHoleCount() {
 		return getLines().size() + 1 - getPoints().size();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer result = new StringBuffer();
+		result.append("Lines:\n");
+		for (CLine line: getLines()) {
+			result.append(line);
+		}
+		result.append("\nPoints:\n");
+		for (IPoint2D point: getPoints()) {
+			result.append(point);
+		}
+		result.append("\nAnnotations:\n");
+		Map<Object, Set<GeometricShape2D>> map = getAnnotatedShape().getMap();
+		for (Entry<Object, Set<GeometricShape2D>> entry: map.entrySet())
+			result.append(entry.getKey() +":\n" + entry.getValue() + "\n");
+		result.append("\naspectRatio: " + getBBox().getAspectRatio());
+		return result.toString();
 	}
 }

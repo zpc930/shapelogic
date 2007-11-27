@@ -65,6 +65,10 @@ public class CommonLogicExpressions {
 
 	public static final String T_JUNCTION_POINT_COUNT = "tJunctionCount";
 	public static final String T_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(\"T_JUNCTION\")";
+	
+	public static final String U_JUNCTION_POINT_COUNT = "uJunctionCount";
+	public static final String U_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(\"U_JUNCTION\")";
+	public static final String U_JUNCTION_POINT_COUNT_EX2 = "getAnnotatedShape().getShapesForAnnotation(\"PointType.U_JUNCTION\").size()";
 
 	public static final String INFLECTION_POINT_COUNT = "inflectionPointCount";
 	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(\"LineType.INFLECTION_POINT\")";
@@ -81,6 +85,10 @@ public class CommonLogicExpressions {
 	public static final String T_JUNCTION_RIGHT_POINT_COUNT = "tJunctionRightCount";
 	public static final String T_JUNCTION_RIGHT_POINT_COUNT_EX = 
 		T_JUNCTION_POINT_COUNT_EX + AND + RIGHT_HALF_EX; 
+
+	public static final String U_JUNCTION_RIGHT_POINT_COUNT = "tJunctionRightCount";
+	public static final String U_JUNCTION_RIGHT_POINT_COUNT_EX = 
+		U_JUNCTION_POINT_COUNT_EX + AND + RIGHT_HALF_EX; 
 
 	public static final String END_POINT_BOTTOM_POINT_COUNT = "endpointBottomPointCount"; 
 	public static final String END_POINT_BOTTOM_POINT_COUNT_EX = 
