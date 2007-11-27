@@ -2,8 +2,21 @@
 
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png FAQ wiki page =
 
+== ShapeLogic will not run as a plugin for ImageJ ==
+The problem is that there are several jar files that are needed for it to run.
+This is described on the [GettingStarted] page
+
+== Does ShapeLogic work with other plugins for ImageJ ==
+  * The intention with SahpeLogic is that is should work with other plugins.
+  * ShapeLogic is using of the shelve best of breed open source libraries when possible.
+  * ShapeLogic is trying to be a very lightweight framework.
+
+== Does ShapeLogic work without ImageJ ==
+Not now. But ShapeLogic is very loosely coupled to ImageJ. 
+So abstracting the connection to ImageJ out should not be too big a task.
+
+= User questions =
+
 Add your questions here.
 This page is intended for users to post question. 
 This might be replaced with a regular user list.
-
-= User questions =
