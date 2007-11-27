@@ -56,6 +56,7 @@ public class CommonLogicExpressions {
 	
 	public static final String SOFT_POINT_COUNT = "softPointCount";
 	public static final String SOFT_POINT_COUNT_EX = "PointOfTypeFilter(\"SOFT_POINT\")";
+	public static final String SOFT_POINT_COUNT_EX2 = "getAnnotatedShape().getShapesForAnnotation(\"PointType.SOFT_POINT\").size()";
 
 	public static final String Y_JUNCTION_POINT_COUNT = "yJunctionCount";
 	public static final String Y_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(\"Y_JUNCTION\")";
