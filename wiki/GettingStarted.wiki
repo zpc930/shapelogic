@@ -26,7 +26,7 @@ These jar file can be found on any Marven 2 repository:
 E.g. commons-math-1.1.jar can be found here:
 [http://repo1.maven.org/maven2/commons-math/commons-math/1.1/]
 
-ShapeLogic 0.4 should come with a version that contains all these dependent jars.
+ShapeLogic 0.7 should come with a version that contains all these dependent jars.
 
 When you open ImageJ there will be a ShapeLogic menu with commands in.
 
