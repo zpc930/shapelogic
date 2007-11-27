@@ -28,5 +28,6 @@ public class Constants {
 
 	//Greater test tasks
 	public static final String NUMERIC_GREATER_TASK = "NumericGreaterTask";
+	public static final String COUNT_COLLECTION_GREATER_TASK = "CountCollectionGreaterTask";
 	public static final String FILTER_COUNT_GREATER_TASK = "FilterCountGreaterTask";
 }
