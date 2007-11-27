@@ -1,6 +1,8 @@
 package org.shapelogic.logic;
 
 /** Contains commonly used logic expression strings
+ * So all the logic expressions that are used in the letter match is definded here.
+ * There are both a name and a logic expression defined for each.
  * 
  * @author Sami Badawi
  *

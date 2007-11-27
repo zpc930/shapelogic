@@ -2,7 +2,10 @@ package org.shapelogic.logic;
 
 /** Does numerical comparison of an expected value and a found value
  * Checks that calculated value is greater than the expected value
- *  
+ * 
+ * There are several version doing related tasks:
+ * This is the simple version that does not do a size() operation for you
+ * 
  * @author Sami Badawi
  *
  */

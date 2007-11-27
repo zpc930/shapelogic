@@ -2,7 +2,8 @@ package org.shapelogic.logic;
 
 import java.util.Collection;
 
-/** When an expression returns a collection this does a count on it.
+/** When an expression returns a collection this does a count on it and does a 
+ * greater than comparison
  * 
  *  It will also work when the expression is returning null and the expected number is 0.
  * 

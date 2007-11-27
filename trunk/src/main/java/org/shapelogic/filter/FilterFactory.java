@@ -10,7 +10,9 @@ import org.antlr.runtime.tree.CommonTree;
 import org.shapelogic.filter.FilterParser.filter_return;
 import org.shapelogic.logic.RootTask;
 
-/**
+/** Turns logic expressions into filters.
+ * Uses Antlr parser to parse to AST, Abstract Syntax Tree, 
+ * then traverses the tree to build the filter.  
  * 
  * @author Sami Badawi
  *

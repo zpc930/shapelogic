@@ -1,10 +1,11 @@
 package org.shapelogic.filter;
 
-import org.antlr.runtime.tree.CommonTree;
-
 import junit.framework.TestCase;
 
-/**
+/** Test FilterFactory
+ * 
+ * Currently only test the AST tree structure 
+ * TODO Expanded
  * 
  * @author Sami Badawi
  *

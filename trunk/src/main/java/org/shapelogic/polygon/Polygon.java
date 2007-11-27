@@ -21,7 +21,7 @@ import org.shapelogic.logic.LazyCalc;
  * but you cannot change the element, and the underlying points are mutable.
  * So point should not be changed after they are added.
  * 
- * Not this and the sub class MultiLinePolygon has the exactly same interface 
+ * Note that this and the sub class MultiLinePolygon has the exactly same interface 
  * 
  * @author Sami Badawi
  *

@@ -10,7 +10,7 @@ import org.shapelogic.logic.Task;
 
 import junit.framework.TestCase;
 
-/**   
+/** Test the very fundamental RootTask that is a singleton
  * 
  * @author Sami Badawi
  *

@@ -4,6 +4,8 @@ package org.shapelogic.logic;
  * The advantage of using this over the SimpleNumericTask is that you can do 
  * boolean expression of the filter expressions   
  * 
+ * Might be deprecated since there are several classes that does a lowest level comparison
+ * 
  * @author Sami Badawi
  *
  */
