@@ -4,7 +4,7 @@
 
 ShapeLogic releases:
 
-= Development version ShapeLogic release 0.8.0 (to be released) =
+= Development version ShapeLogic release 0.7.0 (to be released) =
   * First alpha quality release
   * Make letter recognition example more robust
   * Fix bug so logic language directly can use annotation
