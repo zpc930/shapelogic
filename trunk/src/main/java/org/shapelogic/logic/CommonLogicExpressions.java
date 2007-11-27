@@ -15,6 +15,7 @@ public class CommonLogicExpressions {
 	//Point related
 	public static final String POINT_COUNT = "pointCount";
 	public static final String POINT_COUNT_EX = "getPoints()";
+	public static final String POINT_COUNT_EX2 = "getPoints().size()";
 
 	public static final String END_POINT_COUNT = "endPointCount";
 	public static final String END_POINT_COUNT_EX = "getEndPointCount()";
@@ -53,6 +54,7 @@ public class CommonLogicExpressions {
 	//Point annotation related
 	public static final String HARD_POINT_COUNT = "hardPointCount";
 	public static final String HARD_POINT_COUNT_EX = "PointOfTypeFilter(\"HARD_CORNER\")";
+	public static final String HARD_POINT_COUNT_EX2 = "getAnnotatedShape().getShapesForAnnotation(\"PointType.HARD_CORNER\").size()";
 	
 	public static final String SOFT_POINT_COUNT = "softPointCount";
 	public static final String SOFT_POINT_COUNT_EX = "PointOfTypeFilter(\"SOFT_POINT\")";
@@ -100,9 +102,21 @@ public class CommonLogicExpressions {
 	public static final String END_POINT_TOP_RIGHT_HALF_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + TOP_RIGHT_HALF_EX;
 	
+	public static final String END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT =  "endpointBottomRightHalfPointCount";
+	public static final String END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + BOTTOM_RIGHT_HALF_EX;
+	
 	public static final String END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT =  "endpointBottomLeftHalfPointCount";
 	public static final String END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + BOTTOM_LEFT_HALF_EX;
+	
+	public static final String END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT =  "endpointBottomLeftThirdPointCount";
+	public static final String END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + BOTTOM_LEFT_THIRD_EX;
+	
+	public static final String END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT =  "endpointBottomRightThirdPointCount";
+	public static final String END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + BOTTOM_RIGHT_THIRD_EX;
 	
 	//Line related
 	public static final String LINE_COUNT = "lineCount";
@@ -121,5 +135,8 @@ public class CommonLogicExpressions {
 	//Polygon related
 	public static final String HOLE_COUNT = "holeCount";
 	public static final String HOLE_COUNT_EX = "holeCount";
+	
+	public static final String ASPECT_RATIO = "aspectRatio";
+	public static final String ASPECT_RATIO_EX = "getBBox().getAspectRatio()";
 	
 }
