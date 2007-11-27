@@ -52,22 +52,22 @@ public class CommonLogicExpressions {
 	
 	//Point annotation related
 	public static final String HARD_POINT_COUNT = "hardPointCount";
-	public static final String HARD_POINT_COUNT_EX = "PointOfTypeFilter(PointType.HARD_CORNER)";
+	public static final String HARD_POINT_COUNT_EX = "PointOfTypeFilter(\"HARD_CORNER\")";
 	
 	public static final String SOFT_POINT_COUNT = "softPointCount";
-	public static final String SOFT_POINT_COUNT_EX = "PointOfTypeFilter(PointType.SOFT_POINT)";
+	public static final String SOFT_POINT_COUNT_EX = "PointOfTypeFilter(\"SOFT_POINT\")";
 
 	public static final String Y_JUNCTION_POINT_COUNT = "yJunctionCount";
-	public static final String Y_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(PointType.Y_JUNCTION)";
+	public static final String Y_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(\"Y_JUNCTION\")";
 
 	public static final String T_JUNCTION_POINT_COUNT = "tJunctionCount";
-	public static final String T_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(PointType.T_JUNCTION)";
+	public static final String T_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(\"T_JUNCTION\")";
 
 	public static final String INFLECTION_POINT_COUNT = "inflectionPointCount";
-	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation('LineType.INFLECTION_POINT')";
+	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(\"LineType.INFLECTION_POINT\")";
 
 	public static final String CURVE_ARCH_COUNT = "curveArchCount";
-	public static final String CURVE_ARCH_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation('LineType.CURVE_ARCH')";
+	public static final String CURVE_ARCH_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(\"LineType.CURVE_ARCH\")";
 	
 	
 	//Point location and annotation related

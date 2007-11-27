@@ -96,7 +96,7 @@ public class RootTaskTest extends TestCase
 		rootTask.setNamedValue("testMap", testMap);
 		Object x = rootTask.findNamedValue("testMap.get(\"Sami\'s computer\")");
 		assertEquals(expected, x);
-		Object y = rootTask.findNamedValue("testMap.get('Sami's computer')");
+		Object y = rootTask.findNamedValue("testMap.get('Sami\'s computer')");
 //		assertEquals(expected, y); //XXX did not work
 	}
 }

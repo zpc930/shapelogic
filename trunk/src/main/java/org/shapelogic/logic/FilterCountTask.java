@@ -15,7 +15,7 @@ public class FilterCountTask extends SimpleNumericTask {
 		super(parent, createLocalContext, makeFullExpression(variable,expression), excectedValue);
 	}
 
-	static private String makeFullExpression(String variable, String filterExpression) {
+	static public String makeFullExpression(String variable, String filterExpression) {
 		String fullExpression = "";
 		if (variable != null)
 			fullExpression += variable + ".filter('" + filterExpression + "').size()";
