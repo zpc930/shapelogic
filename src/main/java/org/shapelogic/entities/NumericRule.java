@@ -27,18 +27,28 @@ import static org.shapelogic.util.Constants.BOOLEAN_TASK;
 
 @Entity
 @Table(name = "NUMERIC_RULE")
-/** Data class for rule to be used with Hibernate  
+/** Data class for definitions of rules 
+ * 
+ * It now translate the different rules to different low level tasks
+ * 
+ * This can be used with Hibernate for saving this rule to a database
  * 
  * @author Sami Badawi
  *
  */
 public class NumericRule {
 	private Long _id;
+	/** Name of parent OH, Object Hypothesis */
 	private String _parentOH;
+	/** Name of this individual rule, there can be several rules for 1 OH */
 	private String _name;
+	/** The name of the object you want to do the test on in the JEXL context */
 	private String _variable;
+	/** The expression that you want to evaluate in the JEXL context */
 	private String _expression;
+	/** This is the expected value or the comparison value */
 	private Double _expected;
+	/** This determine what Task is created based on this rule */
 	private String _className;
 	
 	@Id @GeneratedValue @Column(name = "RULE_ID")

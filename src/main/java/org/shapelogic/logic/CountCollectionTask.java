@@ -4,7 +4,8 @@ import java.util.Collection;
 
 /** When an expression returns a collection this does a count on it.
  * 
- *  It will also work when the expression is returning null and the expected number is 0.
+ * It will also work when the expression is returning null and the expected number is 0.
+ * Might be deprecated since there are several classes that does a lowest level comparison
  * 
  * @author Sami Badawi
  *

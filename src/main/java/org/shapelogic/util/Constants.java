@@ -1,6 +1,7 @@
 package org.shapelogic.util;
 
-/**
+/** This just contains a lot of constants.
+ * This should help prevent cyclic dependencies.
  * 
  * @author Sami Badawi
  *

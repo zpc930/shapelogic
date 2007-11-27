@@ -12,7 +12,9 @@ import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.Constants;
 
-/** Test filter based on type of points   
+/** Test filter based on type of points
+ * Create a rootTask and set the polygon in this since the filters need to run 
+ * in a JEXL context
  * 
  * @author Sami Badawi
  *

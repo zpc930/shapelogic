@@ -12,7 +12,8 @@ import junit.framework.TestCase;
 import org.shapelogic.filter.FilterParser;
 import org.shapelogic.filter.FilterParser.filter_return;
 
-/**   
+/** This test the parsing of expression for the logic language that is done with the help
+ * of Antlr.
  * 
  * @author Sami Badawi
  *

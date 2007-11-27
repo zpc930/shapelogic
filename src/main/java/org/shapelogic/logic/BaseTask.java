@@ -18,7 +18,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-/** Base class for Task   
+/** Base class for Task, very fundamental all other tasks are subclassed from this
+ * The majority of task functionalety are placed here.
  * 
  * @author Sami Badawi
  *

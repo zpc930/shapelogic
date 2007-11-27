@@ -13,7 +13,6 @@ import com.google.inject.Module;
  * 
  *  This is a singleton.
  *  
- *  I think that this should only have one child Task.
  * 
  * @author Sami Badawi
  *
@@ -44,6 +43,7 @@ public class RootTask extends BaseTask {
 		return _instance;
 	}
 	
+	/** This is to make the classes known in the JEXL context of this RootTask */
 	private void setAllDefaultClassInContext() {
 		Class[] classes = new Class[] {
 			Boolean.class,

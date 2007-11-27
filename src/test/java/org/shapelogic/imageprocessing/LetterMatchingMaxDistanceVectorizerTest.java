@@ -15,7 +15,6 @@ import org.shapelogic.filter.PointBelowFilter;
 import org.shapelogic.filter.PointLeftOfFilter;
 import org.shapelogic.filter.PointOfTypeFilter;
 import org.shapelogic.filter.PointRightOfFilter;
-import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.polygon.AnnotatedShape;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.GeometricShape2D;
@@ -24,7 +23,11 @@ import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.MultiLine;
 import org.shapelogic.polygon.Polygon;
 
-/**   
+/** Unit test for LetterMatchingMaxDistanceVectorizer, 
+ * The main letter matching and vectorization algorithm, 
+ * that works for both straight and curved capital letters
+ * Note that this is sub classed from another unit test for more basic tests 
+ * that only work for straight letters  
  * 
  * @author Sami Badawi
  *

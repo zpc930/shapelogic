@@ -18,7 +18,13 @@ import static org.shapelogic.util.Constants.BOOLEAN_TASK;
 
 import static org.shapelogic.logic.CommonLogicExpressions.*;
 
-/** Should create all 
+/** Should create all the rules used for letter matching
+ * 
+ * Contains 2 sets of rules for letter matching
+ * 
+ * 1: A simple set that only works for straight letters using simple properties
+ * 2: A more complex set of rules works for straight and curved letters 
+ * This uses annotations 
  * 
  * @author Sami Badawi
  *

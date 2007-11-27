@@ -16,7 +16,7 @@ import ij.plugin.filter.PlugInFilter;
 import ij.process.ByteProcessor;
 import junit.framework.TestCase;
 
-/**   
+/** Has the logic to read image from file and call the different PlugInFilter on it
  * 
  * @author Sami Badawi
  *
