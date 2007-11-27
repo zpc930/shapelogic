@@ -84,7 +84,6 @@ public class FilterParser extends Parser {
             _fsp--;
 
             adaptor.addChild(root_0, orExpr1.getTree());
-            System.out.println(((CommonTree)orExpr1.tree).toStringTree());
 
             }
 

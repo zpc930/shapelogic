@@ -30,8 +30,6 @@ public class BBox implements GeometricShape2D {
         }
     }
     
-    
-    
     private void min(IPoint2D pointIn) {
 		double minX = Math.min(pointIn.getX(),minVal.getX());
 		double minY = Math.min(pointIn.getY(),minVal.getY());
@@ -92,5 +90,15 @@ public class BBox implements GeometricShape2D {
 		return new Rectangle(
 				(int)minVal.getX(),(int)minVal.getY(),
 				(int)maxVal.getX(),(int)maxVal.getY());
+	}
+	
+	/** Defined as x/y */
+	public double getAspectRatio() {
+		double x =getDiagonalVector().getX();
+		double y =getDiagonalVector().getY();
+		if (y != 0.0)
+			return x/y;
+		else
+			return Double.POSITIVE_INFINITY;
 	}
 }
