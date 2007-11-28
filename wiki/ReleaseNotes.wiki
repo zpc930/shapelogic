@@ -4,12 +4,19 @@
 
 ShapeLogic releases:
 
-= Development version ShapeLogic release 0.7.0 (to be released) =
+= Development version ShapeLogic release 0.8.0 (to be released) =
+  * Improve the logic language
+
+= 2007-11-27 ShapeLogic release 0.7 AKA Alpha 1 =
+
+Content of 0.7.0:
   * First alpha quality release
-  * Make letter recognition example more robust
-  * Fix bug so logic language directly can use annotation
-  * Make more general logical expression instead of just equal test at the lowest level
+  * Letter recognition example more robust
+  * Bug fix so logic language directly can use annotation
+  * More general logical expression instead of just equal test at the lowest level
   * Includes a binary distribution that contains all the dependent jar files, to ease deployment 
+  * There is around 16000 lines of Java code
+  * 182 unit test that all works om my local machine
 
 = 2007-11-20 ShapeLogic release 0.3.0  AKA All capital letters release =
 
