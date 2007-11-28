@@ -1,7 +1,5 @@
 #summary Getting started
 
- 
-
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Getting started =
 
 You can use ShapeLogic in different ways:
@@ -10,9 +8,31 @@ You can use ShapeLogic in different ways:
 
 = User mode =
 
-== Steps to get ShapeLogic working from within ImageJ ==
-  * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/ShapeLogic
-  * Take the jar file for ShapeLogic: shapelogic_-0.3.jar, and move it to that directory
+== Steps to get ShapeLogic working from within ImageJ from binary distribution ==
+  * Download shapelogicplugin0.7.zip
+  * Unzip it.
+  * This will create a directory named shapelogicplugin
+  * Take everything from this directory and copy it into ./ImageJ/plugins/
+
+== Testing ShapeLogic letter matching from within ImageJ ==
+  * Open ImageJ
+  * Create a new image say 100 time 100
+  * Draw a letter in black on white background
+  * Go to the shapelogic menu and select item CapitalLetterMatch. Which does the following 
+    # Convert the image to a binary image
+    # Call ImageJ's build in Skeletonize
+    # Vectorize into bitmap into polygon
+    # Clean up the vectorized polygon
+    # Then annotate the polygon
+    # Then match the polygon against all the rules for all the capital letters
+    # With a little luck you will see a dialog box saying what letter was matched
+    # If more than one letter match the match will fail
+    # If the match fails then all the properties of the polygon will be written to the console for debugging
+
+== Steps to get ShapeLogic working from within ImageJ manually ==
+If you need a different version of shapelogic_-0.7.jar, say one compiled for JDK 1.5.
+  * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/shapelogic
+  * Take the jar file for ShapeLogic: shapelogic_-0.7.jar, and move it to that directory
   * Add the jar files that ShapeLogic is dependent on to the ImageJ/plugin dir:
     # antlr-runtime-3.0.jar
     # commons-collections-3.2.jar
@@ -25,6 +45,8 @@ These jar file can be found on any Marven 2 repository:
 
 E.g. commons-math-1.1.jar can be found here:
 [http://repo1.maven.org/maven2/commons-math/commons-math/1.1/]
+
+Or they can be taken out of the shapelogicplugin0.7.zip
 
 ShapeLogic 0.7 should come with a version that contains all these dependent jars.
 
