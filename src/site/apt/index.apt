@@ -7,11 +7,13 @@
 
 ShapeLogic
 
-  Toolkit for image processing and robotic vision.
+  ShapeLogic is an open source toolkit for image processing and robotic vision.
+  Started September 2007.
   
-  Code hosted on {{http://code.google.com/p/shapelogic/}}
+  Code hosted on {{http://code.google.com/p/shapelogic/}}.
   
-  Project home page {{http://www.shapelogic.org/}}
+  Project home page {{http://www.shapelogic.org/}} 
+  this is currently work in progress, not all links are set up yet.
   
 *  Features
 
@@ -36,9 +38,11 @@ ShapeLogic
 *  Requirements
   ShapeLogic uses the following libraries:
   
-  * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic is build on top of the popular ImageJ framework, but could work stand alone without too much work
+  * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic is build on top of the 
+  popular ImageJ framework, but could work stand alone without too much work
 
-  * {{{http://commons.apache.org/} Apache commons}}: {{{http://commons.apache.org/jexl/} JEXL}}, {{{http://commons.apache.org/beanutils/} beanutils}}: For embedded logic language 
+  * {{{http://commons.apache.org/} Apache commons}}: {{{http://commons.apache.org/jexl/} JEXL}}, 
+  {{{http://commons.apache.org/beanutils/} beanutils}}: For embedded logic language 
 
   * {{{http://commons.apache.org/math/} commons math}}: Math library
 
@@ -96,25 +100,10 @@ ShapeLogic
 
   []
 
-** 2007-11-20 ShapeLogic v 0.3 released
-
-  * ShapeLogic v 0.3 consists of 15,000 lines of Java code including 170 unit tests.
-
-  * Letter matching algorithm is now extended to work for all capital letters, but it is still not very robust.
-
-  []
-
-** 2007-11-08 ShapeLogic v 0.2 released
-
-  * ShapeLogic v 0.2 consists of 14,000 lines of Java code including 150 unit tests.
-
-  * Contains a rudimentary letter recognition example algorithm, that can be run as a ImageJ plugin.
-  []
-
-** 2007-09-29 ShapeLogic was created on Google Code Hosting
-
 * Main ideas and motivation for ShapeLogic
 
-  It is currently difficult to combine high order logic and image processing. ShapeLogic is intended as basic plumbing software that turns a logic engine into a simple plug in component in order to ease entry to vision and image analysis. ShapeLogic also fills gaps missing from current Java image processing libraries, and uses a commercially friendly license.
-
-  Site last modified 2007-11-28
+  It is currently difficult to combine high order logic and image processing. 
+  ShapeLogic is intended as basic plumbing software that turns a logic engine 
+  into a simple plug in component in order to ease entry to vision and image 
+  analysis. ShapeLogic also fills gaps missing from current Java image 
+  processing libraries, and uses a commercially friendly license.
