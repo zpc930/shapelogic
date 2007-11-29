@@ -19,18 +19,19 @@
       <item name="Getting Started" href="index.html" collapse="true">
 		  <item name="Getting Started" href="getting-started.html"/>
       </item>
+      <item name="Examples" href="index.html" collapse="true">
+		  <item name="Letter Match" href="letter-match.html"/>
+		  <item name="Medical example" href="medical-example.html"/>
+      </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Image processing" href="image-processing.html"/>
-		  <item name="Machine Learning" href="machine-learning.html"/>
-		  <item name="Letter Match" href="letter-match.html"/>
-	      <item name="Database" href="database.html" />
+	      <item name="Basic Logic" href="basic-logic.html"/>
 	      <item name="Mathematics" href="math.html" />
 	      <item name="Polygon, point, line" href="polygon.html" />
 	      <item name="Code" href="code.html" />
       </item>
       <item name="Architecture" href="index.html" collapse="true">
 	      <item name="Big Ideas" href="bigIdeas.html"/>
-	      <item name="Basic Logic" href="basic-logic.html"/>
       </item>
       <item name="Release Notes" href="release-notes.html" />
       <item name="Road Map" href="roadmap.html" />
