@@ -44,3 +44,6 @@ Content of 0.2.0:
   * Example of rule database for recognizing capital letters
   * Maybe half the code is well commented
   * There are some documentation on the Google Code Hosting page
+
+= 2007-09-29 ShapeLogic was created on Google Code Hosting =
+Development started August 2007.
