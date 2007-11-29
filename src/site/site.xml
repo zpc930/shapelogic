@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="shapelogic">
+  <bannerLeft>
+    <name>shapelogic</name>
+    <src>./images/logos/shapelogicsmalltransparent.png</src>
+    <href>http://index.html/</href>
+  </bannerLeft>
+  <bannerRight>
+  	<src>./images/logos/rightbanner.png</src>
+  </bannerRight>
+  <body>
+    <links>
+      <item name="ImageJ" href="http://rsb.info.nih.gov/ij/"/>
+      <item name="Maven 2" href="http://maven.apache.org/maven2/"/>
+    </links>
+
+    <menu name="shapelogic">
+      <item name="Home" href="index.html"/>
+      <item name="Getting Started" href="index.html" collapse="true">
+		  <item name="Getting Started" href="getting-started.html"/>
+      </item>
+      <item name="Developer Resources" href="index.html" collapse="true">
+		  <item name="Image processing" href="image-processing.html"/>
+		  <item name="Machine Learning" href="machine-learning.html"/>
+		  <item name="Letter Match" href="letter-match.html"/>
+	      <item name="Database" href="database.html" />
+	      <item name="Mathematics" href="math.html" />
+	      <item name="Polygon, point, line" href="polygon.html" />
+	      <item name="Code" href="code.html" />
+      </item>
+      <item name="Architecture" href="index.html" collapse="true">
+	      <item name="Big Ideas" href="bigIdeas.html"/>
+	      <item name="Basic Logic" href="basic-logic.html"/>
+      </item>
+      <item name="Release Notes" href="release-notes.html" />
+      <item name="Road Map" href="roadmap.html" />
+    </menu>
+
+    <menu ref="reports"/>
+
+  </body>
+</project>
