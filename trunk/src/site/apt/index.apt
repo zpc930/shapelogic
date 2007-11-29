@@ -1,0 +1,120 @@
+            ------
+            ShapeLogic
+            ------
+            Sami Badawi
+            ------
+            2007/08/06
+
+ShapeLogic
+
+  Toolkit for image processing and robotic vision.
+  
+  Code hosted on {{http://code.google.com/p/shapelogic/}}
+  
+  Project home page {{http://www.shapelogic.org/}}
+  
+*  Features
+
+  * Declarative goal driven logic engine for calling image processing primitives
+  
+  * The user can store rules in either a flat file or database, decreasing user reliance on Java programming
+  
+  * Implementation of 2D geometry primitives, vectorization and segmentation
+  
+  * Commercially friendly MIT open source license
+  
+  * Annotations of point as: Different type of junctions, end point, hard or soft point
+
+  * Annotations of lines as: Straight, curved, concave, inflection
+
+  * Programmed in Java
+  
+  * Built on top of ImageJ, the leading Java open source project used in medical image processing
+  
+  []
+
+*  Requirements
+  ShapeLogic uses the following libraries:
+  
+  * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic is build on top of the popular ImageJ framework, but could work stand alone without too much work
+
+  * {{{http://commons.apache.org/} Apache commons}}: {{{http://commons.apache.org/jexl/} JEXL}}, {{{http://commons.apache.org/beanutils/} beanutils}}: For embedded logic language 
+
+  * {{{http://commons.apache.org/math/} commons math}}: Math library
+
+  * {{{http://www.antlr.org/} Antlr}}: For parsing build in logic language
+
+  * {{{http://www.hibernate.org/} Hibernate}} or JDBC: For database access
+  
+  * {{{http://code.google.com/p/google-guice/} Google Guice}}: Lightweight IoC framework
+  
+  * {{{http://hsqldb.org/} HSQLDB}} or {{{http://www.h2database.com/} H2}}: Embedded databases
+  
+  * {{{http://maven.apache.org/} Maven 2}}: build system
+
+  []
+  
+* Development Status: Alpha
+
+  * Starting from version 0.7 ShapeLogic is now in Alpha.
+
+  * There is a working example where ShapeLogic is used for matching all the capital letters.
+
+  * ShapeLogic should be able to do useful work now.
+
+  * The API is still under development.
+
+  * A project website should be put up soon.
+
+  * ShapeLogic v 0.7 consists of around 16,000 lines of Java code including 180 unit tests.
+
+  []
+
+* News
+
+** ShapeLogic v 0.8 development not released
+
+  * Create ShapeLogic documentation site
+  
+  * Clean up letter recognition example
+  
+  * More general logical expression instead of just equal test at the lowest level
+
+  []
+
+** 2007-11-27 ShapeLogic v 0.7 released
+
+  * First alpha quality release
+
+  * Letter recognition example is more robust
+
+  * Bug fix so logic language directly can use annotation
+
+  * Added greater than comparison to logical expression instead of just equal test at the lowest level
+
+  * Includes a binary distribution that contains all the dependent jar files, to ease deployment 
+
+  []
+
+** 2007-11-20 ShapeLogic v 0.3 released
+
+  * ShapeLogic v 0.3 consists of 15,000 lines of Java code including 170 unit tests.
+
+  * Letter matching algorithm is now extended to work for all capital letters, but it is still not very robust.
+
+  []
+
+** 2007-11-08 ShapeLogic v 0.2 released
+
+  * ShapeLogic v 0.2 consists of 14,000 lines of Java code including 150 unit tests.
+
+  * Contains a rudimentary letter recognition example algorithm, that can be run as a ImageJ plugin.
+  []
+
+** 2007-09-29 ShapeLogic was created on Google Code Hosting
+
+* Main ideas and motivation for ShapeLogic
+
+  It is currently difficult to combine high order logic and image processing. ShapeLogic is intended as basic plumbing software that turns a logic engine into a simple plug in component in order to ease entry to vision and image analysis. ShapeLogic also fills gaps missing from current Java image processing libraries, and uses a commercially friendly license.
+
+  Site last modified 2007-11-28
