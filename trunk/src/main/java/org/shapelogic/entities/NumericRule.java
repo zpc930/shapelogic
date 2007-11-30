@@ -27,7 +27,7 @@ import static org.shapelogic.util.Constants.BOOLEAN_TASK;
 
 @Entity
 @Table(name = "NUMERIC_RULE")
-/** Data class for definitions of rules 
+/** Data class for definitions of rules.
  * 
  * It now translate the different rules to different low level tasks
  * 
@@ -138,10 +138,10 @@ public class NumericRule {
 		_className = name;
 	}
 	
-	/** Create task based on rule
+	/** Create task based on rule.
 	 * 
 	 * @param parentTask used for inserting this rule as a child of parent 
-	 * @return
+	 * @return the task representing the rule
 	 */
 	public BaseTask makeTask(BaseTask parentTask){
 		BaseTask task = null;

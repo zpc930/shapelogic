@@ -9,7 +9,7 @@ import org.shapelogic.polygon.Calculator2D;
 import org.shapelogic.util.DoubleCalculations;
 
 /** LineProperties contains properties that are important for a line
- * when you are dealing with curved multi line
+ * when you are dealing with curved multi line.
  * 
  * @author Sami Badawi
  *
@@ -19,7 +19,7 @@ import org.shapelogic.util.DoubleCalculations;
  * Sum of positive and sum of negative distances
  * If direction change for the 2 adjacent point is different sign
  * 
- * @Assumptions
+ * Assumptions
  * I do not think that this class is going be reused
  * 
  */
@@ -89,7 +89,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 		return _calcValue;
 	}
 	
-	/** The main LineType for a line there are 3 options: straight, arch, wave
+	/** The main LineType for a line there are 3 options: straight, arch, wave.
 	 */
 	public LineType calcLineType() {
 		if (isStraight()) _lineType = LineType.STRAIGHT;
@@ -100,7 +100,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 		return _lineType;
 	}
 
-	/** Same unnormalized point distance to line used in splitting line
+	/** Same unnormalized point distance to line used in splitting line.
 	 * 
 	 * @param point an input 
 	 * @return unnormalized distance to the line from the star to end point
@@ -116,7 +116,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 //Getter and setter part
 	
 	/** To be straight:
-	 * The diagonal variation can only be 0.1 time the length of the line
+	 * The diagonal variation can only be 0.1 time the length of the line.
 	 * 
 	 * This could done by 
 	 * 1: Max distance
@@ -135,7 +135,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 	}
 
 	/** To be an curve arch:
-	 * Only one side can be represented
+	 * Only one side can be represented.
 	 * 
 	 */
 	boolean isCurveArch() {
@@ -144,7 +144,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 		return false;
 	}
 
-	/** _lineType needs to be set first */
+	/** _lineType needs to be set first. */
 	public boolean isConcaveArch() {
 		if (_lineType != LineType.CURVE_ARCH)
 			return false;

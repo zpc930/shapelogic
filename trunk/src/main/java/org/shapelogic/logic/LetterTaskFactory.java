@@ -18,7 +18,7 @@ import static org.shapelogic.util.Constants.BOOLEAN_TASK;
 
 import static org.shapelogic.logic.CommonLogicExpressions.*;
 
-/** Should create all the rules used for letter matching
+/** Should create all the rules used for letter matching.
  * 
  * Contains 2 sets of rules for letter matching
  * 
@@ -61,7 +61,8 @@ public class LetterTaskFactory {
 		return letterATask;
 	}
 	
-	/** Generate all rule that are needed for matching all the straight capital letter 
+	/** Generate all rule that are needed for matching all the straight capital letter.
+     *
 	 * This is used in the DirectionBasedVectorizer
 	 * 
 	 * @param polygon is a String that contain the context variable that the rules will be applied to
@@ -164,7 +165,8 @@ public class LetterTaskFactory {
 	}
 	
 	/** Generate all rule that are needed for matching all the capital letter 
-	 * using new complex filter rules
+	 * using new complex filter rules.
+	 * 
 	 * This is used in the MaxDistanceVectorizer
 	 * 
 	 * @param polygon is a String that contain the context variable that the rules will be applied to
@@ -443,12 +445,12 @@ public class LetterTaskFactory {
 		return letterATask;
 	}
 	
-	/** Create a letter task from all NumericRules of the underlying letters 
+	/** Create a letter task from all NumericRules of the underlying letters.
 	 * 
 	 * @param parentTask To insert this task into, will often be the RootTask
 	 * @param allNumericRules all the Numeric Rules that are used
 	 * @param letterSelector if you only want to match against on letter for debugging problems
-	 * @return
+	 * @return task representing a lowest level rule
 	 */
 	static public BaseTask createLetterTasksFromRule(BaseTask parentTask, 
 			List<NumericRule> allNumericRules, String letterSelector) {

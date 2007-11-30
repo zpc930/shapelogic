@@ -10,7 +10,10 @@ import static org.shapelogic.util.DoubleCalculations.doubleZero;
 import static org.shapelogic.util.DoubleCalculations.isEven;
 import static org.shapelogic.util.MapOperations.getPointWithDefault;
 
-/** For an undirected line
+/** Class for line.
+ * 
+ * Works for both double and int based points.
+ * Can be used for both undirected and directed lines
  * 
  * I think this is made to be immutable, but points are not.
  * But in order to have the sort work for lines I have to assume that the 
@@ -81,9 +84,9 @@ public class CLine implements ILine2D, PointReplacable<CLine> {
 		return _end.copy().minus(_start);
 	}
 	
-	/** Should return numbers in the range 0 to PI
+	/** Should return numbers in the range 0 to PI.
 	 * 
-	 * @return
+	 * @return the angle in redians
 	 */
 	public double angle() {
 		IPoint2D relativePoint = relativePoint();
@@ -161,7 +164,7 @@ public class CLine implements ILine2D, PointReplacable<CLine> {
 		return newLine;
 	}
 	
-	/** Just order the points in this line alphabetically */
+	/** Just order the points in this line alphabetically. */
 	public CLine orderedLine() {
 		if (getStart().compareTo(getEnd()) < 1) 
 			return this;

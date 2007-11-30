@@ -15,10 +15,7 @@ import org.shapelogic.polygon.MultiLine;
 import org.shapelogic.polygon.ObjectAnnotator;
 import org.shapelogic.util.Constants;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-
-/** DirectionBasedVectorizer is a Vectorizer based on direction
+/** DirectionBasedVectorizer is a Vectorizer based on direction.
  * 
  *  This is special by using directions as the primary way of finding the path.
  *  
@@ -50,7 +47,7 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 
 	protected int _lastPointInCurrentMultiLine = Constants.BEFORE_START_INDEX;
 	
-	/** Test that the current direction is close to the last direction 
+	/** Test that the current direction is close to the last direction. 
 	 * */
 	@Override
 	protected boolean multiLineHasGlobalFitness() {
@@ -97,7 +94,7 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 			return super.lastPixelOk(newDirection);
 	}
 
-	/** Test if the last part of the line is straight
+	/** Test if the last part of the line is straight.
 	 */
 	protected boolean isStraight() {
 		if (NUMBER_OF_SAME_DIRECTION_TO_START_STRAIGHT > _lastPointInCurrentMultiLine - _firstPointInLineIndex) //XXX bad
@@ -125,7 +122,7 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 		return NUMBER_OF_SAME_DIRECTION_TO_START_STRAIGHT <= _currentDirectionCount;
 	}
 	
-	/** Test how many of the 8 directions are represented */
+	/** Test how many of the 8 directions are represented. */
 	protected int numberOfDirections(int[] directionsCount) {
 		int result = 0;
 		for (int i = 0; i < Constants.DIRECTIONS_AROUND_POINT; i++){
@@ -183,11 +180,12 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 		super.makeNewPointPostProcess();
 	}
 	
-	/** Get angle from direction byte array
+	/** Get angle from direction byte array.
 	 * 
-	 * @param directionArray, byte array containing the 8 direction
-	 * @param numberOfPoints, number of directions counted from the end
-	 * @return vector as a point
+	 * directionArray, byte array containing the 8 direction
+	 * startDirection, number of first direction to accumulate 
+	 * endDirection, number of first direction to accumulate
+	 * @return vector as a point of accumulated line
 	 */
 	public static CPointInt angleFromDirectionArray(byte[] directionArray, 
 			int startDirection, int endDirection) {
@@ -201,8 +199,11 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 		return resultVector;
 	}
 
-	/** I think that this is messing with the short lines */
-	protected void splitLine(int splitIndex) throws NotImplementedException 
+	/** I think that this is messing with the short lines.
+	 * 
+	 * @param splitIndex
+	 */
+	protected void splitLine(int splitIndex) 
 	{
 		if (splitIndex<=0)
 			return;
@@ -241,11 +242,11 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 		Arrays.fill(_directionsCount, 0);
 	}
 
-	/**
+	/** Test if multi line is circle.
 	 * 
 	 * @param angleSpeedArray
 	 * @param realValuesInArray
-	 * @return
+	 * @return center of circle
 	 */
 	private IPoint2D testMultiLineForBeingWholeCircle(double[] angleSpeedArray, int realValuesInArray) {
 		if (realValuesInArray < 1)
@@ -271,8 +272,7 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 		return null;
 	}
 
-	/** Simpler circle finder
-	 *  
+	/** Simpler circle finder.
 	 * */
 	private void testMultiLineForBeingWholeCircle() {
 		MultiLine multiLine = getPolygon().getCurrentMultiLine();
