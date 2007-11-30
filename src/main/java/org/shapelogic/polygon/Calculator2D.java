@@ -7,7 +7,7 @@ import org.shapelogic.util.Constants;
 import org.shapelogic.util.DoubleCalculations;
 import static org.shapelogic.util.DoubleCalculations.*;
 
-/** Calculator for simple 2D
+/** Calculator for simple 2D.
  * 
  * There are a lot of small calculations connected with 2D that should not be 
  * thrown in Point and Line classes, but belong in a utility class.
@@ -19,7 +19,7 @@ import static org.shapelogic.util.DoubleCalculations.*;
  */
 public class Calculator2D {
 	
-	/** Hat is really a vector operator, I consider a Point a vector here
+	/** Hat is really a vector operator, I consider a Point a vector here.
 	 *  
 	 * This is maybe simple enough to be on Point classes */
 	static public IPoint2D hatPoint(IPoint2D inPoint) {
@@ -28,7 +28,7 @@ public class Calculator2D {
 		return outPoint;
 	}
 	
-	/** A cosine to the angle between times the 2 vector lengths */
+	/** A cosine to the angle between times the 2 vector lengths. */
 	static public double dotProduct(IPoint2D inPoint1, IPoint2D inPoint2) {
 		return inPoint1.getX() * inPoint2.getX() + inPoint1.getY() * inPoint2.getY();
 	}
@@ -39,7 +39,7 @@ public class Calculator2D {
 		return dotProduct(hatPoint(inPoint1), inPoint2);
 	}
 	
-	/** This is signed */
+	/** This is signed. */
 	static public double distanceOfPointToLine(IPoint2D point, CLine line) {
 		IPoint2D orthogonalVector = hatPoint(line.relativePoint());
 		return dotProduct(orthogonalVector, point.copy().minus(line.getStart()));
@@ -74,9 +74,9 @@ public class Calculator2D {
 	}
 	
 	/** 
-	 * What should I do about integer based points that does not have a  
+	 * What should I do about integer based points that does not have a.
 	 * @param point
-	 * @return
+	 * @return the point scaled to unit length
 	 */
 	static public IPoint2D unitVector(IPoint2D point) {
 		IPoint2D result = null;
@@ -119,7 +119,7 @@ public class Calculator2D {
 		return doubleZero(dotProduct(line1.relativePoint(), hatPoint(line2.relativePoint())));
 	}
 	
-	/** This version is complicated and has a bug. 
+	/** This version is complicated and has a bug.
 	 * 
 	 * Make a projection of the start point of line1 on line2 
 	 * 
@@ -149,7 +149,7 @@ public class Calculator2D {
 		return intersectionPoint;
 	}
 	
-	/** Very simple turn the 2 line into a line equation: a * x + b * y = c  
+	/** Very simple turn the 2 line into a line equation: a * x + b * y = c.
 	 *   So a and b is just the hat vector. While c is what you get when you put one 
 	 *   of the point into this.
 	 * */
@@ -235,7 +235,7 @@ public class Calculator2D {
 		return direction;
 	}
 	
-	/**
+	/** Takes to directions between 0 and 7, and gives the direction difference.
 	 * @return should be between -4 and 4
 	 */
 	static public byte directionDifference(byte direction1, byte direction2) {
@@ -256,9 +256,9 @@ public class Calculator2D {
 		return result;
 	}
 
-    /** Find a point on a line spanned by 2 other points 
+    /** Find a point on a line spanned by 2 other points.
      * 
-     * @param part 0 -> minVal, 1 -> maxVal, 0.5 -> middle point
+     * part 0 -> minVal, 1 -> maxVal, 0.5 -> middle point
      */
 	static public IPoint2D spannedPoint(IPoint2D point1, IPoint2D point2, double fraction) {
 		IPoint2D spanned = point2.copy().multiply(fraction).add(point1.copy().multiply(1-fraction));

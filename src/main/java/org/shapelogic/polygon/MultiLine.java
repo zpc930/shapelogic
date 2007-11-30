@@ -11,7 +11,7 @@ import org.shapelogic.imageprocessing.LineType;
 import org.shapelogic.logic.LazyCalc;
 
 
-/** A list of point on a continues line that does not have any intersections
+/** A list of point on a continues line that does not have any intersections.
  * 
  * But it can contain turns.
  * 
@@ -68,7 +68,7 @@ public class MultiLine extends BaseAnnotatedShape
 	}
 
 	@Override
-	/** Sort all points alphabetically 
+	/** Sorts all points alphabetically.
 	 * 
 	 * This is not very reliable, could cause problems
 	 */
@@ -87,7 +87,7 @@ public class MultiLine extends BaseAnnotatedShape
 	}
 	
 	@Override
-	/** 
+	/** Overriden equals.
 	 * Problems with this method: 
 	 * Change to be able to compare with CLine
 	 * hashcode() should also be changed
@@ -118,7 +118,7 @@ public class MultiLine extends BaseAnnotatedShape
 			
 	}
 	
-	/** Not sure what to return 
+	/** Not sure what to return.
 	 * Maybe an array of CMultiLine 
 	 * 
 	 * @param splitPoint
@@ -128,10 +128,10 @@ public class MultiLine extends BaseAnnotatedShape
 		return split(splitIndex);
 	}
 
-	/** Not sure what to return 
+	/** Not sure what to return.
 	 * Maybe an array of CMultiLine 
 	 * 
-	 * @param splitPoint
+	 * @param splitIndex
 	 */
 	public MultiLine[] split(int splitIndex) {
 		if (splitIndex < 0 || _points.size() <= splitIndex)

@@ -1,6 +1,7 @@
 package org.shapelogic.logic;
 
-/** A calculation that lives in a context
+/** A calculation that lives in a context.
+ *
  * If the calculation has already finished then just take the value
  * 
  * In order to create a context calculation override this class 
@@ -25,8 +26,6 @@ public abstract class ContextCalculation {
 	}
 
 	/** I think that this should first try to find the value in the context.
-	 * 
-	 * 
 	 */
 	public Object getValue(Task task) {
 
@@ -43,10 +42,12 @@ public abstract class ContextCalculation {
 		}
 	}
 
-	/** This should overridden with the calculation that should be done 
+	/** This should overridden with the calculation that should be done.
+	 * 
+	 *  This should just return the cached value if the dirty flag is false
 	 * 
 	 * @param context
-	 * @return
+	 * @return result of calculation
 	 * @throws Exception
 	 */
 	public abstract Object calculation(Task context) throws Exception;

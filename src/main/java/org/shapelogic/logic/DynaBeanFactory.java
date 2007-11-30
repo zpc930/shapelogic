@@ -12,9 +12,9 @@ import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaClass;
 import org.apache.commons.beanutils.DynaProperty;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
-/**   
+/** Helper class for parsing classes from string.
+ * 
+ * Used in CSVParser
  * 
  * @author Sami Badawi
  *
@@ -65,7 +65,7 @@ public class DynaBeanFactory {
 			if (className != null) {
 				klass = _string2class.get(className.trim().toLowerCase());
 			if (klass == null) 
-				throw new ParseException("className: " + className + " not found", 0); 
+				throw new RuntimeException("className: " + className + " not found"); 
 			}
 			props[i] = new DynaProperty(entry.getKey().trim(), klass);
 			i++;
