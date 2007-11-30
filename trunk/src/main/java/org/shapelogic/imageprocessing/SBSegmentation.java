@@ -4,18 +4,12 @@ import ij.process.ImageProcessor;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 
-/*
- * Created on Mar 16, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-
-/**
+/** High level class for segmentation.
+ * 
+ * Works with both color and gray scale.
+ * 
  * @author Sami Badawi
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class SBSegmentation {
 	private ImageProcessor _ip;

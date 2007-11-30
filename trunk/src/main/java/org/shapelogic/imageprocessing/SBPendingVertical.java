@@ -1,4 +1,5 @@
 package org.shapelogic.imageprocessing;
+
 /** Contains information about one line that needs to be checked.
  *
  * @author Sami Badawi
@@ -44,12 +45,14 @@ public class SBPendingVertical implements Cloneable
 		return outLine;
 	}
 	/** Whether the line should be compared to the line that are up or down.
+	 * 
 	 * @return Returns the lookUp.
 	 */
 	public boolean isSearchUp() {
 		return searchUp;
 	}
 	/** Whether the line should be compared to the line that are up or down.
+	 * 
 	 * @param searchUp The searchUp to set.
 	 */
 	public void setSearchUp(boolean searchUp) {

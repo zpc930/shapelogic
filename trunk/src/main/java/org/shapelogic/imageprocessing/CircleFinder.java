@@ -6,7 +6,7 @@ import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLine;
 import org.shapelogic.polygon.ObjectAnnotator;
 
-/** Class that can find a circle in MultiLine 
+/** Class that can find a circle in MultiLine. 
  * 
  * If it find a circle it will annotate the MultiLine as a circle 
  * and set the circle center

@@ -1,7 +1,7 @@
 package org.shapelogic.imageprocessing;
 
 /** LineProperties contains properties that are important for a point
- * when you are dealing with curved multi line
+ * when you are dealing with curved multi line.
  * 
  * @author Sami Badawi
  *

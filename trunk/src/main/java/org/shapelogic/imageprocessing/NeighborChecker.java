@@ -2,9 +2,9 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.util.Constants;
 
-/** Neighbor Checker 
+/** Neighbor Checker.
  * 
- * runs around a point and find what type all the neighbor points have
+ * Runs around a point and find what type all the neighbor points have
  * 
  * @author Sami Badawi
  *
@@ -31,7 +31,7 @@ public class NeighborChecker implements IPixelTypeFinder {
 		_currentPixelIndex = currentPixelIndex;
 	}
 
-	/** Run over the neighbors points and put them in categories */
+	/** Run over the neighbors points and put them in categories. */
 	protected void checkNeighbors() {
 		for (byte i=0; i < Constants.DIRECTIONS_AROUND_POINT; i++) {
 			int pixelIndexI = _currentPixelIndex + _cyclePoints[i];

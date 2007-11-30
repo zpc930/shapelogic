@@ -27,7 +27,8 @@ import ij.plugin.filter.PlugInFilter;
 import ij.process.ByteProcessor;
 import ij.process.ImageProcessor;
 
-/** Input image needs to be binary, that is gray scale with inverted LUT. 
+/** Input image needs to be binary, that is gray scale with inverted LUT.
+ *  
  * That the background is white, 0, and the foreground is black, 255.
  * 
  * When it handles a point it will mark a point as used and what type it has. 
@@ -93,7 +94,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 	protected IPixelTypeFinder _pixelTypeFinder; 
 	protected NumericRule[] _rulesArrayForLetterMatching;
 	
-	/** To be overridden */
+	/** To be overridden. */
 	public boolean isGuiEnabled() {
 		return false;
 	}
@@ -113,7 +114,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		matchLines();
 	}
 
-	/** This does really not belong in a vectorizer */
+	/** This does really not belong in a vectorizer. */
 	protected void matchLines() {
 		RootTask rootTask = RootTask.getInstance();
 		rootTask.setNamedValue(RAW_POLYGON, getPolygon());
@@ -169,8 +170,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 	
 	abstract protected boolean lastPixelOk(byte newDirection);
 
-	/** Cannot handle the last pixel at the edge, so for now just ignore it
-	 * */
+	/** Cannot handle the last pixel at the edge, so for now just ignore it. */
 	protected void init(ImageProcessor ip) {
 		_ip = (ByteProcessor) ip;
 		Rectangle r = _ip.getRoi();
@@ -243,7 +243,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		return false;
 	}
 
-	/** A normal line has a crossing index of 4
+	/** A normal line has a crossing index of 4.
 	 */
 	public int countRegionCrossingsAroundPoint(int pixelIndex) {
 		int countRegionCrossings = 0;
@@ -259,7 +259,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		return countRegionCrossings;
 	}
 
-	/** To be overridden. If I want to do more matching at the end */
+	/** To be overridden. If I want to do more matching at the end. */
 	protected void findMultiLinePostProcess() {
 		_pixels[_currentPixelIndex] = PixelType.toUsed(_pixels[_currentPixelIndex]); //Last point
 		getPolygon().endMultiLine();
@@ -289,6 +289,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 	}
 	
 	/** Draws the vectorized lines on the original image for visual inspection.
+	 * 
 	 * This is probably not needed in the final version of this class
 	 */
 	protected void drawLines() {

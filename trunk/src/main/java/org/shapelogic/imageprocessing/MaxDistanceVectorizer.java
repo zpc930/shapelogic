@@ -7,7 +7,9 @@ import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Calculator2D;
 import org.shapelogic.util.Constants;
 
-/** The main idea is that this will read a whole multi line at a time.
+/** Vectorizer that is splitting lines based on max distance to line between end points.
+ * 
+ * The main idea is that this will read a whole multi line at a time.
  * Then later it will split it according to max distance of pixels to the line 
  * between start and end point of the multi line.
  * 

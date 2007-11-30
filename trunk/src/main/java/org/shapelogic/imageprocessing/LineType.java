@@ -2,7 +2,9 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.logic.OHInterface;
 
-/** This could change quite a bit
+/** Enum for with types for Lines. 
+ * 
+ * This could change quite a bit.
  * 
  * @author Sami Badawi
  */

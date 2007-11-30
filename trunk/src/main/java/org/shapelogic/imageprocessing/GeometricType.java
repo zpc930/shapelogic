@@ -2,7 +2,7 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.logic.OHInterface;
 
-/** Not sure if I should just reuse PixelType 
+/** Not sure if I should just reuse PixelType. 
  * 
  * @author Sami Badawi
  *

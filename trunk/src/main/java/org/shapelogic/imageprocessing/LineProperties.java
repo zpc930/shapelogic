@@ -115,8 +115,8 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 	
 //Getter and setter part
 	
-	/** To be straight:
-	 * The diagonal variation can only be 0.1 time the length of the line.
+	/** To be straight
+	 * the diagonal variation can only be 0.1 time the length of the line.
 	 * 
 	 * This could done by 
 	 * 1: Max distance
@@ -134,8 +134,8 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 		return false;
 	}
 
-	/** To be an curve arch:
-	 * Only one side can be represented.
+	/** To be an curve arch
+	 * only one side can be represented.
 	 * 
 	 */
 	boolean isCurveArch() {
@@ -144,7 +144,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 		return false;
 	}
 
-	/** _lineType needs to be set first. */
+	/** lineType needs to be set first. */
 	public boolean isConcaveArch() {
 		if (_lineType != LineType.CURVE_ARCH)
 			return false;

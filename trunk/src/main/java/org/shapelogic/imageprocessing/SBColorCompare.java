@@ -4,11 +4,10 @@ import ij.process.ByteProcessor;
 import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 
-/**   
+/** Compare implementations for RGB.
  * 
  * @author Sami Badawi
- *
- * Window - Preferences - Java - Code Style - Code Templates
+ * 
  */
 public class SBColorCompare extends SBSimpleCompare {
 
@@ -50,8 +49,8 @@ public class SBColorCompare extends SBSimpleCompare {
 		return dist;
 	}
 
-	/** Thi sused for changes to other images or say modify all colors 
-	 * to the first found
+	/** This used for changes to other images or say modify all colors 
+	 * to the first found.
 	 */
 	public void action(int index) {
 		int dist = colorDistance(pixels[index], handledColor);

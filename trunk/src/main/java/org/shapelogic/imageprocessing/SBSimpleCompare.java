@@ -5,11 +5,10 @@ import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 import java.util.BitSet;
 
-/**
+/** Abstract class fro compare.
+ * 
  * @author Sami Badawi
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public abstract class SBSimpleCompare implements SBPixelCompare {
 	protected int currentColor;

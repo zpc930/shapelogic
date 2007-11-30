@@ -20,7 +20,7 @@ import org.shapelogic.util.DoubleCalculations;
 
 import static org.shapelogic.polygon.Calculator2D.oppositeDirection;
 
-/** Chain Code For MultiLine
+/** Chain Code For MultiLine.
  * 
  * Assume that there is no intersection.
  * 
@@ -44,7 +44,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 	protected int _accumulatedAbsoluteDirectionChange;
 	
 	/** What should happen to the last point if the first and the last point is 
-	 * the same?
+	 * the same.
 	 * 
 	 * I think that there should be 2 points, in the list of points, but as far as
 	 * PointProperties I think that there should only be one, maybe I could just 
@@ -58,7 +58,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 	 */
 	protected List<PointProperties> _pointPropertiesList = new ArrayList<PointProperties>();
 
-	/** Line number N should have end point on point number N 
+	/** Line number N should have end point on point number N.
+	 *  
 	 * The first line should be null if the multi line is open 
 	 * and from the last to the first if closed
 	 * 
@@ -72,7 +73,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 	} 
 	
 	@Override
-	/** This reset all the transient values, but not the startPoint
+	/** This reset all the transient values, but not the startPoint.
+	 * 
 	 * Needs to be called manually
 	 * So startPoint always need to be reset, if it is set in the first place.
 	 */
@@ -112,6 +114,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 	}
 
 	/** Extra passes to find more properties.
+	 * 
 	 * This differs depending on whether the multi line is closed or open */
 	private void postProcessing() {
 		findChangeOfDirectionForLines();
@@ -122,7 +125,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 
 //find method part
 	
-	/** Change of direction in multi line, 
+	/** Change of direction in multi line.
+	 *  
 	 * The current line end at the current point
 	 * So you can only determine the direction change of the last point
 	 * And to determine the direction change sign difference you also need to 
@@ -166,7 +170,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 		}
 	}
 
-	/** Find the accumulated direction change, the sum of all turns   
+	/** Find the accumulated direction change, the sum of all turns.   
 	 */
 	public void findAccumulatedDirectionChange() {
 		_accumulatedDirectionChange = 0;
@@ -193,7 +197,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 			_multiLine.setClosedLineClockWise(null);
 	}
 
-	/** Concave arch, based on both neighbors */
+	/** Concave arch, based on both neighbors. */
 	private void findConcaveArches() {
 		List<? extends IPoint2D> points = _multiLine.getPoints();
 		int lastPointNumber = points.size();
@@ -218,7 +222,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 	}
 
     /** It is a corner point if you go some pixels away and see how the 
-     * distance or direction changes sharply 
+     * distance or direction changes sharply.
      */
 	private void findCornerPoints() {
 		for (Entry<Integer,CPointInt> entity: _pointMap.entrySet()) {
@@ -242,7 +246,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 		}
 	}
 		
-	/** Distinguish between soft and hard corner point 
+	/** Distinguish between soft and hard corner point. 
 	 * 
 	 * This might not work well for very short lines.
 	 * 
@@ -262,7 +266,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 		return PointType.UNKNOWN;
 	}
 
-	/** Find the vector from the start index to the last index */
+	/** Find the vector from the start index to the last index. */
 	private CPointInt findIntervalVector(Integer startIndex, Integer endIndex) {
 		CPointInt currentPoint = new CPointInt();
 		for (int i = startIndex + 1; i <= endIndex; i++) {
@@ -282,7 +286,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 		}
 	}
 	
-	/** For closed there the start and the end point is the same
+	/** For closed there the start and the end point is the same.
+	 * 
 	 * So the first and the last PointProperties and LineProperties should also me the same
 	 */
 	private void handleClosedMultiLines() {
@@ -295,7 +300,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 		_pointPropertiesList.set(Constants.ZERO,_pointPropertiesList.get(numberOfPoints));
 	}
 
-	/** When information have been collected use them for annotations 
+	/** When information have been collected use them for annotations.
+	 *  
 	 * Just run through all the lines and calculate the annotations and set 
 	 * them in the annotation structure for the polygon
 	 */
@@ -322,7 +328,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 		}
 	}
 
-	/** All lengths are unnormalized 
+	/** All lengths are unnormalized.
+	 *  
 	 * For the orthogonal vector I use the hat operator: (x,y) -> (y,-x) 
 	 */
 	private Integer handleInterval(Integer startIndex, Integer endIndex) {
@@ -439,8 +446,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 		_bBox.addPoint(_lastPoint);
 	}
 
-	/** Opposite Direction
-	 * 
+	/** Opposite Direction.
 	 */
 	public void swapChainCodeInOppositeDirection() {
 		for (int i = 0; i <= _lastChain/2; i++) {
@@ -460,7 +466,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 	}
 
 	/** DistLimit is half based on the diameter of the polygon half on the length 
-	 * of the line */
+	 * of the line. */
 	protected double getDistLimit(int pixelCountInCurrentLineInterval) {
 		double distLimit = (_lastChain + pixelCountInCurrentLineInterval) / 20.; 
 		return Math.max(distLimit, 1.);

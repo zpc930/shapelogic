@@ -2,7 +2,9 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.util.Constants;
 
-/**   
+/** Find the type of a pixel.
+ * 
+ * This is used in MaxDistanceVectorizer, and it is only using the neighboors.
  * 
  * @author Sami Badawi
  *
@@ -19,7 +21,8 @@ public class SimplePixelTypeFinder implements IPixelTypeFinder {
 		_cyclePoints = getCyclePoints();
 	}
 
-	/** From the current point find direction
+	/** From the current point find direction.
+	 * 
 	 * A problem with finding maximum is that the neighbor might not be known.
 	 * Should the maximum only be calculated among unused?
 	 * I think that if you have a V point and a junction
