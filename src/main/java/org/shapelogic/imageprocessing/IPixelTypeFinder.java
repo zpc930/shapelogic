@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-/** 
+/** Interface that are used for several Vectorizer.
  * 
  * @author Sami Badawi
  *

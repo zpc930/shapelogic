@@ -90,7 +90,9 @@ public class PixelTypeCalculator implements LazyCalc<PixelType>
 		return pixelType;
 	}
 
-	/** I do not think this is used now */
+	/** Assignment method. 
+	 * 
+	 * I do not think this is used now. */
 	@Deprecated
 	private void assigns(PixelTypeCalculator that) {
 		neighbors = that.neighbors;

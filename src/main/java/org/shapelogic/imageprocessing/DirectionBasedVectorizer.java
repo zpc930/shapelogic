@@ -27,7 +27,7 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 	protected static final int MAX_SHORT_LINE_COUNT = 10000;
 	protected static final int NUMBER_OF_SAME_DIRECTION_TO_START_STRAIGHT =10;
 	
-	/** all the direction from _firstPointInLine, so the direction on index 0 
+	/** All the direction from _firstPointInLine, so the direction on index 0 
 	 * is point one pixel away from _firstPointInLine.
 	 */
 	protected byte[] _chainCodeForMultiLine = new byte[CHAIN_CODE_FOR_MULTI_LINE_MAX_LENGTH];
@@ -73,7 +73,7 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 	}
 	
 	@Override
-	/** If you have straight line first other direction stops the line 
+	/** If you have straight line first other direction stops the line. 
 	 * 
 	 * To follow a multi line I think that this should always give true.
 	 * But I need some way to stop other. Maybe do it on junction.

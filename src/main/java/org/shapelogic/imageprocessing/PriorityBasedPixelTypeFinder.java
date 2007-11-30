@@ -2,7 +2,9 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.util.Constants;
 
-/**   
+/** Classify points to find out what type they are.
+ * 
+ * This is used in ShortLineBasedVectorizer. Those vectorizers did not work very well.
  * 
  * @author Sami Badawi
  *
@@ -19,7 +21,8 @@ public class PriorityBasedPixelTypeFinder implements IPixelTypeFinder {
 		_cyclePoints = getCyclePoints();
 	}
 
-	/** From the current point find direction
+	/** From the current point find direction.
+	 * 
 	 * A problem with finding maximum is that the neighbor might not be known.
 	 * Should the maximum only be calculated among unused?
 	 * I think that if you have a V point and a junction

@@ -1,5 +1,9 @@
 package org.shapelogic.imageprocessing;
-/** In order to handle both colors and grayscale have an interface that tells if 2 pixels are similar.
+
+/** Interface for doing pixel compare.
+ * 
+ * In order to handle both colors and gray scale have an interface that tells 
+ * if 2 pixels are similar.
  *
  * @author Sami Badawi
  */

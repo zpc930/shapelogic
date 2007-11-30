@@ -2,7 +2,9 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.util.Constants;
 
-/** This is classification of all points on the foreground
+/** Enum with types for annotating pixels.  
+ * 
+ * This is classification of all points on the foreground.
  * 
  * How should these be ordered?
  * I think maybe in priority sequence.

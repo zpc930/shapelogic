@@ -2,7 +2,7 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.util.Constants;
 
-/** To keep track of if a pixel has neighbors of a given type of pixel 
+/** To keep track of if a pixel has neighbors of a given type of pixel.
  * 
  * Simple enough not to use getter and setters.
  * 
@@ -29,7 +29,7 @@ class FirstDirectionForType {
 		}
 	}
 
-	/** At lease on instance of this type present */
+	/** At lease on instance of this type present. */
 	public boolean isTypePresent(){
 		return firstDirection != Constants.DIRECTION_NOT_USED;
 	}

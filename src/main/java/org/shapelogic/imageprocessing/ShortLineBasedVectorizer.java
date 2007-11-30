@@ -6,7 +6,9 @@ import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.CircleInterval;
 import org.shapelogic.util.Constants;
-/** Base class for vectorizers that are using a local short line, to determine when to set point on multi line.
+/** Base class for vectorizers that are using a local short line, 
+ * to determine when to set point on multi line.
+ * 
  * This approach was not very successful.
  * @author Sami Badawi
  *
@@ -33,7 +35,8 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 
 	protected LineType _currentLineType = LineType.UNKNOWN;
 
-	/** Take point off _unfinishedPoints try to start line from that, if nothing is found the remove point  
+	/** Take point off _unfinishedPoints try to start line from that, if 
+	 * nothing is found the remove point.  
 	 * */
 	protected void findMultiLine() {
 		if (!findMultiLinePreProcess())
@@ -45,7 +48,7 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		findMultiLinePostProcess();
 	}
 
-	/** Additional check for if new new point to be created
+	/** Additional check for if new new point to be created.
 	 * 
 	 * @return true if a new point should be created
 	 */
@@ -65,7 +68,7 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		return result;
 	}
 
-	/** Find the maximum if there is more than one the add them all the unknown list
+	/** Find the maximum if there is more than one the add them all the unknown list.
 	 */
 	protected byte handleProblematicPoints() {
 		//Find and set the type of all the neighbor points
@@ -88,7 +91,7 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		return Constants.DIRECTION_NOT_USED;
 	}
 
-	/** Find the maximum if there is more than one the add them all the unknown list
+	/** Find the maximum if there is more than one the add them all the unknown list.
 	 */
 	private byte handleProblematicPointsAddNeighborPoints() {
 		//Find and set the type of all the neighbor points
@@ -164,7 +167,8 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		_currentPoint.y += Constants.CYCLE_POINTS_Y[newDirection];
 	}
 
-	/** Make a new point in a multi line after moving one pixel back first
+	/** Make a new point in a multi line after moving one pixel back first.
+	 * 
 	 * Then move one pixel forwards again at the end.
 	 * */
 	@Deprecated
@@ -184,7 +188,7 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		_currentPoint = pixelIndexToPoint(_currentPixelIndex);
 	}
 
-	/** Hook for creating new short line */
+	/** Hook for creating new short line. */
 	public void newShortLine() {
 		_currentVectorDirection = (CPointInt) _currentPoint.copy().minus(_startOfShortLinePoint);
 		_currentAngle = _currentVectorDirection.angle();
@@ -210,7 +214,7 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		this._angleLimit = angleLimit;
 	}
 
-	/** Change to be an up front check */
+	/** Change to be an up front check. */
 	protected boolean lastPixelOk(byte newDirection) {
 		if (newDirection == _firstUsedDirection) return true;
 		else if (newDirection == _secondUsedDirection || _secondUsedDirection == Constants.DIRECTION_NOT_USED) return true;
@@ -256,7 +260,8 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		_rulesArrayForLetterMatching = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 	}
 
-	/** Get the next point to investigate from _currentPoint
+	/** Get the next point to investigate from _currentPoint.
+	 * 
 	 * This also contains check if this should cause a new new point to be created.
 	 * 
 	 * if there is more than one point to chose from add the point to: 
@@ -295,7 +300,8 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		return true;
 	}
 
-	/** Insert point between current _firstPointInLine and newFirstPoint  
+	/** Insert point between current _firstPointInLine and newFirstPoint.
+	 *   
 	 * There are currently several things that I am not sure how to handle
 	 * look in makeNewPoint()
 	 */

@@ -3,13 +3,10 @@ package org.shapelogic.imageprocessing;
 import ij.process.ByteProcessor;
 import ij.process.ImageProcessor;
 
-/**   
+/** Compare implementations for gray scale.
  * 
  * @author Sami Badawi
  *
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 public class SBByteCompare extends SBSimpleCompare {
 
@@ -42,8 +39,8 @@ public class SBByteCompare extends SBSimpleCompare {
 		return Math.abs(color1 - color2);
 	}
 
-	/** Thi sused for changes to other images or say modify all colors 
-	 * to the first found
+	/** This used for changes to other images or say modify all colors 
+	 * to the first found.
 	 */
 	public void action(int index) {
 		_pixels[index] = (byte)handledColor;

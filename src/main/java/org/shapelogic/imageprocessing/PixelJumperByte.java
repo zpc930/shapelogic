@@ -17,6 +17,6 @@ public interface PixelJumperByte {
 	int getMinY();
 	int getMaxY();
 
-	/** What you need to add to the the index in the pixels array to get to the indexed point */
+	/** What you need to add to the the index in the pixels array to get to the indexed point. */
 	int[] getCyclePoints();
 }

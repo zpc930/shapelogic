@@ -24,7 +24,7 @@ import ij.plugin.filter.PlugInFilter;
 import ij.process.ByteProcessor;
 import ij.process.ImageProcessor;
 
-/** LineVectorizer is a vectorizer using short line of default length 5
+/** LineVectorizer is a vectorizer using short line of default length 5.
  * 
  * You do a sequence of small lines, if 2 consecutive lines are close in direction you can merge them.
  * But if they are far away in angle you create a new line.
@@ -35,7 +35,7 @@ import ij.process.ImageProcessor;
  */
 public class LineVectorizer extends ShortLineBasedVectorizer implements PlugInFilter {
 
-	/** Test that the current direction is close to the last direction 
+	/** Test that the current direction is close to the last direction.
 	 * */
 	protected boolean multiLineHasGlobalFitness() {
 		//do big test
