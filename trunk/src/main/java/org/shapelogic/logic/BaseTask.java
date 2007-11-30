@@ -109,8 +109,9 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	}
 
 	/** In case I take the context out of the node 
-	 * @deprecated
+	 * 
 	 * */
+	@Deprecated
 	public JexlContext getContext() {
 		return this;
 	}
