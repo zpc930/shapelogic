@@ -3,7 +3,7 @@
   <bannerLeft>
     <name>shapelogic</name>
     <src>./images/logos/shapelogicsmalltransparent.png</src>
-    <href>http://index.html/</href>
+    <href>./index.html</href>
   </bannerLeft>
   <bannerRight>
   	<src>./images/logos/rightbanner.png</src>
@@ -16,9 +16,6 @@
 
     <menu name="shapelogic">
       <item name="Home" href="index.html"/>
-      <item name="Getting Started" href="index.html" collapse="true">
-		  <item name="Getting Started" href="getting-started.html"/>
-      </item>
       <item name="Examples" href="index.html" collapse="true">
 		  <item name="Letter Match" href="letter-match.html"/>
 		  <item name="Medical example" href="medical-example.html"/>
@@ -31,8 +28,15 @@
 	      <item name="Code" href="code.html" />
       </item>
       <item name="Architecture" href="index.html" collapse="true">
+	      <item name="Declarative logic" href="declarative-logic.html"/>
 	      <item name="Big Ideas" href="bigIdeas.html"/>
       </item>
+      <item name="API Documentation" href="index.html" collapse="true">
+	      <item name="Java Doc for sources" href="apidocs/index.html"/>
+	      <item name="Java Doc for sources" href="testapidocs/index.html"/>
+      </item>
+	  <item name="Getting Started" href="getting-started.html"/>
+      <item name="FAQ" href="faq.html" />
       <item name="Release Notes" href="release-notes.html" />
       <item name="Road Map" href="roadmap.html" />
     </menu>
