@@ -3,7 +3,7 @@ package org.shapelogic.polygon;
 import java.util.Map;
 import java.util.Set;
 
-import org.shapelogic.imageprocessing.PointType;
+import org.shapelogic.util.PointType;
 
 /** Not this functionality is in ChainCodeHandler
  * 

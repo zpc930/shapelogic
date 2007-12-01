@@ -11,6 +11,8 @@ import org.shapelogic.polygon.GeometricShape2D;
 import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLinePolygon;
 import org.shapelogic.polygon.PolygonEndPointAdjuster;
+import org.shapelogic.util.LineType;
+import org.shapelogic.util.PointType;
 
 /**   
  * 

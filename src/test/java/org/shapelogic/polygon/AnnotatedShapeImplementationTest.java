@@ -1,9 +1,9 @@
 package org.shapelogic.polygon;
 
 import org.shapelogic.imageprocessing.AbstractImageProcessingTests;
-import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.logic.RootTask;
 import org.shapelogic.util.Constants;
+import org.shapelogic.util.PointType;
 
 import junit.framework.TestCase;
 

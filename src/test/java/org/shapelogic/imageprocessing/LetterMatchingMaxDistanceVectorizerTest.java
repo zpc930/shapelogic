@@ -22,6 +22,8 @@ import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.MultiLine;
 import org.shapelogic.polygon.Polygon;
+import org.shapelogic.util.LineType;
+import org.shapelogic.util.PointType;
 
 /** Unit test for LetterMatchingMaxDistanceVectorizer, 
  * The main letter matching and vectorization algorithm, 

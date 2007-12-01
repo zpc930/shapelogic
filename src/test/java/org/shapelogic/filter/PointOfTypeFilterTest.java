@@ -3,7 +3,6 @@ package org.shapelogic.filter;
 import java.util.Collection;
 
 import org.shapelogic.entities.NumericRule;
-import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.logic.BaseTask;
 import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.logic.LogicState;
@@ -11,6 +10,7 @@ import org.shapelogic.logic.RootTask;
 import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.Constants;
+import org.shapelogic.util.PointType;
 
 /** Test filter based on type of points
  * Create a rootTask and set the polygon in this since the filters need to run 

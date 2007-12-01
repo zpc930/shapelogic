@@ -7,6 +7,7 @@ import org.shapelogic.logic.LazyCalc;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Calculator2D;
 import org.shapelogic.util.DoubleCalculations;
+import org.shapelogic.util.LineType;
 
 /** LineProperties contains properties that are important for a line
  * when you are dealing with curved multi line.

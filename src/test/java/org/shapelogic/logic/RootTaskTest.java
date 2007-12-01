@@ -3,10 +3,10 @@ package org.shapelogic.logic;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.logic.ContextCalculation;
 import org.shapelogic.logic.RootTask;
 import org.shapelogic.logic.Task;
+import org.shapelogic.util.PointType;
 
 import junit.framework.TestCase;
 

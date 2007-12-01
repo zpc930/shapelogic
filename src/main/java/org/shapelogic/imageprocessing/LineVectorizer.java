@@ -1,28 +1,9 @@
 package org.shapelogic.imageprocessing;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-import org.shapelogic.entities.NumericRule;
-import org.shapelogic.logic.BaseTask;
-import org.shapelogic.logic.LetterTaskFactory;
-import org.shapelogic.logic.RootTask;
-import org.shapelogic.polygon.CLine;
-import org.shapelogic.polygon.CPointInt;
-import org.shapelogic.polygon.CircleInterval;
-import org.shapelogic.polygon.IPoint2D;
-import org.shapelogic.polygon.Polygon;
-import org.shapelogic.util.Constants;
-
-
-import ij.IJ;
-import ij.ImagePlus;
 import ij.plugin.filter.PlugInFilter;
-import ij.process.ByteProcessor;
-import ij.process.ImageProcessor;
+
+import org.shapelogic.polygon.CPointInt;
+import org.shapelogic.util.Constants;
 
 /** LineVectorizer is a vectorizer using short line of default length 5.
  * 

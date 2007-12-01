@@ -1,7 +1,6 @@
 package org.shapelogic.filter;
 
 import org.shapelogic.entities.NumericRule;
-import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.logic.BaseTask;
 import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.logic.LogicState;
@@ -9,6 +8,7 @@ import org.shapelogic.logic.RootTask;
 import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.Constants;
+import org.shapelogic.util.PointType;
 
 /** Test filter based direct boolean expressions evaluated in a JEXL context   
  * 

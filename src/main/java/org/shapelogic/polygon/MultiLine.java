@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.shapelogic.imageprocessing.LineType;
 import org.shapelogic.logic.LazyCalc;
+import org.shapelogic.util.LineType;
 
 
 /** A list of point on a continues line that does not have any intersections.

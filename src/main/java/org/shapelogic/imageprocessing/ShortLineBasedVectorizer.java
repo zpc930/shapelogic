@@ -6,10 +6,13 @@ import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.CircleInterval;
 import org.shapelogic.util.Constants;
+import org.shapelogic.util.LineType;
+
 /** Base class for vectorizers that are using a local short line, 
  * to determine when to set point on multi line.
  * 
  * This approach was not very successful.
+ * 
  * @author Sami Badawi
  *
  */
@@ -121,73 +124,6 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 		return Constants.DIRECTION_NOT_USED;
 	}
 
-	private byte handleProblematicPointsOld() {
-		if (_pixelTypeCalculator.getPixelType() == PixelType.PIXEL_JUNCTION &&
-			!_currentPoint.equals(_firstPointInLine)) {
-		return Constants.DIRECTION_NOT_USED;
-		}
-		else {
-			//Find the type of all the neighbor points, the chose the best one
-			PixelTypeCalculator localPixelTypeCalculator = new PixelTypeCalculator();
-			byte bestDirection = Constants.DIRECTION_NOT_USED;
-			PixelType typeOfBestDirection = PixelType.PIXEL_FOREGROUND_UNKNOWN;
-			for (byte i=0; i < Constants.DIRECTIONS_AROUND_POINT; i++) {
-				int pixelIndexI = _currentPixelIndex + _cyclePoints[i];
-				byte pixel = _pixels[pixelIndexI];
-				if (pixel == PixelType.PIXEL_FOREGROUND_UNKNOWN.color) {
-					findPointType(pixelIndexI, localPixelTypeCalculator);
-					pixel = localPixelTypeCalculator.getPixelType().color;
-					_pixels[pixelIndexI] = pixel; 
-				}
-				if (PixelType.isUnused(pixel)) {
-					if (bestDirection == Constants.DIRECTION_NOT_USED) {
-						bestDirection = i;
-						typeOfBestDirection = localPixelTypeCalculator.getPixelType();
-					}
-					else {
-						if (typeOfBestDirection == PixelType.PIXEL_EXTRA_NEIGHBOR) {
-							bestDirection = i;
-							typeOfBestDirection = localPixelTypeCalculator.getPixelType();
-						} 
-					}
-				}
-			}
-			return bestDirection;
-		}
-	}
-
-	@Deprecated
-	protected void moveCurrentPointBackwards(byte newDirection) {
-		byte startPixelValue = _pixels[_currentPixelIndex];
-		_pixels[_currentPixelIndex] = PixelType.toUnused(startPixelValue);
-		_currentPixelIndex += _cyclePoints[newDirection];
-//		_lastPointInCurrentMultiLine--;
-		_pointsInCurrentShortLine--;
-		_currentPoint.x += Constants.CYCLE_POINTS_X[newDirection];
-		_currentPoint.y += Constants.CYCLE_POINTS_Y[newDirection];
-	}
-
-	/** Make a new point in a multi line after moving one pixel back first.
-	 * 
-	 * Then move one pixel forwards again at the end.
-	 * */
-	@Deprecated
-	protected void makeNewPointFromLastDirection() {
-		byte forwardsDirection = Constants.DIRECTION_NOT_USED;
-		moveCurrentPointBackwards(oppesiteDirection(_currentDirection));
-		forwardsDirection = _currentDirection;
-		_currentPoint = pixelIndexToPoint(_currentPixelIndex); //XXX should not be needed
-		getPolygon().addAfterEnd(_currentPoint.copy());
-		_firstPointInLine = pixelIndexToPoint(_currentPixelIndex);
-		_startOfShortLinePoint.setLocation(_firstPointInLine);
-		makeNewPointPostProcess();
-		if (forwardsDirection != Constants.DIRECTION_NOT_USED) {
-			moveCurrentPointForwards(forwardsDirection);
-			_currentDirection = forwardsDirection; 
-		}
-		_currentPoint = pixelIndexToPoint(_currentPixelIndex);
-	}
-
 	/** Hook for creating new short line. */
 	public void newShortLine() {
 		_currentVectorDirection = (CPointInt) _currentPoint.copy().minus(_startOfShortLinePoint);
@@ -266,7 +202,8 @@ public abstract class ShortLineBasedVectorizer extends BaseVectorizer {
 	 * 
 	 * if there is more than one point to chose from add the point to: 
 	 * _unfinishedPoints that is a list of points that need to be revisited.
-	 *  assumes that _pixelTypeCalculator is set to current point
+	 * assumes that _pixelTypeCalculator is set to current point
+	 * 
 	 * @return true if there are more points
 	 */
 	protected boolean findNextLinePoint() {
