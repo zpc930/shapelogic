@@ -17,6 +17,8 @@ import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLine;
 import org.shapelogic.util.Constants;
 import org.shapelogic.util.DoubleCalculations;
+import org.shapelogic.util.LineType;
+import org.shapelogic.util.PointType;
 
 import static org.shapelogic.polygon.Calculator2D.oppositeDirection;
 

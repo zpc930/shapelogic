@@ -1,10 +1,10 @@
 package org.shapelogic.logic;
 
 import org.shapelogic.filter.PointOfTypeFilter;
-import org.shapelogic.imageprocessing.LineType;
-import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.polygon.MultiLinePolygon;
 import org.shapelogic.polygon.Polygon;
+import org.shapelogic.util.LineType;
+import org.shapelogic.util.PointType;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;

@@ -1,6 +1,5 @@
-package org.shapelogic.imageprocessing;
+package org.shapelogic.util;
 
-import org.shapelogic.logic.OHInterface;
 
 /** Enum for with types for Lines. 
  * 
@@ -9,7 +8,7 @@ import org.shapelogic.logic.OHInterface;
  * @author Sami Badawi
  */
 public enum LineType implements OHInterface {
-	/** Before a type is determined */
+	/* Before a type is determined */
 	UNKNOWN,
 	
 	/** Not completely straight */

@@ -1,6 +1,5 @@
-package org.shapelogic.imageprocessing;
+package org.shapelogic.util;
 
-import org.shapelogic.logic.OHInterface;
 
 /** Enum for with types for Points.
  *   

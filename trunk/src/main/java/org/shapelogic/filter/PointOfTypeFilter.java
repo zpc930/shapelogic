@@ -2,8 +2,8 @@ package org.shapelogic.filter;
 
 import java.util.Set;
 
-import org.shapelogic.imageprocessing.PointType;
 import org.shapelogic.polygon.IPoint2D;
+import org.shapelogic.util.PointType;
 
 /** Filtering based on annotation for points
  * Note that this only works for filters of point type

@@ -90,24 +90,4 @@ public class PixelTypeCalculator implements LazyCalc<PixelType>
 		return pixelType;
 	}
 
-	/** Assignment method. 
-	 * 
-	 * I do not think this is used now. */
-	@Deprecated
-	private void assigns(PixelTypeCalculator that) {
-		neighbors = that.neighbors;
-		unusedNeighbors = that.unusedNeighbors;
-		regionCrossings = that.regionCrossings;
-		firstUnusedNeighbor = that.firstUnusedNeighbor;
-		distanceBetweenLastDirection = that.distanceBetweenLastDirection;
-		pixelType = that.pixelType; 
-		
-		pixelIndex = that.pixelIndex; 
-		highestRankedUnusedPixelTypeColor = that.highestRankedUnusedPixelTypeColor;
-		highestRankedUnusedNeighbor = that.highestRankedUnusedNeighbor;
-		highestRankedUnusedIsUnique = that.highestRankedUnusedIsUnique;
-		isLocalMaximum = that.isLocalMaximum;
-		_dirty = that._dirty;
-	}
-	
 }

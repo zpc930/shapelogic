@@ -14,6 +14,7 @@ import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLine;
 import org.shapelogic.polygon.ObjectAnnotator;
 import org.shapelogic.util.Constants;
+import org.shapelogic.util.LineType;
 
 /** DirectionBasedVectorizer is a Vectorizer based on direction.
  * 
@@ -144,15 +145,6 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 			_chainCodeForMultiLine[_lastPointInCurrentMultiLine] = newDirection;
 			_directionsCount[newDirection]++;
 		}
-	}
-	
-	@Override
-	@Deprecated
-	protected void moveCurrentPointBackwards(byte newDirection) {
-		if (newDirection == Constants.DIRECTION_NOT_USED)
-			return;
-		super.moveCurrentPointBackwards(newDirection);
-		_directionsCount[_chainCodeForMultiLine[_lastPointInCurrentMultiLine]]--;
 	}
 	
 	@Override

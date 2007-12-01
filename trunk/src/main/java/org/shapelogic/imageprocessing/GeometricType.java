@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import org.shapelogic.logic.OHInterface;
+import org.shapelogic.util.OHInterface;
 
 /** Not sure if I should just reuse PixelType. 
  * 

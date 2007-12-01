@@ -1,4 +1,4 @@
-package org.shapelogic.logic;
+package org.shapelogic.util;
 
 /** Maybe this should just be super abstract
  * 
