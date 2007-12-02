@@ -13,12 +13,20 @@ ShapeLogic
   Code hosted on {{http://code.google.com/p/shapelogic/}}.
   From there you can download both source files and binary distributions.  
   
-  Project home page {{http://www.shapelogic.org/}} 
-  this is currently work in progress, not all links are set up yet.
-
-  Currently both sites have around the same amount of information, but 
-  eventually this project site will be the main resource. 
+  Project home page {{http://www.shapelogic.org/}} is currently a work in 
+  progress.
   
+* Main ideas and motivation
+
+  It is currently difficult to combine high order logic and image processing. 
+  ShapeLogic is intended as basic plumbing software that turns a logic engine 
+  into a simple plug in component to ease entry into vision and image 
+  analysis. ShapeLogic also fills gaps missing from current Java image 
+  processing libraries, and uses a commercially friendly license.
+  
+  The current ShapeLogic working example demonstrates capital letter matching.  
+  Future, differing, examples to come.
+
 *  Features
 
   * Declarative goal driven logic engine for calling image processing primitives
@@ -29,9 +37,9 @@ ShapeLogic
   
   * Commercially friendly MIT open source license
   
-  * Annotations of point as: Different type of junctions, end point, hard or soft point
+  * Annotations of point as different type of junctions, end points, hard or soft points
 
-  * Annotations of lines as: Straight, curved, concave, inflection
+  * Annotations of lines as straight, curved, concave or inflection points
 
   * Programmed in Java
   
@@ -40,10 +48,11 @@ ShapeLogic
   []
 
 *  Requirements
+
   ShapeLogic uses the following libraries:
   
-  * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic is build on top of the 
-  popular ImageJ framework, but could work stand alone without too much work
+  * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic is built on top of the 
+  popular ImageJ framework, but could easily stand alone
 
   * {{{http://commons.apache.org/} Apache commons}}: {{{http://commons.apache.org/jexl/} JEXL}}, 
   {{{http://commons.apache.org/beanutils/} beanutils}}: For embedded logic language 
@@ -64,15 +73,11 @@ ShapeLogic
   
 * Development Status: Alpha
 
-  * Starting from version 0.7 ShapeLogic is now in Alpha.
+  * ShapeLogic is in Alpha, as of version 0.7.
 
-  * There is a working example where ShapeLogic is used for matching all the capital letters.
-
-  * ShapeLogic should be able to do useful work now.
+  * There is a working example where ShapeLogic is used for matching capital letters.
 
   * The API is still under development.
-
-  * This ShapeLogic project site has been put up.
 
   * ShapeLogic v 0.7 consists of around 16,000 lines of Java code including 180 unit tests.
 
@@ -80,39 +85,29 @@ ShapeLogic
 
 * News
 
-** ShapeLogic v 0.8 development not released
-
-  * Create ShapeLogic documentation site
-  
-  * Clean up letter recognition example
-  
-  * More general logical expression instead of just equal test at the lowest level
-
-  []
-
 ** 2007-11-27 ShapeLogic v 0.7 released
 
   * First alpha quality release
 
   * Letter recognition example is more robust
 
-  * Bug fix so logic language directly can use annotation
-
-  * Added greater than comparison to logical expression instead of just equal test at the lowest level
-
-  * Includes a binary distribution that contains all the dependent jar files, to ease deployment 
+  * Includes a binary distribution that contains all dependent jar files, to ease deployment 
 
   []
 
-* Main ideas and motivation for ShapeLogic
-
-  It is currently difficult to combine high order logic and image processing. 
-  ShapeLogic is intended as basic plumbing software that turns a logic engine 
-  into a simple plug in component in order to ease entry to vision and image 
-  analysis. ShapeLogic also fills gaps missing from current Java image 
-  processing libraries, and uses a commercially friendly license.
-
 * Future plans for ShapeLogic
 
-  The next example application for ShapeLogic will probably be doing:
-  Medical image recognition or medical image processing.
+** ShapeLogic v 0.8 soon to be released
+
+  * Documentation site under construction
+  
+  * Letter recognition example is being cleaned up
+  
+  * Logic expression language is being extended
+
+  []
+
+** Next example
+
+  The next example application for ShapeLogic will be 
+  medical image processing.

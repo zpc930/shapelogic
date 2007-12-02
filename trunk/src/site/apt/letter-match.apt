@@ -28,38 +28,15 @@ Letter Match Example
   
   shapelogic/src/test/resources/images/smallThinLetters
 
-Recognition of Straight capital letters in ShapeLogic 0.2
-
-  This was a proof of concept used during development of the logic engine, 
-  using the very simple properties of a polygon with only straight lines.
-  It counts the number of points, lines, vertical and horizontal lines.
-  This is enough to distinguish the different capital letters, but  is farily brittle.
-
-  The example works on letters in both SVG and bitmap formats.
-
-* Rules for the letter A in ShapeLogic 0.2
-
-+------------------------------------------+
-new NumericRule("A", POINT_COUNT, polygon, POINT_COUNT_EX, 5.),
-new NumericRule("A", LINE_COUNT, polygon, LINE_COUNT_EX, 5.),
-new NumericRule("A", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.),
-new NumericRule("A", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.),
-new NumericRule("A", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.),
-+------------------------------------------+
-
 * How to see letter recognition in action
 
   See the {{{getting-started.html} Getting Started page}}.
   
 Recognition of all capital letters in ShapeLogic 0.7
 
-  The approach to handle curves was not to match with circle arch or Bézier curve.
-
-  Instead line and point are annotated. 
-
-  And they can be filtered according both position in the bounding box for a 
-  polygon and what annotations the point and line has. The is a substantially 
-  richer structure that you can use for your rules.
+  Lines and points are annotated in order to match curves, circle arches or Bezier curves are not used.
+  Lines and points can be filtered according to both position in the bounding box for a 
+  polygon, and point and line annotations. 
 
 * Rules for the letter A in ShapeLogic 0.7
   
