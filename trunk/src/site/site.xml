@@ -18,19 +18,12 @@
       <item name="Home" href="index.html"/>
       <item name="Examples" href="index.html" collapse="true">
 		  <item name="Letter Match" href="letter-match.html"/>
-		  <item name="Medical example" href="medical-example.html"/>
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Pixel types" href="pixel-types.html"/>
-		  <item name="Image processing" href="image-processing.html"/>
-	      <item name="Basic Logic" href="basic-logic.html"/>
-	      <item name="Mathematics" href="math.html" />
-	      <item name="Polygon, point, line" href="polygon.html" />
-	      <item name="Code" href="code.html" />
       </item>
       <item name="Architecture" href="index.html" collapse="true">
 	      <item name="Declarative logic" href="declarative-logic.html"/>
-	      <item name="Big Ideas" href="bigIdeas.html"/>
       </item>
       <item name="API Documentation" href="index.html" collapse="true">
 	      <item name="Java Doc for sources" href="apidocs/index.html"/>
