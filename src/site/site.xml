@@ -21,6 +21,7 @@
 		  <item name="Medical example" href="medical-example.html"/>
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
+		  <item name="Pixel types" href="pixel-types.html"/>
 		  <item name="Image processing" href="image-processing.html"/>
 	      <item name="Basic Logic" href="basic-logic.html"/>
 	      <item name="Mathematics" href="math.html" />
@@ -33,9 +34,11 @@
       </item>
       <item name="API Documentation" href="index.html" collapse="true">
 	      <item name="Java Doc for sources" href="apidocs/index.html"/>
-	      <item name="Java Doc for sources" href="testapidocs/index.html"/>
+	      <item name="Java Doc for tests" href="testapidocs/index.html"/>
       </item>
 	  <item name="Getting Started" href="getting-started.html"/>
+	  <item name="Google code hosting" href="http://code.google.com/p/shapelogic"/>
+	  <item name="Download" href="http://code.google.com/p/shapelogic/downloads/list"/>
       <item name="FAQ" href="faq.html" />
       <item name="Release Notes" href="release-notes.html" />
       <item name="Road Map" href="roadmap.html" />
