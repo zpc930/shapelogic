@@ -21,6 +21,8 @@
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Pixel types" href="pixel-types.html"/>
+		  <item name="Point type" href="point-type.html"/>
+		  <item name="Line type" href="line-type.html"/>
       </item>
       <item name="Architecture" href="index.html" collapse="true">
 	      <item name="Declarative logic" href="declarative-logic.html"/>
@@ -33,6 +35,7 @@
 	  <item name="Google code hosting" href="http://code.google.com/p/shapelogic"/>
 	  <item name="Download" href="http://code.google.com/p/shapelogic/downloads/list"/>
       <item name="FAQ" href="faq.html" />
+      <item name="Team" href="team.html" />
       <item name="Release Notes" href="release-notes.html" />
       <item name="Road Map" href="roadmap.html" />
     </menu>
