@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs title="Frequently Asked Questions">
+  <part id="ProblemRunningShapeLogic">
+    <faq id="problemRunning">
+      <title>Problem running ShapeLogic</title>
+      <question>Why won't ShapeLogic run as a plug-in for ImageJ?</question>
+      <answer>
+        <p>
+          The problem is that there are several jar files that are needed for it to run.
+          This is described on the
+          <a href="./getting-started.html">Getting started</a> 
+          page.
+        </p>
+        <source>
+          antlr-runtime-3.0.jar
+          commons-collections-3.2.jar
+          commons-jexl-1.1.jar
+          commons-logging-1.0.4.jar
+          commons-math-1.1.jar
+          guice-1.0.jar
+        </source>
+      </answer>
+    </faq>
+    <faq id="jdkversion">
+      <question>What version of Java JDK does ShapeLogic work with?</question>
+      <answer>
+        <p>
+		  ShapeLogic is compiled with JDK version 1.6, but should work fine if compiled with JDK 1.5.<br/>
+		  A version compiled with 1.5 might be released.
+        </p>
+      </answer>
+    </faq>
+    <faq id="installSnapshot">
+      <question>How do I install a snapshot version of ShapeLogic?</question>
+      <answer>
+        <p>
+          <lu>
+            <li>Download the jar file.</li>
+            <li>Go to ./ImageJ/plugins/shapelogic.</li>
+            <li>Append the word old to the current version e.g.: shapelogic__-0.7.jar.old</li>
+            <li>Copy the downloaded or compiled version to ./ImageJ/plugins/shapelogic</li>
+          </lu>
+        </p>
+      </answer>
+    </faq>
+  </part>
+
+  <part id="Build">
+    <title>Build</title>
+    
+    <faq id="buildingWithMave">
+      <question>What tools do I need to build ShapeLogic</question>
+      <answer>
+        <p>
+	      ShapeLogic is build using <a href="http://maven.apache.org">Maven 2</a>.
+        </p>
+        <p>
+          This makes several build tasks very easy, so this is the recommended 
+          way doing builds, but the code should run fine without Maven.
+        </p>
+        <p>
+          Currently the project is set up to work directly with Eclipse 3.3,
+           Java 1.6, but you can use: NetBeans, IntelliJ, JBuilder, emacs or vi.
+        </p>
+      </answer>
+    </faq>
+
+    <faq id="buildCommands">
+      <question>How do you build with Maven 2</question>
+      <answer>
+        <p>
+          In order to do the following:
+          <ol>
+            <li>runs the unit tests locally</li>
+            <li>runs the unit tests locally, and if they passes it will create the jar file</li>
+            <li>runs the unit tests locally and install ShapeLogic to local repository</li>
+          </ol>
+          Call these commands.
+        <source>
+          mvn test
+          mvn package
+          mvn install
+        </source>
+        </p>
+      </answer>
+    </faq>
+    <faq id="buildingProjectSite">
+      <question>How is this project site created?</question>
+      <answer>
+        <p>
+		  The ShapeLogic site is created using a <a href="http://maven.apache.org/doxia/references/apt-format.html">Almost Plain Text format</a>.
+		  The apt files are stored in the directory: shapelogic/src/site.<br/>
+		  Changes can be tracked in SVN<br/>
+        </p>
+        <p>
+		  To generate the site run the following command.
+        <source>
+          mvn site
+        </source>
+        </p>
+      </answer>
+    </faq>
+  </part>
+  
+  <part id="ImageJ">
+    <title>ImageJ</title>
+    <faq id="other1">
+      <question>Does ShapeLogic work with other plug-ins for ImageJ?</question>
+      <answer>
+        <p>
+          <lu>
+            <li>ShapeLogic should work with other plug-ins.</li>
+            <li>ShapeLogic uses off the shelf open source libraries when possible.</li>
+            <li>ShapeLogic is a very lightweight framework.</li>
+          </lu>
+        </p>
+      </answer>
+    </faq>
+
+    <faq id="withoutImageJ">
+      <question>Does ShapeLogic work without ImageJ?</question>
+      <answer>
+        <p>
+		  Not now. But ShapeLogic is very loosely coupled to ImageJ, so abstracting 
+		  the connection to ImageJ out should not be a big task.
+        </p>
+      </answer>
+    </faq>
+  </part>
+
+  <part id="Team">
+    <title>ShapeLogic team</title>
+    
+    <faq id="joinTeam">
+      <question>How can I join ShapeLogic development team?</question>
+      <answer>
+        <p>
+        Leave a message on
+          <a href="http://code.google.com/p/shapelogic/wiki/ShapeLogicTeam">Google code hosting ShapeLogic Team</a> 
+        </p>
+      </answer>
+    </faq>
+
+    <faq id="MailinList">
+      <question>Why isn't there a mailing list for ShapeLogic?</question>
+      <answer>
+        <p>
+          A mailing list will be put up if the need arise. 
+          Until then you can post questions to this page:<br/>
+          <a href="http://code.google.com/p/shapelogic/wiki/FAQ">Google code hosting FAQ</a> 
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>
