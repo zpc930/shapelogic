@@ -1,6 +1,6 @@
 package org.shapelogic.logic;
 
-/** In order for an And Task to succeed all the child Tasks need to succeed
+/** In order for an <code>AndTask</code> to succeed all the child Tasks need to succeed.<p/>
  * 
  * So I should have a way to take one at a time and call calc on them.
  * 
