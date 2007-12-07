@@ -1,12 +1,13 @@
 package org.shapelogic.logic;
 
-/** Does numerical comparison of an expected value and a found value
+import org.shapelogic.util.Constants;
+
+/** Does numerical comparison of an expected value and a found value.
  * 
  * @author Sami Badawi
  *
  */
 public class SimpleNumericTask extends SimpleTask {
-	public static final double TOLERANCE = 0.0001;
 	public SimpleNumericTask(BaseTask parent, boolean createLocalContext,
 			String expression, Number excectedValue) {
 		super(parent, createLocalContext, expression, excectedValue);
@@ -20,6 +21,6 @@ public class SimpleNumericTask extends SimpleTask {
 			return false;
 		Number excectedValue = (Number) _expected;
 		Number expressionValue = (Number) _calcValue;
-		return Math.abs(excectedValue.doubleValue() - expressionValue.doubleValue()) < TOLERANCE;
+		return Math.abs(excectedValue.doubleValue() - expressionValue.doubleValue()) < Constants.TOLERANCE;
 	}
 }

@@ -31,4 +31,8 @@ public class Constants {
 	public static final String NUMERIC_GREATER_TASK = "NumericGreaterTask";
 	public static final String COUNT_COLLECTION_GREATER_TASK = "CountCollectionGreaterTask";
 	public static final String FILTER_COUNT_GREATER_TASK = "FilterCountGreaterTask";
+
+	//A more general task that can create all the other tasks, by taking 2 parameters
+	public static final String PARAMETRIC_RULE_TASK = "ParametricRuleTask";
+	public static final double TOLERANCE = 0.0001;
 }
