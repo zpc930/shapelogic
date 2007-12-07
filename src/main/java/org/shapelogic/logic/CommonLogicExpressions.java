@@ -10,9 +10,17 @@ package org.shapelogic.logic;
 public class CommonLogicExpressions {
 	
 	
-	//
+	// Logic related
 	public static final String AND = " && ";
 	
+	// Filter related
+	public static final String FILTER_START = "#.filter('";
+	public static final String FILTER_END = "').size()";
+	
+	// Filter related
+	public static final String VAR = "#.";
+	public static final String VAR_SIZE_START = "size(#.";
+	public static final String VAR_SIZE_END = ")";
 	
 	//Point related
 	public static final String POINT_COUNT = "pointCount";
