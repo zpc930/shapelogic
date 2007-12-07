@@ -4,8 +4,14 @@
 
 ShapeLogic releases:
 
-= Development version ShapeLogic release 0.8.0 (to be released) =
-  * Improve the logic language
+=== ShapeLogic v 0.8 released AKA Letter matching is almost working (for the forth time) ===
+  * Create ShapeLogic documentation site, checked the documentation into SVN.
+  * Add Javadoc to ShapeLogic documentation site.
+  * Created a way simpler and more expressive syntax for matching rules at the lowest level. 
+  * More general logical expression instead of just equal and greater than test at the lowest level now you can use the following 3 predicates for matching: ==, >, <. 
+  * Clean up letter recognition example, take out all the size() that are part of expressions.
+  * There is around 16000 lines of Java code
+  * 190 unit test that all works om my local machine
 
 = 2007-11-27 ShapeLogic release 0.7 AKA Alpha 1 =
 
