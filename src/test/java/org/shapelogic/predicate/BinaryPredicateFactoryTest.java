@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 public class BinaryPredicateFactoryTest extends TestCase {
 
 	/** Test for BinaryEqualPredicate. */
-	public void testGetInstanceEuqals() {
+	public void testGetInstanceEquals() {
 		Object obj = BinaryPredicateFactory.getInstance("==");
 		assertEquals(obj.getClass(),BinaryEqualPredicate.class);
 	}
@@ -19,5 +19,11 @@ public class BinaryPredicateFactoryTest extends TestCase {
 	public void testGetInstanceGreater() {
 		Object obj = BinaryPredicateFactory.getInstance(">");
 		assertEquals(obj.getClass(),BinaryGreaterPredicate.class);
+	}
+
+	/** Test for BinaryGreaterPredicate. */
+	public void testGetInstanceSmaller() {
+		Object obj = BinaryPredicateFactory.getInstance("<");
+		assertEquals(obj.getClass(),BinarySmallerPredicate.class);
 	}
 }
