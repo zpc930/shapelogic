@@ -153,7 +153,7 @@ public class LetterTaskTest extends TestCase
 		ExistTasks letterTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
 		letterTask.calc();
 		assertEquals(LogicState.SucceededDone, letterTask.getState());
-		BaseTask letterATask = LetterTaskFactory.createLetterATask(rootTask);
+		BaseTask letterATask = LetterTaskLegacyFactory.createLetterATask(rootTask);
 		Object result = letterATask.calc();
 		Polygon polygon = (Polygon) rootTask.getNamedValue(POLYGON);
 		printAnnotaions(polygon);
@@ -170,14 +170,14 @@ public class LetterTaskTest extends TestCase
 	public void testCreateLetterATaskFromRule() {
 		ExistTasks letterTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
 		letterTask.calc();
-		BaseTask letterATask = LetterTaskFactory.createLetterATaskFromRule(rootTask);
+		BaseTask letterATask = LetterTaskLegacyFactory.createLetterATaskFromRule(rootTask);
 		Object result = letterATask.calc();
 		assertEquals("A",result);
 	}
 	
 	private void oneStraightLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
 		setUpByaddingBaskTask(letter);
-		NumericRule[] rulesArray = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
+		NumericRule[] rulesArray = LetterTaskLegacyFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		String onlyMatchLetter = null;
 		if (onlyMatchAgainstSelf)
@@ -189,7 +189,7 @@ public class LetterTaskTest extends TestCase
 	
 	public void oneLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
 		setUpByaddingBaskTask(letter);
-		NumericRule[] rulesArray = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
+		NumericRule[] rulesArray = LetterTaskLegacyFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		String onlyMatchLetter = null;
 		if (onlyMatchAgainstSelf)
@@ -202,7 +202,7 @@ public class LetterTaskTest extends TestCase
 	public void testAllLetterMatchFromRules() {
 		ExistTasks polygonTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
 		polygonTask.calc();
-		NumericRule[] rulesArray = LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
+		NumericRule[] rulesArray = LetterTaskLegacyFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, null);
 		Object result = letterTask.calc();
@@ -245,7 +245,7 @@ public class LetterTaskTest extends TestCase
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		for (NumericRule rule: LetterTaskFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON)) {
+		for (NumericRule rule: LetterTaskLegacyFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON)) {
 			em.persist(rule);
 		}
 		
