@@ -1,6 +1,6 @@
 package org.shapelogic.predicate;
 
-/** Standard binary greater predicate. 
+/** Standard binary smaller predicate. 
  * <p/>
  * First try see if there is a normal equals match, then try to cast to number 
  * and does comparison.
@@ -8,8 +8,8 @@ package org.shapelogic.predicate;
  * @author Sami Badawi
  *
  */
-public class BinaryGreaterPredicate implements BinaryPredicate {
-	public static final String GREATER = ">";
+public class BinarySmallerPredicate implements BinaryPredicate {
+	public static final String SMALLER = "<";
 	
 	@Override
 	public boolean evaluate(Object left, Object right) {
@@ -19,7 +19,7 @@ public class BinaryGreaterPredicate implements BinaryPredicate {
 			if (left instanceof Number && right instanceof Number) {
 				Number leftNumber = (Number) left;
 				Number rightNumber = (Number) right;
-				return leftNumber.doubleValue() > rightNumber.doubleValue();
+				return leftNumber.doubleValue() < rightNumber.doubleValue();
 			}
 			else
 				//XXX Expand to comparable values 
@@ -29,6 +29,6 @@ public class BinaryGreaterPredicate implements BinaryPredicate {
 
 	@Override
 	public String getName() {
-		return GREATER;
+		return SMALLER;
 	}
 }
