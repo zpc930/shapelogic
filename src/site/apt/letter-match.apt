@@ -52,6 +52,28 @@ new NumericRule("A", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUM
 new NumericRule("A", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,SIMPLE_NUMERIC_TASK),
 +------------------------------------------+
 
+  The meaning of the rules for A is:
+  
+  [[1]] There are 5 points
+   
+  [[1]] There is 1 hole
+   
+  [[1]] There is one T junction on the left half of the bounding box
+
+  [[1]] There is one T junction on the right half of the bounding box
+
+  [[1]] The number of end points in the bottom half is 2
+
+  [[1]] There is one horizontal line
+
+  [[1]] There are 0 vertical lines
+
+  [[1]] The total number of end points is 2
+
+  [[1]] There are no soft points
+
+  []
+
 * Rules for the letter C in ShapeLogic 0.7
 
 +------------------------------------------+
@@ -66,6 +88,28 @@ new NumericRule("C", CURVE_ARCH_COUNT, polygon, CURVE_ARCH_COUNT_EX, 1.,NUMERIC_
 new NumericRule("C", HARD_POINT_COUNT, polygon, HARD_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
 new NumericRule("C", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,NUMERIC_GREATER_TASK),
 +------------------------------------------+
+
+  The meaning of the rules for C is:
+  
+  [[1]] There is no holes
+   
+  [[1]] There is no T junction
+
+  [[1]] There is 1 multi line
+
+  [[1]] There are no vertical lines
+
+  [[1]] There are 2 end points
+
+  [[1]] There are 0 inflections points
+
+  [[1]] The there are more than 1 line that is annotated with curved arch 
+
+  [[1]] There are no hard corners
+
+  [[1]] There are more than 0 soft points
+
+  []
 
 * Line annotation in LineType
 
