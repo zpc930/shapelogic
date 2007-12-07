@@ -145,6 +145,9 @@ public class CommonLogicExpressions {
 	public static final String VERTICAL_LINE_COUNT = "verticalLineCount";
 	public static final String VERTICAL_LINE_COUNT_EX = "getVerticalLines()";
 	
+	public static final String STRAIGHT_LINE_COUNT = "straightLineCount";
+	public static final String STRAIGHT_LINE_COUNT_ANN_EX = "getAnnotatedShape().getShapesForAnnotation(\"LineType.STRAIGHT\")";
+
 	//Multi line related
 	public static final String MULTI_LINE_COUNT = "multiLineCount";
 	public static final String MULTI_LINE_COUNT_EX = "getMultiLines()";

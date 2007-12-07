@@ -71,9 +71,11 @@ public class LetterTaskFactory {
 			new NumericRule("B", U_JUNCTION_POINT_COUNT, polygon, size(U_JUNCTION_POINT_COUNT_ANN_EX), "==", 2.),
 			new NumericRule("B", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 0.),
 //			new NumericRule("B", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 1.),
-			new NumericRule("B", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), ">",1.),
+			new NumericRule("B", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), ">",1.), //XXX maybe this should be taken out
 			new NumericRule("B", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 0.),
 			new NumericRule("B", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
+			new NumericRule("B", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), ">", 0.),
+			
 
 			new NumericRule("C", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("C", T_JUNCTION_POINT_COUNT, polygon, filter(T_JUNCTION_POINT_COUNT_EX), "==",0.),
@@ -85,6 +87,7 @@ public class LetterTaskFactory {
 			new NumericRule("C", CURVE_ARCH_COUNT, polygon, size(CURVE_ARCH_COUNT_ANN_EX), ">",1.),
 			new NumericRule("C", HARD_POINT_COUNT, polygon, filter(HARD_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("C", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
+//			new NumericRule("C", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), "==", 0.),
 
 			new NumericRule("D", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
 			new NumericRule("D", T_JUNCTION_POINT_COUNT, polygon, filter(T_JUNCTION_POINT_COUNT_EX), "==", 0.),
@@ -110,10 +113,12 @@ public class LetterTaskFactory {
 			new NumericRule("F", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("F", T_JUNCTION_RIGHT_POINT_COUNT, polygon, filter(T_JUNCTION_RIGHT_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("F", END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT_EX), "==", 1.),
-			new NumericRule("F", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 2.),
-			new NumericRule("F", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 2.),
+			new NumericRule("F", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), ">", 1.),
+			new NumericRule("F", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), ">", 1.),
 			new NumericRule("F", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 3.),
-			new NumericRule("F", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+//			new NumericRule("F", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+//			new NumericRule("F", HARD_POINT_COUNT, polygon, filter(HARD_POINT_COUNT_EX), ">", 0.),
+			new NumericRule("F", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), ">", 2.),
 
 			new NumericRule("G", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("G", T_JUNCTION_POINT_COUNT, polygon, filter(T_JUNCTION_POINT_COUNT_EX), "==", 0.),
@@ -125,6 +130,7 @@ public class LetterTaskFactory {
 			new NumericRule("G", HARD_POINT_COUNT, polygon, size(HARD_POINT_COUNT_ANN_EX), ">", 0.),
 			new NumericRule("G", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
 			new NumericRule("G", ASPECT_RATIO, polygon, VAR + ASPECT_RATIO_EX, ">", 0.5),
+			new NumericRule("G", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), ">", 0.),
 
 			new NumericRule("H", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("H", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX), "==", 1.),
@@ -165,6 +171,7 @@ public class LetterTaskFactory {
 			new NumericRule("K", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 2.),
 			new NumericRule("K", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 4.),
 			new NumericRule("K", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+			new NumericRule("K", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), ">", 2.),
 
 			new NumericRule("L", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("L", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX), "==", 0.),
@@ -246,16 +253,20 @@ public class LetterTaskFactory {
 			
 			new NumericRule("T", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("T", T_JUNCTION_POINT_COUNT, polygon, filter(T_JUNCTION_POINT_COUNT_EX), "==", 1.),
-			new NumericRule("T", END_POINT_TOP_POINT_COUNT, polygon, filter(END_POINT_TOP_POINT_COUNT_EX), "==", 2.),
+			new NumericRule("T", END_POINT_TOP_LEFT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX), "==", 1.),
+			new NumericRule("T", END_POINT_TOP_RIGHT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("T", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 1.),
-			new NumericRule("T", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 2.),
-			new NumericRule("T", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 1.),
+			new NumericRule("T", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), ">", 0.),
+//			new NumericRule("T", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 1.),
 			new NumericRule("T", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 3.),
 			new NumericRule("T", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+			new NumericRule("T", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), ">", 1.),
 
 			new NumericRule("U", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("U", T_JUNCTION_POINT_COUNT, polygon, filter(T_JUNCTION_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("U", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("U", END_POINT_TOP_LEFT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX), "==", 1.),
+			new NumericRule("U", END_POINT_TOP_RIGHT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("U", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 0.),
 			new NumericRule("U", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 2.),
 			new NumericRule("U", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
@@ -265,6 +276,8 @@ public class LetterTaskFactory {
 			new NumericRule("V", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("V", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("V", T_JUNCTION_RIGHT_POINT_COUNT, polygon, filter(T_JUNCTION_RIGHT_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("V", END_POINT_TOP_LEFT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX), "==", 1.),
+			new NumericRule("V", END_POINT_TOP_RIGHT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("V", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("V", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 0.),
 			new NumericRule("V", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 0.),
@@ -272,16 +285,20 @@ public class LetterTaskFactory {
 			new NumericRule("V", MULTI_LINE_COUNT, polygon, size(MULTI_LINE_COUNT_EX), "==", 1.),
 			new NumericRule("V", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
 			new NumericRule("V", INFLECTION_POINT_COUNT, polygon, size(INFLECTION_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("V", POINT_COUNT, polygon, size(POINT_COUNT_EX),"<", 5.),
 
 			new NumericRule("W", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("W", T_JUNCTION_RIGHT_POINT_COUNT, polygon, filter(T_JUNCTION_RIGHT_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("W", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("W", END_POINT_TOP_LEFT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX), "==", 1.),
+			new NumericRule("W", END_POINT_TOP_RIGHT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("W", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 0.),
 			new NumericRule("W", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 0.),
 			new NumericRule("W", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
 			new NumericRule("W", MULTI_LINE_COUNT, polygon, size(MULTI_LINE_COUNT_EX), "==", 1.),
 			new NumericRule("W", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
 			new NumericRule("W", INFLECTION_POINT_COUNT, polygon, size(INFLECTION_POINT_COUNT_EX), ">", 1.),
+			new NumericRule("W", POINT_COUNT, polygon, size(POINT_COUNT_EX),">", 4.),
 
 			new NumericRule("X", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("X", END_POINT_TOP_POINT_COUNT, polygon, filter(END_POINT_TOP_POINT_COUNT_EX), "==", 2.),
@@ -290,6 +307,7 @@ public class LetterTaskFactory {
 			new NumericRule("X", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 0.),
 			new NumericRule("X", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 4.),
 			new NumericRule("X", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+			new NumericRule("X", POINT_COUNT, polygon, size(POINT_COUNT_EX),">", 4.),
 			
 			new NumericRule("Y", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("Y", Y_JUNCTION_POINT_COUNT, polygon, filter(Y_JUNCTION_POINT_COUNT_EX), "==", 1.),
@@ -299,10 +317,13 @@ public class LetterTaskFactory {
 			new NumericRule("Y", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 1.),
 			new NumericRule("Y", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 3.),
 			new NumericRule("Y", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+			new NumericRule("Y", POINT_COUNT, polygon, size(POINT_COUNT_EX),">", 3.),
 
 			new NumericRule("Z", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("Z", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("Z", T_JUNCTION_RIGHT_POINT_COUNT, polygon, filter(T_JUNCTION_RIGHT_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("Z", END_POINT_TOP_LEFT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX), "==", 1.),
+			new NumericRule("Z", END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("Z", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("Z", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 2.),
 			new NumericRule("Z", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 0.),
@@ -310,6 +331,7 @@ public class LetterTaskFactory {
 //			new NumericRule("Z", END_POINT_TOP_LEFT_THIRD_POINT_COUNT, polygon, filter(END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("Z", POINT_COUNT, polygon, size(POINT_COUNT_EX), "==", 4.),
 			new NumericRule("Z", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+			new NumericRule("Z", POINT_COUNT, polygon, size(POINT_COUNT_EX),">", 3.),
 		};
 		return numericRulesForAll;
 	}
