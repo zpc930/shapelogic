@@ -7,7 +7,7 @@ import org.shapelogic.entities.NumericRule;
 
 import junit.framework.TestCase;
 
-/**   
+/** This test NumericRule in connection with Hibernate.
  * 
  * @author Sami Badawi
  *
