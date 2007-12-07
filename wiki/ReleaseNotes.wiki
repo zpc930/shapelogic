@@ -4,7 +4,7 @@
 
 ShapeLogic releases:
 
-=== ShapeLogic v 0.8 released AKA Letter matching is almost working (for the forth time) ===
+= 2007-12-07 ShapeLogic v 0.8 released AKA Letter matching is almost working (for the forth time) =
   * Create ShapeLogic documentation site, checked the documentation into SVN.
   * Add Javadoc to ShapeLogic documentation site.
   * Created a way simpler and more expressive syntax for matching rules at the lowest level. 
