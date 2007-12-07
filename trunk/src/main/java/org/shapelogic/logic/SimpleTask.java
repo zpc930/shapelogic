@@ -4,7 +4,7 @@ import org.apache.commons.jexl.Expression;
 import org.apache.commons.jexl.ExpressionFactory;
 
 /** Base class for tasks where you have an expression to be evaluated in 
- * local context and an expected value
+ * local context and an expected value.
  * 
  * @author Sami Badawi
  *
@@ -43,5 +43,12 @@ public class SimpleTask extends BaseTask {
 			System.out.println("Error expression could not be evaluated: " +_expression);
 			e1.printStackTrace();
 		}
+	}
+	
+	/** Get the expression that is evaluated in the JEXL context. 
+	 * 
+	 * For testing. */
+	public String getExpression() {
+		return _expression;
 	}
 }
