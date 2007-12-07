@@ -18,6 +18,7 @@ public class BinaryPredicateFactory {
 		{
 		BinaryEqualPredicate.class,
 		BinaryGreaterPredicate.class,
+		BinarySmallerPredicate.class,
 		};
 	
 	static {
