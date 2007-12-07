@@ -27,10 +27,14 @@
       </item>
       <item name="Architecture" href="index.html" collapse="true">
 	      <item name="Declarative logic" href="declarative-logic.html"/>
+	      <item name="Logic language" href="logic-language.html"/>
       </item>
       <item name="API Documentation" href="index.html" collapse="true">
 	      <item name="Java Doc for sources" href="apidocs/index.html"/>
 	      <item name="Java Doc for tests" href="testapidocs/index.html"/>
+      </item>
+      <item name="Release versions" href="index.html" collapse="true">
+	      <item name="ShapeLogic 0.8" href="release_versions/shapelogic0.8/index.html"/>
       </item>
 	  <item name="Getting Started" href="getting-started.html"/>
 	  <item name="Google code hosting" href="http://code.google.com/p/shapelogic"/>

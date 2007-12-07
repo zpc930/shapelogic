@@ -85,25 +85,35 @@ ShapeLogic
 
 * News
 
-** 2007-11-27 ShapeLogic v 0.7 released
+** 2007/12/07 ShapeLogic v 0.8 released
 
-  * First alpha quality release
+  * Create ShapeLogic documentation site, checked the documentation into SVN.
 
-  * Letter recognition example is more robust
+  * Add Javadoc to ShapeLogic documentation site.
 
-  * Includes a binary distribution that contains all dependent jar files, to ease deployment 
+  * Created a way simpler and more expressive syntax for matching rules at the lowest level.
+
+  * More general logical expression instead of just equal and greater than test at the lowest level now you can use the following 3 predicates for matching:
+
+    * Equal.
+
+    * Greater.
+
+    * Smaller.
+    
+    []
+    
+  * Clean up letter recognition example, take out all the size() that are part of expressions. 
 
   []
 
 * Future plans for ShapeLogic
 
-** ShapeLogic v 0.8 soon to be released
+** ShapeLogic v 0.9 soon to be released
 
-  * Documentation site under construction
-  
-  * Letter recognition example is being cleaned up
-  
-  * Logic expression language is being extended
+  * Use Or tasks
+
+  * Finish Javadoc for ShapeLogic 
 
   []
 
