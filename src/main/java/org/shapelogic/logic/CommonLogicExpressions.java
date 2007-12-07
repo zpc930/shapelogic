@@ -25,7 +25,6 @@ public class CommonLogicExpressions {
 	//Point related
 	public static final String POINT_COUNT = "pointCount";
 	public static final String POINT_COUNT_EX = "getPoints()";
-	public static final String POINT_COUNT_EX2 = "getPoints().size()";
 
 	public static final String END_POINT_COUNT = "endPointCount";
 	public static final String END_POINT_COUNT_EX = "getEndPointCount()";
@@ -64,11 +63,11 @@ public class CommonLogicExpressions {
 	//Point annotation related
 	public static final String HARD_POINT_COUNT = "hardPointCount";
 	public static final String HARD_POINT_COUNT_EX = "PointOfTypeFilter(\"HARD_CORNER\")";
-	public static final String HARD_POINT_COUNT_EX2 = "getAnnotatedShape().getShapesForAnnotation(\"PointType.HARD_CORNER\").size()";
+	public static final String HARD_POINT_COUNT_ANN_EX = "getAnnotatedShape().getShapesForAnnotation(\"PointType.HARD_CORNER\")";
 	
 	public static final String SOFT_POINT_COUNT = "softPointCount";
 	public static final String SOFT_POINT_COUNT_EX = "PointOfTypeFilter(\"SOFT_POINT\")";
-	public static final String SOFT_POINT_COUNT_EX2 = "getAnnotatedShape().getShapesForAnnotation(\"PointType.SOFT_POINT\").size()";
+	public static final String SOFT_POINT_COUNT_ANN_EX = "getAnnotatedShape().getShapesForAnnotation(\"PointType.SOFT_POINT\")";
 
 	public static final String Y_JUNCTION_POINT_COUNT = "yJunctionCount";
 	public static final String Y_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(\"Y_JUNCTION\")";
@@ -78,13 +77,13 @@ public class CommonLogicExpressions {
 	
 	public static final String U_JUNCTION_POINT_COUNT = "uJunctionCount";
 	public static final String U_JUNCTION_POINT_COUNT_EX = "PointOfTypeFilter(\"U_JUNCTION\")";
-	public static final String U_JUNCTION_POINT_COUNT_EX2 = "getAnnotatedShape().getShapesForAnnotation(\"PointType.U_JUNCTION\").size()";
+	public static final String U_JUNCTION_POINT_COUNT_ANN_EX = "getAnnotatedShape().getShapesForAnnotation(\"PointType.U_JUNCTION\")";
 
 	public static final String INFLECTION_POINT_COUNT = "inflectionPointCount";
 	public static final String INFLECTION_POINT_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(\"LineType.INFLECTION_POINT\")";
 
 	public static final String CURVE_ARCH_COUNT = "curveArchCount";
-	public static final String CURVE_ARCH_COUNT_EX = "getAnnotatedShape().getShapesForAnnotation(\"LineType.CURVE_ARCH\").size()";
+	public static final String CURVE_ARCH_COUNT_ANN_EX = "getAnnotatedShape().getShapesForAnnotation(\"LineType.CURVE_ARCH\")";
 	
 	
 	//Point location and annotation related
@@ -138,13 +137,13 @@ public class CommonLogicExpressions {
 	
 	//Line related
 	public static final String LINE_COUNT = "lineCount";
-	public static final String LINE_COUNT_EX = "getLines().size()";
+	public static final String LINE_COUNT_EX = "getLines()";
 
 	public static final String HORIZONTAL_LINE_COUNT = "horizontalLineCount";
-	public static final String HORIZONTAL_LINE_COUNT_EX = "getHorizontalLines().size()";
+	public static final String HORIZONTAL_LINE_COUNT_EX = "getHorizontalLines()";
 
 	public static final String VERTICAL_LINE_COUNT = "verticalLineCount";
-	public static final String VERTICAL_LINE_COUNT_EX = "getVerticalLines().size()";
+	public static final String VERTICAL_LINE_COUNT_EX = "getVerticalLines()";
 	
 	//Multi line related
 	public static final String MULTI_LINE_COUNT = "multiLineCount";
