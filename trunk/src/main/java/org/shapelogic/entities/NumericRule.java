@@ -13,6 +13,7 @@ import org.shapelogic.logic.CountCollectionTask;
 import org.shapelogic.logic.FilterCountGreaterTask;
 import org.shapelogic.logic.FilterCountTask;
 import org.shapelogic.logic.NumericGreaterTask;
+import org.shapelogic.logic.ParametricRuleTask;
 import org.shapelogic.logic.SimpleNumericTask;
 
 import static org.shapelogic.util.Constants.SIMPLE_NUMERIC_TASK;
@@ -22,6 +23,8 @@ import static org.shapelogic.util.Constants.FILTER_COUNT_TASK;
 import static org.shapelogic.util.Constants.NUMERIC_GREATER_TASK;
 import static org.shapelogic.util.Constants.COUNT_COLLECTION_GREATER_TASK;
 import static org.shapelogic.util.Constants.FILTER_COUNT_GREATER_TASK;
+
+import static org.shapelogic.util.Constants.PARAMETRIC_RULE_TASK;
 
 import static org.shapelogic.util.Constants.BOOLEAN_TASK;
 
@@ -50,12 +53,16 @@ public class NumericRule {
 	private Double _expected;
 	/** This determine what Task is created based on this rule */
 	private String _className;
+	/** What binary predicate to use with ParametricRuleTask. */
+	private String _predicateName;
 	
 	@Id @GeneratedValue @Column(name = "RULE_ID")
 	public Long getId() {
 		return _id;
 	}
 	
+	/** Old constructor taking a class name for creating specific rules. */
+	@Deprecated
 	public NumericRule(String parentOH, String name, String variable, 
 			String expression, Double expected, String className) {
 		_variable = variable;
@@ -66,8 +73,21 @@ public class NumericRule {
 		_className = className;
 	}
 
+	/** New constructor taking a predicateName to use when creating 
+	 * ParametricRuleTask.
+	 */
+	public NumericRule(String parentOH, String name, String variable, 
+			String expression, String predicateName, Double expected) {
+		_variable = variable;
+		_expression = expression; 
+		_name = name;
+		_expected = expected;
+		_parentOH = parentOH;
+		_className = PARAMETRIC_RULE_TASK;
+		_predicateName = predicateName;
+	}
+
 	public NumericRule() {
-		this(null,null,null,null,null,null);
 	}
 
 	public void setId(Long id) {
@@ -145,9 +165,13 @@ public class NumericRule {
 	 */
 	public BaseTask makeTask(BaseTask parentTask){
 		BaseTask task = null;
-
+		
+		//Parametric rule tasks, this is now the recommended way to create tasks
+		if (PARAMETRIC_RULE_TASK.equalsIgnoreCase(getClassName())) {
+			task = new ParametricRuleTask(parentTask, false, getVariable(), getExpression(), getExpected(), _predicateName);
+		}
 		//Equality test tasks
-		if (SIMPLE_NUMERIC_TASK.equalsIgnoreCase(getClassName())) {
+		else if (SIMPLE_NUMERIC_TASK.equalsIgnoreCase(getClassName())) {
 			task = new SimpleNumericTask(parentTask, false, getVariableAndExpression(),getExpected());
 		}
 		else if (COUNT_COLLECTION_TASK.equalsIgnoreCase(getClassName())) {
@@ -173,7 +197,7 @@ public class NumericRule {
 			task = new BooleanTask(parentTask, false, getExpression());
 		}
 		else { //Default is SIMPLE_NUMERIC_TASK 
-			task = new SimpleNumericTask(parentTask, false, getVariableAndExpression(),getExpected());
+			task = new ParametricRuleTask(parentTask, false, getVariable(), getExpression(), getExpected(), _predicateName);
 		}
 		return task;
 	}
