@@ -15,18 +15,18 @@ Getting Started
 
   []
   
-  If you just want to try ShapeLogic as a user this should be very simple.
-  It should probably only take a few minutes after you have ImageJ installed. 
+  Testing ShapeLogic as a user is very simple and
+  only takes a few minutes after ImageJ is installed. 
   
 User mode
 
-*  Steps to get ShapeLogic working from within ImageJ from binary distribution 
+*  Steps to get ShapeLogic working from within ImageJ, from binary distribution 
 
   * Install {{{http://rsb.info.nih.gov/ij/} ImageJ}}
   
-  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin0.7.zip}}
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin0.8.zip}}
 
-  * Unzip it.
+  * Unzip it
 
   * This will create a directory named shapelogicplugin
 
@@ -38,7 +38,7 @@ User mode
 
   * Open ImageJ
   
-  * Create a new image say 100 time 100
+  * Create a new image, 100 x 100 pixels works well
   
   * Draw a letter in black on white background
   
@@ -46,7 +46,7 @@ User mode
 
 [images/letters/Mdrawing.png] Mdrawing
 
-  * Go to the shapelogic menu and select item CapitalLetterMatch. Which does the following 
+  * Go to the shapelogic menu and select CapitalLetterMatch, which does the following 
 
     * Convert the image to a binary image
 
@@ -62,7 +62,7 @@ User mode
 
     * With a little luck you will see a dialog box saying what letter was matched
 
-    * If more than one letter match the match will fail
+    * If more than one letter matches, the match will fail
 
     * If the match fails then all the properties of the polygon will be written to the console for debugging
     
@@ -72,7 +72,7 @@ User mode
 
 * Result of match
 
-  Dialog with result of match
+  Dialog with results of match
   
 [images/letters/Mmatch.png] M match
 
@@ -82,11 +82,11 @@ User mode
 
 *  Steps to get ShapeLogic working from within ImageJ manually 
   
-  If you need a different version of shapelogic_-0.7.jar, say one compiled for JDK 1.5.
+  If you need a different version of shapelogic_-0.8.jar, e.g. one compiled for JDK 1.5.
 
   * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/shapelogic
 
-  * Take the jar file for ShapeLogic: shapelogic_-0.7.jar, and move it to that directory
+  * Take the jar file for ShapeLogic: shapelogic_-0.8.jar, and move it to that directory
 
   * Add the jar files that ShapeLogic is dependent on to the ImageJ/plugin dir:
   
@@ -106,22 +106,20 @@ User mode
     
   []
 
-  These jar file can be found on any Marven 2 repository:
+  These jar file can be found on any Maven 2 repository:
 
   E.g. commons\-math\-1.1.jar can be found here:
   {{http://repo1.maven.org/maven2/commons-math/commons-math/1.1/}}
 
-  Or they can be taken out of the shapelogicplugin0.7.zip
+  Or they can be taken out of the shapelogicplugin0.8.zip
 
-  ShapeLogic 0.7 should come with a version that contains all these dependent jars.
-
-  When you open ImageJ there will be a ShapeLogic menu with commands in.
+   When you open ImageJ there will be a ShapeLogic menu containing commands.
 
   You can get the binary distribution from the download page or compile it yourself.
 
 *  Separating Java and logic rules 
 
-  If you need to add you own rules to ShapeLogic you need to add you changes and compile ShapeLogic.
+  If you need to add you own rules to ShapeLogic you need to add your changes and compile ShapeLogic.
 
   The goal is to separate the databases with the logical rules from the executable jar file, so you do not have to recompile.
 
@@ -129,7 +127,7 @@ Development mode
 
   ShapeLogic is build using [http://maven.apache.org/ Maven 2].
 
-  This makes several build tasks very easy, so this is the recommended way doing builds, but the code should run fine without Maven.
+  This makes several build tasks very easy, so this is the recommended way of doing builds, but the code should run fine without Maven.
 
   Currently the project is set up to work directly with Eclipse 3.3, Java 1.6, but you can use: NetBeans, IntelliJ, JBuilder, emacs or vi.
 

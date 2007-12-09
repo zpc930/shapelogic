@@ -9,7 +9,7 @@
 Line Type
 
   There is a Java enum {{{apidocs/org/shapelogic/util/LineType.html} LineType}} 
-  that contains the types you can annotate an lines with.
+  containing types you can annotate a line with.
 
 * Line annotation in LineType
 
