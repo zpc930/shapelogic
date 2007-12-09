@@ -2,6 +2,8 @@
 
 = http://shapelogic.googlecode.com/svn/wiki/shapelogicsmalltransparent.png Getting started =
 
+For a more up to date version of this page go to [http://www.shapelogic.org/getting-started.html Getting Started] on the project site.
+
 You can use ShapeLogic in different ways:
   * User mode
   * Development mode
