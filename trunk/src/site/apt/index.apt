@@ -31,11 +31,14 @@ ShapeLogic
 
   * Declarative goal driven logic engine for calling image processing primitives
   
-  * The user can store rules in either a flat file or database, decreasing user reliance on Java programming
+  * The user can store rules in either a flat file or database, decreasing user 
+  reliance on Java programming
   
   * Implementation of 2D geometry primitives, vectorization and segmentation
   
-  * Commercially friendly MIT open source license
+  * It is free (as in free beer)
+  
+  * Commercially friendly MIT open source software license
   
   * Annotations of point as different type of junctions, end points, hard or soft points
 
@@ -87,23 +90,15 @@ ShapeLogic
 
 ** 2007/12/07 ShapeLogic v 0.8 released
 
-  * Create ShapeLogic documentation site, checked the documentation into SVN.
+  * Documentation site created, checked into SVN.
 
-  * Add Javadoc to ShapeLogic documentation site.
+  * Javadoc added to documentation site.
 
-  * Created a way simpler and more expressive syntax for matching rules at the lowest level.
+  * Syntax simplified for matching rules at the lowest level.
 
-  * More general logical expression instead of just equal and greater than test at the lowest level now you can use the following 3 predicates for matching:
-
-    * Equal.
-
-    * Greater.
-
-    * Smaller.
-    
-    []
-    
-  * Clean up letter recognition example, take out all the size() that are part of expressions. 
+  * "Smaller" comparison added to logical expression.
+        
+  * Letter recognition example cleaned up
 
   []
 

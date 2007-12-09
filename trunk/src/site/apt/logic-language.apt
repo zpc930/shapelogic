@@ -8,9 +8,8 @@
 
 Logic language
   
-  Calling the logic system in ShapeLogic a language is a bit of a stretch.
-   
-  But starting from ShapeLogic 0.8 it is beginning to be more organized.
+  The ShapeLogic logic system is not quite a language,    
+  but it has become more organized as of v. 0.8.
   
   This is work in progress, so proceed to read this at your own risk.
 
@@ -120,7 +119,7 @@ new NumericRule("A", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
   
   "PointOfTypeFilter(PointType.END_POINT) && PointBelowFilter(0.5)"
   
-  So that is a composite criteria that checks that the point is an end point
+  This is a composite criteria that checks that the point is an end point
   and that it is in the lower half of the bounding box for the polygon.
   
   []

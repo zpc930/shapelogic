@@ -7,14 +7,14 @@
 
 Code guidelines for ShapeLogic
   
-  There is nothing revolutionary about these code guidelines. 
-  This is common sense and current best practices.
-  They are meant to establish a culture or style for ShapeLogic.
+  There is nothing revolutionary about these code guidelines,
+  they are common sense and follow current best practices, but are
+  meant to establish a culture or style for ShapeLogic.
   
 * KISS, Keep it simple stupid
   
   This is the most important principle. When trying to solve a complex problem,
-  it is important to try to keep the code as simple as possible.
+  it is important to try to keep code as simple as possible.
   
   For a good description see {{{http://www.python.org/dev/culture.html} Python culture}}.
   
@@ -27,20 +27,17 @@ Code guidelines for ShapeLogic
   
   All classes should have a test class assigned.
   
-  Do not check code into SVN that do not pass all unit tests.
+  Do not check code into SVN that does not pass all unit tests.
   
 * Use Javadoc
   
-  Make Javadoc for all classes and packages.
-  
-  But do not make it for obvious functions or parameters.
+  Create Javadoc for all classes and packages,   
+  but do not make it for obvious functions or parameters.
   
 * Use loose coupling
   
-  Be very selective about using extra libraries. 
-  The complexity that an extra library introduces makes ShapeLogic harder to understand.
+  Be very selective in the use of extra libraries, and
+  try to avoid cyclic package dependencies.
   
-  Also try to avoid inter package dependencies.
-  
-  Be very cautious about deep object hierarchies, they introduces tight 
+  Be very cautious about deep object hierarchies, they introduce tight 
   coupling, and break encapsulation.

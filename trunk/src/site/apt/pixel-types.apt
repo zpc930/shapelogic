@@ -8,16 +8,16 @@
 
 Pixel types
   
-  A central problem in vectorizing is how to handle the junction.
+  A central vectorization problem is how best to handle junctions.
   
-  The approach that ShapeLogic is taking is to have a somewhat extensive 
-  catalogue of different type of pixels.
+  ShapeLogic has approached the problem by developing an extensive 
+  catalogue of different pixel types.
   
-* Pixel types catalogue 
+* Pixel type catalogue 
 
   * P: Normal point, 2 neighbors, cross index of 4
   
-  * E: End or extreme point, 1 neighbors, cross index of 2
+  * E: End or extreme point, 1 neighbor, cross index of 2
   
   * N: More neighbors, more than 2 neighbors, cross index of 4
   
@@ -66,7 +66,9 @@ Pixel types examples
   
   
 * V points
-
+  
+  V points are angle junctions (as in the letter "V")
+  
 ------------------------
    P     
   N     
@@ -95,9 +97,9 @@ Pixel types examples
   V
 ------------------------
   
-* N points blobs
+* N points
 
-  Is points that has more neighbors but really are only can be traversed in one way.
+  N points have more than 2 neighbors, but can only be traversed in one reasonable way.
   
 ------------------------
  P  P
@@ -114,7 +116,7 @@ Pixel types examples
 
 * Edge and inner points
   
-  Edge and inner points are not handled in ShapeLogic yet.
+  Edge and inner points are not yet handled in ShapeLogic.
     
 ------------------------
  BBBB      

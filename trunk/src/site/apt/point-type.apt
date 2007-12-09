@@ -9,7 +9,7 @@
 Point Type
 
   There is a Java enum {{{apidocs/org/shapelogic/util/PointType.html} PointType}} 
-  that contains the types you can annotate an point with.
+  containing types you can annotate a point with.
 
 * Point annotation in PointType
 
