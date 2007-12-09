@@ -49,10 +49,10 @@
     <title>Build</title>
     
     <faq id="buildingWithMave">
-      <question>What tools do I need to build ShapeLogic</question>
+      <question>What tools do I need to build ShapeLogic?</question>
       <answer>
         <p>
-	      ShapeLogic is build using <a href="http://maven.apache.org">Maven 2</a>.
+	      ShapeLogic is built using <a href="http://maven.apache.org">Maven 2</a>.
         </p>
         <p>
           This makes several build tasks very easy, so this is the recommended 
@@ -66,7 +66,7 @@
     </faq>
 
     <faq id="buildCommands">
-      <question>How do you build with Maven 2</question>
+      <question>How do you build with Maven 2?</question>
       <answer>
         <p>
           In order to do the following:
@@ -88,7 +88,7 @@
       <question>How is this project site created?</question>
       <answer>
         <p>
-		  The ShapeLogic site is created using a <a href="http://maven.apache.org/doxia/references/apt-format.html">Almost Plain Text format</a>.
+		  The ShapeLogic site is created using an <a href="http://maven.apache.org/doxia/references/apt-format.html">Almost Plain Text format</a>.
 		  The apt files are stored in the directory: shapelogic/src/site.<br/>
 		  Changes can be tracked in SVN<br/>
         </p>
@@ -132,7 +132,7 @@
     <title>ShapeLogic team</title>
     
     <faq id="joinTeam">
-      <question>How can I join ShapeLogic development team?</question>
+      <question>How can I join the ShapeLogic development team?</question>
       <answer>
         <p>
         Leave a message on
