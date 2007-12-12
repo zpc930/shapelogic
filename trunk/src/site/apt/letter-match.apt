@@ -78,7 +78,7 @@ new NumericRule("A", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "
 
   []
 
-* Rules for the letter C in ShapeLogic 0.7
+* Rules for the letter C in ShapeLogic 0.8
 
 +------------------------------------------+
 new NumericRule("C", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
