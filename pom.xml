@@ -143,8 +143,8 @@
     <developer>
       <id>Sami Badawi</id>
       <name>Sami Badawi</name>
-      <email>sami.nyc</email>
-      <url>http://www.shapelogic.org</url>
+      <email>sami.badawi!a!google mail</email>
+      <url>http://samibadawi.blogspot.com</url>
       <roles>
         <role>Creator</role>
         <role>Developer</role>
@@ -161,4 +161,13 @@
     <connection>scm:svn:http://shapelogic.googlecode.com/svn/trunk</connection>
     <url>http://shapelogic.googlecode.com/svn/trunk</url>
   </scm>
+  <mailingLists>
+    <mailingList>
+      <name>ShapeLogic</name>
+      <post>shapelogic@googlegroups.com</post>
+      <archive>http://groups.google.com/group/shapelogic</archive>
+      <otherArchives>
+      </otherArchives>
+    </mailingList>
+  </mailingLists>
 </project>
