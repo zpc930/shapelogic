@@ -141,17 +141,5 @@
       </answer>
     </faq>
 
-    <faq id="MailinList">
-      <question>Why isn't there a mailing list for ShapeLogic?</question>
-      <answer>
-        <p>
-          A mailing list will be put up if the need arise. 
-          Until then you can post questions to this page:<br/>
-          <a href="http://code.google.com/p/shapelogic/wiki/FAQ">Google code hosting FAQ</a><br/> 
-          You can post comments and suggestions to this page:<br/>
-          <a href="http://code.google.com/p/shapelogic/wiki/UserComment">User comment page</a>
-        </p>
-      </answer>
-    </faq>
   </part>
 </faqs>
