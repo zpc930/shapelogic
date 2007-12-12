@@ -8,6 +8,8 @@
 Declarative logic
 
   ShapeLogic has a declarative goal driven logic engine.
+  
+  The syntax of the logic language is better described in {{{logic-language.html} Logic language}}. 
 
 * Influences
 
@@ -37,8 +39,9 @@ Important ideas
   one will be chosen, and the other discarded.
   The context is set up a hierarchically, like in most programming languages, 
   so that names bound in a higher context can be seen in a lower one.
+  So the string polygon is set at the root context level and can be seen by all the other context.
   
-  This relies on [http://commons.apache.org/jexl/ Java Expression Language (JEXL)]
+  This relies on {{{http://commons.apache.org/jexl} Java Expression Language (JEXL)}}
 
 * Tree of tasks
 

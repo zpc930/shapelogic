@@ -11,13 +11,71 @@ Logic language
   The ShapeLogic logic system is not quite a language,    
   but it has become more organized as of v. 0.8.
   
-  This is work in progress, so proceed to read this at your own risk.
+  This is work in progress, but are actively updated now.
+
+Logic expressions can live in several places
+
+  There are currently 3 main places where logic expressions can be placed:
+  
+  [[1]] The rules are living in a Prolog like hierarchy of tasks and sub tasks
+
+    [[1]] And tasks
+
+    [[1]] Exclusive Or tasks
+
+    [[1]] Or tasks
+
+    [[1]] Not tasks
+
+    [[1]] Simple tasks
+
+    []
+
+  [[1]] The simple tasks
+  
+  Found named values are set in a JEXL context and expressions can be evaluated here too.
+
+    [[1]] Parametric Rule Tasks: 
+    Any expressions in evaluated to a value that are then compared to an expected value
+
+    [[1]] BooleanTask: 
+    Any expressions in evaluated to a boolean value
+
+    []
+
+  [[1]] Filter Tasks
+  
+  They are sub class of the Parametric Rule Tasks.
+  They come in 2 flavors now:
+
+    [[1]] Filter that runs over all the points in the polygon
+
+    [[1]] Filter that runs over all the lines in the polygon
+
+    []
+    
+    You can also do logical combinations of the filter tasks:
+     
+      So if you have one class with a filter criteria that is filtering:
+       
+      * Points in the upper half of the bounding box of the polygon 
+    
+      * Points that are T junctions
+     
+    []
+    
+    You can combine them with and and to get a filter that filters,
+    T junctions in the upper half.  
+    
+  []
 
 Example of logic language in the ShapeLogic letter matching example 
 
 *  This is how the rules for matching the letter A looks in ShapeLogic v 0.8
 
   The rules for all the capital letters can be found in the class: LetterTaskFactory.java
+  
+  So each line will be translated into one task / goal.
 
 --------------------------------------------
 new NumericRule("A", POINT_COUNT, polygon, VAR_SIZE_START + POINT_COUNT_EX + VAR_SIZE_END,"==", 5.),
@@ -48,17 +106,23 @@ new NumericRule("A", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "
   [] 
 
   
-** Hole count rule
-  
-  This is the rule:
+** Example of how a rule is evaluated 
+
+*** Hole count rule
   
 --------------------------------------------
 new NumericRule("A", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
 --------------------------------------------
 
+*** Sequence of actions generated from hole count rule
+  
   This will be transformed into a task that: 
   
-  [[1]] Evaluated "ploygon.holeCount" to a number
+  [[1]] First the expression is: VAR + HOLE_COUNT_EX = "#.holeCount" 
+  
+  [[1]] Substituted the third argument, "polygon", for "#", to get expression: "ploygon.holeCount"
+  
+  [[1]] Evaluated the resulting expression "ploygon.holeCount" in the JEXL context to a number
   
   [[1]] Take the expected value, here 1
   
@@ -88,7 +152,7 @@ new NumericRule("A", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
   
   [] 
 
-* The 4 main forms of access
+* The 4 main forms of access in a rule that is translated into a Parametric Rule Task
   
   [[1]] Raw expressions. If you do not need a variable, then all you need is an expression.
   
