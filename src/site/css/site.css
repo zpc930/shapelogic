@@ -1,5 +1,4 @@
 #banner {
-  background-color: #ffec6c; 
-  background-image: url(../images/bgfade.jpg);
-  background-repeat: repeat;
+  background-image: url(../images/logos/gradient.png);
+  background-repeat: repeat-x;
 }
