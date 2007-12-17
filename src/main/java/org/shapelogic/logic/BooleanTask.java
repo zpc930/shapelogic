@@ -13,10 +13,10 @@ public class BooleanTask extends BaseTask {
 
 	protected String _expression;
 
-	public BooleanTask(BaseTask parent, boolean createLocalContext, String expression)
+	public BooleanTask(BaseTask parent, boolean createLocalContext, String variable, String expression)
 	{
 		super(parent, createLocalContext);
-		_expression = expression;
+		_expression = ParametricRuleTask.transformExpression(variable,expression);
 	}
 	
 	/** Does the lazy calculation
