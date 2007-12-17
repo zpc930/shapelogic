@@ -87,6 +87,20 @@ public class NumericRule {
 		_predicateName = predicateName;
 	}
 
+	/** New constructor taking a predicateName to use when creating 
+	 * ParametricRuleTask.
+	 */
+	public NumericRule(String parentOH, String name, String variable, 
+			String expression) {
+		_variable = variable;
+		_expression = expression; 
+		_name = name;
+		_expected = null;
+		_parentOH = parentOH;
+		_className = BOOLEAN_TASK;
+		_predicateName = null;
+	}
+
 	public NumericRule() {
 	}
 
@@ -194,7 +208,7 @@ public class NumericRule {
 		
 		//Boolean test tasks
 		else if (BOOLEAN_TASK.equalsIgnoreCase(getClassName())) {
-			task = new BooleanTask(parentTask, false, getExpression());
+			task = new BooleanTask(parentTask, false, getVariable(), getExpression());
 		}
 		else { //Default is SIMPLE_NUMERIC_TASK 
 			task = new ParametricRuleTask(parentTask, false, getVariable(), getExpression(), getExpected(), _predicateName);
