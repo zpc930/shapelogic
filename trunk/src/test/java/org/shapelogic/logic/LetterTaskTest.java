@@ -51,7 +51,7 @@ public class LetterTaskTest extends TestCase
 		//There are 3 different ways to do the setup 
 //		setUpByaddingValuesInTask();
 //		setUpByaddingLazyCalculations();
-		setUpByaddingBaskTask("A");
+		setUpByaddingBaseTask("A");
 	}
 	
 	void setUpByaddingLazyCalculations() {
@@ -104,7 +104,7 @@ public class LetterTaskTest extends TestCase
 		return setupTask.getState();
 	}
 	
-	LogicState setUpByaddingBaskTask(final String letter) {
+	LogicState setUpByaddingBaseTask(final String letter) {
 		rootTask = RootTask.getInstance();
 		final String fileName = FILE_DIR + "/" + letter + ".svg";
 		BaseTask setupTask = new BaseTask(rootTask) {
@@ -176,7 +176,7 @@ public class LetterTaskTest extends TestCase
 	}
 	
 	private void oneStraightLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
-		setUpByaddingBaskTask(letter);
+		setUpByaddingBaseTask(letter);
 		NumericRule[] rulesArray = LetterTaskLegacyFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		String onlyMatchLetter = null;
@@ -188,7 +188,7 @@ public class LetterTaskTest extends TestCase
 	}
 	
 	public void oneLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
-		setUpByaddingBaskTask(letter);
+		setUpByaddingBaseTask(letter);
 		NumericRule[] rulesArray = LetterTaskLegacyFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		String onlyMatchLetter = null;
