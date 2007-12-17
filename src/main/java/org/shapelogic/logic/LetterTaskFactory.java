@@ -66,14 +66,13 @@ public class LetterTaskFactory {
 			new NumericRule("A", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
 			new NumericRule("A", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
 
-			new NumericRule("B", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 2.),
+			new NumericRule("B", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX + "== 2"), //try Boolean Task
 			new NumericRule("B", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX),">", 0.),
 			new NumericRule("B", U_JUNCTION_POINT_COUNT, polygon, size(U_JUNCTION_POINT_COUNT_ANN_EX), "==", 2.),
 			new NumericRule("B", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("B", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 0.),
 			new NumericRule("B", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
 			new NumericRule("B", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), ">", 0.),
-			
 
 			new NumericRule("C", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("C", T_JUNCTION_POINT_COUNT, polygon, filter(T_JUNCTION_POINT_COUNT_EX), "==",0.),
