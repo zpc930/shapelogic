@@ -125,7 +125,7 @@ User mode
 
 Development mode
 
-  ShapeLogic is build using [http://maven.apache.org/ Maven 2].
+  ShapeLogic is build using {{{http://maven.apache.org} Maven 2}}.
 
   This makes several build tasks very easy, so this is the recommended way of doing builds, but the code should run fine without Maven.
 
