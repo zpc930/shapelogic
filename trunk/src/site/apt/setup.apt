@@ -1,0 +1,150 @@
+            ------
+            Build, Debugging and Unit test setup
+            ------
+            Sami Badawi
+            ------
+            2007/12/23
+            ------
+
+Build, Debugging and Unit test setup
+  
+  This page overlaps with the {{{getting-started.html} Getting started page}},
+  but goes into more detail.
+  
+  All of the following processes should be trivial if you use Maven 2 with ShapeLogic:
+  
+  * Build
+  
+  * Debugging
+   
+  * Running unit test from within the IDE or command line  
+  
+  []
+  
+Building ShapeLogic
+  
+  ShapeLogic uses {{{Maven 2}http://maven.apache.org}} for building.
+  
+  This is very simple to learn and makes the build process trivial.
+  
+  Install {{{http://maven.apache.org/download.html} Maven 2}}.
+  
+  Download ShapeLogic and unpack it.
+  
+  After these initial steps the build process only contains 2 steps:
+  
+  Step 1: Go into the shapelogic dir and run this command:
+
+---------------------
+mvn package  
+---------------------
+  
+  This will run all unit tests and if there are no errors, build the jar file.
+  
+  Step 2: When the build is successful moved shapelogic/target/shapelogic_\-0.9.jar to
+  ImageJ/plugin/shapelogic dir, this will make it available in ImageJ.
+  
+* Details to the build process
+
+  The latest jar file is called shapelogic_\-0.9.jar.
+  
+  It has to have an underscore in the name in order for ImageJ to treat it as a plugin.
+  
+* Creating PlugInFilter
+  
+  All the files that are PlugInFilter needs to be placed in the default package dir:
+  shapelogic/src/main/java, and they need to have a name that is ending in a 
+  underscore e.g. MaxDistanceVectorizerTest_.java. 
+  
+  In ShapeLogic the source files that live there are thin wrappers around the 
+  real classes that live under other packages, 
+  e.g.: shapelogic/src/main/java/org/shapelogic/imageprocessing/MaxDistanceVectorizerTest.java
+  
+* Depending jar file
+  
+  In order to run ShapeLogic you need to place all the jar files that it 
+  depends on in the ImageJ/plugin director:
+  
+  These jar file can be found in: 
+  
+---------------------
+  shapelogicplugin0.8.zip   	ShapeLogic 0.8 plugin for ImageJ with all dependent jar files  
+---------------------
+  
+  Steps to install:
+  
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin0.8.zip}}
+
+  * Unzip it
+
+  * This will create a directory named shapelogicplugin
+
+  * Take everything from this directory and copy it into ./ImageJ/plugins/
+  
+  []
+  
+Debugging
+
+  Just start the debugger from Eclipse, with these setting:
+
+---------------------
+Debugging class: ij.ImageJ (main ImageJ class)
+Start directory:  ImageJ directory:
+VM setting: -Xmx50m
+---------------------
+  
+Unit tests
+  
+  The test classes open an image from a file and directly calls the Processor on it directly.  
+  
+  See the AbstractImageProcessingTests.java. Here is the main setup part:
+  
+---------------------
+public ByteProcessor runPluginFilterOnImage(String fileName, PlugInFilter plugInFilter) {
+	Opener opener = new Opener();
+	ImagePlus image = opener.openImage(fileName);
+	ByteProcessor bp = (ByteProcessor) image.getProcessor();
+	plugInFilter.setup("", image);
+	plugInFilter.run(bp);
+	return bp;
+}
+---------------------
+  
+  
+How ShapeLogic was set up
+  
+  You will not need to do this, since ShapeLogic is already setup when down loaded.
+  
+  This useful if you are setting your own ImageJ project up and you want 
+  to use similar simple build, debug and unit test processes.
+  
+  Here is a good description of setting up  
+  {{{http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html}
+  Maven 2 in five minutes}}.
+
+---------------------
+mvn archetype:create -DgroupId=org.shapelogic -DartifactId=shapelogic_
+---------------------
+  
+* Generating Eclipse project
+
+  Install the the Maven 2 plugin for Eclipse: http://m2eclipse.codehaus.org/update
+  
+  To generate the Eclipse project file for ShapeLogic run this command:
+
+---------------------
+mvn eclipse:eclipse  
+---------------------
+  
+  Open Eclipse and import the project.
+  
+  That is all there was to it.
+
+* Generating IntelliJ project
+  
+  To create a project for IntelliJ instead run this command:
+    
+---------------------
+  mvn idea:idea  
+---------------------
+  
