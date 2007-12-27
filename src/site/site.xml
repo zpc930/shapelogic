@@ -35,6 +35,8 @@
 		  <item name="Point Type" href="point-type.html"/>
 		  <item name="Line Type" href="line-type.html"/>
 		  <item name="Code Guidelines" href="code-guidelines.html"/>
+		  <item name="Writing Documentation" href="writing-documentation.html"/>
+		  <item name="Build and Debugging" href="setup.html"/>
       </item>
       <item name="Architecture" href="index.html" collapse="true">
 	      <item name="Declarative logic" href="declarative-logic.html"/>
