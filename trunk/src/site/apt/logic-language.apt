@@ -13,6 +13,8 @@ Logic language
   
   This is work in progress, but are actively updated now.
 
+  For a broader introduction to the logic system see {{{declarative-logic.html} Declarative logic}}. 
+
 Logic expressions can live in several places
 
   There are currently 3 main places where logic expressions can be placed:
@@ -185,6 +187,8 @@ new NumericRule("A", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
   
   This is a composite criteria that checks that the point is an end point
   and that it is in the lower half of the bounding box for the polygon.
+  
+  You can use the normal boolean operators in the filter expression: and, or, not.
   
   []
   

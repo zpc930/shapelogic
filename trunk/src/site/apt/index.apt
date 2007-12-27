@@ -7,7 +7,7 @@
 
 ShapeLogic
 
-  ShapeLogic is an open source toolkit for image processing and robotic vision.
+  ShapeLogic is an open source toolkit for image processing and computer vision.
   Started August 2007.
   
   Code hosted on {{http://code.google.com/p/shapelogic/}}.
@@ -18,7 +18,7 @@ ShapeLogic
   
 * Main ideas and motivation
 
-  It is currently difficult to combine high order logic and image processing. 
+  It is currently difficult to combine declarative logic and image processing. 
   ShapeLogic is intended as basic plumbing software that turns a logic engine 
   into a simple plug in component to ease entry into vision and image 
   analysis. ShapeLogic also fills gaps missing from current Java image 
@@ -82,7 +82,7 @@ ShapeLogic
 
   * The API is still under development.
 
-  * ShapeLogic v 0.7 consists of around 16,000 lines of Java code including 180 unit tests.
+  * ShapeLogic v 0.8 consists of around 16,000 lines of Java code including 190 unit tests.
 
   []
 
@@ -103,8 +103,20 @@ ShapeLogic
   []
 
 * Future plans for ShapeLogic
+  
+  For more up to date information on ongoing development work look at these 
+  
+  * Blog {{{http://samibadawi.blogspot.com} Declarative Computer Vision}} 
+  
+  * {{{roadmap.html} Roadmap}}
+  
+  []
 
 ** ShapeLogic v 0.9 soon to be released
+
+  * Better integration of external user defined rule databases
+  
+  * Possibly move expression language from JEXL to Java 6 Scripting
 
   * Use Or tasks
 
