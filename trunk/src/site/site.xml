@@ -40,9 +40,10 @@
 		  <item name="Lazy Data Streams" href="streams.html"/>
 		  <item name="Annotations" href="annotations.html"/>
       </item>
-      <item name="Architecture" href="index.html" collapse="true">
-	      <item name="Declarative logic" href="declarative-logic.html"/>
+      <item name="Declarative logic" href="index.html" collapse="true">
+	      <item name="Declarative overview" href="declarative-logic.html"/>
 	      <item name="Logic language" href="logic-language.html"/>
+	      <item name="General declarative" href="general-declarative.html"/>
       </item>
       <item name="API Documentation" href="index.html" collapse="true">
 	      <item name="Java Doc for sources" href="apidocs/index.html"/>
