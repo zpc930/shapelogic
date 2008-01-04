@@ -7,7 +7,8 @@
 
 ShapeLogic
 
-  ShapeLogic is an open source toolkit for image processing and computer vision.
+  ShapeLogic is an open source toolkit for declarative programming, image 
+  processing and computer vision.
   Started August 2007.
   
   Code hosted on {{http://code.google.com/p/shapelogic/}}.
@@ -18,9 +19,19 @@ ShapeLogic
   
 * Main ideas and motivation
 
-  It is currently difficult to combine declarative logic and image processing. 
+  ShapeLogic is a library for
+   
+  * Declarative programming and lazy computations in Java
+   
+  * Image processing and computer vision
+  
+  []
+  
+  While ShapeLogic's declarative programming system was initially developed 
+  for image processing and computer vision, it is widely applicable.
+  It is currently difficult to combine declarative programming and image processing.
   ShapeLogic is intended as basic plumbing software that turns a logic engine 
-  into a simple plug in component to ease entry into vision and image 
+  into a simple plugin component to ease entry into vision and image 
   analysis. ShapeLogic also fills gaps missing from current Java image 
   processing libraries, and uses a commercially friendly license.
   
@@ -29,7 +40,9 @@ ShapeLogic
 
 *  Features
 
-  * Declarative goal driven logic engine for calling image processing primitives
+  * Declarative goal driven logic engine with lazy computations
+  
+  * Specialized for the domain of image processing and computer vision
   
   * The user can store rules in either a flat file or database, decreasing user 
   reliance on Java programming
@@ -46,7 +59,7 @@ ShapeLogic
 
   * Programmed in Java
   
-  * Built on top of ImageJ, the leading Java open source project used in medical image processing
+  * Can be used as a plugin for ImageJ, the leading Java open source project used in medical image processing
   
   []
 
@@ -114,9 +127,21 @@ ShapeLogic
 
 ** ShapeLogic v 0.9 soon to be released
 
+  This will be a major release, where ShapeLogic will move beyond current 
+  parameters as a library for the letter match example.  
+  The improved system will be for declarative programming where the user can 
+  define rules in either a database or flat file. 
+  The focus will still be on image processing and computer vision, but the 
+  system will be more broadly applicable.
+  
   * Better integration of external user defined rule databases
   
-  * Possibly move expression language from JEXL to Java 6 Scripting
+  * Possibly move expression language from JEXL to 
+  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}Java 6 Scripting}}
+
+  * Implement lazy data streams like {{{http://www.scala-lang.org} Scala}} or Scheme
+
+  * Make the annotation of shapes more loosely coupled
 
   * Use Or tasks
 
