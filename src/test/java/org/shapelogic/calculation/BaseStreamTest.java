@@ -9,7 +9,7 @@ import junit.framework.TestCase;
  */
 public class BaseStreamTest extends TestCase {
 
-	private BaseStream countingBaseStreamFactory(final int stopNumber) {
+	private BaseStream<Integer> countingBaseStreamFactory(final int stopNumber) {
 		BaseStream<Integer> stream = new BaseStream<Integer>() {
 
 			@Override
@@ -22,6 +22,18 @@ public class BaseStreamTest extends TestCase {
 				return getCalcIndex() <= stopNumber;
 			}
 
+		}; 
+		return stream;
+	}
+	
+	private BaseStream<Integer> fibonacciBaseStreamFactory() {
+		BaseStream<Integer> stream = new BaseStream<Integer>() {
+
+			@Override
+			public Integer calcNext() {
+				if (getCalcIndex() < 2) return 1;
+				return get(getCalcIndex()-2) + get(getCalcIndex()-1);
+			}
 		}; 
 		return stream;
 	}
@@ -82,5 +94,26 @@ public class BaseStreamTest extends TestCase {
 			sum += e;
 		}
 		assertEquals(3,sum);
+	}
+
+	public void testGetCurrent() {
+		BaseStream<Integer> stream = countingBaseStreamFactory(10);
+		assertEquals(-1,stream.getCurrent());
+		assertEquals(new Integer(5),stream.get(5));
+		assertEquals(5,stream.getCurrent());
+	}
+	
+	public void testFibonacci() {
+		BaseStream<Integer> stream = fibonacciBaseStreamFactory();
+		assertNotNull(stream);
+		assertEquals(0,stream.getList().size());
+		assertEquals(-1,stream.getCurrent());
+		assertEquals(-1,stream.getCurrent());
+		assertTrue(stream.hasNextBase());
+		assertEquals(1,stream.getList().size());
+		assertEquals(-1,stream.getCurrent());
+		assertEquals(new Integer(1),stream.next());
+		assertEquals(new Integer(1),stream.next());
+		assertEquals(new Integer(2),stream.next());
 	}
 }

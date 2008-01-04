@@ -99,6 +99,8 @@ abstract public class BaseStream<E> implements Stream<E> {
 				}
 			}
 		}
+		else
+			return _list.get(arg0);
 		return null;
 	}
 
