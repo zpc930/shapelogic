@@ -1,0 +1,57 @@
+            ------
+            Lazy Data Streams
+            ------
+            Sami Badawi
+            ------
+            2008/01/03
+            ------
+
+Lazy Data Streams
+  
+  Lazy Data Streams is a mix between an iterator and a collection. 
+  It can be expanded by lazy calculation of an extra member.
+  
+* Example of Lazy Data Streams 
+  
+  An example would be a Lazy Data Streams to calculate all Fibonacci number.
+  
+  So this need a method to do the calculation that as input will take 
+  
+  * a number 
+  
+  * a reference to the Lazy Data Streams
+  
+  []
+  
+* History
+
+  Lazy Data Streams are used in different functional languages e.g.
+  
+  * Haskell 
+  
+  * Scala 
+  
+  * Scheme
+  
+  []
+  
+* The advantage of a lazy data stream is 
+  
+  * That you can use functional techniques on possible infinite streams of data 
+  
+  * You still have access to previous elements in a calculation by an iterator
+  
+  * You only calculate the necessary elements 
+  
+  [] 
+  
+* Implemented interfaces
+
+  The lazy data streams in ShapeLogic need to implement the following interfaces
+  
+  * Iterator
+  
+  * List
+  
+  []
+  
