@@ -1,0 +1,98 @@
+            ------
+            General declarative programming
+            ------
+            Sami Badawi
+            ------
+            2008/01/04
+            ------
+
+Using ShapeLogic for general declarative programming
+  
+  Starting in ShapeLogic 0.9, the declarative logic system is being refined
+  substantially.
+  
+  While the declarative logic system in ShapeLogic is geared towards the domain
+  of image processing or computer vision, they are not dependent.
+  
+  So this opens the possibility for using ShapeLogic outside image processing 
+  or computer vision. 
+  
+  This page will elaborate a little on the possibility.
+  
+* Current declarative programming system
+  
+  Here is a look at current systems declarative programming sorted by 
+  popularity in a highly unscientific way.
+  
+** Highly popular
+  
+  * <<SQL>> for storing and retrieving uniform data
+  
+  * <<Spreadsheet>> for simple calculations
+  
+  * <<Mathematica>> for advanced mathematics
+  
+  * <<Make>> for compiling C and C++
+  
+  * <<Ant>> for compiling Java
+  
+  []
+  
+** Somewhat popular
+  
+  * <<Hibernate and ORM>> starting to pick up steam
+  
+  * <<List comprehension>> from Haskell is starting to make its way into main 
+  stream programming languages: Python, Scala, C#.
+  
+  * <<IoC>> like Spring and Google Guice.
+  
+  []
+  
+** Not a lot of momentum
+  
+  * <<Expert systems>> popular in the 80ies
+  
+  * <<RETE engines>> e.g. Jess and Drools
+  
+  * <<Prolog>> popular in the 80ies
+  
+  * <<Oz>> experimental functional and logic language
+  
+  * <<CYC>> maybe the most advanced and ambitious system for declarative logic 
+  and programming
+  
+  []
+  
+* Is there room for another system for declarative programming?
+  
+  Here are a few observations
+  
+  * Declarative programming is not a one size fit all field
+  
+  * The more powerful system are not the most popular
+  
+  * Simplicity seem to be a big factor in success, but not exclusively, Prolog is 
+  very simple, but lost momentum
+  
+  * There is a place for custom system
+  
+  []
+  
+* Goal for ShapeLogic in declarative programming
+  
+  ShapeLogic should only be useful in certain domains. 
+  
+  Find a sweet spot where a simple system will be able to do some real work and 
+  be simple to learn.
+  
+* Domain suitable for ShapeLogic
+  
+  A domain where there are a limited number of objects with somewhat constant 
+  and limited set of features.
+  
+* Is there room for ShapeLogic as a general declarative programming system?
+  
+  It is a long shot.
+  
+  
