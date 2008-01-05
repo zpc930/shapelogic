@@ -19,31 +19,33 @@
 	  <item name="Getting Started" href="getting-started.html"/>
 	  <item name="Download" href="http://code.google.com/p/shapelogic/downloads/list"/>
       <item name="General" href="index.html" collapse="true">
-		  <item name="Google Code Hosting" href="http://code.google.com/p/shapelogic"/>
 	      <item name="FAQ" href="faq.html"/>
+		  <item name="Google Code Hosting" href="http://code.google.com/p/shapelogic"/>
+          <item name="Issue Tracking" href="http://code.google.com/p/shapelogic/issues/list"/>
 	      <item name="Mailing List" href="http://groups.google.com/group/shapelogic"/>
           <item name="Release Notes" href="release-notes.html"/>
-          <item name="Issue Tracking" href="http://code.google.com/p/shapelogic/issues/list"/>
-          <item name="Team" href="team.html"/>
           <item name="Road Map" href="roadmap.html"/>
+          <item name="Team" href="team.html"/>
       </item>
       <item name="Examples" href="index.html" collapse="true">
 		  <item name="Letter Match" href="letter-match.html"/>
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
+		  <item name="Annotations" href="annotations.html"/>
+		  <item name="Lazy Data Streams" href="streams.html"/>
+		  <item name="Line Type" href="line-type.html"/>
 		  <item name="Pixel Types" href="pixel-types.html"/>
 		  <item name="Point Type" href="point-type.html"/>
-		  <item name="Line Type" href="line-type.html"/>
+      </item>
+      <item name="Meta ShapeLogic" href="index.html" collapse="true">
+		  <item name="Build and Debugging" href="setup.html"/>
 		  <item name="Code Guidelines" href="code-guidelines.html"/>
 		  <item name="Writing Documentation" href="writing-documentation.html"/>
-		  <item name="Build and Debugging" href="setup.html"/>
-		  <item name="Lazy Data Streams" href="streams.html"/>
-		  <item name="Annotations" href="annotations.html"/>
       </item>
       <item name="Declarative logic" href="index.html" collapse="true">
 	      <item name="Declarative overview" href="declarative-logic.html"/>
-	      <item name="Logic language" href="logic-language.html"/>
 	      <item name="General declarative" href="general-declarative.html"/>
+	      <item name="Logic language" href="logic-language.html"/>
       </item>
       <item name="API Documentation" href="index.html" collapse="true">
 	      <item name="Java Doc for sources" href="apidocs/index.html"/>
