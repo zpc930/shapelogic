@@ -6,6 +6,7 @@
     <href>./index.html</href>
   </bannerLeft>
   <bannerRight>
+    <alt>Open Source, Declarative Programming, Computer Vision</alt>
   	<src>./images/logos/rightbannergradient.png</src>
   </bannerRight>
   <body>
