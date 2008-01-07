@@ -26,6 +26,10 @@ public class BaseStreamTest extends TestCase {
 		return stream;
 	}
 	
+	/** Infinite lazy fibonnacci stream
+	 * 
+	 * @return
+	 */
 	private BaseStream<Integer> fibonacciBaseStreamFactory() {
 		BaseStream<Integer> stream = new BaseStream<Integer>() {
 
@@ -66,7 +70,6 @@ public class BaseStreamTest extends TestCase {
 		BaseStream stream = countingBaseStreamFactory(2);
 		assertEquals(-1,stream.getCurrent());
 		assertEquals(new Integer(1),stream.get(1));
-		assertEquals(1,stream.getCurrent());
 	}
 
 	public void testFailedGet() {
@@ -100,7 +103,6 @@ public class BaseStreamTest extends TestCase {
 		BaseStream<Integer> stream = countingBaseStreamFactory(10);
 		assertEquals(-1,stream.getCurrent());
 		assertEquals(new Integer(5),stream.get(5));
-		assertEquals(5,stream.getCurrent());
 	}
 	
 	public void testFibonacci() {
@@ -115,5 +117,7 @@ public class BaseStreamTest extends TestCase {
 		assertEquals(new Integer(1),stream.next());
 		assertEquals(new Integer(1),stream.next());
 		assertEquals(new Integer(2),stream.next());
+		assertEquals(new Integer(3),stream.next());
+		assertEquals(new Integer(5),stream.next());
 	}
 }
