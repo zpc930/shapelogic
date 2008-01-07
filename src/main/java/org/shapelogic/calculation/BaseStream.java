@@ -94,7 +94,6 @@ abstract public class BaseStream<E> implements Stream<E> {
 		if (arg0 >= _list.size()) {
 			while (hasNext() && calcAddNext()) {
 				if (arg0 < _list.size()) {
-					_current = arg0;
 					return _list.get(arg0);
 				}
 			}
