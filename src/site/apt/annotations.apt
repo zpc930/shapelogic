@@ -51,3 +51,13 @@ Annotations
   * Right now when using JEXL it would be best if this does not use any static methods.
   
   []
+  
+* Fast access
+
+  Maybe make a double index to annotations.
+  
+  Maybe have Types in a set.
+  
+  If you use names and you have a tree set that should work.
+  
+  
