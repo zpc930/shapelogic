@@ -21,7 +21,7 @@ ShapeLogic
 
   ShapeLogic is a library for
    
-  * Declarative programming and lazy computations in Java
+  * {{{general-declarative.html} Declarative programming}} and lazy computations in Java
    
   * Image processing and computer vision
   
