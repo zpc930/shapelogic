@@ -1,6 +1,6 @@
-package org.shapelogic.logic;
+package org.shapelogic.calculation;
 
-/**   
+/** Top interface for calculations.
  * 
  * @author Sami Badawi
  *
