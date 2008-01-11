@@ -1,6 +1,6 @@
 package org.shapelogic.polygon;
 
-import org.shapelogic.logic.LazyCalc;
+import org.shapelogic.calculation.LazyCalc;
 
 /** Create an new improved polygon from an old polygon 
  * Use the Improver interface instead

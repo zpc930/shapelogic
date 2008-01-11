@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.tree.TreeNode;
 
 import org.apache.commons.jexl.JexlContext;
+import org.shapelogic.calculation.LazyCalc;
 
 import com.google.inject.Injector;
 import com.google.inject.Module;
