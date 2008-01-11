@@ -11,9 +11,9 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
+import org.shapelogic.calculation.LazyCalc;
 import org.shapelogic.filter.FilterFactory;
 import org.shapelogic.filter.IFilter;
-import org.shapelogic.logic.LazyCalc;
 
 /** Polygon is the bottom class for polygon works for points on any kind
  * 

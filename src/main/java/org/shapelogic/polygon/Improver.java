@@ -1,6 +1,6 @@
 package org.shapelogic.polygon;
 
-import org.shapelogic.logic.LazyCalc;
+import org.shapelogic.calculation.LazyCalc;
 
 /** ShapeImprover takes a geometric object and make an improved version.
  * This does not have to be a new object, only if there are big changes

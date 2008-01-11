@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import org.shapelogic.logic.LazyCalc;
+import org.shapelogic.calculation.LazyCalc;
 import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.BBox;
 import org.shapelogic.polygon.BaseAnnotatedShape;

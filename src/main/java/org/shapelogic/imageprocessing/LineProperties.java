@@ -3,7 +3,7 @@ package org.shapelogic.imageprocessing;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.shapelogic.logic.LazyCalc;
+import org.shapelogic.calculation.LazyCalc;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Calculator2D;
 import org.shapelogic.util.DoubleCalculations;

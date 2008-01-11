@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import org.shapelogic.logic.LazyCalc;
+import org.shapelogic.calculation.LazyCalc;
 import org.shapelogic.util.Constants;
 
 /** PixelTypeCalculator stores some values for points and 
