@@ -8,6 +8,9 @@ import java.util.ListIterator;
 
 /** Implementation of Stream. 
  * 
+ * This is close to org.apache.commons.collections.list.LazyList,
+ * but that takes a factory to calculate next element, and that works badly here.
+ * 
  * How should a step work?
  * 
  * Normally call the hasNext, in order for this to work it would have to do the 
@@ -37,16 +40,19 @@ abstract public class BaseStream<E> implements Stream<E> {
 	protected int _current = -1;
 	
 	/** Last value that can be calculated
-	 * 
 	 */
 	protected int _last = LAST_UNKNOWN;
+	
+	/** Highest value that last can take.
+	 */
+	protected int _maxLast = LAST_UNKNOWN;
 	
 	/** Calculate the next value
 	 * 
 	 * @return
 	 */
 	@Override
-	abstract public E calcNext();
+	abstract public E calcElement(int index);
 	
 	@Override
 	public boolean hasNext() {
@@ -59,7 +65,7 @@ abstract public class BaseStream<E> implements Stream<E> {
 	 */
 	public boolean calcAddNext() {
 		if (LAST_UNKNOWN != _last) return false;
-		E element = calcNext();
+		E element = calcElement(_list.size());
 		//XXX this should not always be the case
 		if (element != null) {
 			_list.add(element);
@@ -91,16 +97,35 @@ abstract public class BaseStream<E> implements Stream<E> {
 	
 	@Override
 	public E get(int arg0) {
+		if ( _maxLast != LAST_UNKNOWN && _maxLast < arg0)
+			return null;
+		if (isRandomAccess()) {
+			E result = _list.get(arg0);
+			if (result == null) {
+				result = calcElement(arg0);
+				if (result != null) 
+					_list.set(arg0,result);
+			}
+			return result;
+		}
 		if (arg0 >= _list.size()) {
-			while (hasNext() && calcAddNext()) {
-				if (arg0 < _list.size()) {
-					return _list.get(arg0);
+//			while (hasNext() && calcAddNext()) {
+			for (int i = _list.size(); i <= arg0; i++) {
+				E element = calcElement(i);
+				if (element != null)
+					_list.add(element);
+				else {
+					_last = i - 1;
+					return null;
 				}
 			}
 		}
-		else
-			return _list.get(arg0);
-		return null;
+		return _list.get(arg0);
+	}
+	
+	@Override
+	public boolean isRandomAccess() {
+		return false;
 	}
 
 	@Override

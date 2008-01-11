@@ -79,7 +79,7 @@ public class IteratorStreamTest extends TestCase {
 		BaseStream<Integer> stream = new BaseStream<Integer>() {
 
 			@Override
-			public Integer calcNext() {
+			public Integer calcElement(int index) {
 				if (getCalcIndex() < 2) return 1;
 				return get(getCalcIndex()-2) + get(getCalcIndex()-1);
 			}

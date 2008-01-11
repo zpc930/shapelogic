@@ -13,13 +13,17 @@ public class BaseStreamTest extends TestCase {
 		BaseStream<Integer> stream = new BaseStream<Integer>() {
 
 			@Override
-			public Integer calcNext() {
-				return getCalcIndex();
+			public Integer calcElement(int index) {
+				return index;
 			}
 
 			@Override
 			public boolean hasNext() {
 				return getCalcIndex() <= stopNumber;
+			}
+			
+			{
+				_maxLast = stopNumber;
 			}
 
 		}; 
@@ -34,7 +38,7 @@ public class BaseStreamTest extends TestCase {
 		BaseStream<Integer> stream = new BaseStream<Integer>() {
 
 			@Override
-			public Integer calcNext() {
+			public Integer calcElement(int index) {
 				if (getCalcIndex() < 2) return 1;
 				return get(getCalcIndex()-2) + get(getCalcIndex()-1);
 			}
