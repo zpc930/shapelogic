@@ -9,6 +9,7 @@ import java.util.List;
  *
  */
 public interface Stream <E> extends Iterator<E>, List<E>, Iterable<E> {
-	E calcNext();
+	boolean isRandomAccess();
+	E calcElement(int index);
 	int getCalcIndex();
 }
