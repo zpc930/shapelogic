@@ -121,6 +121,16 @@
       <artifactId>stringtemplate</artifactId>
       <version>3.0</version>
     </dependency>
+    <dependency>
+      <groupId>groovy</groupId>
+      <artifactId>groovy-all-1.0-jsr</artifactId>
+      <version>04</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-engine</artifactId>
+      <version>1.5.1</version>
+    </dependency>
   </dependencies>
   <reporting>
     <plugins>
