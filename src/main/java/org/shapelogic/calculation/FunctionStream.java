@@ -27,14 +27,20 @@ public class FunctionStream<E> extends BaseStream<E> {
 	protected String _functionName;
 	protected String _language = "groovy";
 	
-	public FunctionStream(String name, Integer stopNumber, String expression, E ... startList){
+	public FunctionStream(String name, String language, Integer stopNumber, String expression, E ... startList){
 		_name = name;
-		_expression = expression;
-		if (stopNumber != null)
-		_maxLast = stopNumber;
 		_functionName = name + functionNameSuffix;
+		if (language != null)
+			_language = language;
+		if (stopNumber != null)
+			_maxLast = stopNumber;
+		_expression = expression;
 		for (E element: startList) 
 			_list.add(element);
+	}
+	
+	public FunctionStream(String name, Integer stopNumber, String expression, E ... startList){
+		this(name, null, stopNumber, expression, startList);
 	}
 	
 	public FunctionStream(String name, String expression, E ... startList){
