@@ -27,9 +27,11 @@ public class FunctionStream<E> extends BaseStream<E> {
 	protected String _functionName;
 	protected String _language = "groovy";
 	
-	public FunctionStream(String name, String expression, E ... startList){
+	public FunctionStream(String name, Integer stopNumber, String expression, E ... startList){
 		_name = name;
 		_expression = expression;
+		if (stopNumber != null)
+		_maxLast = stopNumber;
 		_functionName = name + functionNameSuffix;
 		for (E element: startList) 
 			_list.add(element);
@@ -74,4 +76,10 @@ public class FunctionStream<E> extends BaseStream<E> {
 		}
 	    return (E) obj;
 	}
+
+	@Override
+	public boolean hasNext() {
+		return _maxLast != LAST_UNKNOWN && getCalcIndex() <= _maxLast;
+	}
+	
 }
