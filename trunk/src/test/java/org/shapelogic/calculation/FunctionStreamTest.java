@@ -22,7 +22,7 @@ public class FunctionStreamTest extends TestCase {
 	 */
 	private BaseStream<Integer> fibonacciBaseStreamFactory() {
 		BaseStream<Integer> stream = new FunctionStream<Integer>(
-				"fibo",null,"def fibo_FUNCTION_ = { fibo.get(it-2) + fibo.get(it-1) };",1,1) {
+				"fibo","def fibo_FUNCTION_ = { fibo.get(it-2) + fibo.get(it-1) };",1,1) {
 		}; 
 		return stream;
 	}
