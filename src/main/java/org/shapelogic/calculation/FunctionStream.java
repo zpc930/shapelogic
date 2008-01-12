@@ -17,13 +17,23 @@ import org.shapelogic.scripting.ScriptingConnect;
  *
  */
 public class FunctionStream<E> extends BaseStream<E> {
-	ScriptingConnect _scriptingConnect;
-	Invocable _scriptEngine;
-	ScriptEngineManager _scriptEngineManager;
-	String _expression = "def fibo_FUNCTON_ = { fibo.get(it-2) + fibo.get(it-1) };";
-	String _language = "groovy";
-	String _name = "fibo";
-	String _functionName = "fibo_FUNCTON_";
+	public static final String functionNameSuffix = "_FUNCTION_";
+	
+	protected ScriptingConnect _scriptingConnect;
+	protected Invocable _scriptEngine;
+	protected ScriptEngineManager _scriptEngineManager;
+	protected String _name;
+	protected String _expression;
+	protected String _functionName;
+	protected String _language = "groovy";
+	
+	public FunctionStream(String name, String expression, E ... startList){
+		_name = name;
+		_expression = expression;
+		_functionName = name + functionNameSuffix;
+		for (E element: startList) 
+			_list.add(element);
+	}
 	
 	public ScriptingConnect getScriptingConnect() {
 		if (_scriptingConnect == null)
