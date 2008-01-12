@@ -1,5 +1,6 @@
 package org.shapelogic.calculation;
 
+
 /** Test of FunctionStream.
  * 
  * Requires Groovy to be installed. Need special installation.
@@ -7,7 +8,7 @@ package org.shapelogic.calculation;
  * @author Sami Badawi
  *
  */
-public class FunctionStreamTest extends AbstractStreamTests {
+public class FunctionJavaScriptStreamTest extends AbstractStreamTests {
 
 	public void setUp() throws Exception {
 		super.setUp();
@@ -16,7 +17,7 @@ public class FunctionStreamTest extends AbstractStreamTests {
 	}
 
 	BaseStream<Integer> countingBaseStreamFactory(final int stopNumber) {
-		BaseStream<Integer> stream = new FunctionStream<Integer>("identity",stopNumber, "def identity_FUNCTION_ = { it };"); 
+		BaseStream<Integer> stream = new FunctionStream<Integer>("identity","javascript",stopNumber, "function identity_FUNCTION_(it) { return it };"); 
 		return stream;
 	}
 	
@@ -26,7 +27,7 @@ public class FunctionStreamTest extends AbstractStreamTests {
 	 */
 	BaseStream<Integer> fibonacciBaseStreamFactory() {
 		BaseStream<Integer> stream = new FunctionStream<Integer>(
-				"fibo","def fibo_FUNCTION_ = { fibo.get(it-2) + fibo.get(it-1) };",1,1) {
+			"fibo","javascript",null,"function fibo_FUNCTION_(it) { return parseInt(fibo.get(it-2) ) + parseInt(fibo.get(it-1))};",1,1) {
 		}; 
 		return stream;
 	}
