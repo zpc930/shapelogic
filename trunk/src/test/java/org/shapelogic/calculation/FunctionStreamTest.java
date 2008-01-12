@@ -12,13 +12,7 @@ import junit.framework.TestCase;
 public class FunctionStreamTest extends TestCase {
 
 	private BaseStream<Integer> countingBaseStreamFactory(final int stopNumber) {
-		BaseStream<Integer> stream = new FunctionStream<Integer>() {
-
-			{
-				_expression = "def identity_FUNCTON_ = { it };";
-				_name = "identity";
-				_functionName = "identity_FUNCTON_";
-			}
+		BaseStream<Integer> stream = new FunctionStream<Integer>("identity","def identity_FUNCTION_ = { it };") {
 
 			@Override
 			public boolean hasNext() {
@@ -38,11 +32,8 @@ public class FunctionStreamTest extends TestCase {
 	 * @return
 	 */
 	private BaseStream<Integer> fibonacciBaseStreamFactory() {
-		BaseStream<Integer> stream = new FunctionStream<Integer>() {
-			{
-				_list.add(1);
-				_list.add(1);
-			}
+		BaseStream<Integer> stream = new FunctionStream<Integer>(
+				"fibo","def fibo_FUNCTION_ = { fibo.get(it-2) + fibo.get(it-1) };",1,1) {
 		}; 
 		return stream;
 	}
