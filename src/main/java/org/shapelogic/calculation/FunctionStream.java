@@ -37,6 +37,10 @@ public class FunctionStream<E> extends BaseStream<E> {
 			_list.add(element);
 	}
 	
+	public FunctionStream(String name, String expression, E ... startList){
+		this(name,null,expression,startList);
+	}
+	
 	public ScriptingConnect getScriptingConnect() {
 		if (_scriptingConnect == null)
 			_scriptingConnect = new ScriptingConnect();
