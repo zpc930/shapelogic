@@ -27,8 +27,7 @@ public class FunctionJavaScriptStreamTest extends AbstractStreamTests {
 	 */
 	BaseStream<Integer> fibonacciBaseStreamFactory() {
 		BaseStream<Integer> stream = new FunctionStream<Integer>(
-			"fibo","javascript",null,"function fibo_FUNCTION_(it) { return parseInt(fibo.get(it-2) ) + parseInt(fibo.get(it-1))};",1,1) {
-		}; 
+			"fibo","javascript",null,"function fibo_FUNCTION_(it) { return parseInt(fibo.get(it-2) ) + parseInt(fibo.get(it-1))};",1,1); 
 		return stream;
 	}
 	
