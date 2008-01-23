@@ -27,12 +27,17 @@ import java.util.ListIterator;
  * 
  * I will ignore synchronization to begin with.
  * 
+ * This version of Stream has been replaced with with Streams in package 
+ * streams, use them instead.
+ * TODO This should be deleted before release of ShapeLogic 0.9 
+ * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 abstract public class BaseStream<E> implements Stream<E> {
 	public final static int LAST_UNKNOWN = -2;
-	protected ArrayList<E> _list = new ArrayList<E>();
+	protected List<E> _list = new ArrayList<E>();
 	
 	/** The last value that was calculated and looked at
 	 * So if you want to see that again use this for a lookup
@@ -80,6 +85,9 @@ abstract public class BaseStream<E> implements Stream<E> {
 	public boolean hasNextBase() {
 		if (_current < _list.size() - 1) 
 			return true;
+		else if ((_maxLast != LAST_UNKNOWN && _maxLast < _list.size())) {
+			return false;
+		} 
 		else {
 			calcAddNext();
 		}
@@ -124,17 +132,38 @@ abstract public class BaseStream<E> implements Stream<E> {
 	}
 	
 	@Override
+	public int getLast() {
+		return _last;
+	}
+
+	@Override
+	public int getMaxLast() {
+		return _maxLast;
+	}
+
+	@Override
 	public boolean isRandomAccess() {
 		return false;
 	}
 
+	/** If there is a list that contains all the results. */
 	@Override
-	public int getCalcIndex() {
+	public boolean isCached() {
+		return true;
+	}
+	
+	@Override
+	public int getCurrentSize() {
 		return _list.size();
 	}
 
 	public List<E> getList() { 
 		return _list;
+	}
+
+	@Override
+	public void setList(List<E> list) {
+		_list = list;
 	}
 	
 	public int getCurrent() {
