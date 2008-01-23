@@ -20,7 +20,7 @@ import java.util.TreeSet;
 public class PolygonEndPointAdjuster implements Improver<Polygon> {
 
 	protected Polygon _inputPolygon;
-	protected Polygon _calcValue;
+	protected Polygon _value;
 	protected boolean _dirty = true;
 	protected List<Set<IPoint2D>> _endPointsMultiClusters;
 	protected Map<Set<IPoint2D>,IPoint2D> _clustersToPointMapping;
@@ -56,24 +56,24 @@ public class PolygonEndPointAdjuster implements Improver<Polygon> {
 		setup();
 		List<Set<IPoint2D>> clusters = _inputPolygon.getEndPointsMultiClusters();
 		if (clusters.size() == 0) {
-			_calcValue = _inputPolygon;
+			_value = _inputPolygon;
 		}
 		else {
 			for (Set<IPoint2D> cluster: clusters) {
 				testCluster(cluster);
 			}
-			_calcValue = _inputPolygon.replacePointsInMap(_clusterPointToCommonPointMapping,_inputPolygon.getAnnotatedShape());
-			_calcValue.setVersion(_inputPolygon.getVersion() + 1);
+			_value = _inputPolygon.replacePointsInMap(_clusterPointToCommonPointMapping,_inputPolygon.getAnnotatedShape());
+			_value.setVersion(_inputPolygon.getVersion() + 1);
 		}
 		_dirty = false;
-		return _calcValue;
+		return _value;
 	}
 
 	@Override
-	public Polygon getCalcValue() {
+	public Polygon getValue() {
 		if (_dirty)
 			calc();
-		return _calcValue;
+		return _value;
 	}
 	
 	/** If all the points in a cluster can be combined to a single point 

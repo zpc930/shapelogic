@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
-import org.shapelogic.calculation.LazyCalc;
+import org.shapelogic.calculation.CalcInvoke;
 import org.shapelogic.filter.FilterFactory;
 import org.shapelogic.filter.IFilter;
 
@@ -27,7 +27,7 @@ import org.shapelogic.filter.IFilter;
  *
  */
 public class Polygon extends BaseAnnotatedShape 
-	implements IPolygon2D, LazyCalc<Polygon>, Cloneable, PointReplacable<Polygon>
+	implements IPolygon2D, CalcInvoke<Polygon>, Cloneable, PointReplacable<Polygon>
 {
 	private static final double MAX_DISTANCE_BETWEEN_CLUSTER_POINTS = 2;
 	protected BBox _bBox; 
@@ -65,7 +65,7 @@ public class Polygon extends BaseAnnotatedShape
 	
 	@Override
 	public BBox getBBox() {
-		getCalcValue();
+		getValue();
 		return _bBox;
 	}
 
@@ -81,7 +81,7 @@ public class Polygon extends BaseAnnotatedShape
 
 	@Override
 	public double getAspectRatio() {
-		getCalcValue();
+		getValue();
 		return _aspectRatio;
 	}
 
@@ -207,13 +207,13 @@ public class Polygon extends BaseAnnotatedShape
     	Polygon result = this;
     	for (Improver<Polygon> improver: _polygonImprovers) {
     		improver.setInput(result);
-    		result = improver.getCalcValue(); 
+    		result = improver.getValue(); 
     	}
     	return result;
     }
     
 	@Override
-	public Polygon getCalcValue() {
+	public Polygon getValue() {
 		if (isDirty())
 			calc();
 		return this;
@@ -285,7 +285,7 @@ public class Polygon extends BaseAnnotatedShape
 	}
 
 	public int getEndPointCount() {
-		getCalcValue();
+		getValue();
 		return _endPointCount;
 	}
 	
@@ -293,7 +293,7 @@ public class Polygon extends BaseAnnotatedShape
 		TreeSet<CLine> result = new TreeSet<CLine>();  
 		if (point == null)
 			return result;
-		getCalcValue();
+		getValue();
 		if (!_points.contains(point))
 			return result;
 		for (CLine line: _lines) {

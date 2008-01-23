@@ -18,7 +18,7 @@ import java.util.TreeMap;
 public class FilterPolygonForSmallLines implements Improver<Polygon> {
 	public static double SMALL_LINE_LIMIT = 0.10;
 	protected Polygon _inputPolygon;
-	protected Polygon _calcValue;
+	protected Polygon _value;
 	protected boolean _dirty = true;
 	protected List<Set<IPoint2D>> _endPointsMultiClusters;
 	protected Map<Set<IPoint2D>,IPoint2D> _clustersToPointMapping;
@@ -53,7 +53,7 @@ public class FilterPolygonForSmallLines implements Improver<Polygon> {
 		_clusterPointToCommonPointMapping = new TreeMap<IPoint2D,IPoint2D>();
 		_createdNewVersion = false;
 		_smallLineCutOffLength =  SMALL_LINE_LIMIT * _inputPolygon.getDiameter();
-		_calcValue = PolygonFactory.createSameType(_inputPolygon);
+		_value = PolygonFactory.createSameType(_inputPolygon);
 		_smallLinesFiltered = 0;
 	}
 
@@ -69,17 +69,17 @@ public class FilterPolygonForSmallLines implements Improver<Polygon> {
 			handleMulitLine(lines);
 		}
 		if (_smallLinesFiltered == 0)
-			_calcValue = _inputPolygon;
-		_calcValue.getCalcValue();
+			_value = _inputPolygon;
+		_value.getValue();
 		_dirty = false;
-		return _calcValue;
+		return _value;
 	}
 
 	@Override
-	public Polygon getCalcValue() {
+	public Polygon getValue() {
 		if (_dirty)
 			calc();
-		return _calcValue;
+		return _value;
 	}
 	
 	/** I think that this need to be done differently for different types of polygons
@@ -103,7 +103,7 @@ public class FilterPolygonForSmallLines implements Improver<Polygon> {
 			_smallLinesFiltered++;
 		}
 		else {
-			_calcValue.addIndependentLine(line);
+			_value.addIndependentLine(line);
 		}
 	}
 	
@@ -132,7 +132,7 @@ public class FilterPolygonForSmallLines implements Improver<Polygon> {
 			removeLast = true;
 		}
 		if (removeFirst || removeLast) {
-			MultiLine result = new MultiLine(_calcValue.getAnnotatedShape());
+			MultiLine result = new MultiLine(_value.getAnnotatedShape());
 			for (int i=0; i<multiLine.getPoints().size(); i++) {
 				if (i == 0) {
 					if (!removeFirst)
@@ -145,10 +145,10 @@ public class FilterPolygonForSmallLines implements Improver<Polygon> {
 				else
 					result.addAfterEnd(multiLine.getPoints().get(i));
 			}
-			_calcValue.addMultiLine(result);
+			_value.addMultiLine(result);
 			return;
 		}
-		_calcValue.addMultiLine(multiLine);
+		_value.addMultiLine(multiLine);
 	}
 
 	@Override

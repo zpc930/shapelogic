@@ -1,6 +1,6 @@
 package org.shapelogic.polygon;
 
-import org.shapelogic.calculation.LazyCalc;
+import org.shapelogic.calculation.CalcInvoke;
 
 /** ShapeImprover takes a geometric object and make an improved version.
  * This does not have to be a new object, only if there are big changes
@@ -13,7 +13,7 @@ import org.shapelogic.calculation.LazyCalc;
  * @author Sami Badawi
  *
  */
-public interface Improver<S> extends LazyCalc<S> {
+public interface Improver<S> extends CalcInvoke<S> {
 	
 	public S getInput();
 	public void setInput(S input);
