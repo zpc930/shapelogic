@@ -13,9 +13,14 @@ import org.shapelogic.scripting.ScriptingConnect;
  * Requires Groovy to be installed. Need special installation of groovy-engine.jar 
  * that need to be downloade from Sun.
  * 
+ * This version of Stream has been replaced with with Streams in package 
+ * streams, use them instead.
+ * TODO This should be deleted before release of ShapeLogic 0.9 
+ * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class FunctionStream<E> extends BaseStream<E> {
 	public static final String functionNameSuffix = "_FUNCTION_";
 	
@@ -89,7 +94,7 @@ public class FunctionStream<E> extends BaseStream<E> {
 
 	@Override
 	public boolean hasNext() {
-		return _maxLast != LAST_UNKNOWN && getCalcIndex() <= _maxLast;
+		return _maxLast != LAST_UNKNOWN && getCurrentSize() <= _maxLast;
 	}
 	
 }
