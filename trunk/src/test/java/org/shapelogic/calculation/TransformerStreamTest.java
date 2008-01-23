@@ -2,8 +2,6 @@ package org.shapelogic.calculation;
 
 import org.apache.commons.collections.Transformer;
 
-import junit.framework.TestCase;
-
 /** Test of TransformerStream.
  * 
  * This is a lazy stream that will calculate a value based on 
@@ -13,10 +11,15 @@ import junit.framework.TestCase;
  * <li>a transform function from the index</li>
  * <li>the other values in the stream</li> 
  * </ul>
+ * <br />
+ * This version of Stream has been replaced with with Streams in package 
+ * streams, use them instead.
+ * TODO This should be deleted before release of ShapeLogic 0.9 
  * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class TransformerStreamTest extends AbstractStreamTests {
 
 	public void setUp() throws Exception {
@@ -30,7 +33,7 @@ public class TransformerStreamTest extends AbstractStreamTests {
 
 			@Override
 			public boolean hasNext() {
-				return getCalcIndex() <= stopNumber;
+				return getCurrentSize() <= stopNumber;
 			}
 			
 			{

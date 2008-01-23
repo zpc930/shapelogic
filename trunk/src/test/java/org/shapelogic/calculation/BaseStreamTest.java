@@ -3,7 +3,11 @@ package org.shapelogic.calculation;
 import junit.framework.TestCase;
 
 /** Test of BaseStream.
- * 
+ * <br />
+ * This version of Stream has been replaced with with Streams in package 
+ * streams, use them instead.
+ * TODO This should be deleted before release of ShapeLogic 0.9 
+ *
  * @author Sami Badawi
  *
  */
@@ -19,7 +23,7 @@ public class BaseStreamTest extends AbstractStreamTests {
 
 			@Override
 			public boolean hasNext() {
-				return getCalcIndex() <= stopNumber;
+				return getCurrentSize() <= stopNumber;
 			}
 			
 			{
@@ -39,8 +43,8 @@ public class BaseStreamTest extends AbstractStreamTests {
 
 			@Override
 			public Integer calcElement(int index) {
-				if (getCalcIndex() < 2) return 1;
-				return get(getCalcIndex()-2) + get(getCalcIndex()-1);
+				if (getCurrentSize() < 2) return 1;
+				return get(getCurrentSize()-2) + get(getCurrentSize()-1);
 			}
 		}; 
 		return stream;
