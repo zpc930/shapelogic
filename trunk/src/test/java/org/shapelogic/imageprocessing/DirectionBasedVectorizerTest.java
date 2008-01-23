@@ -139,7 +139,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 		assertEquals(1,polygon.getMultiLines().size());
 		assertTrue(polygon.getMultiLines().get(0).isClosed());
 		PolygonEndPointAdjuster clusterAdjuster = new PolygonEndPointAdjuster(polygon);
-		MultiLinePolygon clusteredPolygon = (MultiLinePolygon) clusterAdjuster.getCalcValue();
+		MultiLinePolygon clusteredPolygon = (MultiLinePolygon) clusterAdjuster.getValue();
 		assertNotSame(polygon, clusteredPolygon);
 		assertEquals(3,clusteredPolygon.getPoints().size());
 		assertEquals(3,clusteredPolygon.getLines().size());
@@ -173,7 +173,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 		MultiLinePolygon polygon = ((MultiLinePolygon)directionBasedVectorizer.getPolygon());
 		assertEquals(1,polygon.getMultiLines().size());
 		PolygonEndPointAdjuster clusterAdjuster = new PolygonEndPointAdjuster(polygon);
-		MultiLinePolygon clusteredPolygon = (MultiLinePolygon) clusterAdjuster.getCalcValue();
+		MultiLinePolygon clusteredPolygon = (MultiLinePolygon) clusterAdjuster.getValue();
 		assertNotSame(polygon, clusteredPolygon);
 		assertEquals(3,clusteredPolygon.getPoints().size());
 		assertEquals(2,clusteredPolygon.getLines().size());
