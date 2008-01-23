@@ -23,7 +23,7 @@ public class FilterPolygonForSmallLinesTest extends TestCase {
 	    assertEquals(3,polygon.getPoints().size());
 	    FilterPolygonForSmallLines filterPolygonForSmallLines = new FilterPolygonForSmallLines();
 	    filterPolygonForSmallLines.setInput(polygon);
-	    Polygon polygonOut = filterPolygonForSmallLines.getCalcValue();
+	    Polygon polygonOut = filterPolygonForSmallLines.getValue();
 	    assertEquals(2,polygonOut.getPoints().size());
 	    assertNotSame(polygon, polygonOut);
 	    Polygon polygonImproved = polygon.improve();
@@ -40,7 +40,7 @@ public class FilterPolygonForSmallLinesTest extends TestCase {
 	    assertEquals(3,polygon.getPoints().size());
 	    FilterPolygonForSmallLines filterPolygonForSmallLines = new FilterPolygonForSmallLines();
 	    filterPolygonForSmallLines.setInput(polygon);
-	    Polygon polygonOut = filterPolygonForSmallLines.getCalcValue();
+	    Polygon polygonOut = filterPolygonForSmallLines.getValue();
 	    assertEquals(2,polygonOut.getPoints().size());
 	    assertNotSame(polygon, polygonOut);
 	    Polygon polygonImproved = polygon.improve();

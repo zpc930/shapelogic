@@ -22,11 +22,11 @@ public class PolygonEndPointAdjusterTest extends TestCase {
 		multiLinePolygon.addAfterEnd(bottomPoint2);
 		multiLinePolygon.addAfterEnd(bottomPoint3);
 		multiLinePolygon.endMultiLine();
-		multiLinePolygon.getCalcValue(); //Causes a call to calc
+		multiLinePolygon.getValue(); //Causes a call to calc
 		assertEquals(4,multiLinePolygon.getPoints().size());
 		assertEquals(3,multiLinePolygon.getLines().size());
 		PolygonEndPointAdjuster clusterAdjuster = new PolygonEndPointAdjuster(multiLinePolygon);
-		MultiLinePolygon clusteredPolygon = (MultiLinePolygon) clusterAdjuster.getCalcValue();
+		MultiLinePolygon clusteredPolygon = (MultiLinePolygon) clusterAdjuster.getValue();
 		assertNotSame(multiLinePolygon, clusteredPolygon);
 		assertEquals(3,clusteredPolygon.getPoints().size());
 		assertEquals(2,clusteredPolygon.getLines().size());
