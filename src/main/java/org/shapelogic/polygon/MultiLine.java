@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.shapelogic.calculation.LazyCalc;
+import org.shapelogic.calculation.CalcInvoke;
 import org.shapelogic.util.LineType;
 
 
@@ -23,7 +23,7 @@ import org.shapelogic.util.LineType;
  *
  */
 public class MultiLine extends BaseAnnotatedShape 
-	implements ILine2D, LazyCalc<MultiLine>, PointReplacable<MultiLine>, AnnotatedShape 
+	implements ILine2D, CalcInvoke<MultiLine>, PointReplacable<MultiLine>, AnnotatedShape 
 {
 	/** UNKNOWN means not tested for round, but treat as a multi line
 	 * NOT_ROUND means that it is tested for any of the round categories and it is not, treat it as a multi line
@@ -177,14 +177,14 @@ public class MultiLine extends BaseAnnotatedShape
 	}
 
 	@Override
-	public MultiLine getCalcValue() {
+	public MultiLine getValue() {
 		if (_dirty)
 			calc();
 		return this;
 	}
 
 	public BBox getBBox() {
-		getCalcValue();
+		getValue();
 		return _bBox;
 	}
 

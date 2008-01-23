@@ -103,7 +103,7 @@ public class MultiLineDirectionAnnotator implements ObjectAnnotator<Polygon> {
 	}
 
 	@Override
-	public Polygon getCalcValue() {
+	public Polygon getValue() {
 		if (isDirty())
 			calc();
 		return _polygon;

@@ -56,7 +56,7 @@ public class PolygonAnnotator implements ObjectAnnotator<Polygon> {
 
 
 	@Override
-	public Polygon getCalcValue() {
+	public Polygon getValue() {
 		if (isDirty())
 			calc();
 		return _polygon;
