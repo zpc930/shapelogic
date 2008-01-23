@@ -35,4 +35,6 @@ public class Constants {
 	//A more general task that can create all the other tasks, by taking 2 parameters
 	public static final String PARAMETRIC_RULE_TASK = "ParametricRuleTask";
 	public static final double TOLERANCE = 0.0001;
+
+	public final static int LAST_UNKNOWN = -2;
 }
