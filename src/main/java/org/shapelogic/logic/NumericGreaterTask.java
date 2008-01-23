@@ -18,10 +18,10 @@ public class NumericGreaterTask extends SimpleTask {
 
 	@Override
 	public boolean match() {
-		if (_calcValue == null)
+		if (_value == null)
 			return false;
 		Number excectedValue = (Number) _expected;
-		Number expressionValue = (Number) _calcValue;
+		Number expressionValue = (Number) _value;
 		return excectedValue.doubleValue() < expressionValue.doubleValue();
 	}
 }

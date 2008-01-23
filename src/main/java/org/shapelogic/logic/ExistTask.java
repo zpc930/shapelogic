@@ -15,14 +15,14 @@ public class ExistTask<T> extends BaseTask<T> {
 	
 	@Override
 	public boolean match() {
-		_calcValue = (T) findNamedValue(_nameInContext);
-		if (_calcValue == null)
+		_value = (T) findNamedValue(_nameInContext);
+		if (_value == null)
 			return false;
 		return true;
 	}
 	
 	@Override
 	public void postCalc() {
-		setNamedValue(_nameInContext, _calcValue);
+		setNamedValue(_nameInContext, _value);
 	}
 }

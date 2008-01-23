@@ -17,10 +17,10 @@ public class SimpleNumericTask extends SimpleTask {
 	public boolean match() {
 		if (super.match())
 			return true;
-		else if (_calcValue == null)
+		else if (_value == null)
 			return false;
 		Number excectedValue = (Number) _expected;
-		Number expressionValue = (Number) _calcValue;
+		Number expressionValue = (Number) _value;
 		return Math.abs(excectedValue.doubleValue() - expressionValue.doubleValue()) < Constants.TOLERANCE;
 	}
 }

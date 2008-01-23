@@ -24,9 +24,9 @@ public class CountCollectionTask extends SimpleTask {
 		double excectedValueDouble = excectedValue.doubleValue();
 		if (super.match())
 			return true;
-		else if (_calcValue == null)
+		else if (_value == null)
 			return Math.abs(excectedValueDouble) < TOLERANCE;
-		Collection collection = (Collection) _calcValue;
+		Collection collection = (Collection) _value;
 		int expressionValue = collection.size();
 		return Math.abs(excectedValueDouble - expressionValue) < TOLERANCE;
 	}

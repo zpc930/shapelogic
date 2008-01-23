@@ -20,12 +20,12 @@ public class XOrTask extends BaseTask<String> {
 	@Override
 	public String mainCalc() {
 		_currentChildTaskNo = 0;
-		_calcValue = null;
+		_value = null;
 		while (getChildCount() > 0) {
 			Object currentResult = this.calcNextSubTask(); 
 			if (currentResult != null) {
 				if (currentResult!= null)
-					_calcValue = currentResult.toString();
+					_value = currentResult.toString();
 				if (_succededSubTasksCount > 1) {
 					break;
 				}
@@ -36,9 +36,9 @@ public class XOrTask extends BaseTask<String> {
 		}
 		else {
 			_state = LogicState.FailedDone;
-			_calcValue = null;
+			_value = null;
 		}
-		return _calcValue;
+		return _value;
 	} 
 
 

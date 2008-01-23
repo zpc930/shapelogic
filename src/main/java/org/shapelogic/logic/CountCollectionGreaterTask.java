@@ -23,8 +23,8 @@ public class CountCollectionGreaterTask extends SimpleTask {
 		Number excectedValue = (Number) _expected;
 		double excectedValueDouble = excectedValue.doubleValue();
 		int expressionValue = 0;
-		if (_calcValue != null) {
-			Collection collection = (Collection) _calcValue;
+		if (_value != null) {
+			Collection collection = (Collection) _value;
 			expressionValue = collection.size();
 		}
 		return excectedValueDouble < expressionValue;
