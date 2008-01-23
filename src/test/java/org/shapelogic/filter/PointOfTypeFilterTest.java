@@ -47,7 +47,7 @@ public class PointOfTypeFilterTest extends AbstractFilterTests {
 		NumericRule nr = new NumericRule(ruleName, CommonLogicExpressions.T_JUNCTION_POINT_COUNT, 
 				POLYGON, CommonLogicExpressions.T_JUNCTION_POINT_COUNT_EX, 0.,Constants.FILTER_COUNT_GREATER_TASK);
 		BaseTask testTask = nr.makeTask(rootTask);
-		Object matchResult = testTask.getCalcValue();
+		Object matchResult = testTask.getValue();
 		assertEquals(1,matchResult);
 		assertEquals(LogicState.SucceededDone, testTask.getState());
 	} 
