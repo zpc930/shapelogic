@@ -38,7 +38,7 @@ ShapeLogic
   The current ShapeLogic working example demonstrates capital letter matching.  
   Future, differing, examples to come.
 
-*  Features
+* Features
 
   * Declarative goal driven logic engine with lazy computations
   
@@ -46,6 +46,11 @@ ShapeLogic
   
   * The user can store rules in either a flat file or database, decreasing user 
   reliance on Java programming
+  
+  * User rules are written with the Java 6 Scripting interface JSR 223, 
+  {{{http://groovy.codehaus.org}Groovy}}, 
+  {{{http://jruby.codehaus.org}JRuby}}, 
+  {{{http://www.mozilla.org/rhino}JavaScript}} have been tested 
   
   * Implementation of 2D geometry primitives, vectorization and segmentation
   
@@ -95,7 +100,9 @@ ShapeLogic
 
   * The API is still under development.
 
-  * ShapeLogic v 0.8 consists of around 16,000 lines of Java code including 190 unit tests.
+  * The framework for declarative and functional programming is being developed.
+
+  * ShapeLogic currently consists of 19,000 lines of Java code including 250 unit tests.
 
   []
 
@@ -134,13 +141,25 @@ ShapeLogic
   The focus will still be on image processing and computer vision, but the 
   system will be more broadly applicable.
   
-  * Better integration of external user defined rule databases
+  * Introduce new functional, declarative and query constructs
   
-  * Possibly move expression language from JEXL to 
-  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}Java 6 Scripting}}
-
   * Implement lazy data streams like {{{http://www.scala-lang.org} Scala}} or Scheme
 
+  * Test streams by solving the first 10 {{{project-euler.html}mathematical problems}} from {{{http://projecteuler.net}Project Euler}}. 
+  
+  * Enable 
+  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}Java 6 Scripting}}
+  for evaluating expressions. Test with Groovy, JRuby, JavaScript
+
+  []
+
+** ShapeLogic v 1.0 future release
+
+  When the declarative and functional constructs have been tested in pure form,
+  move the current image processing and vision code to use these.
+  
+  * Better integration of external user defined rule databases
+  
   * Make the annotation of shapes more loosely coupled
 
   * Use Or tasks
@@ -149,7 +168,17 @@ ShapeLogic
 
   []
 
-** Next example
+** Next examples
 
-  The next example application for ShapeLogic will be 
-  medical image processing.
+  The next example applications for ShapeLogic will be 
+  
+  [[1]] Solve some {{{project-euler.html}mathematical problems}} from 
+  {{{http://projecteuler.net}Project Euler}}. 
+  It is a list of 178, mathematical problems, that can be solved by computers.
+  They vary in complexity from simple to hard.
+  The goal is to test ShapeLogic's new declarative and functional constructs on real 
+  problems and make sure they are terse and intuitive.
+  
+  [[1]] Medical image processing
+  
+  []
