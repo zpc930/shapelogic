@@ -25,16 +25,16 @@ public class BooleanTask extends BaseTask {
 	/** Can be overridden
 	 */
 	public boolean match() {
-		if (_calcValue == null)
+		if (_value == null)
 			return false;
-		return Boolean.TRUE.equals(_calcValue);
+		return Boolean.TRUE.equals(_value);
 	}
 
 	public void setup() {
 		Expression e;
 		try {
 			e = ExpressionFactory.createExpression( _expression );
-			_calcValue = e.evaluate(getContext());
+			_value = e.evaluate(getContext());
 		} catch (Exception e1) {
 			System.out.println("Error expression could not be evaluated: " +_expression);
 			e1.printStackTrace();

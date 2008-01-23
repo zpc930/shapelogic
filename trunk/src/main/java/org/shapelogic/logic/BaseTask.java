@@ -46,7 +46,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	protected HashMapContext _localContext;
 	protected Module _localModule;
 	protected Injector _injector;
-	protected T _calcValue;
+	protected T _value;
 	private String _name;
 	protected LogicState _lastSubTaskState;
 	protected int _succededSubTasksCount = 0;
@@ -171,9 +171,9 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	@Override
 	public T calc() {
 		preCalc();
-		_calcValue = mainCalc();
+		_value = mainCalc();
 		postCalc();
-		return _calcValue;
+		return _value;
 	}
 
 	public Task getParentTask() {
@@ -191,7 +191,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	/** This should normally be overridden */
 	public T mainCalc() {
 		if (!isDirty())
-			return _calcValue;
+			return _value;
 		try {
 			setup();
 			if (match()) {
@@ -206,7 +206,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 			_state = LogicState.FailedDone;
 			doPrintOnFail();
 		}
-		return _calcValue; 
+		return _value; 
 	}
 	/** match() should be seen like a unify that can also try to set fields
 	 * So this can be overridden */
@@ -324,7 +324,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 		if (task == null)
 			return null;
 //		add((BaseTask)task); // To add it to the task tree
-		value = task.getCalcValue();
+		value = task.getValue();
 		return value;
 	}
 	
@@ -391,10 +391,10 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	}
 
 	@Override
-	public T getCalcValue() {
+	public T getValue() {
 		if (isDirty())
 			calc();
-		return _calcValue;
+		return _value;
 	}
 
 	@Override

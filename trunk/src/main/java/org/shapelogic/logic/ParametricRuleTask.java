@@ -24,7 +24,7 @@ public class ParametricRuleTask extends SimpleTask {
 
 	@Override
 	public boolean match() {
-		return _binaryPredicate.evaluate(_calcValue, _expected);
+		return _binaryPredicate.evaluate(_value, _expected);
 	}
 	
 	/** Transform an expression and a variable to an expression where the 

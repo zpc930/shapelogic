@@ -21,22 +21,22 @@ public class CalcAndSetTask<T> extends BaseTask<T> {
 	
 	@Override
 	public boolean match() {
-		_calcValue = (T) findNamedValue(_nameInContext);
-		if (_calcValue != null)
+		_value = (T) findNamedValue(_nameInContext);
+		if (_value != null)
 			return true;
 		if (_expression instanceof String ) {
 			Expression e;
 			try {
 				e = ExpressionFactory.createExpression( (String)_expression );
-				_calcValue = (T) e.evaluate(getContext());
+				_value = (T) e.evaluate(getContext());
 			} catch (Exception e1) {
 				e1.printStackTrace();
-				_calcValue = (T)_expression; 
+				_value = (T)_expression; 
 			}
 		}
 		else
-			_calcValue = (T)_expression;
-		setNamedValue(_nameInContext, _calcValue);
-		return _calcValue != null;
+			_value = (T)_expression;
+		setNamedValue(_nameInContext, _value);
+		return _value != null;
 	}
 }

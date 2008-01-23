@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.tree.TreeNode;
 
 import org.apache.commons.jexl.JexlContext;
+import org.shapelogic.calculation.CalcInvoke;
 import org.shapelogic.calculation.LazyCalc;
 
 import com.google.inject.Injector;
@@ -17,7 +18,7 @@ import com.google.inject.Module;
  * @author Sami Badawi
  *
  */
-public interface Task<T> extends TreeNode, JexlContext, LazyCalc<T>, Iterable<Module> {
+public interface Task<T> extends TreeNode, JexlContext, CalcInvoke<T>, Iterable<Module> {
 
 	//State
 	LogicState getState();
@@ -63,7 +64,7 @@ public interface Task<T> extends TreeNode, JexlContext, LazyCalc<T>, Iterable<Mo
 	Task getNamedTask(String name);
 //	Iterator<Task> getNamedTaskIterator(String name);
 	void setNamedTask(String name, Task task);
-	T getCalcValue();
+	T getValue();
 	String getName();
 	void setName(String name);
 	LogicState getLastSubTaskState();
