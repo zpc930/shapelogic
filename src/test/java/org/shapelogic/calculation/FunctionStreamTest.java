@@ -4,9 +4,14 @@ package org.shapelogic.calculation;
  * 
  * Requires Groovy to be installed. Need special installation.
  * 
+ * This version of Stream has been replaced with with Streams in package 
+ * streams, use them instead.
+ * TODO This should be deleted before release of ShapeLogic 0.9 
+ * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class FunctionStreamTest extends AbstractStreamTests {
 
 	public void setUp() throws Exception {

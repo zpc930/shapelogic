@@ -1,13 +1,18 @@
 package org.shapelogic.calculation;
 
 
-/** Test of FunctionStream.
+/** Test of FunctionStream.<br />
  * 
- * Requires Groovy to be installed. Need special installation.
+ * JavaScript is the only scripting language that is pre installed in Java 6. <br />  
+ * <br />
+ * This version of Stream has been replaced with with Streams in package 
+ * streams, use them instead.
+ * TODO This should be deleted before release of ShapeLogic 0.9 
  * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class FunctionJavaScriptStreamTest extends AbstractStreamTests {
 
 	public void setUp() throws Exception {

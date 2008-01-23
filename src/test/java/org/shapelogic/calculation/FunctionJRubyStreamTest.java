@@ -3,11 +3,17 @@ package org.shapelogic.calculation;
 
 /** Test of FunctionStream.
  * 
- * Requires Groovy to be installed. Need special installation.
+ * Requires JRuby to be installed. Need special installation.<br />
+ * 
+ * <br />
+ * This version of Stream has been replaced with with Streams in package 
+ * streams, use them instead.
+ * TODO This should be deleted before release of ShapeLogic 0.9 
  * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class FunctionJRubyStreamTest extends AbstractStreamTests {
 
 	public void setUp() throws Exception {
