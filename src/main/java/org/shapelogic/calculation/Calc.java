@@ -6,11 +6,10 @@ package org.shapelogic.calculation;
  *
  */
 public interface Calc <T> {
-	T calc(); //For now there is just one eager executer
-	
-	/** If dirty do calc() else return cached value.
+	/** Starts a lazy calculation.
+	 * If dirty do calc() else return cached value.
 	 * 
 	 *  This should maybe be moved up in the hierarchy
 	 */
-	T getCalcValue();
+	T getValue();
 }
