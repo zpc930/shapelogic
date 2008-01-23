@@ -26,7 +26,7 @@ import org.shapelogic.polygon.ObjectAnnotator;
  */
 public class CircleFinder implements ObjectAnnotator<MultiLine> {
 	private boolean _annotationsFound;
-	private MultiLine _calcValue;
+	private MultiLine _value;
 	private boolean _dirty = true;
 	
 	public CircleFinder() {
@@ -34,7 +34,7 @@ public class CircleFinder implements ObjectAnnotator<MultiLine> {
 	}
 
 	public CircleFinder(MultiLine input) {
-		_calcValue = input;
+		_value = input;
 	}
 	
 	/** For this no state is needed, so this does not build the state
@@ -73,7 +73,7 @@ public class CircleFinder implements ObjectAnnotator<MultiLine> {
 
 	@Override
 	public MultiLine getInput() {
-		return _calcValue;
+		return _value;
 	}
 
 	@Override
@@ -84,34 +84,34 @@ public class CircleFinder implements ObjectAnnotator<MultiLine> {
 
 	@Override
 	public void setup() {
-		_calcValue = null;
+		_value = null;
 		_annotationsFound = false;
 		_dirty = true;
 	}
 
 	@Override
 	public MultiLine calc() {
-		_annotationsFound = findAnnotations(_calcValue);
+		_annotationsFound = findAnnotations(_value);
 		_dirty = false;
-		return _calcValue;
+		return _value;
 	}
 
 	@Override
-	public MultiLine getCalcValue() {
+	public MultiLine getValue() {
 		if (isDirty())
 			calc();
-		return _calcValue;
+		return _value;
 	}
 
 	@Override
 	public boolean isAnnotationsFound() {
-		getCalcValue();
+		getValue();
 		return _annotationsFound;
 	}
 
 	@Override
 	public void setInput(MultiLine input) {
-		_calcValue = input;
+		_value = input;
 	}
 
 }
