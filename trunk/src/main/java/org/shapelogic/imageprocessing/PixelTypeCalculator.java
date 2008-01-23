@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import org.shapelogic.calculation.LazyCalc;
+import org.shapelogic.calculation.CalcInvoke;
 import org.shapelogic.util.Constants;
 
 /** PixelTypeCalculator stores some values for points and 
@@ -9,7 +9,7 @@ import org.shapelogic.util.Constants;
  * @author Sami Badawi
  *
  */
-public class PixelTypeCalculator implements LazyCalc<PixelType> 
+public class PixelTypeCalculator implements CalcInvoke<PixelType> 
 {
 	int neighbors;
 	int unusedNeighbors;
@@ -31,7 +31,7 @@ public class PixelTypeCalculator implements LazyCalc<PixelType>
 	boolean _dirty = true;
 	
 	PixelType getPixelType(){
-		return getCalcValue();
+		return getValue();
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class PixelTypeCalculator implements LazyCalc<PixelType>
 	}
 
 	@Override
-	public PixelType getCalcValue() {
+	public PixelType getValue() {
 		if (isDirty())
 			calc();
 		return pixelType;

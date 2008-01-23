@@ -245,7 +245,7 @@ public class MaxDistanceVectorizer extends BaseVectorizer {
 
 	@Override
 	protected void findMultiLinePostProcess() {
-		_chainCodeHandler.getCalcValue();
+		_chainCodeHandler.getValue();
 		super.findMultiLinePostProcess();
 	}
 }

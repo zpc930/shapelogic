@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import org.shapelogic.calculation.LazyCalc;
+import org.shapelogic.calculation.CalcInvoke;
 import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.BBox;
 import org.shapelogic.polygon.BaseAnnotatedShape;
@@ -28,7 +28,7 @@ import static org.shapelogic.polygon.Calculator2D.oppositeDirection;
  * 
  * @author Sami Badawi
  */
-public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<MultiLine>
+public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<MultiLine>
 {
 	protected static final int CHAIN_CODE_FOR_MULTI_LINE_MAX_LENGTH = 10000;
 	protected static final int SHORT_LINE_LENGTH = 3;
@@ -109,7 +109,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 	}
 
 	@Override
-	public MultiLine getCalcValue() {
+	public MultiLine getValue() {
 		if (isDirty())
 			calc();
 		return _multiLine;
@@ -322,7 +322,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements LazyCalc<Mul
 				CLine currentLine = CLine.makeUnordered(currentPoint, lastPoint);
 				LineProperties currentLineProperties = _linePropertiesList.get(i);
 				if (currentLineProperties != null) {
-					Set<LineType> lineTypes = currentLineProperties.getCalcValue();
+					Set<LineType> lineTypes = currentLineProperties.getValue();
 					getAnnotatedShape().putAllAnnotation(currentLine, lineTypes);
 				}
 			}

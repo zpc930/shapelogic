@@ -119,7 +119,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		RootTask rootTask = RootTask.getInstance();
 		rootTask.setNamedValue(RAW_POLYGON, getPolygon());
 		PolygonEndPointAdjuster adjuster = new PolygonEndPointAdjuster(getPolygon());
-		_cleanedupPolygon = adjuster.getCalcValue();
+		_cleanedupPolygon = adjuster.getValue();
 		_cleanedupPolygon = _cleanedupPolygon.improve(); 
 		rootTask.setNamedValue(POLYGON, _cleanedupPolygon);
 		List<NumericRule> rulesList = Arrays.asList(_rulesArrayForLetterMatching);
@@ -312,7 +312,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 	}
 
 	public Collection<IPoint2D> getPoints() {
-		getPolygon().getCalcValue();
+		getPolygon().getValue();
 		return getPolygon().getPoints();
 	}
 

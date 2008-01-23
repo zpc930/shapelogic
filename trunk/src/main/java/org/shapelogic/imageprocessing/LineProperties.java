@@ -3,7 +3,7 @@ package org.shapelogic.imageprocessing;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.shapelogic.calculation.LazyCalc;
+import org.shapelogic.calculation.CalcInvoke;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Calculator2D;
 import org.shapelogic.util.DoubleCalculations;
@@ -24,7 +24,7 @@ import org.shapelogic.util.LineType;
  * I do not think that this class is going be reused
  * 
  */
-public class LineProperties implements LazyCalc<Set<LineType> > {
+public class LineProperties implements CalcInvoke<Set<LineType> > {
 	public static int STRAIGHT_LIMIT = 50; //straight 
 	
 	public int pixelsWithPositiveDistance;
@@ -42,7 +42,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 	public double angle;
 	private boolean _dirty = true;
 	public LineType _lineType;
-	private Set<LineType> _calcValue = new HashSet<LineType>();
+	private Set<LineType> _value = new HashSet<LineType>();
 	public CPointInt startPoint;
 	public CPointInt relativeVector;
 	public CPointInt orthogonalVector; // orthogonal
@@ -75,19 +75,19 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 		preCalc();
 		calcLineType();
 		if (isConcaveArch()) {
-			_calcValue.add(LineType.CONCAVE_ARCH);
+			_value.add(LineType.CONCAVE_ARCH);
 		}
 		if (inflectionPoint) {
-			_calcValue.add(LineType.INFLECTION_POINT);
+			_value.add(LineType.INFLECTION_POINT);
 		}
-		return _calcValue;
+		return _value;
 	}
 
 	@Override
-	public Set<LineType> getCalcValue() {
+	public Set<LineType> getValue() {
 		if (isDirty())
 			calc();
-		return _calcValue;
+		return _value;
 	}
 	
 	/** The main LineType for a line there are 3 options: straight, arch, wave.
@@ -97,7 +97,7 @@ public class LineProperties implements LazyCalc<Set<LineType> > {
 		else if (isCurveArch()) _lineType = LineType.CURVE_ARCH;
 		else _lineType = LineType.WAVE;
 		_dirty = false;
-		_calcValue.add(_lineType);
+		_value.add(_lineType);
 		return _lineType;
 	}
 
