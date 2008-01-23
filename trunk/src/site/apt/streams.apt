@@ -11,18 +11,6 @@ Lazy Data Streams
   Lazy Data Streams is a mix between an iterator and a collection. 
   It can be expanded by lazy calculation of an extra member.
   
-* Example of Lazy Data Streams 
-  
-  An example would be a Lazy Data Streams to calculate all Fibonacci number.
-  
-  So this need a method to do the calculation that as input will take 
-  
-  * a number 
-  
-  * a reference to the Lazy Data Streams
-  
-  []
-  
 * History
 
   Lazy Data Streams are used in different functional languages e.g.
@@ -45,13 +33,13 @@ Lazy Data Streams
   
   [] 
   
-* Implemented interfaces
-
-  The lazy data streams in ShapeLogic need to implement the following interfaces
+* Example of Lazy Data Streams 
   
-  * Iterator
+  * Lazy Data Streams to calculate all Fibonacci number.
   
-  * List
+  * All even Fibonacci number.
+  
+  * All even Fibonacci number who's sum is less than 100.
   
   []
   
