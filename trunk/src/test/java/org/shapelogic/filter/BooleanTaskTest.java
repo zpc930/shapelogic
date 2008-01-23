@@ -32,7 +32,7 @@ public class BooleanTaskTest extends AbstractFilterTests {
 		NumericRule nr = new NumericRule(ruleName, CommonLogicExpressions.POINT_COUNT, 
 				null, POLYGON+"."+CommonLogicExpressions.POINT_COUNT_EX + ".size()==5", 0.,Constants.BOOLEAN_TASK);
 		BaseTask testTask = nr.makeTask(rootTask);
-		Object matchResult = testTask.getCalcValue();
+		Object matchResult = testTask.getValue();
 		assertEquals(true,matchResult);
 		assertEquals(LogicState.SucceededDone, testTask.getState());
 	} 
@@ -45,7 +45,7 @@ public class BooleanTaskTest extends AbstractFilterTests {
 		NumericRule nr = new NumericRule(ruleName, CommonLogicExpressions.POINT_COUNT, 
 				null, "size("+POLYGON+"."+CommonLogicExpressions.POINT_COUNT_EX + ")==5", 0.,Constants.BOOLEAN_TASK);
 		BaseTask testTask = nr.makeTask(rootTask);
-		Object matchResult = testTask.getCalcValue();
+		Object matchResult = testTask.getValue();
 		assertEquals(true,matchResult);
 		assertEquals(LogicState.SucceededDone, testTask.getState());
 	} 
