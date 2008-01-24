@@ -202,12 +202,9 @@ public class ProjectEuler1Test extends TestCase {
 		};
 		SumAccumulator sumOfSquares = new SumAccumulator(squaredStream);
 		SumAccumulator sumOfNumbers = new SumAccumulator(naturalNumberStream);
-		long sumOfNumbersValue = sumOfNumbers.getValue();
-		System.out.println(sumOfNumbersValue);
-		long sumOfSquaresValue = sumOfSquares.getValue();
-		System.out.println(sumOfSquaresValue);
-		long result = sumOfNumbersValue * sumOfNumbersValue - sumOfSquaresValue; 
+		long result = sumOfNumbers.getValue() * sumOfNumbers.getValue() - sumOfSquares.getValue(); 
 		System.out.println(result);
+		assertEquals(25164150L, result);
 	}
 	
 	/** Problem 7.
@@ -217,6 +214,7 @@ public class ProjectEuler1Test extends TestCase {
 		PrimeNumberStream primeNumberStream = new PrimeNumberStream();
 		long result = primeNumberStream.get(10000);
 		System.out.println(result);
+		assertEquals(104743L, result);
 	}
 	
 	/** Problem 8.
@@ -258,8 +256,7 @@ public class ProjectEuler1Test extends TestCase {
 		BaseListStream1<Integer, Integer> productStream = 
 			new BaseListStream1<Integer, Integer>(inputNumberStream,numberLength) {//XXX you should not need to set length
 				public Integer invoke(Integer input, int index) {
-					if (index<4)
-						return 0;
+					if (index<4) return 0;
 					int result = 1;
 					for (int i=index-4; i<=index;i++) {result*=getInput(i);};
 					return result;
@@ -267,6 +264,7 @@ public class ProjectEuler1Test extends TestCase {
 		};
 		MaxAccumulator maxAccu = new MaxAccumulator(productStream);
 		System.out.println(maxAccu.getValue());
+		assertEquals(new Integer(40824),maxAccu.getValue());
 	}
 	
 	/** Problem 9.
