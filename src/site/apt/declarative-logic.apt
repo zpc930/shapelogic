@@ -9,7 +9,8 @@ Declarative logic
 
   ShapeLogic has a declarative goal driven logic engine.
   
-  The syntax of the logic language is better described in {{{logic-language.html} Logic language}}. 
+  The syntax and development of the logic language is better described in 
+  {{{logic-language.html} Logic language}}. 
 
 * Influences
 
@@ -19,6 +20,10 @@ Declarative logic
 
   * Oz language
 
+  * Lazy streams
+  
+  * IoC, Inversion of Control
+  
   []
 
 Important ideas
@@ -168,3 +173,75 @@ Influences
 
   ShapeLogic merges contexts when faced with different options in a 
   similar way to Oz, though this is not fully implemented yet.
+
+* Lazy streams
+  
+  The idea is that you have definitions of a data stream, say: 
+  
+  * Natural numbers, 
+  
+  * Fibonacci numbres
+  
+  * Sequence of polygons in an image
+  
+  * Sequence of sequence of polygons in an image sequence
+  
+  []
+  
+  The definition does not cause anything to be calculated, but when the data is
+  needed it will be calculated. So it is a generalization of a lazy calculation.
+  
+  The streams in ShapeLogic are different than the streams in Haskell, Oz, 
+  Scheme and Scala. These are all based on data structures similar to a LISP list.
+  
+** Immutable stream in Java List 
+  
+  In ShapeLogic the streams are assumed to be immutable. The data is put in a 
+  normal Java List. 
+  
+*** The advantage of Java List 
+
+  * Faster access to data 
+
+  * Works better with Java
+  
+  [] 
+  
+*** Advantages of LISP list / disadvantage of Java List
+  
+  * In a LISP list sub lists are also lists
+  
+  * This enables elegant functional style recursive programming
+  
+  []
+  
+** Using streams for concurrent programming
+  
+  Streams can also support parallel or concurrent programming, which is important 
+  with the CPU intensive operations in image processing and computer vision. 
+  Especially with the advent of cheap multi processor machines. 
+  
+*** Example: Find polygons in a stack of images  
+
+  You define a lazy data stream for this and set a stream property 
+
+  randomAccess = true
+
+  This indicate that individual elements can be calculated independently. 
+  The factory creating the stream could create a parallel version of the stream 
+  and assign each operation its own thread.
+  
+  Note that the result would be a stream of polygons for each image.
+  
+* IoC, Inversion of Control
+  
+  There is an external definition that determine what type of objects should 
+  be created, and how they should be instantiated and create and instantiate 
+  all dependent object.
+  
+  Once the system become more complex this will probably be essential.
+   
+  The system is currently simple so now this would only add complexity, and is
+  not used yet.
+  
+   
