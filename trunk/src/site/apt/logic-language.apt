@@ -9,12 +9,81 @@
 Logic language
   
   The ShapeLogic logic system is not quite a language,    
-  but it has become more organized as of v. 0.8.
+  but it has become more organized with v. 0.8 and 0.9.
   
   This is work in progress, but are actively updated now.
 
   For a broader introduction to the logic system see {{{declarative-logic.html} Declarative logic}}. 
 
+Different types of declarative programming in ShapeLogic
+  
+  [[1]] Goal driven tasks, somewhat like Prolog without backtracking and unification
+  
+  [[1]] Lazy calculations
+  
+  [[1]] Lazy streams
+  
+  [[1]] IoC, Inversion of Control using Google Guise, not been started yet
+  
+  []
+  
+* Declarative programming in ShapeLogic 02. to 0.8 
+
+  * Goal driven task
+  
+  * AI choice tree integrated with tasks classes
+  
+  * Some use of lazy computations 
+  
+  * Rules were defined using JEXL
+  
+  * Rules where mainly defined in Java classes
+  
+  * Rules could be saved in a database, but this was not integrated with ImageJ
+  
+  []
+  
+  This was fine for handling simple rules applied to one polygon.
+  
+* New declarative programming concept in ShapeLogic 0.9 
+  
+  * Lazy computations was expanded 
+  
+  * Lazy streams was introduced
+  
+  * Lazy streams can use the Java 6 Scripting interface
+  
+  * Tested with Groovy, JRuby and JavaScript, but this is supporting 25 languages
+  
+  []
+  
+  IoC hold potential but has not been used yet.
+  
+* Plan for declarative programming in ShapeLogic 1.0
+  
+  * Integrate Goal driven task with lazy streams
+  
+  * Probably move rules defined using JEXL to rules defined in a scripting 
+  language of the user choice 
+  
+  * Make menu items in ImageJ's menu for opening a user defined database
+  
+  []
+  
+** Problem with Java 6 Scripting in ShapeLogic 1.0
+
+  One possible problem with moving rules to Java 6 Scripting, is that this 
+  requires that the user downloads engine interface files from Sun. This would
+  make the installation of ShapeLogic more complicated now it is just unpacking 
+  a zip and moving it into ImageJ's plugin dir.
+  
+  The only scripting language that works out of the box is JavaScript. 
+  While that is a reasonable language the integration with Java is not so great
+  especially not Java 5.
+  
+  It is also possible to connect Groovy and Java outside Java 6 Scripting, but 
+  then it would not be uniform.
+  
 Logic expressions can live in several places
 
   There are currently 3 main places where logic expressions can be placed:
