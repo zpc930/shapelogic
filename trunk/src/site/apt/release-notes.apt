@@ -11,16 +11,19 @@ Release notes for ShapeLogic
 * 2008/01/23 ShapeLogic v 0.9 released AKA Lazy stream
 
   This is the first release where ShapeLogic is moving beyond current 
-  parameters as a library for the letter match example.  
+  parameters as a plugin library for ImageJ, currently only used in a letter 
+  recognition example.
   The improved system will be for declarative programming where the user can 
   define rules in either a database or flat file. 
   The focus will still be on image processing and computer vision, but the 
   system will be more broadly applicable.
-  There have been no new work on image processing or letter matching in this release.
+  There has been no new work on image processing or letter recognition in this 
+  release. ShapeLogic v 1.0 will combine these new changes with the current 
+  rule base code for image processing.
   
   * Introduce new functional, declarative and query constructs
   
-  * Implement lazy streams like {{{http://www.scala-lang.org} Scala}} or Scheme
+  * Implement lazy streams like Haskell, {{{http://www.scala-lang.org} Scala}} or Scheme
 
   * These functional constructs are very lightweight and you only need one 
   200KB jar file to use it in other applications
@@ -30,8 +33,10 @@ Release notes for ShapeLogic
   
   * Enabled
   {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}Java 6 Scripting}}
-  for evaluating expressions. Tested with Groovy, JRuby, JavaScript, but should 
-  work with other supporting Scripting languages, currently that are 25 of these.
+  for evaluating expressions
+  
+  * Tested with Groovy, JRuby, JavaScript, but should 
+  work with other supported Scripting languages, currently that are 25 of these.
   This makes it possible for users to add rule, formulas and queries in real 
   time using text format. They can interact with a running Java application, 
   which can be useful in science, finance or web application.
