@@ -9,7 +9,17 @@
 Lazy Data Streams
   
   Lazy Data Streams is a mix between an iterator and a collection. 
-  It can be expanded by lazy calculation of an extra member.
+  A stream can be expanded by lazy calculation of an extra member.
+  
+  Streams are going to be a key component of the declarative programming engine 
+  in ShapeLogic. This should happen around ShapeLogic 1.0.
+  
+* Using streams to solve mathematical problems
+  
+  {{{http://projecteuler.net}Project Euler}} 
+  is a list of 178, mathematical problems, that can be solved by computers.
+  The first 10 {{{project-euler.html}mathematical problems}} have been solved 
+  in ShapeLogic using streams.
   
 * History
 
@@ -33,13 +43,13 @@ Lazy Data Streams
   
   [] 
   
-* Example of Lazy Data Streams 
+* Example of lazy infinite data streams 
   
-  * Lazy Data Streams to calculate all Fibonacci number.
+  * Lazy Data Streams to calculate all Fibonacci number
   
-  * All even Fibonacci number.
+  * All even Fibonacci number
   
-  * All even Fibonacci number who's sum is less than 100.
+  * All even Fibonacci number greater than 1000
   
   []
   
