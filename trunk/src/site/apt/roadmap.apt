@@ -13,29 +13,48 @@ Road map
   For more up to date information on ongoing development work look at this blog 
   {{{http://samibadawi.blogspot.com} Declarative Computer Vision}}.
 
-* ShapeLogic v 0.9 soon to be released
+* ShapeLogic v 1.0 soon to be released
 
-  * Better integration of external user defined rule databases
+  ShapeLogic v 0.9 introduced lazy streams a powerful declarative and 
+  functional constructs. It tested them in pure form, on mathematics problems.
+  All image processing and vision code still used goal driven logic.
   
-  * Possibly move expression language from JEXL to Java 6 Scripting
+  * Migrate rule databases for image processing. 
+  Currently they are implemented as goal driven tasks with sub tasks.
+  The new version will use the lazy streams that are simpler and more powerful.
+  
+  * When running ShapeLogic as an plugin for ImageJ add a menu item for loading
+  and running external rules in flat file or database format.
+  
+  * Enabled use of
+  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
+  Java 6 Scripting}}
+  for rule database, this should give the user access to the 25 scripting 
+  languages that are supported
 
-  * Use Or tasks
+  * Make the annotation of shapes more loosely coupled
 
-  * Finish Javadoc for ShapeLogic 
+  * Get ShapeLogic into beta stage
 
+  * Use Inversion of Control, to create object. IoC framework 
+  {{{http://code.google.com/p/google-guice}Google Guice}}
+  
   []
 
-** Possibly move expression language from JEXL to Java 6 Scripting 
+** Moving rule expression language from JEXL to Java 6 Scripting 
   
-  Currently the rules in ShapeLogic are parsed from strings {{{http://commons.apache.org/jexl}Apache Commons JEXL}} library.
+  Currently the rules in ShapeLogic are parsed from strings 
+  {{{http://commons.apache.org/jexl}Apache Commons JEXL}} library.
   
   So the letter A would have a rule saying:
 
   polygon.holeCount == 1
 
-  This is not trivial since a variable say polygon.holeCount could have different values in different contexts.
+  This is not trivial since a variable say polygon.holeCount could have 
+  different values in different contexts.
   
-  E.g. if there was a choice of 2 different thresholds levels, then in one part of the choice tree we could have
+  E.g. if there was a choice of 2 different thresholds levels, then in one 
+  part of the choice tree we could have
   
   polygon.holeCount == 1 and in another we could have
   
@@ -48,22 +67,21 @@ Road map
   handle static fields and methods.
   It might also be better to let the user chose what scripting language they want to use.
   
-  Currently there languages should be available for scripting: 
+  There are 25 scripting languages with varying levels of support available for scripting.
+  Here are some of more well known: 
   {{{http://www.mozilla.org/rhino/scriptjava.html}JavaScript}}, 
   {{{http://www.beanshell.org}BeanShell}}, 
   {{{http://www.jython.org}Jython}}, 
-  {{{http://groovy.codehaus.org}Groovy}} and 
-  {{{http://jruby.codehaus.org}JRuby}}.
+  {{{http://groovy.codehaus.org}Groovy}}, 
+  {{{http://jruby.codehaus.org}JRuby}} and
+  {{{http://commons.apache.org/jexl}Apache Commons JEXL}}.
 
   One issue is that you cannot just use variable binding in a global scripting context.
   In the example from above if the variable polygon.holeCount does not exist in 
   the top context, Java 6 Scripting has some means to handle this problem.
 
-  It is possible that there will be release of ShapeLogic 0.9 where you just 
-  can select another rule database stored in a flat file or a database, 
-  but using the current system, in order not to drag the next release out too long. 
-  This should allow the users to define rules for matching a separate alphabet, say the Greek.
-
+  ShapeLogic 1.0 where should come with a test rule database for a separate 
+  alphabet, say the Greek or the numbers.
 
 * Next ShapeLogic example application
 
