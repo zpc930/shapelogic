@@ -40,7 +40,7 @@ ShapeLogic
 
 * Features
 
-  * Declarative goal driven logic engine with lazy computations
+  * Declarative lazy stream driven logic engine with lazy computations
   
   * Specialized for the domain of image processing and computer vision
   
@@ -64,7 +64,8 @@ ShapeLogic
 
   * Programmed in Java
   
-  * Can be used as a plugin for ImageJ, the leading Java open source project used in medical image processing
+  * Can be used as a plugin for ImageJ, the leading Java open source project 
+  used in medical image processing
   
   []
 
@@ -155,19 +156,29 @@ ShapeLogic
 
 ** ShapeLogic v 1.0 soon to be released
 
-  When the declarative and functional constructs have been tested in pure form,
-  move the current image processing and vision code to use these.
+  ShapeLogic v 0.9 introduced lazy streams a powerful declarative and 
+  functional constructs. It tested them in pure form, on mathematics problems.
+  All image processing and vision code still used goal driven logic.
   
-  * Integrate new functional and declarative construct with current goal driven 
-  logic used for image processing
+  * Migrate rule databases for image processing. 
+  Currently they are implemented as goal driven tasks with sub tasks.
+  The new version will use the lazy streams that are simpler and more powerful.
   
-  * Better integration of external user defined rule databases
+  * When running ShapeLogic as an plugin for ImageJ add a menu item for loading
+  and running external rules in flat file or database format.
   
+  * Enabled use of
+  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
+  Java 6 Scripting}}
+  for rule database, this should give the user access to the 25 scripting 
+  languages that are supported
+
   * Make the annotation of shapes more loosely coupled
 
-  * Use Or tasks
+  * Get ShapeLogic into beta stage
 
-  * Finish Javadoc for ShapeLogic 
+  * Use Inversion of Control, to create object. IoC framework 
+  {{{http://code.google.com/p/google-guice}Google Guice}}
 
   []
 
