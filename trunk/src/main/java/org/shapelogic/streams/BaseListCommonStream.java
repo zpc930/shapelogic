@@ -5,6 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.shapelogic.calculation.ContextGettable;
+import org.shapelogic.calculation.IQueryCalc;
+import org.shapelogic.calculation.InContexts;
+import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.util.Constants;
 
 import static org.shapelogic.util.Constants.LAST_UNKNOWN;
@@ -36,7 +40,8 @@ import static org.shapelogic.util.Constants.LAST_UNKNOWN;
  * @author Sami Badawi
  *
  */
-abstract public class BaseListCommonStream<E> implements ListStream<E>, StreamProperties {
+abstract public class BaseListCommonStream<E> 
+implements ListStream<E>, StreamProperties, ContextGettable {
 	protected List<E> _list = new ArrayList<E>();
 	
 	/** The last value that was calculated and looked at
@@ -60,6 +65,10 @@ abstract public class BaseListCommonStream<E> implements ListStream<E>, StreamPr
 	protected boolean _dirty = true;
 	
 	protected E _value = null;
+	
+	protected Map[] _contexts;
+
+	protected IQueryCalc _query;
 
 	/** Calculate the next value
 	 * 
@@ -247,5 +256,16 @@ abstract public class BaseListCommonStream<E> implements ListStream<E>, StreamPr
 	public Iterator<E> iterator() {
 		return this; //XXX works
 		//return _list.iterator();//XXX lazy init does not work
+	}
+
+	@Override
+	public Map[] getContexts() {
+		return _contexts;
+	}
+
+	public Object getInContext(Object key){
+		if (_query == null)
+			_query = new QueryCalc();
+		return _query.get(key, _contexts);
 	}
 }
