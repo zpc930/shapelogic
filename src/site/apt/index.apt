@@ -103,7 +103,7 @@ ShapeLogic
 
   * The framework for declarative and functional programming is being developed.
 
-  * ShapeLogic currently consists of 19,000 lines of Java code including 250 unit tests.
+  * ShapeLogic currently consists of 20,000 lines of Java code including 270 unit tests.
 
   []
 
@@ -157,7 +157,7 @@ ShapeLogic
 ** ShapeLogic v 1.0 soon to be released
 
   ShapeLogic v 0.9 introduced lazy streams a powerful declarative and 
-  functional constructs. It tested them in pure form, on mathematics problems.
+  functional construct. It tested them in pure form, on mathematics problems.
   All image processing and vision code still used goal driven logic.
   
   * Migrate rule databases for image processing. 
