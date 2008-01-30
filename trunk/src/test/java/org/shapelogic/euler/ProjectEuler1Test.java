@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import org.shapelogic.calculation.Accumulator;
 import org.shapelogic.calculation.BaseAccumulator;
 import org.shapelogic.calculation.AdvanceWhile;
+import org.shapelogic.mathematics.ArrayOperations;
 import org.shapelogic.mathematics.MaxAccumulator;
 import org.shapelogic.mathematics.NaturalNumberStream;
 import org.shapelogic.mathematics.PrimeNumberStream;
@@ -129,14 +130,6 @@ public class ProjectEuler1Test extends TestCase {
 		return product;
 	}
 	
-	static public long product(int[] numberArray) {
-		long product = 1;
-		for (int element: numberArray) {
-			product *= element;
-		}
-		return product;
-	}
-
 	/** Number of this the divisor is dividable into the input.
 	 * 
 	 * @param input number to test
@@ -294,8 +287,8 @@ public class ProjectEuler1Test extends TestCase {
 			public boolean evaluate(int[] object) {return EMPTY_ARRAY != object;}
 		};
 		int[] result = filter.next();
-		long resultNumber = product(result);
-		System.out.println("result: "+ product(result));
+		long resultNumber = ArrayOperations.product(result);
+		System.out.println("result: "+ ArrayOperations.product(result));
 		System.out.println("a: " + result[0] + ", b: " + result[1] + ", c: " + result[2]);
 		assertEquals(31875000L,resultNumber);
 	}
