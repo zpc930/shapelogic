@@ -10,20 +10,20 @@ Declarative logic
   ShapeLogic has a declarative goal driven logic engine.
   
   The syntax and development of the logic language is better described in 
-  {{{logic-language.html} Logic language}}. 
+  {{{logic-language.html} Logic language}}.
 
 * Influences
 
-  * Prolog language
-
-  * AI choice tree
-
-  * Oz language
-
   * Lazy streams
   
+  * AI choice tree
+
   * IoC, Inversion of Control
   
+  * Oz language
+
+  * Prolog language
+
   []
 
 Important ideas
@@ -116,7 +116,7 @@ POINT_COUNT_EX = "polygon.getPoints().size()"
 "polygon.filter('PointOfTypeFilter(PointType.T_JUNCTION) && PointLeftOfFilter(0.5)').size()"
 +------------------------------------------+
 
-These will filter:
+  These will filter:
 
   * Points that are in in the right 30% and top 30% of the bounding box for the polygon.
 
@@ -137,19 +137,26 @@ These will filter:
 Influences
 
 * Prolog
-
+  
+  Up till ShapeLogic v 0.9 goal driven tasks with subtasks was a corner stone in 
+  the logic for image processing. Starting in ShapeLogic v 1.0 this is getting 
+  replace by a lazy stream based approach that is simpler and more powerful.
+  
 ** Prolog history
 
-  Prolog was all the rage in the early 1980s, the Japanese 5 generation project was mainly based on Prolog. It 
-  turned out that it did not scale well to real world problems, partly because it was only good at handling 
+  Prolog was all the rage in the early 1980s, the Japanese 5 generation project 
+  was mainly based on Prolog. It turned out that it did not scale well to real 
+  world problems, partly because it was only good at handling 
   symbolic information and not doing computations, and Prolog fell out of favor.
 
   Despite this, I still think programming in Prolog is almost as simple as SQL.
 
-  ShapeLogic is trying to preserve this simplicity of Prolog, while maintaining ability to do efficient numerical calculations.
+  ShapeLogic is trying to preserve this simplicity of Prolog, while maintaining 
+  ability to do efficient numerical calculations.
 
-  ShapeLogic is not using backtracking or unification, 2 of the main components in Prolog, but shares the idea of
-  programming as goals and tasks with sub goals or horn clauses
+  ShapeLogic is not using backtracking or unification, 2 of the main components 
+  in Prolog, but shares the idea of programming as goals and tasks with sub 
+  goals or horn clauses
 
 * AI choice tree
 
@@ -227,7 +234,7 @@ Influences
 
   randomAccess = true
 
-  This indicate that individual elements can be calculated independently. 
+  This indicates that individual elements can be calculated independently. 
   The factory creating the stream could create a parallel version of the stream 
   and assign each operation its own thread.
   
