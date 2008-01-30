@@ -1,5 +1,7 @@
 package org.shapelogic.streams;
 
+import org.shapelogic.predicate.Predicate;
+
 /** FilterStream is the simplest filter Stream.
  * 
  * @author Sami Badawi
@@ -8,6 +10,5 @@ package org.shapelogic.streams;
  *
  * @param <E> Input and Output are the same
  */
-public interface FilterStream<E> extends Stream<E> {
-	boolean evaluate(E object); 
+public interface FilterStream<E> extends Stream<E>, Predicate<E> {
 }

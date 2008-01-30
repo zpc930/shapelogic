@@ -1,5 +1,7 @@
 package org.shapelogic.streams;
 
+import static org.shapelogic.util.Constants.LAST_UNKNOWN;
+
 
 /** This is the abstract class to override to make a ListFilterStream.
  * 
@@ -36,5 +38,26 @@ abstract public class BaseListFilterStream<E> extends BaseListStream1<E,E> imple
 	
 	public boolean hasNext() {
 		return _inputStream.hasNext(); //XXX not right fix
+	}
+	
+	@Override
+	public E get(int arg0) {
+		if ( _last != LAST_UNKNOWN && _last < arg0)
+			return null;
+		if (arg0 >= _list.size()) {
+			for (int i = _list.size(); i <= arg0; i++) {
+				if (hasNext()) {
+					E element = next();
+					if (element != null)
+						_list.add(element);
+				}
+				else {
+					_last = i - 1;
+					_dirty = false;
+					return null;
+				}
+			}
+		}
+		return _list.get(arg0);
 	}
 }

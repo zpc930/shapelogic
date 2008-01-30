@@ -3,7 +3,7 @@ package org.shapelogic.streams;
 import java.util.Iterator;
 
 import org.shapelogic.calculation.IndexTransform;
-import org.shapelogic.scripting.FunctionTransform;
+import org.shapelogic.scripting.FunctionIndexTransform;
 
 /** StreamFactory is a factory for Streams.
  * 
@@ -38,8 +38,19 @@ public class StreamFactory {
 		return result;
 	}
 
+	/** Create stream based on a function.
+	 * 
+	 * @param <In> is not used now maybe I should change the type
+	 * @param <E> Element type
+	 * @param name of the stream
+	 * @param expression in Scripting language of values stream
+	 * @param language Scripting language by name, Groovy is the default
+	 * @param stopNumber length of this stream
+	 * @param startList elements to add to stream at the beginning
+	 * @return
+	 */
 	static public <In,E> ListStream<E> createListStream(String name, String expression , String language, Integer stopNumber, E ... startList){
-		FunctionTransform<In, E> transformer = new FunctionTransform<In, E>(name, expression, language); 
+		FunctionIndexTransform<In, E> transformer = new FunctionIndexTransform<In, E>(name, expression, language); 
 		ListStream<E> result = new TransformerListStream<In, E>(transformer);
 		if (stopNumber != null)
 			result.setMaxLast(stopNumber);
