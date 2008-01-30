@@ -11,7 +11,8 @@ import junit.framework.TestCase;
  *
  */
 public class BaseListFilterStreamTest extends TestCase {
-	public void test() {
+	
+	BaseListFilterStream<Integer> createEvenNaturalNumberStream() {
 		final NaturalNumberStream naturalNumberStream = new NaturalNumberStream(2);
 		BaseListFilterStream<Integer> evenFilter = new BaseListFilterStream<Integer>(naturalNumberStream) {
 			@Override
@@ -19,9 +20,20 @@ public class BaseListFilterStreamTest extends TestCase {
 				return object % 2 == 0;
 			}
 		};
-		assertNotNull(naturalNumberStream);
+		return evenFilter;
+	}
+
+	public void testEvenNaturalNumberStream() {
+		BaseListFilterStream<Integer> evenFilter = createEvenNaturalNumberStream();
 		assertEquals(new Integer(0),evenFilter.next());
 		assertEquals(new Integer(2),evenFilter.next());
-		assertNull(naturalNumberStream.next());
+		assertNull(evenFilter.next());
+	}
+
+	public void testEvenNaturalNumberStreamUsingGet() {
+		BaseListFilterStream<Integer> evenFilter = createEvenNaturalNumberStream();
+		assertEquals(new Integer(0),evenFilter.get(0));
+		assertEquals(new Integer(2),evenFilter.get(1));
+		assertNull(evenFilter.next());
 	}
 }
