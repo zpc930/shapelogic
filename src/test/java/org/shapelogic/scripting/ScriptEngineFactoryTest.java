@@ -18,8 +18,8 @@ public class ScriptEngineFactoryTest extends TestCase {
 	private static final String GROOVY = "groovy";
 
 	public void testThatDifferentEnginesoForSameLanguageCanBeCreated() throws Exception {
-		ScriptEngine scriptEngine1 = ScriptEngineFactory.getNewScriptEngineByName(GROOVY);
-		ScriptEngine scriptEngine2 = ScriptEngineFactory.getNewScriptEngineByName(GROOVY);
+		ScriptEngine scriptEngine1 = ScriptEngineCache.getNewScriptEngineByName(GROOVY);
+		ScriptEngine scriptEngine2 = ScriptEngineCache.getNewScriptEngineByName(GROOVY);
 		assertNotSame(scriptEngine1, scriptEngine2);
 		String NUMBER = "number";
 		scriptEngine1.put(NUMBER, 1);
@@ -30,14 +30,14 @@ public class ScriptEngineFactoryTest extends TestCase {
 	}
 	
 	public void testCallGroovyScripts() throws Exception {
-		Object obj = ScriptEngineFactory.eval("println('Hello Scripting World!'); 'Hello Sami';",GROOVY);
+		Object obj = ScriptEngineCache.eval("println('Hello Scripting World!'); 'Hello Sami';",GROOVY);
 		assertTrue(obj instanceof String);
-		assertTrue(ScriptEngineFactory.eval("1;",GROOVY) instanceof Number);
-		assertTrue(ScriptEngineFactory.eval("[1,2];",GROOVY) instanceof List);
+		assertTrue(ScriptEngineCache.eval("1;",GROOVY) instanceof Number);
+		assertTrue(ScriptEngineCache.eval("[1,2];",GROOVY) instanceof List);
 	}
 
 	public void testGroovyFunction() throws Exception {
-		Object engine = ScriptEngineFactory.script("def clos = {it*2};",GROOVY);
+		Object engine = ScriptEngineCache.script("def clos = {it*2};",GROOVY);
 	    Invocable inv = (Invocable) engine;
 	    Object obj = inv.invokeFunction("clos", new Object[] { new Integer(1) });
 		assertTrue(obj instanceof Number);
@@ -45,8 +45,8 @@ public class ScriptEngineFactoryTest extends TestCase {
 	}
 
 	public void test2GroovyFunction() throws Exception {
-		Object engine = ScriptEngineFactory.script("def multiply2 = {it*2};",GROOVY);
-		ScriptEngineFactory.script("def multiply3 = {it*3};",GROOVY);
+		Object engine = ScriptEngineCache.script("def multiply2 = {it*2};",GROOVY);
+		ScriptEngineCache.script("def multiply3 = {it*3};",GROOVY);
 		System.out.println("engine: " + engine + ", class: "+ engine.getClass());
 	    Invocable inv = (Invocable) engine;
 	    Object result1 = inv.invokeFunction("multiply2", new Object[] { new Integer(1) });
@@ -58,7 +58,7 @@ public class ScriptEngineFactoryTest extends TestCase {
 	}
 
 	public void testJavascriptFunction1() throws Exception {
-		Object engine = ScriptEngineFactory.script(
+		Object engine = ScriptEngineCache.script(
 				"function sami(it) { println('Hi ' + it)}; \n" +
 				"var sam = sami; \n" +
 				"println('Hello JavaScript ' + sam('Joe')); \n",
@@ -69,7 +69,7 @@ public class ScriptEngineFactoryTest extends TestCase {
 	}
 	
 	public void testJavascriptFunction() throws Exception {
-		Object engine = ScriptEngineFactory.script(
+		Object engine = ScriptEngineCache.script(
 				"function sami(it) { return it*2;}; \n" +
 				"var sam = sami; \n" +
 				"println('Hello JavaScript ' + sam(10)); \n",
@@ -81,7 +81,7 @@ public class ScriptEngineFactoryTest extends TestCase {
 	}
 
 	public void testJavascriptFunctionAsValue() throws Exception {
-		Object function = ScriptEngineFactory.eval(
+		Object function = ScriptEngineCache.eval(
 				"function sami(it) { return it*2;}; \n" +
 				"var sam = sami; \n" +
 				"sam; \n",
