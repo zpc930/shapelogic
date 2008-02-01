@@ -1,19 +1,15 @@
 package org.shapelogic.scripting;
 
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 
 /** BaseScriptingFunction base of any scripting functions.
  * 
  * @author Sami Badawi
  *
  */
-public abstract class BaseScriptingFunction<In,Out> {
+public abstract class BaseScriptingFunction {
 
 	public static final String DEFAULT_LANGUAGE = "groovy";
-	public static final String FUNCTION_NAME_SUFFIX = "_FUNCTION_";
-	
-	protected String _name;
 	protected String _functionName;
 	protected String _expression;
 	protected String _language = DEFAULT_LANGUAGE;
@@ -27,7 +23,6 @@ public abstract class BaseScriptingFunction<In,Out> {
 			ScriptEngine engine;
 			try {
 				ScriptEngineFactory.script(_expression, _language);
-				_scriptEngine.put(_name, this);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
