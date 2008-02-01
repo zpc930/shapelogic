@@ -15,14 +15,11 @@ import org.shapelogic.calculation.IndexTransform;
  * @author Sami Badawi
  *
  */
-public class FunctionIndexTransform<In,E> extends BaseScriptingFunction<In,E> 
+public class FunctionIndexTransform<In,E> extends BaseScriptingFunction
 	implements IndexTransform<In,E> 
 {
-	public static final String FUNCTION_NAME_SUFFIX = "_FUNCTION_";
-	
-	public FunctionIndexTransform(String name, String expression, String language) {
-		_name = name;
-		_functionName = name + FUNCTION_NAME_SUFFIX;
+	public FunctionIndexTransform(String functionName, String expression, String language) {
+		_functionName = functionName;
 		if (language != null)
 			_language = language;
 		_expression = expression;
