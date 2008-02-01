@@ -19,10 +19,10 @@ public abstract class BaseScriptingFunction {
 	/** Lazy init for a ScriptEngine */
 	public ScriptEngine getScriptEngine() {
 		if (_scriptEngine == null) {
-			_scriptEngine = ScriptEngineFactory.getScriptEngineByName(_language);
+			_scriptEngine = ScriptEngineCache.getScriptEngineByName(_language);
 			ScriptEngine engine;
 			try {
-				ScriptEngineFactory.script(_expression, _language);
+				ScriptEngineCache.script(_expression, _language);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
