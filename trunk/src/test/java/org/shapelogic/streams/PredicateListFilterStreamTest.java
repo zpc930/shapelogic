@@ -23,6 +23,9 @@ public class PredicateListFilterStreamTest extends TestCase {
 		if (predicates == null || predicates.length == 0) {
 			compositePredicate = TRUE_PREDICATE;
 		}
+		else if (Constants.AND.equalsIgnoreCase(type)) {
+			compositePredicate = new AllPredicate<Integer>(predicates);
+		}
 		else if (Constants.OR.equalsIgnoreCase(type)) {
 			compositePredicate = new AnyPredicate<Integer>(predicates);
 		}
@@ -49,6 +52,9 @@ public class PredicateListFilterStreamTest extends TestCase {
 		final Predicate<Integer> compositePredicate;
 		if (predicates == null || predicates.length == 0) {
 			compositePredicate = TRUE_PREDICATE;
+		}
+		else if (Constants.AND.equalsIgnoreCase(type)) {
+			compositePredicate = new AllPredicate<Integer>(predicates);
 		}
 		else if (Constants.OR.equalsIgnoreCase(type)) {
 			compositePredicate = new AnyPredicate<Integer>(predicates);
