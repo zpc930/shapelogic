@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.shapelogic.calculation.IndexTransform;
 import org.shapelogic.scripting.FunctionIndexTransform;
+import org.shapelogic.util.Constants;
 
 /** StreamFactory is a factory for Streams.
  * 
@@ -50,7 +51,8 @@ public class StreamFactory {
 	 * @return
 	 */
 	static public <In,E> ListStream<E> createListStream(String name, String expression , String language, Integer stopNumber, E ... startList){
-		FunctionIndexTransform<In, E> transformer = new FunctionIndexTransform<In, E>(name, expression, language); 
+		String functionName = name + Constants.FUNCTION_NAME_SUFFIX;
+		FunctionIndexTransform<In, E> transformer = new FunctionIndexTransform<In, E>(functionName, expression, language); 
 		ListStream<E> result = new TransformerListStream<In, E>(transformer);
 		if (stopNumber != null)
 			result.setMaxLast(stopNumber);
