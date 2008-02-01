@@ -12,7 +12,7 @@ import junit.framework.TestCase;
  * @author Sami Badawi
  *
  */
-public class ScriptEngineFactoryTest extends TestCase {
+public class ScriptEngineCacheTest extends TestCase {
 
 	private static final String JAVASCRIPT = "javascript";
 	private static final String GROOVY = "groovy";
