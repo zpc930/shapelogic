@@ -15,21 +15,18 @@ import org.shapelogic.calculation.Transformer;
  * @author Sami Badawi
  *
  */
-public class FunctionTransform<In,E> extends BaseScriptingFunction<In,E> 
+public class FunctionTransform<In,E> extends BaseScriptingFunction
 	implements Transformer<In,E> 
 {
-	public static final String FUNCTION_NAME_SUFFIX = "_FUNCTION_";
-	
-	public FunctionTransform(String name, String expression, String language) {
-		_name = name;
-		_functionName = name + FUNCTION_NAME_SUFFIX;
+	public FunctionTransform(String functionName, String expression, String language) {
+		_functionName = functionName;
 		if (language != null)
 			_language = language;
 		_expression = expression;
 	}
 	
-	public FunctionTransform(String name, String expression){
-		this(name,expression,DEFAULT_LANGUAGE);
+	public FunctionTransform(String functionName, String expression){
+		this(functionName,expression,DEFAULT_LANGUAGE);
 	}
 	
 	public E transform(In input) {
