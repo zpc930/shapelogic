@@ -18,26 +18,16 @@ public abstract class BaseScriptingFunction<In,Out> {
 	protected String _expression;
 	protected String _language = DEFAULT_LANGUAGE;
 	
-	protected ScriptingConnect _scriptingConnect;
 	protected ScriptEngine _scriptEngine;
-	protected ScriptEngineManager _scriptEngineManager;
-	
-	/** Lazy init for ScriptingCoonect */
-	public ScriptingConnect getScriptingConnect() {
-		if (_scriptingConnect == null)
-			_scriptingConnect = new ScriptingConnect();
-		return _scriptingConnect;
-	} 
 	
 	/** Lazy init for a ScriptEngine */
 	public ScriptEngine getScriptEngine() {
 		if (_scriptEngine == null) {
-			_scriptingConnect = new ScriptingConnect();
+			_scriptEngine = ScriptEngineFactory.getScriptEngineByName(_language);
 			ScriptEngine engine;
 			try {
-				engine = _scriptingConnect.getEngine(_expression, _language);
-		        engine.put(_name, this);
-				_scriptEngine = engine; 
+				ScriptEngineFactory.script(_expression, _language);
+				_scriptEngine.put(_name, this);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
