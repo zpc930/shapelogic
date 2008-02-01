@@ -13,7 +13,7 @@ import javax.script.ScriptEngineManager;
  * @author Sami Badawi
  *
  */
-public class ScriptEngineFactory {
+public class ScriptEngineCache {
 	public static final boolean GET_ENGINE_BY_EXTENSION = false;
 	
     static private ScriptEngineManager _scriptEngineManager;
