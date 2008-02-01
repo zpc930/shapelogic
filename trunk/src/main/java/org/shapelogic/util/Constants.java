@@ -38,7 +38,11 @@ public class Constants {
 
 	public final static int LAST_UNKNOWN = -2;
 
-	private static final String AND = "AND";
+	//Names of Boolean operations
+	public static final String AND = "AND";
 	public static final String OR = "OR";
 	public static final String XOR = "XOR";
+	
+	/** Suffix to function name based on stream name. */
+	public static final String FUNCTION_NAME_SUFFIX = "_FUNCTION_";
 }
