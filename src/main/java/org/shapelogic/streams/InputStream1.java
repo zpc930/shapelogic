@@ -36,4 +36,6 @@ public interface InputStream1 <In, E> {
 	 * */
 	Stream<In> getInputStream();
 	
+	In getInput(int index);
+	
 }
