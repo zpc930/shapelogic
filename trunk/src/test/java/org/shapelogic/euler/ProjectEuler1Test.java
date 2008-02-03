@@ -12,7 +12,7 @@ import org.shapelogic.mathematics.NaturalNumberStream;
 import org.shapelogic.mathematics.PrimeNumberStream;
 import org.shapelogic.mathematics.SumAccumulator;
 import org.shapelogic.streams.BaseListStream0;
-import org.shapelogic.streams.BaseListStream1;
+import org.shapelogic.streams.BaseListIndexedStream1;
 import org.shapelogic.streams.BaseListStream2;
 import org.shapelogic.streams.BaseListFilterStream;
 import org.shapelogic.streams.ListFilterStream;
@@ -50,7 +50,7 @@ public class ProjectEuler1Test extends TestCase {
 	 * 
 	 */
 	public void testProblem2() {
-		BaseListStream1<Object,Integer> fibonacci = new BaseListStream1<Object,Integer>(){
+		BaseListIndexedStream1<Object,Integer> fibonacci = new BaseListIndexedStream1<Object,Integer>(){
 			{ _list.add(1); _list.add(2);}
 			public Integer invoke(Object input, int index) {return get(index-2) + get(index-1);}
 		};
@@ -186,8 +186,8 @@ public class ProjectEuler1Test extends TestCase {
 	 */
 	public void testProblem6() {
 		NaturalNumberStream naturalNumberStream = new NaturalNumberStream(1,100);
-		BaseListStream1<Integer, Integer> squaredStream = 
-			new BaseListStream1<Integer, Integer>(naturalNumberStream) {
+		BaseListIndexedStream1<Integer, Integer> squaredStream = 
+			new BaseListIndexedStream1<Integer, Integer>(naturalNumberStream) {
 				public Integer invoke(Integer input, int index) {
 					if (input == null) return null;
 					return input * input;
@@ -246,8 +246,8 @@ public class ProjectEuler1Test extends TestCase {
 					return Integer.parseInt(""+c);
 				}
 		};
-		BaseListStream1<Integer, Integer> productStream = 
-			new BaseListStream1<Integer, Integer>(inputNumberStream,numberLength) {//XXX you should not need to set length
+		BaseListIndexedStream1<Integer, Integer> productStream = 
+			new BaseListIndexedStream1<Integer, Integer>(inputNumberStream,numberLength) {//XXX you should not need to set length
 				public Integer invoke(Integer input, int index) {
 					if (index<4) return 0;
 					int result = 1;
