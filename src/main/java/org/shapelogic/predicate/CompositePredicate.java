@@ -9,8 +9,11 @@ package org.shapelogic.predicate;
  * @param <T>
  */
 public abstract class CompositePredicate<T> implements Predicate<T> {
-	protected Predicate<T>[] _predicates;
-	                    
+	final protected Predicate<T>[] _predicates;
+	                  
+	public CompositePredicate(Predicate<T>[] predicates) {
+		_predicates = predicates;
+	}
 	public Predicate<T>[] getPredicates(){
 		return _predicates;
 	}

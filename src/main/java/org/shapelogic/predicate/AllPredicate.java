@@ -11,7 +11,7 @@ package org.shapelogic.predicate;
 public class AllPredicate<T> extends CompositePredicate<T> {
 	
 	public AllPredicate(Predicate<T>[] predicates) {
-		_predicates = predicates;
+		super(predicates);
 	}
 	
 	@Override

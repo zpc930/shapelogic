@@ -11,15 +11,18 @@ package org.shapelogic.predicate;
 public class OnePredicate<T> extends CompositePredicate<T> {
 
 	public OnePredicate(Predicate<T>[] predicates) {
-		_predicates = predicates;
+		super(predicates);
 	}
 	
 	@Override
 	public boolean evaluate(T input) {
 		int success = 0; //success 
 		for (Predicate<T> predicate : _predicates) {
-			if (predicate.evaluate(input))
+			if (predicate.evaluate(input)) {
 				success++;
+				if (1 < success)
+					break;
+			}
 		}
 		return success == 1;
 	}
