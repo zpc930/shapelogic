@@ -45,4 +45,8 @@ public class Constants {
 	
 	/** Suffix to function name based on stream name. */
 	public static final String FUNCTION_NAME_SUFFIX = "_FUNCTION_";
+	
+	/** Names of scripting languages in JSR 223. */
+	public static final String GROOVY = "groovy";
+	public static final String JAVASCRIPT = "javascript";
 }
