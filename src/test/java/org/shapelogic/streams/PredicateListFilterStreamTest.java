@@ -1,5 +1,8 @@
 package org.shapelogic.streams;
 
+import java.util.AbstractMap;
+import java.util.Map.Entry;
+
 import org.shapelogic.mathematics.NaturalNumberStream;
 import org.shapelogic.predicate.AllPredicate;
 import org.shapelogic.predicate.AnyPredicate;
@@ -189,5 +192,14 @@ public class PredicateListFilterStreamTest extends TestCase {
 		assertEquals(new Integer(3),andStream.next());
 		assertEquals(new Integer(4),andStream.next());
 		assertEquals(new Integer(8),andStream.next());
+	}
+	
+	/** XOR filters are going to use Entry test them. */
+	public void testEntry() {
+		String key = "number";
+		Integer value = 1;
+		Entry<String, Integer> entry = new AbstractMap.SimpleEntry<String,Integer>(key,value);
+		assertEquals(key,entry.getKey());
+		assertEquals(value,entry.getValue());
 	}
 }
