@@ -10,7 +10,7 @@ import org.shapelogic.util.Constants;
  * @author Sami Badawi
  * 
  */
-public class TransformerListStream<In, E> extends BaseListStream1<In, E> {
+public class TransformerListStream<In, E> extends BaseListIndexedStream1<In, E> {
 	protected IndexTransform<In, E> _transformer;
 	
 	public TransformerListStream(IndexTransform<In, E> transformer, ListStream<In> inputStream, int maxLast) {
