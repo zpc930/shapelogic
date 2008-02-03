@@ -1,10 +1,6 @@
 package org.shapelogic.streams;
 
 import java.util.List;
-import java.util.Map;
-
-import org.shapelogic.calculation.InContexts;
-
 
 /** Implementation of ListStream. <br />
  * 
@@ -34,7 +30,7 @@ import org.shapelogic.calculation.InContexts;
  *
  */
 abstract public class BaseListStream1<In,E> extends BaseListCommonStream<E> 
-implements IndexedInputStream1<In, E> {
+implements InputStream1<In, E> {
 	
 	public BaseListStream1(ListStream<In> inputStream, int maxLast){
 		_inputStream = inputStream;
@@ -53,7 +49,7 @@ implements IndexedInputStream1<In, E> {
 	
 	@Override
 	public E invokeIndex(int index){
-		return invoke(getInput(index),index);
+		return invoke(getInput(index));
 	}
 	
 	public List<E> getList() { 
