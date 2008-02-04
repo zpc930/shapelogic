@@ -124,7 +124,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		rootTask.setNamedValue(POLYGON, _cleanedupPolygon);
 		List<NumericRule> rulesList = Arrays.asList(_rulesArrayForLetterMatching);
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, null);
-		_matchingOH = letterTask.calc();
+		_matchingOH = letterTask.invoke();
 		if (_matchingOH == null) {
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}

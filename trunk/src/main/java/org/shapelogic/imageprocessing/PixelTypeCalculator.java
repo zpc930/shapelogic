@@ -60,7 +60,7 @@ public class PixelTypeCalculator implements CalcInvoke<PixelType>
 	}
 
 	@Override
-	public PixelType calc() {
+	public PixelType invoke() {
 		distanceBetweenLastDirection %= Constants.DIRECTIONS_AROUND_POINT;
 		if (regionCrossings == 4) {
 			if (distanceBetweenLastDirection == 2 || distanceBetweenLastDirection == 6) 
@@ -86,7 +86,7 @@ public class PixelTypeCalculator implements CalcInvoke<PixelType>
 	@Override
 	public PixelType getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return pixelType;
 	}
 

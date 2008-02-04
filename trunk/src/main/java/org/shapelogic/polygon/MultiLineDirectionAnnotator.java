@@ -51,7 +51,7 @@ public class MultiLineDirectionAnnotator implements ObjectAnnotator<Polygon> {
 	}
 
 	@Override
-	public Polygon calc() {
+	public Polygon invoke() {
 		findChangeOfDirectionForLines();
 		_annotationsFound = true; //XXX maybe this should be done differently
 		_dirty = false;
@@ -105,7 +105,7 @@ public class MultiLineDirectionAnnotator implements ObjectAnnotator<Polygon> {
 	@Override
 	public Polygon getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return _polygon;
 	}
 

@@ -58,7 +58,7 @@ public class FilterPolygonForSmallLines implements Improver<Polygon> {
 	}
 
 	@Override
-	public Polygon calc() {
+	public Polygon invoke() {
 		setup();
 		for (CLine lines: _inputPolygon.getLines()) {
 			handleLine(lines);
@@ -78,7 +78,7 @@ public class FilterPolygonForSmallLines implements Improver<Polygon> {
 	@Override
 	public Polygon getValue() {
 		if (_dirty)
-			calc();
+			invoke();
 		return _value;
 	}
 	

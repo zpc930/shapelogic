@@ -138,7 +138,7 @@ public class Polygon extends BaseAnnotatedShape
     }
     
 	@Override
-	public Polygon calc() {
+	public Polygon invoke() {
         _bBox = findBbox();
         double lenX = _bBox.maxVal.getX() - _bBox.minVal.getX();
         double lenY = _bBox.maxVal.getY() - _bBox.minVal.getY();
@@ -215,7 +215,7 @@ public class Polygon extends BaseAnnotatedShape
 	@Override
 	public Polygon getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return this;
 	}
 	

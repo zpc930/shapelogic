@@ -90,7 +90,7 @@ public class CircleFinder implements ObjectAnnotator<MultiLine> {
 	}
 
 	@Override
-	public MultiLine calc() {
+	public MultiLine invoke() {
 		_annotationsFound = findAnnotations(_value);
 		_dirty = false;
 		return _value;
@@ -99,7 +99,7 @@ public class CircleFinder implements ObjectAnnotator<MultiLine> {
 	@Override
 	public MultiLine getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return _value;
 	}
 

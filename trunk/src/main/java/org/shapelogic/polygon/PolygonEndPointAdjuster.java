@@ -52,7 +52,7 @@ public class PolygonEndPointAdjuster implements Improver<Polygon> {
 	}
 
 	@Override
-	public Polygon calc() {
+	public Polygon invoke() {
 		setup();
 		List<Set<IPoint2D>> clusters = _inputPolygon.getEndPointsMultiClusters();
 		if (clusters.size() == 0) {
@@ -72,7 +72,7 @@ public class PolygonEndPointAdjuster implements Improver<Polygon> {
 	@Override
 	public Polygon getValue() {
 		if (_dirty)
-			calc();
+			invoke();
 		return _value;
 	}
 	
