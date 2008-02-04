@@ -1,23 +1,14 @@
 package org.shapelogic.streams;
 
+import org.shapelogic.calculation.Calc2;
+
 /** NumberedStream is a Sequential stream where each element has an intrinsic number.
  * 
  * @author Sami Badawi
  *
  */
-public interface InputsStream2 <In0,In1, E> {
+public interface InputsStream2 <In0,In1, E> extends Calc2<In0,In1, E> {
 
-	/** Closure to calculated 1 individual element based on index and input for 
-	 * the same index.
-	 * 
-	 * Should later just call the invoke on the closure.
-	 * 
-	 * Maybe this should be moved up later.
-	 * 
-	 * @param index of element in list
-	 */
-	E invoke(In0 input0, In1 input1);
-	
 	/* Last accessed calculated element. 
 	 * This should cause a lazy calculation for a calculation. 
 	 * Possibly also for this first element.

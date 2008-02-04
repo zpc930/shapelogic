@@ -1,5 +1,7 @@
 package org.shapelogic.streams;
 
+import org.shapelogic.calculation.Calc1;
+
 /** Universal calculation and logic unit. 
  * 
  * This is going to replace the current Calc, so this should probably just be 
@@ -11,18 +13,7 @@ package org.shapelogic.streams;
  * @author Sami Badawi
  *
  */
-public interface InputStream1 <In, E> {
-	
-	/** Closure to calculated 1 individual element based on index and input for 
-	 * the same index.
-	 * 
-	 * Should later just call the invoke on the closure.
-	 * 
-	 * Maybe this should be moved up later.
-	 * 
-	 * @param index of element in list
-	 */
-	E invoke(In input);
+public interface InputStream1 <In, E> extends Calc1<In, E> {
 	
 	/* Last accessed calculated element. 
 	 * This should cause a lazy calculation for a calculation. 
