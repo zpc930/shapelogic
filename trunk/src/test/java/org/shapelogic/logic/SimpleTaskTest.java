@@ -24,7 +24,7 @@ public class SimpleTaskTest extends TestCase {
 		Map map = new HashMap();
 		map.put(KEY, VALUE);
 		st.setVars(map);
-		st.calc();
+		st.invoke();
 		assertEquals(LogicState.SucceededDone, st.getState());
 		assertEquals(VALUE, st.getVars().get(KEY));
 		
@@ -42,7 +42,7 @@ public class SimpleTaskTest extends TestCase {
 		Map map = new HashMap();
 		map.put(KEY, VALUE);
 		st.setVars(map);
-		st.calc();
+		st.invoke();
 		SimpleTask st2 = new SimpleTask(null, true, KEY2, VALUE2);
 		
 		assertEquals(LogicState.SucceededDone, st.getState());

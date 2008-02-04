@@ -100,7 +100,7 @@ public class LetterTaskTest extends TestCase
 			RAW_POLYGON,"svgReader.getPolygon()",
 			POLYGON,"rawPolygon.cleanUp(true, 0.02)"
 		); 
-		setupTask.calc();
+		setupTask.invoke();
 		return setupTask.getState();
 	}
 	
@@ -119,7 +119,7 @@ public class LetterTaskTest extends TestCase
 				return true;
 			}
 		}; 
-		setupTask.calc();
+		setupTask.invoke();
 		return setupTask.getState();
 	}
 	
@@ -134,14 +134,14 @@ public class LetterTaskTest extends TestCase
 
 	public void testFileNameWithExist() {
 		ExistTask letterTask = new ExistTask(rootTask,FILE_NAME_KEY);
-		letterTask.calc();
+		letterTask.invoke();
 		Object x = rootTask.getNamedValue(FILE_NAME_KEY);
 		assertEquals(FILE_NAME, x);
 	}
 
 	public void testPolygonWithExist() {
 		ExistTasks letterTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
-		letterTask.calc();
+		letterTask.invoke();
 		Object rawPolygon = rootTask.getNamedValue(RAW_POLYGON);
 		assertNotNull(rawPolygon);
 		Object polygon = rootTask.getNamedValue(POLYGON);
@@ -151,10 +151,10 @@ public class LetterTaskTest extends TestCase
 	public void testLetterAMatch() {
 		rootTask = RootTask.getInstance();
 		ExistTasks letterTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
-		letterTask.calc();
+		letterTask.invoke();
 		assertEquals(LogicState.SucceededDone, letterTask.getState());
 		BaseTask letterATask = LetterTaskLegacyFactory.createLetterATask(rootTask);
-		Object result = letterATask.calc();
+		Object result = letterATask.invoke();
 		Polygon polygon = (Polygon) rootTask.getNamedValue(POLYGON);
 		printAnnotaions(polygon);
 		assertEquals("A",result);
@@ -169,9 +169,9 @@ public class LetterTaskTest extends TestCase
 
 	public void testCreateLetterATaskFromRule() {
 		ExistTasks letterTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
-		letterTask.calc();
+		letterTask.invoke();
 		BaseTask letterATask = LetterTaskLegacyFactory.createLetterATaskFromRule(rootTask);
-		Object result = letterATask.calc();
+		Object result = letterATask.invoke();
 		assertEquals("A",result);
 	}
 	
@@ -183,7 +183,7 @@ public class LetterTaskTest extends TestCase
 		if (onlyMatchAgainstSelf)
 			onlyMatchLetter = letter;
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, onlyMatchLetter);
-		Object result = letterTask.calc();
+		Object result = letterTask.invoke();
 		assertEquals(letter,result);
 	}
 	
@@ -195,17 +195,17 @@ public class LetterTaskTest extends TestCase
 		if (onlyMatchAgainstSelf)
 			onlyMatchLetter = letter;
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, onlyMatchLetter);
-		Object result = letterTask.calc();
+		Object result = letterTask.invoke();
 		assertEquals(letter,result);
 	}
 	
 	public void testAllLetterMatchFromRules() {
 		ExistTasks polygonTask = new ExistTasks(rootTask,FILE_NAME_KEY,RAW_POLYGON,POLYGON);
-		polygonTask.calc();
+		polygonTask.invoke();
 		NumericRule[] rulesArray = LetterTaskLegacyFactory.getSimpleNumericRuleForAllStraightLetters(LetterTaskFactory.POLYGON);
 		List<NumericRule> rulesList = Arrays.asList(rulesArray);
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, null);
-		Object result = letterTask.calc();
+		Object result = letterTask.invoke();
 		assertEquals("A",result);
 	}
 	

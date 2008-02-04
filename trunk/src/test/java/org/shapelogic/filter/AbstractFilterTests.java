@@ -37,6 +37,6 @@ public abstract class AbstractFilterTests extends TestCase {
 	    polygon.addLine(north,south);
 	    polygon.addLine(east,west);
 		polygon.addLine(north, center);
-	    polygon.calc();
+	    polygon.invoke();
 	}
 }

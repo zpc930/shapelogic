@@ -29,7 +29,7 @@ public class BBoxTest extends TestCase {
         assertEquals("point size should be 2", 2, poly1.getPoints().size());
         poly1.addLine(east,west);
         assertEquals("Fist point should be west ", poly1.getPoints().iterator().next(), west);
-        poly1.calc();
+        poly1.invoke();
         BBox bbox = poly1.getBBox();
         assertEquals("minVal wrong", bbox.minVal, eMin);
         assertEquals("maxVal wrong", bbox.maxVal, eMax);
@@ -39,7 +39,7 @@ public class BBoxTest extends TestCase {
     	Polygon poly1 = new Polygon();
         poly1.addLine(north,south);
         poly1.addLine(east,west);
-        poly1.calc();
+        poly1.invoke();
         BBox bbox = poly1.getBBox();
         assertEquals("center wrong", eMin, bbox.getDiagonalVector(0.0));
         assertEquals("center wrong", center, bbox.getDiagonalVector(0.5));
