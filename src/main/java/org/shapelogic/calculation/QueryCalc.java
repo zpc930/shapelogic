@@ -24,16 +24,16 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 		for (int i = maps.length-1; 0 <= i; i--) {
 			Map<K,?> map = maps[i];
 			Object result = map.get(key);
-			if (result instanceof Calc) {
+			if (result instanceof CalcValue) {
 				if (result instanceof LazyCalc) {
 					if (!((LazyCalc)result).isDirty())
-						return (V)((Calc)result).getValue();
+						return (V)((CalcValue)result).getValue();
 					
 				}
 				if (result instanceof CalcInContext) {
 					((CalcInContext)result).calc(maps);
 				}
-				return (V)((Calc)result).getValue();
+				return (V)((CalcValue)result).getValue();
 			}
 			if (result != null)
 				return (V)result;
