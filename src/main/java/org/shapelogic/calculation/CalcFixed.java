@@ -8,7 +8,7 @@ package org.shapelogic.calculation;
  *
  * @param <T>
  */
-final public class CalcFixed<T> implements Calc<T> {
+final public class CalcFixed<T> implements CalcValue<T> {
 	final private T _value;
 	public CalcFixed(T value) {
 		_value = value;

@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 public class QueryCalcTest extends TestCase {
 	private IQueryCalc<String, Integer> query;
 	private Map<String, Integer> mapDirectValues;
-	private Map<String, Calc<Integer> > mapLazyCalcValues;
+	private Map<String, CalcValue<Integer> > mapLazyCalcValues;
 	private String KEY = "version";
 	private Integer VALUE1 = 1;
 	private Integer VALUE2 = 2;
@@ -24,7 +24,7 @@ public class QueryCalcTest extends TestCase {
 	public void setUp() {
 		query = new QueryCalc<String, Integer>();
 		mapDirectValues = new TreeMap<String, Integer>(); 
-		mapLazyCalcValues = new TreeMap<String, Calc<Integer> >(); 
+		mapLazyCalcValues = new TreeMap<String, CalcValue<Integer> >(); 
 		mapDirectValues.put(KEY, VALUE1);
 		mapLazyCalcValues.put(KEY, ONE);
 	}
