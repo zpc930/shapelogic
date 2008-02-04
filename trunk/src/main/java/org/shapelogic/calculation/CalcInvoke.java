@@ -11,7 +11,5 @@ package org.shapelogic.calculation;
  *
  * @param <T>
  */
-public interface CalcInvoke<T> extends LazyCalc<T> {
-	T calc(); //Might be renamed invoke()
-
+public interface CalcInvoke<T> extends LazyCalc<T>, Calc0<T> {
 }
