@@ -24,7 +24,7 @@ public class AndTaskTest extends TestCase {
 		Map map = new HashMap();
 		map.put(KEY, VALUE);
 		st.setVars(map);
-		andTask.calc();
+		andTask.invoke();
 		assertEquals(LogicState.SucceededDone, andTask.getState());
 		assertEquals(VALUE, andTask.getVars().get(KEY));
 	}
@@ -47,7 +47,7 @@ public class AndTaskTest extends TestCase {
 		map2.put(KEY2, VALUE2);
 		st2.setVars(map2);
 
-		andTask.calc();
+		andTask.invoke();
 		assertEquals(LogicState.SucceededDone, andTask.getState());
 		assertEquals(VALUE1, andTask.getVars().get(KEY1));
 	}
@@ -71,7 +71,7 @@ public class AndTaskTest extends TestCase {
 		map2.put(KEY2, BAD_VALUE2);
 		st2.setVars(map2);
 
-		andTask.calc();
+		andTask.invoke();
 		assertEquals(LogicState.FailedDone, andTask.getState());
 		assertEquals(BAD_VALUE2, andTask.getVars().get(KEY2));
 	}
