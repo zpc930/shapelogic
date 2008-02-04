@@ -5,7 +5,7 @@ package org.shapelogic.calculation;
  * @author Sami Badawi
  *
  */
-public interface Calc <T> {
+public interface CalcValue <T> {
 	/** Starts a lazy calculation.
 	 * If dirty do calc() else return cached value.
 	 * 
