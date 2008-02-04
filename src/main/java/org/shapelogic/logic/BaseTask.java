@@ -169,7 +169,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	}
 
 	@Override
-	public T calc() {
+	public T invoke() {
 		preCalc();
 		_value = mainCalc();
 		postCalc();
@@ -358,7 +358,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 			return null;
 		int childSize = children.size();
 		Task lastTask = (Task) children.get(childSize-1);
-		Object result = lastTask.calc();
+		Object result = lastTask.invoke();
 		_lastSubTaskState = lastTask.getState();
 		if (LogicState.SucceededDone.equals(_lastSubTaskState))
 			_succededSubTasksCount++;
@@ -393,7 +393,7 @@ public class BaseTask<T> extends DefaultMutableTreeNode implements Task<T> {
 	@Override
 	public T getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return _value;
 	}
 

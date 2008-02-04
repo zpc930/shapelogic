@@ -71,7 +71,7 @@ public class LineProperties implements CalcInvoke<Set<LineType> > {
 	}
 	
 	@Override
-	public Set<LineType> calc() {
+	public Set<LineType> invoke() {
 		preCalc();
 		calcLineType();
 		if (isConcaveArch()) {
@@ -86,7 +86,7 @@ public class LineProperties implements CalcInvoke<Set<LineType> > {
 	@Override
 	public Set<LineType> getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return _value;
 	}
 	

@@ -48,7 +48,7 @@ public class PolygonAnnotator implements ObjectAnnotator<Polygon> {
 	}
 
 	@Override
-	public Polygon calc() {
+	public Polygon invoke() {
 		findJunctions();
 		_dirty = false;
 		return _polygon;
@@ -58,7 +58,7 @@ public class PolygonAnnotator implements ObjectAnnotator<Polygon> {
 	@Override
 	public Polygon getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return _polygon;
 	}
 

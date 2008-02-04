@@ -168,7 +168,7 @@ public class MultiLine extends BaseAnnotatedShape
 	}
 
 	@Override
-	public MultiLine calc() {
+	public MultiLine invoke() {
 		for (IPoint2D point: _points) {
 			_bBox.addPoint(point);
 		}
@@ -179,7 +179,7 @@ public class MultiLine extends BaseAnnotatedShape
 	@Override
 	public MultiLine getValue() {
 		if (_dirty)
-			calc();
+			invoke();
 		return this;
 	}
 

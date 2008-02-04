@@ -94,7 +94,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 	}
 
 	@Override
-	public MultiLine calc() {
+	public MultiLine invoke() {
 		_pointMap.put(Constants.BEFORE_START_INDEX, _firstPoint);
 		addPropertiesForNewPoint(Constants.BEFORE_START_INDEX, _firstPoint, null); 
 		_pointMap.put(_lastChain, (CPointInt)_lastPoint.copy());
@@ -103,7 +103,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		addPointsToMultiLine();
 		handleClosedMultiLines();
 		postProcessing();
-		_multiLine.calc();
+		_multiLine.invoke();
 		_dirty = false;
 		return _multiLine;
 	}
@@ -111,7 +111,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 	@Override
 	public MultiLine getValue() {
 		if (isDirty())
-			calc();
+			invoke();
 		return _multiLine;
 	}
 
