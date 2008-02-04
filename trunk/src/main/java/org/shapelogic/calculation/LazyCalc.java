@@ -6,7 +6,7 @@ package org.shapelogic.calculation;
  * @author Sami Badawi
  *
  */
-public interface LazyCalc<T> extends Calc<T> {
+public interface LazyCalc<T> extends CalcValue<T> {
 	
 	/** When dirty is false that means that the calculated value can be used
 	 */
