@@ -9,10 +9,10 @@ package org.shapelogic.predicate;
  * @author Sami Badawi
  *
  */
-public interface BinaryPredicate<E> {
+public interface BinaryPredicate<In0,In1> {
 	
 	/** Checks if a binary predicate relation holds. */
-	boolean evaluate(E left, E right);
+	boolean evaluate(In0 left, In1 right);
 	
 	/** Used in factory. */
 	String getName();
