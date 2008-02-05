@@ -3,7 +3,7 @@ package org.shapelogic.scripting;
 import javax.script.Invocable;
 import javax.script.ScriptException;
 
-import org.shapelogic.calculation.Transformer;
+import org.shapelogic.calculation.Calc1;
 
 /** Transform based on an expression in a Scripting language using JSR 223.
  *  
@@ -16,7 +16,7 @@ import org.shapelogic.calculation.Transformer;
  *
  */
 public class FunctionTransform<In,E> extends BaseScriptingFunction
-	implements Transformer<In,E> 
+	implements Calc1<In,E> 
 {
 	public FunctionTransform(String functionName, String expression, String language) {
 		_functionName = functionName;
@@ -29,7 +29,8 @@ public class FunctionTransform<In,E> extends BaseScriptingFunction
 		this(functionName,expression,DEFAULT_LANGUAGE);
 	}
 	
-	public E transform(In input) {
+	@Override
+	public E invoke(In input) {
 		Invocable inv = (Invocable)getScriptEngine();
 		if (inv == null)
 			return null;
