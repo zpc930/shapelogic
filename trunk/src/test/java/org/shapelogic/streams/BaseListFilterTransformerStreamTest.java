@@ -2,7 +2,6 @@ package org.shapelogic.streams;
 
 import java.util.Map.Entry;
 
-import org.shapelogic.calculation.Calc1;
 import org.shapelogic.mathematics.NaturalNumberStream;
 
 import junit.framework.TestCase;
