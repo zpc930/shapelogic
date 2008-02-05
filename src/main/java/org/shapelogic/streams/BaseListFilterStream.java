@@ -30,8 +30,10 @@ abstract public class BaseListFilterStream<E> extends BaseListIndexedStream1<E,E
 	public E next() {
 		while (_inputStream.hasNext()) {
 			E input = _inputStream.next();
-			if (evaluate(input))
+			if (evaluate(input)){
+				_list.add(input);
 				return input;
+			}
 		}
 		return null;
 	}
@@ -48,8 +50,6 @@ abstract public class BaseListFilterStream<E> extends BaseListIndexedStream1<E,E
 			for (int i = _list.size(); i <= arg0; i++) {
 				if (hasNext()) {
 					E element = next();
-					if (element != null)
-						_list.add(element);
 				}
 				else {
 					_last = i - 1;
