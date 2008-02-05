@@ -1,6 +1,6 @@
 package org.shapelogic.predicate;
 
-/** All component predicates have to be true.
+/** At least one component predicates have to be true.
  * <br />
  * Same functionality as AnyPredicate in Apache Commons. 
  * 
