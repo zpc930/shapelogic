@@ -68,12 +68,12 @@ public class OnePredicateSelectorTest extends TestCase {
 	public void common() {
 		assertTrue(even.evaluate(0));
 		assertFalse(even.evaluate(1));
-		assertNull(xorEvenThirds.transform(0));
-		assertNull(xorEvenThirds.transform(1));
-		assertEquals("even",xorEvenThirds.transform(2));
-		assertEquals("thirds",xorEvenThirds.transform(3));
-		assertEquals("even",xorEvenThirds.transform(4));
-		assertNull(xorEvenThirds.transform(5));
-		assertNull(xorEvenThirds.transform(6));
+		assertNull(xorEvenThirds.invoke(0));
+		assertNull(xorEvenThirds.invoke(1));
+		assertEquals("even",xorEvenThirds.invoke(2));
+		assertEquals("thirds",xorEvenThirds.invoke(3));
+		assertEquals("even",xorEvenThirds.invoke(4));
+		assertNull(xorEvenThirds.invoke(5));
+		assertNull(xorEvenThirds.invoke(6));
 	}
 }
