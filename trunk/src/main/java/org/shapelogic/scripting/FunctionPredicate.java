@@ -3,6 +3,7 @@ package org.shapelogic.scripting;
 import javax.script.Invocable;
 import javax.script.ScriptException;
 
+import org.shapelogic.calculation.Calc1;
 import org.shapelogic.predicate.Predicate;
 
 /** Transform based on an expression in a Scripting language using JSR 223.
@@ -16,7 +17,7 @@ import org.shapelogic.predicate.Predicate;
  *
  */
 public class FunctionPredicate<In> extends BaseScriptingFunction
-	implements Predicate<In> 
+	implements Predicate<In>, Calc1<In,Object> 
 {
 	public FunctionPredicate(String functionName, String expression, String language) {
 		_functionName = functionName;
