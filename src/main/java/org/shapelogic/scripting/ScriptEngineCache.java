@@ -21,7 +21,7 @@ public class ScriptEngineCache {
     static private Map<String, ScriptEngine> _scriptEngineMap = 
     	new TreeMap<String,ScriptEngine>();
     
-    static private ScriptEngineManager getScriptEngineManager() {
+    static public ScriptEngineManager getScriptEngineManager() {
     	if (_scriptEngineManager == null)
     		_scriptEngineManager = new ScriptEngineManager();
     	return _scriptEngineManager;
