@@ -2,6 +2,8 @@ package org.shapelogic.calculation;
 
 import java.util.Map;
 
+import org.shapelogic.streams.Stream;
+
 /** A very general interface for doing any kind of queries to lazy calculations and streams.
  * 
  * @author Sami Badawi
@@ -14,6 +16,9 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 	private static QueryCalc _instance = new QueryCalc();
 	
 	/** It is a get that will do the lazy calculation.
+	 * <br />
+	 * This should not be used to get a Stream since this is treated as a 
+	 * CalcValue and the value is returned instead of the stream.
 	 * 
 	 * @param key
 	 * @param map sequence of maps to do lookup in starting from the last
@@ -24,7 +29,7 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 		for (int i = maps.length-1; 0 <= i; i--) {
 			Map<K,?> map = maps[i];
 			Object result = map.get(key);
-			if (result instanceof CalcValue) {
+			if (result instanceof CalcValue && (!(result instanceof Stream))) {
 				if (result instanceof LazyCalc) {
 					if (!((LazyCalc)result).isDirty())
 						return (V)((CalcValue)result).getValue();
