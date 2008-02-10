@@ -20,7 +20,6 @@ public abstract class BaseScriptingFunction {
 	public ScriptEngine getScriptEngine() {
 		if (_scriptEngine == null) {
 			_scriptEngine = ScriptEngineCache.getScriptEngineByName(_language);
-			ScriptEngine engine;
 			try {
 				ScriptEngineCache.script(_expression, _language);
 			} catch (Exception e) {
