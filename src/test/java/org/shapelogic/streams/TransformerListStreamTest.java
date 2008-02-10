@@ -1,6 +1,6 @@
 package org.shapelogic.streams;
 
-import org.shapelogic.calculation.IndexTransform;
+import org.shapelogic.calculation.CalcIndex1;
 import org.shapelogic.streams.TransformerListStream;
 
 /** Test of TransformerStream.
@@ -34,10 +34,10 @@ public class TransformerListStreamTest extends AbstractListStreamTests {
 			}
 			
 			{
-				_transformer = new IndexTransform<Object,Integer>() {
+				_transformer = new CalcIndex1<Object,Integer>() {
 
 					@Override
-					public Integer transform(Object arg0, int index) {
+					public Integer invoke(Object arg0, int index) {
 						return index;
 					}
 					
@@ -59,10 +59,10 @@ public class TransformerListStreamTest extends AbstractListStreamTests {
 				//Add 2 first values
 				_list.add(1);
 				_list.add(1);
-				_transformer = new IndexTransform<Object,Integer>() {
+				_transformer = new CalcIndex1<Object,Integer>() {
 
 					@Override
-					public Integer transform(Object obj, int arg0) {
+					public Integer invoke(Object obj, int arg0) {
 						int index = (Integer)arg0;
 						return ((Number)parent.get(index-2)).intValue() + ((Number)parent.get(index-1)).intValue();
 					}
