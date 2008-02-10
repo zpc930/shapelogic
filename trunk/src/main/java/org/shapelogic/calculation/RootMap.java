@@ -3,6 +3,8 @@ package org.shapelogic.calculation;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.shapelogic.scripting.ScriptEngineCache;
+
 /** This is the RootContext where all the certain objects are stored. <br />
  * 
  * There will be a lot of calculations and streams here. <br />
@@ -17,13 +19,18 @@ import java.util.Map;
  */
 public class RootMap {
 	private static final boolean NEW_MAP_ON_CLEAR = false;
-	static Map _map = new HashMap();
+	static Map _map = mapFactory();
 	static Map[] _maps = {_map};
 	
 	static public Map getMap() {
 		return _map;
 	}
 	
+	public static Map mapFactory() {
+		return ScriptEngineCache.getScriptEngineManager().getBindings();
+//		return new HashMap();
+	}
+
 	static public Map[] getMaps(){
 		return _maps;
 	}
