@@ -103,7 +103,7 @@ ShapeLogic
 
   * The framework for declarative and functional programming is being developed.
 
-  * ShapeLogic currently consists of 20,000 lines of Java code including 270 unit tests.
+  * ShapeLogic currently consists of 22,000 lines of Java code including 320 unit tests.
 
   []
 
@@ -165,7 +165,7 @@ ShapeLogic
   The new version will use the lazy streams that are simpler and more powerful.
   
   * When running ShapeLogic as an plugin for ImageJ add a menu item for loading
-  and running external rules in flat file or database format.
+  and running external rules either from flat file, database, macro or Java format.
   
   * Enabled use of
   {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
@@ -176,9 +176,10 @@ ShapeLogic
   * Make the annotation of shapes more loosely coupled
 
   * Get ShapeLogic into beta stage
+  
+  * Add many unit tests for Lazy Stream library
 
-  * Use Inversion of Control, to create object. IoC framework 
-  {{{http://code.google.com/p/google-guice}Google Guice}}
+  * Fix bugs in Lazy Stream library
 
   []
 
