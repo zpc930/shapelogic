@@ -39,7 +39,11 @@ implements FilterTransformerStream<E, Out> {
 		return result2;
 	}
 	
-	public Entry<E, Out> next() {
+	/** Ignore the index, and iterate over the input stream until a non null 
+	 * value is found. 
+	 */
+	@Override
+	public Entry<E, Out> invokeIndex(int index){
 		while (_inputStream.hasNext()) {
 			E input = _inputStream.next();
 			Entry<E, Out> result = invoke(input);
@@ -47,30 +51,5 @@ implements FilterTransformerStream<E, Out> {
 				return result;
 		}
 		return null;
-	}
-	
-	public boolean hasNext() {
-		return _inputStream.hasNext(); //XXX not right fix
-	}
-	
-	@Override
-	public Entry<E, Out> get(int arg0) {
-		if ( _last != LAST_UNKNOWN && _last < arg0)
-			return null;
-		if (arg0 >= _list.size()) {
-			for (int i = _list.size(); i <= arg0; i++) {
-				if (hasNext()) {
-					Entry<E, Out> element = next();
-					if (element != null)
-						_list.add(element);
-				}
-				else {
-					_last = i - 1;
-					_dirty = false;
-					return null;
-				}
-			}
-		}
-		return _list.get(arg0);
 	}
 }
