@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.shapelogic.calculation.ContextGettable;
 import org.shapelogic.calculation.IQueryCalc;
-import org.shapelogic.calculation.InContexts;
 import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.util.Constants;
 
@@ -70,9 +69,14 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 
 	protected IQueryCalc _query;
 
-	/** Calculate the next value
+	/** Calculate the value at an index.
+	 * <br />
+	 * So it gets the needed input value and call the appropriate invoke function.<br /> 
 	 * 
-	 * @return
+	 * Can this be used for a filter call?<br />
+	 * The index does not make sense for a filter since you do not know where 
+	 * the input is coming from. So maybe just ignore it.<br /> 
+	 * This is a little messy but less messy that what is there now.
 	 */
 	abstract public E invokeIndex(int index);
 	
@@ -115,6 +119,7 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 			return (_maxLast != LAST_UNKNOWN && _current < _maxLast);
 	}
 
+	/** Get next element and advance _current. */
 	@Override
 	public E next() {
 		if (isCached()) { 
@@ -134,6 +139,7 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 		}
 	}
 	
+	/** Get next element without advancing _current.  */
 	@Override
 	public E get(int arg0) {
 		if ( _last != LAST_UNKNOWN && _last < arg0)
