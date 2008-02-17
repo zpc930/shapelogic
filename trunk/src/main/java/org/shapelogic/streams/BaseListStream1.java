@@ -32,7 +32,7 @@ import java.util.List;
 abstract public class BaseListStream1<In,E> extends BaseListCommonStream<E> 
 implements InputStream1<In, E> {
 	
-	public BaseListStream1(ListStream<In> inputStream, int maxLast){
+	public BaseListStream1(NumberedStream<In> inputStream, int maxLast){
 		_inputStream = inputStream;
 		setMaxLast(maxLast);
 	}
@@ -45,7 +45,7 @@ implements InputStream1<In, E> {
 	}
 
 	/** Does not always exist. */
-	protected ListStream<In> _inputStream;
+	protected NumberedStream<In> _inputStream;
 	
 	@Override
 	public E invokeIndex(int index){
@@ -62,7 +62,7 @@ implements InputStream1<In, E> {
 	}
 	
 	@Override
-	public ListStream<In> getInputStream() {
+	public NumberedStream<In> getInputStream() {
 		return _inputStream;
 	}
 	
