@@ -36,6 +36,9 @@ import org.shapelogic.calculation.InContexts;
 abstract public class BaseListIndexedStream1<In,E> extends BaseListCommonStream<E> 
 implements IndexedInputStream1<In, E> {
 	
+	/** Does not always exist. */
+	protected NumberedStream<In> _inputStream;
+	
 	public BaseListIndexedStream1(NumberedStream<In> inputStream, int maxLast){
 		_inputStream = inputStream;
 		setMaxLast(maxLast);
@@ -48,9 +51,6 @@ implements IndexedInputStream1<In, E> {
 	public BaseListIndexedStream1(){
 	}
 
-	/** Does not always exist. */
-	protected NumberedStream<In> _inputStream;
-	
 	@Override
 	public E invokeIndex(int index){
 		return invoke(getInput(index),index);
