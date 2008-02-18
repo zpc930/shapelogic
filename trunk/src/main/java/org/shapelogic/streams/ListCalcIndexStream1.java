@@ -12,28 +12,28 @@ import org.shapelogic.util.Constants;
  * @author Sami Badawi
  * 
  */
-public class TransformerListStream<In, E> extends BaseListIndexedStream1<In, E> {
-	protected CalcIndex1<In, E> _transformer;
+public class ListCalcIndexStream1<In, E> extends BaseListIndexedStream1<In, E> {
+	protected CalcIndex1<In, E> _calc;
 	
-	public TransformerListStream(CalcIndex1<In, E> transformer, ListStream<In> inputStream, int maxLast) {
+	public ListCalcIndexStream1(CalcIndex1<In, E> calc, NumberedStream<In> inputStream, int maxLast) {
 		super(inputStream, maxLast);
-		_transformer = transformer;
+		_calc = calc;
 	}
 
-	public TransformerListStream(CalcIndex1<In, E> transformer) {
+	public ListCalcIndexStream1(CalcIndex1<In, E> transformer) {
 		this(transformer,null, Constants.LAST_UNKNOWN);
 	}
 
-	public TransformerListStream() {
+	public ListCalcIndexStream1() {
 	}
 	
-	public TransformerListStream(CalcIndex1<In, E> transformer, int maxLast) {
-		_transformer = transformer;
+	public ListCalcIndexStream1(CalcIndex1<In, E> transformer, int maxLast) {
+		_calc = transformer;
 		setMaxLast(maxLast);
 	}
 
 	@Override
 	public E invoke(In input, int index) {
-		return _transformer.invoke(input, index);
+		return _calc.invoke(input, index);
 	}
 }

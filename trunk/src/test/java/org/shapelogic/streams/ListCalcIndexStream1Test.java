@@ -1,7 +1,7 @@
 package org.shapelogic.streams;
 
 import org.shapelogic.calculation.CalcIndex1;
-import org.shapelogic.streams.TransformerListStream;
+import org.shapelogic.streams.ListCalcIndexStream1;
 
 /** Test of TransformerStream.
  * 
@@ -13,10 +13,12 @@ import org.shapelogic.streams.TransformerListStream;
  * <li>the other values in the stream</li> 
  * </ul>
  * 
+ * XXX This should be called ListCalcIndexStream1Test or something close to that.<br />
+ * 
  * @author Sami Badawi
  *
  */
-public class TransformerListStreamTest extends AbstractListStreamTests {
+public class ListCalcIndexStream1Test extends AbstractListStreamTests {
 
 	@Override
 	public void setUp() throws Exception {
@@ -25,8 +27,8 @@ public class TransformerListStreamTest extends AbstractListStreamTests {
 		fibonacciNumbersAfterOneIteration = 2;
 	}
 
-	TransformerListStream<Object,Integer> countingBaseStreamFactory(final int stopNumber) {
-		TransformerListStream<Object, Integer> stream = new TransformerListStream<Object,Integer>() {
+	ListCalcIndexStream1<Object,Integer> countingBaseStreamFactory(final int stopNumber) {
+		ListCalcIndexStream1<Object, Integer> stream = new ListCalcIndexStream1<Object,Integer>() {
 
 			{
 				_maxLast = stopNumber;
@@ -34,7 +36,7 @@ public class TransformerListStreamTest extends AbstractListStreamTests {
 			}
 			
 			{
-				_transformer = new CalcIndex1<Object,Integer>() {
+				_calc = new CalcIndex1<Object,Integer>() {
 
 					@Override
 					public Integer invoke(Object arg0, int index) {
@@ -52,14 +54,14 @@ public class TransformerListStreamTest extends AbstractListStreamTests {
 	 * 
 	 * @return
 	 */
-	TransformerListStream<Object,Integer> fibonacciBaseStreamFactory() {
-		TransformerListStream<Object,Integer> stream = new TransformerListStream<Object,Integer>() {
+	ListCalcIndexStream1<Object,Integer> fibonacciBaseStreamFactory() {
+		ListCalcIndexStream1<Object,Integer> stream = new ListCalcIndexStream1<Object,Integer>() {
 			{
-				final TransformerListStream<Object,Integer> parent = this;
+				final ListCalcIndexStream1<Object,Integer> parent = this;
 				//Add 2 first values
 				_list.add(1);
 				_list.add(1);
-				_transformer = new CalcIndex1<Object,Integer>() {
+				_calc = new CalcIndex1<Object,Integer>() {
 
 					@Override
 					public Integer invoke(Object obj, int arg0) {
