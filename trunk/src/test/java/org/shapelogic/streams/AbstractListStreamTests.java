@@ -1,5 +1,9 @@
 package org.shapelogic.streams;
 
+import org.shapelogic.calculation.RootMap;
+import org.shapelogic.mathematics.NaturalNumberStream;
+import org.shapelogic.predicate.BinaryEqualPredicate;
+import org.shapelogic.predicate.BinaryPredicate;
 import org.shapelogic.streams.ListStream;
 
 import junit.framework.TestCase;
@@ -14,6 +18,7 @@ public abstract class AbstractListStreamTests extends TestCase {
 	protected int fibonacciNumbersAfterOneIteration = 1;
 	protected boolean _disableTests = false;
 	protected String _language;
+	protected String _filterFunctionExpression;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -114,6 +119,27 @@ public abstract class AbstractListStreamTests extends TestCase {
 		assertNumberEquals(2,(Number)val2);
 		assertNumberEquals(3,stream.next());
 		assertNumberEquals(5,stream.next());
+	}
+	
+	/** Take a named input stream and make a filter based on a function.
+	 */
+	public void testNamedFilterStream() {
+		NaturalNumberStream naturalNumbersTo3 = new NaturalNumberStream(3);
+		String inputStreamName = "naturalNumbersTo3";
+		RootMap.put(inputStreamName, naturalNumbersTo3);
+		String ruleName = "EvenNumbers";
+		BinaryPredicate<Integer, Integer> binaryPredicate = new BinaryEqualPredicate();
+		Integer compareObject = 2;
+		ListStream<Boolean> stream = StreamFactory.createListStream0(ruleName, 
+				inputStreamName, _filterFunctionExpression, binaryPredicate, compareObject, _language);
+		assertEquals(Boolean.FALSE,stream.next());
+		assertEquals(Boolean.TRUE,stream.next());
+		assertEquals(Boolean.FALSE,stream.next());
+		assertEquals(Boolean.FALSE,stream.next());
+//		assertFalse(stream.hasNext()); //XXX should work
+//		assertNull(stream.next()); //XXX should work
+		assertEquals(Boolean.FALSE,stream.next());
+		assertEquals(Boolean.FALSE,stream.next());
 	}
 	
 	/** Maybe this should be moved to utility class */
