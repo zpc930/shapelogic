@@ -121,9 +121,14 @@ public abstract class AbstractListStreamTests extends TestCase {
 		assertNumberEquals(5,stream.next());
 	}
 	
-	/** Take a named input stream and make a filter based on a function.
+	/** Take a named input stream and make a filter based on a scripting function.
+	 * <br />
+	 * So this should only be run for the Scripting function based tests.
 	 */
 	public void testNamedFilterStream() {
+		if (_disableTests) return;
+		if (_filterFunctionExpression==null)
+			return;
 		NaturalNumberStream naturalNumbersTo3 = new NaturalNumberStream(3);
 		String inputStreamName = "naturalNumbersTo3";
 		RootMap.put(inputStreamName, naturalNumbersTo3);
