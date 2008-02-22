@@ -11,7 +11,7 @@ import org.shapelogic.streams.ListStream;
  * @author Sami Badawi
  *
  */
-public class FunctionJRubyStreamTest extends AbstractListStreamTests {
+public class FunctionJRubyStreamTest extends AbstractScriptingListStreamTests {
 
 	public void setUp() throws Exception {
 		super.setUp();
@@ -19,7 +19,7 @@ public class FunctionJRubyStreamTest extends AbstractListStreamTests {
 		fibonacciNumbersAfterOneIteration = 2;
 		_disableTests = true; //XXX JRuby works fine in Eclipse but not under Maven 2, fix and enable again
 		_language = "jruby";
-		_filterFunctionExpression = "def EvenNumbers_FUNCTION_(it) return it*2 end";
+		_filterFunctionExpressionEven = "def EvenNumbers_FUNCTION_(it) return it*2 end";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {

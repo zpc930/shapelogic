@@ -11,14 +11,14 @@ import org.shapelogic.streams.ListStream;
  * @author Sami Badawi
  *
  */
-public class FunctionJavaScriptStreamTest extends AbstractListStreamTests {
+public class FunctionJavaScriptStreamTest extends AbstractScriptingListStreamTests {
 
 	public void setUp() throws Exception {
 		super.setUp();
 		fibonacciNumbersAtStart = 2;
 		fibonacciNumbersAfterOneIteration = 2;
 		_language = "javascript";
-		_filterFunctionExpression = "function EvenNumbers_FUNCTION_(it) { return it*2 }";
+		_filterFunctionExpressionEven = "function EvenNumbers_FUNCTION_(it) { return it*2 }";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {
