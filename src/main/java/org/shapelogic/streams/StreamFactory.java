@@ -4,7 +4,10 @@ import java.util.Iterator;
 
 import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.CalcIndex1;
+import org.shapelogic.calculation.RootMap;
 import org.shapelogic.predicate.BinaryPredicate;
+import org.shapelogic.predicate.BinaryPredicateFactory;
+import org.shapelogic.predicate.Predicate;
 import org.shapelogic.scripting.FunctionCalc1;
 import org.shapelogic.scripting.FunctionCalcIndex1;
 import org.shapelogic.util.Constants;
@@ -15,17 +18,17 @@ import org.shapelogic.util.Constants;
  *
  */
 public class StreamFactory {
-	static public <In, E> ListStream<E> createListStream(CalcIndex1<In, E> transformer){
+	static public <In, E> ListStream<E> createListStream(final CalcIndex1<In, E> transformer){
 		return new ListCalcIndexStream1<In, E>(transformer);
 	}
 
-	static public <E> ListStream<E> createListStream(Iterator<E> iterator, int maxLast){
+	static public <E> ListStream<E> createListStream(final Iterator<E> iterator, int maxLast){
 		ListStream<E> result = new ListCalcIndexStream1<Object, E>(createCalcIndex1(iterator));
 		result.setMaxLast(maxLast);
 		return result;
 	}
 	
-	static public <E> ListStream<E> createListStream(Iterator<E> iterator){
+	static public <E> ListStream<E> createListStream(final Iterator<E> iterator){
 		return new ListCalcIndexStream1<Object, E>(createCalcIndex1(iterator));
 	}
 	
@@ -53,9 +56,12 @@ public class StreamFactory {
 	 * @param startList elements to add to stream at the beginning
 	 * @return
 	 */
-	static public <In,E> ListStream<E> createListStream(String name, String expression , String language, Integer stopNumber, E ... startList){
+	static public <In,E> ListStream<E> createListStream(String name, String expression , 
+		String language, Integer stopNumber, E ... startList)
+	{
 		String functionName = name + Constants.FUNCTION_NAME_SUFFIX;
-		FunctionCalcIndex1<In, E> transformer = new FunctionCalcIndex1<In, E>(functionName, expression, language); 
+		FunctionCalcIndex1<In, E> transformer = 
+			new FunctionCalcIndex1<In, E>(functionName, expression, language); 
 		ListStream<E> result = new ListCalcIndexStream1<In, E>(transformer);
 		if (stopNumber != null)
 			result.setMaxLast(stopNumber);
@@ -88,15 +94,64 @@ public class StreamFactory {
 	 */
 	static public <In0, In1, In2> ListStream<Boolean> createListStream0(String name, 
 			String inputName, String expression, 
-			final BinaryPredicate<In1, In2> binaryPredicate, final In2 compareObject, String language)
+			final BinaryPredicate<In1, In2> binaryPredicate, 
+			final In2 compareObject, String language)
 	{
 		String functionName = name + Constants.FUNCTION_NAME_SUFFIX;
 		//I need to insert the transformer in the stream otherwise I have a 
 		//problem with an extra stream and what kind of caching I should use
 		//would it be better to have a way to turn an expression into a Calc and 
 		//I should have a way to combine Calcs.
-//		final 
 		final NamedNumberedStream0<In0> input = new NamedNumberedStream0(inputName);
+		final Calc1<In0, Boolean> calcBoolean = makeFunctionBooleanCalc1(expression,
+				binaryPredicate, compareObject, language, functionName);
+		final ListCalcStream1<In0,Boolean> calcStream1 = 
+			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
+		return calcStream1;
+	}
+
+	/** Create stream based on a function.
+	 * <br />
+	 * I need to handle something like this:<br />
+	 * <br />
+	 * A, "polygons", "def tempA2 = {it.points.length}", "==", 5<br />
+	 * <br />
+	 * What should the output type of this be?<br />
+	 * NumberedStream[Boolean] <br />
+	 * CaclIndex[Boolean] <br />
+	 * Predicate[Integer] <br />
+	 * <br />
+	 * @param <In> is not used now maybe I should change the type
+	 * @param <E> Element type
+	 * @param name of the created stream
+	 * @param input name of the input stream
+	 * @param expression in Scripting language of values stream
+	 * @param binaryPredicate by name
+	 * @param compareObject
+	 * @param language Scripting language by name, Groovy is the default
+	 * @return
+	 */
+	static public <In0, In1, In2> ListStream<Boolean> createListStream0(String name, 
+			String inputName, String expression, 
+			final String binaryPredicateString, final In2 compareObject, String language)
+	{
+		String functionName = name + Constants.FUNCTION_NAME_SUFFIX;
+		//I need to insert the transformer in the stream otherwise I have a 
+		//problem with an extra stream and what kind of caching I should use
+		//would it be better to have a way to turn an expression into a Calc and 
+		//I should have a way to combine Calcs.
+		final NamedNumberedStream0<In0> input = new NamedNumberedStream0(inputName);
+		final Calc1<In0, Boolean> calcBoolean = makeFunctionBooleanCalc1(expression,
+				binaryPredicateString, compareObject, language, functionName);
+		final ListCalcStream1<In0,Boolean> calcStream1 = 
+			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
+		return calcStream1;
+	}
+
+	public static <In0, In1, In2> Calc1<In0, Boolean> makeFunctionBooleanCalc1(
+			String expression, final BinaryPredicate<In1, In2> binaryPredicate,
+			final In2 compareObject, String language, String functionName) 
+	{
 		final FunctionCalc1<In0,In1> calc1 = 
 			new FunctionCalc1<In0,In1>(functionName, expression, language);
 		final Calc1<In0,Boolean> calcBoolean = new Calc1<In0,Boolean>() {
@@ -105,9 +160,75 @@ public class StreamFactory {
 				return binaryPredicate.evaluate(calc1.invoke(input), compareObject);
 			}
 		};
-		final ListCalcStream1<In0,Boolean> calcStream1 = 
-			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
-		return calcStream1;
+		return calcBoolean;
 	}
 	
+	public static < In0, In1, In2> Calc1<In0, Boolean> makeFunctionBooleanCalc1(
+			String expression, final String binaryPredicateString,
+			final In2 compareObject, String language, String functionName) 
+	{
+		final BinaryPredicate<In1, In2> binaryPredicate = 
+			BinaryPredicateFactory.getInstance(binaryPredicateString);
+		if (binaryPredicate == null)
+			return null;
+		final Calc1<In0,Boolean> calcBoolean = makeFunctionBooleanCalc1(
+			expression, binaryPredicate, compareObject, language, functionName);
+		return calcBoolean;
+	}
+	
+	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String name, 
+			String inputName, String expression, 
+			final BinaryPredicate<In1, In2> binaryPredicate, final In2 compareObject, String language)
+	{
+		Object obj = RootMap.get(name);
+		AndListStream andListStream = null;
+		if (obj == null)
+			andListStream = new AndListStream();
+		else if (!(obj instanceof AndListStream)) 
+			throw new RuntimeException("Wrong type of object: " + obj);
+		else
+			andListStream = (AndListStream) obj;
+		ListStream<Boolean> component = createListStream0(name, inputName,
+				expression, binaryPredicate, compareObject, language);
+		andListStream.getInputStream().add(component);
+		return andListStream;
+	}
+
+	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String name, 
+			String inputName, String expression, 
+			final String binaryPredicateString, final In2 compareObject, String language)
+	{
+		final BinaryPredicate<In1, In2> binaryPredicate = 
+			BinaryPredicateFactory.getInstance(binaryPredicateString);
+		return addListStream0(name, inputName,
+				expression, binaryPredicate, compareObject, language);
+	}
+	
+	public static <In0, In1, In2> Predicate<In0> makeFunctionPredicate(
+			String expression, final BinaryPredicate<In1, In2> binaryPredicate,
+			final In2 compareObject, String language, String functionName) 
+	{
+		final FunctionCalc1<In0,In1> calc1 = 
+			new FunctionCalc1<In0,In1>(functionName, expression, language);
+		final Predicate<In0> calcBoolean = new Predicate<In0>() {
+			@Override
+			public boolean evaluate(In0 input) {
+				return binaryPredicate.evaluate(calc1.invoke(input), compareObject);
+			}
+		};
+		return calcBoolean;
+	}
+	
+	public static <In0, In1, In2> Predicate<In0> makeFunctionPredicate(
+			String expression, final String binaryPredicateString,
+			final In2 compareObject, String language, String functionName) 
+	{
+		final BinaryPredicate<In1, In2> binaryPredicate = 
+			BinaryPredicateFactory.getInstance(binaryPredicateString);
+		if (binaryPredicate == null)
+			return null;
+		final Predicate<In0> calcBoolean = makeFunctionPredicate(
+			expression, binaryPredicate, compareObject, language, functionName);
+		return calcBoolean;
+	}
 }
