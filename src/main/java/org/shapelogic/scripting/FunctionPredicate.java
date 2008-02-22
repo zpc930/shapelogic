@@ -4,6 +4,8 @@ import javax.script.Invocable;
 import javax.script.ScriptException;
 
 import org.shapelogic.calculation.Calc1;
+import org.shapelogic.predicate.BinaryPredicate;
+import org.shapelogic.predicate.BinaryPredicateFactory;
 import org.shapelogic.predicate.Predicate;
 
 /** Transform based on an expression in a Scripting language using JSR 223.
@@ -52,5 +54,33 @@ public class FunctionPredicate<In> extends BaseScriptingFunction
 		if (result instanceof Boolean) return ((Boolean)result).booleanValue();
 		if (result instanceof Number) return ((Number)result).doubleValue() == 0.0;
 		return false;
+	}
+
+	public static <In0, In1, In2> Predicate<In0> makeFunctionPredicate(
+			String expression, final BinaryPredicate<In1, In2> binaryPredicate,
+			final In2 compareObject, String language, String functionName) 
+	{
+		final FunctionCalc1<In0,In1> calc1 = 
+			new FunctionCalc1<In0,In1>(functionName, expression, language);
+		final Predicate<In0> calcBoolean = new Predicate<In0>() {
+			@Override
+			public boolean evaluate(In0 input) {
+				return binaryPredicate.evaluate(calc1.invoke(input), compareObject);
+			}
+		};
+		return calcBoolean;
+	}
+	
+	public static <In0, In1, In2> Predicate<In0> makeFunctionPredicate(
+			String expression, final String binaryPredicateString,
+			final In2 compareObject, String language, String functionName) 
+	{
+		final BinaryPredicate<In1, In2> binaryPredicate = 
+			BinaryPredicateFactory.getInstance(binaryPredicateString);
+		if (binaryPredicate == null)
+			return null;
+		final Predicate<In0> calcBoolean = makeFunctionPredicate(
+			expression, binaryPredicate, compareObject, language, functionName);
+		return calcBoolean;
 	}
 }

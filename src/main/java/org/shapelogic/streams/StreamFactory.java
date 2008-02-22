@@ -60,14 +60,14 @@ public class StreamFactory {
 		String language, Integer stopNumber, E ... startList)
 	{
 		String functionName = name + Constants.FUNCTION_NAME_SUFFIX;
-		FunctionCalcIndex1<In, E> transformer = 
+		FunctionCalcIndex1<In, E> functionCalcIndex1 = 
 			new FunctionCalcIndex1<In, E>(functionName, expression, language); 
-		ListStream<E> result = new ListCalcIndexStream1<In, E>(transformer);
+		ListStream<E> result = new ListCalcIndexStream1<In, E>(functionCalcIndex1);
 		if (stopNumber != null)
 			result.setMaxLast(stopNumber);
 		for (E el: startList)
 			result.getList().add(el);
-		transformer.put(name, result);
+		functionCalcIndex1.put(name, result);
 		return result;
 	}
 	
@@ -178,7 +178,8 @@ public class StreamFactory {
 	
 	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String name, 
 			String inputName, String expression, 
-			final BinaryPredicate<In1, In2> binaryPredicate, final In2 compareObject, String language)
+			final BinaryPredicate<In1, In2> binaryPredicate, 
+			final In2 compareObject, String language)
 	{
 		Object obj = RootMap.get(name);
 		AndListStream andListStream = null;
@@ -204,31 +205,4 @@ public class StreamFactory {
 				expression, binaryPredicate, compareObject, language);
 	}
 	
-	public static <In0, In1, In2> Predicate<In0> makeFunctionPredicate(
-			String expression, final BinaryPredicate<In1, In2> binaryPredicate,
-			final In2 compareObject, String language, String functionName) 
-	{
-		final FunctionCalc1<In0,In1> calc1 = 
-			new FunctionCalc1<In0,In1>(functionName, expression, language);
-		final Predicate<In0> calcBoolean = new Predicate<In0>() {
-			@Override
-			public boolean evaluate(In0 input) {
-				return binaryPredicate.evaluate(calc1.invoke(input), compareObject);
-			}
-		};
-		return calcBoolean;
-	}
-	
-	public static <In0, In1, In2> Predicate<In0> makeFunctionPredicate(
-			String expression, final String binaryPredicateString,
-			final In2 compareObject, String language, String functionName) 
-	{
-		final BinaryPredicate<In1, In2> binaryPredicate = 
-			BinaryPredicateFactory.getInstance(binaryPredicateString);
-		if (binaryPredicate == null)
-			return null;
-		final Predicate<In0> calcBoolean = makeFunctionPredicate(
-			expression, binaryPredicate, compareObject, language, functionName);
-		return calcBoolean;
-	}
 }
