@@ -1,10 +1,12 @@
 package org.shapelogic.streams;
 
+import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.mathematics.NaturalNumberStream;
 import org.shapelogic.predicate.BinaryEqualPredicate;
 import org.shapelogic.predicate.BinaryPredicate;
 import org.shapelogic.streams.ListStream;
+import org.shapelogic.util.Constants;
 
 import junit.framework.TestCase;
 
@@ -17,8 +19,6 @@ public abstract class AbstractListStreamTests extends TestCase {
 	protected int fibonacciNumbersAtStart;
 	protected int fibonacciNumbersAfterOneIteration = 1;
 	protected boolean _disableTests = false;
-	protected String _language;
-	protected String _filterFunctionExpression;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -119,32 +119,6 @@ public abstract class AbstractListStreamTests extends TestCase {
 		assertNumberEquals(2,(Number)val2);
 		assertNumberEquals(3,stream.next());
 		assertNumberEquals(5,stream.next());
-	}
-	
-	/** Take a named input stream and make a filter based on a scripting function.
-	 * <br />
-	 * So this should only be run for the Scripting function based tests.
-	 */
-	public void testNamedFilterStream() {
-		if (_disableTests) return;
-		if (_filterFunctionExpression==null)
-			return;
-		NaturalNumberStream naturalNumbersTo3 = new NaturalNumberStream(3);
-		String inputStreamName = "naturalNumbersTo3";
-		RootMap.put(inputStreamName, naturalNumbersTo3);
-		String ruleName = "EvenNumbers";
-		BinaryPredicate<Integer, Integer> binaryPredicate = new BinaryEqualPredicate();
-		Integer compareObject = 2;
-		ListStream<Boolean> stream = StreamFactory.createListStream0(ruleName, 
-				inputStreamName, _filterFunctionExpression, binaryPredicate, compareObject, _language);
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.TRUE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
-//		assertFalse(stream.hasNext()); //XXX should work
-//		assertNull(stream.next()); //XXX should work
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
 	}
 	
 	/** Maybe this should be moved to utility class */

@@ -10,14 +10,15 @@ import org.shapelogic.streams.ListStream;
  * @author Sami Badawi
  *
  */
-public class FunctionGroovyStreamTest extends AbstractListStreamTests {
+public class FunctionGroovyStreamTest extends AbstractScriptingListStreamTests {
 
 	public void setUp() throws Exception {
 		super.setUp();
 		fibonacciNumbersAtStart = 2;
 		fibonacciNumbersAfterOneIteration = 2;
 		_language = "groovy";
-		_filterFunctionExpression = "def EvenNumbers_FUNCTION_ = {it*2};";
+		_filterFunctionExpressionEven = "def EvenNumbers_FUNCTION_ = {it*2 % 6};";
+		_filterFunctionExpressionThird = "def ThirdNumbers_FUNCTION_ = {it%4};";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {
