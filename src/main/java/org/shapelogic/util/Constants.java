@@ -36,8 +36,10 @@ public class Constants {
 	public static final String PARAMETRIC_RULE_TASK = "ParametricRuleTask";
 	public static final double TOLERANCE = 0.0001;
 
+	//Missing
 	public final static int LAST_UNKNOWN = -2;
-
+	public final static String NO_OH = "";
+	
 	//Names of Boolean operations
 	public static final String AND = "AND";
 	public static final String OR = "OR";
