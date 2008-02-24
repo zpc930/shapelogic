@@ -18,7 +18,8 @@ public class FunctionJavaScriptStreamTest extends AbstractScriptingListStreamTes
 		fibonacciNumbersAtStart = 2;
 		fibonacciNumbersAfterOneIteration = 2;
 		_language = "javascript";
-		_filterFunctionExpressionEven = "function EvenNumbers_FUNCTION_(it) { return it*2 }";
+		_filterFunctionExpressionEven = "function EvenNumbers_FUNCTION_(it) { return it*2 % 6 }";
+		_filterFunctionExpressionThird = "function ThirdNumbers_FUNCTION_(it) { return it*8 }";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {

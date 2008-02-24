@@ -33,7 +33,8 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		BinaryPredicate<Integer, Integer> binaryPredicate = new BinaryEqualPredicate();
 		Integer compareObject = 2;
 		ListStream<Boolean> stream = StreamFactory.createListStream0(ruleName, 
-				inputStreamName, _filterFunctionExpressionEven, binaryPredicate, compareObject, _language);
+				inputStreamName, _filterFunctionExpressionEven, 
+				binaryPredicate, compareObject, _language);
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.TRUE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
@@ -76,11 +77,14 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		NaturalNumberStream naturalNumbersTo3 = new NaturalNumberStream(3);
 		String inputStreamName = "naturalNumbersTo3";
 		RootMap.put(inputStreamName, naturalNumbersTo3);
-		String ruleName = "EvenNumbers";
+		String ruleName = "XOrRule";
+		String partEvenName = "EvenNumbers";
+		String partThirdName = "ThirdNumbers";
 		Integer compareObject = 2;
-		ListStream<Boolean> stream = StreamFactory.addListStream0(ruleName, 
+		RootMap.getMap().remove(ruleName);
+		ListStream<Boolean> stream = StreamFactory.addListStream0(ruleName,partEvenName, 
 				inputStreamName, _filterFunctionExpressionEven, "==", compareObject, _language);
-		StreamFactory.addListStream0(ruleName, 
+		StreamFactory.addListStream0(ruleName, partThirdName,
 				inputStreamName, _filterFunctionExpressionThird, "==", 8, _language);
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.TRUE,stream.next());
