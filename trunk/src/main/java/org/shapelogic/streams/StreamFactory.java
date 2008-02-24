@@ -184,6 +184,9 @@ public class StreamFactory {
 	{
 		Object obj = RootMap.get(andName);
 		AndListStream andListStream = null;
+		if (partName == null) {
+			partName = andName + "_" + inputName;
+		}
 		if (obj == null) {
 			andListStream = new AndListStream();
 			RootMap.put(andName, andListStream);

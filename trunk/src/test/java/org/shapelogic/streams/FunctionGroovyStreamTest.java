@@ -19,6 +19,7 @@ public class FunctionGroovyStreamTest extends AbstractScriptingListStreamTests {
 		_language = "groovy";
 		_filterFunctionExpressionEven = "def EvenNumbers_FUNCTION_ = {it*2 % 6};";
 		_filterFunctionExpressionThird = "def ThirdNumbers_FUNCTION_ = {it*8};";
+		_filterFunctionExpressionEvenNoPartName = "def XOrRule_naturalNumbersTo3_FUNCTION_ = {it*2 % 6};";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {

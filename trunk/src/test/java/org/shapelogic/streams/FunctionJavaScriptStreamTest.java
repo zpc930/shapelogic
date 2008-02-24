@@ -20,6 +20,7 @@ public class FunctionJavaScriptStreamTest extends AbstractScriptingListStreamTes
 		_language = "javascript";
 		_filterFunctionExpressionEven = "function EvenNumbers_FUNCTION_(it) { return it*2 % 6 }";
 		_filterFunctionExpressionThird = "function ThirdNumbers_FUNCTION_(it) { return it*8 }";
+		_filterFunctionExpressionEvenNoPartName = "function XOrRule_naturalNumbersTo3_FUNCTION_(it) { return it*2 % 6 }";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {

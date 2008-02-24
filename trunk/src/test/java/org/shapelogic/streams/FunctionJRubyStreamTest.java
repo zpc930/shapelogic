@@ -21,6 +21,7 @@ public class FunctionJRubyStreamTest extends AbstractScriptingListStreamTests {
 		_language = "jruby";
 		_filterFunctionExpressionEven = "def EvenNumbers_FUNCTION_(it) return it*2 end";
 		_filterFunctionExpressionThird = "def ThirdNumbers_FUNCTION_(it) it*8 end";
+		_filterFunctionExpressionEvenNoPartName = "def XOrRule_naturalNumbersTo3_FUNCTION_(it) return it*2 end";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {
