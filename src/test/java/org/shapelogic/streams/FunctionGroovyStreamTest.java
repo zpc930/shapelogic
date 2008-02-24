@@ -18,7 +18,7 @@ public class FunctionGroovyStreamTest extends AbstractScriptingListStreamTests {
 		fibonacciNumbersAfterOneIteration = 2;
 		_language = "groovy";
 		_filterFunctionExpressionEven = "def EvenNumbers_FUNCTION_ = {it*2 % 6};";
-		_filterFunctionExpressionThird = "def ThirdNumbers_FUNCTION_ = {it%4};";
+		_filterFunctionExpressionThird = "def ThirdNumbers_FUNCTION_ = {it*8};";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {

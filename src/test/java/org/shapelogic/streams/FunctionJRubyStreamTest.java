@@ -20,6 +20,7 @@ public class FunctionJRubyStreamTest extends AbstractScriptingListStreamTests {
 		_disableTests = true; //XXX JRuby works fine in Eclipse but not under Maven 2, fix and enable again
 		_language = "jruby";
 		_filterFunctionExpressionEven = "def EvenNumbers_FUNCTION_(it) return it*2 end";
+		_filterFunctionExpressionThird = "def ThirdNumbers_FUNCTION_(it) it*8 end";
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {

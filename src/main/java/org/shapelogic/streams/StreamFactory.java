@@ -107,6 +107,7 @@ public class StreamFactory {
 				binaryPredicate, compareObject, language, functionName);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
 			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
+		RootMap.put(name, calcStream1);
 		return calcStream1;
 	}
 
@@ -176,32 +177,34 @@ public class StreamFactory {
 		return calcBoolean;
 	}
 	
-	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String name, 
-			String inputName, String expression, 
+	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String andName, 
+			String partName, String inputName, String expression, 
 			final BinaryPredicate<In1, In2> binaryPredicate, 
 			final In2 compareObject, String language)
 	{
-		Object obj = RootMap.get(name);
+		Object obj = RootMap.get(andName);
 		AndListStream andListStream = null;
-		if (obj == null)
+		if (obj == null) {
 			andListStream = new AndListStream();
+			RootMap.put(andName, andListStream);
+		}
 		else if (!(obj instanceof AndListStream)) 
 			throw new RuntimeException("Wrong type of object: " + obj);
 		else
 			andListStream = (AndListStream) obj;
-		ListStream<Boolean> component = createListStream0(name, inputName,
+		ListStream<Boolean> component = createListStream0(partName, inputName,
 				expression, binaryPredicate, compareObject, language);
 		andListStream.getInputStream().add(component);
 		return andListStream;
 	}
 
-	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String name, 
-			String inputName, String expression, 
+	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String andName, 
+			String partName, String inputName, String expression, 
 			final String binaryPredicateString, final In2 compareObject, String language)
 	{
 		final BinaryPredicate<In1, In2> binaryPredicate = 
 			BinaryPredicateFactory.getInstance(binaryPredicateString);
-		return addListStream0(name, inputName,
+		return addListStream0(andName, partName, inputName,
 				expression, binaryPredicate, compareObject, language);
 	}
 	
