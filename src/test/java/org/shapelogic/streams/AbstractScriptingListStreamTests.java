@@ -17,6 +17,7 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 	protected String _language;
 	protected String _filterFunctionExpressionEven;
 	protected String _filterFunctionExpressionThird;
+	protected String _filterFunctionExpressionEvenNoPartName;
 
 	/** Take a named input stream and make a filter based on a scripting function.
 	 * <br />
@@ -96,8 +97,32 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		assertEquals(Boolean.FALSE,stream.next());
 	}
 
-	
-	
+	public void testAddListStream0NoPartName() {
+		if (_disableTests) return;
+		if (_filterFunctionExpressionEven==null)
+			return;
+		NaturalNumberStream naturalNumbersTo3 = new NaturalNumberStream(3);
+		String inputStreamName = "naturalNumbersTo3";
+		RootMap.put(inputStreamName, naturalNumbersTo3);
+		String ruleName = "XOrRule";
+		String partEvenName = "EvenNumbers";
+		String partThirdName = "ThirdNumbers";
+		Integer compareObject = 2;
+		RootMap.getMap().remove(ruleName);
+		ListStream<Boolean> stream = StreamFactory.addListStream0(ruleName,partEvenName, 
+				inputStreamName, _filterFunctionExpressionEven, "==", compareObject, _language);
+		StreamFactory.addListStream0(ruleName, partThirdName,
+				inputStreamName, _filterFunctionExpressionThird, "==", 8, _language);
+		assertEquals(Boolean.FALSE,stream.next());
+		assertEquals(Boolean.TRUE,stream.next());
+		assertEquals(Boolean.FALSE,stream.next());
+		assertEquals(Boolean.FALSE,stream.next());
+//		assertFalse(stream.hasNext()); //XXX should work
+//		assertNull(stream.next()); //XXX should work
+		assertEquals(Boolean.FALSE,stream.next());
+		assertEquals(Boolean.FALSE,stream.next());
+	}
+
 	/** Take a named input stream and make a filter based on a scripting function.
 	 * <br />
 	 * So this should only be run for the Scripting function based tests.
