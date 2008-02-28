@@ -1,5 +1,6 @@
 package org.shapelogic.streams;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.shapelogic.util.Constants;
@@ -22,10 +23,15 @@ public class XOrListStream extends BaseListStreamList<Boolean,String> {
 	public XOrListStream(List<String> ohNames, int maxLast) {
 		super(null,maxLast);
 		_ohNames = ohNames;
+		_inputStream = new ArrayList(); 
 		for (String streamName: _ohNames) {
 			NumberedStream numberedStream = new NamedNumberedStream0(streamName);
-			this.getInputStream().add(numberedStream);
+			getInputStream().add(numberedStream);
 		}
+	}
+	
+	public XOrListStream(List<String> ohNames) {
+		this(ohNames,Constants.LAST_UNKNOWN);
 	}
 	
 	public XOrListStream(List<String> ohNames, List<NumberedStream<Boolean> > inputStream, int maxLast) {
