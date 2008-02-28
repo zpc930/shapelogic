@@ -83,9 +83,9 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		String partThirdName = "ThirdNumbers";
 		Integer compareObject = 2;
 		RootMap.getMap().remove(ruleName);
-		ListStream<Boolean> stream = StreamFactory.addListStream0(ruleName,partEvenName, 
+		ListStream<Boolean> stream = StreamFactory.addAndListStream0(ruleName,partEvenName, 
 				inputStreamName, _filterFunctionExpressionEven, "==", compareObject, _language);
-		StreamFactory.addListStream0(ruleName, partThirdName,
+		StreamFactory.addAndListStream0(ruleName, partThirdName,
 				inputStreamName, _filterFunctionExpressionThird, "==", 8, _language);
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.TRUE,stream.next());
@@ -109,9 +109,9 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		String partThirdName = "ThirdNumbers";
 		Integer compareObject = 2;
 		RootMap.getMap().remove(ruleName);
-		ListStream<Boolean> stream = StreamFactory.addListStream0(ruleName,partEvenName, 
+		ListStream<Boolean> stream = StreamFactory.addAndListStream0(ruleName,partEvenName, 
 				inputStreamName, _filterFunctionExpressionEven, "==", compareObject, _language);
-		StreamFactory.addListStream0(ruleName, partThirdName,
+		StreamFactory.addAndListStream0(ruleName, partThirdName,
 				inputStreamName, _filterFunctionExpressionThird, "==", 8, _language);
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.TRUE,stream.next());
