@@ -12,6 +12,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.shapelogic.calculation.RootMap;
+import org.shapelogic.streams.SingleListStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -22,8 +24,8 @@ import org.xml.sax.SAXException;
  * @author Sami Badawi
  *
  */
-public class SVGReader {
-	String fileName;
+public class SVGReader extends SingleListStream<Polygon> {
+	String _fileName;
 	Document _xml;
 	Polygon _polygon = null ;
 	ArrayList<String> rawLines = new ArrayList<String>();
@@ -35,12 +37,18 @@ public class SVGReader {
 	XPath xpath;
 	private String expression = "//path";
 	
-	public SVGReader(String fileName) {
-		this.fileName = fileName;
+	public SVGReader(String fileName, String name) {
+		this._fileName = fileName;
+		if (name != null)
+			RootMap.put(name,this);
 	}
 	
-	static public SVGReader makeInstance(String fileName) {
-		return new SVGReader(fileName);
+	public SVGReader(String fileName) {
+		this(fileName,null);
+	}
+
+	static public SVGReader makeInstance(String fileName, String name) {
+		return new SVGReader(fileName, name);
 	}  
 
     DocumentBuilder getDocumentBuilder() throws ParserConfigurationException {
@@ -51,8 +59,8 @@ public class SVGReader {
 	}
 
 	void read() throws SAXException, IOException, ParserConfigurationException {
-        System.out.println(fileName);
-        _xml = getDocumentBuilder().parse(fileName);
+        System.out.println(_fileName);
+        _xml = getDocumentBuilder().parse(_fileName);
     }
     
     Polygon makePolygon() throws SAXException, IOException, XPathExpressionException, ParserConfigurationException {
@@ -126,4 +134,14 @@ public class SVGReader {
     	}
     	return _polygon;
     }
+
+	@Override
+	public Polygon invoke() {
+		try {
+			return getPolygon();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
