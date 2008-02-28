@@ -75,10 +75,16 @@ implements InputStreamList<In, E> {
 		if (getInputStream() == null)
 			return null;
 		List<In> result = new ArrayList<In>(getDimension());
+		boolean notNull = false;
 		for (int i = 0; i < getDimension(); i++) {
 			NumberedStream<In> currentInputStream = _inputStream.get(i);
-			result.add(currentInputStream.get(index));
+			In element = currentInputStream.get(index);
+			if (element != null)
+				notNull = true; 
+			result.add(element);
 		}
+		if (!notNull)
+			return null;
 		return result;
 	}
 
