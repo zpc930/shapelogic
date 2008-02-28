@@ -9,7 +9,6 @@ import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
-import org.shapelogic.util.Constants;
 
 /** Create letter streams.
  * 
@@ -48,7 +47,7 @@ public class LoadLetterStreams {
 	public static void loadStreamsRequiredForLetterMatch() {
 		
 		//In order for this to work the polygons have to be defined first
-		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(Constants.POLYGONS);
+		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(StreamNames.POLYGONS);
 
 		Calc1<Polygon, Integer> pointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
