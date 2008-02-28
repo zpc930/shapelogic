@@ -14,7 +14,7 @@ import org.shapelogic.polygon.PolygonEndPointAdjuster;
 import org.shapelogic.util.LineType;
 import org.shapelogic.util.PointType;
 
-/**   
+/** Test MaxDistanceVectorizer.
  * 
  * @author Sami Badawi
  *
