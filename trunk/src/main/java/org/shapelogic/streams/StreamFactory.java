@@ -7,7 +7,6 @@ import org.shapelogic.calculation.CalcIndex1;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.predicate.BinaryPredicate;
 import org.shapelogic.predicate.BinaryPredicateFactory;
-import org.shapelogic.predicate.Predicate;
 import org.shapelogic.scripting.FunctionCalc1;
 import org.shapelogic.scripting.FunctionCalcIndex1;
 import org.shapelogic.util.Constants;
@@ -164,6 +163,19 @@ public class StreamFactory {
 		return calcBoolean;
 	}
 	
+	public static <In1, In2> Calc1<In1, Boolean> makeBooleanCalc1(
+			final BinaryPredicate<In1, In2> binaryPredicate,
+			final In2 compareObject) 
+	{
+		final Calc1<In1,Boolean> calcBoolean = new Calc1<In1,Boolean>() {
+			@Override
+			public Boolean invoke(In1 input) {
+				return binaryPredicate.evaluate(input, compareObject);
+			}
+		};
+		return calcBoolean;
+	}
+	
 	public static < In0, In1, In2> Calc1<In0, Boolean> makeFunctionBooleanCalc1(
 			String expression, final String binaryPredicateString,
 			final In2 compareObject, String language, String functionName) 
@@ -176,8 +188,23 @@ public class StreamFactory {
 			expression, binaryPredicate, compareObject, language, functionName);
 		return calcBoolean;
 	}
+
 	
-	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String andName, 
+	static public <In0, In2> ListStream<Boolean> createListStream0(String name, 
+			String inputName,  
+			final BinaryPredicate<In0, In2> binaryPredicate, 
+			final In2 compareObject)
+	{
+		final NamedNumberedStream0<In0> input = new NamedNumberedStream0(inputName);
+		final Calc1<In0, Boolean> calcBoolean = makeBooleanCalc1(binaryPredicate, compareObject);
+		final ListCalcStream1<In0,Boolean> calcStream1 = 
+			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
+		if (name != null)
+			RootMap.put(name, calcStream1);
+		return calcStream1;
+	}
+
+	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
 			String partName, String inputName, String expression, 
 			final BinaryPredicate<In1, In2> binaryPredicate, 
 			final In2 compareObject, String language)
@@ -201,14 +228,59 @@ public class StreamFactory {
 		return andListStream;
 	}
 
-	static public <In0, In1, In2> ListStream<Boolean> addListStream0(String andName, 
+	static public <In0, In1, In2> ListStream<Boolean> addAndListStream0(String andName, 
 			String partName, String inputName, String expression, 
 			final String binaryPredicateString, final In2 compareObject, String language)
 	{
 		final BinaryPredicate<In1, In2> binaryPredicate = 
 			BinaryPredicateFactory.getInstance(binaryPredicateString);
-		return addListStream0(andName, partName, inputName,
+		return addToAndListStream0(andName, partName, inputName,
 				expression, binaryPredicate, compareObject, language);
 	}
 	
+	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
+			String partName, String inputName,  
+			final BinaryPredicate<In1, In2> binaryPredicate, 
+			final In2 compareObject)
+	{
+		Object obj = RootMap.get(andName);
+		AndListStream andListStream = null;
+//		if (partName == null) {
+//			partName = andName + "_" + inputName;
+//		}
+		if (obj == null) {
+			andListStream = new AndListStream();
+			RootMap.put(andName, andListStream);
+		}
+		else if (!(obj instanceof AndListStream)) 
+			throw new RuntimeException("Wrong type of object: " + obj);
+		else
+			andListStream = (AndListStream) obj;
+		ListStream<Boolean> component = createListStream0(partName, inputName,
+				binaryPredicate, compareObject);
+		andListStream.getInputStream().add(component);
+		return andListStream;
+	}
+
+	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
+			String partName, String inputName,  
+			final String binaryPredicateString, 
+			final In2 compareObject)
+	{
+		final BinaryPredicate<In1, In2> binaryPredicate = 
+			BinaryPredicateFactory.getInstance(binaryPredicateString);
+		return addToAndListStream0(andName, partName, inputName,  
+				binaryPredicate, compareObject);
+	}
+
+	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
+			String inputName,  
+			final String binaryPredicateString, 
+			final In2 compareObject)
+	{
+		final BinaryPredicate<In1, In2> binaryPredicate = 
+			BinaryPredicateFactory.getInstance(binaryPredicateString);
+		return addToAndListStream0(andName, null, inputName,  
+				binaryPredicate, compareObject);
+	}
 }
