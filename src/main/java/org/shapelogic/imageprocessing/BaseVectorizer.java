@@ -18,6 +18,7 @@ import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLinePolygon;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.polygon.PolygonEndPointAdjuster;
+import org.shapelogic.streams.SingleListStream;
 import org.shapelogic.util.Constants;
 
 
@@ -51,7 +52,8 @@ import ij.process.ImageProcessor;
  * @author Sami Badawi
  *
  */
-public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
+public abstract class BaseVectorizer  extends SingleListStream<Polygon> 
+implements PlugInFilter, IPixelTypeFinder {
 
 	//Static
 	public static final String POLYGON = "polygon";
@@ -78,7 +80,7 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 	protected PixelTypeCalculator _pixelTypeCalculator = new PixelTypeCalculator(); 
 	protected ArrayList<CPointInt> _unfinishedPoints = new ArrayList<CPointInt>();
 	private Polygon _polygon = null;
-	private Polygon _cleanedupPolygon = null;
+	protected Polygon _cleanedupPolygon = null;
 	/** this is the index into the _pixels where the current point is */
 	protected int _currentPixelIndex;
 
@@ -111,16 +113,20 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		else
 			showMessage("No line point found.");
 		drawLines();
+		cleanPolygon();
 		matchLines();
 	}
 
+	protected void cleanPolygon() {
+		PolygonEndPointAdjuster adjuster = new PolygonEndPointAdjuster(getPolygon());
+		_cleanedupPolygon = adjuster.getValue();
+		_cleanedupPolygon = _cleanedupPolygon.improve(); 
+	}
+	
 	/** This does really not belong in a vectorizer. */
 	protected void matchLines() {
 		RootTask rootTask = RootTask.getInstance();
 		rootTask.setNamedValue(RAW_POLYGON, getPolygon());
-		PolygonEndPointAdjuster adjuster = new PolygonEndPointAdjuster(getPolygon());
-		_cleanedupPolygon = adjuster.getValue();
-		_cleanedupPolygon = _cleanedupPolygon.improve(); 
 		rootTask.setNamedValue(POLYGON, _cleanedupPolygon);
 		List<NumericRule> rulesList = Arrays.asList(_rulesArrayForLetterMatching);
 		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, null);
@@ -333,6 +339,11 @@ public abstract class BaseVectorizer implements PlugInFilter, IPixelTypeFinder {
 		return _polygon;
 	}
 
+	@Override
+	public Polygon invoke() {
+		return getCleanedupPolygon();
+	}
+	
 	public Object getMatchingOH() {
 		return _matchingOH;
 	}
