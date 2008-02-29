@@ -11,7 +11,7 @@ import junit.framework.TestCase;
  * @author Sami Badawi
  *
  */
-public class NamedNumberedStream0Test extends TestCase {
+public class NamedNumberedStreamTest extends TestCase {
 	
 	
 	@Override
@@ -21,7 +21,7 @@ public class NamedNumberedStream0Test extends TestCase {
 	}
 	
 	public void testNext() {
-		ListStream<Integer> stream = new NamedNumberedStream0("naturalNumbersTo3");
+		NumberedStream<Integer> stream = new NamedNumberedStream("naturalNumbersTo3");
 		assertEquals(new Integer(0),stream.next());
 		assertEquals(new Integer(1),stream.next());
 		assertEquals(new Integer(2),stream.next());
@@ -30,7 +30,7 @@ public class NamedNumberedStream0Test extends TestCase {
 	}
 
 	public void testGet() {
-		ListStream<Integer> stream = new NamedNumberedStream0("naturalNumbersTo3");
+		NumberedStream<Integer> stream = new NamedNumberedStream("naturalNumbersTo3");
 		assertEquals(new Integer(0),stream.get(0));
 		assertEquals(new Integer(1),stream.get(1));
 		assertEquals(new Integer(2),stream.get(2));
