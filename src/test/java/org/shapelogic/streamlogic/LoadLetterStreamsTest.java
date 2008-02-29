@@ -199,10 +199,10 @@ public class LoadLetterStreamsTest extends TestCase
 		final String fileName = FILE_DIR + "/" + letter + ".svg";
 		ListStream<Polygon> rawPolygons = makeRawPolygonsStream(fileName);
 		LoadLetterStreams.loadStreamsRequiredForLetterMatch();
+		String letterFilter = null;
 		if (onlyMatchAgainstSelf)
-			LoadLegacyLetterStreams.makeStraightLetterStream(letter);
-		else
-			LoadLegacyLetterStreams.makeStraightLetterStream(null); 
+			letterFilter = letter;
+		LoadLegacyLetterStreams.makeStraightLetterStream(letterFilter);
     	NamedNumberedStream<Polygon> rawPolygonsFromRoot = 
     		new NamedNumberedStream<Polygon>(RAW_POLYGON);
     	NamedNumberedStream<Boolean> aStreamFromRoot = 
