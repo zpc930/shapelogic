@@ -10,6 +10,7 @@ import org.shapelogic.calculation.RootMap;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
+import org.shapelogic.streams.NamedNumberedStreamLazySetup;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.streams.XOrListStream;
@@ -51,7 +52,7 @@ public class LoadLegacyLetterStreams {
 	public static void loadStreamsRequiredForLetterMatch() {
 		
 		//In order for this to work the polygons have to be defined first
-		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(StreamNames.POLYGONS);
+		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
 
 		Calc1<Polygon, Integer> pointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
@@ -116,7 +117,7 @@ public class LoadLegacyLetterStreams {
 	}
 
 	
-	/**
+	/** Rules for matching straight letters, using only very simple properties.
 	 * 
 	 * @param letterFilter
 	 */
