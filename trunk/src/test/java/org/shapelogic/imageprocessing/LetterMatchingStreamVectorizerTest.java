@@ -1,7 +1,8 @@
 package org.shapelogic.imageprocessing;
 
 
-/** Unit test for LetterMatchingMaxDistanceVectorizer, 
+/** LetterMatchingStreamVectorizerTest unit test for letter matching for StreamVectorizer.
+ * <br />  
  * The main letter matching and vectorization algorithm, 
  * that works for both straight and curved capital letters
  * Note that this is sub classed from another unit test for more basic tests 
@@ -10,12 +11,12 @@ package org.shapelogic.imageprocessing;
  * @author Sami Badawi
  *
  */
-public class LetterMatchingMaxDistanceVectorizerTest extends BaseLetterMatchingMaxDistanceVectorizerTests {
+public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDistanceVectorizerTests {
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		vectorizer = new MaxDistanceVectorizer();
+		vectorizer = new StreamVectorizer();
 	}
 	
 }
