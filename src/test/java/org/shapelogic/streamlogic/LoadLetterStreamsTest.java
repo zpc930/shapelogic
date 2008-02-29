@@ -29,7 +29,7 @@ import org.shapelogic.polygon.Polygon;
 import org.shapelogic.polygon.SVGReader;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
-import org.shapelogic.streams.NamedNumberedStream0;
+import org.shapelogic.streams.NamedNumberedStream;
 
 
 import junit.framework.TestCase;
@@ -171,11 +171,11 @@ public class LoadLetterStreamsTest extends TestCase
 		LoadLetterStreams.loadStreamsRequiredForLetterMatch();
 		LoadLegacyLetterStreams.makeStraightLetterStream(null); 
 		//LoadLetterStreams.makeStraightLetterStream("A"); //To only test one letter
-    	NamedNumberedStream0<Polygon> rawPolygonsFromRoot = 
-    		new NamedNumberedStream0<Polygon>(RAW_POLYGON);
+    	NamedNumberedStream<Polygon> rawPolygonsFromRoot = 
+    		new NamedNumberedStream<Polygon>(RAW_POLYGON);
     	assertSame(rawPolygon, rawPolygonsFromRoot.get(0));
-    	NamedNumberedStream0<Boolean> aStreamFromRoot = 
-    		new NamedNumberedStream0<Boolean>("A");
+    	NamedNumberedStream<Boolean> aStreamFromRoot = 
+    		new NamedNumberedStream<Boolean>("A");
     	assertTrue(aStreamFromRoot.get(0));
 	}
 
@@ -203,10 +203,10 @@ public class LoadLetterStreamsTest extends TestCase
 			LoadLegacyLetterStreams.makeStraightLetterStream(letter);
 		else
 			LoadLegacyLetterStreams.makeStraightLetterStream(null); 
-    	NamedNumberedStream0<Polygon> rawPolygonsFromRoot = 
-    		new NamedNumberedStream0<Polygon>(RAW_POLYGON);
-    	NamedNumberedStream0<Boolean> aStreamFromRoot = 
-    		new NamedNumberedStream0<Boolean>(letter);
+    	NamedNumberedStream<Polygon> rawPolygonsFromRoot = 
+    		new NamedNumberedStream<Polygon>(RAW_POLYGON);
+    	NamedNumberedStream<Boolean> aStreamFromRoot = 
+    		new NamedNumberedStream<Boolean>(letter);
     	LoadLegacyLetterStreams.makeStraightLetterXOrStream();
     	assertTrue(aStreamFromRoot.get(0));
 		ListStream<String> letterString = (ListStream<String>) RootMap.get("Letter");
