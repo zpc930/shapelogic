@@ -101,7 +101,7 @@ public class StreamFactory {
 		//problem with an extra stream and what kind of caching I should use
 		//would it be better to have a way to turn an expression into a Calc and 
 		//I should have a way to combine Calcs.
-		final NamedNumberedStream0<In0> input = new NamedNumberedStream0(inputName);
+		final NamedNumberedStream<In0> input = new NamedNumberedStream(inputName);
 		final Calc1<In0, Boolean> calcBoolean = makeFunctionBooleanCalc1(expression,
 				binaryPredicate, compareObject, language, functionName);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
@@ -140,7 +140,7 @@ public class StreamFactory {
 		//problem with an extra stream and what kind of caching I should use
 		//would it be better to have a way to turn an expression into a Calc and 
 		//I should have a way to combine Calcs.
-		final NamedNumberedStream0<In0> input = new NamedNumberedStream0(inputName);
+		final NamedNumberedStream<In0> input = new NamedNumberedStream(inputName);
 		final Calc1<In0, Boolean> calcBoolean = makeFunctionBooleanCalc1(expression,
 				binaryPredicateString, compareObject, language, functionName);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
@@ -195,7 +195,7 @@ public class StreamFactory {
 			final BinaryPredicate<In0, In2> binaryPredicate, 
 			final In2 compareObject)
 	{
-		final NamedNumberedStream0<In0> input = new NamedNumberedStream0(inputName);
+		final NamedNumberedStream<In0> input = new NamedNumberedStream(inputName);
 		final Calc1<In0, Boolean> calcBoolean = makeBooleanCalc1(binaryPredicate, compareObject);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
 			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
