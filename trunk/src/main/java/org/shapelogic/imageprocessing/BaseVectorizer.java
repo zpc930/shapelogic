@@ -18,6 +18,7 @@ import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLinePolygon;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.polygon.PolygonEndPointAdjuster;
+import org.shapelogic.streams.ListStream;
 import org.shapelogic.streams.SingleListStream;
 import org.shapelogic.util.Constants;
 
@@ -52,8 +53,8 @@ import ij.process.ImageProcessor;
  * @author Sami Badawi
  *
  */
-public abstract class BaseVectorizer  extends SingleListStream<Polygon> 
-implements PlugInFilter, IPixelTypeFinder {
+public abstract class BaseVectorizer  //extends SingleListStream<Polygon> 
+implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
 
 	//Static
 	public static final String POLYGON = "polygon";
@@ -95,6 +96,10 @@ implements PlugInFilter, IPixelTypeFinder {
 	protected int _firstPointInLineIndex = 0;
 	protected IPixelTypeFinder _pixelTypeFinder; 
 	protected NumericRule[] _rulesArrayForLetterMatching;
+	
+	protected ImageProcessor _imageProcessor;
+	protected ListStream<Polygon> _stream;
+	protected int _currentPolygon = Constants.BEFORE_START_INDEX;
 	
 	/** To be overridden. */
 	public boolean isGuiEnabled() {
@@ -207,6 +212,7 @@ implements PlugInFilter, IPixelTypeFinder {
 		super();
 	}
 
+	@Override
 	public int setup(String arg, ImagePlus imp) {
 		if (arg.equals("about"))
 			{showAbout(); return DONE;}
@@ -339,11 +345,33 @@ implements PlugInFilter, IPixelTypeFinder {
 		return _polygon;
 	}
 
-	@Override
-	public Polygon invoke() {
-		return getCleanedupPolygon();
-	}
+//	@Override
+//	public Polygon invoke() {
+//		return getCleanedupPolygon();
+//	}
 	
+	@Override
+	public ImageProcessor getImageProcessor() {
+		return _imageProcessor;
+	}
+
+	@Override
+	public ListStream<Polygon> getStream() {
+		if (_stream == null)
+			_stream = new SingleListStream<Polygon>(){
+			final BaseVectorizer baseVectorizer;
+			{
+				baseVectorizer = BaseVectorizer.this;
+			}
+				@Override
+				public Polygon invoke() {
+					return baseVectorizer.getCleanedupPolygon();
+				}
+			
+		};
+		return _stream;
+	}
+
 	public Object getMatchingOH() {
 		return _matchingOH;
 	}
