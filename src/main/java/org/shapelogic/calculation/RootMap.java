@@ -39,6 +39,11 @@ public class RootMap {
 		_map.put(key, value);
 	}
 	
+	static public void putNoOverwrite(Object key, Object value) {
+		if (!_map.containsValue(key))
+			_map.put(key, value);
+	}
+	
 	static public Object get(Object key) {
 		return _map.get(key);
 	}
@@ -51,5 +56,9 @@ public class RootMap {
 		}
 		else
 			_map.clear();
+	}
+	
+	static public boolean containsValue(Object key){
+		return _map.containsValue(key);
 	}
 }
