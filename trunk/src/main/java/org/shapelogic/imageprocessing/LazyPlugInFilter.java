@@ -22,7 +22,9 @@ public interface LazyPlugInFilter<E> extends PlugInFilter {
 	  
 	/** Used when calling in lazy mode. */
 	ImageProcessor getImageProcessor();
-	  
+	
+	void init(ImageProcessor ip);
+	
 	void showMessage(String text);
 	  
 	boolean isGuiEnabled();

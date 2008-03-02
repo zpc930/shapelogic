@@ -1,6 +1,7 @@
 package org.shapelogic.imageprocessing;
 
 import static org.shapelogic.polygon.Calculator2D.directionBetweenNeighborPoints;
+import ij.process.ImageProcessor;
 
 import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CPointInt;
@@ -45,7 +46,7 @@ import org.shapelogic.util.Constants;
  *
  */
 public class BaseMaxDistanceVectorizer extends BaseVectorizer {
-	protected ChainCodeHandler _chainCodeHandler = new ChainCodeHandler(getPolygon().getAnnotatedShape()); 
+	protected ChainCodeHandler _chainCodeHandler = new ChainCodeHandler(_annotatedShapeImplementation); 
 
 	/** Take point off _unfinishedPoints try to start line from that, if nothing is found the remove point  
 	 * */
@@ -247,5 +248,11 @@ public class BaseMaxDistanceVectorizer extends BaseVectorizer {
 	protected void findMultiLinePostProcess() {
 		_chainCodeHandler.getValue();
 		super.findMultiLinePostProcess();
+	}
+	
+	@Override
+	public void init(ImageProcessor ip) {
+		super.init(ip);
+		_chainCodeHandler = new ChainCodeHandler(getPolygon().getAnnotatedShape());
 	}
 }
