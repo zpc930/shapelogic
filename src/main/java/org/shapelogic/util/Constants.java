@@ -51,4 +51,8 @@ public class Constants {
 	/** Names of scripting languages in JSR 223. */
 	public static final String GROOVY = "groovy";
 	public static final String JAVASCRIPT = "javascript";
+	
+	/** Names used for polygons in matches. Might be moved again. */
+	public static final String POLYGON = "polygon";
+	public static final String RAW_POLYGON = "rawPolygon";
 }

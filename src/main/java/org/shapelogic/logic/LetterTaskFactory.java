@@ -1,10 +1,13 @@
 package org.shapelogic.logic;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.shapelogic.entities.NumericRule;
+import org.shapelogic.polygon.Polygon;
+import org.shapelogic.util.Constants;
 
 import static org.shapelogic.logic.CommonLogicExpressions.*;
 
@@ -350,6 +353,18 @@ public class LetterTaskFactory {
 			parentTask.setNamedTask(currentLetterTask.getName(), currentLetterTask); 
 		}
 		return letterTask;
+	}
+
+	static public String matchPolygonToLetterUsingTask(Polygon rawPolygon, Polygon polygon, NumericRule[] rulesArrayForLetterMatching) {
+		RootTask rootTask = RootTask.getInstance();
+		rootTask.setNamedValue(Constants.RAW_POLYGON, rawPolygon);
+		rootTask.setNamedValue(Constants.POLYGON, polygon);
+		List<NumericRule> rulesList = Arrays.asList(rulesArrayForLetterMatching);
+		BaseTask letterTask = createLetterTasksFromRule(rootTask, rulesList, null);
+		Object matchingOH = letterTask.invoke();
+		if (matchingOH == null)
+			return null;
+		return matchingOH.toString();
 	}
 	
 }
