@@ -41,66 +41,6 @@ public class LoadLetterStreams {
 		StreamFactory.addToAndListStream0(letter, streamName, "==",	value);
 	}
 	
-	/** Load all the required streams for the letter matcher to work.
-	 * <br />
-	 * In order for this to work the polygons have to be defined first.
-	 */
-	public static void loadStreamsRequiredForLetterMatch() {
-		
-		//In order for this to work the polygons have to be defined first
-		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
-
-		Calc1<Polygon, Integer> pointCountCalc1 = new Calc1<Polygon, Integer>() {
-			@Override
-			public Integer invoke(Polygon input) {
-				return input.getPoints().size();
-			}
-		};
-		ListStream<Integer> pointCountStream = 
-			new ListCalcStream1<Polygon, Integer>(pointCountCalc1,polygons); 
-		RootMap.put(POINT_COUNT,pointCountStream);
-		
-		Calc1<Polygon, Integer> lineCountCalc1 = new Calc1<Polygon, Integer>() {
-			@Override
-			public Integer invoke(Polygon input) {
-				return input.getLines().size();
-			}
-		};
-		ListStream<Integer> lineCountStream = 
-			new ListCalcStream1<Polygon, Integer>(lineCountCalc1,polygons); 
-		RootMap.put(LINE_COUNT,lineCountStream);
-		
-		Calc1<Polygon, Integer> horizontalLineCountCalc1 = new Calc1<Polygon, Integer>() {
-			@Override
-			public Integer invoke(Polygon input) {
-				return input.getHorizontalLines().size();
-			}
-		};
-		ListStream<Integer> horizontalLineCountStream = 
-			new ListCalcStream1<Polygon, Integer>(horizontalLineCountCalc1,polygons); 
-		RootMap.put(HORIZONTAL_LINE_COUNT,horizontalLineCountStream);
-		
-		Calc1<Polygon, Integer> verticalLineCountCalc1 = new Calc1<Polygon, Integer>() {
-			@Override
-			public Integer invoke(Polygon input) {
-				return input.getVerticalLines().size();
-			}
-		};
-		ListStream<Integer> verticalLineCountStream = 
-			new ListCalcStream1<Polygon, Integer>(verticalLineCountCalc1,polygons); 
-		RootMap.put(VERTICAL_LINE_COUNT,verticalLineCountStream);
-		
-		Calc1<Polygon, Integer> endPointCountCalc1 = new Calc1<Polygon, Integer>() {
-			@Override
-			public Integer invoke(Polygon input) {
-				return input.getEndPointCount();
-			}
-		};
-		ListStream<Integer> endPointCountStream = 
-			new ListCalcStream1<Polygon, Integer>(endPointCountCalc1,polygons); 
-		RootMap.put(END_POINT_COUNT,endPointCountStream);
-	}
-	
 	public static void makeLetterStream(String letterFilter) {
 		rule("A", POINT_COUNT, 5, letterFilter);
 		rule("A", LINE_COUNT, 5, letterFilter);
