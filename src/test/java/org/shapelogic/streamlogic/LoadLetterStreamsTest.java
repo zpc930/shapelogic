@@ -168,7 +168,7 @@ public class LoadLetterStreamsTest extends TestCase
 		assertNotNull(rawPolygon);
 		System.out.println("rawPolygon: " + rawPolygon);
 		assertTrue(rawPolygon instanceof Polygon);
-		LoadLetterStreams.loadStreamsRequiredForLetterMatch();
+		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		LoadLegacyLetterStreams.makeStraightLetterStream(null); 
 		//LoadLetterStreams.makeStraightLetterStream("A"); //To only test one letter
     	NamedNumberedStream<Polygon> rawPolygonsFromRoot = 
@@ -198,7 +198,7 @@ public class LoadLetterStreamsTest extends TestCase
 		RootMap.clear();
 		final String fileName = FILE_DIR + "/" + letter + ".svg";
 		ListStream<Polygon> rawPolygons = makeRawPolygonsStream(fileName);
-		LoadLetterStreams.loadStreamsRequiredForLetterMatch();
+		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		String letterFilter = null;
 		if (onlyMatchAgainstSelf)
 			letterFilter = letter;
