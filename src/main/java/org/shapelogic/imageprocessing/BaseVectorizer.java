@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.shapelogic.entities.NumericRule;
 import org.shapelogic.logic.LetterTaskFactory;
+import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
@@ -94,10 +95,12 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	
 	protected ImageProcessor _imageProcessor;
 	protected ListStream<Polygon> _stream;
-	protected int _currentPolygon = Constants.BEFORE_START_INDEX;
 	
 	/** Really stream name but could be changed to _name. */
 	protected String _streamName;
+	
+	protected AnnotatedShapeImplementation _annotatedShapeImplementation = 
+		new AnnotatedShapeImplementation();
 	
 	/** To be overridden. */
 	public boolean isGuiEnabled() {
@@ -167,7 +170,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	abstract protected boolean lastPixelOk(byte newDirection);
 
 	/** Cannot handle the last pixel at the edge, so for now just ignore it. */
-	protected void init(ImageProcessor ip) {
+	public void init(ImageProcessor ip) {
 		_ip = (ByteProcessor) ip;
 		Rectangle r = _ip.getRoi();
 		_pixels = (byte[]) _ip.getPixels();
@@ -320,7 +323,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	}
 	
 	protected Polygon polygonFactory() {
-		return new MultiLinePolygon();
+		return new MultiLinePolygon(_annotatedShapeImplementation);
 	}
 	
 
@@ -347,9 +350,10 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 		return false;
 	}
 
+	/** Currently returns the cleaned up polygons. */
 	@Override
 	public Polygon next() {
-		_currentPolygon++;
+		_polygon = null; //Cause lazy creation of a new polygon
 		findAllLines();
 		if (_currentPoint != null)
 			showMessage(
