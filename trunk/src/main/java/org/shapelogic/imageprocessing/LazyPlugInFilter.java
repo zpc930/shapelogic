@@ -26,5 +26,11 @@ public interface LazyPlugInFilter<E> extends PlugInFilter {
 	void showMessage(String text);
 	  
 	boolean isGuiEnabled();
+	
+	/** Maybe getStreamName would be better. */
+	String getStreamName();
+
+	/** Maybe setStreamName would be better. */
+	void setStreamName(String name);
 
 }

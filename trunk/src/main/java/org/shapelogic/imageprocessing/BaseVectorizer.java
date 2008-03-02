@@ -3,15 +3,13 @@ package org.shapelogic.imageprocessing;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.shapelogic.entities.NumericRule;
-import org.shapelogic.logic.BaseTask;
 import org.shapelogic.logic.LetterTaskFactory;
-import org.shapelogic.logic.RootTask;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
@@ -19,7 +17,7 @@ import org.shapelogic.polygon.MultiLinePolygon;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.polygon.PolygonEndPointAdjuster;
 import org.shapelogic.streams.ListStream;
-import org.shapelogic.streams.SingleListStream;
+import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.util.Constants;
 
 
@@ -54,11 +52,8 @@ import ij.process.ImageProcessor;
  *
  */
 public abstract class BaseVectorizer  //extends SingleListStream<Polygon> 
-implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
+implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<Polygon> {
 
-	//Static
-	public static final String POLYGON = "polygon";
-	public static final String RAW_POLYGON = "rawPolygon";
 	public static final int MAX_DISTANCE_BETWEEN_CLUSTER_POINTS = 2;
 	public static final byte STRAIGHT_LINE_COLOR = 127; //Draw color
 
@@ -101,6 +96,9 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
 	protected ListStream<Polygon> _stream;
 	protected int _currentPolygon = Constants.BEFORE_START_INDEX;
 	
+	/** Really stream name but could be changed to _name. */
+	protected String _streamName;
+	
 	/** To be overridden. */
 	public boolean isGuiEnabled() {
 		return false;
@@ -109,16 +107,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
 	@Override
 	public void run(ImageProcessor ip) {
 		init(ip);
-		findAllLines();
-		if (_currentPoint != null)
-			showMessage(
-					"Last line point is: " + _currentPoint + "\n" +
-					"_numberOfPointsInLine: " + _numberOfPointsInAllLines+ "\n" +
-					"Points count: " + getPoints().size()); 
-		else
-			showMessage("No line point found.");
-		drawLines();
-		cleanPolygon();
+		next();
 		matchLines();
 	}
 
@@ -130,18 +119,14 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
 	
 	/** This does really not belong in a vectorizer. */
 	protected void matchLines() {
-		RootTask rootTask = RootTask.getInstance();
-		rootTask.setNamedValue(RAW_POLYGON, getPolygon());
-		rootTask.setNamedValue(POLYGON, _cleanedupPolygon);
-		List<NumericRule> rulesList = Arrays.asList(_rulesArrayForLetterMatching);
-		BaseTask letterTask = LetterTaskFactory.createLetterTasksFromRule(rootTask, rulesList, null);
-		_matchingOH = letterTask.invoke();
+		_matchingOH = LetterTaskFactory.matchPolygonToLetterUsingTask(
+				getPolygon(), _cleanedupPolygon, _rulesArrayForLetterMatching);
 		if (_matchingOH == null) {
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}
 		showMessage("Letter match result: " + _matchingOH);
 	}
-
+	
 	protected void findAllLines() {
 		findFirstLinePoint();
 
@@ -345,11 +330,6 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
 		return _polygon;
 	}
 
-//	@Override
-//	public Polygon invoke() {
-//		return getCleanedupPolygon();
-//	}
-	
 	@Override
 	public ImageProcessor getImageProcessor() {
 		return _imageProcessor;
@@ -358,18 +338,33 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
 	@Override
 	public ListStream<Polygon> getStream() {
 		if (_stream == null)
-			_stream = new SingleListStream<Polygon>(){
-			final BaseVectorizer baseVectorizer;
-			{
-				baseVectorizer = BaseVectorizer.this;
-			}
-				@Override
-				public Polygon invoke() {
-					return baseVectorizer.getCleanedupPolygon();
-				}
-			
-		};
+			_stream = StreamFactory.createListStream(this);
 		return _stream;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return false;
+	}
+
+	@Override
+	public Polygon next() {
+		_currentPolygon++;
+		findAllLines();
+		if (_currentPoint != null)
+			showMessage(
+					"Last line point is: " + _currentPoint + "\n" +
+					"_numberOfPointsInLine: " + _numberOfPointsInAllLines+ "\n" +
+					"Points count: " + getPoints().size()); 
+		else
+			showMessage("No line point found.");
+		drawLines();
+		cleanPolygon();
+		return getCleanedupPolygon();
+	}
+
+	@Override
+	public void remove() {
 	}
 
 	public Object getMatchingOH() {
@@ -412,6 +407,18 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon> {
 	@Override
 	public byte[] getPixels() {
 		return _pixels;
+	}
+
+	/** Really stream name but could be changed to _name. */
+	@Override
+	public String getStreamName() {
+		return _streamName;
+	}
+
+	/** Really stream name but could be changed to _name. */
+	@Override
+	public void setStreamName(String name) {
+		_streamName = name;
 	}
 
 }

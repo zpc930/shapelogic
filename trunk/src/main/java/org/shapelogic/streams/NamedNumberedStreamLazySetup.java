@@ -13,16 +13,16 @@ import org.shapelogic.util.Constants;
  *
  */
 public class NamedNumberedStreamLazySetup<E> implements NumberedStream<E>, SetupFlagged {
-	protected String _key;
+	protected String _name;
 	protected NumberedStream<E> _inputStream; 
 	protected boolean _setup = false;
 	
-	public NamedNumberedStreamLazySetup(String key, int maxLast) {
-		_key = key;
+	public NamedNumberedStreamLazySetup(String name, int maxLast) {
+		_name = name;
 	}
 
-	public NamedNumberedStreamLazySetup(String key) {
-		this(key,Constants.LAST_UNKNOWN);
+	public NamedNumberedStreamLazySetup(String name) {
+		this(name,Constants.LAST_UNKNOWN);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class NamedNumberedStreamLazySetup<E> implements NumberedStream<E>, Setup
 
 	@Override
 	public void setup() {
-		_inputStream = (NumberedStream) RootMap.get(_key);
+		_inputStream = (NumberedStream) RootMap.get(_name);
 		_inputStream.setup();
 		_setup = true;
 	}
@@ -95,4 +95,8 @@ public class NamedNumberedStreamLazySetup<E> implements NumberedStream<E>, Setup
 		return _setup;
 	}
 	
+	/** Not sure if Name is the best choice. */
+	public String getName() {
+		return _name;
+	}
 }
