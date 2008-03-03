@@ -3,8 +3,7 @@ package org.shapelogic.imageprocessing;
 import ij.process.ImageProcessor;
 
 import org.shapelogic.calculation.RootMap;
-import org.shapelogic.logic.LetterTaskFactory;
-import org.shapelogic.streamlogic.LoadLegacyLetterStreams;
+import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NamedNumberedStream;
 import org.shapelogic.streams.NumberedStream;
@@ -38,7 +37,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 		super.init(ip);
 //		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
 		RootMap.put(StreamNames.POLYGONS, getStream());
-		LoadLegacyLetterStreams.loadStraightLetterStream(null);
+		LoadLetterStreams.loadLetterStream(null);
 	}
 
 	@Override

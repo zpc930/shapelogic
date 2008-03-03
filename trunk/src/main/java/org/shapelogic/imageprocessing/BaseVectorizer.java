@@ -101,6 +101,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	
 	protected AnnotatedShapeImplementation _annotatedShapeImplementation = 
 		new AnnotatedShapeImplementation();
+	protected boolean _hasNext = true;
 	
 	/** To be overridden. */
 	public boolean isGuiEnabled() {
@@ -228,6 +229,10 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 		return new CPointInt(x,y);
 	}
 
+	/** Find first point that is not a unused foreground point.
+	 * <br />
+	 * XXX Currently start from the beginning if called multiple time, change that.
+	 */
 	protected boolean findFirstLinePoint() {
 		for (int iY = _minY; iY <= _maxY; iY++) {
 			int lineOffset = _ip.getWidth() * iY; 
@@ -240,6 +245,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 				}
 			}
 		}
+		_hasNext = false;
 		return false;
 	}
 
@@ -347,7 +353,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 
 	@Override
 	public boolean hasNext() {
-		return true;
+		return _hasNext ;
 	}
 
 	/** Currently returns the cleaned up polygons. */
