@@ -347,7 +347,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 
 	@Override
 	public boolean hasNext() {
-		return false;
+		return true;
 	}
 
 	/** Currently returns the cleaned up polygons. */

@@ -1,17 +1,15 @@
 package org.shapelogic.streamlogic;
 
-import static org.shapelogic.logic.CommonLogicExpressions.*;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.LINE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RootMap;
-import org.shapelogic.polygon.Polygon;
-import org.shapelogic.streams.ListCalcStream1;
-import org.shapelogic.streams.ListStream;
-import org.shapelogic.streams.NamedNumberedStreamLazySetup;
-import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.streams.XOrListStream;
 
@@ -31,6 +29,8 @@ import org.shapelogic.streams.XOrListStream;
  *
  */
 public class LoadLegacyLetterStreams {
+	final static public String[] straightLettersArray = 
+	{"A","E","F","H","I","K","L","M","N","T","V","W","X","Y","Z"};
 
 	/** Helper method to create one rule in one letter. 
 	 * 
@@ -47,15 +47,23 @@ public class LoadLegacyLetterStreams {
 	
 	public static void makeStraightLetterXOrStream() {
 		List<String> straightLetters = new ArrayList<String>();
-		String[] straightLettersArray = 
-		{"A","E","F","H","I","K","L","M","N","T","V","W","X","Y","Z"};
 		for (String letter: straightLettersArray)
 			straightLetters.add(letter);
 //		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(Constants.POLYGONS);
 		XOrListStream letterMatchStream = new XOrListStream( straightLetters);
-		RootMap.put("Letter", letterMatchStream);
+		RootMap.put(StreamNames.LETTERS, letterMatchStream);
 	}
 
+	/** Setup all the stream for a straight letter match.<br />
+	 * 
+	 * Requirements streams: polygons.
+	 *  */
+	public static void loadStraightLetterStream(String letterFilter) {
+		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		letterFilter = null;
+		LoadLegacyLetterStreams.makeStraightLetterStream(letterFilter);
+    	LoadLegacyLetterStreams.makeStraightLetterXOrStream();
+	}
 	
 	/** Rules for matching straight letters, using only very simple properties.
 	 * 

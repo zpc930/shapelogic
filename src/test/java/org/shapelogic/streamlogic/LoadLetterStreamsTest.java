@@ -197,6 +197,23 @@ public class LoadLetterStreamsTest extends TestCase
 	private void oneStraightLetterMatch(final String letter, boolean onlyMatchAgainstSelf) {
 		RootMap.clear();
 		final String fileName = FILE_DIR + "/" + letter + ".svg";
+		makeRawPolygonsStream(fileName);
+		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		String letterFilter = null;
+		if (onlyMatchAgainstSelf)
+			letterFilter = letter;
+		LoadLegacyLetterStreams.loadStraightLetterStream(letterFilter);
+    	NamedNumberedStream<Boolean> aStreamFromRoot = 
+    		new NamedNumberedStream<Boolean>(letter);
+    	LoadLegacyLetterStreams.makeStraightLetterXOrStream();
+    	assertTrue(aStreamFromRoot.get(0));
+		ListStream<String> letterString = (ListStream<String>) RootMap.get(StreamNames.LETTERS);
+    	assertEquals(letter,letterString.get(0));
+	}
+	
+	private void oneStraightLetterMatch1(final String letter, boolean onlyMatchAgainstSelf) {
+		RootMap.clear();
+		final String fileName = FILE_DIR + "/" + letter + ".svg";
 		ListStream<Polygon> rawPolygons = makeRawPolygonsStream(fileName);
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		String letterFilter = null;
@@ -209,7 +226,7 @@ public class LoadLetterStreamsTest extends TestCase
     		new NamedNumberedStream<Boolean>(letter);
     	LoadLegacyLetterStreams.makeStraightLetterXOrStream();
     	assertTrue(aStreamFromRoot.get(0));
-		ListStream<String> letterString = (ListStream<String>) RootMap.get("Letter");
+		ListStream<String> letterString = (ListStream<String>) RootMap.get(StreamNames.LETTERS);
     	assertEquals(letter,letterString.get(0));
 	}
 	
