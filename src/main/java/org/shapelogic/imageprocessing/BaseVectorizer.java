@@ -99,8 +99,6 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	/** Really stream name but could be changed to _name. */
 	protected String _streamName;
 	
-	protected AnnotatedShapeImplementation _annotatedShapeImplementation = 
-		new AnnotatedShapeImplementation();
 	protected int _yForUnporcessedPixel;
 	protected int _nextCount;
 	
@@ -338,7 +336,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	}
 	
 	protected Polygon polygonFactory() {
-		return new MultiLinePolygon(_annotatedShapeImplementation);
+		return new MultiLinePolygon();
 	}
 	
 

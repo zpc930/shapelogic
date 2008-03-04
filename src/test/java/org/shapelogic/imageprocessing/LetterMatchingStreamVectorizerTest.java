@@ -44,7 +44,7 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		assertEmptyCollection(inflectionPoints);
 		printAnnotaions(polygon);
 		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
-		assertEquals("A",vectorizer.getMatchingOH());
+		assertEquals("A; B; C",vectorizer.getMatchingOH());
 	}
 
 }
