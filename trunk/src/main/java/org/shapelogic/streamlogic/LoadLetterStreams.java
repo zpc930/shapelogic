@@ -1,71 +1,37 @@
 package org.shapelogic.streamlogic;
 
 import static org.shapelogic.logic.CommonLogicExpressions.ASPECT_RATIO;
-import static org.shapelogic.logic.CommonLogicExpressions.ASPECT_RATIO_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.CURVE_ARCH_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.CURVE_ARCH_COUNT_ANN_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_LEFT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_HALF_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_HALF_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX;
-import static org.shapelogic.logic.CommonLogicExpressions.FILTER_END;
-import static org.shapelogic.logic.CommonLogicExpressions.FILTER_START;
 import static org.shapelogic.logic.CommonLogicExpressions.HARD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HARD_POINT_COUNT_ANN_EX;
-import static org.shapelogic.logic.CommonLogicExpressions.HARD_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.HOLE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HOLE_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.INFLECTION_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.INFLECTION_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.LINE_COUNT;
 import static org.shapelogic.logic.CommonLogicExpressions.MULTI_LINE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.MULTI_LINE_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.SOFT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.SOFT_POINT_COUNT_ANN_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.STRAIGHT_LINE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.STRAIGHT_LINE_COUNT_ANN_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.U_JUNCTION_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.U_JUNCTION_POINT_COUNT_ANN_EX;
-import static org.shapelogic.logic.CommonLogicExpressions.VAR;
-import static org.shapelogic.logic.CommonLogicExpressions.VAR_SIZE_END;
-import static org.shapelogic.logic.CommonLogicExpressions.VAR_SIZE_START;
 import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT_EX;
 import static org.shapelogic.logic.CommonLogicExpressions.Y_JUNCTION_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.Y_JUNCTION_POINT_COUNT_EX;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.shapelogic.calculation.RootMap;
-import org.shapelogic.entities.NumericRule;
-import org.shapelogic.logic.LetterTaskLegacyFactory;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.streams.XOrListStream;
 
@@ -84,7 +50,7 @@ import org.shapelogic.streams.XOrListStream;
 public class LoadLetterStreams {
 
 	final static public String[] lettersArray = 
-	{"A","E","F","H","I","K","L","M","N","T","V","W","X","Y","Z"};
+	{"A","D","E","F","H","I","K","L","M","N","O","T","V","W","X","Y","Z"};
 
 	/** Helper method to create one rule in one letter. 
 	 * 
@@ -128,7 +94,9 @@ public class LoadLetterStreams {
 	public static void loadLetterStream(String letterFilter) {
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		letterFilter = null;
-		LoadLetterStreams.makeLetterStream(letterFilter);
+		LoadLetterStreams.makeStraightLetterStream(letterFilter);
+		LoadLetterStreams.makeAllLetterStream("D");
+		LoadLetterStreams.makeAllLetterStream("O");
     	LoadLetterStreams.makeLetterXOrStream();
 	}
 	
@@ -136,7 +104,7 @@ public class LoadLetterStreams {
 	 * 
 	 * @param letterFilter
 	 */
-	public static void makeLetterStream(String letterFilter) {
+	public static void makeStraightLetterStream(String letterFilter) {
 		rule("A", POINT_COUNT, 5, letterFilter);
 		rule("A", LINE_COUNT, 5, letterFilter);
 		rule("A", HORIZONTAL_LINE_COUNT, 1, letterFilter);
@@ -243,9 +211,9 @@ public class LoadLetterStreams {
 		rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
 
 		rule("B", HOLE_COUNT, "==", 2, letterFilter); //try Boolean Task
-		rule("B", T_JUNCTION_LEFT_POINT_COUNT,">", 0., letterFilter);
+//		rule("B", T_JUNCTION_LEFT_POINT_COUNT,">", 0., letterFilter);
 		rule("B", U_JUNCTION_POINT_COUNT, "==", 2., letterFilter);
-		rule("B", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
+//		rule("B", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
 		rule("B", END_POINT_COUNT, "==", 0., letterFilter);
 		rule("B", SOFT_POINT_COUNT, ">", 0., letterFilter);
 		rule("B", STRAIGHT_LINE_COUNT, ">", 0., letterFilter);
@@ -263,7 +231,7 @@ public class LoadLetterStreams {
 
 		rule("D", HOLE_COUNT, "==", 1., letterFilter);
 		rule("D", T_JUNCTION_POINT_COUNT, "==", 0., letterFilter);
-		rule("D", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
+//		rule("D", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
 		rule("D", VERTICAL_LINE_COUNT, ">", 0., letterFilter);
 		rule("D", END_POINT_COUNT, "==", 0., letterFilter);
 		rule("D", MULTI_LINE_COUNT, "==", 1., letterFilter);
