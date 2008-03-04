@@ -46,7 +46,7 @@ import org.shapelogic.util.Constants;
  *
  */
 public class BaseMaxDistanceVectorizer extends BaseVectorizer {
-	protected ChainCodeHandler _chainCodeHandler = new ChainCodeHandler(_annotatedShapeImplementation); 
+	protected ChainCodeHandler _chainCodeHandler = null; //new ChainCodeHandler(_annotatedShapeImplementation); 
 
 	/** Take point off _unfinishedPoints try to start line from that, if nothing is found the remove point  
 	 * */
@@ -238,6 +238,7 @@ public class BaseMaxDistanceVectorizer extends BaseVectorizer {
 	@Override
 	protected boolean findMultiLinePreProcess() {
 		boolean result = super.findMultiLinePreProcess();
+		_chainCodeHandler = new ChainCodeHandler(getPolygon().getAnnotatedShape());
 		_chainCodeHandler.setup();
 		_chainCodeHandler.setMultiLine(this.getPolygon().getCurrentMultiLine());
 		_chainCodeHandler.setFirstPoint(_firstPointInMultiLine);
