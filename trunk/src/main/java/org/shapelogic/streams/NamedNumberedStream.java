@@ -20,6 +20,13 @@ public class NamedNumberedStream<E> implements NumberedStream<E> {
 	public NamedNumberedStream(String key) {
 		this(key,Constants.LAST_UNKNOWN);
 	}
+	
+	static public NumberedStream getInstance(String key) {
+		Object obj = RootMap.get(key);
+		if (obj instanceof NumberedStream)
+			return (NumberedStream) obj;
+		return null;
+	}
 
 	@Override
 	public E get(int input) {

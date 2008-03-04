@@ -50,7 +50,7 @@ import org.shapelogic.streams.XOrListStream;
 public class LoadLetterStreams {
 
 	final static public String[] lettersArray = 
-	{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R",
+	{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
 		"T","U","V","W","X","Y","Z"};
 
 	/** Helper method to create one rule in one letter. 
@@ -80,11 +80,11 @@ public class LoadLetterStreams {
 	}
 	
 	public static void makeLetterXOrStream() {
-		List<String> Letters = new ArrayList<String>();
+		List<String> letters = new ArrayList<String>();
 		for (String letter: lettersArray)
-			Letters.add(letter);
+			letters.add(letter);
 //		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(Constants.POLYGONS);
-		XOrListStream letterMatchStream = new XOrListStream( Letters);
+		XOrListStream letterMatchStream = new XOrListStream( letters);
 		RootMap.put(StreamNames.LETTERS, letterMatchStream);
 	}
 
@@ -95,17 +95,7 @@ public class LoadLetterStreams {
 	public static void loadLetterStream(String letterFilter) {
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		letterFilter = null;
-		LoadLetterStreams.makeStraightLetterStream(letterFilter);
-		LoadLetterStreams.makeAllLetterStream("B");
-		LoadLetterStreams.makeAllLetterStream("C");
-		LoadLetterStreams.makeAllLetterStream("D");
-		LoadLetterStreams.makeAllLetterStream("G");
-		LoadLetterStreams.makeAllLetterStream("J");
-		LoadLetterStreams.makeAllLetterStream("O");
-		LoadLetterStreams.makeAllLetterStream("P");
-		LoadLetterStreams.makeAllLetterStream("Q");
-		LoadLetterStreams.makeAllLetterStream("R");
-		LoadLetterStreams.makeAllLetterStream("U");
+		LoadLetterStreams.makeAllLetterStream(letterFilter);
     	LoadLetterStreams.makeLetterXOrStream();
 	}
 	
@@ -119,7 +109,7 @@ public class LoadLetterStreams {
 		rule("A", HORIZONTAL_LINE_COUNT, 1, letterFilter);
 		rule("A", VERTICAL_LINE_COUNT, 0, letterFilter);
 		rule("A", END_POINT_COUNT, 2, letterFilter);
-
+		
 		rule("E", POINT_COUNT, 6, letterFilter);
 		rule("E", LINE_COUNT, 5, letterFilter);
 		rule("E", HORIZONTAL_LINE_COUNT, 3, letterFilter);
@@ -198,7 +188,7 @@ public class LoadLetterStreams {
 		rule("Y", HORIZONTAL_LINE_COUNT, 0, letterFilter);
 		rule("Y", VERTICAL_LINE_COUNT, 1, letterFilter);
 		rule("Y", END_POINT_COUNT, 3, letterFilter);
-
+		
 		rule("Z", POINT_COUNT, 4, letterFilter);
 		rule("Z", LINE_COUNT, 3, letterFilter);
 		rule("Z", HORIZONTAL_LINE_COUNT, 2, letterFilter);
@@ -218,7 +208,7 @@ public class LoadLetterStreams {
 		rule("A", VERTICAL_LINE_COUNT, "==", 0., letterFilter);
 		rule("A", END_POINT_COUNT, "==", 2., letterFilter);
 		rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
-
+		
 		rule("B", HOLE_COUNT, "==", 2, letterFilter); //try Boolean Task
 		rule("B", T_JUNCTION_LEFT_POINT_COUNT,">", 0., letterFilter);
 		rule("B", U_JUNCTION_POINT_COUNT, "==", 2., letterFilter);

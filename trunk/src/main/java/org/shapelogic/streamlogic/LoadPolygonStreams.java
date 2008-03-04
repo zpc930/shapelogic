@@ -83,6 +83,8 @@ public class LoadPolygonStreams {
 		loadUJunctionPointCountStream(polygons);
 		
 		loadTJunctionPointCountStream(polygons);
+		
+		loadYJunctionPointCountStream(polygons);
 
 		loadCurveArchCountStream(polygons);
 		
@@ -221,6 +223,18 @@ public class LoadPolygonStreams {
 		ListStream<Integer> tJunctionPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(tJunctionPointCountCalc1,polygons); 
 		RootMap.put(T_JUNCTION_POINT_COUNT,tJunctionPointCountStream);
+	}
+	
+	private static void loadYJunctionPointCountStream(NumberedStream<Polygon> polygons) {
+		Calc1<Polygon, Integer> yJunctionPointCountCalc1 = new Calc1<Polygon, Integer>() {
+			@Override
+			public Integer invoke(Polygon input) {
+				return size(input.getAnnotatedShape().getShapesForAnnotation("PointType.Y_JUNCTION"));
+			}
+		};
+		ListStream<Integer> yJunctionPointCountStream = 
+			new ListCalcStream1<Polygon, Integer>(yJunctionPointCountCalc1,polygons); 
+		RootMap.put(Y_JUNCTION_POINT_COUNT,yJunctionPointCountStream);
 	}
 	
 	private static void loadCurveArchCountStream(NumberedStream<Polygon> polygons) {
