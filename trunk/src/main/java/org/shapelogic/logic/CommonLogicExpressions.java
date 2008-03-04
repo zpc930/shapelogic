@@ -43,7 +43,7 @@ public class CommonLogicExpressions {
 	public static final String TOP_THIRD_EX = "PointAboveFilter(0.3333)";
 	public static final String BOTTOM_THIRD_EX = "PointBelowFilter(0.6666)";	
 	public static final String BOTTOM_HALF_EX = "PointBelowFilter(0.5)";	
-	public static final String MIDDLE_THIRD = 
+	public static final String MIDDLE_THIRD_EX = 
 		"PointBelowFilter(0.3333) && PointAboveFilter(0.6666)";
 	
 	public static final String TOP_LEFT_HALF_EX = TOP_HALF_EX + AND + LEFT_HALF_EX;	
@@ -53,11 +53,11 @@ public class CommonLogicExpressions {
 	
 	public static final String TOP_LEFT_THIRD_EX = TOP_THIRD_EX + AND + LEFT_THIRD_EX;	
 	public static final String TOP_RIGHT_THIRD_EX = TOP_THIRD_EX + AND + RIGHT_THIRD_EX;
-	public static final String MIDDLE_LEFT_THIRD = MIDDLE_THIRD + AND + LEFT_THIRD_EX;
-	public static final String MIDDLE_CENTER_THIRD = MIDDLE_THIRD + AND + CENTER_THIRD_EX;
-	public static final String MIDDLE_RIGHT_THIRD = MIDDLE_THIRD + AND + RIGHT_THIRD_EX;
+	public static final String MIDDLE_LEFT_THIRD_EX = MIDDLE_THIRD_EX + AND + LEFT_THIRD_EX;
+	public static final String MIDDLE_CENTER_THIRD_EX = MIDDLE_THIRD_EX + AND + CENTER_THIRD_EX;
+	public static final String MIDDLE_RIGHT_THIRD_EX = MIDDLE_THIRD_EX + AND + RIGHT_THIRD_EX;
 	public static final String BOTTOM_LEFT_THIRD_EX = BOTTOM_THIRD_EX + AND + LEFT_THIRD_EX;	
-	public static final String BOTTOM_CENTER_THIRD = BOTTOM_THIRD_EX + AND + CENTER_THIRD_EX;
+	public static final String BOTTOM_CENTER_THIRD_EX = BOTTOM_THIRD_EX + AND + CENTER_THIRD_EX;
 	public static final String BOTTOM_RIGHT_THIRD_EX = BOTTOM_THIRD_EX + AND + RIGHT_THIRD_EX;	
 	
 	//Point annotation related

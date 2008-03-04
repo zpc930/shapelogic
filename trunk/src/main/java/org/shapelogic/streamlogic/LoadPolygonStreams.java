@@ -70,6 +70,10 @@ public class LoadPolygonStreams {
 		
 		loadStreamsRequiredForStraightLetterMatch(polygons);
 		
+		loadAllPointFilterStreams(polygons);
+		
+		loadAllAnnotatedPointFilterStreams(polygons);
+		
 		loadHoleCountStream(polygons);
 		
 		loadSoftPointCountStream(polygons);
@@ -87,6 +91,8 @@ public class LoadPolygonStreams {
 		aspectRatioStream(polygons);
 		
 		loadInflectionPointCountStream(polygons);
+		
+		loadStraightLineCountStream(polygons);
 	}
 	
 	public static void loadStreamsRequiredForLetterMatch() {
@@ -264,6 +270,102 @@ public class LoadPolygonStreams {
 			new ListCalcStream1<Polygon, Integer>(inflectionPointCountCalc1,polygons); 
 		RootMap.put(INFLECTION_POINT_COUNT,inflectionPointCountStream);
 	}
+	
+	private static void loadStraightLineCountStream(NumberedStream<Polygon> polygons) {
+		Calc1<Polygon, Integer> straightLineCountCalc1 = new Calc1<Polygon, Integer>() {
+			@Override
+			public Integer invoke(Polygon input) {
+				return size(input.getAnnotatedShape().getShapesForAnnotation("LineType.STRAIGHT"));
+			}
+		};
+		ListStream<Integer> straightLineCountStream = 
+			new ListCalcStream1<Polygon, Integer>(straightLineCountCalc1,polygons); 
+		RootMap.put(STRAIGHT_LINE_COUNT,straightLineCountStream);
+	}
+	
+	
+//--------------------------Filter methods------------------------------------
+	
+	public static void loadFilterStream(String streamName, final String filterExpression, 
+			NumberedStream<Polygon> polygons) {
+		Calc1<Polygon, Integer> filterCalc1 = new Calc1<Polygon, Integer>() {
+			@Override
+			public Integer invoke(Polygon input) {
+				return input.filter(filterExpression).size();
+			}
+		};
+		ListStream<Integer> endPointCountStream = 
+			new ListCalcStream1<Polygon, Integer>(filterCalc1,polygons); 
+		RootMap.put(streamName,endPointCountStream);
+	}
+	
+	//Point location related
+	public static String LEFT_HALF = "leftHalf";
+	public static String LEFT_THIRD = "leftThird";
+	public static String RIGHT_HALF = "rightHalf";
+	public static String RIGHT_THIRD = "rightThrid";
+	public static String CENTER_THIRD = "centerThird";
+	public static String TOP_THIRD = "topThird";
+	public static String BOTTOM_THIRD = "bottomThird";
+	public static String BOTTOM_HALF = "hottomHalf";
+	public static String MIDDLE_THIRD = "middleThrid";
+	public static String TOP_LEFT_HALF = "topLeftHalf";
+	public static String TOP_RIGHT_HALF = "topRightHalf";
+	public static String BOTTOM_LEFT_HALF = "bottomLeftHalf";
+	public static String BOTTOM_RIGHT_HALF = "bottomRightHalf";
+	public static String TOP_LEFT_THIRD = "topLeftThrid";
+	public static String TOP_RIGHT_THIRD = "topRightThrid";
+	public static String MIDDLE_LEFT_THIRD = "middleLeftThird";
+	public static String MIDDLE_CENTER_THIRD = "middleCenterThird";
+	public static String MIDDLE_RIGHT_THIRD = "middleRightThird";
+	public static String BOTTOM_LEFT_THIRD = "bottomLeftThird";
+	public static String BOTTOM_CENTER_THIRD = "bottomCenterThrid";
+	public static String BOTTOM_RIGHT_THIRD = "bottomRightThird";
+//	public static String  = "";
+	
+	public static void loadAllPointFilterStreams(NumberedStream<Polygon> polygons) {
+		loadFilterStream( LEFT_HALF, LEFT_HALF_EX, polygons);
+		loadFilterStream( LEFT_THIRD, LEFT_THIRD_EX, polygons);
+		loadFilterStream( RIGHT_HALF, RIGHT_HALF_EX, polygons);
+		loadFilterStream( RIGHT_THIRD, RIGHT_THIRD_EX, polygons);
+		loadFilterStream( CENTER_THIRD, CENTER_THIRD_EX, polygons);
+		loadFilterStream( TOP_THIRD, TOP_THIRD_EX, polygons);
+		loadFilterStream( BOTTOM_THIRD, BOTTOM_THIRD_EX, polygons);
+		loadFilterStream( BOTTOM_HALF, BOTTOM_HALF_EX, polygons);
+		loadFilterStream( MIDDLE_THIRD, MIDDLE_THIRD_EX, polygons);
+		loadFilterStream( TOP_LEFT_HALF, TOP_LEFT_HALF_EX, polygons);
+		loadFilterStream( TOP_RIGHT_HALF, TOP_RIGHT_HALF_EX, polygons);
+		loadFilterStream( BOTTOM_LEFT_HALF, BOTTOM_LEFT_HALF_EX, polygons);
+		loadFilterStream( BOTTOM_RIGHT_HALF, BOTTOM_RIGHT_HALF_EX, polygons);
+		loadFilterStream( TOP_LEFT_THIRD, TOP_LEFT_THIRD_EX, polygons);
+		loadFilterStream( TOP_RIGHT_THIRD, TOP_RIGHT_THIRD_EX, polygons);
+		loadFilterStream( MIDDLE_LEFT_THIRD, MIDDLE_LEFT_THIRD_EX, polygons);
+		loadFilterStream( MIDDLE_CENTER_THIRD, MIDDLE_CENTER_THIRD_EX, polygons);
+		loadFilterStream( MIDDLE_RIGHT_THIRD, MIDDLE_RIGHT_THIRD_EX, polygons);
+		loadFilterStream( BOTTOM_LEFT_THIRD, BOTTOM_LEFT_THIRD_EX, polygons);
+		loadFilterStream( BOTTOM_CENTER_THIRD, BOTTOM_CENTER_THIRD_EX, polygons);
+		loadFilterStream( BOTTOM_RIGHT_THIRD, BOTTOM_RIGHT_THIRD_EX, polygons);
+//		loadFilterStream( , , polygons);
+	}
+	
+//Point location and annotation related
+	public static void loadAllAnnotatedPointFilterStreams(NumberedStream<Polygon> polygons) {
+		loadFilterStream( T_JUNCTION_LEFT_POINT_COUNT, T_JUNCTION_LEFT_POINT_COUNT_EX, polygons);
+		loadFilterStream( T_JUNCTION_RIGHT_POINT_COUNT, T_JUNCTION_RIGHT_POINT_COUNT_EX, polygons);
+		loadFilterStream( U_JUNCTION_RIGHT_POINT_COUNT, U_JUNCTION_RIGHT_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_BOTTOM_POINT_COUNT, END_POINT_BOTTOM_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_TOP_POINT_COUNT, END_POINT_TOP_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_TOP_LEFT_THIRD_POINT_COUNT, END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_TOP_RIGHT_THIRD_POINT_COUNT, END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_TOP_RIGHT_HALF_POINT_COUNT, END_POINT_TOP_RIGHT_HALF_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT, END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT, END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT, END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT, END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT_EX, polygons);
+		
+	}
+
+//--------------------------Util methods------------------------------------
 	
 	static public int size(Collection collection) {
 		if (collection == null)
