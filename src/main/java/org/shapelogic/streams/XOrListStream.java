@@ -25,8 +25,11 @@ public class XOrListStream extends BaseListStreamList<Boolean,String> {
 		_ohNames = ohNames;
 		_inputStream = new ArrayList(); 
 		for (String streamName: _ohNames) {
-			NumberedStream numberedStream = new NamedNumberedStream(streamName);
-			getInputStream().add(numberedStream);
+			NumberedStream numberedStream = NamedNumberedStream.getInstance(streamName);
+			if (numberedStream != null)
+				getInputStream().add(numberedStream);
+			else
+				throw new RuntimeException("No stream found for name: " + ohNames);
 		}
 	}
 	
