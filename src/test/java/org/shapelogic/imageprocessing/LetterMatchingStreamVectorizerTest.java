@@ -1,5 +1,15 @@
 package org.shapelogic.imageprocessing;
 
+import ij.process.ByteProcessor;
+
+import java.util.Set;
+
+import org.shapelogic.polygon.AnnotatedShape;
+import org.shapelogic.polygon.GeometricShape2D;
+import org.shapelogic.polygon.Polygon;
+import org.shapelogic.util.LineType;
+import org.shapelogic.util.PointType;
+
 
 /** LetterMatchingStreamVectorizerTest unit test for letter matching for StreamVectorizer.
  * <br />  
@@ -19,4 +29,22 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		vectorizer = new StreamVectorizer();
 	}
 	
+	public void testABC() {
+		String fileName = "ABC";
+		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		int pixel = bp.get(0,0);
+		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
+		Polygon polygon = vectorizer.getPolygon();
+		Polygon improvedPolygon = polygon.improve(); 
+		AnnotatedShape annotations = improvedPolygon.getAnnotatedShape();
+		Set<GeometricShape2D> endPoints = annotations.getShapesForAnnotation(PointType.END_POINT);
+		System.out.println("End points: " + endPoints);
+//		assertEquals(2, endPoints.size());
+		Set<GeometricShape2D> inflectionPoints = annotations.getShapesForAnnotation(LineType.INFLECTION_POINT);
+		assertEmptyCollection(inflectionPoints);
+		printAnnotaions(polygon);
+		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
+		assertEquals("A",vectorizer.getMatchingOH());
+	}
+
 }

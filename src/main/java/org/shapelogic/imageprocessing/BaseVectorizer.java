@@ -101,7 +101,8 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	
 	protected AnnotatedShapeImplementation _annotatedShapeImplementation = 
 		new AnnotatedShapeImplementation();
-	protected boolean _hasNext = true;
+	protected int _yForUnporcessedPixel;
+	protected int _nextCount;
 	
 	/** To be overridden. */
 	public boolean isGuiEnabled() {
@@ -132,7 +133,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	}
 	
 	protected void findAllLines() {
-		findFirstLinePoint();
+		findFirstLinePoint(true);
 
 		while (_unfinishedPoints.size() > 0) {
 			//Find whole line
@@ -233,19 +234,25 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	 * <br />
 	 * XXX Currently start from the beginning if called multiple time, change that.
 	 */
-	protected boolean findFirstLinePoint() {
-		for (int iY = _minY; iY <= _maxY; iY++) {
+	protected boolean findFirstLinePoint(boolean process) { 
+		int startY = Math.max(_minY, _yForUnporcessedPixel);
+		for (int iY = startY; iY <= _maxY; iY++) {
 			int lineOffset = _ip.getWidth() * iY; 
 			for (int iX = _minX; iX <= _maxX; iX++) {
 				_currentPixelIndex = lineOffset + iX;
 				if (PixelType.PIXEL_FOREGROUND_UNKNOWN.color == _pixels[_currentPixelIndex]) {
-					_currentPoint = new CPointInt(iX,iY);
-					addToUnfinishedPoints((CPointInt) _currentPoint.copy());
+					_yForUnporcessedPixel = iY;
+					if (process) {
+						_currentPoint = new CPointInt(iX,iY);
+						addToUnfinishedPoints((CPointInt) _currentPoint.copy());
+					}
+//					if (-1 < _nextCount)
+//						System.out.println("\n _nextCount = " + _nextCount 
+//								+ " x:" + iX + " y:" + iY + " process: " + process); 
 					return true;
 				}
 			}
 		}
-		_hasNext = false;
 		return false;
 	}
 
@@ -310,6 +317,8 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	public void showMessage(String text) {
 		if (isGuiEnabled())
 			IJ.showMessage(text);
+		else
+			System.out.println(text);
 	}
 
 	public void showMessage(String title, String text) {
@@ -353,12 +362,13 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 
 	@Override
 	public boolean hasNext() {
-		return _hasNext ;
+		return findFirstLinePoint(false);
 	}
 
 	/** Currently returns the cleaned up polygons. */
 	@Override
 	public Polygon next() {
+		_nextCount++;
 		_polygon = null; //Cause lazy creation of a new polygon
 		findAllLines();
 		if (_currentPoint != null)

@@ -22,11 +22,18 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 //		_matchingOH = LetterTaskFactory.matchPolygonToLetterUsingTask(
 //				getPolygon(), _cleanedupPolygon, _rulesArrayForLetterMatching);
 		NumberedStream<String> letters = new NamedNumberedStream<String>(StreamNames.LETTERS);
-		_matchingOH = letters.next();
+		String message = "";
+		message += letters.next();
+		while (hasNext()) {
+			message += "; " + letters.next() ;
+		}
+		_matchingOH = message;
 		if (_matchingOH == null) {
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}
 		showMessage("Letter match result: " + _matchingOH);
+		if (1 < _nextCount)
+			System.out.println("\n _nextCount = " + _nextCount); 
 	}
 	
 	/** Use this to setup all the needed streams.
@@ -39,7 +46,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 		RootMap.put(StreamNames.POLYGONS, getStream());
 		LoadLetterStreams.loadLetterStream(null);
 	}
-
+	
 	@Override
 	public void run(ImageProcessor ip) {
 		init(ip);
