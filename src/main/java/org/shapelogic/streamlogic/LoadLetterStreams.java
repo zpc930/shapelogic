@@ -50,7 +50,8 @@ import org.shapelogic.streams.XOrListStream;
 public class LoadLetterStreams {
 
 	final static public String[] lettersArray = 
-	{"A","D","E","F","H","I","K","L","M","N","O","T","V","W","X","Y","Z"};
+	{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R",
+		"T","U","V","W","X","Y","Z"};
 
 	/** Helper method to create one rule in one letter. 
 	 * 
@@ -95,8 +96,16 @@ public class LoadLetterStreams {
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		letterFilter = null;
 		LoadLetterStreams.makeStraightLetterStream(letterFilter);
+		LoadLetterStreams.makeAllLetterStream("B");
+		LoadLetterStreams.makeAllLetterStream("C");
 		LoadLetterStreams.makeAllLetterStream("D");
+		LoadLetterStreams.makeAllLetterStream("G");
+		LoadLetterStreams.makeAllLetterStream("J");
 		LoadLetterStreams.makeAllLetterStream("O");
+		LoadLetterStreams.makeAllLetterStream("P");
+		LoadLetterStreams.makeAllLetterStream("Q");
+		LoadLetterStreams.makeAllLetterStream("R");
+		LoadLetterStreams.makeAllLetterStream("U");
     	LoadLetterStreams.makeLetterXOrStream();
 	}
 	
@@ -211,9 +220,9 @@ public class LoadLetterStreams {
 		rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
 
 		rule("B", HOLE_COUNT, "==", 2, letterFilter); //try Boolean Task
-//		rule("B", T_JUNCTION_LEFT_POINT_COUNT,">", 0., letterFilter);
+		rule("B", T_JUNCTION_LEFT_POINT_COUNT,">", 0., letterFilter);
 		rule("B", U_JUNCTION_POINT_COUNT, "==", 2., letterFilter);
-//		rule("B", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
+		rule("B", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
 		rule("B", END_POINT_COUNT, "==", 0., letterFilter);
 		rule("B", SOFT_POINT_COUNT, ">", 0., letterFilter);
 		rule("B", STRAIGHT_LINE_COUNT, ">", 0., letterFilter);
@@ -231,7 +240,7 @@ public class LoadLetterStreams {
 
 		rule("D", HOLE_COUNT, "==", 1., letterFilter);
 		rule("D", T_JUNCTION_POINT_COUNT, "==", 0., letterFilter);
-//		rule("D", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
+		rule("D", END_POINT_BOTTOM_POINT_COUNT, "==", 0., letterFilter);
 		rule("D", VERTICAL_LINE_COUNT, ">", 0., letterFilter);
 		rule("D", END_POINT_COUNT, "==", 0., letterFilter);
 		rule("D", MULTI_LINE_COUNT, "==", 1., letterFilter);
