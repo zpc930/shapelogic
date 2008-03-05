@@ -51,7 +51,8 @@ public class CommonLogicExpressions {
 	public static final String BOTTOM_LEFT_HALF_EX = BOTTOM_HALF_EX + AND + LEFT_HALF_EX;	
 	public static final String BOTTOM_RIGHT_HALF_EX = BOTTOM_HALF_EX + AND + RIGHT_HALF_EX;	
 	
-	public static final String TOP_LEFT_THIRD_EX = TOP_THIRD_EX + AND + LEFT_THIRD_EX;	
+	public static final String TOP_LEFT_THIRD_EX = TOP_THIRD_EX + AND + LEFT_THIRD_EX;
+	public static final String TOP_CENTER_THIRD_EX = TOP_THIRD_EX + AND + CENTER_THIRD_EX;
 	public static final String TOP_RIGHT_THIRD_EX = TOP_THIRD_EX + AND + RIGHT_THIRD_EX;
 	public static final String MIDDLE_LEFT_THIRD_EX = MIDDLE_THIRD_EX + AND + LEFT_THIRD_EX;
 	public static final String MIDDLE_CENTER_THIRD_EX = MIDDLE_THIRD_EX + AND + CENTER_THIRD_EX;
@@ -61,9 +62,9 @@ public class CommonLogicExpressions {
 	public static final String BOTTOM_RIGHT_THIRD_EX = BOTTOM_THIRD_EX + AND + RIGHT_THIRD_EX;	
 	
 	//Point annotation related
-	public static final String HARD_POINT_COUNT = "hardPointCount";
-	public static final String HARD_POINT_COUNT_EX = "PointOfTypeFilter(\"HARD_CORNER\")";
-	public static final String HARD_POINT_COUNT_ANN_EX = "getAnnotatedShape().getShapesForAnnotation(\"PointType.HARD_CORNER\")";
+	public static final String HARD_CORNER_COUNT = "hardPointCount";
+	public static final String HARD_CORNER_COUNT_EX = "PointOfTypeFilter(\"HARD_CORNER\")";
+	public static final String HARD_CORNER_COUNT_ANN_EX = "getAnnotatedShape().getShapesForAnnotation(\"PointType.HARD_CORNER\")";
 	
 	public static final String SOFT_POINT_COUNT = "softPointCount";
 	public static final String SOFT_POINT_COUNT_EX = "PointOfTypeFilter(\"SOFT_POINT\")";
@@ -111,6 +112,10 @@ public class CommonLogicExpressions {
 	public static final String END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + TOP_LEFT_THIRD_EX;
 	
+	public static final String END_POINT_TOP_CENTER_THIRD_POINT_COUNT =  "endpointTopCenterThirdPointCount";
+	public static final String END_POINT_TOP_CENTER_THIRD_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + TOP_CENTER_THIRD_EX;
+	
 	public static final String END_POINT_TOP_RIGHT_THIRD_POINT_COUNT =  "endpointTopRightThirdPointCount";
 	public static final String END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + TOP_RIGHT_THIRD_EX;
@@ -131,6 +136,10 @@ public class CommonLogicExpressions {
 	public static final String END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + BOTTOM_LEFT_THIRD_EX;
 	
+	public static final String END_POINT_BOTTOM_CENTER_THIRD_POINT_COUNT =  "endpointBottomCenterThirdPointCount";
+	public static final String END_POINT_BOTTOM_CENTER_THIRD_POINT_COUNT_EX = 
+		END_COUNT_ANNOTATION_EX + AND + BOTTOM_CENTER_THIRD_EX;
+		
 	public static final String END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT =  "endpointBottomRightThirdPointCount";
 	public static final String END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT_EX = 
 		END_COUNT_ANNOTATION_EX + AND + BOTTOM_RIGHT_THIRD_EX;
