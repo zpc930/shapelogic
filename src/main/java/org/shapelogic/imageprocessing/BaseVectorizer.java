@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.shapelogic.entities.NumericRule;
 import org.shapelogic.logic.LetterTaskFactory;
-import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
@@ -244,9 +243,6 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 						_currentPoint = new CPointInt(iX,iY);
 						addToUnfinishedPoints((CPointInt) _currentPoint.copy());
 					}
-//					if (-1 < _nextCount)
-//						System.out.println("\n _nextCount = " + _nextCount 
-//								+ " x:" + iX + " y:" + iY + " process: " + process); 
 					return true;
 				}
 			}
