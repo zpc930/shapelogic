@@ -12,7 +12,7 @@ import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_LEFT_THI
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_POINT_COUNT;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_HALF_POINT_COUNT;
 import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HARD_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.HARD_CORNER_COUNT;
 import static org.shapelogic.logic.CommonLogicExpressions.HOLE_COUNT;
 import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT;
 import static org.shapelogic.logic.CommonLogicExpressions.INFLECTION_POINT_COUNT;
@@ -228,7 +228,7 @@ public class LoadLetterStreams {
 		rule("C", END_POINT_COUNT, "==", 2., letterFilter);
 		rule("C", INFLECTION_POINT_COUNT, "==", 0., letterFilter);
 		rule("C", CURVE_ARCH_COUNT, ">",1., letterFilter);
-		rule("C", HARD_POINT_COUNT, "==", 0., letterFilter);
+		rule("C", HARD_CORNER_COUNT, "==", 0., letterFilter);
 		rule("C", SOFT_POINT_COUNT, ">", 0., letterFilter);
 
 		rule("D", HOLE_COUNT, "==", 1., letterFilter);
@@ -238,7 +238,7 @@ public class LoadLetterStreams {
 		rule("D", END_POINT_COUNT, "==", 0., letterFilter);
 		rule("D", MULTI_LINE_COUNT, "==", 1., letterFilter);
 		rule("D", SOFT_POINT_COUNT, ">", 0., letterFilter);
-		rule("D", HARD_POINT_COUNT, ">", 0., letterFilter);
+		rule("D", HARD_CORNER_COUNT, ">", 0., letterFilter);
 
 		rule("E", HOLE_COUNT, "==", 0., letterFilter);
 		rule("E", T_JUNCTION_LEFT_POINT_COUNT, "==", 1., letterFilter);
@@ -266,7 +266,7 @@ public class LoadLetterStreams {
 		rule("G", END_POINT_COUNT, "==", 2., letterFilter);
 		rule("G", INFLECTION_POINT_COUNT, "==", 0., letterFilter);
 		rule("G", CURVE_ARCH_COUNT, ">", 2., letterFilter);
-		rule("G", HARD_POINT_COUNT, ">", 0., letterFilter);
+		rule("G", HARD_CORNER_COUNT, ">", 0., letterFilter);
 		rule("G", SOFT_POINT_COUNT, ">", 0., letterFilter);
 		rule("G", ASPECT_RATIO, ">", 0.5, letterFilter);
 		rule("G", STRAIGHT_LINE_COUNT, ">", 0., letterFilter);
@@ -297,7 +297,7 @@ public class LoadLetterStreams {
 		rule("J", VERTICAL_LINE_COUNT, "==", 1., letterFilter);
 		rule("J", END_POINT_COUNT, "==", 2., letterFilter);
 		rule("J", MULTI_LINE_COUNT, "==", 1., letterFilter);
-		rule("J", HARD_POINT_COUNT, "==", 0., letterFilter);
+		rule("J", HARD_CORNER_COUNT, "==", 0., letterFilter);
 		rule("J", SOFT_POINT_COUNT, ">", 0., letterFilter);
 
 		rule("K", HOLE_COUNT, "==", 0., letterFilter);
@@ -344,7 +344,7 @@ public class LoadLetterStreams {
 		rule("O", END_POINT_COUNT, "==", 0., letterFilter);
 		rule("O", MULTI_LINE_COUNT, "==", 1., letterFilter);
 		rule("O", CURVE_ARCH_COUNT, ">", 0., letterFilter);
-		rule("O", HARD_POINT_COUNT, "==", 0., letterFilter);
+		rule("O", HARD_CORNER_COUNT, "==", 0., letterFilter);
 		rule("O", SOFT_POINT_COUNT, ">", 0., letterFilter);
 
 		rule("P", HOLE_COUNT, "==", 1., letterFilter);

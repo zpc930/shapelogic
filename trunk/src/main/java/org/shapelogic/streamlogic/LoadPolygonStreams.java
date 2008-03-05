@@ -198,7 +198,7 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> hardPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(hardPointCountCalc1,polygons); 
-		RootMap.put(HARD_POINT_COUNT,hardPointCountStream);
+		RootMap.put(HARD_CORNER_COUNT,hardPointCountStream);
 	}
 	
 	private static void loadUJunctionPointCountStream(NumberedStream<Polygon> polygons) {
@@ -370,11 +370,13 @@ public class LoadPolygonStreams {
 		loadFilterStream( END_POINT_BOTTOM_POINT_COUNT, END_POINT_BOTTOM_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_TOP_POINT_COUNT, END_POINT_TOP_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_TOP_LEFT_THIRD_POINT_COUNT, END_POINT_TOP_LEFT_THIRD_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_TOP_CENTER_THIRD_POINT_COUNT, END_POINT_TOP_CENTER_THIRD_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_TOP_RIGHT_THIRD_POINT_COUNT, END_POINT_TOP_RIGHT_THIRD_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_TOP_RIGHT_HALF_POINT_COUNT, END_POINT_TOP_RIGHT_HALF_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT, END_POINT_BOTTOM_RIGHT_HALF_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT, END_POINT_BOTTOM_LEFT_HALF_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT, END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT_EX, polygons);
+		loadFilterStream( END_POINT_BOTTOM_CENTER_THIRD_POINT_COUNT, END_POINT_BOTTOM_CENTER_THIRD_POINT_COUNT_EX, polygons);
 		loadFilterStream( END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT, END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT_EX, polygons);
 		
 	}
