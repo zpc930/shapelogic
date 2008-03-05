@@ -78,13 +78,16 @@ public class LoadLetterStreams {
 			return;
 		StreamFactory.addToAndListStream0(letter, streamName, predicate, value);
 	}
+
+	public static void rule(String letter, String streamName, String predicate, double value) {
+		StreamFactory.addToAndListStream0(letter, streamName, predicate, value);
+	}
 	
-	public static void makeLetterXOrStream() {
-		List<String> letters = new ArrayList<String>();
-		for (String letter: lettersArray)
-			letters.add(letter);
-//		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(Constants.POLYGONS);
-		XOrListStream letterMatchStream = new XOrListStream( letters);
+	public static void makeLetterXOrStream(String[] symbolStreamArray) {
+		List<String> symbols = new ArrayList<String>();
+		for (String symbol: symbolStreamArray)
+			symbols.add(symbol);
+		XOrListStream letterMatchStream = new XOrListStream( symbols);
 		RootMap.put(StreamNames.LETTERS, letterMatchStream);
 	}
 
@@ -96,7 +99,7 @@ public class LoadLetterStreams {
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		letterFilter = null;
 		LoadLetterStreams.makeAllLetterStream(letterFilter);
-    	LoadLetterStreams.makeLetterXOrStream();
+    	LoadLetterStreams.makeLetterXOrStream(lettersArray);
 	}
 	
 	/** Rules for matching  letters, using only very simple properties.
@@ -314,6 +317,8 @@ public class LoadLetterStreams {
 		rule("L", END_POINT_COUNT, "==", 2., letterFilter);
 		rule("L", MULTI_LINE_COUNT, "==", 1., letterFilter);
 		rule("L", SOFT_POINT_COUNT, "==", 0., letterFilter);
+		rule("L", END_POINT_TOP_LEFT_THIRD_POINT_COUNT, "==", 1., letterFilter);
+		rule("L", END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT, "==", 1., letterFilter);
 
 		rule("M", HOLE_COUNT, "==", 0., letterFilter);
 		rule("M", T_JUNCTION_LEFT_POINT_COUNT, "==", 0., letterFilter);
