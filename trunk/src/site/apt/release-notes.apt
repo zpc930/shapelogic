@@ -7,6 +7,38 @@
 
 Release notes for ShapeLogic
 
+* 2008/03/05 ShapeLogic v 1.0 released AKA Beta 1
+
+  * Migrate rule databases for image processing. 
+  Currently they are implemented as goal driven tasks with sub tasks.
+  Version 1.0 uses the lazy streams that is simpler and more powerful.
+  
+  * Letter match example now matches all polygons instead of just the first.
+  
+  * When running ShapeLogic as ImageJ plugin, make it easy to define rules for 
+  matching in external Java file.
+  
+  * New number matcher to demonstrate how to define rules for matching in external Java file.
+  
+  * Enabled use of
+  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
+  Java 6 Scripting}}
+  for rule database, this should give the user access to the 25 scripting 
+  languages that are supported
+
+  * Get ShapeLogic into beta stage
+  
+  * Add many unit tests for Lazy Stream library
+
+  * Fix bugs in Lazy Stream library
+
+  * Fix bugs for the letter X
+
+  * There is around 25000 lines of Java code
+
+  * 385 unit test that all works on local machine
+
+  []
 
 * 2008/01/23 ShapeLogic v 0.9 released AKA Lazy stream
 
