@@ -19,7 +19,9 @@ import org.shapelogic.util.Constants;
  * 
  * Always stop on junctions, if there is one junction point use that, but stop after.
  * N points are chosen last.
- * Never go from one N point to another.
+ * Never go from one N point to another, 
+ * unless that the N point is the first point, to handle an X, where you have 4 
+ * N points in the center.
  * If you are at a start point then just chose one direction.
  * Can I delegate this to a different object. I always need to find all the 
  * neighbors first. 
@@ -35,12 +37,14 @@ import org.shapelogic.util.Constants;
  * 
  * For each junction add to unfinished. Go to first junction.
  * If other points are available take first and go to it.
- * If only N point is available, if current point an N stop else go to that.
+ * If only N point is available, if current point an N and not the first point 
+ * stop else go to that.
  * 
  * When coming to a new point check if it is a junction if stop if not on 
  * first point. It does not matter if the start point is used or not.
  * I think that at the end check to see if you can go to either a junction 
  * point or to the start point.
+ * Also stop if you do not know what to do, at the end of handleProblematicPoints().
  * 
  * @author Sami Badawi
  *
@@ -108,8 +112,11 @@ public class BaseMaxDistanceVectorizer extends BaseVectorizer {
 		}
 		else if (_pixelTypeCalculator.unusedNeighbors == 0) {
 			newDirection = handleLastUnused();
-		} else
+		} else {
 			newDirection = handleProblematicPoints();
+			if (newDirection == Constants.DIRECTION_NOT_USED)
+				addToUnfinishedPoints((CPointInt)_currentPoint.copy());
+		}
 		if (newDirection == Constants.DIRECTION_NOT_USED)
 			return false;
 		_currentDirection = newDirection; //XXX redundant
@@ -214,8 +221,9 @@ public class BaseMaxDistanceVectorizer extends BaseVectorizer {
 			return pointHandle.vCornerPoint.firstDirection;
 		else if (pointHandle.other.count > 0) 
 			return pointHandle.other.firstDirection;
-		else if (pointHandle.extraNeighborPoint.count > 0 && 
-				!PixelType.PIXEL_EXTRA_NEIGHBOR.equals(_pixelTypeCalculator.getPixelType()))
+		else if (0 < pointHandle.extraNeighborPoint.count &&
+				(_chainCodeHandler.getLastChain() <= 0 ||
+				!PixelType.PIXEL_EXTRA_NEIGHBOR.equals(_pixelTypeCalculator.getPixelType())))
 			return pointHandle.extraNeighborPoint.firstDirection;
 		else if (pointHandle.used.countUsed > 0)
 			//Only works if at end of closed curve
@@ -238,6 +246,8 @@ public class BaseMaxDistanceVectorizer extends BaseVectorizer {
 	@Override
 	protected boolean findMultiLinePreProcess() {
 		boolean result = super.findMultiLinePreProcess();
+		if (!result)
+			return result;
 		_chainCodeHandler = new ChainCodeHandler(getPolygon().getAnnotatedShape());
 		_chainCodeHandler.setup();
 		_chainCodeHandler.setMultiLine(this.getPolygon().getCurrentMultiLine());
