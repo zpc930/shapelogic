@@ -36,6 +36,9 @@ public class LoadLetterStreamsTest extends TestCase
 	public static final String QUOTE = "\"";
 	boolean runSlowTests = false;
 	
+	public static final String[] LETTERS_TO_TEST = 
+	{"A", "E", "F", "H", "I", "K", "L", "M", "N", "T", "V",  "X", "Y", "Z"};
+	
 	@Override
 	public void setUp() throws Exception
 	{
@@ -96,7 +99,7 @@ public class LoadLetterStreamsTest extends TestCase
 		LoadLetterStreams.loadLetterStream(letterFilter);
     	NamedNumberedStream<Boolean> aStreamFromRoot = 
     		new NamedNumberedStream<Boolean>(letter);
-    	LoadLetterStreams.makeLetterXOrStream();
+    	LoadLetterStreams.makeLetterXOrStream(LETTERS_TO_TEST);
     	assertTrue("Bad match for: " + letter,aStreamFromRoot.get(0));
 		ListStream<String> letterString = (ListStream<String>) RootMap.get(StreamNames.LETTERS);
     	assertEquals(letter,letterString.get(0));
