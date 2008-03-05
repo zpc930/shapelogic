@@ -85,7 +85,7 @@ public class LetterTaskFactory {
 			new NumericRule("C", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
 			new NumericRule("C", INFLECTION_POINT_COUNT, polygon, size(INFLECTION_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("C", CURVE_ARCH_COUNT, polygon, size(CURVE_ARCH_COUNT_ANN_EX), ">",1.),
-			new NumericRule("C", HARD_POINT_COUNT, polygon, filter(HARD_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("C", HARD_CORNER_COUNT, polygon, filter(HARD_CORNER_COUNT_EX), "==", 0.),
 			new NumericRule("C", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
 
 			new NumericRule("D", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
@@ -95,7 +95,7 @@ public class LetterTaskFactory {
 			new NumericRule("D", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 0.),
 			new NumericRule("D", MULTI_LINE_COUNT, polygon, size(MULTI_LINE_COUNT_EX), "==", 1.),
 			new NumericRule("D", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
-			new NumericRule("D", HARD_POINT_COUNT, polygon, size(HARD_POINT_COUNT_ANN_EX), ">", 0.),
+			new NumericRule("D", HARD_CORNER_COUNT, polygon, size(HARD_CORNER_COUNT_ANN_EX), ">", 0.),
 
 			new NumericRule("E", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
 			new NumericRule("E", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX), "==", 1.),
@@ -123,7 +123,7 @@ public class LetterTaskFactory {
 			new NumericRule("G", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
 			new NumericRule("G", INFLECTION_POINT_COUNT, polygon, size(INFLECTION_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("G", CURVE_ARCH_COUNT, polygon, size(CURVE_ARCH_COUNT_ANN_EX), ">", 2.),
-			new NumericRule("G", HARD_POINT_COUNT, polygon, size(HARD_POINT_COUNT_ANN_EX), ">", 0.),
+			new NumericRule("G", HARD_CORNER_COUNT, polygon, size(HARD_CORNER_COUNT_ANN_EX), ">", 0.),
 			new NumericRule("G", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
 			new NumericRule("G", ASPECT_RATIO, polygon, VAR + ASPECT_RATIO_EX, ">", 0.5),
 			new NumericRule("G", STRAIGHT_LINE_COUNT, polygon, size(STRAIGHT_LINE_COUNT_ANN_EX), ">", 0.),
@@ -154,7 +154,7 @@ public class LetterTaskFactory {
 			new NumericRule("J", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 1.),
 			new NumericRule("J", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
 			new NumericRule("J", MULTI_LINE_COUNT, polygon, size(MULTI_LINE_COUNT_EX), "==", 1.),
-			new NumericRule("J", HARD_POINT_COUNT, polygon, filter(HARD_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("J", HARD_CORNER_COUNT, polygon, filter(HARD_CORNER_COUNT_EX), "==", 0.),
 			new NumericRule("J", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
 
 			new NumericRule("K", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
@@ -201,7 +201,7 @@ public class LetterTaskFactory {
 			new NumericRule("O", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 0.),
 			new NumericRule("O", MULTI_LINE_COUNT, polygon, size(MULTI_LINE_COUNT_EX), "==", 1.),
 			new NumericRule("O", CURVE_ARCH_COUNT, polygon, size(CURVE_ARCH_COUNT_ANN_EX), ">", 0.),
-			new NumericRule("O", HARD_POINT_COUNT, polygon, filter(HARD_POINT_COUNT_EX), "==", 0.),
+			new NumericRule("O", HARD_CORNER_COUNT, polygon, filter(HARD_CORNER_COUNT_EX), "==", 0.),
 			new NumericRule("O", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
 
 			new NumericRule("P", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
