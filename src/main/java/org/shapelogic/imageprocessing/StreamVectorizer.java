@@ -23,17 +23,20 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 //				getPolygon(), _cleanedupPolygon, _rulesArrayForLetterMatching);
 		NumberedStream<String> letters = new NamedNumberedStream<String>(StreamNames.LETTERS);
 		String message = "";
-		message += letters.next();
-		while (hasNext()) {
-			message += "; " + letters.next() ;
+		for (int i = 0; hasNext(); i++)
+		{
+			String currentMatch = letters.next();
+			if (i != 0)
+				message += "; ";
+			message += currentMatch;
+			if (currentMatch == null || "".equals(currentMatch))
+				System.out.println("\n\nMatch failed for this:\n" + _cleanedupPolygon);
 		}
 		_matchingOH = message;
 		if (_matchingOH == null) {
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}
 		showMessage("Letter match result: " + _matchingOH);
-		if (1 < _nextCount)
-			System.out.println("\n _nextCount = " + _nextCount); 
 	}
 	
 	/** Use this to setup all the needed streams.
