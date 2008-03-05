@@ -44,7 +44,14 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 		super.init(ip);
 //		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
 		RootMap.put(StreamNames.POLYGONS, getStream());
+		matchSetup(ip);
+	}
+	
+	/** In order to match a different alphabet override this. 
+	 */
+	public void matchSetup(ImageProcessor ip) {
 		LoadLetterStreams.loadLetterStream(null);
+		
 	}
 	
 	@Override
