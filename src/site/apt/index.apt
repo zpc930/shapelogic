@@ -93,9 +93,9 @@ ShapeLogic
 
   []
   
-* Development Status: Alpha
+* Development Status: Beta
 
-  * ShapeLogic is in Alpha, as of version 0.7.
+  * ShapeLogic is in Beta, as of version 1.0.
 
   * There is a working example where ShapeLogic is used for matching capital letters.
 
@@ -109,40 +109,36 @@ ShapeLogic
 
 * News
 
-** 2008/01/23 ShapeLogic v 0.9 released
+** 2008/03/05 ShapeLogic v 1.0 released
 
-  This is the first release where ShapeLogic is moving beyond current 
-  parameters as a plugin library for ImageJ, currently only used in a letter 
-  recognition example.
-  The improved system will be for declarative programming where the user can 
-  define rules in either a database or flat file. 
-  The focus will still be on image processing and computer vision, but the 
-  system will be more broadly applicable.
-  There has been no new work on image processing or letter recognition in this 
-  release. ShapeLogic v 1.0 will combine these new changes with the current 
-  rule base code for image processing.
+  * Migrate rule databases for image processing. 
+  Currently they are implemented as goal driven tasks with sub tasks.
+  Version 1.0 uses the lazy streams that is simpler and more powerful.
   
-  * Introduce new functional, declarative and query constructs
+  * Letter match example now matches all polygons instead of just the first.
   
-  * Implement lazy streams like Haskell, {{{http://www.scala-lang.org} Scala}} or Scheme
+  * When running ShapeLogic as ImageJ plugin, make it easy to define rules for 
+  matching in external Java file.
+  
+  * New number matcher to demonstrate how to define rules for matching in external Java file.
+  
+  * Enabled use of
+  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
+  Java 6 Scripting}}
+  for rule database, this should give the user access to the 25 scripting 
+  languages that are supported
 
-  * These functional constructs are very lightweight and you only need one 
-  200KB jar file to use it in other applications
+  * Get ShapeLogic into beta stage
+  
+  * Add many unit tests for Lazy Stream library
 
-  * Test streams by solving the first 10 {{{project-euler.html}mathematical problems}} 
-  from {{{http://projecteuler.net}Project Euler}} 
-  
-  * Enabled
-  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}Java 6 Scripting}}
-  for evaluating expressions
-  
-  * Tested with Groovy, JRuby, JavaScript, but should 
-  work with other supported Scripting languages, currently that are 25 of these.
-  This makes it possible for users to add rule, formulas and queries in real 
-  time using text format. They can interact with a running Java application, 
-  which can be useful in science, finance or web application.
-  
+  * Fix bugs in Lazy Stream library
+
+  * Fix bugs for the letter X
+
   []
+  
+  Documentation will soon be updated to reflect ShapeLogic 1.0.
 
 * Future plans for ShapeLogic
   
@@ -154,32 +150,12 @@ ShapeLogic
   
   []
 
-** ShapeLogic v 1.0 soon to be released
+** ShapeLogic v 1.1 soon to be released
 
-  ShapeLogic v 0.9 introduced lazy streams a powerful declarative and 
-  functional construct. It tested them in pure form, on mathematics problems.
-  All image processing and vision code still used goal driven logic.
-  
-  * Migrate rule databases for image processing. 
-  Currently they are implemented as goal driven tasks with sub tasks.
-  The new version will use the lazy streams that are simpler and more powerful.
-  
   * When running ShapeLogic as an plugin for ImageJ add a menu item for loading
   and running external rules either from flat file, database, macro or Java format.
   
-  * Enabled use of
-  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
-  Java 6 Scripting}}
-  for rule database, this should give the user access to the 25 scripting 
-  languages that are supported
-
   * Make the annotation of shapes more loosely coupled
-
-  * Get ShapeLogic into beta stage
-  
-  * Add many unit tests for Lazy Stream library
-
-  * Fix bugs in Lazy Stream library
 
   []
 
