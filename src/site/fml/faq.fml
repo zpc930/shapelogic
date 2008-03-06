@@ -25,8 +25,9 @@
       <question>What version of Java JDK does ShapeLogic work with?</question>
       <answer>
         <p>
-		  ShapeLogic is compiled with JDK version 1.6, but should work fine if compiled with JDK 1.5.<br/>
-		  A version compiled with 1.5 might be released.
+		  ShapeLogic is compiled with JDK version 1.6. There are parts of it 
+		  that is using the JSR 223 scripting framework, introduced in 1.6.
+		  It might be possible to compiled it with JDK 1.5.<br/>
         </p>
       </answer>
     </faq>
@@ -122,7 +123,7 @@
     </faq>
 
     <faq id="joinTeam">
-      <question>Can I take dependent libraries out if its functionalety is not used?</question>
+      <question>Can I take dependent libraries out if its functionality is not used?</question>
       <answer>
         <p>
           Yes just take them out one at a time until something break.
@@ -150,7 +151,10 @@
       <question>Does ShapeLogic work without ImageJ?</question>
       <answer>
         <p>
-		  Not now. But ShapeLogic is very loosely coupled to ImageJ, so abstracting 
+          It does for declarative programming. See <a href="./project-euler.html">Project Euler</a>.
+        </p> <p>
+		  As far as image processing is concerned, not now. 
+		  But ShapeLogic is very loosely coupled to ImageJ, so abstracting 
 		  the connection to ImageJ out should not be a big task.
         </p>
       </answer>
@@ -164,8 +168,8 @@
           One of the main objectives for ShapeLogic is to make a good hybrid of 
           Declarative programming and Object Oriented programming. 
           This is not specific to image processing or computer vision.
-          In ShapeLogic 0.9 the external rule database should implemented, so 
-          from then on it should possible that ShapeLogic would be applicable 
+          Since ShapeLogic 0.9 the lazy stream logic framework was implemented, so 
+          from then on it was possible that ShapeLogic would be applicable 
           to other domains. This is not a priority for the current development effort.<br />
           <br />
           There are many approaches to declarative, object oriented hybrids.
