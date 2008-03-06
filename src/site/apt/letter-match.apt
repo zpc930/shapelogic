@@ -11,13 +11,15 @@ Letter Match Example
   ShapeLogic comes with a test application for letter matching, the purpose
   of which is to show how to use the ShapeLogic framework on a simple well defined problem.
   
-  Currently 3 sets of rules have been defined:
+  Currently 4 sets of rules have been defined:
   
   [[1]] Recognition of straight capital letters in ShapeLogic 0.2
   
   [[1]] Recognition of all capital letters starting in ShapeLogic 0.7
   
-  [[1]] Simplified syntax starting in ShapeLogic 0.8
+  [[1]] Simplified syntax by adding a filter logic language starting in ShapeLogic 0.8
+  
+  [[1]] Using lazy stream and filter logic language starting in ShapeLogic 1.0
   
   []
   
@@ -34,26 +36,26 @@ Letter Match Example
 
   See the {{{getting-started.html} Getting Started page}}.
   
-Recognition of all capital letters in ShapeLogic 0.8
+Recognition of all capital letters in ShapeLogic 1.0
 
   Lines and points are annotated in order to match curves, circle arches or Bezier curves are not used.
   Lines and points can be filtered according to both position in the bounding box for a 
   polygon, and point and line annotations. 
 
-* Rules for the letter A in ShapeLogic 0.8
+* Rules for the letter A in ShapeLogic 1.0
   
   For a better description of {{{logic-language.html} logic language syntax}}.
   
 +------------------------------------------+
-new NumericRule("A", POINT_COUNT, polygon, VAR_SIZE_START + POINT_COUNT_EX + VAR_SIZE_END,"==", 5.),
-new NumericRule("A", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
-new NumericRule("A", T_JUNCTION_LEFT_POINT_COUNT, polygon, FILTER_START +  T_JUNCTION_LEFT_POINT_COUNT_EX + FILTER_END,"==", 1.),
-new NumericRule("A", T_JUNCTION_RIGHT_POINT_COUNT, polygon, filter(T_JUNCTION_RIGHT_POINT_COUNT_EX),"==", 1.),
-new NumericRule("A", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 2.),
-new NumericRule("A", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_EX), "==", 1.),
-new NumericRule("A", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 0.),
-new NumericRule("A", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
-new NumericRule("A", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
+rule("A", POINT_COUNT, "==", 5., letterFilter);
+rule("A", HOLE_COUNT, "==", 1., letterFilter);
+rule("A", T_JUNCTION_LEFT_POINT_COUNT,"==", 1., letterFilter);
+rule("A", T_JUNCTION_RIGHT_POINT_COUNT,"==", 1., letterFilter);
+rule("A", END_POINT_BOTTOM_POINT_COUNT, "==", 2., letterFilter);
+rule("A", HORIZONTAL_LINE_COUNT, "==", 1., letterFilter);
+rule("A", VERTICAL_LINE_COUNT, "==", 0., letterFilter);
+rule("A", END_POINT_COUNT, "==", 2., letterFilter);
+rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
 +------------------------------------------+
 
   The meaning of the rules for A is:

@@ -9,10 +9,8 @@
 Logic language
   
   The ShapeLogic logic system is not quite a language,    
-  but it has become more organized with v. 0.8 and 0.9.
+  but it has become more organized with v. 0.8, 0.9 and 1.0.
   
-  This is work in progress, but are actively updated now.
-
   For a broader introduction to the logic system see {{{declarative-logic.html} Declarative logic}}. 
 
 Different types of declarative programming in ShapeLogic
@@ -45,9 +43,9 @@ Different types of declarative programming in ShapeLogic
   
   This was fine for handling simple rules applied to one polygon.
   
-* New declarative programming concept in ShapeLogic 0.9 
+* New declarative programming concept in ShapeLogic 0.9 and 1.0
   
-  * Lazy computations was expanded 
+  * Lazy computations was expanded
   
   * Lazy streams was introduced
   
@@ -55,23 +53,25 @@ Different types of declarative programming in ShapeLogic
   
   * Tested with Groovy, JRuby and JavaScript, but this is supporting 25 languages
   
+  * Lazy streams work with matching several polygons at once
+  
+  * Named lazy stream turned out to be very easy for user defined rules
+  
+  * Using a scripting language is less essential for rule definition is less 
+  essential than with goal driven tasks
+   
   []
   
   IoC hold potential but has not been used yet.
   
-* Plan for declarative programming in ShapeLogic 1.0
-  
-  * Integrate Goal driven task with lazy streams
-  
-  * Probably move rules defined using JEXL to rules defined in a scripting 
-  language of the user choice 
+* Plan for declarative programming in ShapeLogic 1.1
   
   * Make menu items in ImageJ's menu for opening and running a user defined 
   rule database, without user defined Java code
   
   []
   
-** Problem with Java 6 Scripting in ShapeLogic 1.0
+** Problem with Java 6 Scripting for rule definition in ImageJ
 
   One possible problem with moving rules to Java 6 Scripting, is that this 
   requires that the user downloads engine interface files from Sun. This would
@@ -85,7 +85,44 @@ Different types of declarative programming in ShapeLogic
   It is also possible to connect Groovy and Java outside Java 6 Scripting, but 
   then it would not be uniform.
   
-Logic expressions can live in several places
+Logic expressions in lazy stream approach
+  
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} DigitStreamVectorizer}} 
+  is an example showing what is needed to define a match of the numbers working 
+  as a plugin from ImageJ.
+  
+* Define a rule for matching the letter A
+  
++--------------------------------------------+
+rule("A", POINT_COUNT, "==", 5.);
+rule("A", HOLE_COUNT, "==", 1.);
+rule("A", T_JUNCTION_LEFT_POINT_COUNT,"==", 1.);
+rule("A", T_JUNCTION_RIGHT_POINT_COUNT,"==", 1.);
+rule("A", END_POINT_BOTTOM_POINT_COUNT, "==", 2.);
+rule("A", HORIZONTAL_LINE_COUNT, "==", 1.);
+rule("A", VERTICAL_LINE_COUNT, "==", 0.);
+rule("A", END_POINT_COUNT, "==", 2.);
+rule("A", SOFT_POINT_COUNT, "==", 0.);
++--------------------------------------------+
+  
+  The "A" is saying apply this rule to the OH, object hypothesis, the letter A.
+  
+  The next is just names of streams that generate the point count and hole 
+  count for the polygons. Then there is the predicate and the comparison value.
+  
+* Idea behind lazy streams
+  
+  Lazy streams have the following features  
+  
+  * You can define a lazy stream based on other lazy streams
+  
+  * They works as a kind of UNIX pipes or Legos
+  
+  * They serves as your query construct, you can directly query them 
+  
+  []
+  
+Logic expressions in goal driven tasks approach
 
   There are currently 3 main places where logic expressions can be placed:
   
@@ -149,7 +186,7 @@ Example of logic language in the ShapeLogic letter matching example
   
   So each line will be translated into one task / goal.
 
---------------------------------------------
++--------------------------------------------+
 new NumericRule("A", POINT_COUNT, polygon, VAR_SIZE_START + POINT_COUNT_EX + VAR_SIZE_END,"==", 5.),
 new NumericRule("A", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 1.),
 new NumericRule("A", T_JUNCTION_LEFT_POINT_COUNT, polygon, FILTER_START + T_JUNCTION_LEFT_POINT_COUNT_EX + FILTER_END,"==", 1.),
@@ -159,7 +196,7 @@ new NumericRule("A", HORIZONTAL_LINE_COUNT, polygon, size(HORIZONTAL_LINE_COUNT_
 new NumericRule("A", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 0.),
 new NumericRule("A", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
 new NumericRule("A", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), "==", 0.),
---------------------------------------------
++--------------------------------------------+
   
   All rules work in a {{{http://commons.apache.org/jexl/} JEXL}} context.
   

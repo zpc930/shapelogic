@@ -22,7 +22,7 @@ Project Euler
   
   The best way to get familiar ShapeLogic's new functional constructs is to 
   create a Java project with just this file. All you need for 
-  this to run is junit.jar and shapelogic_0.9.jar.
+  this to run is junit.jar and shapelogic_1.0.jar.
   
 ** Comparison to the Scala language
   
