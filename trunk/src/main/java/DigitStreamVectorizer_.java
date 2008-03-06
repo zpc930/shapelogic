@@ -1,31 +1,11 @@
-import static org.shapelogic.logic.CommonLogicExpressions.ASPECT_RATIO;
-import static org.shapelogic.logic.CommonLogicExpressions.CURVE_ARCH_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_CENTER_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_LEFT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_THIRD_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HARD_CORNER_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HOLE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.MULTI_LINE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.SOFT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.U_JUNCTION_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.*;
 import static org.shapelogic.streamlogic.LoadLetterStreams.rule;
 import ij.process.ImageProcessor;
 
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
 
-/** Class running StreamVectorizer and matching polygons to digits.
- * <br />
+/** Class running StreamVectorizer and matching polygons to digits.<br />
  * <p>
  * The main purpose of this is to demonstrate how users of ShapeLogic 
  * relatively easily can define their own match.
@@ -39,7 +19,6 @@ public class DigitStreamVectorizer_ extends StreamVectorizer_ {
 	@Override
 	public void matchSetup(ImageProcessor ip) {
 		loadDigitStream();
-		
 	}
 	
 	public static void loadDigitStream() {
@@ -146,6 +125,5 @@ public class DigitStreamVectorizer_ extends StreamVectorizer_ {
 		rule("9", ASPECT_RATIO, "<", 0.9);
 		rule("9", SOFT_POINT_COUNT, ">", 1.);
 		rule("9", HARD_CORNER_COUNT, "<", 2.);
-		
 	}
 }
