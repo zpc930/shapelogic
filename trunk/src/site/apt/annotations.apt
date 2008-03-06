@@ -8,12 +8,15 @@
 
 Annotations
   
+  Points are annotated with: soft point or hard corners.
+  The annotation object currently live under the polygons. 
+  
 * Goal for new annotations
   
   The goal for the new annotations is to have a uniform framework for all 
   types of annotations on all types of objects.
   
-  They should be loosely coupled. Unlike the annotations up till ShapeLogic 0.8.
+  They should be loosely coupled. Unlike the annotations up till ShapeLogic 1.0.
   
   There are different types of annotations that should be handled easily:
   

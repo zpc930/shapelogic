@@ -8,11 +8,11 @@
 
 Lazy Data Streams
   
-  Lazy Data Streams is a mix between an iterator and a collection. 
+  Lazy Data Streams is a mix between an iterator and a list. 
   A stream can be expanded by lazy calculation of an extra member.
   
-  Streams are going to be a key component of the declarative programming engine 
-  in ShapeLogic. This should happen around ShapeLogic 1.0.
+  Streams is a key component of the declarative programming engine 
+  in ShapeLogic starting from ShapeLogic 1.0.
   
 * Using streams to solve mathematical problems
   

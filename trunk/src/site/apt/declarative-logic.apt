@@ -6,27 +6,167 @@
             2007/11/28
 
 Declarative logic
-
-  ShapeLogic has a declarative goal driven logic engine.
   
+  ShapeLogic is trying to develop a framework for declarative programming that
+  works well for the computer vision and image processing domain. 
+  This has been growing along a letter match example application. It has been a
+  trail and error process that so far has produced these approaches:
+  
+* 3 different approaches to declarative programming in ShapeLogic
+  
+  Here is a chronological listing of ShapeLogic's 3 different approaches 
+  declarative logic:
+  
+  [[1]] Declarative goal driven logic engine. From ShapeLogic 0.2.
+  
+  [[1]] Logic filter language. From ShapeLogic 0.8
   The syntax and development of the logic language is better described in 
   {{{logic-language.html} Logic language}}.
-
-* Influences
-
-  * Lazy streams
   
-  * AI choice tree
-
-  * IoC, Inversion of Control
+  [[1]] Lazy streams. From ShapeLogic 0.9.
   
-  * Oz language
+  []
+  
+* Result of different approaches so far
+  
+  For the letter matching example, the lazy stream approach have been both 
+  simpler and more powerful than the goal driven logic engine.
+  
+  The Artificial Intelligence choice tree is build into the logical structure 
+  of goal driven logic engine, so this approach might work well when reasoning 
+  under uncertainty.
+
+  The logic filter language is used with both lazy streams and goal driven approach.
+  
+  ShapeLogic is a toolkit, all the 3 approaches are available with unit tests. 
+  
+  For now development is focused on the lazy stream approach.
+  
+Lazy streams
+  
+  The idea is that you have definitions of a data stream, say: 
+  
+  * Natural numbers, 
+  
+  * Fibonacci numbres
+  
+  * Sequence of polygons in an image
+  
+  * Sequence of sequence of polygons in an image sequence
+  
+  []
+  
+  The definition does not cause anything to be calculated, but when the data is
+  needed it will be calculated. So it is a generalization of a lazy calculation.
+  
+* Idea behind lazy streams
+  
+  Lazy streams have the following features  
+  
+  * You can define a lazy stream based on other lazy streams
+  
+  * They works as a kind of UNIX pipes or Legos
+  
+  * They serves as your query construct, you can directly query them 
+  
+  []
+  
+* Lazy streams in letter example
+  
+  Stream used in letter match example:
+  
+  * Polygon stream, this is generated from either and SVG file or and image 
+  
+  * Cleaned up polygon stream, this can be done in different ways
+  
+  * A lot of feature streams:
+  
+    * hole count
+  
+    * point count 
+    
+    * number of end point in lower left corner
+    
+    * number of t junction in upper right corner
+    
+    []
+  
+  * Each letter is an And stream build of a feature stream and a predicate, for letter A:
+  
+    * hole count == 1
+  
+    * point count > 5
+    
+    * number of end point in lower left corner == 1
+    
+    * number of t junction on the right side == 1
+    
+    []
+  
+  * The Letter match stream is an XOr stream of the letter stream.
+  
+  []
+  
+* Technical details about lazy streams
+  
+  The streams in ShapeLogic are different than the streams in Haskell, Oz, 
+  Scheme and Scala. These are all based on data structures similar to a LISP list.
+  
+** Immutable stream in Java List 
+  
+  In ShapeLogic the streams are assumed to be immutable. The data is put in a 
+  normal Java List. 
+  
+*** The advantage of Java List 
+
+  * Faster access to data 
+
+  * Works better with Java
+  
+  [] 
+  
+*** Advantages of LISP list / disadvantage of Java List
+  
+  * In a LISP list sub lists are also lists
+  
+  * This enables elegant functional style recursive programming
+  
+  []
+  
+** Using streams for concurrent programming
+  
+  Streams can also support parallel or concurrent programming, which is important 
+  with the CPU intensive operations in image processing and computer vision. 
+  Especially with the advent of cheap multi processor machines. 
+  
+*** Example: Find polygons in a stack of images  
+
+  You define a lazy data stream for this and set a stream property 
+
+  randomAccess = true
+
+  This indicates that individual elements can be calculated independently. 
+  The factory creating the stream could create a parallel version of the stream 
+  and assign each operation its own thread.
+  
+  Note that the result would be a stream of polygons for each image.
+
+Ideas behind declarative goal driven logic engine
+  
+  This is the first approach for declarative programming, currently not the 
+  focus of development.
+  
+* Influences for goal driven logic engine
 
   * Prolog language
 
+  * AI choice tree
+
+  * Oz language
+
   []
 
-Important ideas
+* Important ideas
 
   * Tree of task and sub tasks
 
@@ -107,7 +247,10 @@ POINT_COUNT_EX = "polygon.getPoints().size()"
   All these rules are combined into an AndTask.
   A whole letter match will then be an XOrTask with an AndTask for each letter.
 
-* Boolean combinations of filters with parameters
+
+Logic filter language
+
+ The Logic filter language allows you to do Boolean combinations of filters with parameters
 
   If you need to do more complex boolean combinations of filter on polygons try the following:
 
@@ -134,8 +277,10 @@ POINT_COUNT_EX = "polygon.getPoints().size()"
   Not use !
 +------------------------------------------+
 
-Influences
-
+Influences for the declarative goal driven logic engine
+  
+  Here is a little more of about the influence for declarative goal driven logic engine. 
+  
 * Prolog
   
   Up till ShapeLogic v 0.9 goal driven tasks with subtasks was a corner stone in 
@@ -181,64 +326,7 @@ Influences
   ShapeLogic merges contexts when faced with different options in a 
   similar way to Oz, though this is not fully implemented yet.
 
-* Lazy streams
-  
-  The idea is that you have definitions of a data stream, say: 
-  
-  * Natural numbers, 
-  
-  * Fibonacci numbres
-  
-  * Sequence of polygons in an image
-  
-  * Sequence of sequence of polygons in an image sequence
-  
-  []
-  
-  The definition does not cause anything to be calculated, but when the data is
-  needed it will be calculated. So it is a generalization of a lazy calculation.
-  
-  The streams in ShapeLogic are different than the streams in Haskell, Oz, 
-  Scheme and Scala. These are all based on data structures similar to a LISP list.
-  
-** Immutable stream in Java List 
-  
-  In ShapeLogic the streams are assumed to be immutable. The data is put in a 
-  normal Java List. 
-  
-*** The advantage of Java List 
-
-  * Faster access to data 
-
-  * Works better with Java
-  
-  [] 
-  
-*** Advantages of LISP list / disadvantage of Java List
-  
-  * In a LISP list sub lists are also lists
-  
-  * This enables elegant functional style recursive programming
-  
-  []
-  
-** Using streams for concurrent programming
-  
-  Streams can also support parallel or concurrent programming, which is important 
-  with the CPU intensive operations in image processing and computer vision. 
-  Especially with the advent of cheap multi processor machines. 
-  
-*** Example: Find polygons in a stack of images  
-
-  You define a lazy data stream for this and set a stream property 
-
-  randomAccess = true
-
-  This indicates that individual elements can be calculated independently. 
-  The factory creating the stream could create a parallel version of the stream 
-  and assign each operation its own thread.
-  
-  Note that the result would be a stream of polygons for each image.
+Ideas for future declarative programming constructs
   
 * IoC, Inversion of Control
   

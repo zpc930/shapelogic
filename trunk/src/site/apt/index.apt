@@ -152,16 +152,34 @@ ShapeLogic
 
 ** ShapeLogic v 1.1 soon to be released
 
+  ShapeLogic 1.1 should have less dramatic changes than 0.8, 0.9 and 1.0.
+  
+  The lazy stream declarative programming framework seem to be very easy to use
+  and powerful enough to handle the letter match example. Make it more solid. 
+  Try to see if it can handle more complicated logic.
+  
+*** Potential changes
+  
+  * Simple image processing example working on color images
+  
+  * Example where ShapeLogic declarative programming is used with other libraries
+  
+  * Expanded unit testing
+  
+  * Bug fixes
+  
+  * Better documentation
+  
   * When running ShapeLogic as an plugin for ImageJ add a menu item for loading
-  and running external rules either from flat file, database, macro or Java format.
+  and running external rules either from flat file, database or macro format.
   
   * Make the annotation of shapes more loosely coupled
 
   []
 
-** Next examples
-
-  The next example applications for ShapeLogic will be 
+* Examples applications
+  
+  [[1]] Letter matching example. Very rudimentary OCR.
   
   [[1]] Solve some {{{project-euler.html}mathematical problems}} from 
   {{{http://projecteuler.net}Project Euler}}. 
@@ -170,6 +188,8 @@ ShapeLogic
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.
   
-  [[1]] Medical image processing
-  
   []
+  
+  The next example applications for ShapeLogic will be 
+  
+  Medical image processing

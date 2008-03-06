@@ -25,8 +25,8 @@ Lazy stream library
   ShapeLogic contains functional and declarative constructs that can be used 
   independent of the image processing code.
   
-  To use this just download the shapelogic_-0.9.jar and add it to your  
-  class path. If running from command line: -cp .;shapelogic_-0.9.jar
+  To use this just download the shapelogic_-1.0.jar and add it to your  
+  class path. If running from command line: -cp .;shapelogic_-1.0.jar
   
   For examples of how to use this to solve mathematical problems see 
   {{{project-euler.html}Project Euler solution}}.
@@ -37,7 +37,7 @@ User mode
 
   * Install {{{http://rsb.info.nih.gov/ij/} ImageJ}}
   
-  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin0.9.zip}}
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.0.zip}}
 
   * Unzip it
 
@@ -77,7 +77,8 @@ User mode
 
     * If more than one letter matches, the match will fail
 
-    * If the match fails then all the properties of the polygon will be written to the console for debugging
+    * If the match fails then all the properties of the polygon will be written 
+    to the console for debugging
     
     []
     
@@ -95,11 +96,11 @@ User mode
 
 *  Steps to get ShapeLogic working from within ImageJ manually 
   
-  If you need a different version of shapelogic_-0.9.jar, e.g. one compiled for JDK 1.5.
+  If you need a different version of shapelogic_-1.0.jar, e.g. one compiled for JDK 1.5.
 
   * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/shapelogic
 
-  * Take the jar file for ShapeLogic: shapelogic_-0.9.jar, and move it to that directory
+  * Take the jar file for ShapeLogic: shapelogic_-1.0.jar, and move it to that directory
 
   * Add the jar files that ShapeLogic is dependent on to the ImageJ/plugin dir:
   
@@ -124,18 +125,79 @@ User mode
   E.g. commons\-math\-1.1.jar can be found here:
   {{http://repo1.maven.org/maven2/commons-math/commons-math/1.1/}}
 
-  Or they can be taken out of the shapelogicplugin0.9.zip
+  Or they can be taken out of the shapelogicplugin1.0.zip
 
    When you open ImageJ there will be a ShapeLogic menu containing commands.
 
   You can get the binary distribution from the download page or compile it yourself.
 
-*  Separating Java and logic rules 
+User defined rules in ShapeLogic
+  
+  Starting in ShapeLogic 1.0 it is simpler to make user define rules for matching. 
+  
 
-  If you need to add you own rules to ShapeLogic you need to add your changes and compile ShapeLogic.
+* Number match example
 
-  The goal is to separate the databases with the logical rules from the executable jar file, so you do not have to recompile.
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} DigitStreamVectorizer}} 
+  is an example showing what is needed to define a match of the numbers.
+  
++---------------------------------------------+
 
+public class DigitStreamVectorizer_ extends StreamVectorizer_ {
+
+	@Override
+	public void matchSetup(ImageProcessor ip) {
+		loadDigitStream();
+		
+	}
+	
+	public static void loadDigitStream() {
+		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		makeDigitStream();
+		String[] digits = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}; 
+    	LoadLetterStreams.makeLetterXOrStream(digits);
+	}
+
+	public static void makeDigitStream() {
+
+		rule("0", HOLE_COUNT, "==", 1.);
+		rule("0", T_JUNCTION_POINT_COUNT, "==", 0.);
+		rule("0", END_POINT_COUNT, "==", 0.);
+		rule("0", MULTI_LINE_COUNT, "==", 1.);
+		rule("0", CURVE_ARCH_COUNT, ">", 0.);
+		rule("0", HARD_CORNER_COUNT, "==", 0.);
+		rule("0", SOFT_POINT_COUNT, ">", 0.);
+
+		rule("1", HOLE_COUNT, "==", 0.);
+		rule("1", T_JUNCTION_LEFT_POINT_COUNT, "==", 0.);
+		rule("1", T_JUNCTION_RIGHT_POINT_COUNT, "==", 0.);
+		rule("1", END_POINT_BOTTOM_POINT_COUNT, "==", 1.);
+		rule("1", HORIZONTAL_LINE_COUNT, "==", 0.);
+		rule("1", VERTICAL_LINE_COUNT, "==", 1.);
+		rule("1", END_POINT_COUNT, "==", 2.);
+		rule("1", MULTI_LINE_COUNT, "==", 0.);
+		rule("1", SOFT_POINT_COUNT, "==", 0.);
+		rule("1", ASPECT_RATIO, "<", 0.4);
+		
+	}
+}
++---------------------------------------------+
+
+  This file is not defined inside the shapelogic packages.
+   
+  Users do not need to download the source file for ShapeLogic to use this. 
+  They just need the shapelogic and other dependent jar files.
+  
+
+* Future plans user defined rules in ShapeLogic
+  
+  Defining rules in a stand alone Java file seem to be very simple.   
+  One down side is that you still have to compile the Java file. 
+  It is the goal of ShapeLogic to make rule definition as effortless as possible.
+  
+  With extended rules set it is probably easier to define the rules in a database.
+  ShapeLogic is going to make a menu item in ImageJ for doing this. 
+  
 Development mode
 
   ShapeLogic is build using {{{http://maven.apache.org} Maven 2}}.
