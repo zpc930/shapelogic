@@ -68,12 +68,12 @@ mvn package
   These jar file can be found in: 
   
 ---------------------
-  shapelogicplugin0.8.zip   	ShapeLogic 0.8 plugin for ImageJ with all dependent jar files  
+  shapelogicplugin1.0.zip   	ShapeLogic 1.0 plugin for ImageJ with all dependent jar files  
 ---------------------
   
   Steps to install:
   
-  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin0.8.zip}}
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.0.zip}}
 
   * Unzip it
 
@@ -110,6 +110,29 @@ public ByteProcessor runPluginFilterOnImage(String fileName, PlugInFilter plugIn
 }
 ---------------------
   
+Handling libraries that are not in Maven repository
+  
+  ShapeLogic is mainly only using libraries that are in Maven repository.
+  Maven downloads them automatically when running mvn test or mvn package. 
+  
+  It is a little harder to work with libraries that are not in the Maven repository.
+  
+  There are only 2 of those: Scripting engines and ImageJ 1.38.
+  
+* Installing Groovy or other Scripting engines for JSR 223
+
+  This is one thing that does not work directly with Maven
+  
+  In other to get it to work you have to download jsr223-engines.zip
+  from
+  https://scripting.dev.java.net/servlets/ProjectDocumentList
+  
+  After that you have to unpack it, and install it into the Maven repository:
+  
++-------------------------------------+
+mvn install:install-file -Dfile=groovy-engine.jar -DgroupId=org.codehaus.groovy -DartifactId=groovy-engine -Dversion=1.5.1 -Dpackaging=jar
++-------------------------------------+
+
   
 How ShapeLogic was set up
   

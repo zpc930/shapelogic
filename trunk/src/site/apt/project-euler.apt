@@ -9,7 +9,7 @@
 Project Euler
 
   {{{http://projecteuler.net}Project Euler}} 
-  is a list of 178, mathematical problems, that can be solved by computers.
+  is a list of 178 mathematical problems that can be solved by computers.
   They vary in complexity from simple to hard.
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.
@@ -28,13 +28,12 @@ Project Euler
   
   The blog {{http://scala-blogs.org/2007/12/project-euler-fun-in-scala.html}} 
   is showing off the strength of {{{http://www.scala-lang.org} Scala}} to solve 
-  some of the problems defined in Project Euler. This is as easy as it gets.
-  The APL, Erlang, Haskell, Mathematica, Perl and Python programmer will surely 
-  argue. This is the benchmark by which to measure ShapeLogic's success.
+  some of the problems defined in Project Euler. This is as easy as it gets, however,
+  the APL, Erlang, Haskell, Mathematica, Perl and Python programmer will surely 
+  argue. These simple solutions are the benchmarks by which to measure ShapeLogic's success.
   
-  The solution in Scala clearly use less code, but conceptually there is not a
-  big gap in complexity.
-  Especially when you are using Eclipse which will generate the methods you have 
+  The solution in Scala clearly use less code, but is not substantially simpler,
+  especially when you are using Eclipse which will generate the methods you have 
   to override in order to customize the lazy stream constructs.
   Java is inherently verbose, so it will never be that terse.
   
