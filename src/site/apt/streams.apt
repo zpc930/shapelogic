@@ -8,7 +8,7 @@
 
 Lazy Data Streams
   
-  Lazy Data Streams is a mix between an iterator and a list. 
+  A Lazy Data Stream is a mix between an iterator and a list. 
   A stream can be expanded by lazy calculation of an extra member.
   
   Streams is a key component of the declarative programming engine 
@@ -17,7 +17,7 @@ Lazy Data Streams
 * Using streams to solve mathematical problems
   
   {{{http://projecteuler.net}Project Euler}} 
-  is a list of 178, mathematical problems, that can be solved by computers.
+  is a list of 178 mathematical problems that can be solved by computers.
   The first 10 {{{project-euler.html}mathematical problems}} have been solved 
   in ShapeLogic using streams.
   
@@ -33,7 +33,7 @@ Lazy Data Streams
   
   []
   
-* The advantage of a lazy data stream is 
+* The advantages of a lazy data stream are 
   
   * That you can use functional techniques on possible infinite streams of data 
   
@@ -43,13 +43,13 @@ Lazy Data Streams
   
   [] 
   
-* Example of lazy infinite data streams 
+* Examples of lazy infinite data streams 
   
-  * Lazy Data Streams to calculate all Fibonacci number
+  * Lazy Data Streams to calculate all Fibonacci numbers
   
-  * All even Fibonacci number
+  * All even Fibonacci numbers
   
-  * All even Fibonacci number greater than 1000
+  * All even Fibonacci numbers greater than 1000
   
   []
   

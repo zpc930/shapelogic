@@ -26,7 +26,7 @@ Letter Match Example
   The matching example is not very robust yet, and is 
   made to match letter in sans serif typefaces, e.g. Ariel or Helvetica.
  
-  Unit test exist for all capital letters. 
+  Unit tests exist for all capital letters. 
   
   Matched images can be found in this directory:
   

@@ -23,7 +23,7 @@ Getting Started
 Lazy stream library 
   
   ShapeLogic contains functional and declarative constructs that can be used 
-  independent of the image processing code.
+  independently of the image processing code.
   
   To use this just download the shapelogic_-1.0.jar and add it to your  
   class path. If running from command line: -cp .;shapelogic_-1.0.jar
@@ -59,7 +59,7 @@ User mode
 
 [images/letters/Mdrawing.png] Mdrawing
 
-  * Go to the shapelogic menu and select CapitalLetterMatch, which does the following 
+  * Go to the shapelogic menu and select CapitalLettersMatch, which does the following 
 
     * Convert the image to a binary image
 
@@ -141,6 +141,14 @@ User defined rules in ShapeLogic
   {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} DigitStreamVectorizer}} 
   is an example showing what is needed to define a match of the numbers.
   
+  To run this from ImageJ in the shapelogic menu select 
+  
+  * Digit Match Stream Vectorizer, to only do the vectorize and number match
+  
+  * DigitMatch, to also turn into binary and Skeletonize
+  
+  []
+  
 +---------------------------------------------+
 
 public class DigitStreamVectorizer_ extends StreamVectorizer_ {
@@ -183,28 +191,30 @@ public class DigitStreamVectorizer_ extends StreamVectorizer_ {
 }
 +---------------------------------------------+
 
-  This file is not defined inside the shapelogic packages.
+  This file is not defined inside the shapelogic package system.
    
-  Users do not need to download the source file for ShapeLogic to use this. 
-  They just need the shapelogic and other dependent jar files.
+  Users do not need to download the source file for ShapeLogic to use it, 
+  they only need shapelogic and other dependent jar files.
   
 
-* Future plans user defined rules in ShapeLogic
+* Future plans for user defined rules in ShapeLogic
   
-  Defining rules in a stand alone Java file seem to be very simple.   
-  One down side is that you still have to compile the Java file. 
-  It is the goal of ShapeLogic to make rule definition as effortless as possible.
+  Defining rules in a stand alone Java file is very simple, but  
+  you still have to compile the Java file. 
+  ShapeLogic's goal is to make rule definition as effortless as possible.
   
-  With extended rules set it is probably easier to define the rules in a database.
-  ShapeLogic is going to make a menu item in ImageJ for doing this. 
+  With an extended rules set it should be easier to define rules in a database, 
+  ShapeLogic will add a menu item in ImageJ for doing this. 
   
 Development mode
 
-  ShapeLogic is build using {{{http://maven.apache.org} Maven 2}}.
+  ShapeLogic is built using {{{http://maven.apache.org} Maven 2}}.
 
-  This makes several build tasks very easy, so this is the recommended way of doing builds, but the code should run fine without Maven.
+  This makes several build tasks very easy, and is recommended,
+  but the code should run fine without Maven.
 
-  Currently the project is set up to work directly with Eclipse 3.3, Java 1.6, but you can use: NetBeans, IntelliJ, JBuilder, emacs or vi.
+  Currently the project is set up to work directly with Eclipse 3.3, Java 1.6, 
+  but you can use: NetBeans, IntelliJ, JBuilder, emacs or vi.
 
   *  Steps to compile and run unit tests
    

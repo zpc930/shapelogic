@@ -47,7 +47,7 @@ ShapeLogic
   * The user can store rules in either a flat file or database, decreasing user 
   reliance on Java programming
   
-  * User rules are written with the Java 6 Scripting interface JSR 223, 
+  * User rules are written with Java or the Java 6 Scripting interface JSR 223.   
   {{{http://groovy.codehaus.org}Groovy}}, 
   {{{http://jruby.codehaus.org}JRuby}}, 
   {{{http://www.mozilla.org/rhino}JavaScript}} have been tested 
@@ -101,7 +101,7 @@ ShapeLogic
 
   * The API is still under development.
 
-  * The framework for declarative and functional programming is being developed.
+  * Contains a framework for declarative and functional programming.
 
   * ShapeLogic currently consists of 25,000 lines of Java code including 380 unit tests.
 
@@ -111,30 +111,32 @@ ShapeLogic
 
 ** 2008/03/05 ShapeLogic v 1.0 released
 
-  * Migrate rule databases for image processing. 
-  Currently they are implemented as goal driven tasks with sub tasks.
-  Version 1.0 uses the lazy streams that is simpler and more powerful.
+  * Rule for image processing have been migrated,
+  previously they were implemented as goal driven tasks with sub tasks.
+  Version 1.0 uses lazy streams which is simpler and more powerful.
   
-  * Letter match example now matches all polygons instead of just the first.
+  * Letter match example now matches all polygons instead of just the first found.
   
-  * When running ShapeLogic as ImageJ plugin, make it easy to define rules for 
-  matching in external Java file.
+  * When running ShapeLogic as ImageJ plugin, it is now easy for users to define rules for 
+  matching in external Java files.
   
-  * New number matcher to demonstrate how to define rules for matching in external Java file.
+  * New number matcher to demonstrate how to define rules for matching in 
+  external Java file, 
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java}in 130 lines of code}}.
   
   * Enabled use of
   {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
   Java 6 Scripting}}
-  for rule database, this should give the user access to the 25 scripting 
+  for rule database, which gives the user access to the 25 scripting 
   languages that are supported
 
-  * Get ShapeLogic into beta stage
+  * ShapeLogic now has beta development status
   
-  * Add many unit tests for Lazy Stream library
+  * Many unit tests added for Lazy Stream library
 
-  * Fix bugs in Lazy Stream library
+  * Fixed bugs in Lazy Stream library
 
-  * Fix bugs for the letter X
+  * Fixed bugs for the letter X
 
   []
   
@@ -154,7 +156,7 @@ ShapeLogic
 
   ShapeLogic 1.1 should have less dramatic changes than 0.8, 0.9 and 1.0.
   
-  The lazy stream declarative programming framework seem to be very easy to use
+  The lazy stream declarative programming framework seems to be very easy to use
   and powerful enough to handle the letter match example. Make it more solid. 
   Try to see if it can handle more complicated logic.
   
@@ -181,9 +183,9 @@ ShapeLogic
   
   [[1]] Letter matching example. Very rudimentary OCR.
   
-  [[1]] Solve some {{{project-euler.html}mathematical problems}} from 
+  [[1]] {{{project-euler.html}mathematical problems}} from 
   {{{http://projecteuler.net}Project Euler}}. 
-  It is a list of 178, mathematical problems, that can be solved by computers.
+  This is a list of 178 mathematical problems that can be solved by computers.
   They vary in complexity from simple to hard.
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.
