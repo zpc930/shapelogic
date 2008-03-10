@@ -1,0 +1,41 @@
+            ------
+            Particle Counter
+            ------
+            Sami Badawi
+            ------
+            2008/03/09
+            ------
+
+Particle Counter Example
+
+  The main goal for ShapeLogic v 1.1 is to create an automatic color and gray 
+  scale particle counter example. 
+  This is the first use of ShapeLogic in medical image processing.
+  There are currently particle counters available for ImageJ, however, ShapeLogic's 
+  particle counter will utilize declarative programming tools for a color image processing 
+  problem, making it function without manual user intervention.
+  
+  The test images are taken from the sample images from ImageJ
+  
+[images/particles/blobs.gif] 
+
+  blobs.gif
+
+[images/particles/Cell_Colony.jpg] 
+
+  Cell_Colony.jpg
+
+[images/particles/embryos.jpg] 
+
+  embryos.jpg
+
+* Challenges
+  
+  * Finding background
+  
+  * Reasoning under uncertainty under the lazy stream library
+  
+  * Later finding overlapping particles and counting them separately 
+  
+  []
+  

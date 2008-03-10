@@ -17,11 +17,30 @@ Road map
   
   ShapeLogic 1.1 should have less dramatic changes than 0.8, 0.9 and 1.0.
   
-  The lazy stream declarative programming framework seem to be very easy to use
-  and powerful enough to handle the letter match example. Try to see if it can 
-  handle more complicated logic.
+* Particle counter example
   
-** Top priorities
+  The main goal for 1.1 is to create an automatic color and gray scale 
+  {{{particle.html} particle counter example}}. 
+  This is the first use of ShapeLogic in medical image processing.
+  There are currently particle counters available for ImageJ, however, ShapeLogic's 
+  particle counter will utilize declarative programming tools for a color image processing 
+  problem, making it function without manual user intervention.
+  
+  The test images are taken from the sample images from ImageJ
+  
+[images/particles/blobs.gif] 
+
+  blobs.gif
+
+[images/particles/Cell_Colony.jpg] 
+
+  Cell_Colony.jpg
+
+[images/particles/embryos.jpg] 
+
+  embryos.jpg
+  
+* Top priority changes
   
   * Simple image processing example working on color images
   
@@ -35,7 +54,7 @@ Road map
   
   []
   
-** Medium priorities
+* Medium priorities changes
   
   * When running ShapeLogic as an plugin for ImageJ add a menu item for loading
   and running external rules in flat file or database format.
@@ -53,9 +72,10 @@ Road map
   
   []
 
-* Next ShapeLogic example application
+* More complex ShapeLogic example application
 
   The next example application for ShapeLogic will be medical image processing.
   
   Possibly a problem presented by a Neuroscientists doing Alzheimer's research. 
-  It is a very interesting problem, but it would take at least a few months to finish it.
+  It is a very interesting problem, but it would take at least a few months to 
+  finish it.
