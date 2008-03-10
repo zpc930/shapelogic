@@ -152,36 +152,32 @@ ShapeLogic
   
   []
 
-** ShapeLogic v 1.1 soon to be released
+** ShapeLogic v 1.1 with particle counter example soon to be released
 
-  ShapeLogic 1.1 should have less dramatic changes than 0.8, 0.9 and 1.0.
+  The main goal for 1.1 is to create an automatic color and gray scale 
+  {{{particle.html} particle counter example}}. 
+  This is the first use of ShapeLogic in medical image processing.
+  There are currently particle counters available for ImageJ, however, ShapeLogic's 
+  particle counter will utilize declarative programming tools for a color image processing 
+  problem, making it function without manual user intervention.
   
-  The lazy stream declarative programming framework seems to be very easy to use
-  and powerful enough to handle the letter match example. Make it more solid. 
-  Try to see if it can handle more complicated logic.
+  The test images are taken from the sample images from ImageJ
   
-*** Potential changes
-  
-  * Simple image processing example working on color images
-  
-  * Example where ShapeLogic declarative programming is used with other libraries
-  
-  * Expanded unit testing
-  
-  * Bug fixes
-  
-  * Better documentation
-  
-  * When running ShapeLogic as an plugin for ImageJ add a menu item for loading
-  and running external rules either from flat file, database or macro format.
-  
-  * Make the annotation of shapes more loosely coupled
+[images/particles/blobs.gif] 
 
-  []
+  blobs.gif
+
+[images/particles/Cell_Colony.jpg] 
+
+  Cell_Colony.jpg
+
+[images/particles/embryos.jpg] 
+
+  embryos.jpg
 
 * Examples applications
   
-  [[1]] Letter matching example. Very rudimentary OCR.
+  [[1]] {{{letter-match.html}Letter matching example}}. Very rudimentary OCR.
   
   [[1]] {{{project-euler.html}mathematical problems}} from 
   {{{http://projecteuler.net}Project Euler}}. 
@@ -190,8 +186,8 @@ ShapeLogic
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.
   
+  [[1]] Next example will be an an automatic color and gray scale {{{particle.html}particle counter}}, 
+  first medical image processing example
+  
   []
   
-  The next example applications for ShapeLogic will be 
-  
-  Medical image processing
