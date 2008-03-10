@@ -26,11 +26,12 @@
 	      <item name="Mailing List" href="http://groups.google.com/group/shapelogic"/>
           <item name="Release Notes" href="release-notes.html"/>
           <item name="Road Map" href="roadmap.html"/>
-          <item name="Team" href="team.html"/>
+          <item name="Contacts" href="team.html"/>
       </item>
       <item name="Examples" href="index.html" collapse="true">
 		  <item name="Letter Match" href="letter-match.html"/>
 		  <item name="Project Euler" href="project-euler.html"/>
+		  <item name="Particle" href="particle.html"/>
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Annotations" href="annotations.html"/>
