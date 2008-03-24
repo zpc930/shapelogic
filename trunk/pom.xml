@@ -3,7 +3,7 @@
   <groupId>org.shapelogic</groupId>
   <artifactId>shapelogic_</artifactId>
   <name>shapelogic</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <description>Open source robotic vision and image processing project, written in Java.</description>
   <url>http://maven.apache.org</url>
   <issueManagement>
