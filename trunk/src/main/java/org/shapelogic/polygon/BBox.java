@@ -30,6 +30,18 @@ public class BBox implements GeometricShape2D {
         }
     }
     
+    public void addPoint(int x, int y) {
+    	CPointInt pointIn = new CPointInt(x,y);
+        if (isEmpty()) {
+        	minVal = pointIn.copy();
+        	maxVal = pointIn.copy();
+        }
+        else {
+          min(pointIn);
+          max(pointIn);
+        }
+    }
+    
     private void min(IPoint2D pointIn) {
 		double minX = Math.min(pointIn.getX(),minVal.getX());
 		double minY = Math.min(pointIn.getY(),minVal.getY());
