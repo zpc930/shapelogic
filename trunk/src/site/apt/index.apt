@@ -14,9 +14,6 @@ ShapeLogic
   Code hosted on {{http://code.google.com/p/shapelogic/}}.
   From there you can download both source files and binary distributions.  
   
-  Project home page {{http://www.shapelogic.org/}} is currently a work in 
-  progress.
-  
 * Main ideas and motivation
 
   ShapeLogic is a library for
@@ -70,18 +67,35 @@ ShapeLogic
   []
 
 *  Requirements
-
-  ShapeLogic uses the following libraries:
+  
+  For running as a library for functional and declarative programming there are 
+  no requirements.
+  
+  For running as a ImageJ plugin ShapeLogic uses the following libraries:
   
   * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic is built on top of the 
   popular ImageJ framework, but could easily stand alone
 
+  * {{{http://commons.apache.org/math/} Commons math}}: Math library for geometry
+
+  * {{{http://www.antlr.org/} Antlr}}: For parsing build in filter language
+
+  []
+  
+** Optional requirements
+  
+  These are used in unit tests, builds or old versions of image processing 
+  functionalities: 
+  
+  * {{{http://maven.apache.org/} Maven 2}}: Build system
+
   * {{{http://commons.apache.org/} Apache commons}}: {{{http://commons.apache.org/jexl/} JEXL}}, 
-  {{{http://commons.apache.org/beanutils/} beanutils}}: For embedded logic language 
+  {{{http://commons.apache.org/beanutils/} beanutils}}: For first version logic rules interpreter
 
-  * {{{http://commons.apache.org/math/} commons math}}: Math library
-
-  * {{{http://www.antlr.org/} Antlr}}: For parsing build in logic language
+  * {{{http://groovy.codehaus.org}Groovy}}, 
+  {{{http://jruby.codehaus.org}JRuby}}, 
+  {{{http://www.mozilla.org/rhino}JavaScript}}: 
+  For second version logic rules interpreter
 
   * {{{http://www.hibernate.org/} Hibernate}} or JDBC: For database access
   
@@ -89,8 +103,6 @@ ShapeLogic
   
   * {{{http://hsqldb.org/} HSQLDB}} or {{{http://www.h2database.com/} H2}}: Embedded databases
   
-  * {{{http://maven.apache.org/} Maven 2}}: build system
-
   []
   
 * Development Status: Beta
@@ -103,7 +115,7 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 25,000 lines of Java code including 380 unit tests.
+  * ShapeLogic currently consists of 26,000 lines of Java code including 400 unit tests.
 
   []
 
@@ -175,13 +187,19 @@ ShapeLogic
 
   embryos.jpg
 
+*** Other changes to ShapeLogic v 1.1
+  
+  * Fix bug in segmentation that causes stripes and slowness in big images
+  
+  []
+  
 * Examples applications
   
   [[1]] {{{letter-match.html}Letter matching example}}. Very rudimentary OCR.
   
   [[1]] {{{project-euler.html}mathematical problems}} from 
   {{{http://projecteuler.net}Project Euler}}. 
-  This is a list of 178 mathematical problems that can be solved by computers.
+  This is a list of 186 mathematical problems that can be solved by computers.
   They vary in complexity from simple to hard.
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.

@@ -35,6 +35,10 @@ Particle Counter Example
   
   * Reasoning under uncertainty under the lazy stream library
   
+  * Filtering the particles to count base on simple geometric properties, e.g. area, perimeter
+  
+  * Filtering the particles to count base on the shape of the edge polygon  
+  
   * Later finding overlapping particles and counting them separately 
   
   []
