@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ByteProcessor;
+import ij.process.ImageProcessor;
 
 import java.util.Collection;
 
@@ -18,13 +18,13 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		dirURL = "./src/test/resources/images/smallThinShapes";
-		fileFormat = ".gif";
+		_dirURL = "./src/test/resources/images/smallThinShapes";
+		_fileFormat = ".gif";
 	}
 
 	public void testShortVertical() {
 		String fileName = "vertical";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -36,7 +36,7 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortVerticalAndHorizontal() {
 		String fileName = "verticalAndHorizontal";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -48,7 +48,7 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortRotatedTThin() {
 		String fileName = "rotatedT";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -65,7 +65,7 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testThinProblematicL() {
 		String fileName = "problematicL";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);

@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ByteProcessor;
+import ij.process.ImageProcessor;
 
 import java.util.Set;
 
@@ -31,7 +31,7 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 	
 	public void testABC() {
 		String fileName = "ABC";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getPolygon();
