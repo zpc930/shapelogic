@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ByteProcessor;
+import ij.process.ImageProcessor;
 
 import java.util.Collection;
 import java.util.Set;
@@ -22,13 +22,13 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		dirURL = "./src/test/resources/images/smallThinShapes";
-		fileFormat = ".gif";
+		_dirURL = "./src/test/resources/images/smallThinShapes";
+		_fileFormat = ".gif";
 	}
 	
 	public void testShortVertical() {
 		String fileName = "vertical";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -42,7 +42,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortVerticalAndHorizontal() {
 		String fileName = "verticalAndHorizontal";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -65,7 +65,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortRotatedTThin() {
 		String fileName = "rotatedT";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -83,7 +83,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testThinProblematicL() {
 		String fileName = "problematicL";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -99,7 +99,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testThinDiagonal() {
 		String fileName = "diagonal";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = directionBasedVectorizer.getPoints();
@@ -110,7 +110,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testSmallThinTriangle() {
 		String fileName = "triangle";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = directionBasedVectorizer.getPoints();
@@ -154,7 +154,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testThinLBracket() {
 		String fileName = "LBracket";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)directionBasedVectorizer.getPoints();
@@ -184,7 +184,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 	 */
 	public void testElongatedX() {
 		String fileName = "elongatedX";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)directionBasedVectorizer.getPoints();
@@ -209,7 +209,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testThinPlus() {
 		String fileName = "plus";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)directionBasedVectorizer.getPoints();
@@ -232,7 +232,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 	/** This is an test for new images with problems, should only be used when there are problems*/
 	public void testBigCircle() {
 		String fileName = "bigCircle";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = directionBasedVectorizer.getPoints();
@@ -246,7 +246,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 	/** This is an test for new images with problems, should only be used when there are problems*/
 	public void te_stFailImage() {
 		String fileName = "fail";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = directionBasedVectorizer.getPoints();

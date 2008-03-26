@@ -1,6 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ByteProcessor;
+import ij.process.ImageProcessor;
 
 import java.util.Collection;
 import java.util.List;
@@ -60,7 +60,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 	 */
 	public void testB() {
 		String fileName = "B";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getPolygon();
@@ -96,7 +96,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 	
 	public void testC() {
 		String fileName = "C";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getPolygon();
@@ -114,7 +114,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 
 	public void testD() {
 		String fileName = "D";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -200,7 +200,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 	
 	public void testG() {
 		String fileName = "G";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getCleanedupPolygon();
@@ -216,7 +216,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 
 	public void testJ() {
 		String fileName = "J";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getPolygon();
@@ -234,7 +234,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 
 	public void testO() {
 		String fileName = "O";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -271,7 +271,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 	
 	public void testP() {
 		String fileName = "P";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getPolygon();
@@ -288,7 +288,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 
 	public void testQ() {
 		String fileName = "Q";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getCleanedupPolygon();
@@ -304,7 +304,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 
 	public void testR() {
 		String fileName = "R";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getCleanedupPolygon();
@@ -322,7 +322,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 
 	public void testS() {
 		String fileName = "S";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getPolygon();
@@ -360,7 +360,7 @@ public class BaseLetterMatchingMaxDistanceVectorizerTests extends BaseLetterMatc
 	
 	public void testU() {
 		String fileName = "U";
-		ByteProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getCleanedupPolygon();

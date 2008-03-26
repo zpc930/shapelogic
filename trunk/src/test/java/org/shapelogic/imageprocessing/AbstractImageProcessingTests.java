@@ -13,7 +13,7 @@ import org.shapelogic.polygon.Polygon;
 import ij.ImagePlus;
 import ij.io.Opener;
 import ij.plugin.filter.PlugInFilter;
-import ij.process.ByteProcessor;
+import ij.process.ImageProcessor;
 import junit.framework.TestCase;
 
 /** Has the logic to read image from file and call the different PlugInFilter on it
@@ -24,9 +24,9 @@ import junit.framework.TestCase;
 public class AbstractImageProcessingTests extends TestCase {
 	DirectionBasedVectorizer directionBasedVectorizer = new DirectionBasedVectorizer();
 	
-	String dirURL;
-	String fileFormat;
-	boolean doPrint = true;
+	String _dirURL;
+	String _fileFormat;
+	boolean _doPrint = true;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -34,21 +34,25 @@ public class AbstractImageProcessingTests extends TestCase {
 	}
 	
 	String filePath(String fileName) {
-		return dirURL + "/" + fileName + fileFormat;
+		return _dirURL + "/" + fileName + _fileFormat;
+	}
+	
+	String filePath(String fileName, String fileFormat) {
+		return _dirURL + "/" + fileName + fileFormat;
 	}
 	
 	/** This should be generalized and moved */
-	public ByteProcessor runPluginFilterOnImage(String fileName, PlugInFilter plugInFilter) {
+	public ImageProcessor runPluginFilterOnImage(String fileName, PlugInFilter plugInFilter) {
 		Opener opener = new Opener();
 		ImagePlus image = opener.openImage(fileName);
-		ByteProcessor bp = (ByteProcessor) image.getProcessor();
+		ImageProcessor ip = image.getProcessor();
 		plugInFilter.setup("", image);
-		plugInFilter.run(bp);
-		return bp;
+		plugInFilter.run(ip);
+		return ip;
 	}
 	
 	public void printLines(Polygon polygon) {
-		if (!doPrint)
+		if (!_doPrint)
 			return;
 		System.out.println("Print lines:");
 		for (CLine line: polygon.getLines()) {
@@ -57,7 +61,7 @@ public class AbstractImageProcessingTests extends TestCase {
 	}
 
 	public void printPoints(Polygon polygon) {
-		if (!doPrint)
+		if (!_doPrint)
 			return;
 		System.out.println("Print points:");
 		for (IPoint2D point: polygon.getPoints()) {
@@ -66,7 +70,7 @@ public class AbstractImageProcessingTests extends TestCase {
 	}
 	
 	public void printAnnotaions(Polygon polygon) {
-		if (!doPrint)
+		if (!_doPrint)
 			return;
 		System.out.println("Print annotations:");
 		Map<Object, Set<GeometricShape2D>> map = polygon.getAnnotatedShape().getMap();
@@ -75,7 +79,7 @@ public class AbstractImageProcessingTests extends TestCase {
 	}
 	
 	public void printPolygon(Polygon polygon) {
-		if (!doPrint)
+		if (!_doPrint)
 			return;
 		System.out.println("Print polygon:");
 		printLines(polygon);
