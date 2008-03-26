@@ -27,11 +27,11 @@ abstract class PixelArea {
     public PixelArea(int x, int y) {
     	_startX = x;
     	_startY = y;
-    	_area = 1;
+    	_area = 0;
     	_boundingBox = new BBox();
-    	_boundingBox.addPoint(x,y);
     	_gapInLine = false;
-    	_aggregationPoint = new CPointDouble(x,y);
+    	_aggregationPoint = new CPointDouble(0,0);
+    	addPoint(x, y);
     }
   
     abstract void addPoint(int x, int y, int color);

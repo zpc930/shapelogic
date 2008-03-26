@@ -22,4 +22,9 @@ public interface SBPixelCompare {
 	void init(ij.process.ImageProcessor ip) throws Exception;
 	int getNumberOfPixels();
 	void grabColorFromPixel(int startX, int startY);
+	
+	/** Should pixels be modified. */
+	boolean isModifying();
+	void setModifying(boolean input);
+	int getColorAsInt(int index);
 }

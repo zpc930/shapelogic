@@ -11,12 +11,13 @@ import ij.process.ImageProcessor;
 public class SBByteCompare extends SBSimpleCompare {
 
 	private byte[] _pixels;
+	public static final int MASK = 0xff;
 
 	/** Tells if the color at index is close enough the set color to
 	 * be considered part of the segmented area.
 	 */
 	public boolean similar(int index) {
-		int localColor = _pixels[index] & mask;
+		int localColor = _pixels[index] & MASK;
 		int diff = Math.abs(localColor - currentColor);
 		return diff <= maxDist;
 	}
@@ -30,7 +31,7 @@ public class SBByteCompare extends SBSimpleCompare {
 			throw new Exception("Currently SBSimpleCompare only handles gray scale images.");
 		}
 		_pixels = (byte[]) ip.getPixels();
-		mask = 0xff;
+		mask = MASK;
 		handledColor = 200;
 		super.init(ip);
 	}
@@ -43,6 +44,12 @@ public class SBByteCompare extends SBSimpleCompare {
 	 * to the first found.
 	 */
 	public void action(int index) {
+		if (!isModifying())
+			return;
 		_pixels[index] = (byte)handledColor;
+	}
+
+	public int getColorAsInt(int index) {
+		return _pixels[index] & MASK;
 	}
 }

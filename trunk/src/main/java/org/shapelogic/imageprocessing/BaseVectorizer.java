@@ -318,6 +318,10 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	public void showMessage(String title, String text) {
 		if (isGuiEnabled())
 			IJ.showMessage(title,text);
+		else {
+			System.out.println(title);
+			System.out.println(text);
+		}
 	}
 
 	public Collection<IPoint2D> getPoints() {
