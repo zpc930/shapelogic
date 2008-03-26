@@ -19,6 +19,7 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	protected BitSet bitSet;
 	protected boolean fillWithOwnColor = true;
 	protected int numberOfPixels;
+	protected  boolean _modifying;
 	
 	/** Similar and not handled
 	 */
@@ -85,18 +86,19 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 		return result;
 	}
 
-    /** split color coded as int into 3 int 
-     * sould probably be moved to util class
-     * */
-	static public int[] splitColor(int colorIn) {
-		int[] iArray = new int[3];
-		iArray[0] = (colorIn&0xff0000)>>16;
-		iArray[1] = (colorIn&0xff00)>>8;
-		iArray[2] = colorIn&0xff;
-		return iArray;
+	public static PixelAreaFactory segmentAreaFactory(ImageProcessor ip) throws Exception
+	{
+		PixelAreaFactory result = null;
+		if (ip instanceof ByteProcessor) {
+			result = new GrayAreaFactory();
+		}
+		else if (ip instanceof ColorProcessor) {
+			result = new ColorAreaFactory();
+		}
+		return result;
 	}
-	
-	/** Call at start, this might also work as a reset	 */
+
+    /** Call at start, this might also work as a reset	 */
 	public void init(ij.process.ImageProcessor ip) throws Exception
 	{
 		bitSet = new BitSet(ip.getWidth()*ip.getHeight());
@@ -117,5 +119,16 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	
 	public int getNumberOfPixels() {
 		return numberOfPixels;
+	}
+
+	/** Should pixels be modified. */
+	@Override
+	public boolean isModifying() {
+		return _modifying;
+	}
+
+	@Override
+	public void setModifying(boolean input) {
+		_modifying = input;
 	}
 }

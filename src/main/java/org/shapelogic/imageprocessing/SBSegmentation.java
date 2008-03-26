@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.awt.Rectangle;
 
 /** High level class for segmentation.
- * 
+ * <br />
  * Works with both color and gray scale.
  * 
  * @author Sami Badawi
@@ -13,10 +13,13 @@ import java.awt.Rectangle;
  */
 public class SBSegmentation {
 	private ImageProcessor _ip;
-	private ArrayList _vPV;
+	private ArrayList<SBPendingVertical> _vPV;
 	private SBPixelCompare _pixelCompare;
+	
+	protected PixelAreaFactory _segmentAreaFactory;
+	protected PixelArea _currentSegmentArea; 
 
-	/** dimentions of ROI */
+	/** Dimensions of ROI. */
 	private int _min_x;
 	private int _max_x;
 	private int _min_y;
@@ -25,7 +28,7 @@ public class SBSegmentation {
 	private String _status = "";
 	
 	public SBSegmentation() {
-		_vPV = new ArrayList();
+		_vPV = new ArrayList<SBPendingVertical>();
 	}
 	
 	/** Conviniens method to get the offset from the start of the image
@@ -42,13 +45,13 @@ public class SBSegmentation {
 		return offset;
 	}
 
-	int pointToIndes(int x, int y){
+	int pointToIndex(int x, int y){
 		return _ip.getWidth() * y + x;
 	}
 	
-	/** Given a point find the longest line vertical line
-	 * similar to the chosen colors. If the start point does not match 
-	 * return nulll
+	/** Given a point find the longest line vertical line similar to the chosen colors. 
+	 * <br />
+	 * If the start point does not match return null.<br /> 
 	 * 
 	 * @param x
 	 * @param y
@@ -76,10 +79,6 @@ public class SBSegmentation {
 		}
 		int x1 = Math.max(_min_x,i_low);
 		int x2 = Math.min(_max_x,i_high);
-		if (!_pixelCompare.newSimilar(offset + x1) ||
-			!_pixelCompare.newSimilar(offset + x2)) {
-			boolean debugStop = true;
-		}
 		SBPendingVertical newLine = new SBPendingVertical(x1,x2,lineIn.y, lineIn.isSearchUp());
 		return newLine;
 	}
@@ -87,13 +86,13 @@ public class SBSegmentation {
 	public void segmentAll()
 	{
 		for (int x=_min_x;x<=_max_x;x++) {
-			for (int y=_min_y;y<=_max_y;y++)
-				if (!_pixelCompare.isHandled(pointToIndes(x, y))) {
+			for (int y=_min_y;y<=_max_y;y++) {
+				if (!_pixelCompare.isHandled(pointToIndex(x, y))) {
 					_pixelCompare.grabColorFromPixel(x, y);
 					segment(x, y);
 				}
 			}
-				
+		}
 	}
 	
 	/** Start segmentation by selecting a point
@@ -105,7 +104,10 @@ public class SBSegmentation {
 	 */
 	public void segment(int x, int y)
 	{
-		if (!_pixelCompare.newSimilar(pointToIndes(x,y))){
+		int index = pointToIndex(x,y);
+		if (_segmentAreaFactory != null)
+			_currentSegmentArea = _segmentAreaFactory.makePixelArea(x,y, _pixelCompare.getColorAsInt(index));
+		if (!_pixelCompare.newSimilar(index)){
 			_status = "First pixel did not match. Segmentation is empty.";
 			return;
 		}
@@ -114,7 +116,7 @@ public class SBSegmentation {
 			return;
 		storeLine(firstLine);
 		storeLine(SBPendingVertical.opposite(firstLine));
-		final int maxIterations = 20000;
+		final int maxIterations = 1000 + _ip.getPixelCount()/10;
 		int i;
 		for (i =1; i <= maxIterations; i++) {
 			if (_vPV.size() == 0) 
@@ -123,8 +125,7 @@ public class SBSegmentation {
 			SBPendingVertical curLine = (SBPendingVertical) obj;
 			fullLineTreatment(curLine);
 		}
-		_status = "Finished after " + i + " iterations.\n" +
-		"Numbers of pixels = " + _pixelCompare.getNumberOfPixels();
+		_pixelCompare.getNumberOfPixels();
 	}
 	
 	
@@ -135,8 +136,8 @@ public class SBSegmentation {
 		
 		if (r == null) {
 			_min_x = 0;
-			_max_x = 0;
-			_min_y = _ip.getWidth()-1;
+			_max_x = _ip.getWidth()-1;
+			_min_y = 0;
 			_max_y = _ip.getHeight()-1;
 		}
 		else {
@@ -195,15 +196,20 @@ public class SBSegmentation {
 	void handleLine(SBPendingVertical curLine)
 	{
 		int offset = offsetToLineStart(curLine.y);
+		int y = curLine.y;
 		for (int i = curLine.xMin; i <= curLine.xMax; i++) {
 			if (_pixelCompare.isHandled(offset + i))
 				continue;
-			_pixelCompare.action(offset + i);
-			_pixelCompare.setHandled(offset + i);
+			if (!_pixelCompare.isHandled(offset + i)) {
+				_pixelCompare.action(offset + i);
+				_pixelCompare.setHandled(offset + i);
+				if (_currentSegmentArea != null)
+					_currentSegmentArea.addPoint(i,y,_pixelCompare.getColorAsInt(offset + i));
+			}
 		}
 	}
 
-	/** After handling a line cuntinue in the same direction
+	/** After handling a line continue in the same direction.
 	 * 
 	 * @param curLine
 	 */
@@ -278,6 +284,13 @@ public class SBSegmentation {
 	 * @return Returns the status.
 	 */
 	public String getStatus() {
+		if ("".equals(_status) ) {
+			if (_segmentAreaFactory != null) {
+				int areas = _segmentAreaFactory.getStore().size();
+				_status += "Numbers of areas = " + areas;
+				_status += "\nPixels per area = " + _ip.getPixelCount() / areas; 
+			}
+		}
 		return _status;
 	}
 
@@ -301,5 +314,13 @@ public class SBSegmentation {
 		if (!checkLine(curLine))
 			checkLine(curLine);
 		_vPV.add(curLine);
+	}
+
+	public void setSegmentAreaFactory(PixelAreaFactory areaFactory) {
+		_segmentAreaFactory = areaFactory;
+	}
+
+	public PixelAreaFactory getSegmentAreaFactory() {
+		return _segmentAreaFactory;
 	}
 }
