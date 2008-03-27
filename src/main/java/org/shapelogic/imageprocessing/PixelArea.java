@@ -20,6 +20,9 @@ abstract class PixelArea {
   
     /** Number of pixels. */
 	protected int _area;
+	
+    /** Area is background, value null means not known. */
+	protected Boolean _background;
   
     /** If any line in the area has a line that was split. */
 	protected boolean _gapInLine;
@@ -60,6 +63,14 @@ abstract class PixelArea {
 
 	public BBox getBoundingBox() {
 		return _boundingBox;
+	}
+
+	public Boolean getBackground() {
+		return _background;
+	}
+
+	public void setBackground(Boolean background) {
+		_background = background;
 	}
 	
 }
