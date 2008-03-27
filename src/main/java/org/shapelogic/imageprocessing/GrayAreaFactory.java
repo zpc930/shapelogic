@@ -12,7 +12,7 @@ import java.util.List;
 public class GrayAreaFactory implements PixelAreaFactory {
 	
 	ArrayList<GrayArea> _store = new ArrayList<GrayArea>();
-	int _background;
+	int _backgroundColor;
 	int _maxArea = 0;
 	
 	@Override
@@ -29,8 +29,8 @@ public class GrayAreaFactory implements PixelAreaFactory {
 
 	/** Returns the biggest color. */
 	@Override
-	public int background() {
-		return _background;
+	public int getBackgroundColor() {
+		return _backgroundColor;
 	}
 
 	@Override
