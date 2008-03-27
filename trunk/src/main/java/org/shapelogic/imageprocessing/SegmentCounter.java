@@ -20,6 +20,8 @@ public class SegmentCounter implements PlugInFilter {
 	/** Modifying colors */
 	protected boolean _modifying = true;
 	protected SBSegmentation _segmentation;
+	protected String _pluginName = "Segmenter";
+	
 	
 	public int setup(String arg, ImagePlus imp) {
 		if (arg.equals("about"))
@@ -45,15 +47,19 @@ public class SegmentCounter implements PlugInFilter {
 				_segmentation.segmentAll();
 			else
 				_segmentation.segment(startX, startY);
-			showMessage("About Inverter_...",_segmentation.getStatus());
+			showMessage(_pluginName, getStatus());
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
+	
+	public String getStatus() {
+		return _segmentation.getStatus();
+	}
 
 	void showAbout() {
-		showMessage("About SBSegment01_...",
+		showMessage(_pluginName,
 			"Segments 24 bit RGB and 8 bit Gray\n" +
 			"works with rectangular ROIs\n"
 		);

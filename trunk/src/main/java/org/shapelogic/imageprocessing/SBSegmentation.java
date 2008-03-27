@@ -268,12 +268,18 @@ public class SBSegmentation {
 			ex.printStackTrace();
 		}
 	}
+	
 	/**
 	 * @param ip The ip to set.
 	 */
 	public void setImageProcessor(ImageProcessor ip) {
 		this._ip = ip;
 	}
+
+	public ImageProcessor getImageProcessor() {
+		return _ip;
+	}
+	
 	/**
 	 * @param pixelCompare The pixelCompare to set.
 	 */
@@ -284,15 +290,22 @@ public class SBSegmentation {
 	 * @return Returns the status.
 	 */
 	public String getStatus() {
+		if ("".equals(_status) ) 
+			_status = findStatus();
+		return _status;
+	}
+	
+	public String findStatus() {
+		String status = "";
 		if ("".equals(_status) ) {
 			if (_segmentAreaFactory != null) {
 				int areas = _segmentAreaFactory.getStore().size();
-				_status += "Numbers of areas = " + areas;
-				_status += "\nPixels per area = " + _ip.getPixelCount() / areas; 
+				status += "Numbers of areas = " + areas;
+				status += "\nPixels per area = " + _ip.getPixelCount() / areas; 
 			}
 		}
-		return _status;
-	}
+		return status;
+	} 
 
 	/** Make sure that every point on curLine is similar the the chosen color */
 	boolean checkLine(SBPendingVertical curLine)
