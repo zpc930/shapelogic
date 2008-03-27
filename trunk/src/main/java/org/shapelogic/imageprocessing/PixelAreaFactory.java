@@ -10,6 +10,6 @@ import java.util.List;
 public interface PixelAreaFactory {
 	PixelArea makePixelArea(int x, int y, int startColor);
 	List<? extends PixelArea> getStore();
-	int background();
+	int getBackgroundColor();
 	void sort();
 }
