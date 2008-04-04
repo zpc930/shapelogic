@@ -25,8 +25,9 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), _segmenter);
 		assertEquals(1,bp.getWidth());
 		assertTrue(bp instanceof ByteProcessor);
+		assertTrue(bp.isInvertedLut());
 		int pixel = bp.get(0,0);
-		assertEquals(0,pixel);
+		assertEquals(0,pixel); //So this is a white background pixel
 		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(1,factory.getStore().size());
@@ -61,6 +62,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertNotNull(factory);
 		assertEquals(9761,factory.getStore().size()); 
 		assertFalse(_segmenter.isParticleImage()); //XXX should be changed to true
+		assertTrue(bp.isInvertedLut());
 	}
 
 }
