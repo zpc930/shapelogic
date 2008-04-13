@@ -25,6 +25,8 @@ import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.LineType;
 import org.shapelogic.util.PointType;
 
+import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+
 /** Unit test for LetterMatchingMaxDistanceVectorizer, 
  * The main letter matching and vectorization algorithm, 
  * that works for both straight and curved capital letters

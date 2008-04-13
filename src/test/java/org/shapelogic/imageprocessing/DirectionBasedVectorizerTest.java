@@ -10,6 +10,8 @@ import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLinePolygon;
 import org.shapelogic.polygon.PolygonEndPointAdjuster;
+import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+
 
 /**   
  * 
@@ -28,7 +30,7 @@ public class DirectionBasedVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testShortVertical() {
 		String fileName = "vertical";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
+		ImageProcessor bp = ImageUtil.runPluginFilterOnImage(filePath(fileName), directionBasedVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
