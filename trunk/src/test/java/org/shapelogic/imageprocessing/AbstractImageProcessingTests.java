@@ -10,10 +10,6 @@ import org.shapelogic.polygon.GeometricShape2D;
 import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.Polygon;
 
-import ij.ImagePlus;
-import ij.io.Opener;
-import ij.plugin.filter.PlugInFilter;
-import ij.process.ImageProcessor;
 import junit.framework.TestCase;
 
 /** Has the logic to read image from file and call the different PlugInFilter on it
@@ -39,16 +35,6 @@ public class AbstractImageProcessingTests extends TestCase {
 	
 	String filePath(String fileName, String fileFormat) {
 		return _dirURL + "/" + fileName + fileFormat;
-	}
-	
-	/** This should be generalized and moved */
-	public ImageProcessor runPluginFilterOnImage(String fileName, PlugInFilter plugInFilter) {
-		Opener opener = new Opener();
-		ImagePlus image = opener.openImage(fileName);
-		ImageProcessor ip = image.getProcessor();
-		plugInFilter.setup("", image);
-		plugInFilter.run(ip);
-		return ip;
 	}
 	
 	public void printLines(Polygon polygon) {

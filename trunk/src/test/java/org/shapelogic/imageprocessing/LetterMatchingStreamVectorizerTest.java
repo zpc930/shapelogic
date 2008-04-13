@@ -10,6 +10,7 @@ import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.LineType;
 import org.shapelogic.util.PointType;
 
+import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
 
 /** LetterMatchingStreamVectorizerTest unit test for letter matching for StreamVectorizer.
  * <br />  

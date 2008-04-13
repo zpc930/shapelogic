@@ -8,6 +8,8 @@ import org.shapelogic.polygon.CPointDouble;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
 
+import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+
 /**   
  * 
  * @author Sami Badawi
