@@ -14,7 +14,7 @@ import org.shapelogic.polygon.PolygonEndPointAdjuster;
 import org.shapelogic.util.LineType;
 import org.shapelogic.util.PointType;
 
-import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
 
 /** Test MaxDistanceVectorizer.
  * 

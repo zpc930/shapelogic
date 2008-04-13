@@ -25,7 +25,7 @@ import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.LineType;
 import org.shapelogic.util.PointType;
 
-import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
 
 /** Unit test for LetterMatchingMaxDistanceVectorizer, 
  * The main letter matching and vectorization algorithm, 

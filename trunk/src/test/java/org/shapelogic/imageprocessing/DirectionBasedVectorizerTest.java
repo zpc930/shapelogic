@@ -5,12 +5,14 @@ import ij.process.ImageProcessor;
 import java.util.Collection;
 import java.util.Set;
 
+import org.shapelogic.imageutil.ImageUtil;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.MultiLinePolygon;
 import org.shapelogic.polygon.PolygonEndPointAdjuster;
-import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+
+import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
 
 
 /**   

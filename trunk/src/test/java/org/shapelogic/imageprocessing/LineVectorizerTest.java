@@ -7,7 +7,7 @@ import java.util.Collection;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.IPoint2D;
 
-import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
 
 /**   
  * 
