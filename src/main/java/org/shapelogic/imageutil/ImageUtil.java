@@ -1,4 +1,4 @@
-package org.shapelogic.imageprocessing;
+package org.shapelogic.imageutil;
 
 import ij.ImagePlus;
 import ij.io.Opener;
