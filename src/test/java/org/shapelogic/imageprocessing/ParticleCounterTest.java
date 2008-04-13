@@ -4,7 +4,7 @@ import ij.process.ByteProcessor;
 import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 
-import static org.shapelogic.imageprocessing.ImageUtil.runPluginFilterOnImage;
+import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
 
 /** Test SBSegment.
  * <br />
