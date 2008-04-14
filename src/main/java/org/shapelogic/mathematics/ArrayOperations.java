@@ -15,11 +15,19 @@ public class ArrayOperations {
 	 * @return
 	 */
 	static public long product(int[] numberArray) {
-		long product = 1;
+		long result = 1;
 		for (int element: numberArray) {
-			product *= element;
+			result *= element;
 		}
-		return product;
+		return result;
+	}
+
+	static public long sum(int[] numberArray) {
+		long result = 0;
+		for (int element: numberArray) {
+			result += element;
+		}
+		return result;
 	}
 
 }
