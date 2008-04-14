@@ -73,4 +73,12 @@ public class StorelessDiscriptiveStatistic {
 		double mean = getMean();
 		return _totalSquare /_count - mean*mean;
 	}
+	
+	public void merge(StorelessDiscriptiveStatistic input) {
+		_total+=input.getTotal();
+		_totalSquare+=input.getTotalSquare();
+		_count+=input.getCount();
+		_min = Math.min(_min, input.getMin());
+		_max = Math.max(_max, input.getMax());
+	}
 }
