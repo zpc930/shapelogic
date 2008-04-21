@@ -18,6 +18,8 @@ public interface ImageOperation extends Runnable {
 
 	/** This wrapper only implement displaying a simple text string. */ 
 	void showMessage(String title, String text);
+	
+	String showAbout();
 
 	/** If you want the object to  write to a GUI, set a GUIWrapper. */
 	void setGuiWrapper(GuiWrapper guiWrapper);
