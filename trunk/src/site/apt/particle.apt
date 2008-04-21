@@ -29,11 +29,11 @@ Particle Counter Example
 
   embryos.jpg
 
-* Challenges
+* Goals
   
   * Finding background
   
-  * Reasoning under uncertainty under the lazy stream library
+  * Reasoning under uncertainty using the lazy stream library
   
   * Filtering the particles to count base on simple geometric properties, e.g. area, perimeter
   
@@ -42,4 +42,3 @@ Particle Counter Example
   * Later finding overlapping particles and counting them separately 
   
   []
-  

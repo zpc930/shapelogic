@@ -14,6 +14,9 @@ ShapeLogic
   Code hosted on {{http://code.google.com/p/shapelogic/}}.
   From there you can download both source files and binary distributions.  
   
+  Join the {{{http://groups.google.com/group/shapelogic}ShapeLogic mailing list}} 
+  for announcements, questions, bug reports, suggestions and feature requests.
+  
 * Main ideas and motivation
 
   ShapeLogic is a library for
@@ -82,6 +85,11 @@ ShapeLogic
 
   []
   
+  Starting from ShapeLogic 1.1 you can run the image processing algorithms 
+  {{{image-formats.html}outside ImageJ}}, 
+  using just a BufferedImage. If you want to embed ShapeLogic in your 
+  application.
+  
 ** Optional requirements
   
   These are used in unit tests, builds or old versions of image processing 
@@ -115,7 +123,7 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 26,000 lines of Java code including 400 unit tests.
+  * ShapeLogic currently consists of 28,000 lines of Java code including 420 unit tests.
 
   []
 
@@ -186,10 +194,21 @@ ShapeLogic
 [images/particles/embryos.jpg] 
 
   embryos.jpg
-
+  
+  The secondary goal is to {{{image-formats.html} decouple ShapeLogic's}} 
+  image processing algorithms 
+  from ImageJ. The idea is not to redo ImageJ's functionality but to make 
+  ShapeLogic more modular. All of ShapeLogic's current image processing 
+  algorithms only use very simple image properties so they should apply outside 
+  of ImageJ.
+  
 *** Other changes to ShapeLogic v 1.1
   
   * Fix bug in segmentation that causes stripes and slowness in big images
+  
+  * Add unit tests for segmentation
+  
+  * Color clustering
   
   []
   

@@ -31,7 +31,7 @@ Lazy stream library
   For examples of how to use this to solve mathematical problems see 
   {{{project-euler.html}Project Euler solution}}.
   
-User mode
+Image processing user mode with ImageJ
 
 *  Steps to get ShapeLogic working from within ImageJ, from binary distribution 
 
