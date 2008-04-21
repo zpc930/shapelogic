@@ -11,9 +11,4 @@ import org.shapelogic.imageprocessing.DirectionBasedVectorizer;
 @Deprecated
 public class DirectionBasedVectorizer_ extends DirectionBasedVectorizer {
 
-	@Override
-	public boolean isGuiEnabled() {
-		return true;
-	}
-
 }

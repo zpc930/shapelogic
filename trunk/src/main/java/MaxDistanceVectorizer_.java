@@ -1,4 +1,5 @@
 import org.shapelogic.imageprocessing.MaxDistanceVectorizer;
+import org.shapelogic.imageutil.PlugInFilterAdapter;
 
 /** Thin wrapper around MaxDistanceVectorizer
  * 
@@ -7,11 +8,8 @@ import org.shapelogic.imageprocessing.MaxDistanceVectorizer;
  * @author Sami Badawi
  *
  */
-public class MaxDistanceVectorizer_ extends MaxDistanceVectorizer {
-
-	@Override
-	public boolean isGuiEnabled() {
-		return true;
+public class MaxDistanceVectorizer_ extends PlugInFilterAdapter {
+	public MaxDistanceVectorizer_() {
+		super(new MaxDistanceVectorizer());
 	}
-
 }

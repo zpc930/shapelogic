@@ -1,4 +1,5 @@
 import org.shapelogic.imageprocessing.ParticleCounter;
+import org.shapelogic.imageutil.PlugInFilterAdapter;
 
 /** Automatic particle counter for 24 bit RGB and 8 bit Gray.
  * <br />
@@ -9,11 +10,10 @@ import org.shapelogic.imageprocessing.ParticleCounter;
  * @author Sami Badawi
  *
  */
-public class ParticleCounter_ extends ParticleCounter {
+public class ParticleCounter_ extends PlugInFilterAdapter {
 	
-	public boolean isGuiEnabled() {
-		return true;
+	public ParticleCounter_() {
+		super(new ParticleCounter());
 	}
-
 }
 

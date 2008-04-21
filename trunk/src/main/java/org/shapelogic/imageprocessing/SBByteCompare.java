@@ -1,7 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ByteProcessor;
-import ij.process.ImageProcessor;
+import org.shapelogic.imageutil.SLImage;
 
 /** Compare implementations for gray scale.
  * 
@@ -22,18 +21,15 @@ public class SBByteCompare extends SBSimpleCompare {
 		return diff <= maxDist;
 	}
 
-	public void init(ImageProcessor ipIn) throws Exception {
-		ip = ipIn;
-		if (ip == null) {
+	public void init(SLImage ipIn) throws Exception {
+		_slImage = ipIn;
+		if (_slImage == null) {
 			throw new Exception("ImageProcessor == null");
 		}
-		if (!(ip instanceof ByteProcessor)) {
-			throw new Exception("Currently SBSimpleCompare only handles gray scale images.");
-		}
-		_pixels = (byte[]) ip.getPixels();
+		_pixels = (byte[]) _slImage.getPixels();
 		mask = MASK;
 		handledColor = 200;
-		super.init(ip);
+		super.init(_slImage);
 	}
 
 	public int colorDistance(int color1, int color2) {

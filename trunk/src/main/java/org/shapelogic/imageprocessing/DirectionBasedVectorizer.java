@@ -23,7 +23,7 @@ import org.shapelogic.util.LineType;
  * @author Sami Badawi
  *
  */
-public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implements PlugInFilter {
+public class DirectionBasedVectorizer extends ShortLineBasedVectorizer {
 	protected static final int CHAIN_CODE_FOR_MULTI_LINE_MAX_LENGTH = 10000;
 	protected static final int MAX_SHORT_LINE_COUNT = 10000;
 	protected static final int NUMBER_OF_SAME_DIRECTION_TO_START_STRAIGHT =10;
@@ -257,7 +257,7 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 				double y = bBox.minVal.getY() + bBox.maxVal.getY();
 				y *= 0.5;
 				CPointDouble center = new CPointDouble(x,y);
-				showMessage("Circle found. With center: " + center);
+				showMessage("","Circle found. With center: " + center);
 				return center;
 			}
 		}
@@ -270,6 +270,6 @@ public class DirectionBasedVectorizer extends ShortLineBasedVectorizer implement
 		MultiLine multiLine = getPolygon().getCurrentMultiLine();
 		ObjectAnnotator<MultiLine> circleFinder = new CircleFinder(multiLine); 
 		if (circleFinder.isAnnotationsFound())
-			showMessage("Circle found. With center: " + multiLine.getCenterForCircle());
+			showMessage("","Circle found. With center: " + multiLine.getCenterForCircle());
 	}
 }

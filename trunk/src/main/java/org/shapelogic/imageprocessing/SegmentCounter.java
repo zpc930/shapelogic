@@ -1,9 +1,11 @@
 package org.shapelogic.imageprocessing;
-import ij.*;
-import ij.plugin.filter.PlugInFilter;
-import ij.process.*;
+
 import org.shapelogic.imageprocessing.SBSegmentation;
 import org.shapelogic.imageprocessing.SBSimpleCompare;
+import org.shapelogic.imageutil.BaseSLImageFilter;
+import org.shapelogic.imageutil.SLImage;
+
+import static org.shapelogic.imageutil.ImageJConstants.*;
 
 /** Base class for segmentation and particle counter for 24 bit RGB and 8 bit Gray.
  * <br /> 
@@ -14,34 +16,40 @@ import org.shapelogic.imageprocessing.SBSimpleCompare;
  * @author Sami Badawi
  *
  */
-public class SegmentCounter implements PlugInFilter {
+public class SegmentCounter extends BaseSLImageFilter {
 	protected boolean _doAll = true;
 	
 	/** Modifying colors */
 	protected boolean _modifying = true;
 	protected SBSegmentation _segmentation;
 	protected String _pluginName = "Segmenter";
+	protected boolean _saveArea;
 	
+	public SegmentCounter(boolean saveArea) {
+		super(DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
+		_saveArea = saveArea;
+	}
 	
-	public int setup(String arg, ImagePlus imp) {
+	public int setup(String arg, SLImage image) {
 		if (arg.equals("about"))
 			{showAbout(); return DONE;}
-		return DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING;
+		return super.setup(arg,image);
 	}
 
-	public void run(ImageProcessor ip) {
-		if (!(ip instanceof ByteProcessor || ip instanceof ColorProcessor))
-			return;
+	public void run() {
+//		if (!(ip instanceof ByteProcessor || ip instanceof ColorProcessor))
+//			return;
 		try {
-			int startX = ip.getWidth()/2;
-			int startY = ip.getHeight()/2;
-			SBSimpleCompare compare = SBSimpleCompare.factory(ip);
+			int startX = getSLImage().getWidth()/2;
+			int startY = getSLImage().getHeight()/2;
+			SBSimpleCompare compare = SBSimpleCompare.factory(getSLImage());
 			compare.grabColorFromPixel(startX, startY);
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
-			_segmentation.setImageProcessor(ip);
+			_segmentation.setSLImage(getSLImage());
 			_segmentation.setPixelCompare(compare);
-			_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(ip));
+			if (_saveArea)
+				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getSLImage()));
 			_segmentation.init();
 			if (_doAll)
 				_segmentation.segmentAll();
@@ -63,19 +71,6 @@ public class SegmentCounter implements PlugInFilter {
 			"Segments 24 bit RGB and 8 bit Gray\n" +
 			"works with rectangular ROIs\n"
 		);
-	}
-
-	public void showMessage(String title, String text) {
-		if (isGuiEnabled())
-			IJ.showMessage(title,text);
-		else {
-			System.out.println(title);
-			System.out.println(text);
-		}
-	}
-	
-	public boolean isGuiEnabled() {
-		return false;
 	}
 
 	public SBSegmentation getSegmentation() {
