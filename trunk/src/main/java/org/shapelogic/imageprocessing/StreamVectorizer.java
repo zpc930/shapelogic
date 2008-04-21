@@ -1,7 +1,5 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ImageProcessor;
-
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
