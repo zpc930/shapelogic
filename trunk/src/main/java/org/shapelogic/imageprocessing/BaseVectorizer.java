@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.shapelogic.entities.NumericRule;
-import org.shapelogic.imageutil.BaseSLImageFilter;
+import org.shapelogic.imageutil.BaseImageOperation;
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.ImageJConstants;
 import org.shapelogic.imageutil.SLImage;
@@ -50,7 +50,7 @@ import ij.process.ImageProcessor;
  * @author Sami Badawi
  *
  */
-public abstract class BaseVectorizer extends BaseSLImageFilter 
+public abstract class BaseVectorizer extends BaseImageOperation 
 	implements IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<Polygon> 
 {
 
@@ -190,20 +190,6 @@ public abstract class BaseVectorizer extends BaseSLImageFilter
 
 	/** All the objects that needs special version should be created here. */
 	abstract protected void internalFactory();
-
-	@Override
-	public int setup(String arg, SLImage imp) {
-		if (arg.equals("about"))
-			{showAbout(); return ImageJConstants.DONE;}
-		return super.setup(arg, imp);
-	}
-
-	void showAbout() {
-		showMessage("About LineVectorizer...",
-			"Works for 8 bit Gray\n" +
-			"works with rectangular ROIs\n"
-		);
-	}
 
 	public int pointToPixelIndex(int x, int y) {
 		return _slImage.getWidth() * y + x;

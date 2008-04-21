@@ -2,7 +2,7 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.imageprocessing.SBSegmentation;
 import org.shapelogic.imageprocessing.SBSimpleCompare;
-import org.shapelogic.imageutil.BaseSLImageFilter;
+import org.shapelogic.imageutil.BaseImageOperation;
 import org.shapelogic.imageutil.SLImage;
 
 import static org.shapelogic.imageutil.ImageJConstants.*;
@@ -16,7 +16,7 @@ import static org.shapelogic.imageutil.ImageJConstants.*;
  * @author Sami Badawi
  *
  */
-public class SegmentCounter extends BaseSLImageFilter {
+public class SegmentCounter extends BaseImageOperation {
 	protected boolean _doAll = true;
 	
 	/** Modifying colors */
@@ -30,12 +30,6 @@ public class SegmentCounter extends BaseSLImageFilter {
 		_saveArea = saveArea;
 	}
 	
-	public int setup(String arg, SLImage image) {
-		if (arg.equals("about"))
-			{showAbout(); return DONE;}
-		return super.setup(arg,image);
-	}
-
 	public void run() {
 //		if (!(ip instanceof ByteProcessor || ip instanceof ColorProcessor))
 //			return;
@@ -64,13 +58,6 @@ public class SegmentCounter extends BaseSLImageFilter {
 	
 	public String getStatus() {
 		return _segmentation.getStatus();
-	}
-
-	void showAbout() {
-		showMessage(_pluginName,
-			"Segments 24 bit RGB and 8 bit Gray\n" +
-			"works with rectangular ROIs\n"
-		);
 	}
 
 	public SBSegmentation getSegmentation() {
