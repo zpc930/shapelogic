@@ -1,0 +1,147 @@
+            ------
+            Image Format
+            ------
+            Sami Badawi
+            ------
+            2008/04/21
+            ------
+
+Image formats supported by ShapeLogic
+
+  Until ShapeLogic 1.0 the image processing algorithms where only running under
+  {{{http://rsb.info.nih.gov/ij} ImageJ}}.  
+  
+  Starting with version 1.1 ShapeLogic's image processing algorithms 
+  will be decoupled from ImageJ. The idea is not to redo ImageJ's 
+  functionality but to make ShapeLogic more modular. All of ShapeLogic's 
+  current image processing algorithms only use very simple image 
+  properties so they should apply outside of ImageJ.
+
+  Not everything will work outside ImageJ. The letter match example has
+  a first step that is a skeletonize algorithm that comes with ImageJ.
+  In order to get that to work outside you will need to have another 
+  implementation of this.
+  
+* Wrapper classes SLImage and SLImageFilter
+  
+** SLImage
+  
+  This is a wrapper interface that contains very simple properties of an image.
+  
+  In order to get a new image format to work transparently with ShapeLogic you
+  need to make an adaptor pattern that for you image class to this interface. 
+  
+** ImageOperation
+  
+  This is a wrapper around a PlugInFilter. It is any operations that can change 
+  a SLImage.
+  
+** PlugInFilterAdapter
+  
+  PlugInFilterAdapter is the way to turn an ImageOperation into a PlugInFilter 
+  that can be run from ImageJ. Here is an example:
+  
+  StreamVectorizer is an ImageOperation for vectorizing bitmaps and finding 
+  letters it it. It can be called with any SLImage, while StreamVectorizer_ is 
+  the letter matching example that you can use in ImageJ. 
+  
++-------------------------------------+
+public class StreamVectorizer_ extends PlugInFilterAdapter {
+	public StreamVectorizer_() {
+		super(new StreamVectorizer());
+	}
+}
++-------------------------------------+
+  
+* Images classes in different image libraries
+  
+  Here are some of the main Java image libraries order by complexity of the 
+  image classes.
+  
+** ImageJ
+  
+  {{{http://rsb.info.nih.gov/ij} ImageJ}} only have 4 different images.
+  
+  Implemented by 4 subclasses of the ImageProcessor:
+  
+  * ByteProcessor 8 bits for gray and indexed images
+  
+  * ShortProcessor 16 bits for gray
+  
+  * FloatProcessor 32 bits for gray float
+  
+  * ColorProcessor for 32 bits ARGB
+  
+  []
+  
+  The focus is simplicity for the programmer. There is only one image layout
+  for a given image type.
+  
+** Java2D 
+  
+  {{{http://java.sun.com/docs/books/tutorial/2d} Java2D's}} 
+  main image format is BufferedImage. This is a very flexible class that 
+  can handle most non compressed layouts of a image that is loaded in a buffer.
+  
+** JAI Java Advanced Imaging
+  
+  {{{http://java.sun.com/javase/technologies/desktop/media/jai}JAI}} is a 
+  pretty complex image processing and rendering library. 
+  It can be used to handle big flow of operations and images that are too large 
+  to be loaded in memory at the same time.
+  
+* Image formats that are supported
+  
+  * ImageProcessor from ImageJ
+  
+  * BufferedImage from Java2D
+  
+  []
+  
+  This code will be released with ShapeLogic 1.1.
+  
+* Image formats that might be supported later
+  
+  * TiledImage from JAI
+  
+  * OpImage from JAI
+  
+  []
+  
+* When to use ShapeLogic with ImageJ
+
+  ImageJ is a fantastic tool for image processing. Here are a few of its features:
+  
+  * A great GUI to experiment and work in
+  
+  * Lots of free plugins
+  
+  * It is the leading Java open source software image processing tool
+  
+  * Macro language to combine commands
+  
+  * Active user and developer community
+  
+  * Responsive mailing list
+  
+  * Very easy to program
+  
+  * It is free
+  
+  * The code is available and in the public domain
+  
+  []
+  
+* When not to use ShapeLogic with ImageJ
+  
+  * If you want to embed ShapeLogic in your application without adding ImageJ
+  
+  * Sometimes it is hard to separate ImageJ from the ImageJ GUI
+  
+  * You need to use some other library say
+  {{{http://java.sun.com/docs/books/tutorial/2d} Java2D}} or 
+  {{{http://java.sun.com/javase/technologies/desktop/media/jai}JAI}}
+  
+  []
+
+  

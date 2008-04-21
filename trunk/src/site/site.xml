@@ -35,6 +35,7 @@
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Annotations" href="annotations.html"/>
+		  <item name="Image formats" href="image-formats.html"/>
 		  <item name="Lazy Data Streams" href="streams.html"/>
 		  <item name="Line Type" href="line-type.html"/>
 		  <item name="Pixel Types" href="pixel-types.html"/>
