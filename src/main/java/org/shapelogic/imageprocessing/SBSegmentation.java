@@ -1,8 +1,9 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ImageProcessor;
 import java.util.ArrayList;
 import java.awt.Rectangle;
+
+import org.shapelogic.imageutil.SLImage;
 
 /** High level class for segmentation.
  * <br />
@@ -12,7 +13,7 @@ import java.awt.Rectangle;
  *
  */
 public class SBSegmentation {
-	private ImageProcessor _ip;
+	private SLImage _slImage;
 	private ArrayList<SBPendingVertical> _vPV;
 	private SBPixelCompare _pixelCompare;
 	
@@ -40,13 +41,13 @@ public class SBSegmentation {
 	 */
 	private int offsetToLineStart(int y)
 	{
-		int width = _ip.getWidth();
+		int width = _slImage.getWidth();
 		int offset = y * width;		
 		return offset;
 	}
 
 	int pointToIndex(int x, int y){
-		return _ip.getWidth() * y + x;
+		return _slImage.getWidth() * y + x;
 	}
 	
 	/** Given a point find the longest line vertical line similar to the chosen colors. 
@@ -116,7 +117,7 @@ public class SBSegmentation {
 			return;
 		storeLine(firstLine);
 		storeLine(SBPendingVertical.opposite(firstLine));
-		final int maxIterations = 1000 + _ip.getPixelCount()/10;
+		final int maxIterations = 1000 + _slImage.getPixelCount()/10;
 		int i;
 		for (i =1; i <= maxIterations; i++) {
 			if (_vPV.size() == 0) 
@@ -132,13 +133,13 @@ public class SBSegmentation {
 	/** line is at the edge of image and pointing away from the center	 */
 	public void init()
 	{
-		Rectangle r = _ip.getRoi();
+		Rectangle r = _slImage.getRoi();
 		
 		if (r == null) {
 			_min_x = 0;
-			_max_x = _ip.getWidth()-1;
+			_max_x = _slImage.getWidth()-1;
 			_min_y = 0;
-			_max_y = _ip.getHeight()-1;
+			_max_y = _slImage.getHeight()-1;
 		}
 		else {
 			_min_x = r.x;
@@ -272,12 +273,12 @@ public class SBSegmentation {
 	/**
 	 * @param ip The ip to set.
 	 */
-	public void setImageProcessor(ImageProcessor ip) {
-		this._ip = ip;
+	public void setSLImage(SLImage ip) {
+		this._slImage = ip;
 	}
 
-	public ImageProcessor getImageProcessor() {
-		return _ip;
+	public SLImage getSLImage() {
+		return _slImage;
 	}
 	
 	/**
@@ -290,19 +291,17 @@ public class SBSegmentation {
 	 * @return Returns the status.
 	 */
 	public String getStatus() {
-		if ("".equals(_status) ) 
+		if (_status == null || "".equals(_status) ) 
 			_status = findStatus();
 		return _status;
 	}
 	
 	public String findStatus() {
 		String status = "";
-		if ("".equals(_status) ) {
-			if (_segmentAreaFactory != null) {
-				int areas = _segmentAreaFactory.getStore().size();
-				status += "Numbers of areas = " + areas;
-				status += "\nPixels per area = " + _ip.getPixelCount() / areas; 
-			}
+		if (_segmentAreaFactory != null) {
+			int areas = _segmentAreaFactory.getStore().size();
+			status += "Numbers of areas = " + areas;
+			status += "\nPixels per area = " + _slImage.getPixelCount() / areas; 
 		}
 		return status;
 	} 

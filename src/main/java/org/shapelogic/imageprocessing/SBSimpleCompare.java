@@ -5,6 +5,8 @@ import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 import java.util.BitSet;
 
+import org.shapelogic.imageutil.SLImage;
+
 /** Abstract class fro compare.
  * 
  * @author Sami Badawi
@@ -14,7 +16,7 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	protected int currentColor;
 	protected int handledColor;
 	protected int mask;
-	protected ImageProcessor ip;
+	protected SLImage _slImage;
 	protected int maxDist = 10;
 	protected BitSet bitSet;
 	protected boolean fillWithOwnColor = true;
@@ -65,7 +67,7 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	}
 	
 	public void grabColorFromPixel(int startX, int startY) {
-		currentColor = ip.getPixel(startX, startY) & mask;
+		currentColor = _slImage.get(startX, startY) & mask;
 		if (fillWithOwnColor)
 			handledColor = currentColor;
 	}
@@ -86,6 +88,26 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 		return result;
 	}
 
+	public static SBSimpleCompare factory(SLImage ip) throws Exception
+	{
+		SBSimpleCompare result = null;
+		int channels = ip.getNChannels();
+		if (ip.isGray()) {
+			result = new SBByteCompare();
+		}
+		else if (ip.isRgb()) {
+			result = new SBColorCompare();
+		}
+		else {
+			System.out.println("Error: could not create SBSimpleCompare. ip.getNChannels()=" + ip.getNChannels());
+		}
+			
+		if (result != null) {
+			result.init(ip);
+		}
+		return result;
+	}
+
 	public static PixelAreaFactory segmentAreaFactory(ImageProcessor ip) throws Exception
 	{
 		PixelAreaFactory result = null;
@@ -98,12 +120,38 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 		return result;
 	}
 
+	public static PixelAreaFactory segmentAreaFactory(SLImage image) throws Exception
+	{
+		PixelAreaFactory result = null;
+		int channels = image.getNChannels(); 
+		if (image.isGray()) {
+			result = new GrayAreaFactory();
+		}
+		else if (image.isRgb()) {
+			result = new ColorAreaFactory();
+		}
+		else {
+			System.out.println("Error: could not create PixelAreaFactory. image.getNChannels()=" + image.getNChannels());
+		}
+		return result;
+	}
+
     /** Call at start, this might also work as a reset	 */
 	public void init(ij.process.ImageProcessor ip) throws Exception
 	{
 		bitSet = new BitSet(ip.getWidth()*ip.getHeight());
 		numberOfPixels = 0;
 	}
+	
+    /** Call at start, this might also work as a reset	 */
+	public void init(SLImage image) throws Exception
+	{
+		bitSet = new BitSet(image.getWidth()*image.getHeight());
+		numberOfPixels = 0;
+		_slImage = image;
+	}
+	
+	
 	/** Check if pixel at index already have been handled. 
 	 */
 	public boolean isHandled(int index) {

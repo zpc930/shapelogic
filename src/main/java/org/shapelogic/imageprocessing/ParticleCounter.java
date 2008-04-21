@@ -16,7 +16,7 @@ public class ParticleCounter extends SegmentCounter {
 	
 	public ParticleCounter()
 	{
-		super();
+		super(true);
 		_modifying = false;
 		_pluginName = "Particle Counter";
 	}
@@ -26,7 +26,7 @@ public class ParticleCounter extends SegmentCounter {
 			_segmentation.getSegmentAreaFactory().sort();
 			List<? extends PixelArea> store = _segmentation.getSegmentAreaFactory().getStore();
 			int biggestArea = store.get(store.size()-1).getArea();
-			double biggestAreaPercentage = biggestArea * 100 / getSegmentation().getImageProcessor().getPixelCount();
+			double biggestAreaPercentage = biggestArea * 100 / getSegmentation().getSLImage().getPixelCount();
 			_particleImage = biggestAreaPercentage > 50;
 		}
 		return _particleImage;

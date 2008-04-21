@@ -1,7 +1,6 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ColorProcessor;
-import ij.process.ImageProcessor;
+import org.shapelogic.imageutil.SLImage;
 
 /** Compare implementations for RGB.
  * 
@@ -23,18 +22,15 @@ public class SBColorCompare extends SBSimpleCompare {
 		return diff <= maxDist;
 	}
 
-	public void init(ImageProcessor ipIn) throws Exception {
-		ip = ipIn;
-		if (ip == null) {
+	public void init(SLImage ipIn) throws Exception {
+		_slImage = ipIn;
+		if (_slImage == null) {
 			throw new Exception("ImageProcessor == null");
 		}
-		if (!(ip instanceof ColorProcessor)) {
-			throw new Exception("Currently SBSimpleCompare only handles RGB images.");
-		}
-		pixels = (int[]) ip.getPixels();
+		pixels = (int[]) _slImage.getPixels();
 		mask = MASK;
 		handledColor = 0xf0f0f0; // light gray
-		super.init(ip);
+		super.init(_slImage);
 	}
 
     /** split color coded as int into 3 int */

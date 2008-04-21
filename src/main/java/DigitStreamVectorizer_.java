@@ -1,7 +1,8 @@
 import static org.shapelogic.logic.CommonLogicExpressions.*;
 import static org.shapelogic.streamlogic.LoadLetterStreams.rule;
-import ij.process.ImageProcessor;
 
+import org.shapelogic.imageprocessing.StreamVectorizer;
+import org.shapelogic.imageutil.PlugInFilterAdapter;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
 
@@ -14,11 +15,15 @@ import org.shapelogic.streamlogic.LoadPolygonStreams;
  * @author Sami Badawi
  *
  */
-public class DigitStreamVectorizer_ extends StreamVectorizer_ {
-
-	@Override
-	public void matchSetup(ImageProcessor ip) {
-		loadDigitStream();
+public class DigitStreamVectorizer_ extends PlugInFilterAdapter {
+	
+	public DigitStreamVectorizer_() {
+		super(new StreamVectorizer()  {
+			@Override
+			public void matchSetup() {
+				loadDigitStream();
+			}
+		});
 	}
 	
 	public static void loadDigitStream() {

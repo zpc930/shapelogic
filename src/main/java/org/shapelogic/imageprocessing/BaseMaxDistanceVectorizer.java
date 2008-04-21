@@ -263,8 +263,8 @@ public class BaseMaxDistanceVectorizer extends BaseVectorizer {
 	}
 	
 	@Override
-	public void init(ImageProcessor ip) {
-		super.init(ip);
+	public void init() {
+		super.init();
 		_chainCodeHandler = new ChainCodeHandler(getPolygon().getAnnotatedShape());
 	}
 }

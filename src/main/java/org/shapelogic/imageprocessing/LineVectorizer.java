@@ -14,7 +14,7 @@ import org.shapelogic.util.Constants;
  * @author Sami Badawi
  *
  */
-public class LineVectorizer extends ShortLineBasedVectorizer implements PlugInFilter {
+public class LineVectorizer extends ShortLineBasedVectorizer {
 
 	/** Test that the current direction is close to the last direction.
 	 * */

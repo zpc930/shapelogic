@@ -36,30 +36,30 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 		if (_matchingOH == null) {
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}
-		showMessage("Letter match result: " + _matchingOH);
+		showMessage("","Letter match result: " + _matchingOH);
 	}
 	
 	/** Use this to setup all the needed streams.
 	 */
 	@Override
-	public void init(ImageProcessor ip) {
+	public void init() {
 		RootMap.clear();
-		super.init(ip);
+		super.init();
 //		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
 		RootMap.put(StreamNames.POLYGONS, getStream());
-		matchSetup(ip);
+		matchSetup();
 	}
 	
 	/** In order to match a different alphabet override this. 
 	 */
-	public void matchSetup(ImageProcessor ip) {
+	public void matchSetup() {
 		LoadLetterStreams.loadLetterStream(null);
 		
 	}
 	
 	@Override
-	public void run(ImageProcessor ip) {
-		init(ip);
+	public void run() {
+		init();
 //		next();
 		matchLines();
 	}

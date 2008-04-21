@@ -1,4 +1,5 @@
 import org.shapelogic.imageprocessing.LineVectorizer;
+import org.shapelogic.imageutil.PlugInFilterAdapter;
 
 /** Thin wrapper around DirectionBasedVectorizer
  * 
@@ -9,11 +10,10 @@ import org.shapelogic.imageprocessing.LineVectorizer;
  *
  */
 @Deprecated
-public class LineVectorizer_ extends LineVectorizer {
-
-	@Override
-	public boolean isGuiEnabled() {
-		return true;
+public class LineVectorizer_ extends PlugInFilterAdapter {
+	
+	public LineVectorizer_() {
+		super(new LineVectorizer());
 	}
 
 }

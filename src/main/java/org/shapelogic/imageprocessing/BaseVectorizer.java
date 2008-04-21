@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.shapelogic.entities.NumericRule;
+import org.shapelogic.imageutil.BaseSLImageFilter;
+import org.shapelogic.imageutil.IJImage;
+import org.shapelogic.imageutil.ImageJConstants;
+import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.CPointInt;
@@ -20,11 +24,6 @@ import org.shapelogic.streams.ListStream;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.util.Constants;
 
-
-import ij.IJ;
-import ij.ImagePlus;
-import ij.plugin.filter.PlugInFilter;
-import ij.process.ByteProcessor;
 import ij.process.ImageProcessor;
 
 /** Input image needs to be binary, that is gray scale with inverted LUT.
@@ -51,14 +50,14 @@ import ij.process.ImageProcessor;
  * @author Sami Badawi
  *
  */
-public abstract class BaseVectorizer  //extends SingleListStream<Polygon> 
-implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<Polygon> {
+public abstract class BaseVectorizer extends BaseSLImageFilter 
+	implements IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<Polygon> 
+{
 
 	public static final int MAX_DISTANCE_BETWEEN_CLUSTER_POINTS = 2;
 	public static final byte STRAIGHT_LINE_COLOR = 127; //Draw color
 
 	//Image related
-	ByteProcessor _ip;
 	protected byte[] _pixels;
 	//Dimension of image
 	protected int _minX;
@@ -92,7 +91,6 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	protected IPixelTypeFinder _pixelTypeFinder; 
 	protected NumericRule[] _rulesArrayForLetterMatching;
 	
-	protected ImageProcessor _imageProcessor;
 	protected ListStream<Polygon> _stream;
 	
 	/** Really stream name but could be changed to _name. */
@@ -101,14 +99,13 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	protected int _yForUnporcessedPixel;
 	protected int _nextCount;
 	
-	/** To be overridden. */
-	public boolean isGuiEnabled() {
-		return false;
+	public BaseVectorizer() {
+		super(ImageJConstants.DOES_8G+ImageJConstants.SUPPORTS_MASKING);
 	}
 
 	@Override
-	public void run(ImageProcessor ip) {
-		init(ip);
+	public void run() {
+		init();
 		next();
 		matchLines();
 	}
@@ -126,7 +123,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 		if (_matchingOH == null) {
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}
-		showMessage("Letter match result: " + _matchingOH);
+		showMessage("","Letter match result: " + _matchingOH);
 	}
 	
 	protected void findAllLines() {
@@ -169,25 +166,24 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	abstract protected boolean lastPixelOk(byte newDirection);
 
 	/** Cannot handle the last pixel at the edge, so for now just ignore it. */
-	public void init(ImageProcessor ip) {
-		_ip = (ByteProcessor) ip;
-		Rectangle r = _ip.getRoi();
-		_pixels = (byte[]) _ip.getPixels();
-		int width = _ip.getWidth();
+	public void init() {
+		Rectangle r = _slImage.getRoi();
+		_pixels = (byte[]) _slImage.getPixels();
+		int width = _slImage.getWidth();
 		//
 		_cyclePoints = new int[] {1, 1 + width, width, -1 + width, -1, -1 - width, -width, 1 - width};
 		
 		if (r == null) { 
 			_minX = 1;
-			_maxX = _ip.getWidth()-2;
+			_maxX = _slImage.getWidth()-2;
 			_minY = 1;
-			_maxY = _ip.getHeight()-2;
+			_maxY = _slImage.getHeight()-2;
 		}
 		else {
 			_minX = Math.max(1, r.x);
-			_maxX = Math.min(_ip.getWidth()-2,r.x + r.width -1);
+			_maxX = Math.min(_slImage.getWidth()-2,r.x + r.width -1);
 			_minY = Math.max(1, r.y);
-			_maxY = Math.min(_ip.getHeight()-2,r.y + r.height -1);
+			_maxY = Math.min(_slImage.getHeight()-2,r.y + r.height -1);
 		}
 		internalFactory(); 
 	}
@@ -195,15 +191,11 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	/** All the objects that needs special version should be created here. */
 	abstract protected void internalFactory();
 
-	public BaseVectorizer() {
-		super();
-	}
-
 	@Override
-	public int setup(String arg, ImagePlus imp) {
+	public int setup(String arg, SLImage imp) {
 		if (arg.equals("about"))
-			{showAbout(); return DONE;}
-		return DOES_8G+SUPPORTS_MASKING;
+			{showAbout(); return ImageJConstants.DONE;}
+		return super.setup(arg, imp);
 	}
 
 	void showAbout() {
@@ -214,16 +206,16 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	}
 
 	public int pointToPixelIndex(int x, int y) {
-		return _ip.getWidth() * y + x;
+		return _slImage.getWidth() * y + x;
 	}
 
 	public int pointToPixelIndex(IPoint2D point) {
-		return _ip.getWidth() * (int)point.getY() + (int)point.getX();
+		return _slImage.getWidth() * (int)point.getY() + (int)point.getX();
 	}
 
 	public CPointInt pixelIndexToPoint(int pixelIndex) {
-		int y = pixelIndex / _ip.getWidth();
-		int x = pixelIndex % _ip.getWidth();
+		int y = pixelIndex / _slImage.getWidth();
+		int x = pixelIndex % _slImage.getWidth();
 		return new CPointInt(x,y);
 	}
 
@@ -234,7 +226,7 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	protected boolean findFirstLinePoint(boolean process) { 
 		int startY = Math.max(_minY, _yForUnporcessedPixel);
 		for (int iY = startY; iY <= _maxY; iY++) {
-			int lineOffset = _ip.getWidth() * iY; 
+			int lineOffset = _slImage.getWidth() * iY; 
 			for (int iX = _minX; iX <= _maxX; iX++) {
 				_currentPixelIndex = lineOffset + iX;
 				if (PixelType.PIXEL_FOREGROUND_UNKNOWN.color == _pixels[_currentPixelIndex]) {
@@ -295,33 +287,37 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 			_unfinishedPoints.add(newPoint);
 	}
 	
-	/** Draws the vectorized lines on the original image for visual inspection.
+	/** Draws the vectorized lines on the original image for visual inspection.<br />
 	 * 
-	 * This is probably not needed in the final version of this class
+	 * This is probably not needed in the final version of this class.
 	 */
 	protected void drawLines() {
-			_ip.setColor(STRAIGHT_LINE_COLOR);
-			if (getPoints().size() == 0)
-				return;
-			for (CLine line: getPolygon().getLines()) {
-				drawLine(line);
-			}
-		}
-
-	public void showMessage(String text) {
-		if (isGuiEnabled())
-			IJ.showMessage(text);
+		IJImage ijImage = null;
+		if (_slImage instanceof IJImage)
+			ijImage = (IJImage)_slImage; 
 		else
-			System.out.println(text);
-	}
-
-	public void showMessage(String title, String text) {
-		if (isGuiEnabled())
-			IJ.showMessage(title,text);
-		else {
-			System.out.println(title);
-			System.out.println(text);
+			return;
+		ijImage.getImageProcessor().setColor(STRAIGHT_LINE_COLOR);
+		if (getPoints().size() == 0)
+			return;
+		for (CLine line: getPolygon().getLines()) {
+			drawLine(line);
 		}
+	}
+	
+	/** Get an ImageJ ImageProcessor <br />
+	 * 
+	 * This introduces dependency of ImageJ in a image processing algorithm, 
+	 * and should ideally be abstracted out.
+	 */
+	public ImageProcessor getImageProcessor() {
+		IJImage ijImage = null;
+		if (_slImage instanceof IJImage)
+			ijImage = (IJImage)_slImage;
+		if (ijImage != null)
+			return ijImage.getImageProcessor();
+		else
+			return null;
 	}
 
 	public Collection<IPoint2D> getPoints() {
@@ -330,7 +326,10 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 	}
 
 	protected void drawLine(CLine line) {
-		_ip.drawLine((int)line.getStart().getX(), (int)line.getStart().getY(),
+		ImageProcessor imageProcessor = getImageProcessor();
+		if (imageProcessor == null)
+			return;
+		imageProcessor.drawLine((int)line.getStart().getX(), (int)line.getStart().getY(),
 				(int)line.getEnd().getX(), (int)line.getEnd().getY());
 	
 	}
@@ -344,11 +343,6 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 		if (_polygon == null)
 			_polygon = polygonFactory(); 
 		return _polygon;
-	}
-
-	@Override
-	public ImageProcessor getImageProcessor() {
-		return _imageProcessor;
 	}
 
 	@Override
@@ -370,12 +364,12 @@ implements PlugInFilter, IPixelTypeFinder, LazyPlugInFilter<Polygon>, Iterator<P
 		_polygon = null; //Cause lazy creation of a new polygon
 		findAllLines();
 		if (_currentPoint != null)
-			showMessage(
+			showMessage("",
 					"Last line point is: " + _currentPoint + "\n" +
 					"_numberOfPointsInLine: " + _numberOfPointsInAllLines+ "\n" +
 					"Points count: " + getPoints().size()); 
 		else
-			showMessage("No line point found.");
+			showMessage("","No line point found.");
 		drawLines();
 		cleanPolygon();
 		return getCleanedupPolygon();
