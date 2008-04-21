@@ -1,9 +1,8 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ImageProcessor;
-
 import java.util.Set;
 
+import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.AnnotatedShape;
 import org.shapelogic.polygon.GeometricShape2D;
 import org.shapelogic.polygon.Polygon;
@@ -32,7 +31,7 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 	
 	public void testABC() {
 		String fileName = "ABC";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Polygon polygon = vectorizer.getPolygon();

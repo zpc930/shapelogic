@@ -1,9 +1,8 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ImageProcessor;
-
 import java.util.Collection;
 
+import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.IPoint2D;
 
@@ -26,7 +25,7 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortVertical() {
 		String fileName = "vertical";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -38,7 +37,7 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortVerticalAndHorizontal() {
 		String fileName = "verticalAndHorizontal";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -50,7 +49,7 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortRotatedTThin() {
 		String fileName = "rotatedT";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -67,7 +66,7 @@ public class LineVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testThinProblematicL() {
 		String fileName = "problematicL";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), lineVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), lineVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);

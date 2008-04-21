@@ -1,9 +1,8 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ImageProcessor;
-
 import java.util.Set;
 
+import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.CPointDouble;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
@@ -27,7 +26,7 @@ public class LetterMatchingDirectionBasedVectorizerTest extends BaseLetterMatchi
 	@Override
 	public void testA() {
 		String fileName = "A";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -51,7 +50,7 @@ public class LetterMatchingDirectionBasedVectorizerTest extends BaseLetterMatchi
 	@Override
 	public void testK() {
 		String fileName = "K";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -72,7 +71,7 @@ public class LetterMatchingDirectionBasedVectorizerTest extends BaseLetterMatchi
 	@Override
 	public void testM() {
 		String fileName = "M";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
