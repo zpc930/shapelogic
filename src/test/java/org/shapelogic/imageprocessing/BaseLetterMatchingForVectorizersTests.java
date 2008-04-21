@@ -1,9 +1,8 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ImageProcessor;
-
 import java.util.Set;
 
+import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.CPointDouble;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.IPoint2D;
@@ -30,7 +29,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 	
 	public void testA() {
 		String fileName = "A";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -53,7 +52,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testE() {
 		String fileName = "E";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -83,7 +82,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testF() {
 		String fileName = "F";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -104,7 +103,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testH() {
 		String fileName = "H";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -125,7 +124,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 	}
 	public void testI() {
 		String fileName = "I";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -139,7 +138,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 	
 	public void testK() {
 		String fileName = "K";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -160,7 +159,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testL() {
 		String fileName = "L";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getPoints();
@@ -176,7 +175,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 		
 	public void testM() {
 		String fileName = "M";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -200,7 +199,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testN() {
 		String fileName = "N";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -219,7 +218,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testT() {
 		String fileName = "T";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -238,7 +237,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testV() {
 		String fileName = "V";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -255,7 +254,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testW() {
 		String fileName = "W";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -272,7 +271,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testX() {
 		String fileName = "X";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -292,7 +291,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testY() {
 		String fileName = "Y";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();
@@ -311,7 +310,7 @@ public abstract class BaseLetterMatchingForVectorizersTests extends
 
 	public void testZ() {
 		String fileName = "Z";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), vectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)vectorizer.getCleanedupPolygon().getPoints();

@@ -1,10 +1,9 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ImageProcessor;
-
 import java.util.Collection;
 import java.util.Set;
 
+import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.GeometricShape2D;
@@ -33,7 +32,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testShortVertical() {
 		String fileName = "vertical";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -52,7 +51,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortVerticalArch() {
 		String fileName = "verticalArch";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		assertEquals(30,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -72,7 +71,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortVerticalAndHorizontal() {
 		String fileName = "verticalAndHorizontal";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -101,7 +100,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testShortRotatedTThin() {
 		String fileName = "rotatedT";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -127,7 +126,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testThinProblematicL() {
 		String fileName = "problematicL";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		assertEquals(20,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
@@ -147,7 +146,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 	
 	public void testThinDiagonal() {
 		String fileName = "diagonal";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = maxDistanceVectorizer.getPoints();
@@ -166,7 +165,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testSmallThinTriangle() {
 		String fileName = "triangle";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = maxDistanceVectorizer.getPoints();
@@ -226,7 +225,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testThinLBracket() {
 		String fileName = "LBracket";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)maxDistanceVectorizer.getPoints();
@@ -251,7 +250,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testElongatedX() {
 		String fileName = "elongatedX";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)maxDistanceVectorizer.getPoints();
@@ -276,7 +275,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 
 	public void testThinPlus() {
 		String fileName = "plus";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Set<IPoint2D> points = (Set<IPoint2D>)maxDistanceVectorizer.getPoints();
@@ -300,7 +299,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 	/** This is an test for new images with problems, should only be used when there are problems*/
 	public void testBigCircle() {
 		String fileName = "bigCircle";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = maxDistanceVectorizer.getPoints();
@@ -330,7 +329,7 @@ public class MaxDistanceVectorizerTest extends AbstractImageProcessingTests {
 		if (!testFailedIamge)
 			return;
 		String fileName = "fail";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), maxDistanceVectorizer);
 		int pixel = bp.get(0,0);
 		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
 		Collection<IPoint2D> points = maxDistanceVectorizer.getPoints();

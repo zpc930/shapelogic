@@ -1,9 +1,8 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ByteProcessor;
-import ij.process.ColorProcessor;
-import ij.process.ImageProcessor;
+import org.shapelogic.imageutil.SLImage;
 
+import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
 import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
 
 /** Test SBSegment.
@@ -13,7 +12,7 @@ import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
  *
  */
 public class SegmentTest extends AbstractImageProcessingTests {
-	SegmentCounter _segmenter = new SegmentCounter();
+	SegmentCounter _segmenter = new SegmentCounter(false);
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -24,14 +23,14 @@ public class SegmentTest extends AbstractImageProcessingTests {
 	
 	public void testShortVerticalGif() {
 		String fileName = "oneWhitePixelGray";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), _segmenter);
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName), _segmenter);
 		assertEquals(1,bp.getWidth());
-		assertTrue(bp instanceof ByteProcessor);
+//		assertTrue(bp instanceof ByteProcessor);
 		int pixel = bp.get(0,0);
 		assertEquals(0,pixel);
 		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
-		assertNotNull(factory);
-		assertEquals(1,factory.getStore().size());
+		assertNull(factory);
+//		assertEquals(1,factory.getStore().size());
 	}
 
 	/** This shows that when you save and image as PNG it will always be opened 
@@ -39,27 +38,41 @@ public class SegmentTest extends AbstractImageProcessingTests {
 	 */
 	public void testShortVerticalPng() {
 		String fileName = "oneWhitePixelGray";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName,".png"), _segmenter);
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName), _segmenter);
 		assertEquals(1,bp.getWidth());
-		assertTrue(bp instanceof ColorProcessor);
+//		assertTrue(bp instanceof ByteProcessor);
 		int pixel = bp.get(0,0);
-		assertEquals(16777215,pixel);
+		assertEquals(0,pixel);
 		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
-		assertNotNull(factory);
-		assertEquals(1,factory.getStore().size());
+		assertNull(factory);
+//		assertEquals(1,factory.getStore().size());
 	}
 
 	public void testBlobsGif() {
 		String fileName = "blobs";
-		ImageProcessor bp = runPluginFilterOnImage(filePath(fileName), _segmenter);
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName), _segmenter);
 		assertEquals(256,bp.getWidth());
 		assertEquals(65024,bp.getPixelCount());
-		assertTrue(bp instanceof ByteProcessor);
+//		assertTrue(bp instanceof ByteProcessor);
 		int pixel = bp.get(0,0);
 		assertEquals(40,pixel);
 		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
-		assertNotNull(factory);
-		assertEquals(9761,factory.getStore().size()); 
+		assertNull(factory);
+//		assertEquals(9761,factory.getStore().size()); 
+	}
+
+	/** This gets opened as a byte interleaved and not as an int RGB
+	 */
+	public void testCleanSpotPng() {
+		String fileName = "spot1Clean";
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _segmenter);
+		assertEquals(30,bp.getWidth());
+		assertEquals(900,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(0xffffff,pixel);
+		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		assertNull(factory);
+//		assertEquals(2,factory.getStore().size()); 
 	}
 
 }
