@@ -2,7 +2,7 @@ package org.shapelogic.imageprocessing;
 
 import junit.framework.TestCase;
 
-import static org.shapelogic.imageprocessing.ColorUtil.*;
+import static org.shapelogic.color.ColorUtil.*;
 
 /** Test ColorUtil.
  * 
