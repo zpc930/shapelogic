@@ -118,6 +118,8 @@ ShapeLogic
   * ShapeLogic is in Beta, as of version 1.0.
 
   * There is a working example where ShapeLogic is used for matching capital letters.
+  
+  * Image processing algorithms now work both in {{{image-formats.html}ImageJ and on Java's BufferedImage}}.
 
   * The API is still under development.
 
