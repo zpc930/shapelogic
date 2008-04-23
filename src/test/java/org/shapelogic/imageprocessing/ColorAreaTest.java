@@ -1,5 +1,7 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ColorArea;
+
 import junit.framework.TestCase;
 
 /** Test ColorArea.
@@ -24,7 +26,7 @@ public class ColorAreaTest extends TestCase {
 
 	public void test2Points() {
 		ColorArea grayArea = new ColorArea(10,20,100);
-		grayArea.addPoint(40, 30, 0);
+		grayArea.putPixel(40, 30, 0);
 		assertEquals(2, grayArea.getArea());
 		assertEquals(25., grayArea.getCenterPoint().getX());
 		assertEquals(25., grayArea.getCenterPoint().getY());
