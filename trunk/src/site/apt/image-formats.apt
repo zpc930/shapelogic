@@ -8,19 +8,20 @@
 
 Image formats supported by ShapeLogic
 
-  Until ShapeLogic 1.0 the image processing algorithms where only running under
+  Until ShapeLogic's 1.0 release, the image processing algorithms where only running under
   {{{http://rsb.info.nih.gov/ij} ImageJ}}.  
   
-  Starting with version 1.1 ShapeLogic's image processing algorithms 
-  will be decoupled from ImageJ. The idea is not to redo ImageJ's 
-  functionality but to make ShapeLogic more modular. All of ShapeLogic's 
-  current image processing algorithms only use very simple image 
-  properties so they should apply outside of ImageJ.
+  Now ShapeLogic's image processing algorithms have been decoupled from ImageJ. 
+  This is checked into SVN, and will be in the ShapeLogic 1.1 release.
+  The idea is not to redo ImageJ's functionality but to make ShapeLogic more 
+  modular. 
+  All of ShapeLogic's current image processing algorithms only use very simple 
+  image properties so they should apply outside of ImageJ.
 
-  Not everything will work outside ImageJ. The letter match example has
+  Not everything will work outside of ImageJ. The letter match example has
   a first step that is a skeletonize algorithm that comes with ImageJ.
-  In order to get that to work outside you will need to have another 
-  implementation of this.
+  I you want to use the full letter match example outside ImageJ you will need 
+  another implementation of the skeletonize algorithm.
   
 * Wrapper classes SLImage and SLImageFilter
   
