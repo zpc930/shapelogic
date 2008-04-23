@@ -205,7 +205,7 @@ public class SBSegmentation {
 				_pixelCompare.action(offset + i);
 				_pixelCompare.setHandled(offset + i);
 				if (_currentSegmentArea != null)
-					_currentSegmentArea.addPoint(i,y,_pixelCompare.getColorAsInt(offset + i));
+					_currentSegmentArea.putPixel(i,y,_pixelCompare.getColorAsInt(offset + i));
 			}
 		}
 	}

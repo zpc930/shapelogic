@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ColorAndVarianceI;
 import org.shapelogic.polygon.BBox;
 import org.shapelogic.polygon.CPointDouble;
 import org.shapelogic.polygon.IPoint2D;
@@ -10,7 +11,8 @@ import org.shapelogic.polygon.IPoint2D;
  * @author Sami Badawi
  *
  */
-abstract class PixelArea {
+abstract class PixelArea implements ColorAndVarianceI 
+{
 
 	protected CPointDouble _aggregationPoint;
   
@@ -37,8 +39,6 @@ abstract class PixelArea {
     	addPoint(x, y);
     }
   
-    abstract void addPoint(int x, int y, int color);
-    
     public void addPoint(int x, int y) {
     	_boundingBox.addPoint(x,y);
 //    	_gapInLine = false;

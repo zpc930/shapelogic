@@ -167,23 +167,23 @@ public abstract class BaseVectorizer extends BaseImageOperation
 
 	/** Cannot handle the last pixel at the edge, so for now just ignore it. */
 	public void init() {
-		Rectangle r = _slImage.getRoi();
-		_pixels = (byte[]) _slImage.getPixels();
-		int width = _slImage.getWidth();
+		Rectangle r = _image.getRoi();
+		_pixels = (byte[]) _image.getPixels();
+		int width = _image.getWidth();
 		//
 		_cyclePoints = new int[] {1, 1 + width, width, -1 + width, -1, -1 - width, -width, 1 - width};
 		
 		if (r == null) { 
 			_minX = 1;
-			_maxX = _slImage.getWidth()-2;
+			_maxX = _image.getWidth()-2;
 			_minY = 1;
-			_maxY = _slImage.getHeight()-2;
+			_maxY = _image.getHeight()-2;
 		}
 		else {
 			_minX = Math.max(1, r.x);
-			_maxX = Math.min(_slImage.getWidth()-2,r.x + r.width -1);
+			_maxX = Math.min(_image.getWidth()-2,r.x + r.width -1);
 			_minY = Math.max(1, r.y);
-			_maxY = Math.min(_slImage.getHeight()-2,r.y + r.height -1);
+			_maxY = Math.min(_image.getHeight()-2,r.y + r.height -1);
 		}
 		internalFactory(); 
 	}
@@ -192,16 +192,16 @@ public abstract class BaseVectorizer extends BaseImageOperation
 	abstract protected void internalFactory();
 
 	public int pointToPixelIndex(int x, int y) {
-		return _slImage.getWidth() * y + x;
+		return _image.getWidth() * y + x;
 	}
 
 	public int pointToPixelIndex(IPoint2D point) {
-		return _slImage.getWidth() * (int)point.getY() + (int)point.getX();
+		return _image.getWidth() * (int)point.getY() + (int)point.getX();
 	}
 
 	public CPointInt pixelIndexToPoint(int pixelIndex) {
-		int y = pixelIndex / _slImage.getWidth();
-		int x = pixelIndex % _slImage.getWidth();
+		int y = pixelIndex / _image.getWidth();
+		int x = pixelIndex % _image.getWidth();
 		return new CPointInt(x,y);
 	}
 
@@ -212,7 +212,7 @@ public abstract class BaseVectorizer extends BaseImageOperation
 	protected boolean findFirstLinePoint(boolean process) { 
 		int startY = Math.max(_minY, _yForUnporcessedPixel);
 		for (int iY = startY; iY <= _maxY; iY++) {
-			int lineOffset = _slImage.getWidth() * iY; 
+			int lineOffset = _image.getWidth() * iY; 
 			for (int iX = _minX; iX <= _maxX; iX++) {
 				_currentPixelIndex = lineOffset + iX;
 				if (PixelType.PIXEL_FOREGROUND_UNKNOWN.color == _pixels[_currentPixelIndex]) {
@@ -279,8 +279,8 @@ public abstract class BaseVectorizer extends BaseImageOperation
 	 */
 	protected void drawLines() {
 		IJImage ijImage = null;
-		if (_slImage instanceof IJImage)
-			ijImage = (IJImage)_slImage; 
+		if (_image instanceof IJImage)
+			ijImage = (IJImage)_image; 
 		else
 			return;
 		ijImage.getImageProcessor().setColor(STRAIGHT_LINE_COLOR);
@@ -298,8 +298,8 @@ public abstract class BaseVectorizer extends BaseImageOperation
 	 */
 	public ImageProcessor getImageProcessor() {
 		IJImage ijImage = null;
-		if (_slImage instanceof IJImage)
-			ijImage = (IJImage)_slImage;
+		if (_image instanceof IJImage)
+			ijImage = (IJImage)_image;
 		if (ijImage != null)
 			return ijImage.getImageProcessor();
 		else

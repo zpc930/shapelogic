@@ -34,16 +34,16 @@ public class SegmentCounter extends BaseImageOperation {
 //		if (!(ip instanceof ByteProcessor || ip instanceof ColorProcessor))
 //			return;
 		try {
-			int startX = getSLImage().getWidth()/2;
-			int startY = getSLImage().getHeight()/2;
-			SBSimpleCompare compare = SBSimpleCompare.factory(getSLImage());
+			int startX = getImage().getWidth()/2;
+			int startY = getImage().getHeight()/2;
+			SBSimpleCompare compare = SBSimpleCompare.factory(getImage());
 			compare.grabColorFromPixel(startX, startY);
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
-			_segmentation.setSLImage(getSLImage());
+			_segmentation.setSLImage(getImage());
 			_segmentation.setPixelCompare(compare);
 			if (_saveArea)
-				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getSLImage()));
+				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
 			_segmentation.init();
 			if (_doAll)
 				_segmentation.segmentAll();

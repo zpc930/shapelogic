@@ -9,47 +9,52 @@ import static org.shapelogic.imageutil.ImageJConstants.*;
  */
 public abstract class BaseImageOperation implements ImageOperation {
 	
-	protected SLImage _slImage;
+	protected SLImage _image;
 	protected GuiWrapper _guiWrapper;
 	
 	/** This is an argument with information about what should be run. */
 	protected String _arg;
 	protected int _setupReturnValue;
 	
-	public BaseImageOperation() {
-		this(null);
+	public BaseImageOperation(int setupReturnValue, String arg, SLImage imp) {
+		_setupReturnValue = setupReturnValue;
+		_arg = arg;
+		_image = imp;
+	}
+	
+	public BaseImageOperation(int setupReturnValue, SLImage imp) {
+		this(setupReturnValue,null,imp);
 	}
 	
 	public BaseImageOperation(SLImage imp) {
-		this(null,imp);
-	}
-	
-	public BaseImageOperation(String arg, SLImage imp) {
-		_arg = arg;
-		_slImage = imp;
+		this(DOES_ALL,null,imp);
 	}
 	
 	public BaseImageOperation(int setupReturnValue) {
-		_setupReturnValue = setupReturnValue;
+		this(setupReturnValue,null,null);
+	}
+	
+	public BaseImageOperation() {
+		this(DOES_ALL);
 	}
 	
 	@Override
-	public SLImage getSLImage() {
-		return _slImage;
+	public SLImage getImage() {
+		return _image;
 	}
 
 	/** If you are using the ImageOperation to fit into a ImageJ PlugInFilter
 	 * use this to instantiate arg and image.<br />
 	 */
 	@Override
-	public int setup(String arg, SLImage imp) {
+	public int setup(String arg, SLImage image) {
 		_arg = arg;
-		_slImage = imp;
+		_image = image;
 		if (arg.equals("about")) {
 			showAbout(); 
 			return DONE;
 		}
-		else if (imp == null) 
+		else if (image == null) 
 			showAbout(); 
 		return _setupReturnValue;
 	}
@@ -78,9 +83,14 @@ public abstract class BaseImageOperation implements ImageOperation {
 	 * */
 	@Override
 	public boolean isImageValid() {
-		if ((_setupReturnValue & DOES_8G) != 0 && _slImage.isGray()) return true;
-		if ((_setupReturnValue & DOES_RGB) != 0 && _slImage.isRgb()) return true;
-		return false;
+		boolean result = false;
+		if ((_setupReturnValue & DOES_8G) != 0 && _image.isGray()) 
+			result = true;
+		else if ((_setupReturnValue & DOES_RGB) != 0 && _image.isRgb()) 
+			result = true;
+		else if ((_setupReturnValue & DOES_16) != 0 && _image.getNChannels()==2) 
+			result = true;
+		return result;
 	}
 
 	@Override
