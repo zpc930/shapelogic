@@ -11,7 +11,7 @@ package org.shapelogic.imageutil;
 public interface ImageOperation extends Runnable {
 	
 	/** How to get the SLImage in run(). */ 
-	SLImage getSLImage();
+	SLImage getImage();
 
 	/** Equivalent of setup in PlugInFilter. */ 
 	int setup(String arg, SLImage imp);

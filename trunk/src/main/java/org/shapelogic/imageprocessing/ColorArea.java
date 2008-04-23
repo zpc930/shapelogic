@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ColorAndVarianceI;
 import org.shapelogic.mathematics.StorelessDiscriptiveStatistic;
 
 /** ColorArea holds the information.
@@ -20,9 +21,6 @@ public class ColorArea extends PixelArea {
 
 	protected int _startColor;
 	
-	protected double _sumRed;
-	protected double _sumGreen;
-	protected double _sumBlue;
 	protected StorelessDiscriptiveStatistic[] _colorStatistics = new StorelessDiscriptiveStatistic[3];
 
 	private int[] splitColors = new int[3];  
@@ -37,9 +35,9 @@ public class ColorArea extends PixelArea {
     	}
     }
     
-    public void addPoint(int x, int y, int inputColor) {
+    public void putPixel(int x, int y, int color) {
     	addPoint(x, y);
-    	ColorUtil.splitColor(inputColor, splitColors);
+    	ColorUtil.splitColor(color, splitColors);
     	for (int i = 0; i < 3; i++) {
     		_colorStatistics[i].increment(splitColors[i]);
     	}
@@ -63,4 +61,22 @@ public class ColorArea extends PixelArea {
     			(int)_colorStatistics[ColorUtil.GREEN_POS].getMean(),
     			(int)_colorStatistics[ColorUtil.BLUE_POS].getMean());
     }
+
+	@Override
+	public double getStandardDeviation() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void merge(ColorAndVarianceI colorAndVariance) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int[] getColorChannels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

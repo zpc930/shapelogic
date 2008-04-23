@@ -14,7 +14,7 @@ import java.awt.Rectangle;
  * @author Sami Badawi
  *
  */
-public interface SLImage {
+public interface SLImage extends PixelHandler {
 	/** Returns the width of this image in pixels. */
 	int getWidth();
 	

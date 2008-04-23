@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ColorAndVarianceI;
 import org.shapelogic.mathematics.StorelessDiscriptiveStatistic;
 
 /** GrayArea holds the information.
@@ -28,9 +29,9 @@ public class GrayArea extends PixelArea {
     	_grayStatistic.increment(startColor);
     }
     
-    public void addPoint(int x, int y, int inputColor) {
+    public void putPixel(int x, int y, int color) {
     	addPoint(x, y);
-    	_grayStatistic.increment(inputColor);
+    	_grayStatistic.increment(color);
     }
     
 	public StorelessDiscriptiveStatistic getGrayStatistic() {
@@ -39,5 +40,29 @@ public class GrayArea extends PixelArea {
 	
 	public int getMeanGray() {
 		return (int)_grayStatistic.getMean();
+	}
+
+	@Override
+	public int getMeanColor() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getStandardDeviation() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void merge(ColorAndVarianceI colorAndVariance) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int[] getColorChannels() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
