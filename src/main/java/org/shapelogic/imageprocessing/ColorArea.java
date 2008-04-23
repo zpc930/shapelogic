@@ -23,23 +23,23 @@ public class ColorArea extends PixelArea {
 	
 	protected StorelessDiscriptiveStatistic[] _colorStatistics = new StorelessDiscriptiveStatistic[3];
 
-	private int[] splitColors = new int[3];  
+	private int[] _splitColors = new int[3];  
 	
     public ColorArea(int x, int y, int startColor) {
     	super(x,y);
     	_startColor = startColor;
-    	ColorUtil.splitColor(startColor, splitColors);
+    	ColorUtil.splitColor(startColor, _splitColors);
     	for (int i = 0; i < 3; i++) {
     		_colorStatistics[i] = new StorelessDiscriptiveStatistic();
-    		_colorStatistics[i].increment(splitColors[i]);
+    		_colorStatistics[i].increment(_splitColors[i]);
     	}
     }
     
     public void putPixel(int x, int y, int color) {
     	addPoint(x, y);
-    	ColorUtil.splitColor(color, splitColors);
+    	ColorUtil.splitColor(color, _splitColors);
     	for (int i = 0; i < 3; i++) {
-    		_colorStatistics[i].increment(splitColors[i]);
+    		_colorStatistics[i].increment(_splitColors[i]);
     	}
     }
     
@@ -71,12 +71,10 @@ public class ColorArea extends PixelArea {
 	@Override
 	public void merge(ColorAndVarianceI colorAndVariance) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public int[] getColorChannels() {
-		// TODO Auto-generated method stub
-		return null;
+		return new int[] {getMeanColor()};
 	}
 }
