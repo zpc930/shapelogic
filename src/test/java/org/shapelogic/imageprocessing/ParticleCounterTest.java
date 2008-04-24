@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 
 import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
@@ -27,7 +28,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertTrue(bp.isInvertedLut());
 		int pixel = bp.get(0,0);
 		assertEquals(0,pixel); //So this is a white background pixel
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(1,factory.getStore().size());
 		assertTrue(_segmenter.isParticleImage());
@@ -44,7 +45,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(1,bp.getWidth());
 		int pixel = bp.get(0,0);
 		assertEquals(0,pixel);
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(1,factory.getStore().size());
 		assertTrue(_segmenter.isParticleImage());
@@ -57,7 +58,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(65024,bp.getPixelCount());
 		int pixel = bp.get(0,0);
 		assertEquals(40,pixel);
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(9761,factory.getStore().size()); 
 		assertFalse(_segmenter.isParticleImage()); //XXX should be changed to true
@@ -73,7 +74,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(900,bp.getPixelCount());
 		int pixel = bp.get(0,0);
 		assertEquals(0xffffff,pixel);
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(2,factory.getStore().size()); 
 	}
