@@ -17,6 +17,7 @@ public class GrayRange extends GrayAndVariance implements IColorRange {
 	
 	/** Distance from colorCenter that will be accepted in this Range. */
 	protected double _maxDistance;
+	protected IColorDistance _distance = new ColorDistance1();
 
 	/** Color encoded in an int. */
 	protected int _colorCenter;
@@ -124,5 +125,15 @@ public class GrayRange extends GrayAndVariance implements IColorRange {
 	public void merge(IColorAndVariance colorAndVariance) {
 		super.merge(colorAndVariance); //XXX add more
 		
+	}
+	
+	@Override
+	public IColorDistance getDistance() {
+		return _distance;
+	}
+
+	@Override
+	public void setDistance(IColorDistance distance) {
+		_distance = distance;
 	}
 }

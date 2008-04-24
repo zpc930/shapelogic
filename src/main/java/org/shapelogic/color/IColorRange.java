@@ -47,4 +47,8 @@ public interface IColorRange extends IColorAndVariance {
 	
 	/** If the ColorRange can change. */
 	boolean isRangeFrozen();
+	
+	IColorDistance getDistance();
+
+	void setDistance(IColorDistance distance);
 }

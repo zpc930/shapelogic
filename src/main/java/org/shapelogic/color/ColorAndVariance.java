@@ -11,12 +11,20 @@ import org.shapelogic.mathematics.StorelessDiscriptiveStatistic;
  */
 public class ColorAndVariance implements IColorAndVariance {
 	
-	protected StorelessDiscriptiveStatistic[] _colorStatistics = new StorelessDiscriptiveStatistic[3];
+	protected StorelessDiscriptiveStatistic[] _colorStatistics;
 
 	protected int[] _splitColors = new int[3];  
 	
 	protected int _lastX = -1;
 	protected int _lastY = -1;
+	
+	public ColorAndVariance() {
+		int numberOfChannels = 3;
+		_colorStatistics = new StorelessDiscriptiveStatistic[numberOfChannels];
+		for (int i=0; i < numberOfChannels; i++) {
+			_colorStatistics[i] = new StorelessDiscriptiveStatistic();
+		}
+	}
 	
 	/** Add the color for a given point (x,y). <br />
 	 * 

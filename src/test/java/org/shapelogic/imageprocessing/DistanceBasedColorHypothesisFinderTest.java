@@ -26,16 +26,18 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 		assertTrue(bp.isInvertedLut());
 		int pixel = bp.get(0,0);
 		assertEquals(0,pixel); //So this is a white background pixel
+		assertEquals(1,_colorHypothesisFinder.findBestColorHypothesis(null).getColors().size()); 
 	}
 
 
-	public void te_stSpot1Clean() {
+	public void testSpot1Clean() {
 		String fileName = "spot1Clean";
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _colorHypothesisFinder);
 		assertEquals(30,bp.getWidth());
 		assertTrue(bp.isRgb());
 		int pixel = bp.get(0,0);
 		assertEquals(0xffffff,pixel); //So this is a white background pixel
+		assertEquals(2,_colorHypothesisFinder.findBestColorHypothesis(null).getColors().size()); 
 	}
 
 }
