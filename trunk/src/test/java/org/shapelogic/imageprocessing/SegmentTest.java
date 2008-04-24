@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 
 import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
@@ -28,7 +29,7 @@ public class SegmentTest extends AbstractImageProcessingTests {
 //		assertTrue(bp instanceof ByteProcessor);
 		int pixel = bp.get(0,0);
 		assertEquals(0,pixel);
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNull(factory);
 //		assertEquals(1,factory.getStore().size());
 	}
@@ -43,7 +44,7 @@ public class SegmentTest extends AbstractImageProcessingTests {
 //		assertTrue(bp instanceof ByteProcessor);
 		int pixel = bp.get(0,0);
 		assertEquals(0,pixel);
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNull(factory);
 //		assertEquals(1,factory.getStore().size());
 	}
@@ -56,7 +57,7 @@ public class SegmentTest extends AbstractImageProcessingTests {
 //		assertTrue(bp instanceof ByteProcessor);
 		int pixel = bp.get(0,0);
 		assertEquals(40,pixel);
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNull(factory);
 //		assertEquals(9761,factory.getStore().size()); 
 	}
@@ -70,7 +71,7 @@ public class SegmentTest extends AbstractImageProcessingTests {
 		assertEquals(900,bp.getPixelCount());
 		int pixel = bp.get(0,0);
 		assertEquals(0xffffff,pixel);
-		PixelAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
+		ValueAreaFactory factory = _segmenter.getSegmentation().getSegmentAreaFactory();
 		assertNull(factory);
 //		assertEquals(2,factory.getStore().size()); 
 	}
