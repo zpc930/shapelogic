@@ -17,9 +17,11 @@ public class ColorRange extends ColorAndVariance implements IColorRange {
 	
 	/** Distance from colorCenter that will be accepted in this Range. */
 	protected double _maxDistance;
+	protected IColorDistance _distance = new ColorDistance1();
 
 	/** Color encoded in an int. */
 	protected int _colorCenter;
+	protected int[] _colorCenterInChannels = new int[3];
 	protected int[] _borderCount = new int[3];
 	protected boolean _frozen;
 
@@ -113,16 +115,28 @@ public class ColorRange extends ColorAndVariance implements IColorRange {
 	@Override
 	public void setColorCenter(int center) {
 		_colorCenter = center;
+//		_colorCenterInChannels
 	}
 
 	@Override
 	public double distanceFromRangeCenter(int color) {
-		return Math.abs(_colorCenter - color);
+    	ColorUtil.splitColor(color, _splitColors);
+		return _distance.distance(_colorCenterInChannels,_splitColors);
 	}
 
 	@Override
 	public void merge(IColorAndVariance colorAndVariance) {
 		super.merge(colorAndVariance); //XXX add more
 		
+	}
+
+	@Override
+	public IColorDistance getDistance() {
+		return _distance;
+	}
+
+	@Override
+	public void setDistance(IColorDistance distance) {
+		_distance = distance;
 	}
 }

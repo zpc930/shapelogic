@@ -5,8 +5,10 @@ package org.shapelogic.color;
  * The 1 norm is called the Taxicab norm or Manhattan norm.<br />
  * It is then scaled down by the number of dimensions, so that the distance of 
  * 2 colors will be the same in gray and RGB space.<br />
- * 
+ * <br />
  * This could be changed to use scaling for the different component.<br />
+ * <br />
+ * This should work for both color and gray.<br />
  * 
  * @author Sami Badawi
  *

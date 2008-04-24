@@ -116,6 +116,8 @@ implements IColorHypothesisFinder, PixelHandler {
 			}
 			if (_currentColorRange == null) {
 				_currentColorRange = ColorFactory.makeColorRangeI(_image);
+				_currentColorRange.setColorCenter(color);
+				_colorHypothesis.addColor(_currentColorRange);
 			}
 		}
 		_currentColorRange.putPixel(x, y, color);

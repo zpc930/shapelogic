@@ -16,7 +16,7 @@ public class ColorFactory {
 	
 	public static IColorRange makeColorRangeI(SLImage image) {
 		if (image.isGray()) return new GrayRange();
-//		if (image.isRgb()) return new ColorRange();//XXX ColorRange not implemented yet
+		if (image.isRgb()) return new ColorRange();
 		return null;
 	}
 	
