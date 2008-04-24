@@ -2,7 +2,9 @@ package org.shapelogic.color;
 
 import org.shapelogic.imageutil.PixelHandler;
 
-/** ColorAndVarianceI interface for a color / gray and a standard deviation.
+/** ColorAndVarianceI is a color aggregate with a mean color and a standard deviation.<br />
+ *  
+ * ColorAndVarianceI is an interface for a color / gray implementations.
  * 
  * @author Sami Badawi
  *
