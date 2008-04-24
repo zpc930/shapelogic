@@ -3,6 +3,8 @@ package org.shapelogic.imageprocessing;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 
+import org.shapelogic.color.ValueArea;
+import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 
 /** High level class for segmentation.
@@ -17,8 +19,8 @@ public class SBSegmentation {
 	private ArrayList<SBPendingVertical> _vPV;
 	private SBPixelCompare _pixelCompare;
 	
-	protected PixelAreaFactory _segmentAreaFactory;
-	protected PixelArea _currentSegmentArea; 
+	protected ValueAreaFactory _segmentAreaFactory;
+	protected ValueArea _currentSegmentArea; 
 
 	/** Dimensions of ROI. */
 	private int _min_x;
@@ -328,11 +330,11 @@ public class SBSegmentation {
 		_vPV.add(curLine);
 	}
 
-	public void setSegmentAreaFactory(PixelAreaFactory areaFactory) {
+	public void setSegmentAreaFactory(ValueAreaFactory areaFactory) {
 		_segmentAreaFactory = areaFactory;
 	}
 
-	public PixelAreaFactory getSegmentAreaFactory() {
+	public ValueAreaFactory getSegmentAreaFactory() {
 		return _segmentAreaFactory;
 	}
 }

@@ -5,6 +5,9 @@ import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 import java.util.BitSet;
 
+import org.shapelogic.color.ColorAreaFactory;
+import org.shapelogic.color.ValueAreaFactory;
+import org.shapelogic.color.GrayAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 
 /** Abstract class fro compare.
@@ -108,9 +111,9 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 		return result;
 	}
 
-	public static PixelAreaFactory segmentAreaFactory(ImageProcessor ip) throws Exception
+	public static ValueAreaFactory segmentAreaFactory(ImageProcessor ip) throws Exception
 	{
-		PixelAreaFactory result = null;
+		ValueAreaFactory result = null;
 		if (ip instanceof ByteProcessor) {
 			result = new GrayAreaFactory();
 		}
@@ -120,9 +123,9 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 		return result;
 	}
 
-	public static PixelAreaFactory segmentAreaFactory(SLImage image) throws Exception
+	public static ValueAreaFactory segmentAreaFactory(SLImage image) throws Exception
 	{
-		PixelAreaFactory result = null;
+		ValueAreaFactory result = null;
 		int channels = image.getNChannels(); 
 		if (image.isGray()) {
 			result = new GrayAreaFactory();

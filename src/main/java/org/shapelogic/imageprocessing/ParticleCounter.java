@@ -2,6 +2,8 @@ package org.shapelogic.imageprocessing;
 
 import java.util.List;
 
+import org.shapelogic.color.ValueArea;
+
 /** ParticleCounter count number of particles in a particle image.
  * <br />
  * 
@@ -24,7 +26,7 @@ public class ParticleCounter extends SegmentCounter {
 	public boolean isParticleImage() {
 		if (_particleImage == null) {
 			_segmentation.getSegmentAreaFactory().sort();
-			List<? extends PixelArea> store = _segmentation.getSegmentAreaFactory().getStore();
+			List<ValueArea> store = _segmentation.getSegmentAreaFactory().getStore();
 			int biggestArea = store.get(store.size()-1).getArea();
 			double biggestAreaPercentage = biggestArea * 100 / getSegmentation().getSLImage().getPixelCount();
 			_particleImage = biggestAreaPercentage > 50;
