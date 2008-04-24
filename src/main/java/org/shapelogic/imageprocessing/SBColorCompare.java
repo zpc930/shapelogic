@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ColorUtil;
 import org.shapelogic.imageutil.SLImage;
 
 /** Compare implementations for RGB.
