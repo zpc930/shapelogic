@@ -1,6 +1,8 @@
 package org.shapelogic.color;
 
-/** ColorRangeI.
+/** ColorRangeI is a color aggregate that exist in an defined range.<br />
+ * 
+ * ColorAndVarianceI is an interface for a color / gray implementations.
  * 
  * @author Sami Badawi
  *
