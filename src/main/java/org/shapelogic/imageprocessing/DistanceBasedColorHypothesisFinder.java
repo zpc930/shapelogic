@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.List;
 import org.shapelogic.color.ColorChannelSplitter;
 import org.shapelogic.color.ColorDistance1;
 import org.shapelogic.color.ColorFactory;
@@ -80,6 +81,8 @@ implements IColorHypothesisFinder, PixelHandler {
 		if (_pixelAreaHandler == null) 
 			return null;
 		_pixelAreaHandler.handleAllPixels(this);
+                List<IColorAndVariance> colors = (List<IColorAndVariance>) _colorHypothesis.getColors();
+                
 		return _colorHypothesis;
 	}
 	
