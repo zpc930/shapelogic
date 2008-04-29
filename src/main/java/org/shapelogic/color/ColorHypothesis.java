@@ -22,12 +22,11 @@ public interface ColorHypothesis {
 	IColorAndVariance getBackground();
 	void setBackground(IColorAndVariance color);
 	
-	/** There will not always be a global tolerance.<br />
+	/** There will not always be a global maxDistance.<br />
 	 * 
-	 * Maybe change name to getTolerance.
 	 *  */
-	double getGlobalTolerance();
-	void setGlobalTolerance(double tolerance);
+	double getMaxDistance();
+	void setMaxDistance(double maxDistance);
 	
 	/** Is it possible to merge the 2 colors in the given context. */
 	boolean mergable(IColorAndVariance color1, IColorAndVariance color2);
