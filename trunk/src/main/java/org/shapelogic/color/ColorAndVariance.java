@@ -15,9 +15,6 @@ public class ColorAndVariance implements IColorAndVariance {
 
 	protected int[] _splitColors = new int[3];  
 	
-	protected int _lastX = -1;
-	protected int _lastY = -1;
-	
 	public ColorAndVariance() {
 		int numberOfChannels = 3;
 		_colorStatistics = new StorelessDiscriptiveStatistic[numberOfChannels];
@@ -36,8 +33,6 @@ public class ColorAndVariance implements IColorAndVariance {
     	for (int i = 0; i < 3; i++) {
     		_colorStatistics[i].increment(_splitColors[i]);
     	}
-		_lastX = x;
-		_lastY = y;
 	}
 
 	@Override
@@ -90,6 +85,4 @@ public class ColorAndVariance implements IColorAndVariance {
     			(int)_colorStatistics[ColorUtil.GREEN_POS].getMean(),
     			(int)_colorStatistics[ColorUtil.BLUE_POS].getMean());
     }
-
-
 }
