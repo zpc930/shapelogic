@@ -15,6 +15,8 @@ package org.shapelogic.color;
  */
 public class ColorDistance1 implements IColorDistance {
 	
+    public static ColorDistance1 INSTANCE = new ColorDistance1();
+    
 	@Override
 	public double distance(ColorChannels colorV1, ColorChannels colorV2) {
 		int[] color1 = colorV1.getColorChannels();
@@ -40,5 +42,9 @@ public class ColorDistance1 implements IColorDistance {
 		}
 		return distanceResult / minLength;
 	}
+    
+    public static ColorDistance1 getInstance() {
+        return INSTANCE;
+    }
 
 }
