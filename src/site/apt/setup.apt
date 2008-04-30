@@ -134,7 +134,7 @@ mvn install:install-file -Dfile=groovy-engine.jar -DgroupId=org.codehaus.groovy 
 +-------------------------------------+
 
   
-How ShapeLogic was set up
+How ShapeLogic was set up for Maven and Eclipse
   
   You will not need to do this, since ShapeLogic is already setup when down loaded.
   
@@ -168,6 +168,63 @@ mvn eclipse:eclipse
   To create a project for IntelliJ instead run this command:
     
 ---------------------
-  mvn idea:idea  
+mvn idea:idea  
 ---------------------
+  
+How to run ShapeLogic from {NetBeans}
+  
+  * In NetBeans download the Maven plugin.
+  
+  * Checkout ShapeLogic from Google Code into your NetBeansProjects dir:
+  
++---------------------------------------------------+
+cd NetBeansProjects
+svn checkout http://shapelogic.googlecode.com/svn/trunk/ shapelogic-read-only
++---------------------------------------------------+
+  
+  * In NetBeans create a new project of type Maven, Maven from existing POM
+  
+  []
+  
+  Maven gloals can be run directly from NetBeans. Just rigthclick on shapelogic
+  project, select Custom, Goals. Type the name of the goal, e.g. package.
+  This comes with word compleation.
+  
+  The site goals could not be run from NetBeans because of a Maven version 
+  conflict, but ran fine from command line:
+
+---------------------
+cd NetBeansProjects/shapelogic
+mvn site  
+---------------------
+
+  This was tested with NetBeans 6.0 and 6.1.
+  
+Planforms and IDE
+  
+  ShapeLogic is pure Java and should run under most platforms and IDEs.
+  ShapeLogic development has taken place under Linux, Windows, Eclipse and 
+  NetBeans. All works fine. And each has some advantages.
+  
+* Eclipse 3.3 advantages
+  
+  * Better integration with Maven, especially for selecting dependent libraries
+  and for debugger
+  
+  * Bigger community, and more plugins
+  
+  * Spell checker for comments and documentation files
+  
+  []
+  
+* NetBeans 6.1 advantages
+  
+  * Less dependencies more stability, Eclipse would break under some 
+  Linux AMD64 distributions
+  
+  * There is only one way of doing normal things that seems better integrated
+  
+  * More ligthweight than Eclipse
+  
+  []
   
