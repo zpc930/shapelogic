@@ -11,13 +11,9 @@ import org.shapelogic.mathematics.ArrayOperations;
  */
 public class ColorRange extends ColorAndVariance implements IColorRange {
 	
-	/** Not sure if these are needed. */
-	protected int _minColor = 256;
-	protected int _maxColor = 0;
-	
 	/** Distance from colorCenter that will be accepted in this Range. */
 	protected double _maxDistance;
-	protected IColorDistance _distance = new ColorDistance1();
+	protected IColorDistance _distance = ColorDistance1.INSTANCE;
 
 	/** Color encoded in an int. */
 	protected int _colorCenter;
@@ -41,22 +37,26 @@ public class ColorRange extends ColorAndVariance implements IColorRange {
 		super.putPixel(x, y, color);
 		_lastX = x;
 		_lastY = y;
-		if (_maxColor < color)
-			_maxColor = color;
-		if (color < _minColor)
-			_minColor = color;
+	}
+
+	@Override
+	public double distanceFromRangeCenter(int color) {
+    	ColorUtil.splitColor(color, _splitColors);
+		return _distance.distance(_colorCenterInChannels,_splitColors);
 	}
 
 	@Override
 	public boolean colorInRange(int color) {
-		return Math.abs(_colorCenter - color) <= _maxDistance;
+        double dist = distanceFromRangeCenter(color);
+		return dist <= _maxDistance;
 	}
 
 	@Override
 	public double distanceFromRange(int color) {
-		if (Math.abs(_colorCenter - color) <= _maxDistance) 
+        double dist = distanceFromRangeCenter(color);
+		if (Math.abs(dist) <= _maxDistance) 
 			return 0.;
-		return Math.abs( Math.abs(_colorCenter - color) - _maxDistance);
+		return dist - _maxDistance;
 	}
 	
 	@Override
@@ -115,13 +115,7 @@ public class ColorRange extends ColorAndVariance implements IColorRange {
 	@Override
 	public void setColorCenter(int center) {
 		_colorCenter = center;
-//		_colorCenterInChannels
-	}
-
-	@Override
-	public double distanceFromRangeCenter(int color) {
-    	ColorUtil.splitColor(color, _splitColors);
-		return _distance.distance(_colorCenterInChannels,_splitColors);
+        ColorUtil.splitColor(center, _colorCenterInChannels);
 	}
 
 	@Override
@@ -138,5 +132,10 @@ public class ColorRange extends ColorAndVariance implements IColorRange {
 	@Override
 	public void setDistance(IColorDistance distance) {
 		_distance = distance;
+	}
+
+	@Override
+	public int[] getColorChannels() {
+		return _colorCenterInChannels;
 	}
 }
