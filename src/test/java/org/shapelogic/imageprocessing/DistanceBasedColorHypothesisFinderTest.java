@@ -1,5 +1,7 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.List;
+import org.shapelogic.color.IColorRange;
 import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
 
 import org.shapelogic.imageutil.SLImage;
@@ -10,23 +12,24 @@ import org.shapelogic.imageutil.SLImage;
  *
  */
 public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProcessingTests {
-	DistanceBasedColorHypothesisFinder _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder();
+	DistanceBasedColorHypothesisFinder _colorHypothesisFinder;
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		_dirURL = "./src/test/resources/images/particles";
 		_fileFormat = ".gif";
+        _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder();
 	}
 	
-	public void testShortVerticalGif() {
+	public void testOneWhitePixelGrayGif() {
 		String fileName = "oneWhitePixelGray";
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName), _colorHypothesisFinder);
 		assertEquals(1,bp.getWidth());
 		assertTrue(bp.isInvertedLut());
 		int pixel = bp.get(0,0);
 		assertEquals(0,pixel); //So this is a white background pixel
-		assertEquals(1,_colorHypothesisFinder.findBestColorHypothesis(null).getColors().size()); 
+		assertEquals(1,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
 	}
 
 
@@ -37,7 +40,83 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 		assertTrue(bp.isRgb());
 		int pixel = bp.get(0,0);
 		assertEquals(0xffffff,pixel); //So this is a white background pixel
-		assertEquals(2,_colorHypothesisFinder.findBestColorHypothesis(null).getColors().size()); 
+		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
+	}
+
+	public void testSpot1CleanJpg() {
+		String fileName = "spot1Clean";
+//		_colorHypothesisFinder.setMaxDistance(50);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
+        assertEquals(30,bp.getWidth());
+		assertTrue(bp.isRgb());
+		int pixel = bp.get(0,0);
+		assertEquals(0xffffff,pixel); //So this is a white background pixel
+		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
+	}
+
+	public void testSpot1Noise5Jpg() {
+		String fileName = "spot1Noise5";
+//		_colorHypothesisFinder.setMaxDistance(50);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
+        assertEquals(30,bp.getWidth());
+		assertTrue(bp.isRgb());
+		int pixel = bp.get(0,0);
+		assertEquals(16382457,pixel); //So this is a white background pixel
+		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size());
+        List<IColorRange> colors = (List)_colorHypothesisFinder.getColorHypothesis().getColors();
+		assertEquals(249,colors.get(0).getColorChannels()[0]); 
+		assertEquals(5,colors.get(1).getColorChannels()[0]); 
+	}
+
+	public void testSpot1Noise5Jpg2Iterations() {
+		String fileName = "spot1Noise5";
+        _colorHypothesisFinder.setMaxIterations(2);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
+        assertEquals(30,bp.getWidth());
+		assertTrue(bp.isRgb());
+		int pixel = bp.get(0,0);
+		assertEquals(16382457,pixel); //So this is a white background pixel
+		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size());
+        List<IColorRange> colors = (List)_colorHypothesisFinder.getColorHypothesis().getColors();
+		assertEquals(6,colors.get(0).getColorChannels()[0]); 
+		assertEquals(250,colors.get(1).getColorChannels()[0]); 
+	}
+
+	public void testSpot1Noise5Jpg3Iterations() {
+		String fileName = "spot1Noise5";
+        _colorHypothesisFinder.setMaxIterations(3);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
+        assertEquals(30,bp.getWidth());
+		assertTrue(bp.isRgb());
+		int pixel = bp.get(0,0);
+		assertEquals(16382457,pixel); //So this is a white background pixel
+		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size());
+        List<IColorRange> colors = (List)_colorHypothesisFinder.getColorHypothesis().getColors();
+		assertEquals(6,colors.get(0).getColorChannels()[0]); 
+		assertEquals(250,colors.get(1).getColorChannels()[0]); 
+	}
+
+	public void testSpot1Noise10Jpg() {
+		String fileName = "spot1Noise10";
+		_colorHypothesisFinder.setMaxDistance(50);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
+        assertEquals(30,bp.getWidth());
+		assertTrue(bp.isRgb());
+		int pixel = bp.get(0,0);
+		assertEquals(16645629,pixel); //So this is a white background pixel
+		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
+	}
+
+	public void te_stSpot1Noise10MoreIterationsJpg() {
+		String fileName = "spot1Noise10";
+		_colorHypothesisFinder.setMaxDistance(35);
+        _colorHypothesisFinder.setMaxIterations(3);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
+        assertEquals(30,bp.getWidth());
+		assertTrue(bp.isRgb());
+		int pixel = bp.get(0,0);
+		assertEquals(16645629,pixel); //So this is a white background pixel
+		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
 	}
 
 }
