@@ -13,6 +13,11 @@ package org.shapelogic.color;
  */
 public interface IColorHypothesisFinder {
 	
-	ColorHypothesis findBestColorHypothesis(ColorHypothesis lastColorHypothesis);
-	
+	ColorHypothesis findBestColorHypothesis();
+	ColorHypothesis colorHypothesisIteration(ColorHypothesis lastColorHypothesis);
+	ColorHypothesis getColorHypothesis();
+	int getMaxIterations();
+    int getIteration();
+    void setMaxIterations(int maxIterations);
+    boolean verifyColor(IColorRange colorRange);
 }
