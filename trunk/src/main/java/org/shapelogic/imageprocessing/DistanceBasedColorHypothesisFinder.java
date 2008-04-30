@@ -33,24 +33,26 @@ import org.shapelogic.imageutil.SLImage;
  */
 public class DistanceBasedColorHypothesisFinder extends BaseImageOperation
 implements IColorHypothesisFinder, PixelHandler {
-	protected ColorHypothesis _colorHypothesis = new SimpleColorHypothesis();
-	protected IColorRange _currentColorRange;
-	protected double _tolerance;
-	protected IColorDistance _distance;
-	protected int[] _colorCannels;
-	protected PixelAreaHandler _pixelAreaHandler;
-	protected ColorChannelSplitter _colorChannelSplitter; 
-	
-	public DistanceBasedColorHypothesisFinder(String arg, SLImage image, double tolerance) {
-		_tolerance = tolerance;
+	private ColorHypothesis _colorHypothesis; // = new SimpleColorHypothesis();
+	private ColorHypothesis _lastColorHypothesis;
+	private IColorRange _currentColorRange;
+	private double _maxDistance;
+	private IColorDistance _distance;
+	private int[] _colorCannels;
+	private PixelAreaHandler _pixelAreaHandler;
+	private ColorChannelSplitter _colorChannelSplitter; 
+	private int _maxIterations = 1;
+    private int _iteration;
+    
+	public DistanceBasedColorHypothesisFinder(String arg, SLImage image, double maxDistance) {
+		_maxDistance = maxDistance;
 		if (image != null)
 			init(arg,image);
 	}
 	
-	protected void init(String arg, SLImage image) {
+	private void init(String arg, SLImage image) {
 		_arg = arg;
 		_image = image;
-		_colorHypothesis.setGlobalTolerance(_tolerance);
 		_distance = new ColorDistance1();
 		_colorCannels = ColorFactory.makeColorCannels(_image);
 		if (_image != null)
@@ -58,26 +60,37 @@ implements IColorHypothesisFinder, PixelHandler {
 		_colorChannelSplitter = ColorFactory.makeColorChannelSplitter(image);
 	}
 	
-	public DistanceBasedColorHypothesisFinder(String arg, String filePath, double tolerance) {
-		this(arg, new SLBufferedImage(filePath), tolerance);
+	public DistanceBasedColorHypothesisFinder(String arg, String filePath, double maxDistance) {
+		this(arg, new SLBufferedImage(filePath), maxDistance);
 	}
 	
 	public DistanceBasedColorHypothesisFinder(String arg, String dir, 
-			String fileName, String fileFormat, double tolerance) {
-		this(arg, new SLBufferedImage(dir,fileName,fileFormat), tolerance);
+			String fileName, String fileFormat, double maxDistance) {
+		this(arg, new SLBufferedImage(dir,fileName,fileFormat), maxDistance);
 	}
 	
 	public DistanceBasedColorHypothesisFinder() {
 		this(30.);
 	}
 	
-	public DistanceBasedColorHypothesisFinder(double tolerance) {
-		this(null, (SLImage)null, tolerance);
+	public DistanceBasedColorHypothesisFinder(double maxDistance) {
+		this(null, (SLImage)null, maxDistance);
 	}
+    
+    @Override
+	public ColorHypothesis findBestColorHypothesis() {
+        for (_iteration = 0; _iteration < _maxIterations; _iteration++) {
+            _colorHypothesis = colorHypothesisIteration(_colorHypothesis);
+        }
+        return _colorHypothesis;
+    }
 	
 	@Override
-	public ColorHypothesis findBestColorHypothesis(
+	public ColorHypothesis colorHypothesisIteration(
 			ColorHypothesis lastColorHypothesis) {
+        _lastColorHypothesis = lastColorHypothesis;
+        _colorHypothesis = new SimpleColorHypothesis();
+		_colorHypothesis.setMaxDistance(_maxDistance);
 		if (_pixelAreaHandler == null) 
 			return null;
 		_pixelAreaHandler.handleAllPixels(this);
@@ -96,7 +109,7 @@ implements IColorHypothesisFinder, PixelHandler {
 
 	@Override
 	public void run() {
-		_colorHypothesis = findBestColorHypothesis(null);
+		_colorHypothesis = findBestColorHypothesis();
 		if (_colorHypothesis == null) {
 			showMessage("Error in " + getClass().getSimpleName(), "Image not set.");
 			return;
@@ -107,23 +120,62 @@ implements IColorHypothesisFinder, PixelHandler {
 
 	@Override
 	public void putPixel(int x, int y, int color) {
+		_colorChannelSplitter.split(color,_colorCannels);
 		if (_currentColorRange == null || !_currentColorRange.colorInRange(color)) {
 			_currentColorRange = null;
+            int newColorCenter = color;
 			for (IColorAndVariance colorI : _colorHypothesis.getColors()) {
-				_colorChannelSplitter.split(color,_colorCannels);
 				//XXX cast to range and use center
-				if (_distance.distance(_colorCannels,colorI.getColorChannels()) <= _tolerance) {
+				if (_distance.distance(_colorCannels,colorI.getColorChannels()) <= _maxDistance) {
 					_currentColorRange = (IColorRange) colorI;
 					break;
 				}
 			}
+            if (_currentColorRange == null && _lastColorHypothesis != null) {
+                for (IColorAndVariance colorJ : _lastColorHypothesis.getColors()) {
+                    if (_distance.distance(_colorCannels,colorJ.getColorChannels()) <= _maxDistance) {
+                        newColorCenter = ((IColorRange) colorJ).getMeanColor();
+                        break;
+                    }
+                }
+            }
 			if (_currentColorRange == null) {
 				_currentColorRange = ColorFactory.makeColorRangeI(_image);
-				_currentColorRange.setColorCenter(color);
+				_currentColorRange.setColorCenter(newColorCenter);
+                _currentColorRange.setMaxDistance(_maxDistance);
 				_colorHypothesis.addColor(_currentColorRange);
 			}
 		}
 		_currentColorRange.putPixel(x, y, color);
 	}
 	
+    public void setMaxDistance(double maxDistance){
+        _maxDistance = maxDistance;
+    }
+    
+    @Override
+    public ColorHypothesis getColorHypothesis() {
+        return _colorHypothesis;
+    }
+
+    @Override
+    public int getMaxIterations() {
+        return _maxIterations;
+    }
+
+    @Override
+    public void setMaxIterations(int maxIterations) {
+        _maxIterations = maxIterations;
+    }
+
+    @Override
+    public boolean verifyColor(IColorRange colorRange) {
+        return true;
+    }
+
+    @Override
+    public int getIteration() {
+        return _iteration;
+    }
+
 }
