@@ -54,7 +54,8 @@ public class ColorUtil {
 	}
 	
 	static public int packColors(int red, int green, int blue) {
-		return red << RED_OFFSET + green << GREEN_OFFSET + blue;
+		int result = (red << RED_OFFSET) + (green << GREEN_OFFSET) + blue;
+        return result;
 	}
 
 	static public int packColors(int[] colors) {
