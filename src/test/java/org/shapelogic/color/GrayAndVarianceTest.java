@@ -16,7 +16,6 @@ public class GrayAndVarianceTest extends TestCase {
 	String _dir = "./src/test/resources/images/particles";
 	String _fileFormat = ".png";
 	
-	
 	public void testGrayAndVariance() {
 		GrayAndVariance grayAndVariance = new GrayAndVariance();
 		grayAndVariance.putPixel(dummyX, dummyY, 0);
