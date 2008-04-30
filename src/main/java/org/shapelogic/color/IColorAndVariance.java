@@ -1,5 +1,6 @@
 package org.shapelogic.color;
 
+import org.shapelogic.imageutil.HasArea;
 import org.shapelogic.imageutil.PixelHandler;
 
 /** ColorAndVarianceI is a color aggregate with a mean color and a standard deviation.<br />
@@ -9,7 +10,8 @@ import org.shapelogic.imageutil.PixelHandler;
  * @author Sami Badawi
  *
  */
-public interface IColorAndVariance extends PixelHandler, ColorChannels {
+public interface IColorAndVariance extends PixelHandler, ColorChannels, HasArea 
+{
 	
 	/** */
 	void merge(IColorAndVariance colorAndVariance);
@@ -17,8 +19,5 @@ public interface IColorAndVariance extends PixelHandler, ColorChannels {
 	double getStandardDeviation();
 	
 	int getMeanColor();
-	
-	/** Area of this color range. */
-	int getArea();
 	
 }
