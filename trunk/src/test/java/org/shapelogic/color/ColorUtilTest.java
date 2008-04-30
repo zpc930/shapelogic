@@ -14,6 +14,12 @@ public class ColorUtilTest extends TestCase {
 	final static int ONE_TWO_THREE = 0x10203; // = 66051
 	final static int[] THREE_TWO_ONE_ARRAY = {3,2,1};
 	
+	public void testShift() {
+        assertEquals(2,1<<1);
+        assertEquals(4,1<<2);
+        assertEquals(6,(1<<2) + (1<<1));
+    }
+    
 	public void testSplit() {
 		assertEquals(1,splitRed(ONE_TWO_THREE));
 		assertEquals(2,splitGreen(ONE_TWO_THREE));
