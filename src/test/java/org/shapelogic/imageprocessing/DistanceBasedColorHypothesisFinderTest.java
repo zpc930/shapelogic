@@ -1,6 +1,7 @@
 package org.shapelogic.imageprocessing;
 
 import java.util.List;
+import org.shapelogic.color.ColorHypothesis;
 import org.shapelogic.color.IColorRange;
 import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
 
@@ -32,7 +33,6 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 		assertEquals(1,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
 	}
 
-
 	public void testSpot1Clean() {
 		String fileName = "spot1Clean";
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _colorHypothesisFinder);
@@ -40,7 +40,10 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 		assertTrue(bp.isRgb());
 		int pixel = bp.get(0,0);
 		assertEquals(0xffffff,pixel); //So this is a white background pixel
-		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
+        //So this is a white background pixel
+        ColorHypothesis colorHypothesis = _colorHypothesisFinder.getColorHypothesis();
+		assertEquals(2,colorHypothesis.getColors().size()); 
+        assertNotNull(colorHypothesis.getBackground());
 	}
 
 	public void testSpot1CleanJpg() {
@@ -64,8 +67,8 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 		assertEquals(16382457,pixel); //So this is a white background pixel
 		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size());
         List<IColorRange> colors = (List)_colorHypothesisFinder.getColorHypothesis().getColors();
-		assertEquals(249,colors.get(0).getColorChannels()[0]); 
-		assertEquals(5,colors.get(1).getColorChannels()[0]); 
+		assertEquals(5,colors.get(0).getColorChannels()[0]); 
+		assertEquals(249,colors.get(1).getColorChannels()[0]); 
 	}
 
 	public void testSpot1Noise5Jpg2Iterations() {
@@ -107,7 +110,7 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
 	}
 
-	public void te_stSpot1Noise10MoreIterationsJpg() {
+	public void testSpot1Noise10MoreIterationsJpg() {
 		String fileName = "spot1Noise10";
 		_colorHypothesisFinder.setMaxDistance(35);
         _colorHypothesisFinder.setMaxIterations(3);
