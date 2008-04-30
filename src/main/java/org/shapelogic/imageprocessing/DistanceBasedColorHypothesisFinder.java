@@ -1,5 +1,7 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import org.shapelogic.color.ColorChannelSplitter;
 import org.shapelogic.color.ColorDistance1;
@@ -82,6 +84,7 @@ implements IColorHypothesisFinder, PixelHandler {
         for (_iteration = 0; _iteration < _maxIterations; _iteration++) {
             _colorHypothesis = colorHypothesisIteration(_colorHypothesis);
         }
+        findBestBackground(_colorHypothesis);
         return _colorHypothesis;
     }
 	
@@ -176,6 +179,22 @@ implements IColorHypothesisFinder, PixelHandler {
     @Override
     public int getIteration() {
         return _iteration;
+    }
+
+    @Override
+    public IColorRange findBestBackground(ColorHypothesis colorHypothesis) {
+        List<IColorAndVariance> colorList = null;
+        Collection<IColorAndVariance> colorObj = colorHypothesis.getColors();
+        if (colorObj instanceof List) {
+            colorList = (List<IColorAndVariance>) colorObj;
+            Collections.sort(colorList,AreaComparator.INSTANCE);
+            IColorAndVariance biggestColor = colorList.get(colorList.size()-1);
+            if (_image.getPixelCount() < biggestColor.getArea()*2){
+                colorHypothesis.setBackground(biggestColor);
+                return (IColorRange) biggestColor;
+            }
+        }
+        return null;
     }
 
 }
