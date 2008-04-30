@@ -12,7 +12,7 @@ import java.util.Collection;
 public class SimpleColorHypothesis implements ColorHypothesis {
 	
 	protected Collection<IColorAndVariance> _colors = new ArrayList<IColorAndVariance>();
-	protected double _globalTolerance = 20;
+	protected double _maxDistance = 20;
 	protected IColorAndVariance _background;
 	
 	/** If the color is identical merge else add. 
@@ -20,12 +20,12 @@ public class SimpleColorHypothesis implements ColorHypothesis {
 	 */
 	@Override
 	public boolean addColor(IColorAndVariance color) {
-		for (IColorAndVariance colorI: _colors) {
-			if (mergable(color, colorI)) {
-				color.merge(colorI);
-				return true;
-			}
-		}
+//		for (IColorAndVariance colorI: _colors) {
+//			if (mergable(color, colorI)) {
+//				color.merge(colorI);
+//				return true;
+//			}
+//		}
 		_colors.add(color);
 		return false;
 	}
@@ -46,18 +46,20 @@ public class SimpleColorHypothesis implements ColorHypothesis {
 	}
 
 	@Override
-	public double getGlobalTolerance() {
-		return _globalTolerance;
+	public double getMaxDistance() {
+		return _maxDistance;
 	}
 
 	@Override
-	public void setGlobalTolerance(double tolerance) {
-		_globalTolerance = tolerance;
+	public void setMaxDistance(double tolerance) {
+		_maxDistance = tolerance;
 	}
 
 	@Override
 	public boolean mergable(IColorAndVariance color1, IColorAndVariance color2) {
-		return Arrays.equals(color1.getColorChannels(), color2.getColorChannels());
+//		boolean result = Arrays.equals(color1.getColorChannels(), color2.getColorChannels());
+        boolean result = ColorDistance1.INSTANCE.distance(color1, color2) < _maxDistance;
+        return result;
 	}
 
 }
