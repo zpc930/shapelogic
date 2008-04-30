@@ -11,7 +11,8 @@ import org.shapelogic.imageutil.HasArea;
  *
  */
 public class AreaComparator implements Comparator<HasArea> {
-
+    static public final AreaComparator INSTANCE = new AreaComparator();
+    
 	@Override
 	public int compare(HasArea o1, HasArea o2) {
 		return o1.getArea() - o2.getArea();
