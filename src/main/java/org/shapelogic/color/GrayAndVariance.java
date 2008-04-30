@@ -19,9 +19,6 @@ public class GrayAndVariance implements IColorAndVariance {
 	
 	/** Distance from colorCenter that will be accepted in this Range. */
 	protected double _maxDistance;
-
-	protected int _lastX = -1;
-	protected int _lastY = -1;
 	
 	/** Add the color for a given point (x,y). <br />
 	 * 
@@ -30,8 +27,6 @@ public class GrayAndVariance implements IColorAndVariance {
 	@Override
 	public void putPixel(int x, int y, int color) {
 		_grayStatistic.increment(color);
-		_lastX = x;
-		_lastY = y;
 		if (_maxColor < color)
 			_maxColor = color;
 		if (color < _minColor)
