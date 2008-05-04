@@ -1,16 +1,19 @@
 package org.shapelogic.color;
 
+import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.mathematics.StorelessDiscriptiveStatistic;
 
 /** GrayAndVariance describes an average color with variance for gray 8 bit.
  * <br />
  * Used for color clustering, and particle counter.<br />
  * 
+ * XXX this class should be renamed to ColorArea
+ *  
  * @author Sami Badawi
  *
  */
 public class ColorAndVariance implements IColorAndVariance {
-	
+	PixelArea _pixelArea;
 	protected StorelessDiscriptiveStatistic[] _colorStatistics;
 
 	protected int[] _splitColors = new int[3];  
@@ -29,7 +32,9 @@ public class ColorAndVariance implements IColorAndVariance {
 	 */
 	@Override
 	public void putPixel(int x, int y, int color) {
-    	ColorUtil.splitColor(color, _splitColors);
+     	if (_pixelArea != null)
+            _pixelArea.addPoint(x, y);
+       	ColorUtil.splitColor(color, _splitColors);
     	for (int i = 0; i < 3; i++) {
     		_colorStatistics[i].increment(_splitColors[i]);
     	}
@@ -84,5 +89,15 @@ public class ColorAndVariance implements IColorAndVariance {
     			(int)_colorStatistics[ColorUtil.RED_POS].getMean(),
     			(int)_colorStatistics[ColorUtil.GREEN_POS].getMean(),
     			(int)_colorStatistics[ColorUtil.BLUE_POS].getMean());
+    }
+
+    @Override
+    public PixelArea getPixelArea() {
+        return _pixelArea;
+    }
+
+    @Override
+    public void setPixelArea(PixelArea pixelArea) {
+        _pixelArea = pixelArea;
     }
 }

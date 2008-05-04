@@ -1,5 +1,6 @@
 package org.shapelogic.color;
 
+import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.mathematics.StorelessDiscriptiveStatistic;
 
 /** GrayAndVariance describes an average color with variance for gray 8 bit.
@@ -10,6 +11,8 @@ import org.shapelogic.mathematics.StorelessDiscriptiveStatistic;
  *
  */
 public class GrayAndVariance implements IColorAndVariance {
+
+    PixelArea _pixelArea;
 	
 	protected StorelessDiscriptiveStatistic _grayStatistic = new StorelessDiscriptiveStatistic();
 
@@ -26,6 +29,8 @@ public class GrayAndVariance implements IColorAndVariance {
 	 */
 	@Override
 	public void putPixel(int x, int y, int color) {
+    	if (_pixelArea != null)
+            _pixelArea.addPoint(x, y);
 		_grayStatistic.increment(color);
 		if (_maxColor < color)
 			_maxColor = color;
@@ -72,4 +77,14 @@ public class GrayAndVariance implements IColorAndVariance {
 	public int getMeanGray() {
 		return (int)_grayStatistic.getMean();
 	}
+    
+    @Override
+    public PixelArea getPixelArea() {
+        return _pixelArea;
+    }
+
+    @Override
+    public void setPixelArea(PixelArea pixelArea) {
+        _pixelArea = pixelArea;
+    }
 }

@@ -5,26 +5,30 @@ import java.util.Collections;
 import java.util.List;
 
 import org.shapelogic.imageprocessing.AreaComparator;
+import org.shapelogic.imageutil.PixelArea;
 
-/** GrayAreaFactory is a factory and store for GrayArea.
+/** GrayAreaFactory is a factory and store for GrayEdgeArea.
  * <br />
  * @author Sami Badawi
  *
  */
 public class GrayAreaFactory implements ValueAreaFactory {
 	
-	ArrayList<ValueArea> _store = new ArrayList<ValueArea>();
+	ArrayList<IColorAndVariance> _store = new ArrayList<IColorAndVariance>();
 	int _backgroundColor;
 	int _maxArea = 0;
 	
 	@Override
-	public List<ValueArea> getStore() {
+	public List<IColorAndVariance> getStore() {
 		return _store;
 	}
 
 	@Override
-	public GrayArea makePixelArea(int x, int y, int startColor) {
-		GrayArea result = new GrayArea(x, y, startColor);
+	public IColorAndVariance makePixelArea(int x, int y, int startColor) {
+		IColorAndVariance result = new GrayAndVariance();
+        result.setPixelArea(new PixelArea(x, y));
+        //XXX not sure if this could result in double counting
+        result.putPixel(x, y, startColor); 
 		_store.add(result);
 		return result;
 	}
@@ -39,5 +43,4 @@ public class GrayAreaFactory implements ValueAreaFactory {
 	public void sort() {
 		Collections.sort(_store,new AreaComparator());
 	}
-
 }
