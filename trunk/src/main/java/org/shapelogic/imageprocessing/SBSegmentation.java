@@ -3,7 +3,8 @@ package org.shapelogic.imageprocessing;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 
-import org.shapelogic.color.ValueArea;
+import org.shapelogic.color.IColorAndVariance;
+import org.shapelogic.color.IColorEdgeArea;
 import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 
@@ -20,7 +21,7 @@ public class SBSegmentation {
 	private SBPixelCompare _pixelCompare;
 	
 	protected ValueAreaFactory _segmentAreaFactory;
-	protected ValueArea _currentSegmentArea; 
+	protected IColorAndVariance _currentSegmentArea; 
 
 	/** Dimensions of ROI. */
 	private int _min_x;

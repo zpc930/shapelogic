@@ -1,15 +1,13 @@
 package org.shapelogic.imageprocessing;
 
-import org.shapelogic.imageprocessing.SBSegmentation;
-import org.shapelogic.imageprocessing.SBSimpleCompare;
 import org.shapelogic.imageutil.BaseImageOperation;
-import org.shapelogic.imageutil.SLImage;
 
 import static org.shapelogic.imageutil.ImageJConstants.*;
 
-/** Base class for segmentation and particle counter for 24 bit RGB and 8 bit Gray.
+/** Segmentation for 24 bit RGB and 8 bit Gray.
  * <br /> 
- * Might be split up into seperate class for segmentation and particle counter.<br />
+ * No longer used as base class for particle counter.<br /> 
+ * Might be renamed.<br />
  * 
  * Works with rectangular ROIs
  * 
