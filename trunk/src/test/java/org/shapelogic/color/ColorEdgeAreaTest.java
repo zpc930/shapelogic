@@ -1,20 +1,17 @@
 package org.shapelogic.color;
 
-import org.shapelogic.color.ColorArea;
-import org.shapelogic.color.ColorAreaFactory;
-
 import junit.framework.TestCase;
 
-/** Test ColorArea.
+/** Test ColorEdgeArea.
  * <br />
  * 
  * @author Sami Badawi
  *
  */
-public class ColorAreaTest extends TestCase {
+public class ColorEdgeAreaTest extends TestCase {
 	
 	public void test1Points() {
-		ColorArea grayArea = new ColorArea(10,20,100);
+		ColorEdgeArea grayArea = new ColorEdgeArea(10,20,100);
 		assertEquals(1, grayArea.getArea());
 		assertEquals(10., grayArea.getPixelArea().getCenterPoint().getX());
 		assertEquals(20., grayArea.getPixelArea().getCenterPoint().getY());
@@ -26,7 +23,7 @@ public class ColorAreaTest extends TestCase {
 	}
 
 	public void test2Points() {
-		ColorArea grayArea = new ColorArea(10,20,100);
+		ColorEdgeArea grayArea = new ColorEdgeArea(10,20,100);
 		grayArea.putPixel(40, 30, 0);
 		assertEquals(2, grayArea.getArea());
 		assertEquals(25., grayArea.getPixelArea().getCenterPoint().getX());
@@ -40,7 +37,7 @@ public class ColorAreaTest extends TestCase {
 	
 	public void testFactory() {
 		ColorAreaFactory colorAreaFactory = new ColorAreaFactory();
-		ColorArea grayArea = (ColorArea) colorAreaFactory.makePixelArea(10,20,100);
+		ColorAndVariance grayArea = (ColorAndVariance) colorAreaFactory.makePixelArea(10,20,100);
 		assertEquals(1, grayArea.getArea());
 		assertEquals(10., grayArea.getPixelArea().getCenterPoint().getX());
 		assertEquals(20., grayArea.getPixelArea().getCenterPoint().getY());
