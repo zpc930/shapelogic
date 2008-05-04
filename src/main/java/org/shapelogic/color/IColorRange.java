@@ -23,28 +23,9 @@ public interface IColorRange extends IColorAndVariance {
 	void setMaxDistance(double distance);
 	
 	int getColorCenter();
-
-	void setColorCenter(int center);
-	
-	/** Description of how much high contrast neighbor.
-	 * 
-	 * What would be a good measure for this.
-	 * 
-	 * Maybe the rate of borders that are high contrast to the one that are not.
-	 * 
-	 * So maybe have a 30 and 70 percentile contrast levels. 
-	 * 
-	 * Or maybe I can just set the levels manually and do the count.
-	 * 
-	 *  */
-	int getHighContrastBorders();
-	
-	int getMediumContrastBorders();
-	
-	int getLowContrastBorders();
-	
-	int getAllContrastBorders();
-	
+    
+    void setColorCenter(int center);
+    
 	/** If the ColorRange can change. */
 	boolean isRangeFrozen();
 	
