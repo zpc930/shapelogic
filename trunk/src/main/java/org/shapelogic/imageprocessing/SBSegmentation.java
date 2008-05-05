@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.awt.Rectangle;
 
 import org.shapelogic.color.IColorAndVariance;
-import org.shapelogic.color.IColorEdgeArea;
 import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 
@@ -50,7 +49,7 @@ public class SBSegmentation {
 	}
 
 	int pointToIndex(int x, int y){
-		return _slImage.getWidth() * y + x;
+		return _slImage.getLineStride() * y + x;
 	}
 	
 	/** Given a point find the longest line vertical line similar to the chosen colors. 
@@ -93,6 +92,24 @@ public class SBSegmentation {
 			for (int y=_min_y;y<=_max_y;y++) {
 				if (!_pixelCompare.isHandled(pointToIndex(x, y))) {
 					_pixelCompare.grabColorFromPixel(x, y);
+					segment(x, y);
+				}
+			}
+		}
+	}
+	
+    /**
+     * 
+     * @param color
+     */
+	public void segmentAll(int color)
+	{
+        _pixelCompare.setCurrentColor(color);
+		for (int y=_min_y;y<=_max_y;y++) {
+    		for (int x=_min_x;x<=_max_x;x++) {
+                int index = pointToIndex(x, y);
+				if (!_pixelCompare.isHandled(index) &&
+                        _pixelCompare.similar(index)) {
 					segment(x, y);
 				}
 			}

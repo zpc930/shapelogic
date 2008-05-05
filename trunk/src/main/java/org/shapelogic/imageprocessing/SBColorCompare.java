@@ -15,11 +15,13 @@ public class SBColorCompare extends SBSimpleCompare {
 
 	/** Tells if the color at index is close enought the set color to
 	 * be considered part of the segmented area.
+     * 
+     * XXX very slow split currentColor into components
 	 */
 	public boolean similar(int index) {
 		int localColor = pixels[index] & mask;
 		//localColor
-		int diff = colorDistance(localColor,currentColor);
+		int diff = colorDistance(localColor,_currentColor);
 		return diff <= maxDist;
 	}
 
@@ -63,4 +65,9 @@ public class SBColorCompare extends SBSimpleCompare {
 	public int getColorAsInt(int index) {
 		return pixels[index];
 	}
+
+    @Override
+    public void setCurrentColor(int color) {
+        _currentColor = color;
+    }
 }

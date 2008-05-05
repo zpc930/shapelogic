@@ -17,7 +17,7 @@ public class SBByteCompare extends SBSimpleCompare {
 	 */
 	public boolean similar(int index) {
 		int localColor = _pixels[index] & MASK;
-		int diff = Math.abs(localColor - currentColor);
+		int diff = Math.abs(localColor - _currentColor);
 		return diff <= maxDist;
 	}
 

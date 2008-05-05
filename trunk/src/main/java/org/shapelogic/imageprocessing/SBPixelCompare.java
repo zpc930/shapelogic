@@ -27,4 +27,5 @@ public interface SBPixelCompare {
 	boolean isModifying();
 	void setModifying(boolean input);
 	int getColorAsInt(int index);
+	void setCurrentColor(int color);
 }
