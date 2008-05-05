@@ -16,7 +16,7 @@ import org.shapelogic.imageutil.SLImage;
  *
  */
 public abstract class SBSimpleCompare implements SBPixelCompare {
-	protected int currentColor;
+	protected int _currentColor;
 	protected int handledColor;
 	protected int mask;
 	protected SLImage _slImage;
@@ -36,13 +36,13 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	 * @return Returns the currentColor.
 	 */
 	public int getCurrentColor() {
-		return currentColor;
+		return _currentColor;
 	}
 	/**
 	 * @param currentColor The currentColor to set.
 	 */
 	public void setCurrentColor(int currentColor) {
-		this.currentColor = currentColor;
+		this._currentColor = currentColor;
 	}
 	/**
 	 * @return Returns the handledColor.
@@ -70,9 +70,9 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	}
 	
 	public void grabColorFromPixel(int startX, int startY) {
-		currentColor = _slImage.get(startX, startY) & mask;
+		_currentColor = _slImage.get(startX, startY) & mask;
 		if (fillWithOwnColor)
-			handledColor = currentColor;
+			handledColor = _currentColor;
 	}
 	
 	public static SBSimpleCompare factory(ImageProcessor ip) throws Exception

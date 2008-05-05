@@ -2,10 +2,13 @@ package org.shapelogic.imageprocessing;
 
 import java.util.List;
 
+import org.shapelogic.color.ColorHypothesis;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.IColorHypothesisFinder;
 import org.shapelogic.imageutil.BaseImageOperation;
 
+import org.shapelogic.imageutil.PixelArea;
+import org.shapelogic.polygon.BBox;
 import static org.shapelogic.imageutil.ImageJConstants.*;
 
 /** ParticleCounter count number of particles in a particle image.
@@ -16,35 +19,51 @@ import static org.shapelogic.imageutil.ImageJConstants.*;
  * @author Sami Badawi
  *
  */
-public class ParticleCounter extends BaseImageOperation 
+public class BaseParticleCounter extends BaseImageOperation 
         implements IParticleCounter 
 {
 	
 	Boolean _particleImage;
-	protected boolean _doAll = true;
 	
 	/** Modifying colors */
 	protected boolean _modifying = true;
 	protected SBSegmentation _segmentation;
-	protected String _pluginName = "Segmenter";
 	protected boolean _saveArea;
     protected IColorHypothesisFinder _colorHypothesisFinder;
+    protected ColorHypothesis _colorHypothesis;
 	
-	public ParticleCounter()
+	public BaseParticleCounter()
 	{
 		super(DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
 		_saveArea = true;
 		_modifying = false;
-		_pluginName = "Particle Counter";
 	}
 
     @Override
 	public void run() {
 		try {
-			int startX = getImage().getWidth()/2;
-			int startY = getImage().getHeight()/2;
+            init();
+            //find the color hypothesis
+            _colorHypothesis = _colorHypothesisFinder.findBestColorHypothesis();
+            //segment all the background colors, count how maybe connected regions this has
+			_segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
+            //count how many components and how much area the background takes up
+            countBackground();
+            //segment all the remaining
+			_segmentation.segmentAll();
+			showMessage(getClass().getSimpleName(), getStatus());
+		}
+		catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+    
+    /** Setup all the needed factory methods based on what type the image has.
+     * 
+     * @throws java.lang.Exception
+     */
+    protected void init() throws Exception {
 			SBSimpleCompare compare = SBSimpleCompare.factory(getImage());
-			compare.grabColorFromPixel(startX, startY);
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
 			_segmentation.setSLImage(getImage());
@@ -52,16 +71,8 @@ public class ParticleCounter extends BaseImageOperation
 			if (_saveArea)
 				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
 			_segmentation.init();
-			if (_doAll)
-				_segmentation.segmentAll();
-			else
-				_segmentation.segment(startX, startY);
-			showMessage(_pluginName, getStatus());
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+            _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, 30);
+    }
 	
     @Override
 	public String getStatus() {
@@ -93,6 +104,29 @@ public class ParticleCounter extends BaseImageOperation
 		return _particleImage;
 	}
 
+    protected boolean countBackground() {
+        boolean result = false;
+        int backgroundArea = 0;
+		List<IColorAndVariance> store = _segmentation.getSegmentAreaFactory().getStore();
+        BBox aggregatedBoundingBox = new BBox();
+        for (IColorAndVariance area: store) {
+            backgroundArea += area.getArea();
+            PixelArea pixelArea = area.getPixelArea();
+            if (pixelArea != null) {
+                aggregatedBoundingBox.add(pixelArea.getBoundingBox());
+            }
+        }
+        int totalImageArea = getSegmentation().getSLImage().getPixelCount();
+        double biggestAreaPercentage = backgroundArea * 100 / totalImageArea;
+        double boundingBoxPercentage = 
+                aggregatedBoundingBox.getDiagonalVector().getX() * 
+                aggregatedBoundingBox.getDiagonalVector().getY() * 
+                100 / totalImageArea;
+        _particleImage =  50 <biggestAreaPercentage && 90 < boundingBoxPercentage;
+        _particleImage = result;
+        return result;
+    }
+    
     @Override
 	public int getParticleCount() {
 		return _segmentation.getSegmentAreaFactory().getStore().size() - 1;
