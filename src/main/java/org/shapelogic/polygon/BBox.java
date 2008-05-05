@@ -113,4 +113,16 @@ public class BBox implements GeometricShape2D {
 		else
 			return Double.POSITIVE_INFINITY;
 	}
+    
+    public void add(BBox bBox) {
+        if (isEmpty()) {
+        	minVal = bBox.minVal.copy();
+        	maxVal = bBox.maxVal.copy();
+        }
+        else {
+            addPoint(bBox.minVal);
+            addPoint(bBox.maxVal);
+        }
+    }
+    
 }
