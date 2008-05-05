@@ -31,7 +31,11 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected boolean _saveArea;
     protected IColorHypothesisFinder _colorHypothesisFinder;
     protected ColorHypothesis _colorHypothesis;
-	
+	protected int _backgroundArea;
+	protected int _backgroundCount;
+	protected Integer _particleCount;
+	protected double _boundingBoxArea;
+    protected int _maxIterations = 2;
 	public BaseParticleCounter()
 	{
 		super(DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
@@ -50,7 +54,8 @@ public class BaseParticleCounter extends BaseImageOperation
             //count how many components and how much area the background takes up
             countBackground();
             //segment all the remaining
-			_segmentation.segmentAll();
+            if (_particleImage != null && _particleImage)
+    			_segmentation.segmentAll();
 			showMessage(getClass().getSimpleName(), getStatus());
 		}
 		catch (Exception ex) {
@@ -72,6 +77,7 @@ public class BaseParticleCounter extends BaseImageOperation
 				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
 			_segmentation.init();
             _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, 30);
+            _colorHypothesisFinder.setMaxIterations(_maxIterations);
     }
 	
     @Override
@@ -95,41 +101,45 @@ public class BaseParticleCounter extends BaseImageOperation
     @Override
 	public boolean isParticleImage() {
 		if (_particleImage == null) {
-			_segmentation.getSegmentAreaFactory().sort();
-			List<IColorAndVariance> store = _segmentation.getSegmentAreaFactory().getStore();
-			int biggestArea = store.get(store.size()-1).getArea();
-			double biggestAreaPercentage = biggestArea * 100 / getSegmentation().getSLImage().getPixelCount();
-			_particleImage = biggestAreaPercentage > 50;
+        double totalImageArea = getImageArea();
+        double biggestAreaPercentage = _backgroundArea * 100 / totalImageArea;
+        double boundingBoxPercentage = _boundingBoxArea * 100 / totalImageArea;
+        _particleImage =  50 < biggestAreaPercentage && 
+                90 < boundingBoxPercentage;
 		}
 		return _particleImage;
 	}
 
     protected boolean countBackground() {
         boolean result = false;
-        int backgroundArea = 0;
+    	_backgroundArea = 0;
 		List<IColorAndVariance> store = _segmentation.getSegmentAreaFactory().getStore();
         BBox aggregatedBoundingBox = new BBox();
         for (IColorAndVariance area: store) {
-            backgroundArea += area.getArea();
+            _backgroundArea += area.getArea();
             PixelArea pixelArea = area.getPixelArea();
             if (pixelArea != null) {
                 aggregatedBoundingBox.add(pixelArea.getBoundingBox());
             }
         }
-        int totalImageArea = getSegmentation().getSLImage().getPixelCount();
-        double biggestAreaPercentage = backgroundArea * 100 / totalImageArea;
-        double boundingBoxPercentage = 
-                aggregatedBoundingBox.getDiagonalVector().getX() * 
-                aggregatedBoundingBox.getDiagonalVector().getY() * 
-                100 / totalImageArea;
-        _particleImage =  50 <biggestAreaPercentage && 90 < boundingBoxPercentage;
-        _particleImage = result;
+        _backgroundCount = store.size();
+        _boundingBoxArea = 
+                (aggregatedBoundingBox.getDiagonalVector().getX() +1) * 
+                (aggregatedBoundingBox.getDiagonalVector().getY() + 1);
+        result = isParticleImage();
         return result;
+    }
+    
+    public double getImageArea() {
+        return getImage().getPixelCount();
     }
     
     @Override
 	public int getParticleCount() {
-		return _segmentation.getSegmentAreaFactory().getStore().size() - 1;
+        if (_particleCount == null) {
+            _particleCount = _segmentation.getSegmentAreaFactory().getStore().size() - 1;
+        }
+        return _particleCount;
 	}
 
     @Override

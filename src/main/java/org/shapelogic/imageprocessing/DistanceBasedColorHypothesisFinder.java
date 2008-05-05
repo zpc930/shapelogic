@@ -13,6 +13,7 @@ import org.shapelogic.color.IColorHypothesisFinder;
 import org.shapelogic.color.IColorRange;
 import org.shapelogic.color.SimpleColorHypothesis;
 import org.shapelogic.imageutil.BaseImageOperation;
+import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.imageutil.PixelAreaHandler;
 import org.shapelogic.imageutil.PixelHandler;
 import org.shapelogic.imageutil.SLBufferedImage;
@@ -82,6 +83,7 @@ implements IColorHypothesisFinder, PixelHandler {
     @Override
 	public ColorHypothesis findBestColorHypothesis() {
         for (_iteration = 0; _iteration < _maxIterations; _iteration++) {
+            _currentColorRange = null;
             _colorHypothesis = colorHypothesisIteration(_colorHypothesis);
         }
         findBestBackground(_colorHypothesis);
@@ -97,7 +99,7 @@ implements IColorHypothesisFinder, PixelHandler {
 		if (_pixelAreaHandler == null) 
 			return null;
 		_pixelAreaHandler.handleAllPixels(this);
-                List<IColorAndVariance> colors = (List<IColorAndVariance>) _colorHypothesis.getColors();
+        List<IColorAndVariance> colors = (List<IColorAndVariance>) _colorHypothesis.getColors();
                 
 		return _colorHypothesis;
 	}
@@ -146,6 +148,7 @@ implements IColorHypothesisFinder, PixelHandler {
 				_currentColorRange = ColorFactory.makeColorRangeI(_image);
 				_currentColorRange.setColorCenter(newColorCenter);
                 _currentColorRange.setMaxDistance(_maxDistance);
+                _currentColorRange.setPixelArea(new PixelArea(x, y));
 				_colorHypothesis.addColor(_currentColorRange);
 			}
 		}
