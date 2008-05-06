@@ -119,7 +119,7 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 		assertTrue(bp.isRgb());
 		int pixel = bp.get(0,0);
 		assertEquals(16645629,pixel); //So this is a white background pixel
-		assertEquals(2,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
+		assertEquals(3,_colorHypothesisFinder.getColorHypothesis().getColors().size()); 
 	}
 
 }
