@@ -36,6 +36,9 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected Integer _particleCount;
 	protected double _boundingBoxArea;
     protected int _maxIterations = 2;
+    protected double _maxDistance = 50.;
+    protected int _minPixelInArea = 5;
+    
 	public BaseParticleCounter()
 	{
 		super(DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
@@ -78,7 +81,7 @@ public class BaseParticleCounter extends BaseImageOperation
 			if (_saveArea)
 				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
 			_segmentation.init();
-            _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, 30);
+            _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, _maxDistance);
             _colorHypothesisFinder.setMaxIterations(_maxIterations);
     }
 	
@@ -124,7 +127,7 @@ public class BaseParticleCounter extends BaseImageOperation
                 aggregatedBoundingBox.add(pixelArea.getBoundingBox());
             }
         }
-        _backgroundCount = store.size();
+        _backgroundCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelInArea);
         _boundingBoxArea = 
                 (aggregatedBoundingBox.getDiagonalVector().getX() +1) * 
                 (aggregatedBoundingBox.getDiagonalVector().getY() + 1);
@@ -139,7 +142,11 @@ public class BaseParticleCounter extends BaseImageOperation
     @Override
 	public int getParticleCount() {
         if (_particleCount == null) {
-            _particleCount = _segmentation.getSegmentAreaFactory().getStore().size() - 1;
+            _segmentation.getSegmentAreaFactory().sort();
+            List<IColorAndVariance> store = 
+                    _segmentation.getSegmentAreaFactory().getStore();
+            int totalCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelInArea);
+            _particleCount = totalCount - _backgroundCount;
         }
         return _particleCount;
 	}
@@ -152,5 +159,15 @@ public class BaseParticleCounter extends BaseImageOperation
     @Override
     public void setColorHypothesisFinder(IColorHypothesisFinder colorHypothesisFinder) {
         _colorHypothesisFinder = colorHypothesisFinder;
+    }
+    
+    @Override
+    public double getMaxDistance() {
+        return _maxDistance;
+    }
+    
+    @Override
+    public void setMaxDistance(double maxDistance) {
+        _maxDistance = maxDistance;
     }
 }
