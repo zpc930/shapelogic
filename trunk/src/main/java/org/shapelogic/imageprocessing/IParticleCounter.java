@@ -27,7 +27,14 @@ public interface IParticleCounter extends ImageOperation {
     void setColorHypothesisFinder(IColorHypothesisFinder colorHypothesisFinder);
     
     double getMaxDistance();
-    
-    void setMaxDistance(double maxDistance);
 
+    void setMaxDistance(double maxDistance);
+    
+    int getMinPixelsInArea();
+    
+    void setMinPixelsInArea(int minPixelsInArea);
+
+    int getMaxIterations();
+
+    void setMaxIterations(int maxIterations);
 }
