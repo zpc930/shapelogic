@@ -32,11 +32,6 @@ public class ColorEdgeArea extends ColorRange implements IColorEdgeArea {
     public ColorEdgeArea(int x, int y, int startColor) {
     	_pixelArea = new PixelArea(x,y);
     	_colorCenter= startColor;
-    	ColorUtil.splitColor(startColor, _splitColors);
-    	for (int i = 0; i < 3; i++) {
-    		_colorStatistics[i] = new StorelessDiscriptiveStatistic();
-    		_colorStatistics[i].increment(_splitColors[i]);
-    	}
     }
     
 	/** Add the color for a given point (x,y). <br />
