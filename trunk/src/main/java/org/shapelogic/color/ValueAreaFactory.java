@@ -13,4 +13,5 @@ public interface ValueAreaFactory {
 	List<IColorAndVariance> getStore();
 	int getBackgroundColor();
 	void sort();
+    int areasGreaterThan(int minSize);
 }
