@@ -82,6 +82,23 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(17,_particleCounter.getParticleCount()); 
 	}
 
+	public void testEmbryosMoreIterations() {
+		String fileName = "embryos6";
+        _particleCounter.setMaxDistance(100);
+        _particleCounter.setMinPixelsInArea(20);
+        _particleCounter.setMaxIterations(4);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
+		assertEquals(256,bp.getWidth());
+		assertEquals(52480,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(12561501,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(383,factory.getStore().size()); //XXX should be 2
+		assertTrue(_particleCounter.isParticleImage()); 
+		assertEquals(17,_particleCounter.getParticleCount()); 
+	}
+
 	/** This gets opened as a byte interleaved and not as an int RGB
 	 */
 	public void testCleanSpotPng() {
