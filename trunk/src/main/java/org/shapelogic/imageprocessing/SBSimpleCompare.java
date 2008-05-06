@@ -20,7 +20,7 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	protected int handledColor;
 	protected int mask;
 	protected SLImage _slImage;
-	protected int maxDist = 10;
+	protected int _maxDistance = 10;
 	protected BitSet bitSet;
 	protected boolean fillWithOwnColor = true;
 	protected int numberOfPixels;
@@ -60,13 +60,13 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	 * @return Returns the maxDist.
 	 */
 	public int getMaxDist() {
-		return maxDist;
+		return _maxDistance;
 	}
 	/**
 	 * @param maxDist The maxDist to set.
 	 */
 	public void setMaxDist(int maxDist) {
-		this.maxDist = maxDist;
+		this._maxDistance = maxDist;
 	}
 	
 	public void grabColorFromPixel(int startX, int startY) {
@@ -182,4 +182,9 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	public void setModifying(boolean input) {
 		_modifying = input;
 	}
+    
+    @Override
+    public void setMaxDistance(int maxDistance) {
+        _maxDistance = maxDistance;
+    }
 }

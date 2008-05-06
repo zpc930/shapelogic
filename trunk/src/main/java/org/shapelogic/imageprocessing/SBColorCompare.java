@@ -22,7 +22,7 @@ public class SBColorCompare extends SBSimpleCompare {
 		int localColor = pixels[index] & mask;
 		//localColor
 		int diff = colorDistance(localColor,_currentColor);
-		return diff <= maxDist;
+		return diff <= _maxDistance;
 	}
 
 	public void init(SLImage ipIn) throws Exception {
@@ -55,7 +55,7 @@ public class SBColorCompare extends SBSimpleCompare {
 		if (!isModifying())
 			return;
 		int dist = colorDistance(pixels[index], handledColor);
-		if (dist <= maxDist)
+		if (dist <= _maxDistance)
 			pixels[index] = handledColor;
 		else {
 			boolean debugStop = true;

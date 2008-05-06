@@ -28,4 +28,6 @@ public interface SBPixelCompare {
 	void setModifying(boolean input);
 	int getColorAsInt(int index);
 	void setCurrentColor(int color);
+    void setMaxDistance(int maxDistance);
+    
 }

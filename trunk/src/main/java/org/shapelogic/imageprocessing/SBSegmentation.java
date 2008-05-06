@@ -253,7 +253,7 @@ public class SBSegmentation {
 				lowX = i;
 				insideSimilar = true;
 			}
-			else if (insideSimilar && !curSimilar) { //leave
+  			else if (insideSimilar && !curSimilar) { //leave
 				SBPendingVertical newLine = new SBPendingVertical(lowX,i-1,yNew,
 						curLine.isSearchUp());
 				checkLine(newLine);
@@ -355,4 +355,8 @@ public class SBSegmentation {
 	public ValueAreaFactory getSegmentAreaFactory() {
 		return _segmentAreaFactory;
 	}
+
+    public void setMaxDistance(int maxDistance) {
+        _pixelCompare.setMaxDistance(maxDistance);
+    }
 }
