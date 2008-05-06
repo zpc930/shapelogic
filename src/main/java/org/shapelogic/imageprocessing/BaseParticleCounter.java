@@ -37,7 +37,7 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected double _boundingBoxArea;
     protected int _maxIterations = 2;
     protected double _maxDistance = 50.;
-    protected int _minPixelInArea = 5;
+    protected int _minPixelsInArea = 5;
     
 	public BaseParticleCounter()
 	{
@@ -127,7 +127,7 @@ public class BaseParticleCounter extends BaseImageOperation
                 aggregatedBoundingBox.add(pixelArea.getBoundingBox());
             }
         }
-        _backgroundCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelInArea);
+        _backgroundCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelsInArea);
         _boundingBoxArea = 
                 (aggregatedBoundingBox.getDiagonalVector().getX() +1) * 
                 (aggregatedBoundingBox.getDiagonalVector().getY() + 1);
@@ -145,7 +145,7 @@ public class BaseParticleCounter extends BaseImageOperation
             _segmentation.getSegmentAreaFactory().sort();
             List<IColorAndVariance> store = 
                     _segmentation.getSegmentAreaFactory().getStore();
-            int totalCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelInArea);
+            int totalCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelsInArea);
             _particleCount = totalCount - _backgroundCount;
         }
         return _particleCount;
@@ -169,5 +169,25 @@ public class BaseParticleCounter extends BaseImageOperation
     @Override
     public void setMaxDistance(double maxDistance) {
         _maxDistance = maxDistance;
+    }
+
+    @Override
+    public int getMinPixelsInArea() {
+        return _minPixelsInArea;
+    }
+
+    @Override
+    public void setMinPixelsInArea(int minPixelsInArea) {
+        _minPixelsInArea = minPixelsInArea;
+    }
+
+    @Override
+    public int getMaxIterations() {
+        return _maxIterations;
+    }
+
+    @Override
+    public void setMaxIterations(int maxIterations) {
+        _maxIterations = maxIterations;
     }
 }
