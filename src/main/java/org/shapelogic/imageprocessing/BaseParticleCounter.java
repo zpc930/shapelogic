@@ -54,8 +54,10 @@ public class BaseParticleCounter extends BaseImageOperation
             //count how many components and how much area the background takes up
             countBackground();
             //segment all the remaining
-            if (_particleImage != null && _particleImage)
+            if (_particleImage != null && _particleImage) {
+                _segmentation.setMaxDistance(1000);//Everything get lumped together
     			_segmentation.segmentAll();
+            }
 			showMessage(getClass().getSimpleName(), getStatus());
 		}
 		catch (Exception ex) {
