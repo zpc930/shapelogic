@@ -29,6 +29,7 @@ public class ParticleCounter extends BaseImageOperation
 	protected String _pluginName = "Segmenter";
 	protected boolean _saveArea;
     protected IColorHypothesisFinder _colorHypothesisFinder;
+    protected double _maxDistance = 30.;
 	
 	public ParticleCounter()
 	{
@@ -49,6 +50,8 @@ public class ParticleCounter extends BaseImageOperation
 			_segmentation = new SBSegmentation();
 			_segmentation.setSLImage(getImage());
 			_segmentation.setPixelCompare(compare);
+            compare.setMaxDistance((int)_maxDistance);
+            _segmentation.setMaxDistance((int)_maxDistance);
 			if (_saveArea)
 				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
 			_segmentation.init();
@@ -106,5 +109,15 @@ public class ParticleCounter extends BaseImageOperation
     @Override
     public void setColorHypothesisFinder(IColorHypothesisFinder colorHypothesisFinder) {
         _colorHypothesisFinder = colorHypothesisFinder;
+    }
+
+    @Override
+    public double getMaxDistance() {
+        return _maxDistance;
+    }
+    
+    @Override
+    public void setMaxDistance(double maxDistance) {
+        _maxDistance = maxDistance;
     }
 }
