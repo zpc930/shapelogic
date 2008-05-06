@@ -131,14 +131,14 @@ implements IColorHypothesisFinder, PixelHandler {
             int newColorCenter = color;
 			for (IColorAndVariance colorI : _colorHypothesis.getColors()) {
 				//XXX cast to range and use center
-				if (_distance.distance(_colorCannels,colorI.getColorChannels()) <= _maxDistance) {
+				if (_distance.distance(_colorCannels,colorI.getColorChannels()) <= _maxDistance * 0.7) {
 					_currentColorRange = (IColorRange) colorI;
 					break;
 				}
 			}
             if (_currentColorRange == null && _lastColorHypothesis != null) {
                 for (IColorAndVariance colorJ : _lastColorHypothesis.getColors()) {
-                    if (_distance.distance(_colorCannels,colorJ.getColorChannels()) <= _maxDistance) {
+                    if (_distance.distance(_colorCannels,colorJ.getColorChannels()) <= _maxDistance * 0.7) {
                         newColorCenter = ((IColorRange) colorJ).getMeanColor();
                         break;
                     }

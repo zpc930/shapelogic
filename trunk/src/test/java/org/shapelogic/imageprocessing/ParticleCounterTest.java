@@ -94,9 +94,9 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(383,factory.getStore().size()); //XXX should be 2
+		assertEquals(252,factory.getStore().size()); 
 		assertTrue(_particleCounter.isParticleImage()); 
-		assertEquals(17,_particleCounter.getParticleCount()); 
+		assertEquals(8,_particleCounter.getParticleCount()); 
 	}
 
 	/** This gets opened as a byte interleaved and not as an int RGB
