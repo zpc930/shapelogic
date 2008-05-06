@@ -35,7 +35,7 @@ public class PixelArea implements PixelHandler
     	_boundingBox = new BBox();
     	_gapInLine = false;
     	_aggregationPoint = new CPointDouble(0,0);
-    	addPoint(x, y);
+//    	addPoint(x, y); //Went it gets created it should not add the first point
     }
   
     public void addPoint(int x, int y) {

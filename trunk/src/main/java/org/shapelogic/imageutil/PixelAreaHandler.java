@@ -31,7 +31,8 @@ public class PixelAreaHandler
 			if (phe != null)
 				phe.handlePixelStart(x, j, _image.get(x, j));
 			for (int i=x;i<xEnd;i++) {
-				ph.putPixel(i, j, _image.get(i, j));
+				int color = _image.get(i, j);
+				ph.putPixel(i, j, color);
 			}
 			if (phe != null)
 				phe.handlePixelEnd(x+width, j, _image.get(x+width, j));
