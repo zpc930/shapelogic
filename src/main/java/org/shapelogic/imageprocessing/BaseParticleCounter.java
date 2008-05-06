@@ -23,7 +23,7 @@ public class BaseParticleCounter extends BaseImageOperation
         implements IParticleCounter 
 {
 	
-	Boolean _particleImage;
+	protected Boolean _particleImage;
 	
 	/** Modifying colors */
 	protected boolean _modifying = true;
