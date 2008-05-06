@@ -12,6 +12,7 @@ public class GrayAreaTest extends TestCase {
 	
 	public void test1Points() {
 		GrayEdgeArea grayArea = new GrayEdgeArea(10,20,100);
+		grayArea.putPixel(10, 20, 100);
 		assertEquals(1, grayArea.getArea());
 		assertEquals(10., grayArea.getPixelArea().getCenterPoint().getX());
 		assertEquals(20., grayArea.getPixelArea().getCenterPoint().getY());
@@ -24,6 +25,7 @@ public class GrayAreaTest extends TestCase {
 
 	public void test2Points() {
 		GrayEdgeArea grayArea = new GrayEdgeArea(10,20,100);
+		grayArea.putPixel(10, 20, 100);
 		grayArea.putPixel(40, 30, 0);
 		assertEquals(2, grayArea.getArea());
 		assertEquals(25., grayArea.getPixelArea().getCenterPoint().getX());
