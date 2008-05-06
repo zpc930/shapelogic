@@ -31,7 +31,7 @@ public class GrayEdgeArea extends GrayRange implements IColorEdgeArea {
 	
     public GrayEdgeArea(int x, int y, int startColor) {
     	_colorCenter= startColor;
-    	_grayStatistic.increment(startColor);
+//    	_grayStatistic.increment(startColor);
     	_pixelArea = new PixelArea(x,y);
     }
     
