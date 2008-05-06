@@ -23,5 +23,11 @@ public interface IParticleCounter extends ImageOperation {
     boolean isParticleImage();
     
     IColorHypothesisFinder getColorHypothesisFinder();
+    
     void setColorHypothesisFinder(IColorHypothesisFinder colorHypothesisFinder);
+    
+    double getMaxDistance();
+    
+    void setMaxDistance(double maxDistance);
+
 }
