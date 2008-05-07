@@ -35,7 +35,7 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected int _backgroundCount;
 	protected Integer _particleCount;
 	protected double _boundingBoxArea;
-    protected int _maxIterations = 2;
+    protected int _iterations = 2;
     protected double _maxDistance = 50.;
     protected int _minPixelsInArea = 5;
     
@@ -87,7 +87,7 @@ public class BaseParticleCounter extends BaseImageOperation
 				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
 			_segmentation.init();
             _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, _maxDistance);
-            _colorHypothesisFinder.setMaxIterations(_maxIterations);
+            _colorHypothesisFinder.setIterations(_iterations);
     }
 	
     @Override
@@ -189,12 +189,12 @@ public class BaseParticleCounter extends BaseImageOperation
     }
 
     @Override
-    public int getMaxIterations() {
-        return _maxIterations;
+    public int getIterations() {
+        return _iterations;
     }
 
     @Override
-    public void setMaxIterations(int maxIterations) {
-        _maxIterations = maxIterations;
+    public void setIterations(int iterations) {
+        _iterations = iterations;
     }
 }

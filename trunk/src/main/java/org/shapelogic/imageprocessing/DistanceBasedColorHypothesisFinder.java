@@ -44,7 +44,8 @@ implements IColorHypothesisFinder, PixelHandler {
 	private int[] _colorCannels;
 	private PixelAreaHandler _pixelAreaHandler;
 	private ColorChannelSplitter _colorChannelSplitter; 
-	private int _maxIterations = 1;
+    /** How many iterations to do */
+	private int _iterations = 1;
     private int _iteration;
     
 	public DistanceBasedColorHypothesisFinder(String arg, SLImage image, double maxDistance) {
@@ -82,7 +83,7 @@ implements IColorHypothesisFinder, PixelHandler {
     
     @Override
 	public ColorHypothesis findBestColorHypothesis() {
-        for (_iteration = 0; _iteration < _maxIterations; _iteration++) {
+        for (_iteration = 0; _iteration < _iterations; _iteration++) {
             _currentColorRange = null;
             _colorHypothesis = colorHypothesisIteration(_colorHypothesis);
         }
@@ -164,14 +165,16 @@ implements IColorHypothesisFinder, PixelHandler {
         return _colorHypothesis;
     }
 
+    /** How many iterations to do. */
     @Override
-    public int getMaxIterations() {
-        return _maxIterations;
+    public int getIterations() {
+        return _iterations;
     }
 
+    /** How many iterations to do. */
     @Override
-    public void setMaxIterations(int maxIterations) {
-        _maxIterations = maxIterations;
+    public void setIterations(int iterations) {
+        _iterations = iterations;
     }
 
     @Override
@@ -179,6 +182,11 @@ implements IColorHypothesisFinder, PixelHandler {
         return true;
     }
 
+    /** Number of the current iteration.<br />
+     * 
+     * XXX: Not sure that this is needed. <br />
+     * XXX: Might rename this to getCurrentIteration.
+     */
     @Override
     public int getIteration() {
         return _iteration;

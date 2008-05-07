@@ -16,9 +16,9 @@ public interface IColorHypothesisFinder {
 	ColorHypothesis findBestColorHypothesis();
 	ColorHypothesis colorHypothesisIteration(ColorHypothesis lastColorHypothesis);
 	ColorHypothesis getColorHypothesis();
-	int getMaxIterations();
+	int getIterations();
     int getIteration();
-    void setMaxIterations(int maxIterations);
+    void setIterations(int maxIterations);
     boolean verifyColor(IColorRange colorRange);
     IColorRange findBestBackground(ColorHypothesis colorHypothesis);
 }
