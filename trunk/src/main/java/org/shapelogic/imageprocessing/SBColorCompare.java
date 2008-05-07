@@ -84,4 +84,10 @@ public class SBColorCompare extends SBSimpleCompare {
         _currentColor = color;
         ColorUtil.splitColor(color,_colorChannels);
     }
+    
+    @Override
+	public void grabColorFromPixel(int startX, int startY) {
+        super.grabColorFromPixel(startX, startY);
+        ColorUtil.splitColor(_currentColor,_colorChannels);
+    }
 }
