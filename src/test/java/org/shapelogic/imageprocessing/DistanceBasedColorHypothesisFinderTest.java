@@ -73,7 +73,7 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 
 	public void testSpot1Noise5Jpg2Iterations() {
 		String fileName = "spot1Noise5";
-        _colorHypothesisFinder.setMaxIterations(2);
+        _colorHypothesisFinder.setIterations(2);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
         assertEquals(30,bp.getWidth());
 		assertTrue(bp.isRgb());
@@ -87,7 +87,7 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 
 	public void testSpot1Noise5Jpg3Iterations() {
 		String fileName = "spot1Noise5";
-        _colorHypothesisFinder.setMaxIterations(3);
+        _colorHypothesisFinder.setIterations(3);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
         assertEquals(30,bp.getWidth());
 		assertTrue(bp.isRgb());
@@ -113,7 +113,7 @@ public class DistanceBasedColorHypothesisFinderTest  extends AbstractImageProces
 	public void testSpot1Noise10MoreIterationsJpg() {
 		String fileName = "spot1Noise10";
 		_colorHypothesisFinder.setMaxDistance(35);
-        _colorHypothesisFinder.setMaxIterations(3);
+        _colorHypothesisFinder.setIterations(3);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _colorHypothesisFinder);
         assertEquals(30,bp.getWidth());
 		assertTrue(bp.isRgb());

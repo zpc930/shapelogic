@@ -51,7 +51,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		String fileName = "blobs";
         _particleCounter.setMaxDistance(100);
         _particleCounter.setMinPixelsInArea(7);
-        _particleCounter.setMaxIterations(3);
+        _particleCounter.setIterations(3);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName), _particleCounter);
 		assertEquals(256,bp.getWidth());
 		assertEquals(65024,bp.getPixelCount());
@@ -69,7 +69,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		String fileName = "embryos6";
         _particleCounter.setMaxDistance(100);
         _particleCounter.setMinPixelsInArea(20);
-        _particleCounter.setMaxIterations(3);
+        _particleCounter.setIterations(3);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
 		assertEquals(256,bp.getWidth());
 		assertEquals(52480,bp.getPixelCount());
@@ -86,7 +86,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		String fileName = "embryos6";
         _particleCounter.setMaxDistance(100);
         _particleCounter.setMinPixelsInArea(20);
-        _particleCounter.setMaxIterations(4);
+        _particleCounter.setIterations(4);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
 		assertEquals(256,bp.getWidth());
 		assertEquals(52480,bp.getPixelCount());
