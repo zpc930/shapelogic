@@ -61,4 +61,8 @@ public class ColorUtil {
 	static public int packColors(int[] colors) {
 		return (colors[RED_POS] << RED_OFFSET) + (colors[GREEN_POS] << GREEN_OFFSET) + colors[BLUE_POS];
 	}
+    
+    static public int grayToRGB(int gray) {
+        return packColors(gray, gray, gray);
+    }
 }
