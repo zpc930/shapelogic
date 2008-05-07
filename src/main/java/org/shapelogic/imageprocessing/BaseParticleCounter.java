@@ -53,13 +53,18 @@ public class BaseParticleCounter extends BaseImageOperation
             //find the color hypothesis
             _colorHypothesis = _colorHypothesisFinder.findBestColorHypothesis();
             //segment all the background colors, count how maybe connected regions this has
-			_segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
-            //count how many components and how much area the background takes up
-            countBackground();
-            //segment all the remaining
-            if (_particleImage != null && _particleImage) {
-                _segmentation.setMaxDistance(1000);//Everything get lumped together
-    			_segmentation.segmentAll();
+            if (_colorHypothesis.getBackground() == null) {
+                _particleImage = Boolean.FALSE;
+            }
+            else {
+                _segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
+                //count how many components and how much area the background takes up
+                countBackground();
+                //segment all the remaining
+                if (_particleImage != null && _particleImage) {
+                    _segmentation.setMaxDistance(1000);//Everything get lumped together
+                    _segmentation.segmentAll();
+                }
             }
 			showMessage(getClass().getSimpleName(), getStatus());
 		}
