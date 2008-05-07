@@ -321,7 +321,10 @@ public class SBSegmentation {
 		if (_segmentAreaFactory != null) {
 			int areas = _segmentAreaFactory.getStore().size();
 			status += "Numbers of areas = " + areas;
-			status += "\nPixels per area = " + _slImage.getPixelCount() / areas; 
+            if (0 < areas)
+    			status += "\nPixels per area = " + _slImage.getPixelCount() / areas; 
+            else 
+                status += ", segmentation was not run.";
 		}
 		return status;
 	} 
