@@ -6,12 +6,15 @@ import ij.process.ImageProcessor;
 
 /** Shows how how to call one PlugInFilter from another.<br />
  * 
+ * Used to be called org.shapelogic.imageutil.PlugInFilterCaller_, 
+ * but that caused it to show up in the ImageJ memu.<br />
+ * 
  * This is important for unit testing.
  * 
  * @author Sami Badawi
  *
  */
-public class PlugInFilterCaller_ implements PlugInFilter {
+public class PlugInFilterCaller implements PlugInFilter {
 	
 	String _pluginName;
 	String _arg;
@@ -23,12 +26,12 @@ public class PlugInFilterCaller_ implements PlugInFilter {
 //	}
 	
 	/** Default is to call ShapeLogic segmenter. */
-	public PlugInFilterCaller_() {
+	public PlugInFilterCaller() {
 		this("SBSegment_", "", DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
 	}
 	
 	/** Use this to setup your own plugin runner. */
-	public PlugInFilterCaller_(String pluginName, String arg, int returnValueForSetup) {
+	public PlugInFilterCaller(String pluginName, String arg, int returnValueForSetup) {
 		_pluginName = pluginName;
 		_arg = arg;
 		_returnValueForSetup = returnValueForSetup;
