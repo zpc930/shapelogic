@@ -138,7 +138,7 @@ ShapeLogic
   * Simple particle counter implementation, finds average color and standard 
   deviation for each particle
   
-  * There are several parameters that determins how the particle counter works
+  * There are several parameters that determine how the particle counter works
   
   * Color clustering
   
@@ -147,7 +147,7 @@ ShapeLogic
   * Particle image checker
   
   * Extend all the image processing algorithms in ShapeLogic to work in both 
-  ImageJ and plain Java
+  ImageJ and in plain Java
   
   []
   
