@@ -7,6 +7,45 @@
 
 Release notes for ShapeLogic
 
+* 2008/05/07 ShapeLogic v 1.1 released AKA Simple particle coutner
+  
+  * Base class for particle counters and analyzers
+  
+  * Simple particle counter implementation, finds average color and standard 
+  deviation for each particle
+  
+  * There are several parameters that determins how the particle counter works
+  
+  * Color clustering
+  
+  * Background color finder
+  
+  * Particle image checker
+  
+  * Extend all the image processing algorithms in ShapeLogic to work in both 
+  ImageJ and plain Java
+  
+  * Deleted the SVN tags for ShapeLogic 0.2, 0.3 and 0.7 since they where 
+  checked into the wrong place
+  
+  * Fix bug in segmentation that causes stripes and slowness in big images
+  
+  * Add unit tests for segmentation
+  
+  * Better support for {{{setup.html#NetBeans}NetBeans}}
+  
+  * ShapeLogic still has beta development status
+  
+  * There is around 29000 lines of Java code
+
+  * 440 unit test that all works on local machine
+
+  []
+  
+  
+  
+  
+  
 * 2008/03/05 ShapeLogic v 1.0 released AKA Beta 1
 
   * Rule for image processing have been migrated,
