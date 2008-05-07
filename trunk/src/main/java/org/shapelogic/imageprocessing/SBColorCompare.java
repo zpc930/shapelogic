@@ -12,6 +12,8 @@ public class SBColorCompare extends SBSimpleCompare {
 
 	private int[] pixels;
 	public static final int MASK = 0xffffff;
+    protected int[] _colorChannels = new int[3];
+    protected int[] _splitColorChannels = new int[3];
 
 	/** Tells if the color at index is close enought the set color to
 	 * be considered part of the segmented area.
@@ -21,7 +23,8 @@ public class SBColorCompare extends SBSimpleCompare {
 	public boolean similar(int index) {
 		int localColor = pixels[index] & mask;
 		//localColor
-		int diff = colorDistance(localColor,_currentColor);
+        ColorUtil.splitColor(localColor,_splitColorChannels);
+		int diff = colorDistance(_colorChannels,_splitColorChannels);
 		return diff <= _maxDistance;
 	}
 
@@ -40,6 +43,16 @@ public class SBColorCompare extends SBSimpleCompare {
 	public int colorDistance(int color1, int color2) {
 		int [] rgb1 = ColorUtil.splitColor(color1);
 		int [] rgb2 = ColorUtil.splitColor(color2);
+		int dist = 0;
+		for (int i = 0; i < rgb1.length; i++ ) {
+			dist += Math.abs(rgb1[i] - rgb2[i]);
+		}
+		dist = dist / 3; // to make it fit with grayscale
+		return dist;
+	}
+
+    /** split color coded as int into 3 int */
+	public int colorDistance(int[] rgb1, int[] rgb2) {
 		int dist = 0;
 		for (int i = 0; i < rgb1.length; i++ ) {
 			dist += Math.abs(rgb1[i] - rgb2[i]);
@@ -69,5 +82,6 @@ public class SBColorCompare extends SBSimpleCompare {
     @Override
     public void setCurrentColor(int color) {
         _currentColor = color;
+        ColorUtil.splitColor(color,_colorChannels);
     }
 }
