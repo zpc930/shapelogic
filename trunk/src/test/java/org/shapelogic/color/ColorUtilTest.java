@@ -38,4 +38,8 @@ public class ColorUtilTest extends TestCase {
 		assertEquals(ONE_TWO_THREE,packColors(THREE_TWO_ONE_ARRAY));
 	}
 
+	public void testGrayToRGB() {
+		assertEquals(0x020202,grayToRGB(2));
+	}
+
 }
