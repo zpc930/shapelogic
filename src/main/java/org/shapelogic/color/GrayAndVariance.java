@@ -87,4 +87,12 @@ public class GrayAndVariance implements IColorAndVariance {
     public void setPixelArea(PixelArea pixelArea) {
         _pixelArea = pixelArea;
     }
+    
+    @Override
+    public String toString() {
+        String result = "";
+        for (int channel: getColorChannels())
+            result += channel + ", ";
+        return result;
+    }
 }
