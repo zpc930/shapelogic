@@ -94,6 +94,8 @@ public class BaseParticleCounter extends BaseImageOperation
 		status += "\nImage is " + negation + "a particle image.";
 		if (isParticleImage()) {
 			status += "\nParticle count: " + getParticleCount();
+            status += "\nBackground color is: " + _colorHypothesis.getBackground().toString();
+            status += "\nNumber of colors is: " + _colorHypothesis.getColors().size();
 		}
 		return status;
 	}
