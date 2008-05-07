@@ -34,7 +34,7 @@ public interface IParticleCounter extends ImageOperation {
     
     void setMinPixelsInArea(int minPixelsInArea);
 
-    int getMaxIterations();
+    int getIterations();
 
-    void setMaxIterations(int maxIterations);
+    void setIterations(int maxIterations);
 }

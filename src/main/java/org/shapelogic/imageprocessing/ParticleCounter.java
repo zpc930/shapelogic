@@ -15,7 +15,7 @@ public class ParticleCounter extends BaseParticleCounter
 {
     public ParticleCounter() {
         super();
-        _maxIterations = 3;
+        _iterations = 3;
         _maxDistance = 70;
         _minPixelsInArea = 10;
     }
