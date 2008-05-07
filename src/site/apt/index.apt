@@ -131,6 +131,26 @@ ShapeLogic
 
 * News
 
+** 2008/05/07 ShapeLogic v 1.1 released
+  
+  * Base class for particle counters and analyzers
+  
+  * Simple particle counter implementation, finds average color and standard 
+  deviation for each particle
+  
+  * There are several parameters that determins how the particle counter works
+  
+  * Color clustering
+  
+  * Background color finder
+  
+  * Particle image checker
+  
+  * Extend all the image processing algorithms in ShapeLogic to work in both 
+  ImageJ and plain Java
+  
+  []
+  
 ** 2008/03/05 ShapeLogic v 1.0 released
 
   * Rule for image processing have been migrated,
