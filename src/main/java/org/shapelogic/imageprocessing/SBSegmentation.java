@@ -29,6 +29,7 @@ public class SBSegmentation {
 	private int _max_y;
 	
 	private String _status = "";
+	private boolean _slowTestMode = false;
 	
 	public SBSegmentation() {
 		_vPV = new ArrayList<SBPendingVertical>();
@@ -256,7 +257,6 @@ public class SBSegmentation {
   			else if (insideSimilar && !curSimilar) { //leave
 				SBPendingVertical newLine = new SBPendingVertical(lowX,i-1,yNew,
 						curLine.isSearchUp());
-				checkLine(newLine);
 				storeLine(newLine);
 				insideSimilar = false;
 			}
@@ -275,7 +275,7 @@ public class SBSegmentation {
 		if (isExpandable(curLine)) {
 			SBPendingVertical expanded = expandSBPendingVertical(curLine);
 			//check that new line is still good
-			if (!checkLine(expanded)) {
+			if (!_slowTestMode || !checkLine(expanded)) {
 				expanded = expandSBPendingVertical(curLine);
 			}
 			curLine = expanded;
@@ -330,21 +330,21 @@ public class SBSegmentation {
 	boolean checkLine(SBPendingVertical curLine)
 	{
 		int offset = offsetToLineStart(curLine.y);
-		boolean debugStop = false;
+		boolean problem = false;
 		for (int i = curLine.xMin; i <= curLine.xMax; i++) {
 			if (_pixelCompare.similar(offset + i))
 				continue;
 			else {
-				boolean handledBefore = _pixelCompare.similar(offset + i);
-				debugStop = true;
+				boolean handledBefore = _pixelCompare.similar(offset + i);//for debugging
+				problem = true;
 			}
 		}
-		return ! debugStop;
+		return ! problem;
 	}
 	
 	void storeLine(SBPendingVertical curLine){
-		if (!checkLine(curLine))
-			checkLine(curLine);
+		if (_slowTestMode && !checkLine(curLine))
+			checkLine(curLine); //for debugging
 		_vPV.add(curLine);
 	}
 
