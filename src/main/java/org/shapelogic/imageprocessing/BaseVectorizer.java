@@ -349,13 +349,15 @@ public abstract class BaseVectorizer extends BaseImageOperation
 		_nextCount++;
 		_polygon = null; //Cause lazy creation of a new polygon
 		findAllLines();
-		if (_currentPoint != null)
-			showMessage("",
+		if (_currentPoint != null) {
+			if (_nextCount == 1) //XXX maybe make a better logging system or take out
+                showMessage(getClass().getSimpleName(),
 					"Last line point is: " + _currentPoint + "\n" +
 					"_numberOfPointsInLine: " + _numberOfPointsInAllLines+ "\n" +
 					"Points count: " + getPoints().size()); 
+        }
 		else
-			showMessage("","No line point found.");
+			showMessage(getClass().getSimpleName(),"No line point found.");
 		drawLines();
 		cleanPolygon();
 		return getCleanedupPolygon();
