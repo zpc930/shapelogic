@@ -84,8 +84,7 @@ ShapeLogic
   * {{{http://www.antlr.org/} Antlr}}: For parsing build in filter language
 
   []
-  
-  Starting from ShapeLogic 1.1 you can run the image processing algorithms 
+  You can run all current image processing algorithms 
   {{{image-formats.html}outside ImageJ}}, 
   using just a BufferedImage. If you want to embed ShapeLogic in your 
   application.
@@ -133,14 +132,23 @@ ShapeLogic
 
 ** 2008/05/07 ShapeLogic v 1.1 released
   
-  * Base class for particle counters and analyzers
-  
-  * Simple particle counter implementation, finds average color and standard 
+  * Automatic color and gray scale {{{particle.html} particle counter example}}
+  working without manual user intervention
+
+  * This particle counter implementation, finds average color and standard 
   deviation for each particle
   
-  * There are several parameters that determine how the particle counter works
+  * Little framework to build more advanced particle counters and particle analyzers
   
-  * Color clustering
+  * First use of ShapeLogic in medical image processing
+
+  * The particle counter has gone through limited testing, and seems to work 
+  somewhat well
+
+  * Particle counter functionality can be tweaked by setting parameters, 
+  currently this has be done from within the Java code
+  
+  * Color clustering using K-mean algorithm
   
   * Background color finder
   
@@ -148,41 +156,10 @@ ShapeLogic
   
   * Extend all the image processing algorithms in ShapeLogic to work in both 
   ImageJ and in plain Java
-  
-  []
-  
-** 2008/03/05 ShapeLogic v 1.0 released
-
-  * Rule for image processing have been migrated,
-  previously they were implemented as goal driven tasks with sub tasks.
-  Version 1.0 uses lazy streams which is simpler and more powerful.
-  
-  * Letter match example now matches all polygons instead of just the first found.
-  
-  * When running ShapeLogic as ImageJ plugin, it is now easy for users to define rules for 
-  matching in external Java files.
-  
-  * New number matcher to demonstrate how to define rules for matching in 
-  external Java file, 
-  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java}in 130 lines of code}}.
-  
-  * Enabled use of
-  {{{http://java.sun.com/javase/6/docs/technotes/guides/scripting/programmer_guide/index.html}
-  Java 6 Scripting}}
-  for rule database, which gives the user access to the 25 scripting 
-  languages that are supported
-
-  * ShapeLogic now has beta development status
-  
-  * Many unit tests added for Lazy Stream library
-
-  * Fixed bugs in Lazy Stream library
-
-  * Fixed bugs for the letter X
 
   []
   
-  Documentation will soon be updated to reflect ShapeLogic 1.0.
+  Documentation will soon be updated to reflect ShapeLogic 1.1.
 
 * Future plans for ShapeLogic
   
@@ -194,15 +171,23 @@ ShapeLogic
   
   []
 
-** ShapeLogic v 1.1 with particle counter example soon to be released
+** ShapeLogic v 1.2 with improved particle counter example soon to be released
 
-  The main goal for 1.1 is to create an automatic color and gray scale 
-  {{{particle.html} particle counter example}}. 
-  This is the first use of ShapeLogic in medical image processing.
-  There are currently particle counters available for ImageJ, however, ShapeLogic's 
-  particle counter will utilize declarative programming tools for a color image processing 
-  problem, making it function without manual user intervention.
+  * More testing and tweaking of particle counter
+
+  * Make it easier to set parameters for particle counter in a macro or a 
+  configuration file
+
+  * Print report about each blob, color, area, standard deviation to a file
+
+  * Different implementations of particle counters
+
+  * Vectorise blobs by tracing the edge
+
+  * Filter blobs based geometric properties of the edge
   
+  []
+
   The test images are taken from the sample images from ImageJ
   
 [images/particles/blobs.gif] 
@@ -217,38 +202,19 @@ ShapeLogic
 
   embryos.jpg
   
-  The secondary goal is to {{{image-formats.html} decouple ShapeLogic's}} 
-  image processing algorithms 
-  from ImageJ. The idea is not to redo ImageJ's functionality but to make 
-  ShapeLogic more modular. All of ShapeLogic's current image processing 
-  algorithms only use very simple image properties so they should apply outside 
-  of ImageJ.
-  
-*** Other changes to ShapeLogic v 1.1
-  
-  * Fix bug in segmentation that causes stripes and slowness in big images
-  
-  * Add unit tests for segmentation
-  
-  * Color clustering
-  
-  * Better support for {{{setup.html#NetBeans}NetBeans}}
-  
-  []
-  
 * Examples applications
+  
+  [[1]] Automatic color and gray scale {{{particle.html}particle counter}}, 
+  first medical image processing example.
   
   [[1]] {{{letter-match.html}Letter matching example}}. Very rudimentary OCR.
   
   [[1]] {{{project-euler.html}mathematical problems}} from 
   {{{http://projecteuler.net}Project Euler}}. 
-  This is a list of 186 mathematical problems that can be solved by computers.
+  This is a list of 192 mathematical problems that can be solved by computers.
   They vary in complexity from simple to hard.
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.
-  
-  [[1]] Next example will be an an automatic color and gray scale {{{particle.html}particle counter}}, 
-  first medical image processing example
   
   []
   
