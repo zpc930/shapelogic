@@ -31,7 +31,7 @@
       <item name="Examples" href="index.html" collapse="true">
 		  <item name="Letter Match" href="letter-match.html"/>
 		  <item name="Project Euler" href="project-euler.html"/>
-		  <item name="Particle" href="particle.html"/>
+		  <item name="Particle counter" href="particle.html"/>
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Annotations" href="annotations.html"/>
