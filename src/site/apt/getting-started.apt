@@ -25,8 +25,8 @@ Lazy stream library
   ShapeLogic contains functional and declarative constructs that can be used 
   independently of the image processing code.
   
-  To use this just download the shapelogic_-1.0.jar and add it to your  
-  class path. If running from command line: -cp .;shapelogic_-1.0.jar
+  To use this just download the shapelogic_-1.1.jar and add it to your  
+  class path. If running from command line: -cp .;shapelogic_-1.1.jar
   
   For examples of how to use this to solve mathematical problems see 
   {{{project-euler.html}Project Euler solution}}.
@@ -37,7 +37,7 @@ Image processing user mode with ImageJ
 
   * Install {{{http://rsb.info.nih.gov/ij/} ImageJ}}
   
-  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.0.zip}}
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.1.zip}}
 
   * Unzip it
 
@@ -96,11 +96,11 @@ Image processing user mode with ImageJ
 
 *  Steps to get ShapeLogic working from within ImageJ manually 
   
-  If you need a different version of shapelogic_-1.0.jar, e.g. one compiled for JDK 1.5.
+  If you need a different version of shapelogic_-1.1.jar, e.g. one compiled for JDK 1.5.
 
   * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/shapelogic
 
-  * Take the jar file for ShapeLogic: shapelogic_-1.0.jar, and move it to that directory
+  * Take the jar file for ShapeLogic: shapelogic_-1.1.jar, and move it to that directory
 
   * Add the jar files that ShapeLogic is dependent on to the ImageJ/plugin dir:
   
@@ -125,7 +125,7 @@ Image processing user mode with ImageJ
   E.g. commons\-math\-1.1.jar can be found here:
   {{http://repo1.maven.org/maven2/commons-math/commons-math/1.1/}}
 
-  Or they can be taken out of the shapelogicplugin1.0.zip
+  Or they can be taken out of the shapelogicplugin1.1.zip
 
    When you open ImageJ there will be a ShapeLogic menu containing commands.
 
@@ -213,8 +213,8 @@ Development mode
   This makes several build tasks very easy, and is recommended,
   but the code should run fine without Maven.
 
-  Currently the project is set up to work directly with Eclipse 3.3, Java 1.6, 
-  but you can use: NetBeans, IntelliJ, JBuilder, emacs or vi.
+  Currently the project is set up to work directly with Eclipse 3.3, NetBeans
+  6.0 \- 6.1, Java 1.6, but you can use: IntelliJ, JBuilder, emacs or vi.
 
   *  Steps to compile and run unit tests
    
