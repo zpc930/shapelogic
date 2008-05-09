@@ -16,7 +16,7 @@ Particle Counter Example
   Users looking for a mature particle counter should probably wait for
   ShapeLogic v 1.2.
 
-* Test result for images taken from the sample images from ImageJ
+* {Test} result for images taken from the sample images from ImageJ
   
   The particle counter was tested on the particle images from ImageJ:
   
@@ -137,7 +137,7 @@ double _maxDistance = 50.; // Distance between color in same color bucket
 int _minPixelsInArea = 5; // Minimum number of pixels in particle
 +-----------------------------------+
 
-* How to tweak parameters in ShapeLogic v 1.1
+* How to tweak {parameters} in ShapeLogic v 1.1
 
   Tweaking the parameters is a little clumsy, currently this has be done from 
   within the Java code.

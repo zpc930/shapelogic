@@ -147,13 +147,15 @@ ShapeLogic
   * First use of ShapeLogic in medical image processing
 
   * Extends all the image processing algorithms in ShapeLogic to work in both 
-  ImageJ and in plain Java
+  ImageJ and in {{{image-formats.html}plain Java}}
 
   []
   
   The particle counter in ShapeLogic v 1.1 has gone through limited testing, 
-  and seems to work well. Tweaking the parameters is a little clumsy.
-  Users looking for a mature particle counter should wait for ShapeLogic v 1.2.
+  and seems to {{{particle.html#Test}work well}} though 
+  {{{particle.html#parameters}tweaking the parameters}} is still a bit
+  clumsy. Users looking for a mature particle counter should probably wait for
+  ShapeLogic v 1.2.
 
   Documentation will soon be updated to reflect ShapeLogic 1.1.
 
