@@ -16,18 +16,23 @@ Particle Counter Example
   Users looking for a mature particle counter should probably wait for
   ShapeLogic v 1.2.
 
-* {Test} result for images taken from the sample images from ImageJ
+* {Test} on sample images from ImageJ
   
   The particle counter was tested on the particle images from ImageJ:
   
 [images/particles/embryos.jpg] 
 
-  embryos.jpg. The un-tweaked particle counter in ShapeLogic 1.1 found particle count = 9
-  for the part of embryos.jpg shown here. embryos.jpg contains 6 particles and a
-  few spots of noise.
+  embryos.jpg. The un-tweaked particle counter in ShapeLogic 1.1 found 
   
-  After changing the parameter setting it found the particle count = 5, which is 
-  the correct value since ShapeLogic 1.1 cannot split overlapping particles.
+  particle count = 9
+  
+  embryos.jpg contains 6 particles and a few shadows.
+  
+  After changing the parameter setting it found 
+  
+  particle count = 5
+
+  which is the correct value since ShapeLogic 1.1 cannot split overlapping particles.
 
 [images/particles/Cell_Colony.jpg] 
 
@@ -118,10 +123,10 @@ _minPixelsInArea = 70; // Minimum number of pixels in particle
 
   * Check that image is a particle image, if it is not stop
   
-  * Run over the image again find the individual blobs based on the color 
+  * Run over the image again find the individual particles based on the color 
   hypothesis
   
-  * Collect color and area information for each blob
+  * Collect color and area information for each particle
   
   * Filter particles based on size
   
