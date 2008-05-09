@@ -8,36 +8,183 @@
 
 Particle Counter Example
 
-  The main goal for ShapeLogic v 1.1 is to create an automatic color and gray 
-  scale particle counter example. 
-  This is the first use of ShapeLogic in medical image processing.
-  There are currently particle counters available for ImageJ, however, ShapeLogic's 
-  particle counter will utilize declarative programming tools for a color image processing 
-  problem, making it function without manual user intervention.
-  
-  The test images are taken from the sample images from ImageJ
-  
-[images/particles/blobs.gif] 
+  ShapeLogic v 1.1 contains the first version of an automatic color and gray 
+  scale particle counter working without manual user intervention.
 
-  blobs.gif
+  The particle counter in ShapeLogic v 1.1 has gone through limited testing, 
+  and seems to work well. Tweaking the parameters is a little clumsy.
+  Users looking for a mature particle counter should probably wait for
+  ShapeLogic v 1.2.
+
+* Test result for images taken from the sample images from ImageJ
+  
+  The particle counter was tested on the particle images from ImageJ:
+  
+[images/particles/embryos.jpg] 
+
+  embryos.jpg. The un-tweaked particle counter in ShapeLogic 1.1 found particle count = 9
+  for the part of embryos.jpg shown here. embryos.jpg contains 6 particles and a
+  few spots of noise.
+  
+  After changing the parameter setting it found the particle count = 5, which is 
+  the correct value since ShapeLogic 1.1 cannot split overlapping particles.
 
 [images/particles/Cell_Colony.jpg] 
 
-  Cell_Colony.jpg
+  Cell_Colony.jpg. It is hard for a human to count the particles in this image 
+  but ShapeLogic v 1.1 gave a resonable result.
 
-[images/particles/embryos.jpg] 
+[images/particles/blobs.gif] 
 
-  embryos.jpg
+  blobs.gif. ShapeLogic v 1.1 did not recognize this as a particle image.
 
-* Goals
+** Parameters that gave correct match for embryos.jpg
+
++-------------------------------------------------------------+
+_iterations = 4; // K-mean iterations for color hypothesis
+_maxDistance = 90; // Distance between color in same color bucket
+_minPixelsInArea = 70; // Minimum number of pixels in particle
++-------------------------------------------------------------+
+
+* Information for each particle in ShapeLogic v 1.1
   
-  * Finding background
+  * Average color
+
+  * Standard deviation 
   
+  * Center of gravity
+  
+  * Area
+  
+  * Bounding box
+  
+  * Start point
+  
+  []
+
+  This information is available but there is no print report function in 1.1.
+
+* Plans for particle counter in ShapeLogic v 1.2
+
+  * More testing and tweaking of particle counter
+
+  * Make it easier to set parameters for particle counter in a macro, a 
+  configuration file or possibly a dialog box
+
+  * Print report about each particle, color, area, standard deviation, position 
+  to a file
+
+  * Different implementations of particle counters that need less tweaking
+
+  * Vectorize particles by tracing the edge
+
+  * Filter particles based geometric properties count based on the shape of the 
+  edge polygon 
+  
+  * Enable ROI, 1.1 only works on whole images
+  
+  []
+
+* Usage
+  
+  There is just one step. Under shapelogic menu click "Particle Counter".
+  
+  A dialog will appear with the following information:
+  
+  * How many regions were found
+  
+  * Background color
+  
+  * If the image was a particle image
+  
+  * The number of particles
+  
+  * The number of colors in the color hypothesis
+  
+  []
+
+* Framework to build more advanced particle counters and particle analyzers
+  
+  The particle counter algorithm in ShapeLogic 1.1 is relatively simple. It is 
+  setup to be expanded to handle more advanced algorithms. Here is the flow.
+  
+  * Find one or more color hypothesis
+  
+    * Color clustering using K-mean algorithm
+  
+    * Background color finder
+  
+    []
+
+  * Check that image is a particle image, if it is not stop
+  
+  * Run over the image again find the individual blobs based on the color 
+  hypothesis
+  
+  * Collect color and area information for each blob
+  
+  * Filter particles based on size
+  
+  []
+ 
+* Particle counter functionality can be tweaked by setting parameters
+
+  Here are the parameters you can set with their default values:
+
++-----------------------------------+
+int _iterations = 2; // K-mean iterations for color hypothesis
+double _maxDistance = 50.; // Distance between color in same color bucket
+int _minPixelsInArea = 5; // Minimum number of pixels in particle
++-----------------------------------+
+
+* How to tweak parameters in ShapeLogic v 1.1
+
+  Tweaking the parameters is a little clumsy, currently this has be done from 
+  within the Java code.
+
+  Copy the following text into a file called CustomParticleCounter_.java:
+
++-----------------------------------+
+import org.shapelogic.imageprocessing.BaseParticleCounter;
+import org.shapelogic.imageutil.PlugInFilterAdapter;
+
+/** CustomParticleCounter shows how customize the parameter settings. */
+public class CustomParticleCounter_ extends PlugInFilterAdapter {
+	
+	public CustomParticleCounter_() {
+		super(new BaseParticleCounter() {
+            {
+                _iterations = 4; // K-mean interations for color hypothesis
+                _maxDistance = 90; // Distance between color in same color bucket
+                _minPixelsInArea = 70; // Minimum number of pixels in particle
+            }
+        });
+	}
+}
++-----------------------------------+
+  
+** Compile from within ImageJ
+
+  * Place the CustomParticleCounter_.java into ImageJ/plugin/shapelogic directory.
+  
+  * Compile it from within ImageJ, by going to Plugin -> Compile and Run ...
+
+  []
+  
+** Compile from outside ImageJ
+
+  * Compile CustomParticleCounter_.java someplace else using Eclipse,
+  NetBeans or javac and take the resulting 2 class files:
+
+  CustomParticleCounter.class CustomParticleCounter_$1.class 
+  
+  * Move them into ImageJ/plugin/shapelogic directory.
+
+  []
+
+* Plans for particle counter beyond ShapeLogic v 1.2
+
   * Reasoning under uncertainty using the lazy stream library
-  
-  * Filtering the particles to count base on simple geometric properties, e.g. area, perimeter
-  
-  * Filtering the particles to count base on the shape of the edge polygon  
   
   * Later finding overlapping particles and counting them separately 
   

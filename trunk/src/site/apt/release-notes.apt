@@ -9,27 +9,22 @@ Release notes for ShapeLogic
 
 * 2008/05/07 ShapeLogic v 1.1 released AKA Simple particle counter
   
-  * Automatic color and gray scale {{{particle.html} particle counter example}}
-  working without manual user intervention
+  * {{{particle.html} Particle counter}} working directly on color and gray 
+  scale images without manual user intervention
 
-  * This particle counter implementation, finds average color and standard 
-  deviation for each particle
+  * Particle counter finds average color, standard deviation, area and location 
+  for each particle
   
-  * Little framework to build more advanced particle counters and particle analyzers
-  
-  * First use of ShapeLogic in medical image processing
-
-  * The particle counter has gone through limited testing, and seems to work somewhat well
-
-  * Particle counter functionality can be tweaked by setting parameters, 
-  currently this has be done from within the Java code
+  * Framework to build more advanced particle counters and particle analyzers
   
   * Color clustering using K-mean algorithm
   
   * Background color finder
-  
+
   * Particle image checker
   
+  * First use of ShapeLogic in medical image processing
+
   * Extend all the image processing algorithms in ShapeLogic to work in both 
   ImageJ and in plain Java
 
