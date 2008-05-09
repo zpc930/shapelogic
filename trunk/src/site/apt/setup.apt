@@ -41,12 +41,12 @@ mvn package
   
   This will run all unit tests and if there are no errors, build the jar file.
   
-  Step 2: When the build is successful moved shapelogic/target/shapelogic_\-1.0.jar to
+  Step 2: When the build is successful moved shapelogic/target/shapelogic_\-1.1.jar to
   ImageJ/plugin/shapelogic dir, this will make it available in ImageJ.
   
 * Details to the build process
 
-  The latest jar file is called shapelogic_\-1.0.jar.
+  The latest jar file is called shapelogic_\-1.1.jar.
   
   It has to have an underscore in the name in order for ImageJ to treat it as a plugin.
   
@@ -68,12 +68,12 @@ mvn package
   These jar file can be found in: 
   
 ---------------------
-  shapelogicplugin1.0.zip   	ShapeLogic 1.0 plugin for ImageJ with all dependent jar files  
+  shapelogicplugin1.1.zip   	ShapeLogic 1.0 plugin for ImageJ with all dependent jar files  
 ---------------------
   
   Steps to install:
   
-  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.0.zip}}
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.1.zip}}
 
   * Unzip it
 
