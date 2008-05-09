@@ -132,33 +132,29 @@ ShapeLogic
 
 ** 2008/05/07 ShapeLogic v 1.1 released
   
-  * Automatic color and gray scale {{{particle.html} particle counter example}}
-  working without manual user intervention
+  * {{{particle.html} Particle counter}} working directly on color and gray 
+  scale images without manual user intervention
 
-  * This particle counter implementation, finds average color and standard 
-  deviation for each particle
+  * Particle counter finds average color, standard deviation, area and location 
+  for each particle
   
-  * Little framework to build more advanced particle counters and particle analyzers
-  
-  * First use of ShapeLogic in medical image processing
-
-  * The particle counter has gone through limited testing, and seems to work 
-  somewhat well
-
-  * Particle counter functionality can be tweaked by setting parameters, 
-  currently this has be done from within the Java code
+  * Framework to build more advanced particle counters and particle analyzers
   
   * Color clustering using K-mean algorithm
   
   * Background color finder
   
-  * Particle image checker
-  
-  * Extend all the image processing algorithms in ShapeLogic to work in both 
+  * First use of ShapeLogic in medical image processing
+
+  * Extends all the image processing algorithms in ShapeLogic to work in both 
   ImageJ and in plain Java
 
   []
   
+  The particle counter in ShapeLogic v 1.1 has gone through limited testing, 
+  and seems to work well. Tweaking the parameters is a little clumsy.
+  Users looking for a mature particle counter should wait for ShapeLogic v 1.2.
+
   Documentation will soon be updated to reflect ShapeLogic 1.1.
 
 * Future plans for ShapeLogic
@@ -178,13 +174,13 @@ ShapeLogic
   * Make it easier to set parameters for particle counter in a macro or a 
   configuration file
 
-  * Print report about each blob, color, area, standard deviation to a file
+  * Print report about each particle's color, area, standard deviation to a file
 
   * Different implementations of particle counters
 
-  * Vectorise blobs by tracing the edge
+  * Vectorize particles by tracing the edge
 
-  * Filter blobs based geometric properties of the edge
+  * Filter particles based geometric properties of the edge
   
   []
 
