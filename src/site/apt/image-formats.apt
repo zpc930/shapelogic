@@ -24,7 +24,7 @@ Image formats supported by ShapeLogic
   
 * Main idea Interfaces SLImage and ImageOperation
   
-  Main idea was to abstrac out a subset of the ImageProsessor 
+  Main idea was to abstract out a subset of the ImageProsessor 
   and PlugInFilter into Java interfaces:
 
   * SLImage from ImageProsessor 

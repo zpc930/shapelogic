@@ -200,7 +200,7 @@ mvn site
 
   This was tested with NetBeans 6.0 and 6.1.
   
-Planforms and IDE
+Platforms and IDE
   
   ShapeLogic is pure Java and should run under most platforms and IDEs.
   ShapeLogic development has taken place under Linux, Windows, Eclipse and 
@@ -224,7 +224,7 @@ Planforms and IDE
   
   * There is only one way of doing normal things that seems better integrated
   
-  * More ligthweight than Eclipse
+  * More lightweight than Eclipse
   
   []
   
