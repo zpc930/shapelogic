@@ -8,8 +8,8 @@
 
 Image formats supported by ShapeLogic
 
-  Until ShapeLogic's 1.0 release, the image processing algorithms where only running under
-  {{{http://rsb.info.nih.gov/ij} ImageJ}}.  
+  Until ShapeLogic's 1.0 release, the image processing algorithms where only 
+  running under {{{http://rsb.info.nih.gov/ij} ImageJ}}.  
   
   Now ShapeLogic's image processing algorithms have been decoupled from ImageJ. 
   The idea is not to redo ImageJ's functionality but to make ShapeLogic more 
@@ -22,8 +22,21 @@ Image formats supported by ShapeLogic
   I you want to use the full letter match example outside ImageJ you will need 
   another implementation of the skeletonize algorithm.
   
-* Wrapper classes SLImage and SLImageFilter
+* Main idea Interfaces SLImage and ImageOperation
   
+  Main idea was to abstrac out a subset of the ImageProsessor 
+  and PlugInFilter into Java interfaces:
+
+  * SLImage from ImageProsessor 
+  
+  * ImageOperation from PlugInFilter
+
+  []
+
+  It is trivial implement them them in ImageJ and simple to do it in Java2D.
+  When writing a image processing algorithm write an ImageOperation instead of
+  a PlugInFilter.
+
 ** SLImage
   
   This is a wrapper interface that contains very simple properties of an image.
