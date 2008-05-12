@@ -76,8 +76,8 @@ ShapeLogic
   
   For running as a ImageJ plugin ShapeLogic uses the following libraries:
   
-  * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic is built on top of the 
-  popular ImageJ framework, but could easily stand alone
+  * {{{http://rsb.info.nih.gov/ij/} ImageJ}} ShapeLogic can either run as a 
+  plugin in popular ImageJ framework or stand alone in pure Java2D
 
   * {{{http://commons.apache.org/math/} Commons math}}: Math library for geometry
 
@@ -116,9 +116,13 @@ ShapeLogic
 
   * ShapeLogic is in Beta, as of version 1.0.
 
-  * There is a working example where ShapeLogic is used for matching capital letters.
+  * {{{particle.html} Particle counter}} working directly on color images 
+  without manual user intervention.
+
+  * Working example where ShapeLogic is used for matching capital letters.
   
-  * Image processing algorithms now work both in {{{image-formats.html}ImageJ and on Java's BufferedImage}}.
+  * Image processing algorithms now work both in 
+  {{{image-formats.html}ImageJ and on Java's BufferedImage}}.
 
   * The API is still under development.
 
@@ -169,21 +173,33 @@ ShapeLogic
   
   []
 
-** ShapeLogic v 1.2 with improved particle counter example soon to be released
+** ShapeLogic v 1.2 with particle analyzer soon to be released
 
-  * More testing and tweaking of particle counter
+  * More testing and improvement of particle counter
 
-  * Make it easier to set parameters for particle counter in a macro or a 
-  configuration file
+    * Make it easier to set parameters in a macro or a configuration file
 
-  * Print report about each particle's color, area, standard deviation to a file
+    * Improve to handle blobs.gif image shown here, this was not
+  recognized as a particle image under ShapeLogic 1.1
 
-  * Different implementations of particle counters
-
-  * Vectorize particles by tracing the edge
-
-  * Filter particles based geometric properties of the edge
+    * Enable ROI, 1.1 only works on whole images
   
+    []
+
+  * Particle analyzer
+
+    * Suitable for processing cells and organelles
+
+    * Expand the particle counter to a full featured particle analyzer
+
+    * Print report about each particle's color, area, standard deviation to a file
+
+    * Vectorize particles by tracing the edge into polygon
+
+    * Filter particles based on geometric properties of the edge
+  
+    []
+
   []
 
   The test images are taken from the sample images from ImageJ
@@ -207,9 +223,9 @@ ShapeLogic
   
   [[1]] {{{letter-match.html}Letter matching example}}. Very rudimentary OCR.
   
-  [[1]] {{{project-euler.html}mathematical problems}} from 
+  [[1]] {{{project-euler.html}Mathematical problems}} from 
   {{{http://projecteuler.net}Project Euler}}. 
-  This is a list of 192 mathematical problems that can be solved by computers.
+  This is a list of 193 mathematical problems that can be solved by computers.
   They vary in complexity from simple to hard.
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.
