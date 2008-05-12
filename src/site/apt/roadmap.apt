@@ -13,18 +13,39 @@ Road map
   For more up to date information on ongoing development work look at this blog 
   {{{http://samibadawi.blogspot.com} Declarative Computer Vision}}.
 
-* ShapeLogic v 1.1 soon to be released
+* ShapeLogic v 1.2 with particle analyzer soon to be released
+
+  * More testing and improving of particle counter
+
+  * Make it easier to set parameters for particle counter in a macro or a 
+  configuration file
+
+  * Improve particle counter to handle blobs.gif image shown here, this was not
+  recognized as a particle image under ShapeLogic 1.1
+
+  * Enable ROI for particle counter, 1.1 only works on whole images
   
-  ShapeLogic 1.1 should have less dramatic changes than 0.8, 0.9 and 1.0.
+  * Particle analyzer
+
+    * Suitable for processing cells and organelles
+
+    * Expand the particle counter to a full featured particle analyzer
+
+    * Print report about each particle's color, area, standard deviation to a file
+
+    * Vectorize particles by tracing the edge
+
+    * Filter particles based geometric properties of the edge
   
-* Particle counter example
-  
-  The main goal for 1.1 is to create an automatic color and gray scale 
-  {{{particle.html} particle counter example}}. 
-  This is the first use of ShapeLogic in medical image processing.
-  There are currently particle counters available for ImageJ, however, ShapeLogic's 
-  particle counter will utilize declarative programming tools for a color image processing 
-  problem, making it function without manual user intervention.
+    []
+
+  []
+
+  The main goal for 1.2 is to create an automatic color and gray scale 
+  {{{particle.html} particle analyzer}}. 
+  There are currently particle counters available for ImageJ, however, 
+  ShapeLogic's particle counter and analyzer will function without manual user 
+  intervention.
   
   The test images are taken from the sample images from ImageJ
   
@@ -41,8 +62,6 @@ Road map
   embryos.jpg
   
 * Top priority changes
-  
-  * Simple image processing example working on color images
   
   * Example where ShapeLogic declarative programming is used with other libraries
   
@@ -74,7 +93,7 @@ Road map
 
 * More complex ShapeLogic example application
 
-  The next example application for ShapeLogic will be medical image processing.
+  Particle analyzer
   
   Possibly a problem presented by a Neuroscientists doing Alzheimer's research. 
   It is a very interesting problem, but it would take at least a few months to 
