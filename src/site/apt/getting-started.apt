@@ -145,7 +145,8 @@ Image processing user mode with ImageJ
 
 User defined rules in ShapeLogic
   
-  Starting in ShapeLogic 1.0 it is simpler to make user define rules for matching. 
+  Starting in ShapeLogic 1.0 it is simpler to make user define rules for 
+  matching for use in letter matcher or the second version of particle counter.
   
 
 * Number match example
