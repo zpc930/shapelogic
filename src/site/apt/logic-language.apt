@@ -64,12 +64,11 @@ Different types of declarative programming in ShapeLogic
   
   IoC hold potential but has not been used yet.
   
-* Plan for declarative programming in ShapeLogic 1.1
+* Future plan for declarative programming in ShapeLogic
   
-  * Make menu items in ImageJ's menu for opening and running a user defined 
-  rule database, without user defined Java code
-  
-  []
+  Make menu items in ImageJ's menu for opening and running a user defined 
+  rule database, without user defined Java code. Since it was so easy to define
+  rules in Java this have been given lower priority than originally planned.
   
 ** Problem with Java 6 Scripting for rule definition in ImageJ
 
