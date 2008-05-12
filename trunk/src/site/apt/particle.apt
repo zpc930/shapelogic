@@ -1,12 +1,12 @@
             ------
-            Particle Counter
+            Particle Counter and Analyzer
             ------
             Sami Badawi
             ------
             2008/03/09
             ------
 
-Particle Counter Example
+Particle Counter and Analyzer
 
   ShapeLogic v 1.1 contains the first version of an automatic color and gray 
   scale particle counter working without manual user intervention.
@@ -69,25 +69,33 @@ _minPixelsInArea = 70; // Minimum number of pixels in particle
 
   This information is available but there is no print report function in 1.1.
 
-* Plans for particle counter in ShapeLogic v 1.2
+* ShapeLogic v 1.2 with particle analyzer soon to be released
 
-  * More testing and tweaking of particle counter
+  * More testing and improvement of particle counter
 
-  * Make it easier to set parameters for particle counter in a macro, a 
-  configuration file or possibly a dialog box
+    * Make it easier to set parameters in a macro or a configuration file
 
-  * Print report about each particle, color, area, standard deviation, position 
-  to a file
+    * Improve to handle blobs.gif image shown here, this was not
+  recognized as a particle image under ShapeLogic 1.1
 
-  * Different implementations of particle counters that need less tweaking
-
-  * Vectorize particles by tracing the edge
-
-  * Filter particles based geometric properties count based on the shape of the 
-  edge polygon 
+    * Enable ROI, 1.1 only works on whole images
   
-  * Enable ROI, 1.1 only works on whole images
+    []
+
+  * Particle analyzer
+
+    * Suitable for processing cells and organelles
+
+    * Expand the particle counter to a full featured particle analyzer
+
+    * Print report about each particle's color, area, standard deviation to a file
+
+    * Vectorize particles by tracing the edge into polygon
+
+    * Filter particles based on geometric properties of the edge
   
+    []
+
   []
 
 * Usage
