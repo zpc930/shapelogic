@@ -9,7 +9,7 @@
 Project Euler
 
   {{{http://projecteuler.net}Project Euler}} 
-  is a list of 186 mathematical problems that can be solved by computers.
+  is a list of 193 mathematical problems that can be solved by computers.
   They vary in complexity from simple to hard.
   The goal is to test ShapeLogic's new declarative and functional constructs on real 
   problems and make sure they are terse and intuitive.
