@@ -61,7 +61,8 @@
         </p>
         <p>
           Currently the project is set up to work directly with Eclipse 3.3,
-           Java 1.6, but you can use: NetBeans, IntelliJ, JBuilder, emacs or vi.
+          NetBeans 6.0 / 6.1, Java 1.6, 
+          but you can use: IntelliJ, JBuilder, emacs or vi.
         </p>
       </answer>
     </faq>
@@ -217,6 +218,7 @@
           Here is a short list of of some of them:<br />
           <br />
           <lu>
+            <li><a href="http://java.sun.com/javafx">JavaFX</a> the new Java RIA.</li>
             <li><a href="http://www.prova.ws">Prova</a> is a Java Prolog hybrid.</li>
             <li>List Comprehension in <a href="http://www.python.org/doc/2.3.5/tut/node7.html">Python</a> and <a href="http://www.haskell.org/">Haskell</a>.</li> 
             <li><a href="http://msdn2.microsoft.com/en-us/netframework/aa904594.aspx">Microsoft LINQ</a></li>
@@ -237,8 +239,8 @@
       <question>How can I join the ShapeLogic development team?</question>
       <answer>
         <p>
-        Leave a message on
-          <a href="http://code.google.com/p/shapelogic/wiki/ShapeLogicTeam">Google code hosting ShapeLogic Team</a> 
+          See the 
+          <a href="team.html">contact page</a> 
         </p>
       </answer>
     </faq>
