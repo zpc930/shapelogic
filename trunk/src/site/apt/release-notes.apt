@@ -5,7 +5,7 @@
             ------
             2007/08/06
 
-Release notes for ShapeLogic
+Release notes for releases with development status beta
 
 * 2008/05/07 ShapeLogic v 1.1 released AKA Simple particle counter
   
@@ -80,6 +80,8 @@ Release notes for ShapeLogic
   * 385 unit test that all works on local machine
 
   []
+
+Releases with development status alpha
 
 * 2008/01/23 ShapeLogic v 0.9 released AKA Lazy stream
 
@@ -163,6 +165,8 @@ Release notes for ShapeLogic
 
   []
   
+Releases with development status pre alpha
+
 * 2007/11/20 ShapeLogic release 0.3.0  AKA All capital letters release
 
   Content of 0.3.0:
