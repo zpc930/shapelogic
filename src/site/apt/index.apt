@@ -35,8 +35,8 @@ ShapeLogic
   analysis. ShapeLogic also fills gaps missing from current Java image 
   processing libraries, and uses a commercially friendly license.
   
-  The current ShapeLogic working example demonstrates capital letter matching.  
-  Future, differing, examples to come.
+  ShapeLogic has an automatic color {{{particle.html}particle counter}} and a
+  {{{letter-match.html}letter matching example}}.
 
 * Features
 
@@ -199,6 +199,8 @@ ShapeLogic
     * Filter particles based on geometric properties of the edge
   
     []
+
+  * Color replace, replaces one color within a tolerance with another color
 
   []
 
