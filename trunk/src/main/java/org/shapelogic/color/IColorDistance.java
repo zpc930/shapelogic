@@ -28,4 +28,8 @@ package org.shapelogic.color;
 public interface IColorDistance {
 	double distance(ColorChannels color1, ColorChannels color2);
 	double distance(int[] color1, int[] color2);
+	double distance(int color1, int color2);
+	double distanceToReferenceColor(int color);
+	void setReferenceColor(int color);
 }
+

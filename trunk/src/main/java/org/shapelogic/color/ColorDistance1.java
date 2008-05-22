@@ -16,6 +16,7 @@ package org.shapelogic.color;
 public class ColorDistance1 implements IColorDistance {
 	
     public static ColorDistance1 INSTANCE = new ColorDistance1();
+	protected int _referenceColor;
     
 	@Override
 	public double distance(ColorChannels colorV1, ColorChannels colorV2) {
@@ -46,5 +47,20 @@ public class ColorDistance1 implements IColorDistance {
     public static ColorDistance1 getInstance() {
         return INSTANCE;
     }
+
+	@Override
+	public double distance(int color1, int color2) {
+		return Math.abs(color1-color2);
+	}
+
+	@Override
+	public double distanceToReferenceColor(int color) {
+		return Math.abs(_referenceColor-color);
+	}
+
+	@Override
+	public void setReferenceColor(int color) {
+		_referenceColor = color;
+	}
 
 }
