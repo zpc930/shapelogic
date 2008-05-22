@@ -27,23 +27,33 @@ public class ImageUtil {
 	}
 
 	/** Opens an image and run a PlugInFilter on it. */
-	static public SLImage runPluginFilterOnImage(String fileName, ImageOperation plugInFilter) {
+	static public SLImage runPluginFilterOnImage(String fileName, 
+            ImageOperation plugInFilter, String arg) {
 		IJImage image = new IJImage(fileName);
-		plugInFilter.setup("", image);
+		plugInFilter.setup(arg, image);
 		plugInFilter.run();
 		return image;
 	}
 
+	static public SLImage runPluginFilterOnImage(String fileName, 
+            ImageOperation plugInFilter) {
+        return runPluginFilterOnImage(fileName, plugInFilter,"");
+    }
 	/** Opens an image and run a PlugInFilter on it. */
-	static public SLImage runPluginFilterOnBufferedImage(String fileName, ImageOperation plugInFilter) {
+	static public SLImage runPluginFilterOnBufferedImage(String fileName, 
+            ImageOperation plugInFilter, String arg) {
 		SLImage image = new SLBufferedImage(fileName);
 		if (!image.isEmpty()) {
-			plugInFilter.setup("", image);
+			plugInFilter.setup(arg, image);
 			plugInFilter.run();
 		}
 		return image;
 	}
 	
+	static public SLImage runPluginFilterOnBufferedImage(String fileName, 
+            ImageOperation plugInFilter) {
+        return runPluginFilterOnBufferedImage(fileName, plugInFilter,"");
+    }
 	/** Crate any subclass of Image to a BufferedImage.<br />
 	 * 
 	 * @param image input

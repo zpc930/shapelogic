@@ -1,5 +1,7 @@
 package org.shapelogic.imageutil;
 
+import org.shapelogic.util.BeanUtilsParser;
+import org.shapelogic.util.KeyValueParser;
 import static org.shapelogic.imageutil.ImageJConstants.*;
 
 /** Class to subclass when writing filters.<br />
@@ -15,11 +17,19 @@ public abstract class BaseImageOperation implements ImageOperation {
 	/** This is an argument with information about what should be run. */
 	protected String _arg;
 	protected int _setupReturnValue;
+    protected KeyValueParser _keyValueParser;
 	
 	public BaseImageOperation(int setupReturnValue, String arg, SLImage imp) {
 		_setupReturnValue = setupReturnValue;
-		_arg = arg;
 		_image = imp;
+        try {
+            _keyValueParser = new BeanUtilsParser();
+        }
+        catch (Exception ex) {
+            System.out.println("Could not create a BeanUtilsParser. " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        setArg(arg);
 	}
 	
 	public BaseImageOperation(int setupReturnValue, SLImage imp) {
@@ -48,7 +58,7 @@ public abstract class BaseImageOperation implements ImageOperation {
 	 */
 	@Override
 	public int setup(String arg, SLImage image) {
-		_arg = arg;
+		setArg(arg);
 		_image = image;
 		if (arg.equals("about")) {
 			showAbout(); 
@@ -107,9 +117,31 @@ public abstract class BaseImageOperation implements ImageOperation {
 	public String showAbout() {
 		String message = "";
 		if ((_setupReturnValue & DOES_8G) != 0) message += "Works for 8 bit Gray\n";
+		if ((_setupReturnValue & DOES_8C) != 0) message += "Works for 8 bit Index\n";
+		if ((_setupReturnValue & DOES_16) != 0) message += "Works for 16 bit Cray\n";
 		if ((_setupReturnValue & DOES_RGB) != 0) message += "Works for 32 bit Color\n";
 
 		showMessage("About " + getClass().getSimpleName(),message);
 		return message;
 	}
+    
+	@Override
+    public KeyValueParser getKeyValueParser() {
+        return _keyValueParser;
+    }
+            
+	@Override
+    public void setKeyValueParser(KeyValueParser keyValueParser) {
+        _keyValueParser = keyValueParser;
+    }
+
+	@Override
+    public void setArg(String arg) {
+//        System.out.println("arg: " + arg);
+        if (arg == null) return; //This can be called multiple times
+        _arg = arg;
+        if (_keyValueParser == null) 
+            return;
+        _keyValueParser.parse(this, _arg);
+    }
 }

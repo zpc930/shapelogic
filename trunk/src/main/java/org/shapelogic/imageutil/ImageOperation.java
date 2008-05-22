@@ -1,5 +1,7 @@
 package org.shapelogic.imageutil;
 
+import org.shapelogic.util.KeyValueParser;
+
 /** Modifies a image. An abstraction of ImageJ's PlugInFilter.<br />
  * 
  * Used for a thin wrapper around PlugInFilter or a class that will do the same 
@@ -31,4 +33,10 @@ public interface ImageOperation extends Runnable {
 	int getSetupReturnValue();
 
 	void setSetupReturnValue(int setupReturnValue);
+    
+    KeyValueParser getKeyValueParser();
+            
+    void setKeyValueParser(KeyValueParser keyValueParser);
+    
+    void setArg(String arg);
 }
