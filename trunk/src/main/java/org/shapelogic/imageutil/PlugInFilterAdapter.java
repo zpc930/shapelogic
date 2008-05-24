@@ -30,4 +30,8 @@ public class PlugInFilterAdapter implements PlugInFilter {
 			return _imageOperation.setup(arg, null);
 		return _imageOperation.setup(arg, new IJImage(imp));
 	}
+    
+    public ImageOperation getImageOperation() {
+        return _imageOperation;
+    }
 }
