@@ -1,5 +1,7 @@
 package org.shapelogic.imageutil;
 
+import java.awt.Rectangle;
+
 /** Run a PixelHanler in a given area using ImageJ.<br />
  * 
  * This class was the beginning of SLImage, the image abstraction from ImageJ.<br />
@@ -7,7 +9,7 @@ package org.shapelogic.imageutil;
  * @author Sami Badawi
  *
  */
-public class PixelAreaHandler  
+public class PixelAreaHandler implements HasSLImage
 {
 	protected SLImage _image;
 	
@@ -21,12 +23,18 @@ public class PixelAreaHandler
 	}
 
 	/** Handle a pixel with a color and a coordinate. */
+	public void handlePixelArea(PixelHandler ph, Rectangle rectangle) {
+        handlePixelArea(ph, rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+    }
+	/** Handle a pixel with a color and a coordinate. */
 	public void handlePixelArea(PixelHandler ph, int x, int y, int width, int height) {
 		PixelHandlerEnds phe = null;
 		if (ph instanceof PixelHandlerEnds)
 			phe = (PixelHandlerEnds)ph;
 		int xEnd = x + width;
 		int yEnd = y + height;
+		if (phe != null)
+            phe.setup();
 		for (int j=y;j<yEnd;j++) {
 			if (phe != null)
 				phe.handlePixelStart(x, j, _image.get(x, j));
@@ -35,8 +43,10 @@ public class PixelAreaHandler
 				ph.putPixel(i, j, color);
 			}
 			if (phe != null)
-				phe.handlePixelEnd(x+width, j, _image.get(x+width, j));
+				phe.handlePixelEnd(x+width, j, _image.get(x+width-1, j));
 		}
+		if (phe != null)
+            phe.postProcess();
 	}
 
 	/** Handle all the pixels in an image.<br />
@@ -46,4 +56,9 @@ public class PixelAreaHandler
 	public void handleAllPixels(PixelHandler ph) {
 		handlePixelArea(ph, 0, 0, _image.getWidth(), _image.getHeight());
 	}
+
+    @Override
+    public void setImage(SLImage image) {
+        _image = image;
+    }
 }
