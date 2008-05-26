@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import java.awt.Rectangle;
 import java.util.List;
 
 import org.shapelogic.color.ColorHypothesis;
@@ -143,7 +144,11 @@ public class BaseParticleCounter extends BaseImageOperation
     }
     
     public double getImageArea() {
-        return getImage().getPixelCount();
+        Rectangle rectangle = getImage().getRoi();
+        if (rectangle != null)
+            return rectangle.getWidth() * rectangle.getHeight();
+        else
+            return getImage().getPixelCount();
     }
     
     @Override
