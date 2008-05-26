@@ -17,6 +17,9 @@ import org.shapelogic.color.IColorDistance;
 
 /** ColorReplacer replaces one color with another.<br />
  *
+ * This is for comparison of how the direct ImageJ way compares to the 
+ * ImageOperation working on SLImage.
+ * 
  * @author Sami Badawi
  */
 public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
@@ -82,11 +85,17 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
     	int endX = imageProcessor.getWidth();
 		Rectangle rectangle = imageProcessor.getRoi();
     	if (rectangle != null) {
-    		startLine = rectangle.y;
     		startX = rectangle.x;
-    		endLine = startLine + rectangle.height;
+    		startLine = rectangle.y;
     		endX = startX + rectangle.width;
+    		endLine = startLine + rectangle.height;
     	}
+        else {
+    		startX = 0;
+    		startLine = 0;
+    		endX = imageProcessor.getWidth();
+    		endLine = imageProcessor.getHeight();
+        }
     	for (int y = startLine; y < endLine; y++) {
         	for (int x = startX; x < endX; x++) {
         		currentColor = imageProcessor.get(x, y);
