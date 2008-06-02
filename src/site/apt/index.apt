@@ -128,7 +128,7 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 29,000 lines of Java code including 440 unit tests.
+  * ShapeLogic currently consists of 30,000 lines of Java code including 450 unit tests.
 
   []
 
@@ -200,7 +200,11 @@ ShapeLogic
   
     []
 
-  * Color replace, replaces one color within a tolerance with another color
+  * Color replace, replaces one color within a tolerance with another color.
+  Parameter input dialog with preview check box
+
+  * Organize plugins and macros under ShapeLogic and ShapeLogicOld menus, until
+  1.1 they where all placed under shapelogic menu
 
   []
 
