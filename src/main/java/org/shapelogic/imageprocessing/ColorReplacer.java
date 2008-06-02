@@ -44,8 +44,12 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
             return DONE;
         }
         _flags |= KEEP_PREVIEW;      // standard filter without enlarge
-        if (imp.getStackSize()==1)
-            _flags |= NO_CHANGES;            // undoable as a "compound filter"
+//        if (imp.getStackSize()==1)
+//            _flags |= NO_CHANGES;            // undoable as a "compound filter"
+        //To make macros work with parameters
+        _maxDistance = _gd.getNextNumber();
+        _referenceColor = (int)_gd.getNextNumber();
+        _colorDistance.setReferenceColor(_referenceColor);
         return IJ.setupDialog(imp, _flags);
     }
 
