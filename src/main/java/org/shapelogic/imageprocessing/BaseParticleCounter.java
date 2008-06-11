@@ -23,6 +23,10 @@ import static org.shapelogic.imageutil.ImageJConstants.*;
 public class BaseParticleCounter extends BaseImageOperation 
         implements IParticleCounter 
 {
+	//These defaults are not fine tuned yet
+    final static protected int ITERATIONS_DEFAULTS = 2;
+    final static protected double MAX_DISTANCE_DEFAULTS = 50.;
+    final static protected int MIN_PIXELS_IN_AREA_DEFAULTS = 5;
 	
 	protected Boolean _particleImage;
 	
@@ -36,9 +40,10 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected int _backgroundCount;
 	protected Integer _particleCount;
 	protected double _boundingBoxArea;
-    protected int _iterations = 2;
-    protected double _maxDistance = 50.;
-    protected int _minPixelsInArea = 5;
+	
+    protected int _iterations = ITERATIONS_DEFAULTS;
+    protected double _maxDistance = MAX_DISTANCE_DEFAULTS;
+    protected int _minPixelsInArea = MIN_PIXELS_IN_AREA_DEFAULTS;
     
 	public BaseParticleCounter()
 	{
