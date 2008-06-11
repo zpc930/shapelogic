@@ -18,7 +18,7 @@ import org.shapelogic.imageutil.PlugInFilterAdapter;
  * It need an input parameter definition that is using reflection.<br />
  *
  * For comparison with ColorReplacer.java, this is a little longer but it is
- * more gerneral and pretty straigtforward.<br />
+ * more general and pretty straightforward.<br />
  * 
  * @author Sami Badawi
  */

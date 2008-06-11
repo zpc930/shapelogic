@@ -9,7 +9,7 @@ import org.shapelogic.imageutil.SLImage;
 
 /** Handles Color Replace for individual pixel, used with wrapper to work on whole image.<br />
  * 
- * Example of a PixelHandler that ca be used to change a whole image.<br />
+ * Example of a PixelHandler that can be used to change a whole image.<br />
  * 
  * @author Sami Badawi
  */
