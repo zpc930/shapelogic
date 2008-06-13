@@ -4,9 +4,6 @@ import ij.process.ByteProcessor;
 import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 
-import org.shapelogic.imageprocessing.SBByteCompare;
-import org.shapelogic.imageprocessing.SBColorCompare;
-import org.shapelogic.imageprocessing.SBSimpleCompare;
 import org.shapelogic.imageutil.SLImage;
 
 /** Factory for different color classes.<br />
@@ -66,26 +63,6 @@ public class ColorFactory {
 		}
 		else {
 			System.out.println("Error: could not create PixelAreaFactory. image.getNChannels()=" + image.getNChannels());
-		}
-		return result;
-	}
-
-	public static SBSimpleCompare factory(SLImage ip) throws Exception
-	{
-		SBSimpleCompare result = null;
-		int channels = ip.getNChannels();
-		if (ip.isGray()) {
-			result = new SBByteCompare();
-		}
-		else if (ip.isRgb()) {
-			result = new SBColorCompare();
-		}
-		else {
-			System.out.println("Error: could not create SBSimpleCompare. ip.getNChannels()=" + ip.getNChannels());
-		}
-			
-		if (result != null) {
-			result.init(ip);
 		}
 		return result;
 	}
