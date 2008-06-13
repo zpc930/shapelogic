@@ -94,7 +94,7 @@ public class BaseParticleCounter extends BaseImageOperation
      * @throws java.lang.Exception
      */
     protected void init() throws Exception {
-			SBSimpleCompare compare = ColorFactory.factory(getImage());
+			SBSimpleCompare compare = ProcessingFactory.compareFactory(getImage());
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
 			_segmentation.setSLImage(getImage());
@@ -139,10 +139,10 @@ public class BaseParticleCounter extends BaseImageOperation
 		return _particleImage;
 	}
 
-    /** Count background pixels.<br/>
+    /** Count background pixels.<br />
      *  
-     *  Should be called when only background have been segmented.<br/>
-     *  Not sure that this really makes sense, or I can assume that there is always 1 background.<br/>
+     *  Should be called when only background have been segmented.<br />
+     *  Not sure that this really makes sense, or I can assume that there is always 1 background.<br />
      *  
      * */
     protected boolean countBackground() {
