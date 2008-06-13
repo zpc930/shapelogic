@@ -99,7 +99,7 @@ public class SBSegmentation {
 		}
 	}
 	
-    /**
+    /** Set every pixel that has the input color, regardless of connectivity.<br/>
      * 
      * @param color
      */
@@ -107,8 +107,9 @@ public class SBSegmentation {
 	{
         _pixelCompare.setCurrentColor(color);
 		for (int y=_min_y;y<=_max_y;y++) {
+			int lineStart = pointToIndex(0, y);;
     		for (int x=_min_x;x<=_max_x;x++) {
-                int index = pointToIndex(x, y);
+                int index = lineStart + x;
 				if (!_pixelCompare.isHandled(index) &&
                         _pixelCompare.similar(index)) {
 					segment(x, y);
