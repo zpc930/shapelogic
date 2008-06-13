@@ -99,7 +99,7 @@ public class SBSegmentation {
 		}
 	}
 	
-    /** Set every pixel that has the input color, regardless of connectivity.<br/>
+    /** Set every pixel that has the input color, regardless of connectivity.<br />
      * 
      * @param color
      */

@@ -3,7 +3,7 @@ package org.shapelogic.color;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/** SimpleColorHypothesis is a color hypothesis.<br/>
+/** SimpleColorHypothesis is a color hypothesis.<br />
  * 
  * @author Sami Badawi
  *

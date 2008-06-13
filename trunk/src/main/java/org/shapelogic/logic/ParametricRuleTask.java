@@ -5,8 +5,8 @@ import org.shapelogic.predicate.BinaryPredicateFactory;
 
 /** More general task that can create all the other tasks, by taking 2 parameters.
  * <p>
- * 1: A variable that the expression should work on<br/>
- * 2: An expression that can contain the #, which will be replaced with the variable <br/>
+ * 1: A variable that the expression should work on<br />
+ * 2: An expression that can contain the #, which will be replaced with the variable <br />
  * 
  * <p>
  * The constructor takes a <code>BinaryPredicate</code> as an argument.
