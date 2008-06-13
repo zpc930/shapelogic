@@ -5,12 +5,9 @@ import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
 import java.util.BitSet;
 
-import org.shapelogic.color.ColorAreaFactory;
-import org.shapelogic.color.ValueAreaFactory;
-import org.shapelogic.color.GrayAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 
-/** Abstract class fro compare.
+/** Abstract class for compare.<br/>
  * 
  * @author Sami Badawi
  *
@@ -75,71 +72,7 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 			handledColor = _currentColor;
 	}
 	
-	public static SBSimpleCompare factory(ImageProcessor ip) throws Exception
-	{
-		SBSimpleCompare result = null;
-		if (ip instanceof ByteProcessor) {
-			result = new SBByteCompare();
-		}
-		else if (ip instanceof ColorProcessor) {
-			result = new SBColorCompare();
-		}
-			
-		if (result != null) {
-			result.init(ip);
-		}
-		return result;
-	}
-
-	public static SBSimpleCompare factory(SLImage ip) throws Exception
-	{
-		SBSimpleCompare result = null;
-		int channels = ip.getNChannels();
-		if (ip.isGray()) {
-			result = new SBByteCompare();
-		}
-		else if (ip.isRgb()) {
-			result = new SBColorCompare();
-		}
-		else {
-			System.out.println("Error: could not create SBSimpleCompare. ip.getNChannels()=" + ip.getNChannels());
-		}
-			
-		if (result != null) {
-			result.init(ip);
-		}
-		return result;
-	}
-
-	public static ValueAreaFactory segmentAreaFactory(ImageProcessor ip) throws Exception
-	{
-		ValueAreaFactory result = null;
-		if (ip instanceof ByteProcessor) {
-			result = new GrayAreaFactory();
-		}
-		else if (ip instanceof ColorProcessor) {
-			result = new ColorAreaFactory();
-		}
-		return result;
-	}
-
-	public static ValueAreaFactory segmentAreaFactory(SLImage image) throws Exception
-	{
-		ValueAreaFactory result = null;
-		int channels = image.getNChannels(); 
-		if (image.isGray()) {
-			result = new GrayAreaFactory();
-		}
-		else if (image.isRgb()) {
-			result = new ColorAreaFactory();
-		}
-		else {
-			System.out.println("Error: could not create PixelAreaFactory. image.getNChannels()=" + image.getNChannels());
-		}
-		return result;
-	}
-
-    /** Call at start, this might also work as a reset	 */
+	/** Call at start, this might also work as a reset	 */
 	public void init(ij.process.ImageProcessor ip) throws Exception
 	{
 		bitSet = new BitSet(ip.getWidth()*ip.getHeight());

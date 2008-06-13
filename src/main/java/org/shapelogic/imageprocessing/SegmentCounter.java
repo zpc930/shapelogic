@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ColorFactory;
 import org.shapelogic.imageutil.BaseImageOperation;
 
 import static org.shapelogic.imageutil.ImageJConstants.*;
@@ -34,14 +35,14 @@ public class SegmentCounter extends BaseImageOperation {
 		try {
 			int startX = getImage().getWidth()/2;
 			int startY = getImage().getHeight()/2;
-			SBSimpleCompare compare = SBSimpleCompare.factory(getImage());
+			SBSimpleCompare compare = ColorFactory.factory(getImage());
 			compare.grabColorFromPixel(startX, startY);
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
 			_segmentation.setSLImage(getImage());
 			_segmentation.setPixelCompare(compare);
 			if (_saveArea)
-				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
+				_segmentation.setSegmentAreaFactory(ColorFactory.segmentAreaFactory(getImage()));
 			_segmentation.init();
 			if (_doAll)
 				_segmentation.segmentAll();
