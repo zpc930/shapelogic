@@ -1,13 +1,10 @@
 package org.shapelogic.imageprocessing;
 
-import ij.process.ByteProcessor;
-import ij.process.ColorProcessor;
-import ij.process.ImageProcessor;
 import java.util.BitSet;
 
 import org.shapelogic.imageutil.SLImage;
 
-/** Abstract class for compare.<br/>
+/** Abstract class for compare.<br />
  * 
  * @author Sami Badawi
  *
