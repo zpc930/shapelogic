@@ -3,6 +3,7 @@ package org.shapelogic.imageprocessing;
 import java.awt.Rectangle;
 import java.util.List;
 
+import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorHypothesis;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.IColorHypothesisFinder;
@@ -15,7 +16,16 @@ import static org.shapelogic.imageutil.ImageJConstants.*;
 /** ParticleCounter count number of particles in a particle image.
  * <br />
  * 
- * This is really just a slightly modified segmenter.
+ * This is using the SBSegmentation that is also used by Segmenter.<br />
+ * 
+ * In this base implementation:<br />
+ * Find a color hypothesis.<br />
+ * Set everything in the background color into one segment.<br />
+ * Segment the rest into normal segments regardless of color.<br />
+ * 
+ * If this is overridden then there can be more segments in the background color.<br />
+ * 
+ * How do I know what is background colored?<br />
  * 
  * @author Sami Badawi
  *
@@ -31,9 +41,11 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected Boolean _particleImage;
 	
 	/** Modifying colors */
-	protected boolean _modifying = true;
+	protected boolean _modifying = false;
 	protected SBSegmentation _segmentation;
-	protected boolean _saveArea;
+
+	/** Create a IColorAndVariance, area for each particle. */
+	protected boolean _saveArea = true;
     protected IColorHypothesisFinder _colorHypothesisFinder;
     protected ColorHypothesis _colorHypothesis;
 	protected int _backgroundArea;
@@ -48,8 +60,6 @@ public class BaseParticleCounter extends BaseImageOperation
 	public BaseParticleCounter()
 	{
 		super(DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
-		_saveArea = true;
-		_modifying = false;
 	}
 
     @Override
@@ -68,7 +78,7 @@ public class BaseParticleCounter extends BaseImageOperation
                 countBackground();
                 //segment all the remaining
                 if (_particleImage != null && _particleImage) {
-                    _segmentation.setMaxDistance(1000);//Everything get lumped together
+                    _segmentation.setMaxDistance(1000000000);//Everything get lumped together
                     _segmentation.segmentAll();
                 }
             }
@@ -84,13 +94,13 @@ public class BaseParticleCounter extends BaseImageOperation
      * @throws java.lang.Exception
      */
     protected void init() throws Exception {
-			SBSimpleCompare compare = SBSimpleCompare.factory(getImage());
+			SBSimpleCompare compare = ColorFactory.factory(getImage());
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
 			_segmentation.setSLImage(getImage());
 			_segmentation.setPixelCompare(compare);
 			if (_saveArea)
-				_segmentation.setSegmentAreaFactory(SBSimpleCompare.segmentAreaFactory(getImage()));
+				_segmentation.setSegmentAreaFactory(ColorFactory.segmentAreaFactory(getImage()));
 			_segmentation.init();
             _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, _maxDistance);
             _colorHypothesisFinder.setIterations(_iterations);
@@ -116,6 +126,7 @@ public class BaseParticleCounter extends BaseImageOperation
 		return _segmentation;
 	}
 
+    /** This is not fine tuned. */
     @Override
 	public boolean isParticleImage() {
 		if (_particleImage == null) {
@@ -128,6 +139,12 @@ public class BaseParticleCounter extends BaseImageOperation
 		return _particleImage;
 	}
 
+    /** Count background pixels.<br/>
+     *  
+     *  Should be called when only background have been segmented.<br/>
+     *  Not sure that this really makes sense, or I can assume that there is always 1 background.<br/>
+     *  
+     * */
     protected boolean countBackground() {
         boolean result = false;
     	_backgroundArea = 0;
