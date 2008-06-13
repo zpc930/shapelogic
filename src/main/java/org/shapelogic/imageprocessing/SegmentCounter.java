@@ -35,7 +35,7 @@ public class SegmentCounter extends BaseImageOperation {
 		try {
 			int startX = getImage().getWidth()/2;
 			int startY = getImage().getHeight()/2;
-			SBSimpleCompare compare = ColorFactory.factory(getImage());
+			SBSimpleCompare compare = ProcessingFactory.compareFactory(getImage());
 			compare.grabColorFromPixel(startX, startY);
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
