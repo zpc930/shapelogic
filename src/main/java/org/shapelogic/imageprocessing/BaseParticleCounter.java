@@ -66,30 +66,55 @@ public class BaseParticleCounter extends BaseImageOperation
 	public void run() {
 		try {
             init();
-            //find the color hypothesis
-            _colorHypothesis = _colorHypothesisFinder.findBestColorHypothesis();
-            //segment all the background colors, count how maybe connected regions this has
-            if (_colorHypothesis.getBackground() == null) {
-                _particleImage = Boolean.FALSE;
-            }
-            else {
-                _segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
-                //count how many components and how much area the background takes up
-                countBackground();
-                //segment all the remaining
-                if (_particleImage != null && _particleImage) {
-                    _segmentation.setMaxDistance(1000000000);//Everything get lumped together
-                    _segmentation.segmentAll();
-                }
-            }
-			showMessage(getClass().getSimpleName(), getStatus());
+            findColorHypothesis();
+			segment();
+			globalFilter();
+			prepareResultsTable();
+			showResultDialog();
+			displayResultsTable();
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
     
-    /** Setup all the needed factory methods based on what type the image has.
+    protected void findColorHypothesis() {
+        _colorHypothesis = _colorHypothesisFinder.findBestColorHypothesis();
+	}
+
+    protected void segment() {
+        if (_colorHypothesis.getBackground() == null) {
+            _particleImage = Boolean.FALSE;
+        }
+        else {
+            _segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
+            //count how many components and how much area the background takes up
+            countBackground();
+            //segment all the remaining
+            if (_particleImage != null && _particleImage) {
+                _segmentation.setMaxDistance(1000000000);//Everything get lumped together
+                _segmentation.segmentAll();
+            }
+        }
+	}
+    
+    protected void globalFilter() {
+    	
+    }
+    
+    protected void showResultDialog() {
+		showMessage(getClass().getSimpleName(), getStatus());
+    }
+    
+    protected void prepareResultsTable() {
+    	
+    }
+    
+    protected void displayResultsTable() {
+    	
+    }
+
+	/** Setup all the needed factory methods based on what type the image has.
      * 
      * @throws java.lang.Exception
      */

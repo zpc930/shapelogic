@@ -34,7 +34,6 @@ public class ParticleCounter_ extends ParticleCounter implements ExtendedPlugInF
 	@Override
 	public void run(ImageProcessor ip) {
 		run();
-		populateTable();
 	}
 
 	@Override
@@ -46,8 +45,8 @@ public class ParticleCounter_ extends ParticleCounter implements ExtendedPlugInF
 		
 	}
 	
-    void populateTable() {
-    	
+	@Override
+    protected void prepareResultsTable() {
     	List<IColorAndVariance> particles = _segmentation.getSegmentAreaFactory().getStore();
     	_rt.getFreeColumn(COLOR);
     	int i=0;
@@ -68,8 +67,12 @@ public class ParticleCounter_ extends ParticleCounter implements ExtendedPlugInF
         	}
     		i++;
     	}
-    	_rt.show("Particle properties");
     }
+	
+	@Override
+	protected void displayResultsTable() {
+    	_rt.show("Particle properties");
+	}
 
 	@Override
 	public void setNPasses(int passes) {
