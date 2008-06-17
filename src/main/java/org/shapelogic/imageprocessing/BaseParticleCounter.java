@@ -1,6 +1,7 @@
 package org.shapelogic.imageprocessing;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.shapelogic.color.ColorFactory;
@@ -57,6 +58,9 @@ public class BaseParticleCounter extends BaseImageOperation
     protected double _maxDistance = MAX_DISTANCE_DEFAULTS;
     protected int _minPixelsInArea = MIN_PIXELS_IN_AREA_DEFAULTS;
     
+    protected List<IColorAndVariance> _particlesOrig;
+    protected List<IColorAndVariance> _particlesFiltered;
+    
 	public BaseParticleCounter()
 	{
 		super(DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
@@ -69,6 +73,7 @@ public class BaseParticleCounter extends BaseImageOperation
             findColorHypothesis();
 			segment();
 			globalFilter();
+			analyzeParticles();
 			prepareResultsTable();
 			showResultDialog();
 			displayResultsTable();
@@ -89,7 +94,7 @@ public class BaseParticleCounter extends BaseImageOperation
         else {
             _segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
             //count how many components and how much area the background takes up
-            countBackground();
+            findBackground();
             //segment all the remaining
             if (_particleImage != null && _particleImage) {
                 _segmentation.setMaxDistance(1000000000);//Everything get lumped together
@@ -99,6 +104,21 @@ public class BaseParticleCounter extends BaseImageOperation
 	}
     
     protected void globalFilter() {
+    	_particlesOrig = new ArrayList<IColorAndVariance>();
+    	final List<IColorAndVariance> store = _segmentation.getSegmentAreaFactory().getStore();
+    	for (int i=_backgroundCount;i<store.size();i++) {
+    		_particlesOrig.add( store.get(i) );
+    	}
+    	
+    	_particlesFiltered = new ArrayList<IColorAndVariance>();
+    	for (IColorAndVariance particle: _particlesOrig) {
+    		if (_minPixelsInArea <= particle.getArea() )
+    		_particlesFiltered.add( particle );
+    	}
+    	
+    }
+    
+    protected void analyzeParticles() {
     	
     }
     
@@ -170,7 +190,7 @@ public class BaseParticleCounter extends BaseImageOperation
      *  Not sure that this really makes sense, or I can assume that there is always 1 background.<br />
      *  
      * */
-    protected boolean countBackground() {
+    protected boolean findBackground() {
         boolean result = false;
     	_backgroundArea = 0;
 		List<IColorAndVariance> store = _segmentation.getSegmentAreaFactory().getStore();
@@ -182,7 +202,8 @@ public class BaseParticleCounter extends BaseImageOperation
                 aggregatedBoundingBox.add(pixelArea.getBoundingBox());
             }
         }
-        _backgroundCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelsInArea);
+        //XXX should take all with new method
+        _backgroundCount = _segmentation.getSegmentAreaFactory().getStore().size();
         _boundingBoxArea = 
                 (aggregatedBoundingBox.getDiagonalVector().getX() +1) * 
                 (aggregatedBoundingBox.getDiagonalVector().getY() + 1);
@@ -201,11 +222,7 @@ public class BaseParticleCounter extends BaseImageOperation
     @Override
 	public int getParticleCount() {
         if (_particleCount == null) {
-            _segmentation.getSegmentAreaFactory().sort();
-            List<IColorAndVariance> store = 
-                    _segmentation.getSegmentAreaFactory().getStore();
-            int totalCount = _segmentation.getSegmentAreaFactory().areasGreaterThan(_minPixelsInArea);
-            _particleCount = totalCount - _backgroundCount;
+            _particleCount = _particlesFiltered.size();
         }
         return _particleCount;
 	}
