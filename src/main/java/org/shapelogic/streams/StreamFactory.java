@@ -101,7 +101,7 @@ public class StreamFactory {
 		//problem with an extra stream and what kind of caching I should use
 		//would it be better to have a way to turn an expression into a Calc and 
 		//I should have a way to combine Calcs.
-		final NamedNumberedStream<In0> input = new NamedNumberedStream(inputName);
+		final NumberedStream<In0> input = findNumberedStream(inputName);
 		final Calc1<In0, Boolean> calcBoolean = makeFunctionBooleanCalc1(expression,
 				binaryPredicate, compareObject, language, functionName);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
@@ -140,7 +140,7 @@ public class StreamFactory {
 		//problem with an extra stream and what kind of caching I should use
 		//would it be better to have a way to turn an expression into a Calc and 
 		//I should have a way to combine Calcs.
-		final NamedNumberedStream<In0> input = new NamedNumberedStream(inputName);
+		final NumberedStream<In0> input = findNumberedStream(inputName);
 		final Calc1<In0, Boolean> calcBoolean = makeFunctionBooleanCalc1(expression,
 				binaryPredicateString, compareObject, language, functionName);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
@@ -188,6 +188,23 @@ public class StreamFactory {
 			expression, binaryPredicate, compareObject, language, functionName);
 		return calcBoolean;
 	}
+	
+	/** Factory for finding NumberedStream in RootMap.
+	 * 
+	 * @param <E>
+	 * @param name of the stream
+	 * @return
+	 */
+	static public <E> NumberedStream<E> findNumberedStream(String name) {
+		Object obj = RootMap.get(name);
+		if (obj == null)
+			throw new RuntimeException("NumberedStream not found in RootMap for name: " 
+					+ name + ", nothing found.");
+		if (obj instanceof NumberedStream)
+			return (NumberedStream<E>) obj;
+		throw new RuntimeException("NumberedStream not found in RootMap for name: " + name + 
+				", type: " + obj.getClass().getSimpleName());
+	}
 
 	
 	static public <In0, In2> ListStream<Boolean> createListStream0(String name, 
@@ -195,7 +212,7 @@ public class StreamFactory {
 			final BinaryPredicate<In0, In2> binaryPredicate, 
 			final In2 compareObject)
 	{
-		final NamedNumberedStream<In0> input = new NamedNumberedStream(inputName);
+		final NumberedStream<In0> input = findNumberedStream(inputName);
 		final Calc1<In0, Boolean> calcBoolean = makeBooleanCalc1(binaryPredicate, compareObject);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
 			new ListCalcStream1<In0,Boolean>(calcBoolean,input);

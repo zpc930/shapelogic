@@ -25,7 +25,7 @@ public class XOrListStream extends BaseListStreamList<Boolean,String> {
 		_ohNames = ohNames;
 		_inputStream = new ArrayList(); 
 		for (String streamName: _ohNames) {
-			NumberedStream numberedStream = NamedNumberedStream.getInstance(streamName);
+			NumberedStream numberedStream = StreamFactory.findNumberedStream(streamName);
 			if (numberedStream != null)
 				getInputStream().add(numberedStream);
 			else
