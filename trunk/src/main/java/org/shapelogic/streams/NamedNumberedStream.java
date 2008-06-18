@@ -1,24 +1,25 @@
 package org.shapelogic.streams;
 
 import org.shapelogic.calculation.RootMap;
-import org.shapelogic.util.Constants;
 
 /** Get a Named Stream out of the context.
+ * 
+ * <p>The idea is that there should be a stream already and this will create a 
+ * thin wrapper around it, so now there will be an extra stream, this serves no 
+ * purpose.</p>
  * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class NamedNumberedStream<E> implements NumberedStream<E> {
 	protected String _key;
 	protected NumberedStream<E> _inputStream; 
 	
-	public NamedNumberedStream(String key, int maxLast) {
+	@Deprecated
+	public NamedNumberedStream(String key) {
 		_key = key;
 		_inputStream = (NumberedStream) RootMap.get(_key);
-	}
-
-	public NamedNumberedStream(String key) {
-		this(key,Constants.LAST_UNKNOWN);
 	}
 	
 	static public NumberedStream getInstance(String key) {

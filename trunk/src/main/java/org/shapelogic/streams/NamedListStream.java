@@ -4,24 +4,25 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.shapelogic.calculation.RootMap;
-import org.shapelogic.util.Constants;
 
-/** Get a Named Stream out of the context.
+/** Get a Named Stream out of the context.<br />
+ * 
+ * <p>The idea is that there should be a stream already and this will create a 
+ * thin wrapper around it, so now there will be an extra stream, this serves no 
+ * purpose.</p>
  * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class NamedListStream<E> implements ListStream<E> {
 	protected String _key;
 	protected ListStream<E> _inputStream; 
 	
-	public NamedListStream(String key, int maxLast) {
+	@Deprecated
+	public NamedListStream(String key) {
 		_key = key;
 		_inputStream = (ListStream) RootMap.get(_key);
-	}
-
-	public NamedListStream(String key) {
-		this(key,Constants.LAST_UNKNOWN);
 	}
 
 	@Override

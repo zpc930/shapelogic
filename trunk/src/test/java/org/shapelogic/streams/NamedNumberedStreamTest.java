@@ -11,6 +11,7 @@ import junit.framework.TestCase;
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class NamedNumberedStreamTest extends TestCase {
 	
 	
