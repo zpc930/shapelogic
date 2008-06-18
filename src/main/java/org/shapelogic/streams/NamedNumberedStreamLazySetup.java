@@ -2,7 +2,6 @@ package org.shapelogic.streams;
 
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.calculation.SetupFlagged;
-import org.shapelogic.util.Constants;
 
 /** Get a Named Stream out of the context.
  * <br />
@@ -17,17 +16,13 @@ public class NamedNumberedStreamLazySetup<E> implements NumberedStream<E>, Setup
 	protected NumberedStream<E> _inputStream; 
 	protected boolean _setup = false;
 	
-	public NamedNumberedStreamLazySetup(String name, int maxLast) {
-		_name = name;
-	}
-
 	public NamedNumberedStreamLazySetup(String name) {
-		this(name,Constants.LAST_UNKNOWN);
+		_name = name;
 	}
 
 	@Override
 	public E get(int input) {
-		if (!isSetup())
+		if (!_setup)
 			setup();
 		return _inputStream.get(input);
 	}
@@ -66,21 +61,21 @@ public class NamedNumberedStreamLazySetup<E> implements NumberedStream<E>, Setup
 
 	@Override
 	public E getValue() {
-		if (!isSetup())
+		if (!_setup)
 			setup();
 		return _inputStream.getValue();
 	}
 
 	@Override
 	public boolean hasNext() {
-		if (!isSetup())
+		if (!_setup)
 			setup();
 		return _inputStream.hasNext();
 	}
 
 	@Override
 	public E next() {
-		if (!isSetup())
+		if (!_setup)
 			setup();
 		return _inputStream.next();
 	}
