@@ -9,6 +9,7 @@ package org.shapelogic.util;
 public class Constants {
 	public static final double PRECISION = 0.001;
 	public static final int BYTE_MASK = 255;
+
 	public static final byte DIRECTION_NOT_USED = -1;
 	public static final int DIRECTIONS_AROUND_POINT = 8;
 	public static final int BEFORE_START_INDEX = -1; 
@@ -19,6 +20,16 @@ public class Constants {
 	/** What you need to add to the y coordinate to get to the indexed point */
 	public static int[] CYCLE_POINTS_Y = {0, 1, 1, 1,  0,  -1, -1, -1};
 
+	//Directions
+	public static final int LEFT = 0;
+	public static final int LEFT_DOWN = 1;
+	public static final int DOWN = 2;
+	public static final int RIGHT_DOWN = 3;
+	public static final int RIGHT = 4;
+	public static final int RIGHT_UP = 5;
+	public static final int UP = 6;
+	public static final int LEFT_UP = 7;
+	
 	//Equality test tasks
 	public static final String SIMPLE_NUMERIC_TASK = "SimpleNumericTask";
 	public static final String COUNT_COLLECTION_TASK = "CountCollectionTask";
