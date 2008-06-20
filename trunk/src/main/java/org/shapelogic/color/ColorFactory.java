@@ -38,6 +38,26 @@ public class ColorFactory {
 		if (image.isRgb())  return ColorChannelSplitterRGB.getInstance();
 		return null;
 	}
+	
+	public static IColorDistance makeColorDistance(SLImage image) {
+		if (image.isGray()) return new ColorDistance1();
+		if (image.isRgb())  return  new ColorDistance1RGB();
+		return null;
+	}
+
+	public static IColorDistanceWithImage makeColorDistanceWithImage(SLImage image) {
+		IColorDistanceWithImage result;
+		if (image.isGray()) {
+			result = new ColorDistanceWithImage1();
+		}
+		else if (image.isRgb()) { 
+			result = new ColorDistanceWithImage1RGB();
+		}
+		else
+			return null;
+		result.setImage(image);
+		return result;
+	}
 
 	public static ValueAreaFactory segmentAreaFactory(ImageProcessor ip) throws Exception
 	{
