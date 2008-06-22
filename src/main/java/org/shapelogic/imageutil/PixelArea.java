@@ -76,5 +76,13 @@ public class PixelArea implements PixelHandler
 	public void putPixel(int x, int y, int color) {
 		addPoint(x, y);
 	}
+
+	public int getStartX() {
+		return _startX;
+	}
+
+	public int getStartY() {
+		return _startY;
+	}
 	
 }
