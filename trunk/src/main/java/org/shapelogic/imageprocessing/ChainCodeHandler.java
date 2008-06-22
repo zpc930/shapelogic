@@ -441,11 +441,25 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 
 //Simple interaction part
 		
-	public void addChainCode(byte chainCode) {
+	public boolean addChainCode(byte chainCode) {
 		_lastChain++;
+		if (_lastChain == _chainCodeForMultiLine.length) //XXX should probably expand the array
+		{
+			if (false) {
+				int maxPoints = _chainCodeForMultiLine.length;
+				byte[] xtemp = new byte[maxPoints*2];
+				System.arraycopy(_chainCodeForMultiLine, 0, xtemp, 0, maxPoints);
+				_chainCodeForMultiLine = xtemp;
+			}
+			else {
+				_lastChain--;
+				return false;
+			}
+		}	
 		_chainCodeForMultiLine[_lastChain] = chainCode;
 		_lastPoint.translate(Constants.CYCLE_POINTS_X[chainCode], Constants.CYCLE_POINTS_Y[chainCode]);
 		_bBox.addPoint(_lastPoint);
+		return true;
 	}
 
 	/** Opposite Direction.
