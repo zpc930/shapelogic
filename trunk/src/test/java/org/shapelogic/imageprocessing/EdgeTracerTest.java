@@ -4,15 +4,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import junit.framework.TestCase;
+
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.AnnotatedShape;
 import org.shapelogic.polygon.GeometricShape2D;
-import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.LineType;
 import org.shapelogic.util.PointType;
-
-import junit.framework.TestCase;
 
 /** Test of EdgeTracer.<br />
  * 
@@ -35,6 +34,7 @@ public class EdgeTracerTest extends TestCase {
 		String filename = "redbox";
 		SLImage image = new IJImage(filePath(filename,".png"));
 		int foregroundColor = 0xff0000; 
+		int foregroundColorClose = 0xfe0000; 
 		assertNotNull(image);
 		assertFalse(image.isEmpty());
 		assertEquals(10,image.getWidth());
@@ -43,7 +43,29 @@ public class EdgeTracerTest extends TestCase {
 		assertEquals(-1, image.get(0, 0)); //Background unmasked
 		assertEquals(0xffffff, image.get(0, 0) & 0xffffff); //Background
 		assertEquals(foregroundColor, image.get(2, 2) & 0xffffff); //Foreground
-		EdgeTracer edgeTracer = new EdgeTracer(image,foregroundColor,10,true);
+		EdgeTracer edgeTracer = new EdgeTracer(image,foregroundColorClose,10,true);
+		ChainCodeHandler cch = edgeTracer.autoOutline(5,2);
+		//if 5,5 was used as start point a soft point would have been found
+		assertEquals(23,cch.getLastChain());
+		assertEquals(4, cch.getAnnotatedShape().getShapesForAnnotation(PointType.HARD_CORNER).size());
+		assertEquals(4, cch.getAnnotatedShape().getShapesForAnnotation(LineType.STRAIGHT).size());
+		printAnnotaions(cch.getAnnotatedShape());
+	}
+
+	public void testRedboxInverse() {
+		String filename = "redbox";
+		SLImage image = new IJImage(filePath(filename,".png"));
+		int foregroundColor = 0xff0000; 
+		int backgroundColorClose = 0xfffeff; 
+		assertNotNull(image);
+		assertFalse(image.isEmpty());
+		assertEquals(10,image.getWidth());
+		assertEquals(10,image.getHeight());
+		assertTrue(image.isRgb());
+		assertEquals(-1, image.get(0, 0)); //Background unmasked
+		assertEquals(0xffffff, image.get(0, 0) & 0xffffff); //Background
+		assertEquals(foregroundColor, image.get(2, 2) & 0xffffff); //Foreground
+		EdgeTracer edgeTracer = new EdgeTracer(image,backgroundColorClose,10,false);
 		ChainCodeHandler cch = edgeTracer.autoOutline(5,2);
 		//if 5,5 was used as start point a soft point would have been found
 		assertEquals(23,cch.getLastChain());

@@ -59,7 +59,7 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(40,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(476,factory.getStore().size()); 
+		assertEquals(65,factory.getStore().size()); 
 //		assertTrue(_particleCounter.isParticleImage()); 
 //		assertEquals(30,_particleCounter.getParticleCount()); 
 //		assertTrue(bp.isInvertedLut());
@@ -77,9 +77,9 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(383,factory.getStore().size()); //XXX should be 2
+		assertEquals(61,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage()); 
-		assertEquals(17,_particleCounter.getParticleCount()); 
+		assertEquals(5,_particleCounter.getParticleCount()); 
 	}
 
 	public void testEmbryosWithParameters() {
@@ -112,9 +112,9 @@ public class ParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(252,factory.getStore().size()); 
+		assertEquals(66,factory.getStore().size()); 
 		assertTrue(_particleCounter.isParticleImage()); 
-		assertEquals(8,_particleCounter.getParticleCount()); 
+		assertEquals(7,_particleCounter.getParticleCount()); 
 	}
 
 	/** This gets opened as a byte interleaved and not as an int RGB

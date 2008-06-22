@@ -31,7 +31,7 @@ public class BaseParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(16382457,pixel); //So this is a white background pixel
 		ValueAreaFactory factory = _baseParticleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(6,factory.getStore().size()); //XXX change to 2
+		assertEquals(2,factory.getStore().size());
 		assertEquals(1,_baseParticleCounter.getParticleCount());
 		assertTrue(_baseParticleCounter.isParticleImage());
 	}
@@ -75,8 +75,8 @@ public class BaseParticleCounterTest extends AbstractImageProcessingTests {
 		assertEquals(40,pixel);
 		ValueAreaFactory factory = _baseParticleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(199,factory.getStore().size()); 
-		assertFalse(_baseParticleCounter.isParticleImage()); //XXX should be changed to true
+		assertEquals(67,factory.getStore().size()); 
+		assertTrue(_baseParticleCounter.isParticleImage());
 		assertTrue(bp.isInvertedLut());
 	}
 
@@ -105,7 +105,7 @@ public class BaseParticleCounterTest extends AbstractImageProcessingTests {
 		ValueAreaFactory factory = _baseParticleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(1,_baseParticleCounter.getParticleCount());
-		assertEquals(6,factory.getStore().size()); 
+		assertEquals(2,factory.getStore().size()); 
 	}
 
 	public void testSpot1Noise10() {
@@ -118,6 +118,6 @@ public class BaseParticleCounterTest extends AbstractImageProcessingTests {
 		ValueAreaFactory factory = _baseParticleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(1,_baseParticleCounter.getParticleCount());
-		assertEquals(19,factory.getStore().size()); 
+		assertEquals(2,factory.getStore().size()); 
 	}
 }
