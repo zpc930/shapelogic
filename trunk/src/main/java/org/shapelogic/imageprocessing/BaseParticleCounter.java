@@ -58,8 +58,8 @@ public class BaseParticleCounter extends BaseImageOperation
     protected double _maxDistance = MAX_DISTANCE_DEFAULTS;
     protected int _minPixelsInArea = MIN_PIXELS_IN_AREA_DEFAULTS;
     
-    protected List<IColorAndVariance> _particlesOrig;
-    protected List<IColorAndVariance> _particlesFiltered;
+    protected List<IColorAndVariance> _particlesOrig = new ArrayList<IColorAndVariance>();
+    protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
     
 	public BaseParticleCounter()
 	{
@@ -92,6 +92,7 @@ public class BaseParticleCounter extends BaseImageOperation
             _particleImage = Boolean.FALSE;
         }
         else {
+        	_segmentation.setMaxDistance((int)_maxDistance);
             _segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
             //count how many components and how much area the background takes up
             findBackground();
@@ -104,13 +105,13 @@ public class BaseParticleCounter extends BaseImageOperation
 	}
     
     protected void globalFilter() {
-    	_particlesOrig = new ArrayList<IColorAndVariance>();
+    	_particlesOrig.clear();
     	final List<IColorAndVariance> store = _segmentation.getSegmentAreaFactory().getStore();
     	for (int i=_backgroundCount;i<store.size();i++) {
     		_particlesOrig.add( store.get(i) );
     	}
     	
-    	_particlesFiltered = new ArrayList<IColorAndVariance>();
+    	_particlesFiltered.clear();
     	for (IColorAndVariance particle: _particlesOrig) {
     		if (_minPixelsInArea <= particle.getArea() )
     		_particlesFiltered.add( particle );
