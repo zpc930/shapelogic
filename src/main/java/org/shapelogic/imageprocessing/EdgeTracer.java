@@ -175,8 +175,12 @@ public class EdgeTracer {
 					break;
 			}
 			direction = newDirection;
-			chainCodeHandler.addChainCode((byte)direction);
-		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
+			//If the chain becomes too long just give up
+			if (!chainCodeHandler.addChainCode((byte)direction))
+				break;
+		} while ((x!=xstart || y!=ystart));
+		//Original clause causes termination problems
+//		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
 		chainCodeHandler.getValue();
 		return chainCodeHandler;
 	}
