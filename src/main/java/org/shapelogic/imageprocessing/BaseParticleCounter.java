@@ -38,6 +38,7 @@ public class BaseParticleCounter extends BaseImageOperation
     final static protected int ITERATIONS_DEFAULTS = 2;
     final static protected double MAX_DISTANCE_DEFAULTS = 50.;
     final static protected int MIN_PIXELS_IN_AREA_DEFAULTS = 5;
+    final static protected int MAX_PIXELS_IN_AREA_DEFAULTS = 1000;
 	
 	protected Boolean _particleImage;
 	
@@ -57,6 +58,7 @@ public class BaseParticleCounter extends BaseImageOperation
     protected int _iterations = ITERATIONS_DEFAULTS;
     protected double _maxDistance = MAX_DISTANCE_DEFAULTS;
     protected int _minPixelsInArea = MIN_PIXELS_IN_AREA_DEFAULTS;
+    protected int _maxPixelsInArea = MAX_PIXELS_IN_AREA_DEFAULTS;
     
     protected List<IColorAndVariance> _particlesOrig = new ArrayList<IColorAndVariance>();
     protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
@@ -74,6 +76,7 @@ public class BaseParticleCounter extends BaseImageOperation
 			segment();
 			globalFilter();
 			analyzeParticles();
+			customDefinition();
 			prepareResultsTable();
 			showResultDialog();
 			displayResultsTable();
@@ -113,13 +116,18 @@ public class BaseParticleCounter extends BaseImageOperation
     	
     	_particlesFiltered.clear();
     	for (IColorAndVariance particle: _particlesOrig) {
-    		if (_minPixelsInArea <= particle.getArea() )
-    		_particlesFiltered.add( particle );
+    		int particleArea = particle.getArea();
+    		if ((_minPixelsInArea <= particleArea) && (particleArea <= _maxPixelsInArea) )
+    			_particlesFiltered.add( particle );
     	}
     	
     }
     
     protected void analyzeParticles() {
+    	
+    }
+    
+    protected void customDefinition() {
     	
     }
     
