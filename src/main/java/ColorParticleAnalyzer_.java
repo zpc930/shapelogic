@@ -31,6 +31,11 @@ public class ColorParticleAnalyzer_ extends ColorParticleAnalyzer implements Ext
 	protected ResultsTable _rt = new ResultsTable();
     protected GenericDialog _gd;
     
+    protected static int _iterationsStatic = ITERATIONS_DEFAULTS;
+    protected static double _maxDistanceStatic = MAX_DISTANCE_DEFAULTS;
+    protected static int _minPixelsInAreaStatic = MIN_PIXELS_IN_AREA_DEFAULTS;
+    protected static int _maxPixelsInAreaStatic = MAX_PIXELS_IN_AREA_DEFAULTS;
+    
 	@Override
 	public void run(ImageProcessor ip) {
 		run();
@@ -102,16 +107,18 @@ public class ColorParticleAnalyzer_ extends ColorParticleAnalyzer implements Ext
         _maxDistance = 70;
         _minPixelsInArea = 10;
         _gd = new GenericDialog(getClass().getSimpleName(), IJ.getInstance());
-        _gd.addNumericField("Max distance: ", _maxDistance, 0);
-        _gd.addNumericField("Min pixels: ", _minPixelsInArea, 0);
-        _gd.addNumericField("Min pixels: ", _iterations, 0);
+        _gd.addNumericField("Max_distance: ", _maxDistanceStatic, 0);
+        _gd.addNumericField("Min_pixels: ", _minPixelsInAreaStatic, 0);
+        _gd.addNumericField("Max_pixels: ", _maxPixelsInAreaStatic, 0);
+        _gd.addNumericField("Iterations: ", _iterationsStatic, 0);
         _gd.showDialog();
         if (_gd.wasCanceled()) {
             return DONE;
         }
-        _maxDistance = _gd.getNextNumber();
-        _minPixelsInArea = (int)_gd.getNextNumber();
-        _iterations = (int)_gd.getNextNumber();
+        _maxDistance = _maxDistanceStatic = _gd.getNextNumber();
+        _minPixelsInArea = _minPixelsInAreaStatic = (int)_gd.getNextNumber();
+        _maxPixelsInArea = _maxPixelsInAreaStatic = (int)_gd.getNextNumber();
+        _iterations = _iterationsStatic = (int)_gd.getNextNumber();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 }
