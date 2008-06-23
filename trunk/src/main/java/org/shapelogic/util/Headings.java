@@ -10,5 +10,7 @@ public class Headings {
 	//XXX move to a constants or headings class
 	public static final String COLOR = "Color";
 	public static final String PERIMETER = "Perimeter";
+	public static final String CIRCULARITY = "Circularity";
+	public static final String ASPECT_RATIO = "AspectRatio";
 
 }
