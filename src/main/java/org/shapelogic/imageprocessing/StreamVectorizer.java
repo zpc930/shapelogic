@@ -5,6 +5,7 @@ import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NamedNumberedStream;
 import org.shapelogic.streams.NumberedStream;
+import org.shapelogic.streams.StreamFactory;
 
 /** Same vectorizer as MaxDistanceVectorizer, but logic implemented with streams.
  * <br />
@@ -19,7 +20,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 	protected void matchLines() {
 //		_matchingOH = LetterTaskFactory.matchPolygonToLetterUsingTask(
 //				getPolygon(), _cleanedupPolygon, _rulesArrayForLetterMatching);
-		NumberedStream<String> letters = new NamedNumberedStream<String>(StreamNames.LETTERS);
+		NumberedStream<String> letters = StreamFactory.findNumberedStream(StreamNames.LETTERS);
 		String message = "";
 		for (int i = 0; hasNext(); i++)
 		{
