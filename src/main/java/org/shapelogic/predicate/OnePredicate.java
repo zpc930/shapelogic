@@ -2,7 +2,9 @@ package org.shapelogic.predicate;
 
 /** One component predicates have to be true.
  * <br />
- * Same functionality as OnePredicate in Apache Commons. 
+ * Same functionality as OnePredicate in Apache Commons.<br /> 
+ * 
+ * This is an Exclusive OR operation.<br />
  * 
  * @author Sami Badawi
  *
