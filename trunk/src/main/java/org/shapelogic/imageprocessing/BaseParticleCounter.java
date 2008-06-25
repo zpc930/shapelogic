@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorHypothesis;
 import org.shapelogic.color.IColorAndVariance;
@@ -12,6 +13,8 @@ import org.shapelogic.imageutil.BaseImageOperation;
 
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.polygon.BBox;
+import org.shapelogic.streams.XOrListStream;
+
 import static org.shapelogic.imageutil.ImageJConstants.*;
 
 /** ParticleCounter count number of particles in a particle image.
@@ -62,6 +65,8 @@ public class BaseParticleCounter extends BaseImageOperation
     
     protected List<IColorAndVariance> _particlesOrig = new ArrayList<IColorAndVariance>();
     protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
+    
+    protected XOrListStream _categorizer;
     
 	public BaseParticleCounter()
 	{
@@ -148,6 +153,7 @@ public class BaseParticleCounter extends BaseImageOperation
      * @throws java.lang.Exception
      */
     protected void init() throws Exception {
+    		RootMap.clear(); //XXX Clear RootMap before use. Not sure if I should put results in the RootMap
 			SBSimpleCompare compare = ProcessingFactory.compareFactory(getImage());
 			compare.setModifying(_modifying);
 			_segmentation = new SBSegmentation();
