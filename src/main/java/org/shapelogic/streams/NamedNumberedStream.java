@@ -8,6 +8,8 @@ import org.shapelogic.calculation.RootMap;
  * thin wrapper around it, so now there will be an extra stream, this serves no 
  * purpose.</p>
  * 
+ * Use factory method StreamFactory.findNumberedStream(String name) instead.
+ * 
  * @author Sami Badawi
  *
  */
