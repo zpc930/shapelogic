@@ -53,37 +53,41 @@ public class ColorParticleAnalyzer_ extends ColorParticleAnalyzer implements Ext
 	@Override
     protected void prepareResultsTable() {
     	List<IColorAndVariance> particles = _particlesFiltered;
+    	_rt.setDefaultHeadings();
     	_rt.getFreeColumn(Headings.COLOR);
     	_rt.getFreeColumn(Headings.PERIMETER);
     	_rt.getFreeColumn(Headings.CIRCULARITY);
     	_rt.getFreeColumn(Headings.ASPECT_RATIO);
-    	_rt.setDefaultHeadings();
     	for (int i=0;i<particles.size();i++) {
-    		IColorAndVariance particle = _particleStream.get(i);
-        	if (particle == null)
-        		continue;
-        	if (particle.getArea() < getMinPixelsInArea())
-        		continue;
-        	_rt.incrementCounter();
-        	_rt.addValue(ResultsTable.AREA, particle.getArea());
-        	_rt.addValue(ResultsTable.STD_DEV, particle.getStandardDeviation());
-        	_rt.addValue(Headings.COLOR, particle.getMeanColor());
-        	PixelArea pixelArea = particle.getPixelArea();
-        	if (pixelArea != null) {
-            	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
-            	_rt.addValue(ResultsTable.Y_CENTER_OF_MASS, pixelArea.getCenterPoint().getY());
-        	}
     		try {
+	    		IColorAndVariance particle = _particleStream.get(i);
+	        	if (particle == null)
+	        		continue;
+	        	_rt.incrementCounter();
+	        	_rt.addValue(ResultsTable.AREA, particle.getArea());
+	        	_rt.addValue(ResultsTable.STD_DEV, particle.getStandardDeviation());
+	        	_rt.addValue(Headings.COLOR, particle.getMeanColor());
+	        	PixelArea pixelArea = particle.getPixelArea();
+	        	if (pixelArea != null) {
+	            	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
+	            	_rt.addValue(ResultsTable.Y_CENTER_OF_MASS, pixelArea.getCenterPoint().getY());
+	        	}
     			_rt.addValue(Headings.ASPECT_RATIO, _aspectRatioStream.get(i));
 				ChainCodeHandler chainCodeHandler = _chainCodeHandlerStream.get(i); 
 				if (chainCodeHandler == null) {
 					_rt.addLabel("Label", "Missing chain code handler.");
-					continue;
 				}
-				int perimeter = chainCodeHandler.getLastChain() + 1;
-				_rt.addValue(Headings.PERIMETER, perimeter);
-				double circularity = perimeter==0?0.0:4.0*Math.PI*particle.getArea()/(perimeter*perimeter);
-				_rt.addValue(Headings.CIRCULARITY, circularity);
+				else {
+					int perimeter = chainCodeHandler.getLastChain() + 1;
+					_rt.addValue(Headings.PERIMETER, perimeter);
+					double circularity = perimeter==0?0.0:4.0*Math.PI*particle.getArea()/(perimeter*perimeter);
+					_rt.addValue(Headings.CIRCULARITY, circularity);
+				}
+				if (_categorizer != null) {
+					String category = _categorizer.get(i);
+					if (category != null && !"".equals(category.trim()))
+						_rt.addLabel("Label", category);
+				}
 			} catch (RuntimeException e) {
 				_rt.addLabel("Label", "Error: " + e.getMessage());
 				_rt.addValue(Headings.PERIMETER, -999);
