@@ -68,7 +68,7 @@ public class IteratorStreamTest extends AbstractListStreamTests {
 	}
 
 	ListStream<Integer> countingBaseStreamFactory(final int stopNumber) {
-		ListStream<Integer> stream = StreamFactory.createListStream(countingIteratorFactory(),stopNumber);
+		ListStream<Integer> stream = new IteratorStream<Integer>(countingIteratorFactory(),stopNumber);
 		return stream;
 	}
 	
@@ -77,7 +77,7 @@ public class IteratorStreamTest extends AbstractListStreamTests {
 	 * @return
 	 */
 	ListStream<Integer> fibonacciBaseStreamFactory() {
-		ListStream<Integer> stream = StreamFactory.createListStream(fibonacciIteratorFactory());
+		ListStream<Integer> stream = new IteratorStream<Integer>(fibonacciIteratorFactory());
 		return stream;
 	}
 	
