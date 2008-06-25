@@ -5,6 +5,7 @@ import ij.measure.ResultsTable;
 import java.util.List;
 
 import org.shapelogic.calculation.Calc1;
+import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.streams.ListCalcStream1;
@@ -25,6 +26,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected ListStream<ChainCodeHandler> _chainCodeHandlerStream;
 	protected EdgeTracer _edgeTracer;
 	protected ListCalcStream1<IColorAndVariance, Double> _aspectRatioStream;
+	protected ListCalcStream1<IColorAndVariance, Boolean> _roundishStream;
 
 	/** Analyzes particles and group them.<br />
 	 * 
@@ -58,6 +60,13 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		_aspectRatioStream = 
 			new ListCalcStream1<IColorAndVariance, Double>(aspectRatioCalc1,_particleStream); 
 		_aspectRatioStream.setup();
+		
+		
+    }
+    
+	@Override
+    protected void customDefinition() {
+    	
     }
     
 	@Override
