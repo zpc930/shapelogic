@@ -45,6 +45,7 @@ public class Polygon extends BaseAnnotatedShape
 	//I could make this lazy
 	protected AnnotatedShapeImplementation _annotatedShape; 
 	protected List<Improver<Polygon> > _polygonImprovers;
+	protected Integer _perimeter; 
 
 	public Polygon() {
 		this(null);
@@ -82,6 +83,14 @@ public class Polygon extends BaseAnnotatedShape
 	@Override
 	public double getAspectRatio() {
 		getValue();
+        if (_bBox.minVal!=null) { 
+	        double lenX = _bBox.maxVal.getX() - _bBox.minVal.getX();
+	        double lenY = _bBox.maxVal.getY() - _bBox.minVal.getY();
+	        if (lenX > 0)
+	            _aspectRatio = lenY / lenX;
+	        else
+	            _aspectRatio = Double.POSITIVE_INFINITY;
+        }
 		return _aspectRatio;
 	}
 
@@ -140,19 +149,14 @@ public class Polygon extends BaseAnnotatedShape
 	@Override
 	public Polygon invoke() {
         _bBox = findBbox();
-        double lenX = _bBox.maxVal.getX() - _bBox.minVal.getX();
-        double lenY = _bBox.maxVal.getY() - _bBox.minVal.getY();
-        if (lenX > 0)
-            _aspectRatio = lenY / lenX;
-        else
-            _aspectRatio = Double.POSITIVE_INFINITY;
         findPointCount();
         _dirty = false;
         return this;
     }
 
     private BBox findBbox() {
-        _bBox = new BBox();
+    	if(_bBox == null)
+    		_bBox = new BBox();
         for (IPoint2D pointInPolygon : _points )
             _bBox.addPoint(pointInPolygon);
         return _bBox;
@@ -479,5 +483,13 @@ public class Polygon extends BaseAnnotatedShape
 			result.append(entry.getKey() +":\n" + entry.getValue() + "\n");
 		result.append("\naspectRatio: " + getBBox().getAspectRatio());
 		return result.toString();
+	}
+
+	public Integer getPerimeter() {
+		return _perimeter;
+	}
+
+	public void setPerimeter(Integer perimeter) {
+		_perimeter = perimeter;
 	}
 }
