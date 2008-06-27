@@ -10,6 +10,7 @@ import org.shapelogic.color.IColorDistanceWithImage;
 import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.CPointInt;
+import org.shapelogic.polygon.Polygon;
 
 /** Edge Tracer. <br />
  * 
@@ -30,7 +31,6 @@ public class EdgeTracer {
 	private int width, height;
 	private double _maxDistance;
 	private boolean _traceCloseToColor;
-	private final AnnotatedShapeImplementation _annotatedShape = new AnnotatedShapeImplementation();
 
 	/** Constructs a Wand object from an ImageProcessor. */
 	public EdgeTracer(SLImage image, int referenceColor, double maxDistance, boolean traceCloseToColor) {
@@ -72,7 +72,7 @@ public class EdgeTracer {
 		'startX' and 'startY' are somewhere inside the area. 
 		A 16 entry lookup table is used to determine the
 		direction at each step of the tracing process. */
-	public ChainCodeHandler autoOutline(int startX, int startY) {
+	public Polygon autoOutline(int startX, int startY) {
 		int x = startX;
 		int y = startY;
 		int direction;
@@ -90,9 +90,13 @@ public class EdgeTracer {
 		return traceEdge(x, y, direction);
 	}
 		
-	ChainCodeHandler traceEdge(int xstart, int ystart, int startingDirection) {
-		ChainCodeHandler chainCodeHandler = new ChainCodeHandler(_annotatedShape);
+	Polygon traceEdge(int xstart, int ystart, int startingDirection) {
+		Polygon polygon = new Polygon();
+		polygon.startMultiLine();
+		ChainCodeHandler chainCodeHandler = new ChainCodeHandler(polygon.getAnnotatedShape());
+		chainCodeHandler = new ChainCodeHandler(polygon.getAnnotatedShape());
 		chainCodeHandler.setup();
+		chainCodeHandler.setMultiLine(polygon.getCurrentMultiLine());
 		chainCodeHandler.setFirstPoint(new CPointInt(xstart,ystart));
 		int[] table = {
 						// 1234, 1=upper left pixel,  2=upper right, 3=lower left, 4=lower right
@@ -182,10 +186,9 @@ public class EdgeTracer {
 		//Original clause causes termination problems
 //		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
 		chainCodeHandler.getValue();
-		return chainCodeHandler;
-	}
-
-	public AnnotatedShapeImplementation getAnnotatedShape() {
-		return _annotatedShape;
+		polygon.setPerimeter(chainCodeHandler.getLastChain());
+		polygon.getValue();
+		polygon.getBBox().add(chainCodeHandler._bBox);
+		return polygon;
 	}
 }
