@@ -2,6 +2,9 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
+import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.streams.NumberedStream;
+import org.shapelogic.streams.StreamFactory;
 
 import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
 
@@ -80,6 +83,9 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(61,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage()); 
 		assertEquals(5,_particleCounter.getParticleCount()); 
+		NumberedStream<Number> ns = StreamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertEquals(new Double(1), ns.get(0));
+		assertEquals(new Double(1.0769230769230769), ns.get(1));
 	}
 
 	public void testEmbryosWithParameters() {
