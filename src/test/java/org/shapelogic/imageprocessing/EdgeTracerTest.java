@@ -8,8 +8,12 @@ import junit.framework.TestCase;
 
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.SLImage;
+import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.polygon.AnnotatedShape;
 import org.shapelogic.polygon.GeometricShape2D;
+import org.shapelogic.polygon.Polygon;
+import org.shapelogic.streams.NumberedStream;
+import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.util.LineType;
 import org.shapelogic.util.PointType;
 
@@ -44,9 +48,9 @@ public class EdgeTracerTest extends TestCase {
 		assertEquals(0xffffff, image.get(0, 0) & 0xffffff); //Background
 		assertEquals(foregroundColor, image.get(2, 2) & 0xffffff); //Foreground
 		EdgeTracer edgeTracer = new EdgeTracer(image,foregroundColorClose,10,true);
-		ChainCodeHandler cch = edgeTracer.autoOutline(5,2);
+		Polygon cch = edgeTracer.autoOutline(5,2);
 		//if 5,5 was used as start point a soft point would have been found
-		assertEquals(23,cch.getLastChain());
+		assertEquals(new Integer(23),cch.getPerimeter());
 		assertEquals(4, cch.getAnnotatedShape().getShapesForAnnotation(PointType.HARD_CORNER).size());
 		assertEquals(4, cch.getAnnotatedShape().getShapesForAnnotation(LineType.STRAIGHT).size());
 		printAnnotaions(cch.getAnnotatedShape());
@@ -66,9 +70,9 @@ public class EdgeTracerTest extends TestCase {
 		assertEquals(0xffffff, image.get(0, 0) & 0xffffff); //Background
 		assertEquals(foregroundColor, image.get(2, 2) & 0xffffff); //Foreground
 		EdgeTracer edgeTracer = new EdgeTracer(image,backgroundColorClose,10,false);
-		ChainCodeHandler cch = edgeTracer.autoOutline(5,2);
+		Polygon cch = edgeTracer.autoOutline(5,2);
 		//if 5,5 was used as start point a soft point would have been found
-		assertEquals(23,cch.getLastChain());
+		assertEquals(new Integer(23),cch.getPerimeter());
 		assertEquals(4, cch.getAnnotatedShape().getShapesForAnnotation(PointType.HARD_CORNER).size());
 		assertEquals(4, cch.getAnnotatedShape().getShapesForAnnotation(LineType.STRAIGHT).size());
 		printAnnotaions(cch.getAnnotatedShape());
