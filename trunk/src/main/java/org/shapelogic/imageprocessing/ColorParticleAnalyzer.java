@@ -8,6 +8,9 @@ import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.PixelArea;
+import org.shapelogic.polygon.Polygon;
+import org.shapelogic.streamlogic.LoadPolygonStreams;
+import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
 import org.shapelogic.streams.WrappedListStream;
@@ -23,7 +26,7 @@ import org.shapelogic.util.Headings;
  */
 public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected WrappedListStream<IColorAndVariance> _particleStream;
-	protected ListStream<ChainCodeHandler> _chainCodeHandlerStream;
+	protected ListStream<Polygon> _polygonStream;
 	protected EdgeTracer _edgeTracer;
 	protected ListCalcStream1<IColorAndVariance, Double> _aspectRatioStream;
 	protected ListCalcStream1<IColorAndVariance, Boolean> _roundishStream;
@@ -37,17 +40,19 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
     	_particleStream = new WrappedListStream<IColorAndVariance>(_particlesFiltered);
     	_edgeTracer = new EdgeTracer(_image,_colorHypothesis.getBackground().getMeanColor(),
     			_maxDistance, false);
-		Calc1<IColorAndVariance, ChainCodeHandler> chainCodeCalc1 = 
-			new Calc1<IColorAndVariance, ChainCodeHandler>() {
+		Calc1<IColorAndVariance, Polygon> chainCodeCalc1 = 
+			new Calc1<IColorAndVariance, Polygon>() {
 				@Override
-				public ChainCodeHandler invoke(IColorAndVariance input) {
+				public Polygon invoke(IColorAndVariance input) {
 					PixelArea pixelArea = input.getPixelArea();
 					return _edgeTracer.autoOutline(pixelArea.getStartX(), pixelArea.getStartY());
 				}
 		};
-		_chainCodeHandlerStream = 
-			new ListCalcStream1<IColorAndVariance, ChainCodeHandler>(chainCodeCalc1,_particleStream); 
-		_chainCodeHandlerStream.setup();
+		_polygonStream = 
+			new ListCalcStream1<IColorAndVariance, Polygon>(chainCodeCalc1,_particleStream); 
+		_polygonStream.setup();
+		RootMap.put(StreamNames.POLYGONS, _polygonStream);
+		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		
 		Calc1<IColorAndVariance, Double> aspectRatioCalc1 = 
 			new Calc1<IColorAndVariance, Double>() {
@@ -91,10 +96,10 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
             	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
             	_rt.addValue(ResultsTable.Y_CENTER_OF_MASS, pixelArea.getCenterPoint().getY());
         	}
-    		ChainCodeHandler chainCodeHandler = _chainCodeHandlerStream.get(i); 
+        	Polygon chainCodeHandler = _polygonStream.get(i); 
         	if (chainCodeHandler == null)
         		continue;
-        	int perimeter = chainCodeHandler.getLastChain() + 1;
+        	int perimeter = chainCodeHandler.getPerimeter();
         	System.out.println("perimeter: " + perimeter);
         	_rt.addValue(Headings.PERIMETER, perimeter);
     	}
