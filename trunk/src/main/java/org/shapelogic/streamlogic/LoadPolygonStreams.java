@@ -99,7 +99,7 @@ public class LoadPolygonStreams {
 	
 	public static void loadStreamsRequiredForLetterMatch() {
 		//In order for this to work the polygons have to be defined first
-		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
+		NumberedStream<Polygon> polygons = StreamFactory.findNumberedStream(StreamNames.POLYGONS);
 		loadStreamsRequiredForLetterMatch(polygons);
 	}
 	
