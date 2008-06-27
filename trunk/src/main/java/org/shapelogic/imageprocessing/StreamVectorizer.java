@@ -3,7 +3,6 @@ package org.shapelogic.imageprocessing;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
-import org.shapelogic.streams.NamedNumberedStream;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 
