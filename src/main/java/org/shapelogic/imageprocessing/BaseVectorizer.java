@@ -12,7 +12,6 @@ import org.shapelogic.entities.NumericRule;
 import org.shapelogic.imageutil.BaseImageOperation;
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.ImageJConstants;
-import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CLine;
 import org.shapelogic.polygon.CPointInt;
