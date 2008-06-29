@@ -50,16 +50,19 @@ public class ParticleCounter_ extends ParticleCounter implements ExtendedPlugInF
 	}
 	
 	@Override
-    protected void prepareResultsTable() {
-    	List<IColorAndVariance> particles = _particlesFiltered;
-    	_rt.getFreeColumn(Headings.COLOR);
-    	int i=0;
+    protected void defaultColumnDefinitions() {
     	_rt.setDefaultHeadings();
-    	for (IColorAndVariance particle: particles) {
-        	if (particle == null)
-        		continue;
-        	if (particle.getArea() < getMinPixelsInArea())
-        		continue;
+    	_rt.getFreeColumn(Headings.COLOR);
+    }
+	
+	@Override
+	protected boolean populateResultsTableRow(int index) {
+		try {
+			IColorAndVariance particle = _particlesFiltered.get(index);
+			if (particle == null)
+				return false;
+			if (particle.getArea() < getMinPixelsInArea())
+				return false;
         	_rt.incrementCounter();
         	_rt.addValue(ResultsTable.AREA, particle.getArea());
         	_rt.addValue(ResultsTable.STD_DEV, particle.getStandardDeviation());
@@ -69,9 +72,16 @@ public class ParticleCounter_ extends ParticleCounter implements ExtendedPlugInF
             	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
             	_rt.addValue(ResultsTable.Y_CENTER_OF_MASS, pixelArea.getCenterPoint().getY());
         	}
-    		i++;
-    	}
-    }
+			return true;
+		} catch (RuntimeException e) {
+			String errorMessage = "Error: " + e.getMessage();
+			_rt.addLabel("Label", errorMessage);
+			System.out.println(errorMessage);
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	
 	@Override
 	protected void displayResultsTable() {
