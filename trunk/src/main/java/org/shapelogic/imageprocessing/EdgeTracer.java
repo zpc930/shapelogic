@@ -8,7 +8,6 @@ import static org.shapelogic.util.Constants.UP;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.IColorDistanceWithImage;
 import org.shapelogic.imageutil.SLImage;
-import org.shapelogic.polygon.AnnotatedShapeImplementation;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Polygon;
 
@@ -44,6 +43,10 @@ public class EdgeTracer {
 	
 	/** Use XOR to either handle colors close to reference color or far away. */
 	private boolean inside(int x, int y) {
+		if (x < 0 || y < 0)
+			return false;
+		if (width <= x || height <= y)
+			return false;
 		return _traceCloseToColor ^ (_maxDistance < _colorDistanceWithImage.distanceToReferenceColor(x, y));
 	}
 
