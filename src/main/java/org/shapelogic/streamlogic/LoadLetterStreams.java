@@ -83,12 +83,12 @@ public class LoadLetterStreams {
 		StreamFactory.addToAndListStream0(letter, streamName, predicate, value);
 	}
 	
-	public static void makeLetterXOrStream(String[] symbolStreamArray) {
+	public static void makeXOrStream(String streamName, String[] symbolStreamArray) {
 		List<String> symbols = new ArrayList<String>();
 		for (String symbol: symbolStreamArray)
 			symbols.add(symbol);
 		XOrListStream letterMatchStream = new XOrListStream( symbols);
-		RootMap.put(StreamNames.LETTERS, letterMatchStream);
+		RootMap.put(streamName, letterMatchStream);
 	}
 
 	/** Setup all the stream for a  letter match.<br />
@@ -99,7 +99,7 @@ public class LoadLetterStreams {
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		letterFilter = null;
 		LoadLetterStreams.makeAllLetterStream(letterFilter);
-    	LoadLetterStreams.makeLetterXOrStream(lettersArray);
+    	LoadLetterStreams.makeXOrStream(StreamNames.LETTERS, lettersArray);
 	}
 	
 	/** Rules for matching  letters, using only very simple properties.
@@ -460,6 +460,15 @@ public class LoadLetterStreams {
 		rule("Z", POINT_COUNT, "==", 4., letterFilter);
 		rule("Z", SOFT_POINT_COUNT, "==", 0., letterFilter);
 		rule("Z", POINT_COUNT,">", 3., letterFilter);
+	}
+
+	final static public String[] particleArray = 
+		{"Flat","Tall"};	
+		
+	public static void makeParticleStream() {
+		rule("Flat", ASPECT_RATIO, ">", 1.1, null);
+		
+		rule("Tall", ASPECT_RATIO, "<", 0.9, null);
 	}
 
 }
