@@ -1,6 +1,10 @@
 package org.shapelogic.imageprocessing;
 
+import ij.IJ;
+
 import java.awt.Rectangle;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +66,7 @@ public class BaseParticleCounter extends BaseImageOperation
     protected double _maxDistance = MAX_DISTANCE_DEFAULTS;
     protected int _minPixelsInArea = MIN_PIXELS_IN_AREA_DEFAULTS;
     protected int _maxPixelsInArea = MAX_PIXELS_IN_AREA_DEFAULTS;
+	protected boolean _displayTable = true;
     
     protected List<IColorAndVariance> _particlesOrig = new ArrayList<IColorAndVariance>();
     protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
@@ -80,14 +85,23 @@ public class BaseParticleCounter extends BaseImageOperation
             findColorHypothesis();
 			segment();
 			globalFilter();
-			analyzeParticles();
-			customDefinition();
-			prepareResultsTable();
+			defaultColumnDefinitions();
+			customColumnDefinitions();
+			defaultStreamDefinitions();
+			customStreamDefinitions();
+			categorizeStreams();
+			populateResultsTable();
 			showResultDialog();
-			displayResultsTable();
+			if (_displayTable) {
+				displayResultsTable();
+			}
 		}
 		catch (Exception ex) {
-			ex.printStackTrace();
+			String errorMessage = "Error in run: " + ex.toString();
+			showMessage(getClass().getSimpleName(), errorMessage);
+			StringWriter sw = new StringWriter();
+			ex.printStackTrace(new PrintWriter(sw));
+			IJ.log(sw.getBuffer().toString());
 		}
 	}
     
@@ -128,19 +142,47 @@ public class BaseParticleCounter extends BaseImageOperation
     	
     }
     
-    protected void analyzeParticles() {
+    /** Define extra streams and also extra columns.*/
+    protected void defaultStreamDefinitions() {
     	
     }
     
-    protected void customDefinition() {
+    /** Define extra streams and also extra columns.*/
+    protected void customStreamDefinitions() {
     	
     }
     
-    protected void showResultDialog() {
-		showMessage(getClass().getSimpleName(), getStatus());
+	/** Analyzes particles and group them.<br />*/
+    protected void categorizeStreams() {
+    	
     }
     
-    protected void prepareResultsTable() {
+    /** Setup all the stream and other needed things. */
+    protected void defaultColumnDefinitions() {
+    	
+    }
+    
+    /** Define extra streams and also extra columns.*/
+    protected void customColumnDefinitions() {
+    	
+    }
+    
+    /** Populate the table with the streams. */
+    protected void populateResultsTable() {
+    	List<IColorAndVariance> particles = _particlesFiltered;
+    	for (int i=0;i<particles.size();i++) {
+    		if (populateResultsTableRow(i))
+    			populateResultsTableRowCustom(i);
+    	}
+    }
+    
+    /** Populate one row of the result table with the default fields. */
+    protected boolean populateResultsTableRow(int index) {
+    	return false;
+    }
+    
+    /** Populate one row of the result table with the extra fields. */
+    protected void populateResultsTableRowCustom(int index) {
     	
     }
     
@@ -148,6 +190,10 @@ public class BaseParticleCounter extends BaseImageOperation
     	
     }
 
+    protected void showResultDialog() {
+		showMessage(getClass().getSimpleName(), getStatus());
+    }
+    
 	/** Setup all the needed factory methods based on what type the image has.
      * 
      * @throws java.lang.Exception
@@ -281,4 +327,8 @@ public class BaseParticleCounter extends BaseImageOperation
     public void setIterations(int iterations) {
         _iterations = iterations;
     }
+
+	public void setDisplayTable(boolean table) {
+		_displayTable = table;
+	}
 }
