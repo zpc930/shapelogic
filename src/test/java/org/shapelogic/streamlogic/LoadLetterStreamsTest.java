@@ -99,7 +99,7 @@ public class LoadLetterStreamsTest extends TestCase
 		LoadLetterStreams.loadLetterStream(letterFilter);
     	NamedNumberedStream<Boolean> aStreamFromRoot = 
     		new NamedNumberedStream<Boolean>(letter);
-    	LoadLetterStreams.makeLetterXOrStream(LETTERS_TO_TEST);
+    	LoadLetterStreams.makeXOrStream(StreamNames.LETTERS,LETTERS_TO_TEST);
     	assertTrue("Bad match for: " + letter,aStreamFromRoot.get(0));
 		ListStream<String> letterString = (ListStream<String>) RootMap.get(StreamNames.LETTERS);
     	assertEquals(letter,letterString.get(0));
