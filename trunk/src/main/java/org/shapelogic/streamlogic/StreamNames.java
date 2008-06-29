@@ -9,5 +9,6 @@ public class StreamNames {
 
 	public static final String POLYGONS = "polygons";
 	public static final String LETTERS = "letters";
+	public static final String PARTICLES = "particles";
 
 }
