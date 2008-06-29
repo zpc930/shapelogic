@@ -5,6 +5,7 @@ import org.shapelogic.imageprocessing.StreamVectorizer;
 import org.shapelogic.imageutil.PlugInFilterAdapter;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
+import org.shapelogic.streamlogic.StreamNames;
 
 /** Class running StreamVectorizer and matching polygons to digits.<br />
  * <p>
@@ -30,7 +31,7 @@ public class DigitStreamVectorizer_ extends PlugInFilterAdapter {
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		makeDigitStream();
 		String[] digits = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}; 
-    	LoadLetterStreams.makeLetterXOrStream(digits);
+    	LoadLetterStreams.makeXOrStream(StreamNames.LETTERS,digits);
 	}
 
 	public static void makeDigitStream() {
