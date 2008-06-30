@@ -1,6 +1,6 @@
 package org.shapelogic.color;
 
-/**
+/** Color distance for RGB.<br />
  * 
  * @author Sami Badawi
  *
