@@ -6,12 +6,15 @@ import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.PixelArea;
+import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.streamlogic.LoadLetterStreams;
+import org.shapelogic.streamlogic.LoadParticleStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
+import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.WrappedListStream;
 import org.shapelogic.streams.XOrListStream;
 
@@ -29,8 +32,12 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected WrappedListStream<IColorAndVariance> _particleStream;
 	protected ListStream<Polygon> _polygonStream;
 	protected EdgeTracer _edgeTracer;
-	protected ListCalcStream1<IColorAndVariance, Double> _aspectRatioStream;
+	protected NumberedStream<Double> _aspectRatioStream;
+	protected NumberedStream<Integer> _grayValueStream;
+	protected NumberedStream<Integer> _hardCornerCountStream;
 	protected ListCalcStream1<IColorAndVariance, Boolean> _roundishStream;
+	protected NumberedStream<Integer> _inflectionPointCountStream;
+	protected NumberedStream<Integer> _curveArchCountStream;
 
 	protected void defaultStreamDefinitions() {
     	_particleStream = new WrappedListStream<IColorAndVariance>(_particlesFiltered);
@@ -49,6 +56,11 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		_polygonStream.setup();
 		RootMap.put(StreamNames.POLYGONS, _polygonStream);
 		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		LoadParticleStreams.loadStreamsRequiredForParticleMatch(_particleStream,_image);
+    	_grayValueStream = (NumberedStream<Integer>) RootMap.get(StreamNames.COLOR_GRAY);
+    	_hardCornerCountStream = (NumberedStream<Integer>) RootMap.get(CommonLogicExpressions.HARD_CORNER_COUNT);
+    	_inflectionPointCountStream = (NumberedStream<Integer>) RootMap.get(CommonLogicExpressions.INFLECTION_POINT_COUNT);
+    	_curveArchCountStream = (NumberedStream<Integer>) RootMap.get(CommonLogicExpressions.CURVE_ARCH_COUNT);
     }
     
 	/** Analyzes particles and group them.<br />
@@ -57,8 +69,8 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	 */
 	@Override
 	protected void categorizeStreams() {
-		LoadLetterStreams.makeParticleStream();
-    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadLetterStreams.particleArray);
+		LoadParticleStreams.exampleMakeParticleStream();
+    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
     	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
 	}
 	
