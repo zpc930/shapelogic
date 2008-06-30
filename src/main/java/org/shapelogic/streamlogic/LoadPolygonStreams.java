@@ -11,7 +11,6 @@ import org.shapelogic.calculation.RootMap;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
-import org.shapelogic.streams.NamedNumberedStreamLazySetup;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 
