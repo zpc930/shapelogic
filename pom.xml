@@ -135,7 +135,7 @@
     <dependency>
       <groupId>imagej</groupId>
       <artifactId>imagej</artifactId>
-      <version>1.38</version>
+      <version>1.40.g</version>
     </dependency>
     <dependency>
       <groupId>commons-math</groupId>
@@ -166,16 +166,6 @@
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-engine</artifactId>
       <version>1.5.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jruby</groupId>
-      <artifactId>jruby-complete</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jruby</groupId>
-      <artifactId>jruby-engine</artifactId>
-      <version>1.0.1</version>
     </dependency>
   </dependencies>
   <reporting>
