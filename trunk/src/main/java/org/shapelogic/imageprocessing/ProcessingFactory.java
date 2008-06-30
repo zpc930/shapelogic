@@ -10,22 +10,26 @@ import org.shapelogic.imageutil.SLImage;
  */
 public class ProcessingFactory {
 
-	public static SBSimpleCompare compareFactory(SLImage ip) throws Exception
+	public static SBSimpleCompare compareFactory(SLImage image) throws Exception
 	{
 		SBSimpleCompare result = null;
-		int channels = ip.getNChannels();
-		if (ip.isGray()) {
-			result = new SBByteCompare();
+		if (image.isGray()) {
+			if (image.isGray8())
+				result = new SBByteCompare();
+			else if (image.isGray16())
+				result = new SBShortCompare();
+			else
+				result = new SBByteCompare();
 		}
-		else if (ip.isRgb()) {
+		else if (image.isRgb()) {
 			result = new SBColorCompare();
 		}
 		else {
-			System.out.println("Error: could not create SBSimpleCompare. ip.getNChannels()=" + ip.getNChannels());
+			System.out.println("Error: could not create SBSimpleCompare. ip.getNChannels()=" + image.getNChannels());
 		}
 			
 		if (result != null) {
-			result.init(ip);
+			result.init(image);
 		}
 		return result;
 	}

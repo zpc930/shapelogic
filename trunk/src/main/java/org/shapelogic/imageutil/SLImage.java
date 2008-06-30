@@ -72,10 +72,12 @@ public interface SLImage extends PixelHandler {
 	
 	boolean isGray();
 	
+	boolean isGray8();
+	
+	boolean isGray16();
+	
 	boolean isRgb();
 	
-    int getBufferedImageType();
-    
 	Rectangle getActiveRectangle();
 	
 	int getLineStride();
