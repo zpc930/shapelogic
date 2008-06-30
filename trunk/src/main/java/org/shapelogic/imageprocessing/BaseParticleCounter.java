@@ -288,6 +288,10 @@ public class BaseParticleCounter extends BaseImageOperation
         return _particleCount;
 	}
 
+	public List<IColorAndVariance> getParticleFiltered() {
+        return _particlesFiltered;
+	}
+    
     @Override
     public IColorHypothesisFinder getColorHypothesisFinder() {
         return _colorHypothesisFinder;
