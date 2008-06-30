@@ -1,8 +1,10 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.polygon.BBox;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 
@@ -25,7 +27,8 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		super.setUp();
 		_dirURL = "./src/test/resources/images/particles";
 		_fileFormat = ".gif";
-        _particleCounter = new ColorParticleAnalyzer();
+        _particleCounter = new ColorParticleAnalyzerIJ();
+        _particleCounter.setDisplayTable(false);
 	}
 	
 	public void testWhitePixelGray() {
@@ -39,6 +42,13 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertNotNull(factory);
 		assertEquals(1,factory.getStore().size());
 		assertTrue(_particleCounter.isParticleImage());
+		assertEquals(0,_particleCounter.getParticleFiltered().size());
+		IColorAndVariance particle = factory.getStore().get(0);
+		BBox bBox = particle.getPixelArea().getBoundingBox();
+		assertEquals(0.,bBox.minVal.getX());
+		assertEquals(0.,bBox.minVal.getY());
+		assertEquals(0.,bBox.maxVal.getX());
+		assertEquals(0.,bBox.maxVal.getY());
 	}
 
 	/** This shows that when you save and image as PNG it will always be opened 
@@ -135,5 +145,39 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(2,factory.getStore().size()); 
+		assertEquals(1,_particleCounter.getParticleFiltered().size());
+		IColorAndVariance particle = _particleCounter.getParticleFiltered().get(0);
+		BBox bBox = particle.getPixelArea().getBoundingBox();
+		assertEquals(8.,bBox.minVal.getX());
+		assertEquals(8.,bBox.minVal.getY());
+		assertEquals(22.,bBox.maxVal.getX());
+		assertEquals(22.,bBox.maxVal.getY());
+		assertEquals(15.,bBox.getCenter().getX());
+		assertEquals(15.,bBox.getCenter().getY());
+		assertEquals(1.,bBox.getAspectRatio());
+	}
+
+	/** This gets opened as a byte interleaved and not as an int RGB
+	 */
+	public void testOvalCleanPng() {
+		String fileName = "oval1Clean";
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _particleCounter);
+		assertEquals(30,bp.getWidth());
+		assertEquals(1800,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(0xffffff,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(2,factory.getStore().size()); 
+		assertEquals(1,_particleCounter.getParticleFiltered().size());
+		IColorAndVariance particle = _particleCounter.getParticleFiltered().get(0);
+		BBox bBox = particle.getPixelArea().getBoundingBox();
+		assertEquals(8.,bBox.minVal.getX());
+		assertEquals(16.,bBox.minVal.getY());
+		assertEquals(22.,bBox.maxVal.getX());
+		assertEquals(45.,bBox.maxVal.getY());
+		assertEquals(15.,bBox.getCenter().getX());
+		assertEquals(30.,bBox.getCenter().getY());
+		assertEquals(0.4827586206896552,bBox.getAspectRatio());
 	}
 }
