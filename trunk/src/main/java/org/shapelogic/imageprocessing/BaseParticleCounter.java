@@ -45,7 +45,7 @@ public class BaseParticleCounter extends BaseImageOperation
     final static protected int ITERATIONS_DEFAULTS = 2;
     final static protected double MAX_DISTANCE_DEFAULTS = 50.;
     final static protected int MIN_PIXELS_IN_AREA_DEFAULTS = 5;
-    final static protected int MAX_PIXELS_IN_AREA_DEFAULTS = 1000;
+    final static protected int MAX_PIXELS_IN_AREA_DEFAULTS = 10000;
 	
 	protected Boolean _particleImage;
 	
