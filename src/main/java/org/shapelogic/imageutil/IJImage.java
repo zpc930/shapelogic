@@ -9,6 +9,7 @@ import ij.process.ImageProcessor;
 import ij.process.ShortProcessor;
 
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /** Abstraction of ImageJ ImageProcessor.<br />
  * 
@@ -155,4 +156,23 @@ public class IJImage implements SLImage {
 		return _imageProcessor instanceof ColorProcessor;
 	}
 
+	/** Note this is the BufferedImage type not the ImageJ type.<br /> 
+	 * 
+	 * Might also create a getImageJType().
+	 * */
+    public int getBufferedImageType() {
+    	if (_image != null) {
+	    	int imageJType = _image.getType();
+	    	if (ImagePlus.GRAY8 == imageJType) return BufferedImage.TYPE_BYTE_GRAY;
+	       	if (ImagePlus.COLOR_RGB == imageJType) return BufferedImage.TYPE_INT_RGB;
+	       	if (ImagePlus.GRAY16 == imageJType) return BufferedImage.TYPE_USHORT_GRAY;
+	       	if (ImagePlus.COLOR_256 == imageJType) return BufferedImage.TYPE_BYTE_INDEXED;
+    	}
+    	else {
+	    	if (_imageProcessor instanceof ByteProcessor) return BufferedImage.TYPE_BYTE_GRAY;
+	       	if (_imageProcessor instanceof ColorProcessor) return BufferedImage.TYPE_INT_RGB;
+	       	if (_imageProcessor instanceof ShortProcessor) return BufferedImage.TYPE_USHORT_GRAY;
+    	}
+    	return -1;
+    }
 }
