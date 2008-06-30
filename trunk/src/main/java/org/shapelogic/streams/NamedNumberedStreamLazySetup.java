@@ -6,11 +6,15 @@ import org.shapelogic.calculation.SetupFlagged;
 /** Get a Named Stream out of the context.
  * <br />
  * With lazy setup, so the input stream is only found when you start to use the
- * values in the stream.
+ * values in the stream.<br />
+ * 
+ * Last resort to get a reference to a stream that is not yet available.<br />
+ * Currently not used hence it is deprecated, but it could be useful.<br />
  * 
  * @author Sami Badawi
  *
  */
+@Deprecated
 public class NamedNumberedStreamLazySetup<E> implements NumberedStream<E>, SetupFlagged {
 	protected String _name;
 	protected NumberedStream<E> _inputStream; 
