@@ -26,6 +26,7 @@ public class ColorFactory {
 	
 	public static IColorAndVariance makeColorAndVarianceI(SLImage image) {
 		if (image.isGray()) return new GrayAndVariance();
+		if (image.isRgb()) return new ColorAndVariance();
 		return null;
 	} 
 	
