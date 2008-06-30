@@ -13,6 +13,8 @@ import org.shapelogic.imageutil.IJGui;
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.imageutil.SLImage;
+import org.shapelogic.polygon.BBox;
+import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.Headings;
 
@@ -86,6 +88,12 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 		_rt.getFreeColumn(Headings.PERIMETER);
 		_rt.getFreeColumn(Headings.CIRCULARITY);
 		_rt.getFreeColumn(Headings.ASPECT_RATIO);
+		_rt.getFreeColumn(Headings.GRAY_VALUE);
+    	_rt.getFreeColumn(Headings.BOUNDING_BOX_X_MIN);
+    	_rt.getFreeColumn(Headings.BOUNDING_BOX_Y_MIN);
+    	_rt.getFreeColumn(Headings.BOUNDING_BOX_X_MAX);
+    	_rt.getFreeColumn(Headings.BOUNDING_BOX_Y_MAX);
+    	_rt.getFreeColumn(Headings.HARD_CORNERS);
 	}
 
 	@Override
@@ -102,6 +110,13 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         	if (pixelArea != null) {
             	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
             	_rt.addValue(ResultsTable.Y_CENTER_OF_MASS, pixelArea.getCenterPoint().getY());
+            	BBox bBox = pixelArea.getBoundingBox();
+            	IPoint2D minPoint = bBox.minVal;
+            	IPoint2D maxPoint = bBox.maxVal;
+            	_rt.addValue(Headings.BOUNDING_BOX_X_MIN, minPoint.getX());
+            	_rt.addValue(Headings.BOUNDING_BOX_Y_MIN, minPoint.getY());
+            	_rt.addValue(Headings.BOUNDING_BOX_X_MAX, maxPoint.getX());
+            	_rt.addValue(Headings.BOUNDING_BOX_Y_MAX, maxPoint.getY());
         	}
 			_rt.addValue(Headings.ASPECT_RATIO, _aspectRatioStream.get(index));
 			Polygon polygon = _polygonStream.get(index); 
@@ -121,6 +136,10 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 				else
 					_rt.addLabel("Label", "NA");
 			}
+			_rt.addValue(Headings.GRAY_VALUE, _grayValueStream.get(index));
+			_rt.addValue(Headings.HARD_CORNERS, _hardCornerCountStream.get(index));
+			_rt.addValue(Headings.INFLECTION_POINT_COUNT, _inflectionPointCountStream.get(index));
+			_rt.addValue(Headings.CURVE_ARCH_COUNT, _curveArchCountStream.get(index));
 			return true;
 		} catch (RuntimeException e) {
 			String errorMessage = "Error: " + e.getMessage();
