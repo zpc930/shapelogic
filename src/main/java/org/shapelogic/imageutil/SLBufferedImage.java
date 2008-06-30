@@ -288,7 +288,20 @@ public class SLBufferedImage implements SLImage {
 	}
 
 	@Override
-	public int getBufferedImageType() {
-		return _bufferedImage.getType();
-	}
+    public boolean isGray8() {
+    	if (_bufferedImage != null) {
+	    	int imageJType = _bufferedImage.getType();
+	    	if (BufferedImage.TYPE_BYTE_GRAY == imageJType) return true;
+    	}
+    	return false;
+    }
+
+	@Override
+    public boolean isGray16() {
+    	if (_bufferedImage != null) {
+	    	int imageJType = _bufferedImage.getType();
+	    	if (BufferedImage.TYPE_USHORT_GRAY == imageJType) return true;
+    	}
+    	return false;
+    }
 }
