@@ -74,6 +74,8 @@ public interface SLImage extends PixelHandler {
 	
 	boolean isRgb();
 	
+    int getBufferedImageType();
+    
 	Rectangle getActiveRectangle();
 	
 	int getLineStride();

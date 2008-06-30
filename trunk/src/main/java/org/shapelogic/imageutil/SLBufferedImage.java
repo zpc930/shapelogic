@@ -286,4 +286,9 @@ public class SLBufferedImage implements SLImage {
 		return type == BufferedImage.TYPE_INT_RGB ||
 			type == BufferedImage.TYPE_INT_ARGB;
 	}
+
+	@Override
+	public int getBufferedImageType() {
+		return _bufferedImage.getType();
+	}
 }
