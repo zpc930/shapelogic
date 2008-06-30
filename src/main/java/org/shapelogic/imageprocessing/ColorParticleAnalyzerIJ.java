@@ -61,9 +61,6 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 
 	@Override
 	public int showDialog(ImagePlus imp, String command, PlugInFilterRunner pfr) {
-        _iterations = 3;
-        _maxDistance = 70;
-        _minPixelsInArea = 10;
         _gd = new GenericDialog(getClass().getSimpleName(), IJ.getInstance());
         _gd.addNumericField("Max_distance: ", _maxDistanceStatic, 0);
         _gd.addNumericField("Min_pixels: ", _minPixelsInAreaStatic, 0);
@@ -85,6 +82,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 	    _rt = new ResultsTable();
 		_rt.setDefaultHeadings();
 		_rt.getFreeColumn(Headings.COLOR);
+		_rt.getFreeColumn(Headings.COLOR_STD_DEV);
 		_rt.getFreeColumn(Headings.PERIMETER);
 		_rt.getFreeColumn(Headings.CIRCULARITY);
 		_rt.getFreeColumn(Headings.ASPECT_RATIO);
@@ -104,7 +102,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         		return false;
         	_rt.incrementCounter();
         	_rt.addValue(ResultsTable.AREA, particle.getArea());
-        	_rt.addValue(ResultsTable.STD_DEV, particle.getStandardDeviation());
+        	_rt.addValue(Headings.COLOR_STD_DEV, particle.getStandardDeviation());
         	_rt.addValue(Headings.COLOR, particle.getMeanColor());
         	PixelArea pixelArea = particle.getPixelArea();
         	if (pixelArea != null) {

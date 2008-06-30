@@ -53,6 +53,7 @@ public class ParticleCounter_ extends ParticleCounter implements ExtendedPlugInF
     protected void defaultColumnDefinitions() {
     	_rt.setDefaultHeadings();
     	_rt.getFreeColumn(Headings.COLOR);
+    	_rt.getFreeColumn(Headings.COLOR_STD_DEV);
     }
 	
 	@Override
@@ -65,7 +66,7 @@ public class ParticleCounter_ extends ParticleCounter implements ExtendedPlugInF
 				return false;
         	_rt.incrementCounter();
         	_rt.addValue(ResultsTable.AREA, particle.getArea());
-        	_rt.addValue(ResultsTable.STD_DEV, particle.getStandardDeviation());
+        	_rt.addValue(Headings.COLOR_STD_DEV, particle.getStandardDeviation());
         	_rt.addValue(Headings.COLOR, particle.getMeanColor());
         	PixelArea pixelArea = particle.getPixelArea();
         	if (pixelArea != null) {
