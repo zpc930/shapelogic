@@ -65,4 +65,16 @@ public class ColorUtil {
     static public int grayToRGB(int gray) {
         return packColors(gray, gray, gray);
     }
+    
+    /** Change an RGB color to a gray value.
+     * 
+     * Based on the perceived contribution to the brightness. 
+     *  */
+    static public int rgbToGray(int colorIn) {
+    	int red = (colorIn&RED_MASK)>>RED_OFFSET; //red
+		int green = (colorIn&GREEN_MASK)>>GREEN_OFFSET; //green
+		int blue = colorIn&BLUE_MASK; //blue
+		double brightness = 0.3*red + 0.59*green + 0.11*blue;
+    	return (int)brightness;
+    }
 }
