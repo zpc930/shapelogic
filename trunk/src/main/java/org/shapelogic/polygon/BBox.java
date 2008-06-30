@@ -59,8 +59,8 @@ public class BBox implements GeometricShape2D {
     	if (center instanceof CPointInt) {
     		long x = (int) center.getX();
     		long y = (int) center.getY();
-    		if (isEven(x) || isEven(y)) {
-    			return new CPointDouble(x * 05, y * 0.5);
+    		if (isEven(x) && isEven(y)) {
+    			return new CPointInt((int)x / 2, (int)y / 2);
     		}
     	}
     	center.multiply(0.5);
