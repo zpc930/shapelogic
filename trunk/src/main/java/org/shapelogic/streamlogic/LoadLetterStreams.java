@@ -462,13 +462,4 @@ public class LoadLetterStreams {
 		rule("Z", POINT_COUNT,">", 3., letterFilter);
 	}
 
-	final static public String[] particleArray = 
-		{"Flat","Tall"};	
-		
-	public static void makeParticleStream() {
-		rule("Flat", ASPECT_RATIO, ">", 1.1, null);
-		
-		rule("Tall", ASPECT_RATIO, "<", 0.9, null);
-	}
-
 }
