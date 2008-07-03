@@ -13,8 +13,8 @@ ShapeLogic
   
   The first real application for ShapeLogic is a 
   {{{particle.html}particle analyzer}}. 
-  It will find, categorize particles on a somewhat uniform background. Then it
-  make a report of geometric properties of each of the particles. Main 
+  It will find and categorize particles on a relatively uniform background then 
+  make a report of geometric properties for each of the particles. The main 
   application is for recognizing cells in medical image processing.
   
   Code hosted on {{http://code.google.com/p/shapelogic/}}.
@@ -85,18 +85,18 @@ ShapeLogic
     
 [images/particles/embryos.jpg] 
   
-  Here is the result of running the non customized particle analyzer on it.
+  Here is the result of running the non-customized particle analyzer on it.
 
 [images/particles/particleAnalyzerResult.png]
   
-  The categories for the particles are not meaning full, but it is easy to 
-  setup rule for categorizing particles.
+  The categories for the particles are only examples, it is easy to 
+  setup different rules for categorizing particles.
   
   In ShapeLogic 1.3 there will be custom rules to recognize specific cells and
-  it will be tested more.
+  it will be tested further.
   
   ShapeLogic 1.2 also contains the second version of a color particle counter. 
-  It also prints a smaller report over the particle's properties.
+  It also prints a smaller report of the particle's properties.
   
 [images/particles/particleCounterResult.png]
   
@@ -172,13 +172,13 @@ ShapeLogic
   scale images without manual user intervention
   
   * Particle analyzer traces the edge of each particle and turns it into a 
-  polygon. The the same rules that was used in the letter matcher can be used 
+  polygon. The same rules that were used in the letter matcher can be used 
   on particles to classify them
   
   * Particle analyzer is suitable for processing cells
 
-  * Both particle counter and particle analyzer now takes input parameters and 
-  makes a  to result table report about each particle's 
+  * Both particle counter and particle analyzer now take input parameters and 
+  reports a to a result table on each particle's 
     
     * Area 
     
@@ -228,12 +228,12 @@ ShapeLogic
   
   []
 
-** ShapeLogic v 1.3 with particle analyzer soon to be released
+** ShapeLogic v 1.3 with specific cell recognition particle analyzer soon to be released
 
   * Make custom rules to recognize specific cells. 
-  The user have to make these rules themselves in ShapeLogic 1.2.
+  In v 1.2 the user has to make rules themselves.
   
-  * Fix bug in edge trace. Sometime it produces the wrong perimeter length.
+  * Fix bugs in edge trace. In v 1.2 the wrong perimeter lengths are sometimes found.
   
   []
 

@@ -7,6 +7,47 @@
 
 Release notes for releases with development status beta
 
+* 2008/07/01 ShapeLogic v 1.2 released AKA particle analyzer
+
+  * {{{particle.html} Particle analyzer}} working directly on color and gray 
+  scale images without manual user intervention
+  
+  * Particle analyzer traces the edge of each particle and turns it into a 
+  polygon. The the same rules that was used in the letter matcher can be used 
+  on particles to classify them
+  
+  * Particle analyzer is suitable for processing cells
+
+  * Both particle counter and particle analyzer now takes input parameters and 
+  print report about each particle's area, color, standard deviation of color
+  center of gravity to result table
+  
+  * Additionally particle analyzer reports
+  
+	  * Length of perimeter
+	  
+	  * Circularity
+	  
+	  * Gray value brightness
+	  
+	  * Bounding box
+	  
+	  * Number of hard corners
+	  
+	  * Number of inflection points
+	  
+	  * Number of curve arches
+      
+      []
+  
+  * Color replace, replaces one color within a tolerance with another color.
+  Parameter input dialog with preview check box
+
+  * Organize plugins and macros under ShapeLogic and ShapeLogicOld menus, until
+  1.1 they where all placed under shapelogic menu
+
+  []
+
 * 2008/05/07 ShapeLogic v 1.1 released AKA Simple particle counter
   
   * {{{particle.html} Particle counter}} working directly on color and gray 

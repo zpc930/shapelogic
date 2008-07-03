@@ -10,14 +10,14 @@ Particle Counter and Analyzer
 
   ShapeLogic v 1.2 contains both an automatic color and gray scale particle
   counter and a particle analyzer working without manual user intervention.
-  The goal is to be able to recognize different cells on a somewhat uniform 
+  The goal is to be able to recognize different cells on a relatively uniform 
   background and be able to extract a lot of geometric information.
     
 * Common functionality for particle counter and particle analyzer 
   
   * Take input parameters, e.g. min and max size for particles 
   
-  * Find the background color
+  * Find background color
   
   * Find particles
   
@@ -69,21 +69,9 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
 [images/particles/particleCountDialog.png] 
 
-  * How many regions were found
-  
-  * Background color
-  
-  * If the image was a particle image
-  
-  * The number of particles
-  
-  * The number of colors in the color hypothesis
-  
-  []
-  
-  A report of the properties of each particle is sent to an ImageJ result table. 
-  This can be exported to Excel.
-  This is different for the particle counter and analyzer. 
+  A report of each particle's properties is sent to an ImageJ result table, 
+  which can be exported to Excel.
+  Reports are different for the particle counter and analyzer. 
   
 * Particle counter information for each particle 
   
@@ -135,16 +123,22 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   []
   
-  It finds a lot more geometric properties that is not printed, it is easy to
-  make ShapeLogic print them.
+  The particle analyzer finds many more geometric properties that are not shown
+  on the above example, it is easy to print them if desired.
   
-  Besides this the particle analyzer can select and categorize particles based 
-  on all these properties.
+  This the particle analyzer can also select and categorize particles based 
+  on all of the above properties.
   In order to categorize particles the user should define geometric rules for
   each particle type.
 
   ShapeLogic v 1.3 will come with predefined rules for certain cells.
 
+* Current status of the particle analyzer in ShapeLogic v 1.2 
+  
+  The particle analyzer in ShapeLogic v 1.2 has gone through limited testing 
+  and seems to work well. There is still a bug in the edge tracer,
+  the wrong perimeter lengths are sometimes found.
+  
 * {Test} on sample images from ImageJ
   
   The particle counter was tested on the particle images from ImageJ:
@@ -246,9 +240,9 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 +-----------------------------------+
 
  
-* How to make you own particle analyzer category rules
+* How to make your own particle analyzer category rules
   
-  This example only have 2 categories Flat and Non flat. 
+  This example only has 2 categories Flat and Non flat. 
   It is flat if it twice as wide as it is high.
   
   Copy the following text into a file called CustomParticleAnalyzer_.java:
@@ -298,12 +292,10 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
   
   * ShapeLogic v 1.3 will come with predefined rules for certain cells
 
-  * Make them be able to handle background that is not uniform
-  
-  * Expand it to handle organelles
+  * It will be able to handle a background that is not uniform and cell organelles
 
-  * Reasoning under uncertainty using the lazy stream library
+  * It will incorporate reasoning under uncertainty using the lazy stream library
   
-  * Later finding overlapping particles and counting them separately 
+  * It will hopefully be able to find overlapping particles and distinguish them as separate 
   
   []
