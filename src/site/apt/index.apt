@@ -11,6 +11,12 @@ ShapeLogic
   processing and computer vision.
   Started August 2007.
   
+  The first real application for ShapeLogic is a 
+  {{{particle.html}particle analyzer}}. 
+  It will find, categorize particles on a somewhat uniform background. Then it
+  make a report of geometric properties of each of the particles. Main 
+  application is for recognizing cells in medical image processing.
+  
   Code hosted on {{http://code.google.com/p/shapelogic/}}.
   From there you can download both source files and binary distributions.  
   
@@ -25,6 +31,8 @@ ShapeLogic
    
   * Image processing and computer vision
   
+  *{{{particle.html}Particle analyzer}} for medical image processing
+  
   []
   
   While ShapeLogic's declarative programming system was initially developed 
@@ -35,7 +43,7 @@ ShapeLogic
   analysis. ShapeLogic also fills gaps missing from current Java image 
   processing libraries, and uses a commercially friendly license.
   
-  ShapeLogic has an automatic color {{{particle.html}particle counter}} and a
+  ShapeLogic has an automatic color {{{particle.html}particle analyzer}} and a
   {{{letter-match.html}letter matching example}}.
 
 * Features
@@ -69,6 +77,29 @@ ShapeLogic
   
   []
 
+*  Particle analyzer
+
+  ShapeLogic 1.2 contains the first version of a {{{particle.html}color particle analyzer}}.
+  
+  Here is an example particle image embryos.jpg
+    
+[images/particles/embryos.jpg] 
+  
+  Here is the result of running the non customized particle analyzer on it.
+
+[images/particles/particleAnalyzerResult.png]
+  
+  The categories for the particles are not meaning full, but it is easy to 
+  setup rule for categorizing particles.
+  
+  In ShapeLogic 1.3 there will be custom rules to recognize specific cells and
+  it will be tested more.
+  
+  ShapeLogic 1.2 also contains the second version of a color particle counter. 
+  It also prints a smaller report over the particle's properties.
+  
+[images/particles/particleCounterResult.png]
+  
 *  Requirements
   
   For running as a library for functional and declarative programming there are 
@@ -84,6 +115,7 @@ ShapeLogic
   * {{{http://www.antlr.org/} Antlr}}: For parsing build in filter language
 
   []
+  
   You can run all current image processing algorithms 
   {{{image-formats.html}outside ImageJ}}, 
   using just a BufferedImage. If you want to embed ShapeLogic in your 
@@ -116,8 +148,8 @@ ShapeLogic
 
   * ShapeLogic is in Beta, as of version 1.0.
 
-  * {{{particle.html} Particle counter}} working directly on color images 
-  without manual user intervention.
+  * {{{particle.html} Particle counter and particle analyzer}} working directly 
+  on color images without manual user intervention.
 
   * Working example where ShapeLogic is used for matching capital letters.
   
@@ -128,40 +160,63 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 30,000 lines of Java code including 450 unit tests.
+  * ShapeLogic currently consists of 30,000 lines of Java code including 460 unit tests.
 
   []
 
 * News
 
-** 2008/05/07 ShapeLogic v 1.1 released
+** 2008/07/01 ShapeLogic v 1.2 released
   
-  * {{{particle.html} Particle counter}} working directly on color and gray 
+  * {{{particle.html} Particle analyzer}} working directly on color and gray 
   scale images without manual user intervention
+  
+  * Particle analyzer traces the edge of each particle and turns it into a 
+  polygon. The the same rules that was used in the letter matcher can be used 
+  on particles to classify them
+  
+  * Particle analyzer is suitable for processing cells
 
-  * Particle counter finds average color, standard deviation, area and location 
-  for each particle
+  * Both particle counter and particle analyzer now takes input parameters and 
+  makes a  to result table report about each particle's 
+    
+    * Area 
+    
+    * Color 
+    
+    * Standard deviation of color
+    
+    * Center of gravity
+    
+    []
   
-  * Framework to build more advanced particle counters and particle analyzers
+  * Additional reports fields for particle analyzer
   
-  * Color clustering using K-mean algorithm
+	  * Length of perimeter
+	  
+	  * Circularity
+	  
+	  * Gray value brightness
+	  
+	  * Bounding box
+	  
+	  * Number of hard corners
+	  
+	  * Number of inflection points
+	  
+	  * Number of curve arches
+      
+      []
   
-  * Background color finder
-  
-  * First use of ShapeLogic in medical image processing
+  * Color replace, replaces one color within a tolerance with another color.
+  Parameter input dialog with preview check box
 
-  * Extends all the image processing algorithms in ShapeLogic to work in both 
-  ImageJ and in {{{image-formats.html}plain Java}}
+  * Organize plugins and macros under ShapeLogic and ShapeLogicOld menus, until
+  1.1 they where all placed under shapelogic menu
 
   []
   
-  The particle counter in ShapeLogic v 1.1 has gone through limited testing, 
-  and seems to {{{particle.html#Test}work well}} though 
-  {{{particle.html#parameters}tweaking the parameters}} is still a bit
-  clumsy. Users looking for a mature particle counter should probably wait for
-  ShapeLogic v 1.2.
-
-  Documentation will soon be updated to reflect ShapeLogic 1.1.
+  Documentation will soon be updated to reflect ShapeLogic 1.2.
 
 * Future plans for ShapeLogic
   
@@ -173,39 +228,13 @@ ShapeLogic
   
   []
 
-** ShapeLogic v 1.2 with particle analyzer soon to be released
+** ShapeLogic v 1.3 with particle analyzer soon to be released
 
-  * More testing and improvement of particle counter
-
-    * Make it easier to set parameters in a macro or a configuration file
-
-    * Improve to handle blobs.gif image shown here, this was not
-  recognized as a particle image under ShapeLogic 1.1
-
-    * Enable ROI, 1.1 only works on whole images
+  * Make custom rules to recognize specific cells. 
+  The user have to make these rules themselves in ShapeLogic 1.2.
   
-    []
-
-  * Particle analyzer
-
-    * Suitable for processing cells and organelles
-
-    * Expand the particle counter to a full featured particle analyzer
-
-    * Print report about each particle's color, area, standard deviation to a file
-
-    * Vectorize particles by tracing the edge into polygon
-
-    * Filter particles based on geometric properties of the edge
+  * Fix bug in edge trace. Sometime it produces the wrong perimeter length.
   
-    []
-
-  * Color replace, replaces one color within a tolerance with another color.
-  Parameter input dialog with preview check box
-
-  * Organize plugins and macros under ShapeLogic and ShapeLogicOld menus, until
-  1.1 they where all placed under shapelogic menu
-
   []
 
   The test images are taken from the sample images from ImageJ
@@ -224,7 +253,7 @@ ShapeLogic
   
 * Examples applications
   
-  [[1]] Automatic color and gray scale {{{particle.html}particle counter}}, 
+  [[1]] Automatic color and gray scale {{{particle.html}particle counter and analyzer}}, 
   first medical image processing example.
   
   [[1]] {{{letter-match.html}Letter matching example}}. Very rudimentary OCR.

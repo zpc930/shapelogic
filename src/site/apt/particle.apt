@@ -8,102 +8,67 @@
 
 Particle Counter and Analyzer
 
-  ShapeLogic v 1.1 contains the first version of an automatic color and gray 
-  scale particle counter working without manual user intervention.
-
-  The particle counter in ShapeLogic v 1.1 has gone through limited testing, 
-  and seems to work well. Tweaking the parameters is a little clumsy.
-  Users looking for a mature particle counter should probably wait for
-  ShapeLogic v 1.2.
-
-* {Test} on sample images from ImageJ
+  ShapeLogic v 1.2 contains both an automatic color and gray scale particle
+  counter and a particle analyzer working without manual user intervention.
+  The goal is to be able to recognize different cells on a somewhat uniform 
+  background and be able to extract a lot of geometric information.
+    
+* Common functionality for particle counter and particle analyzer 
   
-  The particle counter was tested on the particle images from ImageJ:
+  * Take input parameters, e.g. min and max size for particles 
   
-[images/particles/embryos.jpg] 
-
-  embryos.jpg. The un-tweaked particle counter in ShapeLogic 1.1 found 
+  * Find the background color
   
-  particle count = 9
+  * Find particles
   
-  embryos.jpg contains 6 particles and a few shadows.
+  * Extract geometric properties of the particles
   
-  After changing the parameter setting it found 
-  
-  particle count = 5
-
-  which is the correct value since ShapeLogic 1.1 cannot split overlapping particles.
-
-[images/particles/Cell_Colony.jpg] 
-
-  Cell_Colony.jpg. It is hard for a human to count the particles in this image 
-  but ShapeLogic v 1.1 gave a reasonable result.
-
-[images/particles/blobs.gif] 
-
-  blobs.gif. ShapeLogic v 1.1 did not recognize this as a particle image.
-
-** Parameters that gave correct match for embryos.jpg
-
-+-------------------------------------------------------------+
-_iterations = 4; // K-mean iterations for color hypothesis
-_maxDistance = 90; // Distance between color in same color bucket
-_minPixelsInArea = 70; // Minimum number of pixels in particle
-+-------------------------------------------------------------+
-
-* Information for each particle in ShapeLogic v 1.1
-  
-  * Average color
-
-  * Standard deviation 
-  
-  * Center of gravity
-  
-  * Area
-  
-  * Bounding box
-  
-  * Start point
+  * Print a report to a result table that can be exported to Excel
   
   []
-
-  This information is available but there is no print report function in 1.1.
-
-* ShapeLogic v 1.2 with particle analyzer soon to be released
-
-  * More testing and improvement of particle counter
-
-    * Make it easier to set parameters in a macro or a configuration file
-
-    * Improve to handle blobs.gif image shown here, this was not
-  recognized as a particle image under ShapeLogic 1.1
-
-    * Enable ROI, 1.1 only works on whole images
   
-    []
-
-  * Particle analyzer
-
-    * Suitable for processing cells and organelles
-
-    * Expand the particle counter to a full featured particle analyzer
-
-    * Print report about each particle's color, area, standard deviation to a file
-
-    * Vectorize particles by tracing the edge into polygon
-
-    * Filter particles based on geometric properties of the edge
-  
-    []
-
-  []
-
 * Usage
   
-  There is just one step. Under shapelogic menu click "Particle Counter".
+  Here is an example particle image embryos.jpg
+    
+[images/particles/embryos.jpg] 
+
+  Under ImageJ Plugins ShapeLogic menu click 
+  "Particle Counter" or "Color Particle Analyzer".
   
-  A dialog will appear with the following information:
+[images/particles/shapelogicmenu.png] 
   
+** Input parameters dialog
+  
+  Select input parameters in dialog
+  
+[images/particles/particleInputDialog.png] 
+  
+  The parameters 
+  
+  Max distance: Distance between color in same color bucket
+  
+  Min pixels: Minimum number of pixels in particle
+  
+  Max pixels: Maximum number of pixels in particle
+  
+  Iterations: {{{http://en.wikipedia.org/wiki/K-means_algorithm}K-mean}} iterations for color hypothesis
+  
+  These are the default values and the name of the parameters in Java.
+  
++-------------------------------------------------------------+
+_iterations = 2; // K-mean iterations for color hypothesis
+_maxDistance = 50; // Distance between color in same color bucket
+_minPixelsInArea = 30; // Minimum number of pixels in particle
+_maxPixelsInArea = 10000; // Maximum number of pixels in particle
++-------------------------------------------------------------+
+
+** Summary result dialog
+
+  A summary result is shown in a dialog, with the following information:
+  
+[images/particles/particleCountDialog.png] 
+
   * How many regions were found
   
   * Background color
@@ -115,10 +80,95 @@ _minPixelsInArea = 70; // Minimum number of pixels in particle
   * The number of colors in the color hypothesis
   
   []
+  
+  A report of the properties of each particle is sent to an ImageJ result table. 
+  This can be exported to Excel.
+  This is different for the particle counter and analyzer. 
+  
+* Particle counter information for each particle 
+  
+  The particle counter finds and prints basic geometric properties of the particles
+  
+[images/particles/particleCounterResult.png]
+
+  * Area 
+  
+  * Center of gravity 
+  
+  * Color
+  
+  * Std dev for color
+  
+  []
+  
+  The particle counter in ShapeLogic v 1.2 has gone through some testing, 
+  and seems to work well.
+
+* Particle analyzer information for each particle
+
+  The particle analyzer traces the edge of each particle. It finds and prints 
+  more advanced geometric properties of the particles
+  
+[images/particles/particleAnalyzerResult.png]
+  
+  * Area 
+  
+  * Center of gravity 
+  
+  * Color
+  
+  * Std dev for color
+  
+  * Length of perimeter
+  
+  * Circularity
+  
+  * Gray value brightness
+  
+  * Bounding box
+  
+  * Number of hard corners
+  
+  * Number of inflection points
+  
+  * Number of curve arches
+  
+  []
+  
+  It finds a lot more geometric properties that is not printed, it is easy to
+  make ShapeLogic print them.
+  
+  Besides this the particle analyzer can select and categorize particles based 
+  on all these properties.
+  In order to categorize particles the user should define geometric rules for
+  each particle type.
+
+  ShapeLogic v 1.3 will come with predefined rules for certain cells.
+
+* {Test} on sample images from ImageJ
+  
+  The particle counter was tested on the particle images from ImageJ:
+  
+[images/particles/embryos.jpg] 
+
+  embryos.jpg. The un-tweaked particle counter in ShapeLogic 1.2 found 
+  
+  particle count = 6
+  
+  embryos.jpg contains 6 particles and a few shadows.
+  
+[images/particles/Cell_Colony.jpg] 
+
+  Cell_Colony.jpg. It is hard for a human to count the particles in this image 
+  but ShapeLogic v 1.2 gave a reasonable result.
+
+[images/particles/blobs.gif] 
+
+  blobs.gif. ShapeLogic v 1.2 handled this well too.
 
 * Framework to build more advanced particle counters and particle analyzers
   
-  The particle counter algorithm in ShapeLogic 1.1 is relatively simple. It is 
+  The particle counter algorithm in ShapeLogic 1.2 is relatively simple. It is 
   setup to be expanded to handle more advanced algorithms. Here is the flow.
   
   * Find one or more color hypothesis
@@ -139,46 +189,95 @@ _minPixelsInArea = 70; // Minimum number of pixels in particle
   * Filter particles based on size
   
   []
- 
-* Particle counter functionality can be tweaked by setting parameters
 
-  Here are the parameters you can set with their default values:
+* Defining rules for categories in ShapeLogic 1.2
+  
+  This is done by sub classing ColorParticleAnalyzer or ColorParticleAnalyzerIJ.
+  Override the categorizeStreams() method.
+  
+  Use ColorParticleAnalyzerIJ if you work with ImageJ and ColorParticleAnalyzer 
+  if you work without.
 
+  Here is the current categorize code. It is only there to serve as an example: 
+  
+  The rule syntax is very straightforward. There are a lot of numeric streams
+  with one lazy calculated number for each particle. E.g. aspect ratio stream.
+  Then you define one rule for each constraint you want to put on a given
+  category.
+  
+  In order to belong to the category Flat the aspect ratio for a particle just 
+  has to greater than 1.1.
+  
+  In order to belong to the category "Light round" the aspect ratio for a particle just 
+  has to between 0.9 and 1.1 and the brightness have to be greater than 150.
+  
+  Note that a particle that satisfy more categories will not belong to any of them.
+  
 +-----------------------------------+
-int _iterations = 2; // K-mean iterations for color hypothesis
-double _maxDistance = 50.; // Distance between color in same color bucket
-int _minPixelsInArea = 5; // Minimum number of pixels in particle
-+-----------------------------------+
-
-* How to tweak {parameters} in ShapeLogic v 1.1
-
-  Tweaking the parameters is a little clumsy, currently this has be done from 
-  within the Java code.
-
-  Copy the following text into a file called CustomParticleCounter_.java:
-
-+-----------------------------------+
-import org.shapelogic.imageprocessing.BaseParticleCounter;
-import org.shapelogic.imageutil.PlugInFilterAdapter;
-
-/** CustomParticleCounter shows how customize the parameter settings. */
-public class CustomParticleCounter_ extends PlugInFilterAdapter {
+	@Override
+	protected void categorizeStreams() {
+		LoadParticleStreams.exampleMakeParticleStream();
+    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+    	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
+	}
 	
-	public CustomParticleCounter_() {
-		super(new BaseParticleCounter() {
-            {
-                _iterations = 4; // K-mean interations for color hypothesis
-                _maxDistance = 90; // Distance between color in same color bucket
-                _minPixelsInArea = 70; // Minimum number of pixels in particle
-            }
-        });
+	
+	final static public String[] EXAMPLE_PARTICLE_ARRAY = 
+	{"Flat","Tall","Light round", "Dark round"};	
+	
+	/** This shows what to do to define rules for the color particle analyzer.<br />
+	 * 
+	 * This is not useful.<br /> 
+	 * Light and dark is turned around if inverted LUT is used.<br /> 
+	 */
+	public static void exampleMakeParticleStream() {
+		LoadLetterStreams.rule("Flat", ASPECT_RATIO, ">", 1.1, null);
+		
+		LoadLetterStreams.rule("Tall", ASPECT_RATIO, "<", 0.9, null);
+
+		LoadLetterStreams.rule("Light round", StreamNames.COLOR_GRAY, ">", 150, null);
+		LoadLetterStreams.rule("Light round", ASPECT_RATIO, "<", 1.1, null);
+		LoadLetterStreams.rule("Light round", ASPECT_RATIO, ">", 0.9, null);
+
+		LoadLetterStreams.rule("Dark round", StreamNames.COLOR_GRAY, "<", 120, null);
+		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, "<", 1.1, null);
+		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, ">", 0.9, null);
+	}
++-----------------------------------+
+
+ 
+* How to make you own particle analyzer category rules
+  
+  This example only have 2 categories Flat and Non flat. 
+  It is flat if it twice as wide as it is high.
+  
+  Copy the following text into a file called CustomParticleAnalyzer_.java:
+
++-----------------------------------+
+import org.shapelogic.calculation.RootMap;
+import org.shapelogic.imageprocessing.ColorParticleAnalyzerIJ;
+import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.streamlogic.LoadLetterStreams;
+import org.shapelogic.streamlogic.StreamNames;
+import org.shapelogic.streams.XOrListStream;
+
+public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
+	@Override
+	protected void categorizeStreams() {
+	    
+		LoadLetterStreams.rule("Flat", CommonLogicExpressions.ASPECT_RATIO, ">", 2, null);
+		
+		LoadLetterStreams.rule("Non flat", CommonLogicExpressions.ASPECT_RATIO, "<", 2, null);
+
+    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, new String[] {"Flat", "Non flat"});
+    	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
 	}
 }
 +-----------------------------------+
   
 ** Compile from within ImageJ
 
-  * Place the CustomParticleCounter_.java into ImageJ/plugin/shapelogic directory.
+  * Place the CustomParticleAnalyzer_.java into ImageJ/plugin/ShapeLogic directory.
   
   * Compile it from within ImageJ, by going to Plugin -> Compile and Run ...
 
@@ -186,16 +285,22 @@ public class CustomParticleCounter_ extends PlugInFilterAdapter {
   
 ** Compile from outside ImageJ
 
-  * Compile CustomParticleCounter_.java someplace else using Eclipse,
-  NetBeans or javac and take the resulting 2 class files:
+  * Compile CustomParticleAnalyzer_.java someplace else using Eclipse,
+  NetBeans or javac and take the resulting class file:
 
-  CustomParticleCounter.class CustomParticleCounter_$1.class 
+  CustomParticleAnalyzer_.class 
   
-  * Move them into ImageJ/plugin/shapelogic directory.
+  * Move it into ImageJ/plugin/ShapeLogic directory.
 
   []
 
-* Plans for particle counter beyond ShapeLogic v 1.2
+* Plans for particle counter and analyzer beyond ShapeLogic v 1.2
+  
+  * ShapeLogic v 1.3 will come with predefined rules for certain cells
+
+  * Make them be able to handle background that is not uniform
+  
+  * Expand it to handle organelles
 
   * Reasoning under uncertainty using the lazy stream library
   
