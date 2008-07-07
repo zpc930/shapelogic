@@ -288,14 +288,16 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 
   []
 
-* Plans for particle counter and analyzer beyond ShapeLogic v 1.2
+* Possible future plans for particle analyzer beyond ShapeLogic v 1.2
   
   * ShapeLogic v 1.3 will come with predefined rules for certain cells
-
-  * It will be able to handle a background that is not uniform and cell organelles
-
-  * It will incorporate reasoning under uncertainty using the lazy stream library
   
-  * It will hopefully be able to find overlapping particles and distinguish them as separate 
+  * Create rule for recognizing cells using neural networks or machine learning techniques
+
+  * Be able to handle a background that is not uniform, and cell organelles
+
+  * Incorporate reasoning under uncertainty using the lazy stream library
+  
+  * Find overlapping particles and distinguish them as separate 
   
   []
