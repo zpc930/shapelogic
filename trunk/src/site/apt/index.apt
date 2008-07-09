@@ -235,6 +235,12 @@ ShapeLogic
   
   * Fix bugs in edge trace. In v 1.2 the wrong perimeter lengths are sometimes found.
   
+  * Make it easier to select what particle properties to print out, now a 
+  random selection of somewhat useful properties have been selected.
+  
+  * Possibly change the edge tracer to find 8-directions chain codes instead of 
+  4-directions chain codes, in order to improve precision of perimeter length.
+  
   []
 
   The test images are taken from the sample images from ImageJ
