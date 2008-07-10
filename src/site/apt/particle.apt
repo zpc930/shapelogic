@@ -194,7 +194,8 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 
   Here is the current categorize code. It is only there to serve as an example: 
   
-  The rule syntax is very straightforward. There are a lot of numeric streams
+  The {{{logic-language.html#syntax} rule syntax}} is very straightforward. 
+  There are a lot of numeric streams
   with one lazy calculated number for each particle. E.g. aspect ratio stream.
   Then you define one rule for each constraint you want to put on a given
   category.
