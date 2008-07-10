@@ -55,6 +55,10 @@ Release notes for releases with development status beta
   * Organize plugins and macros under ShapeLogic and ShapeLogicOld menus, until
   1.1 they where all placed under shapelogic menu
 
+  * Over 30000 lines of Java code
+
+  * 465 unit test that all works on local machine
+
   []
 
 * 2008/05/07 ShapeLogic v 1.1 released AKA Simple particle counter
