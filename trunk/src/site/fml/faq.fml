@@ -21,6 +21,21 @@
         </source>
       </answer>
     </faq>
+    <faq id="problemRunningOnMac">
+      <title>Problem running ShapeLogic on a Max</title>
+      <question>Why won't ShapeLogic run as a plug-in for ImageJ on my Mac?</question>
+      <answer>
+        <p>
+		The problem is that Shapelogic has been built to require
+		Java 1.6 and the Mac comes pre installed with Java 1.5.
+		You can get an update to Java 1.6 for OS X 10.5. See
+		<a href="http://developer.apple.com/java/">http://developer.apple.com/java/</a>
+        </p><p>
+		Then you need to set ImageJ to use Java 1.6. This is done in the
+		ImageJ.cfg file under ImageJ dir.
+        </p>
+      </answer>
+    </faq>
     <faq id="jdkversion">
       <question>What version of Java JDK does ShapeLogic work with?</question>
       <answer>

@@ -27,9 +27,12 @@
           <item name="Release Notes" href="release-notes.html"/>
           <item name="Road Map" href="roadmap.html"/>
           <item name="Contacts" href="team.html"/>
+          <item name="Site revisions" href="site-revisions.html"/>
+      </item>
+      <item name="Applications" href="index.html" collapse="true">
+		  <item name="Particle Analyzer" href="particle.html"/>
       </item>
       <item name="Examples" href="index.html" collapse="true">
-		  <item name="Particle Analyzer" href="particle.html"/>
 		  <item name="Project Euler" href="project-euler.html"/>
 		  <item name="Letter Match" href="letter-match.html"/>
       </item>
@@ -58,12 +61,6 @@
       </item>
       <item name="Team Blogs" href="index.html" collapse="true">
           <item name="Sami Badawi" href="http://samibadawi.blogspot.com"/>
-      </item>
-      <item name="Release Versions" href="index.html" collapse="true">
-	      <item name="ShapeLogic 0.8" href="release_versions/shapelogic0.8/index.html"/>
-	      <item name="ShapeLogic 0.9" href="release_versions/shapelogic0.9/index.html"/>
-	      <item name="ShapeLogic 1.0" href="release_versions/shapelogic1.0/index.html"/>
-	      <item name="ShapeLogic 1.1" href="release_versions/shapelogic1.1/index.html"/>
       </item>
     </menu>
 

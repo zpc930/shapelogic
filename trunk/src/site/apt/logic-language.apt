@@ -84,7 +84,7 @@ Different types of declarative programming in ShapeLogic
   It is also possible to connect Groovy and Java outside Java 6 Scripting, but 
   then it would not be uniform.
   
-Logic expressions in lazy stream approach
+Logic expressions {syntax} in lazy stream approach
   
   {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} DigitStreamVectorizer}} 
   is an example showing what is needed to define a match of the numbers working 
