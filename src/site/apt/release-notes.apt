@@ -13,16 +13,25 @@ Release notes for releases with development status beta
   scale images without manual user intervention
   
   * Particle analyzer traces the edge of each particle and turns it into a 
-  polygon. The the same rules that was used in the letter matcher can be used 
+  polygon. The same rules that were used in the letter matcher can be used 
   on particles to classify them
   
   * Particle analyzer is suitable for processing cells
 
-  * Both particle counter and particle analyzer now takes input parameters and 
-  print report about each particle's area, color, standard deviation of color
-  center of gravity to result table
+  * Both particle counter and particle analyzer now take input parameters and 
+  reports a to a result table on each particle's 
+    
+    * Area 
+    
+    * Color 
+    
+    * Standard deviation of color
+    
+    * Center of gravity
+    
+    []
   
-  * Additionally particle analyzer reports
+  * Additional reports fields for particle analyzer
   
 	  * Length of perimeter
 	  
