@@ -3,7 +3,7 @@ package org.shapelogic.calculation;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.shapelogic.scripting.ScriptEngineCache;
+//import org.shapelogic.scripting.ScriptEngineCache;
 
 /** This is the RootContext where all the certain objects are stored. <br />
  * 
@@ -27,8 +27,8 @@ public class RootMap {
 	}
 	
 	public static Map mapFactory() {
-		return ScriptEngineCache.getScriptEngineManager().getBindings();
-//		return new HashMap();
+//		return ScriptEngineCache.getScriptEngineManager().getBindings();
+		return new HashMap();
 	}
 
 	static public Map[] getMaps(){

@@ -166,6 +166,11 @@ ShapeLogic
 
 * News
 
+** 2008/07/12 ShapeLogic v 1.2.1 released build for JDK 1.5 / Java 5
+  
+  A user filed a bug report that ShapeLogic was not running on his Mac. 
+  This version of ShapeLogic is built for JDK 1.5.
+  
 ** 2008/07/01 ShapeLogic v 1.2 released
   
   * {{{particle.html} Particle analyzer}} working directly on color and gray 

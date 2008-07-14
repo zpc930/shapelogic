@@ -7,6 +7,14 @@
 
 Release notes for releases with development status beta
 
+* 2008/07/12 ShapeLogic v 1.2.1 released AKA Mac friendly for Java 5
+  
+  First bug fix release. A user filed a bug report that ShapeLogic was not running on his Mac.
+
+  * Built for JDK 1.5 and should work with the Mac 
+  
+  []
+  
 * 2008/07/01 ShapeLogic v 1.2 released AKA particle analyzer
 
   * {{{particle.html} Particle analyzer}} working directly on color and gray 
@@ -55,7 +63,7 @@ Release notes for releases with development status beta
   * Organize plugins and macros under ShapeLogic and ShapeLogicOld menus, until
   1.1 they where all placed under shapelogic menu
 
-  * Over 30000 lines of Java code
+  * 31000 lines of Java code
 
   * 465 unit test that all works on local machine
 
