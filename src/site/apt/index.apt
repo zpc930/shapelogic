@@ -92,8 +92,8 @@ ShapeLogic
   The categories for the particles are only examples, it is easy to 
   setup different rules for categorizing particles.
   
-  In ShapeLogic 1.3 there will be custom rules to recognize specific cells and
-  it will be tested further.
+  In ShapeLogic 1.3 there will be custom rules to  
+  {{{cell.html}categorize specific cells}} and it will be tested further.
   
   ShapeLogic 1.2 also contains the second version of a color particle counter. 
   It also prints a smaller report of the particle's properties.
@@ -235,7 +235,7 @@ ShapeLogic
 
 ** ShapeLogic v 1.3 with specific cell recognition particle analyzer soon to be released
 
-  * Make custom rules to recognize specific cells. 
+  * Make custom rules to recognize specific {{{cell.html}cells}}. 
   In v 1.2 the user has to make rules themselves.
   
   * Fix bugs in edge trace. In v 1.2 the wrong perimeter lengths are sometimes found.
