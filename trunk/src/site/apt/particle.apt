@@ -12,7 +12,10 @@ Particle Counter and Analyzer
   counter and a particle analyzer working without manual user intervention.
   The goal is to be able to recognize different cells on a relatively uniform 
   background and be able to extract a lot of geometric information.
-    
+  
+  See {{{cell.html}Cell Categorizer}} for images types that can be handled by
+  the current particle analyzer, and for future plans.
+  
 * Common functionality for particle counter and particle analyzer 
   
   * Take input parameters, e.g. min and max size for particles 
@@ -131,7 +134,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   In order to categorize particles the user should define geometric rules for
   each particle type.
 
-  ShapeLogic v 1.3 will come with predefined rules for certain cells.
+  ShapeLogic v 1.3 will come with predefined rules to {{{cell.html}categorize certain cells}}.
 
 * Current status of the particle analyzer in ShapeLogic v 1.2 
   
@@ -151,15 +154,6 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   embryos.jpg contains 6 particles and a few shadows.
   
-[images/particles/Cell_Colony.jpg] 
-
-  Cell_Colony.jpg. It is hard for a human to count the particles in this image 
-  but ShapeLogic v 1.2 gave a reasonable result.
-
-[images/particles/blobs.gif] 
-
-  blobs.gif. ShapeLogic v 1.2 handled this well too.
-
 * Framework to build more advanced particle counters and particle analyzers
   
   The particle counter algorithm in ShapeLogic 1.2 is relatively simple. It is 
