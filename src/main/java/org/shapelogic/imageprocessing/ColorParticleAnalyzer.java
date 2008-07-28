@@ -31,7 +31,7 @@ import org.shapelogic.streams.XOrListStream;
 public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected WrappedListStream<IColorAndVariance> _particleStream;
 	protected ListStream<Polygon> _polygonStream;
-	protected EdgeTracer _edgeTracer;
+	protected IEdgeTracer _edgeTracer;
 	protected NumberedStream<Double> _aspectRatioStream;
 	protected NumberedStream<Integer> _grayValueStream;
 	protected NumberedStream<Integer> _hardCornerCountStream;
