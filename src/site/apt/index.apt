@@ -160,7 +160,7 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 30,000 lines of Java code including 460 unit tests.
+  * ShapeLogic currently consists of 31,000 lines of Java code including 470 unit tests.
 
   []
 
@@ -245,6 +245,8 @@ ShapeLogic
   
   * Possibly change the edge tracer to find 8-directions chain codes instead of 
   4-directions chain codes, in order to improve precision of perimeter length.
+  
+  * Make a couple of new particle analyzers, with different color strategies
   
   []
 
