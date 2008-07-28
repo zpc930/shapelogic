@@ -189,7 +189,7 @@ public class EdgeTracerWand implements IEdgeTracer {
 		//Original clause causes termination problems
 		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
 		chainCodeHandler.getValue();
-		polygon.setPerimeter(chainCodeHandler.getLastChain());
+		polygon.setPerimeter(chainCodeHandler.getLastChain()+1);
 		polygon.getValue();
 		polygon.getBBox().add(chainCodeHandler._bBox);
 		return polygon;
