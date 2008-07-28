@@ -10,6 +10,7 @@ import org.shapelogic.color.IColorDistanceWithImage;
 import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Polygon;
+import org.shapelogic.util.Constants;
 
 /** Edge Tracer. <br />
  * 
@@ -24,27 +25,7 @@ import org.shapelogic.polygon.Polygon;
  *
  */
 public class EdgeTracer implements IEdgeTracer {
-	static final int UP_OR_DOWN=-2, LEFT_OR_RIGHT=-3, NA=-1;
 	
-	static final int[] table = {
-					// 1234, 1=upper left pixel,  2=upper right, 3=lower left, 4=lower right
-		NA,			// 0000, should never happen
-		RIGHT,		// 000X,
-		DOWN,		// 00X0
-		RIGHT,		// 00XX
-		UP,			// 0X00
-		UP,			// 0X0X
-		UP_OR_DOWN, // 0XX0 Go up or down depending on current direction
-		UP,			// 0XXX
-		LEFT,		// X000
-		LEFT_OR_RIGHT, // X00X  Go left or right depending on current direction
-		DOWN,		// X0X0
-		RIGHT,		// X0XX
-		LEFT,		// XX00
-		LEFT,		// XX0X
-		DOWN,		// XXX0
-		NA,			// XXXX Should never happen
-		};
 	private IColorDistanceWithImage _colorDistanceWithImage; 
 	private int width, height;
 	private double _maxDistance;
@@ -69,27 +50,6 @@ public class EdgeTracer implements IEdgeTracer {
 		return _traceCloseToColor ^ (_maxDistance < _colorDistanceWithImage.distanceToReferenceColor(x, y));
 	}
 
-	/* Are we tracing a one pixel wide line? */
-	boolean isLine(int xs, int ys) {
-		int r = 5;
-		int xmin=xs;
-		int xmax=xs+2*r;
-		if (xmax>=width) xmax=width-1;
-		int ymin=ys-r;
-		if (ymin<0) ymin=0;
-		int ymax=ys+r;
-		if (ymax>=height) ymax=height-1;
-		int area = 0;
-		int insideCount = 0;
-		for (int x=xmin; (x<=xmax); x++)
-			for (int y=ymin; y<=ymax; y++) {
-				area++;
-				if (inside(x,y))
-					insideCount++;
-			}
-		return ((double)insideCount)/area>=0.75;
-	}
-	
 	/** Traces the boundary of an area of uniform color, where
 		'startX' and 'startY' are somewhere inside the area. 
 		A 16 entry lookup table is used to determine the
@@ -97,45 +57,27 @@ public class EdgeTracer implements IEdgeTracer {
 	public Polygon autoOutline(int startX, int startY) {
 		int x = startX;
 		int y = startY;
-		int direction;
-		do {x++;} while (inside(x,y));
-		if (isLine(x, y)) {
-			direction = UP;
-		} else {
-			if (!inside(x-1,y-1))
-				direction = RIGHT;
-			else if (inside(x,y-1))
-				direction = LEFT;
-			else
-				direction = DOWN;
-		}
-		return traceEdge(x, y, direction);
+		do {
+			x++;
+		} while (inside(x,y));
+		x--;
+		return traceEdge(x, y, 0);
 	}
 	
 	int nextDirection(int x, int y, int lastDirection) {
-		boolean UL = inside(x-1, y-1);	// upper left
-		boolean UR = inside(x, y-1);	// upper right
-		boolean LL = inside(x-1, y);	// lower left
-		boolean LR = inside(x, y);		// lower right
-		int index = 0;
-		if (LR) index |= 1;
-		if (LL) index |= 2;
-		if (UR) index |= 4;
-		if (UL) index |= 8;
-		int newDirection = table[index];
-		if (newDirection==UP_OR_DOWN) {
-			if (lastDirection==RIGHT)
-				newDirection = UP;
-			else
-				newDirection = DOWN;
+		boolean L = inside(x-1, y);	// upper left
+		boolean D = inside(x, y+1);	// lower left
+		boolean R = inside(x+1, y);		// lower right
+		boolean U = inside(x, y-1);	// upper right
+		boolean[] directions = {L,D,R,U};
+		int lastDirectionReleativeCurrent = lastDirection/2+ Constants.DIRECTIONS_4_AROUND_POINT/2;
+		for (int i=1; i < Constants.DIRECTIONS_4_AROUND_POINT; i++) {
+			int real_direction = (lastDirectionReleativeCurrent + i) % Constants.DIRECTIONS_4_AROUND_POINT;
+			//Return first point that is inside
+			if (directions[real_direction])
+				return real_direction*2;
 		}
-		if (newDirection==LEFT_OR_RIGHT) {
-			if (lastDirection==UP)
-				newDirection = LEFT;
-			else
-				newDirection = RIGHT;
-		}
-		return newDirection;
+		return -1; //Not found
 	}
 		
 	Polygon traceEdge(int xstart, int ystart, int startingDirection) {
@@ -154,6 +96,8 @@ public class EdgeTracer implements IEdgeTracer {
 		do {
 			count++;
 			direction = nextDirection(x,y,direction);
+			if (-1 == direction)
+				break;
 			switch (direction) {
 				case UP:
 					y = y-1;
@@ -175,7 +119,7 @@ public class EdgeTracer implements IEdgeTracer {
 		//Original clause causes termination problems
 //		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
 		chainCodeHandler.getValue();
-		polygon.setPerimeter(chainCodeHandler.getLastChain());
+		polygon.setPerimeter(chainCodeHandler.getLastChain()+1);
 		polygon.getValue();
 		polygon.getBBox().add(chainCodeHandler._bBox);
 		return polygon;
