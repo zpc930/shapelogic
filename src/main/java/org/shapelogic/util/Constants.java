@@ -12,6 +12,7 @@ public class Constants {
 
 	public static final byte DIRECTION_NOT_USED = -1;
 	public static final int DIRECTIONS_AROUND_POINT = 8;
+	public static final int DIRECTIONS_4_AROUND_POINT = 4;
 	public static final int BEFORE_START_INDEX = -1; 
 	public static final int START_INDEX = 0; 
 	public static final Integer ZERO = new Integer(0);
