@@ -57,11 +57,17 @@ public class EdgeTracer implements IEdgeTracer {
 	public Polygon autoOutline(int startX, int startY) {
 		int x = startX;
 		int y = startY;
+		//Find top point inside
 		do {
-			x++;
+			y--;
 		} while (inside(x,y));
-		x--;
-		return traceEdge(x, y, 0);
+		y++;
+		//Find leftmost top point inside
+		do {
+			x--;
+		} while (inside(x,y));
+		x++;
+		return traceEdge(x, y, 2);
 	}
 	
 	int nextDirection(int x, int y, int lastDirection) {
