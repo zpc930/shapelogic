@@ -37,13 +37,16 @@ Image processing user mode with ImageJ
 
   * Install {{{http://rsb.info.nih.gov/ij/} ImageJ}}
   
-  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.2.zip}}
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.2.1.zip}}
 
   * Unzip it
 
-  * This will create a directory named shapelogicplugin
+  * This will create a directory named shapelogicplugin1.2.1/shapelogicplugin
+  
+  * Inside this there are 2 dirs: ShapeLogic and ShapeLogicOld and 6 jar files
 
-  * Take everything from this directory and copy it into ./ImageJ/plugins/
+  * Take these 2 dirs and all the jar files from this directory and copy it 
+  into ./ImageJ/plugins/
   
   []
 
