@@ -23,35 +23,16 @@ import org.shapelogic.polygon.Polygon;
  * @author Sami Badawi
  *
  */
-public class EdgeTracer implements IEdgeTracer {
+public class EdgeTracerWand implements IEdgeTracer {
 	static final int UP_OR_DOWN=-2, LEFT_OR_RIGHT=-3, NA=-1;
 	
-	static final int[] table = {
-					// 1234, 1=upper left pixel,  2=upper right, 3=lower left, 4=lower right
-		NA,			// 0000, should never happen
-		RIGHT,		// 000X,
-		DOWN,		// 00X0
-		RIGHT,		// 00XX
-		UP,			// 0X00
-		UP,			// 0X0X
-		UP_OR_DOWN, // 0XX0 Go up or down depending on current direction
-		UP,			// 0XXX
-		LEFT,		// X000
-		LEFT_OR_RIGHT, // X00X  Go left or right depending on current direction
-		DOWN,		// X0X0
-		RIGHT,		// X0XX
-		LEFT,		// XX00
-		LEFT,		// XX0X
-		DOWN,		// XXX0
-		NA,			// XXXX Should never happen
-		};
 	private IColorDistanceWithImage _colorDistanceWithImage; 
 	private int width, height;
 	private double _maxDistance;
 	private boolean _traceCloseToColor;
 
 	/** Constructs a Wand object from an ImageProcessor. */
-	public EdgeTracer(SLImage image, int referenceColor, double maxDistance, boolean traceCloseToColor) {
+	public EdgeTracerWand(SLImage image, int referenceColor, double maxDistance, boolean traceCloseToColor) {
 		_colorDistanceWithImage = ColorFactory.makeColorDistanceWithImage(image);
 		_colorDistanceWithImage.setReferenceColor(referenceColor);
 		_maxDistance = maxDistance;
@@ -111,32 +92,6 @@ public class EdgeTracer implements IEdgeTracer {
 		}
 		return traceEdge(x, y, direction);
 	}
-	
-	int nextDirection(int x, int y, int lastDirection) {
-		boolean UL = inside(x-1, y-1);	// upper left
-		boolean UR = inside(x, y-1);	// upper right
-		boolean LL = inside(x-1, y);	// lower left
-		boolean LR = inside(x, y);		// lower right
-		int index = 0;
-		if (LR) index |= 1;
-		if (LL) index |= 2;
-		if (UR) index |= 4;
-		if (UL) index |= 8;
-		int newDirection = table[index];
-		if (newDirection==UP_OR_DOWN) {
-			if (lastDirection==RIGHT)
-				newDirection = UP;
-			else
-				newDirection = DOWN;
-		}
-		if (newDirection==LEFT_OR_RIGHT) {
-			if (lastDirection==UP)
-				newDirection = LEFT;
-			else
-				newDirection = RIGHT;
-		}
-		return newDirection;
-	}
 		
 	Polygon traceEdge(int xstart, int ystart, int startingDirection) {
 		Polygon polygon = new Polygon();
@@ -146,34 +101,93 @@ public class EdgeTracer implements IEdgeTracer {
 		chainCodeHandler.setup();
 		chainCodeHandler.setMultiLine(polygon.getCurrentMultiLine());
 		chainCodeHandler.setFirstPoint(new CPointInt(xstart,ystart));
+		int[] table = {
+						// 1234, 1=upper left pixel,  2=upper right, 3=lower left, 4=lower right
+			NA,			// 0000, should never happen
+			RIGHT,		// 000X,
+			DOWN,		// 00X0
+			RIGHT,		// 00XX
+			UP,			// 0X00
+			UP,			// 0X0X
+			UP_OR_DOWN, // 0XX0 Go up or down depending on current direction
+			UP,			// 0XXX
+			LEFT,		// X000
+			LEFT_OR_RIGHT, // X00X  Go left or right depending on current direction
+			DOWN,		// X0X0
+			RIGHT,		// X0XX
+			LEFT,		// XX00
+			LEFT,		// XX0X
+			DOWN,		// XXX0
+			NA,			// XXXX Should never happen
+			};
+		int index;
+		int newDirection;
 		int x = xstart;
 		int y = ystart;
 		int direction = startingDirection;
 
+		boolean UL = inside(x-1, y-1);	// upper left
+		boolean UR = inside(x, y-1);	// upper right
+		boolean LL = inside(x-1, y);	// lower left
+		boolean LR = inside(x, y);		// lower right
 		int count = 0;
 		do {
+			index = 0;
+			if (LR) index |= 1;
+			if (LL) index |= 2;
+			if (UR) index |= 4;
+			if (UL) index |= 8;
+			newDirection = table[index];
+			if (newDirection==UP_OR_DOWN) {
+				if (direction==RIGHT)
+					newDirection = UP;
+				else
+					newDirection = DOWN;
+			}
+			if (newDirection==LEFT_OR_RIGHT) {
+				if (direction==UP)
+					newDirection = LEFT;
+				else
+					newDirection = RIGHT;
+			}
 			count++;
-			direction = nextDirection(x,y,direction);
-			switch (direction) {
+			switch (newDirection) {
 				case UP:
 					y = y-1;
+					LL = UL;
+					LR = UR;
+					UL = inside(x-1, y-1);
+					UR = inside(x, y-1);
 					break;
 				case DOWN:
 					y = y + 1;
+					UL = LL;
+					UR = LR;
+					LL = inside(x-1, y);
+					LR = inside(x, y);
 					break;
 				case LEFT:
 					x = x-1;
+					UR = UL;
+					LR = LL;
+					UL = inside(x-1, y-1);
+					LL = inside(x-1, y);
 					break;
 				case RIGHT:
 					x = x + 1;
+					UL = UR;
+					LL = LR;
+					UR = inside(x, y-1);
+					LR = inside(x, y);
 					break;
 			}
+			direction = newDirection;
 			//If the chain becomes too long just give up
 			if (!chainCodeHandler.addChainCode((byte)direction))
 				break;
-		} while ((x!=xstart || y!=ystart));
+//		} while ((x!=xstart || y!=ystart));
 		//Original clause causes termination problems
-//		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
+		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
 		chainCodeHandler.getValue();
 		polygon.setPerimeter(chainCodeHandler.getLastChain());
 		polygon.getValue();
