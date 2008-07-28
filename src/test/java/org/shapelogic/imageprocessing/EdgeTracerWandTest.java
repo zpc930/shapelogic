@@ -2,22 +2,21 @@ package org.shapelogic.imageprocessing;
 
 import org.shapelogic.imageutil.SLImage;
 
-
-/** Test of EdgeTracer.<br />
+/** Test of EdgeTracerWand.<br />
  * 
  * @author Sami Badawi
  *
  */
-public class EdgeTracerTest extends EdgeTracerTests {
-	
+public class EdgeTracerWandTest extends EdgeTracerTests {
+
 	@Override
 	public IEdgeTracer getInstance(SLImage image, int referenceColor,
 			double maxDistance, boolean traceCloseToColor) {
-		return new EdgeTracer(image,referenceColor,maxDistance,traceCloseToColor);
+		return new EdgeTracerWand(image,referenceColor,maxDistance,traceCloseToColor);
 	}
 	
 	@Override
 	public void setUp() {
+		boxPerimeter = new Integer(24);
 	}
-	
 }
