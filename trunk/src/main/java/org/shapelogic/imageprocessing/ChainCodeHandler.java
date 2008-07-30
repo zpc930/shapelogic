@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -163,7 +164,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 			previousPointProperties = lastPointProperties; 
 			lastPointProperties = currentPointProperties;
 		}
-		if (closed) {
+		if (closed && 2 < numberOfPoints) {
 			PointProperties firstPointProperties = _pointPropertiesList.get(0);
 			PointProperties returnPointProperties = _pointPropertiesList.get(numberOfPoints-2);
 			LineProperties returnLineProperties = _linePropertiesList.get(0);
@@ -178,20 +179,25 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		_accumulatedDirectionChange = 0;
 		_accumulatedAbsoluteDirectionChange = 0;
 		byte lastDirection = _chainCodeForMultiLine[_lastChain];
+		int lastDirectionChange = 0;
 		for (int i = 0; i <= _lastChain; i++) {
 			byte direction = _chainCodeForMultiLine[i];
 			int directionChange = direction - lastDirection;
 			if (4 < directionChange)
 				directionChange -= 8;
-			else if (directionChange < -4)
+			else if (directionChange <= -4)
 				directionChange += 8;
+			//-4 and 4 are both correct, so you have to look at the last direction
+			if (4 == directionChange && 0 < lastDirectionChange)
+				directionChange -= 8;
+			lastDirectionChange = directionChange; 
 			_accumulatedDirectionChange += directionChange;
 			_accumulatedAbsoluteDirectionChange  += Math.abs(directionChange);
 			lastDirection = direction;
 		}
 		if (isClosed()) {
 			_multiLine.setClosedLineClockWise(_accumulatedDirectionChange > 0);
-			if (Math.abs(_accumulatedDirectionChange) != 8 )
+			if (Math.abs(_accumulatedDirectionChange) != 8 && _accumulatedDirectionChange != 0)//XXX not sure if 0 is OK
 				throw new RuntimeException(
 						"Closed curve should have direction change -8 or 8, found: " + _accumulatedDirectionChange);
 		}
@@ -356,25 +362,29 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		if (!doNotSplit) {
 			CPointInt maxNegativePoint = new CPointInt();
 			CPointInt currentPoint = (CPointInt) startPoint.copy();
-			if (xCoordinate == 0 && yCoordinate == 0) {
-				CPointInt vectorToHalfWayPoint = findIntervalVector(startIndex, endIndex / 2);
-				xCoordinate = vectorToHalfWayPoint.x;
-				yCoordinate = vectorToHalfWayPoint.y;
-			}
-			int[] distanceDifference = new int[Constants.DIRECTIONS_AROUND_POINT];
-			for (int i = 0; i < Constants.DIRECTIONS_AROUND_POINT; i++) {
-				distanceDifference[i] = Constants.CYCLE_POINTS_X[i] * yCoordinate - 
-				Constants.CYCLE_POINTS_Y[i] * xCoordinate;
-			}
+			int[] distanceDifference = null;
 			double lengthOfDistanceUnit = relativeVector.distanceFromOrigin();
+			if (xCoordinate == 0 && yCoordinate == 0) {
+				lengthOfDistanceUnit = 1;
+			}
+			else {
+				distanceDifference = new int[Constants.DIRECTIONS_AROUND_POINT];
+				for (int i = 0; i < Constants.DIRECTIONS_AROUND_POINT; i++) {
+					distanceDifference[i] = Constants.CYCLE_POINTS_X[i] * yCoordinate - 
+					Constants.CYCLE_POINTS_Y[i] * xCoordinate;
+				}
+			}
 			lineProperties.lengthOfDistanceUnit = lengthOfDistanceUnit;
 			int unnormalizedDistanceInt = (int) Math.ceil(lengthOfDistanceUnit); 
 			lengthOfDistanceUnit *= getDistLimit(endIndex + 1 - startIndex);  
 			for (int i = startIndex + 1; i <= endIndex; i++) {
 				byte direction = _chainCodeForMultiLine[i];
-				currentDist += distanceDifference[direction];
 				currentPoint.x += Constants.CYCLE_POINTS_X[direction];
 				currentPoint.y += Constants.CYCLE_POINTS_Y[direction];
+				if (distanceDifference != null)
+					currentDist += distanceDifference[direction];
+				else
+					currentDist = (int)(((Point)startPoint).distance(currentPoint) * unnormalizedDistanceInt);
 				if (Math.abs(currentDist) < unnormalizedDistanceInt) {
 					lineProperties.pixelsWithAlmostZeroDistance++;
 				}
