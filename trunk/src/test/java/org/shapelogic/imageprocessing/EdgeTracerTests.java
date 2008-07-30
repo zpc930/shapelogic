@@ -23,6 +23,7 @@ abstract public class EdgeTracerTests extends TestCase {
 	final static String _dirURL = "./src/test/resources/images/particles";
 	final static String _fileFormat = ".gif";
 	protected Integer boxPerimeter = 20; //
+	protected Integer iPerimeter = 54;
 	
 	String filePath(String fileName) {
 		return _dirURL + "/" + fileName + _fileFormat;
@@ -30,6 +31,10 @@ abstract public class EdgeTracerTests extends TestCase {
 	
 	String filePath(String fileName, String fileFormat) {
 		return _dirURL + "/" + fileName + fileFormat;
+	}
+	
+	String filePath(String dir, String fileName, String fileFormat) {
+		return dir + "/" + fileName + fileFormat;
 	}
 	
 	abstract IEdgeTracer getInstance(SLImage image, int referenceColor, double maxDistance, boolean traceCloseToColor);
@@ -92,6 +97,22 @@ abstract public class EdgeTracerTests extends TestCase {
 		IEdgeTracer edgeTracer = getInstance(image,foregroundColor,10,true);
 		Polygon cch = edgeTracer.autoOutline(5,5);
 		assertEquals(boxPerimeter,cch.getPerimeter());
+	}
+
+	public void testI() {
+		String filename = "I";
+		SLImage image = new IJImage(filePath("./src/test/resources/images/smallThinLetters", filename, ".gif"));
+		int foregroundColor = 255; 
+		assertNotNull(image);
+		assertFalse(image.isEmpty());
+		assertEquals(30,image.getWidth());
+		assertEquals(30,image.getHeight());
+		assertTrue(image.isGray());
+		assertEquals(0, image.get(0, 0)); //Background
+		assertEquals(foregroundColor, image.get(14, 2)); //Foreground
+		IEdgeTracer edgeTracer = getInstance(image,foregroundColor,10,true);
+		Polygon cch = edgeTracer.autoOutline(14,2);
+		assertEquals(iPerimeter,cch.getPerimeter());
 	}
 
 	public void printAnnotaions(AnnotatedShape annotatedShape) {
