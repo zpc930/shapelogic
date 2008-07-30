@@ -208,7 +208,7 @@ public class LetterTaskFactory {
 			new NumericRule("P", T_JUNCTION_LEFT_POINT_COUNT, polygon, filter(T_JUNCTION_LEFT_POINT_COUNT_EX), "==", 1.),
 			new NumericRule("P", T_JUNCTION_RIGHT_POINT_COUNT, polygon, filter(T_JUNCTION_RIGHT_POINT_COUNT_EX), "==", 0.),
 			new NumericRule("P", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 1.),
-			new NumericRule("P", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 2.),
+			new NumericRule("P", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), ">", 1.),
 			new NumericRule("P", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 1.),
 			new NumericRule("P", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
 
