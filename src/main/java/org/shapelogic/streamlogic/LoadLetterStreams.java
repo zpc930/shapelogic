@@ -351,7 +351,7 @@ public class LoadLetterStreams {
 		rule("P", T_JUNCTION_LEFT_POINT_COUNT, "==", 1., letterFilter);
 		rule("P", T_JUNCTION_RIGHT_POINT_COUNT, "==", 0., letterFilter);
 		rule("P", END_POINT_BOTTOM_POINT_COUNT, "==", 1., letterFilter);
-		rule("P", VERTICAL_LINE_COUNT, "==", 2., letterFilter);
+		rule("P", VERTICAL_LINE_COUNT, ">", 1., letterFilter);
 		rule("P", END_POINT_COUNT, "==", 1., letterFilter);
 		rule("P", SOFT_POINT_COUNT, ">", 0., letterFilter);
 
