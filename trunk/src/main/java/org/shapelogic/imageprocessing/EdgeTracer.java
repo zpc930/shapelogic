@@ -71,19 +71,24 @@ public class EdgeTracer implements IEdgeTracer {
 	}
 	
 	int nextDirection(int x, int y, int lastDirection) {
-		boolean L = inside(x-1, y);	// upper left
-		boolean D = inside(x, y+1);	// lower left
-		boolean R = inside(x+1, y);		// lower right
-		boolean U = inside(x, y-1);	// upper right
-		boolean[] directions = {L,D,R,U};
+		boolean[] directions = makeDirections(x, y);
 		int lastDirectionReleativeCurrent = lastDirection/2+ Constants.DIRECTIONS_4_AROUND_POINT/2;
-		for (int i=1; i < Constants.DIRECTIONS_4_AROUND_POINT; i++) {
+		for (int i=1; i <= Constants.DIRECTIONS_4_AROUND_POINT; i++) {
 			int real_direction = (lastDirectionReleativeCurrent + i) % Constants.DIRECTIONS_4_AROUND_POINT;
 			//Return first point that is inside
 			if (directions[real_direction])
 				return real_direction*2;
 		}
 		return -1; //Not found
+	}
+
+	private boolean[] makeDirections(int x, int y) {
+		boolean L = inside(x-1, y);	// upper left
+		boolean D = inside(x, y+1);	// lower left
+		boolean R = inside(x+1, y);		// lower right
+		boolean U = inside(x, y-1);	// upper right
+		boolean[] directions = {L,D,R,U};
+		return directions;
 	}
 		
 	Polygon traceEdge(int xstart, int ystart, int startingDirection) {
