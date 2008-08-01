@@ -2,7 +2,7 @@ package org.shapelogic.filter;
 
 import org.shapelogic.polygon.CLine;
 
-/** 
+/** Filter lines that are both horizontal and also full length of the multi line it is part of.
  * 
  * @author Sami Badawi
  *
@@ -13,6 +13,7 @@ public class FullLengthHorizontalFilter extends PolygonLineFilter {
 	public boolean evaluate(Object line) {
 		return 
 		((CLine)line).isHorizontal() &&
-		getParent().getBBox().getDiagonalVector().getY() * 0.9 < ((CLine)line).relativePoint().getY();
+		Math.abs(getParent().getBBox().getDiagonalVector().getY()) * 0.9 < 
+		Math.abs(((CLine)line).relativePoint().getY());
 	}
 }
