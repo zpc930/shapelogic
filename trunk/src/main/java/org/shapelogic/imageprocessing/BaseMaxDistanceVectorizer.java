@@ -1,8 +1,6 @@
 package org.shapelogic.imageprocessing;
 
 import static org.shapelogic.polygon.Calculator2D.directionBetweenNeighborPoints;
-import ij.process.ImageProcessor;
-
 import org.shapelogic.logic.LetterTaskFactory;
 import org.shapelogic.polygon.CPointInt;
 import org.shapelogic.polygon.Calculator2D;
