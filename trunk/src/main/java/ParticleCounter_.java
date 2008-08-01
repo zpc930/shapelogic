@@ -6,8 +6,6 @@ import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
 import ij.process.ImageProcessor;
 
-import java.util.List;
-
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageprocessing.ParticleCounter;
 import org.shapelogic.imageutil.IJGui;
