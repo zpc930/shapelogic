@@ -45,7 +45,7 @@ public class Polygon extends BaseAnnotatedShape
 	//I could make this lazy
 	protected AnnotatedShapeImplementation _annotatedShape; 
 	protected List<Improver<Polygon> > _polygonImprovers;
-	protected Integer _perimeter; 
+	protected Double _perimeter; 
 
 	public Polygon() {
 		this(null);
@@ -485,11 +485,11 @@ public class Polygon extends BaseAnnotatedShape
 		return result.toString();
 	}
 
-	public Integer getPerimeter() {
+	public Double getPerimeter() {
 		return _perimeter;
 	}
 
-	public void setPerimeter(Integer perimeter) {
+	public void setPerimeter(Double perimeter) {
 		_perimeter = perimeter;
 	}
 }

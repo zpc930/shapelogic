@@ -22,8 +22,8 @@ import org.shapelogic.util.PointType;
 abstract public class EdgeTracerTests extends TestCase {
 	final static String _dirURL = "./src/test/resources/images/particles";
 	final static String _fileFormat = ".gif";
-	protected Integer boxPerimeter = 20; //
-	protected Integer iPerimeter = 54;
+	protected Double boxPerimeter = 20.; //
+	protected Double iPerimeter = 54.;
 	
 	String filePath(String fileName) {
 		return _dirURL + "/" + fileName + _fileFormat;

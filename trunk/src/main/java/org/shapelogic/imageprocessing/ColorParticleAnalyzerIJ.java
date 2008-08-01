@@ -122,7 +122,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 				_rt.addLabel("Label", "Missing polygon.");
 			}
 			else {
-				int perimeter = polygon.getPerimeter();
+				double perimeter = polygon.getPerimeter();
 				_rt.addValue(Headings.PERIMETER, perimeter);
 				double circularity = perimeter==0?0.0:4.0*Math.PI*particle.getArea()/(perimeter*perimeter);
 				_rt.addValue(Headings.CIRCULARITY, circularity);

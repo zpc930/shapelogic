@@ -31,6 +31,7 @@ import static org.shapelogic.polygon.Calculator2D.oppositeDirection;
  */
 public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<MultiLine>
 {
+	private static final double SQRT_2 = Math.sqrt(2);
 	protected static final int CHAIN_CODE_FOR_MULTI_LINE_MAX_LENGTH = 10000;
 	protected static final int SHORT_LINE_LENGTH = 3;
 	protected static final double LIMIT_FOR_HARD_CORNER = 60 * Math.PI /180; //30 degrees
@@ -69,6 +70,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 	 * I could possibly also have the first LineProperties have an extra reference at the end   
 	 */
 	protected List<LineProperties> _linePropertiesList = new ArrayList<LineProperties>();
+	protected double _perimeter;
 	
 
 	public ChainCodeHandler(AnnotatedShapeImplementation annotatedShape) {
@@ -90,6 +92,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		_bBox = new BBox();
 		_accumulatedDirectionChange = 0;
 		_accumulatedAbsoluteDirectionChange = 0;
+		_perimeter = 0;
 		_pointPropertiesList.clear();
 		_linePropertiesList.clear();
 	}
@@ -182,6 +185,10 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		int lastDirectionChange = 0;
 		for (int i = 0; i <= _lastChain; i++) {
 			byte direction = _chainCodeForMultiLine[i];
+			if ((direction & 1) != 0)//Odd number
+				_perimeter += SQRT_2;
+			else
+				_perimeter += 1;
 			int directionChange = direction - lastDirection;
 			if (4 < directionChange)
 				directionChange -= 8;
@@ -531,4 +538,11 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		return _lastPoint;
 	}
 
+	public double getPerimeter() {
+		return _perimeter;
+	}
+
+	public void setPerimeter(double perimeter) {
+		_perimeter = perimeter;
+	}
 }
