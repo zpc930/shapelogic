@@ -30,7 +30,9 @@ public class EdgeTracer implements IEdgeTracer {
 	private int width, height;
 	private double _maxDistance;
 	private boolean _traceCloseToColor;
-
+	private boolean[] _dirs = new boolean[Constants.DIRECTIONS_AROUND_POINT]; 
+	public static final int STEP_SIZE_FOR_4_DIRECTIONS = 2;
+	
 	/** Constructs a Wand object from an ImageProcessor. */
 	public EdgeTracer(SLImage image, int referenceColor, double maxDistance, boolean traceCloseToColor) {
 		_colorDistanceWithImage = ColorFactory.makeColorDistanceWithImage(image);
@@ -70,25 +72,31 @@ public class EdgeTracer implements IEdgeTracer {
 		return traceEdge(x, y, 2);
 	}
 	
-	int nextDirection(int x, int y, int lastDirection) {
-		boolean[] directions = makeDirections(x, y);
-		int lastDirectionReleativeCurrent = lastDirection/2+ Constants.DIRECTIONS_4_AROUND_POINT/2;
-		for (int i=1; i <= Constants.DIRECTIONS_4_AROUND_POINT; i++) {
-			int real_direction = (lastDirectionReleativeCurrent + i) % Constants.DIRECTIONS_4_AROUND_POINT;
+	int nextDirection(int x, int y, int lastDirection, boolean clockwise) {
+		boolean[] directions = makeDirections(x, y, true);
+		int lastDirectionReleativeCurrent = lastDirection + Constants.DIRECTIONS_AROUND_POINT/2;
+		int stepSize = STEP_SIZE_FOR_4_DIRECTIONS;
+		for (int i=2; i <= Constants.DIRECTIONS_AROUND_POINT; i+=stepSize) {
+			int step = i;
+			if (!clockwise)
+				step = Constants.DIRECTIONS_AROUND_POINT -i;
+			int real_direction = (lastDirectionReleativeCurrent + step) 
+			% Constants.DIRECTIONS_AROUND_POINT;
 			//Return first point that is inside
 			if (directions[real_direction])
-				return real_direction*2;
+				return real_direction;
 		}
 		return -1; //Not found
 	}
 
-	private boolean[] makeDirections(int x, int y) {
-		boolean L = inside(x-1, y);	// upper left
-		boolean D = inside(x, y+1);	// lower left
-		boolean R = inside(x+1, y);		// lower right
-		boolean U = inside(x, y-1);	// upper right
-		boolean[] directions = {L,D,R,U};
-		return directions;
+	private boolean[] makeDirections(int x, int y, boolean only4points) {
+		int stepSize = 1;
+		if (only4points)
+			stepSize = STEP_SIZE_FOR_4_DIRECTIONS;
+		for (int i=0; i < Constants.DIRECTIONS_AROUND_POINT; i+=stepSize) {
+			_dirs[i] = inside(x + Constants.CYCLE_POINTS_X[i], y + Constants.CYCLE_POINTS_Y[i]);
+		}
+		return _dirs;
 	}
 		
 	Polygon traceEdge(int xstart, int ystart, int startingDirection) {
@@ -101,12 +109,12 @@ public class EdgeTracer implements IEdgeTracer {
 		chainCodeHandler.setFirstPoint(new CPointInt(xstart,ystart));
 		int x = xstart;
 		int y = ystart;
+		startingDirection = BaseVectorizer.oppesiteDirection((byte)nextDirection(x,y,startingDirection-2, false));
 		int direction = startingDirection;
-
 		int count = 0;
 		do {
 			count++;
-			direction = nextDirection(x,y,direction);
+			direction = nextDirection(x,y,direction, true);
 			if (-1 == direction)
 				break;
 			switch (direction) {
@@ -126,9 +134,9 @@ public class EdgeTracer implements IEdgeTracer {
 			//If the chain becomes too long just give up
 			if (!chainCodeHandler.addChainCode((byte)direction))
 				break;
-		} while ((x!=xstart || y!=ystart));
+//		} while ((x!=xstart || y!=ystart));
 		//Original clause causes termination problems
-//		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
+		} while ((x!=xstart || y!=ystart || direction!=startingDirection));
 		chainCodeHandler.getValue();
 		polygon.setPerimeter(chainCodeHandler.getLastChain()+1);
 		polygon.getValue();
