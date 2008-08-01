@@ -22,14 +22,14 @@ public class Constants {
 	public static int[] CYCLE_POINTS_Y = {0, 1, 1, 1,  0,  -1, -1, -1};
 
 	//Directions
-	public static final int LEFT = 0;
-	public static final int LEFT_DOWN = 1;
+	public static final int RIGHT = 0;
+	public static final int RIGHT_DOWN = 1;
 	public static final int DOWN = 2;
-	public static final int RIGHT_DOWN = 3;
-	public static final int RIGHT = 4;
-	public static final int RIGHT_UP = 5;
+	public static final int LEFT_DOWN = 3;
+	public static final int LEFT = 4;
+	public static final int LEFT_UP = 5;
 	public static final int UP = 6;
-	public static final int LEFT_UP = 7;
+	public static final int RIGHT_UP = 7;
 	
 	//Equality test tasks
 	public static final String SIMPLE_NUMERIC_TASK = "SimpleNumericTask";
