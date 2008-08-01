@@ -94,8 +94,12 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertTrue(_particleCounter.isParticleImage()); 
 		assertEquals(5,_particleCounter.getParticleCount()); 
 		NumberedStream<Number> ns = StreamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
-		assertEquals(new Double(1), ns.get(0));
-		assertEquals(new Double(1.0769230769230769), ns.get(1));
+		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
+		assertClose(0.77, ns.get(1).doubleValue(), 0.1);
+	}
+	
+	public void assertClose(double expected, double found, double precision) {
+		assertTrue(Math.abs(expected-found) < precision);
 	}
 
 	public void testEmbryosWithParameters() {
