@@ -122,4 +122,8 @@ abstract public class EdgeTracerTests extends TestCase {
 			System.out.println(entry.getKey() +":\n" + entry.getValue());
 	}
 	
+	public void testNegativeModulus() {
+		assertEquals(-4, -4 % 8);
+	}
+	
 }
