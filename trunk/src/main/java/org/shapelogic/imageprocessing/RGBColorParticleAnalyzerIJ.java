@@ -19,6 +19,7 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
 	protected static int _rStatic = 0;
 	protected static int _gStatic = 0;
 	protected static int _bStatic = 0;
+	protected static boolean _backgroundStatic = true;
 	
 	
 	@Override
@@ -30,7 +31,7 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         _gd.addNumericField("RGB R value: ", _rStatic, 0);
         _gd.addNumericField("RGB G value: ", _gStatic, 0);
         _gd.addNumericField("RGB B value: ", _bStatic, 0);
-        _gd.addCheckbox("Background", true);
+        _gd.addCheckbox("Background", _backgroundStatic);
         
         _gd.showDialog();
         if (_gd.wasCanceled()) {
@@ -44,6 +45,7 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         int b = _bStatic = (int)_gd.getNextNumber();
         int rgbValue = ColorUtil.packColors( r, g, b);
         _inputColor = rgbValue;
+        _useReferenceAsBackground = _backgroundStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 
