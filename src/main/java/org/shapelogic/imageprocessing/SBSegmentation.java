@@ -30,7 +30,8 @@ public class SBSegmentation {
 	
 	private String _status = "";
 	private boolean _slowTestMode = false;
-	
+	private boolean _farFromReferenceColor = false;
+		
 	public SBSegmentation() {
 		_vPV = new ArrayList<SBPendingVertical>();
 	}
@@ -363,4 +364,13 @@ public class SBSegmentation {
     public void setMaxDistance(int maxDistance) {
         _pixelCompare.setMaxDistance(maxDistance);
     }
+
+    public boolean isFarFromReferencColor() {
+		return _farFromReferenceColor;
+	}
+
+	public void setFarFromReferencColor(boolean farFromColor) {
+		_farFromReferenceColor = farFromColor;
+		_pixelCompare.setFarFromReferencColor(farFromColor);
+	}
 }
