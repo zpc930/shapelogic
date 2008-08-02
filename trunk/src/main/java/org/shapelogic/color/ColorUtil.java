@@ -12,9 +12,9 @@ public class ColorUtil {
 	public static final int RED_MASK = 0xff0000;
 
 	//Saving in this sequence gives the option of saving alpha too
-	public static final int RED_POS = 2;
+	public static final int RED_POS = 0;
 	public static final int GREEN_POS = 1;
-	public static final int BLUE_POS = 0;
+	public static final int BLUE_POS = 2;
 
 	public static final int GREEN_OFFSET = 8;
 	public static final int RED_OFFSET = 16;
