@@ -204,9 +204,13 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		}
 		if (isClosed()) {
 			_multiLine.setClosedLineClockWise(_accumulatedDirectionChange > 0);
-			if (Math.abs(_accumulatedDirectionChange) != 8 && _accumulatedDirectionChange != 0)//XXX not sure if 0 is OK
-				throw new RuntimeException(
-						"Closed curve should have direction change -8 or 8, found: " + _accumulatedDirectionChange);
+			if (Math.abs(_accumulatedDirectionChange) != 8 && _accumulatedDirectionChange != 0) {//XXX not sure if 0 is OK
+				String message = "Closed curve should have direction change -8 or 8, found: " + _accumulatedDirectionChange;
+				if (false)
+					throw new RuntimeException(message);
+				else
+					System.out.println(message);
+			}
 		}
 		else
 			_multiLine.setClosedLineClockWise(null);
