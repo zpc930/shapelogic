@@ -25,7 +25,7 @@ public class SBColorCompare extends SBSimpleCompare {
 		//localColor
         ColorUtil.splitColor(localColor,_splitColorChannels);
 		int diff = colorDistance(_colorChannels,_splitColorChannels);
-		return diff <= _maxDistance;
+		return (diff <= _maxDistance) ^ _farFromReferenceColor;
 	}
 
 	public void init(SLImage ipIn) throws Exception {

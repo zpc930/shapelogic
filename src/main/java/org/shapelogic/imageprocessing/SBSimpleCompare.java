@@ -19,6 +19,7 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
 	protected boolean fillWithOwnColor = true;
 	protected int numberOfPixels;
 	protected  boolean _modifying;
+	protected boolean _farFromReferenceColor = false;
 	
 	/** Similar and not handled
 	 */
@@ -117,4 +118,14 @@ public abstract class SBSimpleCompare implements SBPixelCompare {
     public void setMaxDistance(int maxDistance) {
         _maxDistance = maxDistance;
     }
+
+    @Override
+	public boolean isFarFromReferencColor() {
+		return _farFromReferenceColor;
+	}
+
+	@Override
+	public void setFarFromReferencColor(boolean farFromColor) {
+		_farFromReferenceColor = farFromColor;
+	}
 }
