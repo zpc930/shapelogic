@@ -41,5 +41,11 @@ public class ColorUtilTest extends TestCase {
 	public void testGrayToRGB() {
 		assertEquals(0x020202,grayToRGB(2));
 	}
+	
+	public void testColorToString() {
+		assertEquals("1, 2, 3",colorToString(ONE_TWO_THREE,true));
+		assertEquals(""+ONE_TWO_THREE,colorToString(ONE_TWO_THREE,false));
+		
+	}
 
 }
