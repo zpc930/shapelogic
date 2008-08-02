@@ -30,6 +30,7 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		_fileFormat = ".gif";
         _particleCounter = new RGBColorParticleAnalyzerIJ();
         _particleCounter.setDisplayTable(false);
+		_particleCounter.setUseReferenceAsBackground(true);
 	}
 	
 	public void testWhitePixelGray() {
@@ -149,11 +150,41 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 	 */
 	public void testCleanSpotPng() {
 		String fileName = "spot1Clean";
+		final int background = 0xffffff;
+		final int foreground = 0;
+		_particleCounter.setUseReferenceAsBackground(true);
+		_particleCounter.setInputColor(background);
 		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _particleCounter);
 		assertEquals(30,bp.getWidth());
 		assertEquals(900,bp.getPixelCount());
 		int pixel = bp.get(0,0);
-		assertEquals(0xffffff,pixel);
+		assertEquals(background,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(2,factory.getStore().size()); 
+		assertEquals(1,_particleCounter.getParticleFiltered().size());
+		IColorAndVariance particle = _particleCounter.getParticleFiltered().get(0);
+		BBox bBox = particle.getPixelArea().getBoundingBox();
+		assertEquals(8.,bBox.minVal.getX());
+		assertEquals(8.,bBox.minVal.getY());
+		assertEquals(22.,bBox.maxVal.getX());
+		assertEquals(22.,bBox.maxVal.getY());
+		assertEquals(15.,bBox.getCenter().getX());
+		assertEquals(15.,bBox.getCenter().getY());
+		assertEquals(1.,bBox.getAspectRatio());
+	}
+
+	public void testCleanSpotPngForground() {
+		String fileName = "spot1Clean";
+		final int background = 0xffffff;
+		final int foreground = 0;
+		_particleCounter.setUseReferenceAsBackground(false);
+		_particleCounter.setInputColor(foreground);
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _particleCounter);
+		assertEquals(30,bp.getWidth());
+		assertEquals(900,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(background,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(2,factory.getStore().size()); 
