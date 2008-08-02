@@ -76,6 +76,7 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected Integer _inputColor;
 	protected Integer _backgroundColor;
 	protected Integer _referenceColor = _inputColor;
+	protected boolean _useReferenceAsBackground = true;
     
 	public BaseParticleCounter()
 	{
@@ -134,7 +135,15 @@ public class BaseParticleCounter extends BaseImageOperation
     protected void segment() {
         if (_referenceColor != null) {
         	_segmentation.setMaxDistance((int)_maxDistance);
-            _segmentation.segmentAll(_referenceColor);
+        	if (!_useReferenceAsBackground) {
+	            _segmentation.setFarFromReferencColor(true);
+	            _segmentation.segmentAll(_referenceColor);
+	            _segmentation.setFarFromReferencColor(false);
+        	}
+        	else {
+	            _segmentation.setFarFromReferencColor(false);
+	            _segmentation.segmentAll(_referenceColor);
+        	}
             //count how many components and how much area the background takes up
             findBackground();
             //segment all the remaining
@@ -365,5 +374,13 @@ public class BaseParticleCounter extends BaseImageOperation
 
 	public void setInputColor(Integer color) {
 		_inputColor = color;
+	}
+
+	public boolean isUseReferenceAsBackground() {
+		return _useReferenceAsBackground;
+	}
+
+	public void setUseReferenceAsBackground(boolean referenceAsBackground) {
+		_useReferenceAsBackground = referenceAsBackground;
 	}
 }
