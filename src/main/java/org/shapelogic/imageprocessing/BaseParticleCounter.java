@@ -72,6 +72,9 @@ public class BaseParticleCounter extends BaseImageOperation
     protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
     
     protected XOrListStream _categorizer;
+	protected Integer _inputColor;
+	protected Integer _backgroundColor;
+	protected Integer _referenceColor = _inputColor;
     
 	public BaseParticleCounter()
 	{
@@ -105,19 +108,35 @@ public class BaseParticleCounter extends BaseImageOperation
 		}
 	}
     
+    /** Everything related to setting the background color.
+     * 
+     * TODO move all the set color stuff from segment() up her.
+     * 
+     * */
     protected void findColorHypothesis() {
+    	if (_inputColor != null) {
+            _particleImage = Boolean.TRUE;
+    		_referenceColor = _inputColor;
+    		_backgroundCount = 1;
+    		return;
+    	}
         _colorHypothesis = _colorHypothesisFinder.findBestColorHypothesis();
-	}
-
-    protected void segment() {
         if (_colorHypothesis.getBackground() == null) {
             _particleImage = Boolean.FALSE;
         }
         else {
+        	_backgroundColor = _colorHypothesis.getBackground().getMeanColor();
+    		_referenceColor = _backgroundColor;
+        }
+	}
+
+    protected void segment() {
+        if (_referenceColor != null) {
         	_segmentation.setMaxDistance((int)_maxDistance);
-            _segmentation.segmentAll(_colorHypothesis.getBackground().getMeanColor());
+            _segmentation.segmentAll(_referenceColor);
             //count how many components and how much area the background takes up
-            findBackground();
+        	if (_inputColor == null)
+        		findBackground();
             //segment all the remaining
             if (_particleImage != null && _particleImage) {
                 _segmentation.setMaxDistance(1000000000);//Everything get lumped together
@@ -221,8 +240,9 @@ public class BaseParticleCounter extends BaseImageOperation
 		status += "\nImage is " + negation + "a particle image.";
 		if (isParticleImage()) {
 			status += "\nParticle count: " + getParticleCount();
-            status += "\nBackground color is: " + _colorHypothesis.getBackground().toString();
-            status += "\nNumber of colors is: " + _colorHypothesis.getColors().size();
+            status += "\nBackground color is: " + _referenceColor;
+            if (_colorHypothesis != null && _colorHypothesis.getColors() != null)
+            	status += "\nNumber of colors is: " + _colorHypothesis.getColors().size();
 		}
 		return status;
 	}
@@ -334,5 +354,13 @@ public class BaseParticleCounter extends BaseImageOperation
 
 	public void setDisplayTable(boolean table) {
 		_displayTable = table;
+	}
+
+	public Integer getInputColor() {
+		return _inputColor;
+	}
+
+	public void setInputColor(Integer color) {
+		_inputColor = color;
 	}
 }
