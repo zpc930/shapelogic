@@ -12,7 +12,7 @@ import static org.shapelogic.color.ColorUtil.*;
 public class ColorUtilTest extends TestCase {
 	
 	final static int ONE_TWO_THREE = 0x10203; // = 66051
-	final static int[] THREE_TWO_ONE_ARRAY = {3,2,1};
+	final static int[] THREE_TWO_ONE_ARRAY = {1,2,3};
 	
 	public void testShift() {
         assertEquals(2,1<<1);
