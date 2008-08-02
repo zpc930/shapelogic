@@ -11,6 +11,7 @@ import java.util.List;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorHypothesis;
+import org.shapelogic.color.ColorUtil;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.IColorHypothesisFinder;
 import org.shapelogic.imageutil.BaseImageOperation;
@@ -135,8 +136,7 @@ public class BaseParticleCounter extends BaseImageOperation
         	_segmentation.setMaxDistance((int)_maxDistance);
             _segmentation.segmentAll(_referenceColor);
             //count how many components and how much area the background takes up
-        	if (_inputColor == null)
-        		findBackground();
+            findBackground();
             //segment all the remaining
             if (_particleImage != null && _particleImage) {
                 _segmentation.setMaxDistance(1000000000);//Everything get lumped together
@@ -240,7 +240,7 @@ public class BaseParticleCounter extends BaseImageOperation
 		status += "\nImage is " + negation + "a particle image.";
 		if (isParticleImage()) {
 			status += "\nParticle count: " + getParticleCount();
-            status += "\nBackground color is: " + _referenceColor;
+            status += "\nBackground color is: " + ColorUtil.colorToString(_referenceColor,_image.isRgb());
             if (_colorHypothesis != null && _colorHypothesis.getColors() != null)
             	status += "\nNumber of colors is: " + _colorHypothesis.getColors().size();
 		}
@@ -288,7 +288,10 @@ public class BaseParticleCounter extends BaseImageOperation
         _boundingBoxArea = 
                 (aggregatedBoundingBox.getDiagonalVector().getX() +1) * 
                 (aggregatedBoundingBox.getDiagonalVector().getY() + 1);
-        result = isParticleImage();
+    	if (_inputColor == null)
+    		result = isParticleImage();
+    	else
+    		result = true;
         return result;
     }
     
