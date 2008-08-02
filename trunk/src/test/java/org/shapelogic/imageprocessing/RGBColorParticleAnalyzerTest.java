@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import org.shapelogic.color.ColorUtil;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
@@ -27,13 +28,14 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		super.setUp();
 		_dirURL = "./src/test/resources/images/particles";
 		_fileFormat = ".gif";
-        _particleCounter = new ColorParticleAnalyzerIJ();
+        _particleCounter = new RGBColorParticleAnalyzerIJ();
         _particleCounter.setDisplayTable(false);
 	}
 	
 	public void testWhitePixelGray() {
 		String fileName = "oneWhitePixelGray";
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName), _particleCounter);
+        _particleCounter.setInputColor(0);
 		assertEquals(1,bp.getWidth());
 		assertTrue(bp.isInvertedLut());
 		int pixel = bp.get(0,0);
@@ -64,7 +66,7 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		String fileName = "blobs";
         _particleCounter.setMaxDistance(100);
         _particleCounter.setMinPixelsInArea(7);
-        _particleCounter.setIterations(3);
+        _particleCounter.setInputColor(49);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName), _particleCounter);
 		assertEquals(256,bp.getWidth());
 		assertEquals(65024,bp.getPixelCount());
@@ -72,7 +74,7 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(40,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(65,factory.getStore().size()); 
+		assertEquals(64,factory.getStore().size()); 
 //		assertTrue(_particleCounter.isParticleImage()); 
 //		assertEquals(30,_particleCounter.getParticleCount()); 
 //		assertTrue(bp.isInvertedLut());
@@ -80,9 +82,10 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 
 	public void testEmbryos() {
 		String fileName = "embryos6";
-        _particleCounter.setMaxDistance(100);
-        _particleCounter.setMinPixelsInArea(20);
-        _particleCounter.setIterations(3);
+        _particleCounter.setMaxDistance(50);
+        _particleCounter.setMinPixelsInArea(5);
+        int rgbValue = ColorUtil.packColors(186, 165, 88);
+        _particleCounter.setInputColor(rgbValue);
 		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
 		assertEquals(256,bp.getWidth());
 		assertEquals(52480,bp.getPixelCount());
@@ -90,16 +93,21 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(61,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage()); 
-		assertEquals(5,_particleCounter.getParticleCount()); 
+		assertEquals(6,_particleCounter.getParticleCount()); 
 		NumberedStream<Number> ns = StreamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
-		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
-		assertClose(0.77, ns.get(1).doubleValue(), 0.1);
+		assertClose(1.17, ns.get(0).doubleValue(), 0.1);
+		assertClose(1., ns.get(1).doubleValue(), 0.1);
 	}
 	
 	public void assertClose(double expected, double found, double precision) {
 		assertTrue(Math.abs(expected-found) < precision);
+	}
+	
+	/** Debug version. */
+	public void assertClose2(double expected, double found, double precision) {
+		assertEquals(expected,found);
 	}
 
 	public void testEmbryosWithParameters() {
