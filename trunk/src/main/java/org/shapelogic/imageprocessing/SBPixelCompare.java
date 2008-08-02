@@ -29,5 +29,6 @@ public interface SBPixelCompare {
 	int getColorAsInt(int index);
 	void setCurrentColor(int color);
     void setMaxDistance(int maxDistance);
-    
+    boolean isFarFromReferencColor();
+    void setFarFromReferencColor(boolean farFromColor);
 }

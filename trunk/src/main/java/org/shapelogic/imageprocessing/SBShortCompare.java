@@ -18,7 +18,7 @@ public class SBShortCompare extends SBSimpleCompare {
 	public boolean similar(int index) {
 		int localColor = _pixels[index] & MASK;
 		int diff = Math.abs(localColor - _currentColor);
-		return diff <= _maxDistance;
+		return (diff <= _maxDistance) ^ _farFromReferenceColor;
 	}
 
 	public void init(SLImage ipIn) throws Exception {
