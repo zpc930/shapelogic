@@ -28,9 +28,9 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         _gd.addNumericField("Max_distance: ", _maxDistanceStatic, 0);
         _gd.addNumericField("Min_pixels: ", _minPixelsInAreaStatic, 0);
         _gd.addNumericField("Max_pixels: ", _maxPixelsInAreaStatic, 0);
-        _gd.addNumericField("RGB R value: ", _rStatic, 0);
-        _gd.addNumericField("RGB G value: ", _gStatic, 0);
-        _gd.addNumericField("RGB B value: ", _bStatic, 0);
+        _gd.addNumericField("RGB_R: ", _rStatic, 0);
+        _gd.addNumericField("RGB_G: ", _gStatic, 0);
+        _gd.addNumericField("RGB_B / Gray: ", _bStatic, 0);
         _gd.addCheckbox("Background", _backgroundStatic);
         
         _gd.showDialog();
