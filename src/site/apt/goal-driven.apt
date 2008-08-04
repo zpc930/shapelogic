@@ -11,7 +11,7 @@ Goal driven declarative programming
   This page is about the goal driven declarative programming from ShapeLogic 0.2 to 0.8.
   It is not currently under development, but might be suited for handling 
   reasoning under uncertainty, so the code is left in. 
-  The package for this is org.shapelogic.logic.
+  The Java package for this is org.shapelogic.logic.
   
 * Declarative programming in ShapeLogic 02. to 0.8 
 

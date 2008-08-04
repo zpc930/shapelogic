@@ -7,6 +7,25 @@
 
 Release notes for releases with development status beta
 
+* 2008/08/02 ShapeLogic v 1.3 released AKA New modes for particle analyzer
+  
+  * {{{particle.html} Particle analyzer}} now has a {{{particle.html#rgb} manual color mode}}, 
+  where you can set either the foreground or background color, in addition to 
+  the automatic mode introduced in v 1.2
+  
+  * New edge tracer for particle analyzer, in v 1.2 the wrong perimeter lengths 
+  are sometimes found  
+  
+  * Built for JDK 1.5 / Java 5 so it should work on the Mac without updates
+  
+  * Fixed some bugs
+  
+  * 32000 lines of Java code
+
+  * 480 unit test that all works on local machine
+
+  []
+  
 * 2008/07/12 ShapeLogic v 1.2.1 released AKA Mac friendly for Java 5
   
   First bug fix release. A user filed a bug report that ShapeLogic was not running on his Mac.

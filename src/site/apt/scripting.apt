@@ -8,6 +8,11 @@
 
 Scripting using JSR 223
   
+  The code to define rules in a scripting languages is available, however it
+  turned out that using Java was simpler for the current rules.
+  Therefore both letter match example and particle analyzer are currently using 
+  Java for rule definition.
+  
 * Goals for scripting
   
   * It should be possible to add new scripts dynamically

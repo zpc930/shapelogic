@@ -8,13 +8,18 @@
 
 Particle Counter and Analyzer
 
-  ShapeLogic v 1.2 contains both an automatic color and gray scale particle
+  ShapeLogic 1.2 and 1.3 contain both an automatic color and gray scale particle
   counter and a particle analyzer working without manual user intervention.
   The goal is to be able to recognize different cells on a relatively uniform 
   background and be able to extract a lot of geometric information.
   
   See {{{cell.html}Cell Categorizer}} for images types that can be handled by
   the current particle analyzer, and for future plans.
+  
+  ShapeLogic 1.3 contains 2 new modes for the particle analyzer: one where 
+  you set the foreground color of the particles and one where you set the
+  background color. They will always find a particle image and will not fail,
+  unlike the automatic particle analyzer.
   
 * Common functionality for particle counter and particle analyzer 
   
@@ -32,12 +37,12 @@ Particle Counter and Analyzer
   
 * Usage
   
-  Here is an example particle image embryos.jpg
+  {Test} on example particle image embryos.jpg
     
 [images/particles/embryos.jpg] 
 
   Under ImageJ Plugins ShapeLogic menu click 
-  "Particle Counter" or "Color Particle Analyzer".
+  "Particle Counter", "Color Particle Analyzer" or "RGB Color Particle Analyzer".
   
 [images/particles/shapelogicmenu.png] 
   
@@ -136,38 +141,65 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 
   ShapeLogic v 1.3 will come with predefined rules to {{{cell.html}categorize certain cells}}.
 
-* Current status of the particle analyzer in ShapeLogic v 1.2 
+* Particle analyzer in manual {rgb} modes
   
-  The particle analyzer in ShapeLogic v 1.2 has gone through limited testing 
-  and seems to work well. There is still a bug in the edge tracer,
-  the wrong perimeter lengths are sometimes found.
+  In ShapeLogic 1.3 there are 2 new color modes for the particle analyzer.
   
-* {Test} on sample images from ImageJ
+  You find them under the menu item: RGB Color Particle Analyzer.
   
-  The particle counter was tested on the particle images from ImageJ:
+  One will set the background color the other sets the foreground color.
   
-[images/particles/embryos.jpg] 
-
-  embryos.jpg. The un-tweaked particle counter in ShapeLogic 1.2 found 
+[images/particles/rgb_particleInputDialog.png]
   
-  particle count = 6
+** Set foreground color mode
   
-  embryos.jpg contains 6 particles and a few shadows.
+  This is useful for
+  
+  * Particles with different colors, where you are only interested in one 
+  
+  * Images that are not particle images
+  
+  []
+   
+  Here is an example
+  
+[images/particles/legionella_pneumophila10157.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10157 legionella pneumophila
+  
+  The setting in the dialog was to find the purple bacteria.
+  
+** Set background color mode
+  
+  This is useful for
+  
+  * Close up of a particle where the background color is not the most frequent 
+  
+  * You are working on a small ROI region of interest
+  
+  []
+  
+* Current status of the particle analyzer in ShapeLogic v 1.3 
+  
+  The particle analyzer in ShapeLogic v 1.3 has gone through limited testing 
+  and seems to work well. 
   
 * Framework to build more advanced particle counters and particle analyzers
   
-  The particle counter algorithm in ShapeLogic 1.2 is relatively simple. It is 
+  The particle counter algorithm in ShapeLogic 1.3 is relatively simple. It is 
   setup to be expanded to handle more advanced algorithms. Here is the flow.
   
-  * Find one or more color hypothesis
+  * If either foreground or background color is set you are done
+  
+  * Else find one or more color hypothesis automatically
   
     * Color clustering using K-mean algorithm
   
     * Background color finder
   
+    * Check that image is a particle image, if it is not stop
+    
     []
-
-  * Check that image is a particle image, if it is not stop
   
   * Run over the image again find the individual particles based on the color 
   hypothesis
@@ -178,7 +210,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   []
 
-* Defining rules for categories in ShapeLogic 1.2
+* Defining rules for categories in ShapeLogic 1.3
   
   This is done by sub classing ColorParticleAnalyzer or ColorParticleAnalyzerIJ.
   Override the categorizeStreams() method.
@@ -283,24 +315,24 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 
   []
 
-* Plans for ShapeLogic v 1.3
+* Plans for ShapeLogic v 1.4
   
-  * Make custom rules to recognize specific cells. 
-  In v 1.2 the user has to make rules themselves.
-  
-  * Fix bugs in edge trace. In v 1.2 the wrong perimeter lengths are sometimes found.
+  * Make custom rules to recognize specific {{{cell.html}cells}}. 
+  In v 1.3 the user has to make rules themselves.
   
   * Make it easier to select what particle properties to print out, now a 
   random selection of somewhat useful properties have been selected.
   
-  * Possibly change the edge tracer to find 8-directions chain codes instead of 
-  4-directions chain codes, in order to improve precision of perimeter length.
+  * HSV mode for the particle analyzer
+  
+  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
+  1 layered neural network for rules for particle analyzer
   
   []
   
-* Possible future plans for particle analyzer beyond ShapeLogic v 1.3
+* Possible future plans for particle analyzer beyond ShapeLogic v 1.4
   
-  * ShapeLogic v 1.3 will come with predefined rules for certain cells
+  * ShapeLogic v 1.4 will come with predefined rules for certain cells
   
   * Create rule for recognizing cells using neural networks or machine learning techniques
 
