@@ -1,11 +1,11 @@
             ------
-            Declarative logic
+            Declarative logic overview
             ------
             Sami Badawi
             ------
             2007/11/28
 
-Declarative logic
+Declarative logic overview
   
   ShapeLogic is trying to develop a framework for declarative programming that
   works well for the computer vision and image processing domain. 
@@ -17,7 +17,7 @@ Declarative logic
   Here is a chronological listing of ShapeLogic's 3 different approaches 
   declarative logic:
   
-  [[1]] Declarative goal driven logic engine. From ShapeLogic 0.2.
+  [[1]] Declarative goal driven logic engine. From ShapeLogic 0.2 till 0.8.
   
   [[1]] Logic filter language. From ShapeLogic 0.8
   The syntax and development of the logic language is better described in 
@@ -30,11 +30,13 @@ Declarative logic
 * Result of different approaches so far
   
   For the letter matching example, the lazy stream approach have been both 
-  simpler and more powerful than the goal driven logic engine.
+  simpler and more powerful than the goal driven logic engine. This is also 
+  used with the particle analyzer.
   
-  The Artificial Intelligence choice tree is build into the logical structure 
-  of goal driven logic engine, so this approach might work well when reasoning 
-  under uncertainty.
+  The declarative goal driven logic engine is build around an
+  Artificial Intelligence choice tree that is traversed by hierarchical tasks. 
+  This approach was only developed until ShapeLogic 0.8, but 
+  it might work well when reasoning under uncertainty.
 
   The logic filter language is used with both lazy streams and goal driven approach.
   
@@ -71,7 +73,7 @@ Lazy streams
   
   []
   
-* Lazy streams in letter example
+* Lazy streams in letter match example and particle analyzer
   
   Stream used in letter match example:
   
@@ -151,10 +153,39 @@ Lazy streams
   
   Note that the result would be a stream of polygons for each image.
 
+Logic filter language
+
+ The Logic filter language allows you to do Boolean combinations of filters with parameters
+
+  If you need to do more complex boolean combinations of filter on polygons try the following:
+
++------------------------------------------+
+"polygon.filter('PointRightOfFilter(0.3) && PointAboveFilter(0.3)')"
+"polygon.filter('PointOfTypeFilter(PointType.T_JUNCTION) && PointLeftOfFilter(0.5)').size()"
++------------------------------------------+
+
+  These will filter:
+
+  * Points that are in in the right 30% and top 30% of the bounding box for the polygon.
+
+  * Points that are in in the left 50% of the bounding box for the polygon and having the annotation T Junction.
+  
+  []
+  
+* Logical operators
+
+  Currently ShapeLogic is using the standard Java, C, C++ notation:
+
++------------------------------------------+
+  And use &&
+  Or use ||
+  Not use !
++------------------------------------------+
+
 Ideas behind declarative goal driven logic engine
   
-  This is the first approach for declarative programming, currently not the 
-  focus of development.
+  This is the first approach for declarative programming, used until ShapeLogic 
+  0.8.
   
 * Influences for goal driven logic engine
 
@@ -246,36 +277,6 @@ POINT_COUNT_EX = "polygon.getPoints().size()"
 
   All these rules are combined into an AndTask.
   A whole letter match will then be an XOrTask with an AndTask for each letter.
-
-
-Logic filter language
-
- The Logic filter language allows you to do Boolean combinations of filters with parameters
-
-  If you need to do more complex boolean combinations of filter on polygons try the following:
-
-+------------------------------------------+
-"polygon.filter('PointRightOfFilter(0.3) && PointAboveFilter(0.3)')"
-"polygon.filter('PointOfTypeFilter(PointType.T_JUNCTION) && PointLeftOfFilter(0.5)').size()"
-+------------------------------------------+
-
-  These will filter:
-
-  * Points that are in in the right 30% and top 30% of the bounding box for the polygon.
-
-  * Points that are in in the left 50% of the bounding box for the polygon and having the annotation T Junction.
-  
-  []
-  
-* Logical operators
-
-  Currently ShapeLogic is using the standard Java, C, C++ notation:
-
-+------------------------------------------+
-  And use &&
-  Or use ||
-  Not use !
-+------------------------------------------+
 
 Influences for the declarative goal driven logic engine
   
