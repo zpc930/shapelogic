@@ -13,6 +13,8 @@ Getting Started
   
   * Development mode for ImageJ plugin
   
+  * As an image processing library for your application
+  
   * As a lazy stream library
 
   []
@@ -25,8 +27,8 @@ Lazy stream library
   ShapeLogic contains functional and declarative constructs that can be used 
   independently of the image processing code.
   
-  To use this just download the shapelogic_-1.2.jar and add it to your  
-  class path. If running from command line: -cp .;shapelogic_-1.2.jar
+  To use this just download the shapelogic_-1.3.jar and add it to your  
+  class path. If running from command line: -cp .;shapelogic_-1.3.jar
   
   For examples of how to use this to solve mathematical problems see 
   {{{project-euler.html}Project Euler solution}}.
@@ -37,11 +39,11 @@ Image processing user mode with ImageJ
 
   * Install {{{http://rsb.info.nih.gov/ij/} ImageJ}}
   
-  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.2.1.zip}}
+  * Download {{{http://code.google.com/p/shapelogic/} shapelogicplugin1.3.zip}}
 
   * Unzip it
 
-  * This will create a directory named shapelogicplugin1.2.1/shapelogicplugin
+  * This will create a directory named shapelogicplugin1.3/shapelogicplugin
   
   * Inside this there are 2 dirs: ShapeLogic and ShapeLogicOld and 6 jar files
 
@@ -115,11 +117,11 @@ Image processing user mode with ImageJ
 
 *  Steps to get ShapeLogic working from within ImageJ manually 
   
-  If you need a different version of shapelogic_-1.2.jar, e.g. one compiled for JDK 1.5.
+  If you need a different version of shapelogic_-1.3.jar, e.g. one compiled for JDK 1.7.
 
   * Create a ShapeLogic dir under ImageJ: ./ImageJ/plugins/ShapeLogic
 
-  * Take the jar file for ShapeLogic: shapelogic_-1.2.jar, and move it to that directory
+  * Take the jar file for ShapeLogic: shapelogic_-1.3.jar, and move it to that directory
 
   * Add the jar files that ShapeLogic is dependent on to the ImageJ/plugin dir:
   
@@ -144,7 +146,7 @@ Image processing user mode with ImageJ
   E.g. commons\-math\-1.1.jar can be found here:
   {{http://repo1.maven.org/maven2/commons-math/commons-math/1.1/}}
 
-  Or they can be taken out of the shapelogicplugin1.2.zip
+  Or they can be taken out of the shapelogicplugin1.3.zip
 
    When you open ImageJ there will be a ShapeLogic menu containing commands.
 
@@ -234,7 +236,7 @@ Development mode
   but the code should run fine without Maven.
 
   Currently the project is set up to work directly with Eclipse 3.3, NetBeans
-  6.0 \- 6.1, Java 1.6, but you can use: IntelliJ, JBuilder, emacs or vi.
+  6.0 \- 6.1, Java 1.5, but you can use: IntelliJ, JBuilder, emacs or vi.
 
   *  Steps to compile and run unit tests
    
@@ -264,8 +266,8 @@ Development mode
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.5</source>
+          <target>1.5</target>
         </configuration>
       </plugin>
     </plugins>

@@ -111,8 +111,6 @@ public class StreamVectorizer_ extends PlugInFilterAdapter {
   
   []
   
-  This code will be released with ShapeLogic 1.1.
-  
 * Image formats that might be supported later
   
   * TiledImage from JAI

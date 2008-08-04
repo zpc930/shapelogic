@@ -13,53 +13,22 @@ Road map
   For more up to date information on ongoing development work look at this blog 
   {{{http://samibadawi.blogspot.com} Declarative Computer Vision}}.
 
-* ShapeLogic v 1.2 with particle analyzer soon to be released
+** ShapeLogic v 1.4 with specific cell recognition particle analyzer soon to be released
 
-  * More testing and improving of particle counter
-
-  * Make it easier to set parameters for particle counter in a macro or a 
-  configuration file
-
-  * Improve particle counter to handle blobs.gif image shown here, this was not
-  recognized as a particle image under ShapeLogic 1.1
-
-  * Enable ROI for particle counter, 1.1 only works on whole images
+  * Make custom rules to recognize specific {{{cell.html}cells}}. 
+  In v 1.3 the user has to make rules themselves.
   
-  * Particle analyzer
-
-    * Suitable for processing cells and organelles
-
-    * Expand the particle counter to a full featured particle analyzer
-
-    * Print report about each particle's color, area, standard deviation to a file
-
-    * Vectorize particles by tracing the edge
-
-    * Filter particles based geometric properties of the edge
+  * Make it easier to select what particle properties to print out, now a 
+  random selection of somewhat useful properties have been selected.
   
-    []
-
+  * HSV mode for the particle analyzer
+  
+  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
+  1 layered neural network for rules for particle analyzer
+  
+  * Improve the color replacer plugin, to take separate RGB values as input
+  
   []
-
-  The main goal for 1.2 is to create an automatic color and gray scale 
-  {{{particle.html} particle analyzer}}. 
-  There are currently particle counters available for ImageJ, however, 
-  ShapeLogic's particle counter and analyzer will function without manual user 
-  intervention.
-  
-  The test images are taken from the sample images from ImageJ
-  
-[images/particles/blobs.gif] 
-
-  blobs.gif
-
-[images/particles/Cell_Colony.jpg] 
-
-  Cell_Colony.jpg
-
-[images/particles/embryos.jpg] 
-
-  embryos.jpg
   
 * Top priority changes
   
