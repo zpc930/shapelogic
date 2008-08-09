@@ -13,7 +13,7 @@ Road map
   For more up to date information on ongoing development work look at this blog 
   {{{http://samibadawi.blogspot.com} Declarative Computer Vision}}.
 
-** ShapeLogic v 1.4 with specific cell recognition particle analyzer soon to be released
+* ShapeLogic v 1.4 with specific cell recognition particle analyzer soon to be released
 
   * Make custom rules to recognize specific {{{cell.html}cells}}. 
   In v 1.3 the user has to make rules themselves.
