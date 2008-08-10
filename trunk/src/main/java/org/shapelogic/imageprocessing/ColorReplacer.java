@@ -40,9 +40,9 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
         this._pfr = pfr;
         _gd = new GenericDialog(getClass().getSimpleName(), IJ.getInstance());
         _gd.addNumericField("Max distance: ", _maxDistance, (int)_maxDistance==_maxDistance?1:2);
-        _gd.addNumericField("RGB_R: ", _rStatic, _rStatic);
-        _gd.addNumericField("RGB_G: ", _gStatic, _gStatic);
-        _gd.addNumericField("RGB_B / Gray: ", _bStatic, _bStatic);
+        _gd.addNumericField("RGB_R: ", _rStatic, 0);
+        _gd.addNumericField("RGB_G: ", _gStatic, 0);
+        _gd.addNumericField("RGB_B / Gray: ", _bStatic, 0);
         _gd.addPreviewCheckbox(pfr);
         _gd.addDialogListener(this);
         _gd.showDialog();
