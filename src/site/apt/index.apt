@@ -194,8 +194,11 @@ ShapeLogic
 
 ** ShapeLogic v 1.4 with specific cell recognition particle analyzer soon to be released
 
+  * {{{component.html}Component framework}} for hybrid and complex vision problems
+  
   * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.3 the user has to make rules themselves.
+  In v 1.3 the user has to make rules themselves. Mainly pending finding a 
+  relevant test case.
   
   * Make it easier to select which particle properties to print out, currently a 
   random selection of somewhat useful properties has been selected.
