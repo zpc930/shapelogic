@@ -13,6 +13,7 @@ import java.awt.Rectangle;
 
 import org.shapelogic.color.ColorDistance1;
 import org.shapelogic.color.ColorDistance1RGB;
+import org.shapelogic.color.ColorUtil;
 import org.shapelogic.color.IColorDistance;
 
 /** ColorReplacer replaces one color with another.<br />
@@ -25,7 +26,10 @@ import org.shapelogic.color.IColorDistance;
 public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
     private int _flags = DOES_ALL|SUPPORTS_MASKING|PARALLELIZE_STACKS;
     private static double _maxDistance = 15.0;
-    private static int _referenceColor = 1;
+    private int _referenceColor = 1;
+	protected static int _rStatic = 0;
+	protected static int _gStatic = 0;
+	protected static int _bStatic = 0;
     protected IColorDistance _colorDistance;
 
     GenericDialog _gd;
@@ -36,7 +40,9 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
         this._pfr = pfr;
         _gd = new GenericDialog(getClass().getSimpleName(), IJ.getInstance());
         _gd.addNumericField("Max distance: ", _maxDistance, (int)_maxDistance==_maxDistance?1:2);
-        _gd.addNumericField("Reference color: ", _referenceColor, 0);
+        _gd.addNumericField("RGB_R: ", _rStatic, _rStatic);
+        _gd.addNumericField("RGB_G: ", _gStatic, _gStatic);
+        _gd.addNumericField("RGB_B / Gray: ", _bStatic, _bStatic);
         _gd.addPreviewCheckbox(pfr);
         _gd.addDialogListener(this);
         _gd.showDialog();
@@ -48,7 +54,10 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
 //            _flags |= NO_CHANGES;            // undoable as a "compound filter"
         //To make macros work with parameters
         _maxDistance = _gd.getNextNumber();
-        _referenceColor = (int)_gd.getNextNumber();
+        int r = _rStatic = (int)_gd.getNextNumber();
+        int g = _gStatic = (int)_gd.getNextNumber();
+        int b = _bStatic = (int)_gd.getNextNumber();
+        _referenceColor= ColorUtil.packColors( r, g, b);
         _colorDistance.setReferenceColor(_referenceColor);
         return IJ.setupDialog(imp, _flags);
     }
@@ -75,7 +84,10 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
             if (gd.wasOKed()) IJ.error("Angle is invalid.");
             return false;
         }
-        _referenceColor = (int)gd.getNextNumber();
+        int r = _rStatic = (int)_gd.getNextNumber();
+        int g = _gStatic = (int)_gd.getNextNumber();
+        int b = _bStatic = (int)_gd.getNextNumber();
+        _referenceColor= ColorUtil.packColors( r, g, b);
         _colorDistance.setReferenceColor(_referenceColor);
         return true;
     }
