@@ -19,18 +19,23 @@ Component framework
   
 * Example of use
   
-** Text in uneven intensity
+** Image with text in uneven intensity
  
-  Run 2 threshold operations. Then for each run 
+  Duplicate the image 2 times 
   
-  * Binary 
+  Run 2 threshold operations with different thresholds. Then for each image run 
+  
+  * Make Binary 
   
   * Skeletonize
   
-  * Vectorize in one of the thresholded images based on what is best in a given area 
+  * Run vectorizer on each image
   
   []
   
+  In order to vectorize a given part of the image look at the 2 skeletonized 
+  images chose the best and run vectorizer on that. To run the whole image 
+  split it up into parts and vectorize them.
   
 * Relationship to ImageJ macros
   
