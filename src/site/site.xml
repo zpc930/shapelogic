@@ -39,6 +39,7 @@
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Annotations" href="annotations.html"/>
+		  <item name="Component Framework" href="component.html"/>
 		  <item name="Image Formats" href="image-formats.html"/>
 		  <item name="Lazy Data Streams" href="streams.html"/>
 		  <item name="Line Type" href="line-type.html"/>
