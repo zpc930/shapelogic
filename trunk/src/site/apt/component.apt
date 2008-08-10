@@ -37,6 +37,9 @@ Component framework
   images chose the best and run vectorizer on that. To run the whole image 
   split it up into parts and vectorize them.
   
+  After that take all the chosen polygons and use them to draw lines on the 
+  original image.
+  
 * Relationship to ImageJ macros
   
   For stringing together whole image operations ImageJ has a wonderfully simple 
@@ -52,7 +55,22 @@ Component framework
 * Main idea in ShapeLogic's component framework
   
   This should be integrated with the current lazy calculations and lazy data 
-  streams. It should be a little easier to set it up.  
+  streams. A lot of the work consist in making conventions and convenience 
+  methods and classes. 
+  
+** For ShapeLogic's component framework the following should be easy   
+  
+  * Duplicate images inside a plugin in order to run other plugin on it
+  
+  * Setup plugin filters to be run lazily
+  
+  * Set parameters for plugin filter when they are run lazily
+  
+  * Good naming convention for accessing internal data from other plugins
+  
+  * Handle local contexts
+  
+  []
   
 * Current problems
   
