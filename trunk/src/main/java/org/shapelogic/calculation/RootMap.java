@@ -9,21 +9,28 @@ import java.util.Map;
  * 
  * There will be a lot of calculations and streams here. <br />
  * 
- * Currently implemented as a kind of a singleton. <br />
+ * Singleton. <br />
  * This might be changed if more contexts need to be active at the same time.<br />
  * 
- * This survives between tests so reset if testing.
+ * This survives between tests so reset if testing.<br />
  * 
  * @author Sami Badawi
  *
  */
-public class RootMap {
+public class RootMap implements RecursiveContext {
 	private static final boolean NEW_MAP_ON_CLEAR = false;
-	static Map _map = mapFactory();
-	static Map[] _maps = {_map};
+	private Map _map;
+	private static RootMap INSTANCE; 
 	
-	static public Map getMap() {
-		return _map;
+	private RootMap() {
+		_map = mapFactory();
+	}
+	
+	static public RootMap getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new RootMap();
+		}
+		return INSTANCE;
 	}
 	
 	public static Map mapFactory() {
@@ -31,34 +38,40 @@ public class RootMap {
 		return new HashMap();
 	}
 
-	static public Map[] getMaps(){
-		return _maps;
-	}
-	
 	static public void put(Object key, Object value) {
-		_map.put(key, value);
+		getInstance().getContext().put(key, value);
 	}
 	
 	static public void putNoOverwrite(Object key, Object value) {
-		if (!_map.containsValue(key))
-			_map.put(key, value);
+		if (!getInstance().getContext().containsValue(key))
+			getInstance().getContext().put(key, value);
 	}
 	
 	static public Object get(Object key) {
-		return _map.get(key);
+		return getInstance().getContext().get(key);
 	}
 	
 	/** Maybe making a new map would be better. */
 	static public void clear() {
+		getInstance();
 		if (NEW_MAP_ON_CLEAR) {
-			_map = new HashMap();
-			_maps[0] = _map;
+			INSTANCE._map = mapFactory();
 		}
 		else
-			_map.clear();
+			INSTANCE._map.clear();
 	}
 	
 	static public boolean containsValue(Object key){
-		return _map.containsValue(key);
+		return getInstance().getContext().containsValue(key);
 	}
+
+	@Override
+	public Map getContext() {
+		return _map;
+	}
+
+	@Override
+	public RecursiveContext getParentContext() {
+		return null;
+	}	
 }

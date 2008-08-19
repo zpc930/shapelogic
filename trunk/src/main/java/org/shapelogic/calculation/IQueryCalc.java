@@ -3,10 +3,11 @@ package org.shapelogic.calculation;
 import java.util.Map;
 
 /** A very general interface for doing any kind of queries to lazy calculations and streams.
- * 
- * @author Sami Badawi 
  * <br />
  * Generic will mainly not be used. The can be expanded with wild cards, but ignore for now.
+ * 
+ * @author Sami Badawi 
+ * 
  * @param <K> key
  * @param <V> value
  */
@@ -26,5 +27,5 @@ public interface IQueryCalc<K,V> {
 	 * @param inContexts class that contains the contexts that this is to be done in.
 	 * @return
 	 */
-	V get(K key, InContexts<K> inContexts);
+	V get(K key, RecursiveContext<K> inContexts);
 }

@@ -18,16 +18,17 @@ abstract public class BaseCalcInContext<K,V> implements CalcInContext<K,V> {
 	protected int _topLevelUsed = 0;
 	
 	@Override
-	abstract public V invoke(Map<K,?>[] contextArray);
+	abstract public V invoke(RecursiveContext<K> contextArray);
 	
 	public BaseCalcInContext(K key) {
 		_key = key;
 	}
 	
 	@Override
-	public V calc(Map[] contextArray) {
-		_value = invoke(contextArray);
-		contextArray[_topLevelUsed].put(_key, _value);
+	public V calc(RecursiveContext<K> recursiveContext) {
+		_value = invoke(recursiveContext);
+		Map map = recursiveContext.getContext();
+		map.put(_key, _value);
 		_dirty = false;
 		return _value;
 	}

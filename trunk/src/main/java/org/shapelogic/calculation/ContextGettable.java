@@ -9,6 +9,6 @@ package org.shapelogic.calculation;
  * @param <K> Key type
  * @param <V> Value type of result
  */
-public interface ContextGettable<K,V> extends InContexts<K> {
+public interface ContextGettable<K,V> extends RecursiveContext<K> {
 	V getInContext(K key);
 }
