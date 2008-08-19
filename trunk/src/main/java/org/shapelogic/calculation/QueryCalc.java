@@ -16,6 +16,10 @@ import org.shapelogic.streams.Stream;
 public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 	private static QueryCalc _instance = new QueryCalc();
 	
+	static public QueryCalc getInstance() {
+		return _instance;
+	}
+
 	/** It is a get that will do the lazy calculation.
 	 * <br />
 	 * This should not be used to get a Stream since this is treated as a 
@@ -84,7 +88,17 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 		return null;
 	}
 	
-	static public QueryCalc getInstance() {
-		return _instance;
+	/** Put in the first non null context in a RecursiveContext. */
+	@Override
+	public void put(K key, V value, RecursiveContext<K> recursiveContext) {
+		do {
+			Map map = recursiveContext.getContext();
+			if (map == null)
+				recursiveContext = recursiveContext.getParentContext();
+			else {
+				map.put(key, value);
+			}
+		}
+		while (recursiveContext != null);
 	} 
 }
