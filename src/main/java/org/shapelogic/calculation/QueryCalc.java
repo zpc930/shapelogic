@@ -5,10 +5,11 @@ import java.util.Map;
 import org.shapelogic.streams.Stream;
 
 /** A very general interface for doing any kind of queries to lazy calculations and streams.
- * 
- * @author Sami Badawi
  * <br />
  * Generic will mainly not be used. The can be expanded with wild cards, but ignore for now.
+ * 
+ * @author Sami Badawi
+ * 
  * @param <K> key
  * @param <V> value
  */
@@ -27,7 +28,7 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 	@Override
 	public V get(K key, Map<K,?> ... maps) {
 		for (int i = maps.length-1; 0 <= i; i--) {
-			Map<K,?> map = maps[i];
+			final Map map = maps[i];
 			Object result = map.get(key);
 			if (result instanceof CalcValue && (!(result instanceof Stream))) {
 				if (result instanceof LazyCalc) {
@@ -36,19 +37,51 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 					
 				}
 				if (result instanceof CalcInContext) {
-					((CalcInContext)result).calc(maps);
+					RecursiveContext rc = new RecursiveContext() {
+						@Override
+						public Map getContext() {
+							return map;
+						}
+						@Override
+						public RecursiveContext getParentContext() {
+							return null;
+						}
+					}; 
+					result = ((CalcInContext)result).calc(rc);
 				}
-				return (V)((CalcValue)result).getValue();
+				else
+					result = ((CalcValue)result).getValue();
 			}
-			if (result != null)
+			if (result != null) {
+				map.put(key, result);
 				return (V)result;
+			}
 		}
 		return null;
 	}
 	
 	@Override
-	public V get(K key, InContexts<K> inContexts) {
-		return (V) get(key, inContexts.getContexts());
+	public V get(K key, RecursiveContext<K> recursiveContexts) {
+		do {
+			Map<K,?> map = recursiveContexts.getContext();
+			Object result = map.get(key);
+			if (result instanceof CalcValue && (!(result instanceof Stream))) {
+				if (result instanceof LazyCalc) {
+					if (!((LazyCalc)result).isDirty())
+						return (V)((CalcValue)result).getValue();
+					
+				}
+				if (result instanceof CalcInContext) {
+					return (V)((CalcInContext)result).calc(recursiveContexts);
+				}
+				return (V)((CalcValue)result).getValue();
+			}
+			if (result != null)
+				return (V)result;
+			recursiveContexts = recursiveContexts.getParentContext();
+		}
+		while (recursiveContexts != null);
+		return null;
 	}
 	
 	static public QueryCalc getInstance() {
