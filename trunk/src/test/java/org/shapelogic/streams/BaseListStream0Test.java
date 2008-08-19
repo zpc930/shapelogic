@@ -3,6 +3,8 @@ package org.shapelogic.streams;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.shapelogic.calculation.RecursiveContext;
+
 import junit.framework.TestCase;
 
 /** Test BaseListStream0.
@@ -22,11 +24,15 @@ public class BaseListStream0Test extends TestCase {
 		BaseListStream0<Integer> inputNumberStream = 
 			new BaseListStream0<Integer>(10) {
 				{
-					_contexts = new Map[] {context};
+					_context = context;
 				}
 				@Override
 				public Integer invoke(int index) {
 					return ((Integer)getInContext("base")) * index;
+				}
+				@Override
+				public RecursiveContext getParentContext() {
+					return null;
 				}
 		};
 		return inputNumberStream;

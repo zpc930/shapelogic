@@ -43,7 +43,7 @@ public class NamedCalcFixedTest extends TestCase {
 	
 	/** The value survives in the RootMap */
 	public void testGetValueInRootMap42WithQueryCalc() {
-		assertEquals(new Integer(42), QueryCalc.getInstance().get("number42", RootMap.getMaps()));
+		assertEquals(new Integer(42), QueryCalc.getInstance().get("number42", RootMap.getInstance()));
 	}
 
 	public void testGetNaturalNumbers() {
@@ -81,7 +81,7 @@ public class NamedCalcFixedTest extends TestCase {
 			new NamedCalcFixed<NumberedStream<Integer>>("naturalNumbers",new NaturalNumberStream());
 		assertNotNull(RootMap.get("naturalNumbers"));
 		assertTrue(RootMap.get("naturalNumbers") instanceof Stream);
-		assertTrue(QueryCalc.getInstance().get("naturalNumbers", RootMap.getMaps()) instanceof Stream);
+		assertTrue(QueryCalc.getInstance().get("naturalNumbers", RootMap.getInstance() ) instanceof Stream);
 	}
 
 }
