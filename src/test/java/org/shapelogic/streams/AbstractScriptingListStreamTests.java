@@ -82,7 +82,7 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		String partEvenName = "EvenNumbers";
 		String partThirdName = "ThirdNumbers";
 		Integer compareObject = 2;
-		RootMap.getMap().remove(ruleName);
+		RootMap.getInstance().getContext().remove(ruleName);
 		ListStream<Boolean> stream = StreamFactory.addAndListStream0(ruleName,partEvenName, 
 				inputStreamName, _filterFunctionExpressionEven, "==", compareObject, _language);
 		StreamFactory.addAndListStream0(ruleName, partThirdName,
@@ -108,7 +108,7 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		String partEvenName = "EvenNumbers";
 		String partThirdName = "ThirdNumbers";
 		Integer compareObject = 2;
-		RootMap.getMap().remove(ruleName);
+		RootMap.getInstance().getContext().remove(ruleName);
 		ListStream<Boolean> stream = StreamFactory.addAndListStream0(ruleName,partEvenName, 
 				inputStreamName, _filterFunctionExpressionEven, "==", compareObject, _language);
 		StreamFactory.addAndListStream0(ruleName, partThirdName,

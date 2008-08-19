@@ -8,6 +8,7 @@ import java.util.Map;
 import org.shapelogic.calculation.ContextGettable;
 import org.shapelogic.calculation.IQueryCalc;
 import org.shapelogic.calculation.QueryCalc;
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.util.Constants;
 
 import static org.shapelogic.util.Constants.LAST_UNKNOWN;
@@ -65,9 +66,11 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 	
 	protected E _value = null;
 	
-	protected Map[] _contexts;
+	protected Map _context;
 
 	protected IQueryCalc _query;
+
+	protected RecursiveContext _parentContext;
 
 	/** Calculate the value at an index.
 	 * <br />
@@ -226,9 +229,14 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 
 	@Override
 	public Map getContext() {
-		return null;
+		return _context;
 	}
 
+	@Override
+	public RecursiveContext getParentContext() {
+		return _parentContext;
+	}
+	
 	@Override
 	public E getValue() {
 		return _value;
@@ -264,14 +272,9 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 		//return _list.iterator();//XXX lazy init does not work
 	}
 
-	@Override
-	public Map[] getContexts() {
-		return _contexts;
-	}
-
 	public Object getInContext(Object key){
 		if (_query == null)
 			_query = new QueryCalc();
-		return _query.get(key, _contexts);
+		return _query.get(key, this);
 	}
 }
