@@ -28,4 +28,6 @@ public interface IQueryCalc<K,V> {
 	 * @return
 	 */
 	V get(K key, RecursiveContext<K> inContexts);
+
+	void put(K key, V value, RecursiveContext<K> recursiveContext);
 }
