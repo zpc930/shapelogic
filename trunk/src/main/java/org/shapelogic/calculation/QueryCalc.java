@@ -66,7 +66,7 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 	
 	@Override
 	public V get(K key, RecursiveContext<K> recursiveContexts) {
-		do {
+		while (recursiveContexts != null) {
 			Map<K,?> map = recursiveContexts.getContext();
 			Object result = map.get(key);
 			if (result instanceof CalcValue && (!(result instanceof Stream))) {
@@ -84,21 +84,20 @@ public class QueryCalc<K,V> implements IQueryCalc<K,V> {
 				return (V)result;
 			recursiveContexts = recursiveContexts.getParentContext();
 		}
-		while (recursiveContexts != null);
 		return null;
 	}
 	
 	/** Put in the first non null context in a RecursiveContext. */
 	@Override
 	public void put(K key, V value, RecursiveContext<K> recursiveContext) {
-		do {
+		while (recursiveContext != null) {
 			Map map = recursiveContext.getContext();
 			if (map == null)
 				recursiveContext = recursiveContext.getParentContext();
 			else {
 				map.put(key, value);
+				return;
 			}
 		}
-		while (recursiveContext != null);
 	} 
 }
