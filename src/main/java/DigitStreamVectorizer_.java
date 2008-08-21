@@ -1,8 +1,10 @@
 import static org.shapelogic.logic.CommonLogicExpressions.*;
-import static org.shapelogic.streamlogic.LoadLetterStreams.rule;
+import ij.ImagePlus;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
 
 import org.shapelogic.imageprocessing.StreamVectorizer;
-import org.shapelogic.imageutil.PlugInFilterAdapter;
+import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
 import org.shapelogic.streamlogic.StreamNames;
@@ -16,25 +18,25 @@ import org.shapelogic.streamlogic.StreamNames;
  * @author Sami Badawi
  *
  */
-public class DigitStreamVectorizer_ extends PlugInFilterAdapter {
+public class DigitStreamVectorizer_ extends StreamVectorizer implements PlugInFilter {
 	
-	public DigitStreamVectorizer_() {
-		super(new StreamVectorizer()  {
-			@Override
-			public void matchSetup() {
-				loadDigitStream();
-			}
-		});
+	@Override
+	public void matchSetup() {
+		loadDigitStream();
 	}
 	
-	public static void loadDigitStream() {
-		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+	public void loadDigitStream() {
+		loadLetterStreams.loadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		makeDigitStream();
 		String[] digits = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}; 
-    	LoadLetterStreams.makeXOrStream(StreamNames.LETTERS,digits);
+    	loadLetterStreams.makeXOrStream(StreamNames.LETTERS,digits);
+	}
+	
+	public void rule(String letter, String streamName, String predicate, double value) {
+		loadLetterStreams.rule(letter, streamName, predicate, value);
 	}
 
-	public static void makeDigitStream() {
+	public void makeDigitStream() {
 
 		rule("0", HOLE_COUNT, "==", 1.);
 		rule("0", T_JUNCTION_POINT_COUNT, "==", 0.);
@@ -131,5 +133,15 @@ public class DigitStreamVectorizer_ extends PlugInFilterAdapter {
 		rule("9", ASPECT_RATIO, "<", 0.9);
 		rule("9", SOFT_POINT_COUNT, ">", 1.);
 		rule("9", HARD_CORNER_COUNT, "<", 2.);
+	}
+
+	@Override
+	public void run(ImageProcessor ip) {
+		run();
+	}
+
+	@Override
+	public int setup(String arg, ImagePlus imp) {
+		return setup(arg, new IJImage(imp));
 	}
 }
