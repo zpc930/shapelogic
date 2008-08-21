@@ -68,7 +68,7 @@ Component framework
   
   * Good naming convention for accessing internal data from other plugins
   
-  * Handle local contexts
+  * Handle local and recursive contexts
   
   []
   

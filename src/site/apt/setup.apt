@@ -103,13 +103,13 @@ Unit tests
   See the AbstractImageProcessingTests.java. Here is the main setup part:
   
 ---------------------
-public ByteProcessor runPluginFilterOnImage(String fileName, PlugInFilter plugInFilter) {
+static public ImageProcessor runPluginFilterOnImage(String fileName, PlugInFilter plugInFilter) {
 	Opener opener = new Opener();
 	ImagePlus image = opener.openImage(fileName);
-	ByteProcessor bp = (ByteProcessor) image.getProcessor();
+	ImageProcessor ip = image.getProcessor();
 	plugInFilter.setup("", image);
-	plugInFilter.run(bp);
-	return bp;
+	plugInFilter.run(ip);
+	return ip;
 }
 ---------------------
   
