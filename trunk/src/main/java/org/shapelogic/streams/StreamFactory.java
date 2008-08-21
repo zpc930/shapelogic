@@ -4,6 +4,9 @@ import java.util.Iterator;
 
 import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.CalcIndex1;
+import org.shapelogic.calculation.IQueryCalc;
+import org.shapelogic.calculation.QueryCalc;
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.predicate.BinaryPredicate;
 import org.shapelogic.predicate.BinaryPredicateFactory;
@@ -17,6 +20,13 @@ import org.shapelogic.util.Constants;
  *
  */
 public class StreamFactory {
+	private static IQueryCalc queryCalc = QueryCalc.getInstance();
+	RecursiveContext recursiveContext = RootMap.getInstance(); //XXX should not be static
+	
+	public StreamFactory(RecursiveContext recursiveContext) {
+		this.recursiveContext = recursiveContext;
+	}
+	
 	static public <In, E> ListStream<E> createListStream(final CalcIndex1<In, E> transformer){
 		return new ListCalcIndexStream1<In, E>(transformer);
 	}
@@ -91,7 +101,7 @@ public class StreamFactory {
 	 * @param language Scripting language by name, Groovy is the default
 	 * @return
 	 */
-	static public <In0, In1, In2> ListStream<Boolean> createListStream0(String name, 
+	public <In0, In1, In2> ListStream<Boolean> createListStream0(String name, 
 			String inputName, String expression, 
 			final BinaryPredicate<In1, In2> binaryPredicate, 
 			final In2 compareObject, String language)
@@ -131,7 +141,7 @@ public class StreamFactory {
 	 * @param language Scripting language by name, Groovy is the default
 	 * @return
 	 */
-	static public <In0, In1, In2> ListStream<Boolean> createListStream0(String name, 
+	public <In0, In1, In2> ListStream<Boolean> createListStream0(String name, 
 			String inputName, String expression, 
 			final String binaryPredicateString, final In2 compareObject, String language)
 	{
@@ -195,8 +205,8 @@ public class StreamFactory {
 	 * @param name of the stream
 	 * @return
 	 */
-	static public <E> NumberedStream<E> findNumberedStream(String name) {
-		Object obj = RootMap.get(name);
+	static public <E> NumberedStream<E> findNumberedStream(String name, RecursiveContext recursiveContext) {
+		Object obj = queryCalc.get(name, recursiveContext);
 		if (obj == null)
 			throw new RuntimeException("NumberedStream not found in RootMap for name: " 
 					+ name + ", nothing found.");
@@ -206,8 +216,11 @@ public class StreamFactory {
 				", type: " + obj.getClass().getSimpleName());
 	}
 
+	public <E> NumberedStream<E> findNumberedStream(String name) {
+		return findNumberedStream(name,recursiveContext);
+	}
 	
-	static public <In0, In2> ListStream<Boolean> createListStream0(String name, 
+	public <In0, In2> ListStream<Boolean> createListStream0(String name, 
 			String inputName,  
 			final BinaryPredicate<In0, In2> binaryPredicate, 
 			final In2 compareObject)
@@ -221,7 +234,7 @@ public class StreamFactory {
 		return calcStream1;
 	}
 
-	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
+	public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
 			String partName, String inputName, String expression, 
 			final BinaryPredicate<In1, In2> binaryPredicate, 
 			final In2 compareObject, String language)
@@ -245,7 +258,7 @@ public class StreamFactory {
 		return andListStream;
 	}
 
-	static public <In0, In1, In2> ListStream<Boolean> addAndListStream0(String andName, 
+	public <In0, In1, In2> ListStream<Boolean> addAndListStream0(String andName, 
 			String partName, String inputName, String expression, 
 			final String binaryPredicateString, final In2 compareObject, String language)
 	{
@@ -255,7 +268,7 @@ public class StreamFactory {
 				expression, binaryPredicate, compareObject, language);
 	}
 	
-	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
+	public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
 			String partName, String inputName,  
 			final BinaryPredicate<In1, In2> binaryPredicate, 
 			final In2 compareObject)
@@ -279,7 +292,7 @@ public class StreamFactory {
 		return andListStream;
 	}
 
-	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
+	public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
 			String partName, String inputName,  
 			final String binaryPredicateString, 
 			final In2 compareObject)
@@ -290,7 +303,7 @@ public class StreamFactory {
 				binaryPredicate, compareObject);
 	}
 
-	static public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
+	public <In0, In1, In2> ListStream<Boolean> addToAndListStream0(String andName, 
 			String inputName,  
 			final String binaryPredicateString, 
 			final In2 compareObject)

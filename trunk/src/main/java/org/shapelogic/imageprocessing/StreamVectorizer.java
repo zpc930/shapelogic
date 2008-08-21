@@ -1,5 +1,8 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.Map;
+
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
@@ -12,14 +15,16 @@ import org.shapelogic.streams.StreamFactory;
  * @author Sami Badawi
  *
  */
-public class StreamVectorizer extends BaseMaxDistanceVectorizer {
+public class StreamVectorizer extends BaseMaxDistanceVectorizer implements RecursiveContext {
+	protected Map _context = RootMap.getInstance().getContext();
+	protected LoadLetterStreams loadLetterStreams;
 
 	/** This does really not belong in a vectorizer. */
 	@Override
 	protected void matchLines() {
 //		_matchingOH = LetterTaskFactory.matchPolygonToLetterUsingTask(
 //				getPolygon(), _cleanedupPolygon, _rulesArrayForLetterMatching);
-		NumberedStream<String> letters = StreamFactory.findNumberedStream(StreamNames.LETTERS);
+		NumberedStream<String> letters = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
 		String message = "";
 		for (int i = 0; hasNext(); i++)
 		{
@@ -44,14 +49,15 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 		RootMap.clear();
 		super.init();
 //		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
-		RootMap.put(StreamNames.POLYGONS, getStream());
+		_context.put(StreamNames.POLYGONS, getStream());
+		loadLetterStreams = new LoadLetterStreams(this);
 		matchSetup();
 	}
 	
 	/** In order to match a different alphabet override this. 
 	 */
 	public void matchSetup() {
-		LoadLetterStreams.loadLetterStream(null);
+		loadLetterStreams.loadLetterStream(null);
 		
 	}
 	
@@ -60,5 +66,15 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer {
 		init();
 //		next();
 		matchLines();
+	}
+
+	@Override
+	public Map getContext() {
+		return _context;
+	}
+
+	@Override
+	public RecursiveContext getParentContext() {
+		return null;
 	}
 }

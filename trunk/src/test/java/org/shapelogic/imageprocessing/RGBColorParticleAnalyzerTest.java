@@ -97,7 +97,8 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(30,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage()); 
 		assertEquals(6,_particleCounter.getParticleCount()); 
-		NumberedStream<Number> ns = StreamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
 		assertClose(1.17, ns.get(0).doubleValue(), 0.1);
 		assertClose(1., ns.get(1).doubleValue(), 0.1);
 	}

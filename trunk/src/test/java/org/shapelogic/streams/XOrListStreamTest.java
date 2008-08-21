@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.shapelogic.calculation.Calc1;
+import org.shapelogic.calculation.RootMap;
 import org.shapelogic.mathematics.NaturalNumberStream;
 
 import junit.framework.TestCase;
@@ -42,7 +43,7 @@ public class XOrListStreamTest extends TestCase {
 		List<String > listOfNames = new ArrayList<String>();
 		String greaterThan1Name = "greaterThan1Stream";
 		listOfNames.add(greaterThan1Name);
-		XOrListStream xorListStream = new XOrListStream(listOfNames,listOfStreams);
+		XOrListStream xorListStream = new XOrListStream(listOfNames, RootMap.getInstance(), listOfStreams);
 		
 		assertEquals("",xorListStream.get(0));
 		assertEquals("",xorListStream.get(1));
@@ -56,7 +57,7 @@ public class XOrListStreamTest extends TestCase {
 		List<String > listOfNames = new ArrayList<String>();
 		String greaterThan1Name = "greaterThan1Stream";
 		listOfNames.add(greaterThan1Name);
-		XOrListStream xorListStream = new XOrListStream(listOfNames,listOfStreams);
+		XOrListStream xorListStream = new XOrListStream(listOfNames,RootMap.getInstance(),listOfStreams);
 		
 		assertEquals("",xorListStream.next());
 		assertEquals("",xorListStream.next());
@@ -73,7 +74,7 @@ public class XOrListStreamTest extends TestCase {
 		String greaterThan2Name = "greaterThan2Stream";
 		listOfNames.add(greaterThan1Name);
 		listOfNames.add(greaterThan2Name);
-		XOrListStream xorListStream = new XOrListStream(listOfNames,listOfStreams);
+		XOrListStream xorListStream = new XOrListStream(listOfNames,RootMap.getInstance(),listOfStreams);
 		
 		assertEquals("",xorListStream.get(0));
 		assertEquals("",xorListStream.get(1));

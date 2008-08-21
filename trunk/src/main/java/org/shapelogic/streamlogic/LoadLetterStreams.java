@@ -31,6 +31,9 @@ import static org.shapelogic.logic.CommonLogicExpressions.Y_JUNCTION_POINT_COUNT
 import java.util.ArrayList;
 import java.util.List;
 
+import org.shapelogic.calculation.IQueryCalc;
+import org.shapelogic.calculation.QueryCalc;
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.streams.XOrListStream;
@@ -48,7 +51,18 @@ import org.shapelogic.streams.XOrListStream;
  *
  */
 public class LoadLetterStreams {
-
+	
+	private static IQueryCalc queryCalc = QueryCalc.getInstance();
+	RecursiveContext recursiveContext = RootMap.getInstance();
+	StreamFactory streamFactory;
+	public LoadPolygonStreams loadPolygonStreams;
+	
+	public LoadLetterStreams(RecursiveContext recursiveContext) {
+		this.recursiveContext = recursiveContext;
+		streamFactory = new StreamFactory(recursiveContext);
+		loadPolygonStreams = new LoadPolygonStreams(recursiveContext);
+	}
+	
 	final static public String[] lettersArray = 
 	{"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
 		"T","U","V","W","X","Y","Z"};
@@ -60,10 +74,10 @@ public class LoadLetterStreams {
 	 * @param value constraint value
 	 * @param letterFilter if only one rule should be generated this should be set to a letter 
 	 */
-	public static void rule(String letter, String streamName, int value, String letterFilter) {
+	public void rule(String letter, String streamName, int value, String letterFilter) {
 		if (letterFilter != null && !letterFilter.equalsIgnoreCase(letter))
 			return;
-		StreamFactory.addToAndListStream0(letter, streamName, "==",	value);
+		streamFactory.addToAndListStream0(letter, streamName, "==",	value);
 	}
 	
 	/** Helper method to create one rule in one letter. 
@@ -73,40 +87,40 @@ public class LoadLetterStreams {
 	 * @param value constraint value
 	 * @param letterFilter if only one rule should be generated this should be set to a letter 
 	 */
-	public static void rule(String letter, String streamName, String predicate, double value, String letterFilter) {
+	public void rule(String letter, String streamName, String predicate, double value, String letterFilter) {
 		if (letterFilter != null && !letterFilter.equalsIgnoreCase(letter))
 			return;
-		StreamFactory.addToAndListStream0(letter, streamName, predicate, value);
+		streamFactory.addToAndListStream0(letter, streamName, predicate, value);
 	}
 
-	public static void rule(String letter, String streamName, String predicate, double value) {
-		StreamFactory.addToAndListStream0(letter, streamName, predicate, value);
+	public void rule(String letter, String streamName, String predicate, double value) {
+		streamFactory.addToAndListStream0(letter, streamName, predicate, value);
 	}
 	
-	public static void makeXOrStream(String streamName, String[] symbolStreamArray) {
+	public void makeXOrStream(String streamName, String[] symbolStreamArray) {
 		List<String> symbols = new ArrayList<String>();
 		for (String symbol: symbolStreamArray)
 			symbols.add(symbol);
-		XOrListStream letterMatchStream = new XOrListStream( symbols);
-		RootMap.put(streamName, letterMatchStream);
+		XOrListStream letterMatchStream = new XOrListStream( symbols, recursiveContext);
+		queryCalc.put(streamName, letterMatchStream, recursiveContext);
 	}
 
 	/** Setup all the stream for a  letter match.<br />
 	 * 
 	 * Requirements streams: polygons.
 	 *  */
-	public static void loadLetterStream(String letterFilter) {
-		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+	public void loadLetterStream(String letterFilter) {
+		loadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		letterFilter = null;
-		LoadLetterStreams.makeAllLetterStream(letterFilter);
-    	LoadLetterStreams.makeXOrStream(StreamNames.LETTERS, lettersArray);
+		makeAllLetterStream(letterFilter);
+    	makeXOrStream(StreamNames.LETTERS, lettersArray);
 	}
 	
 	/** Rules for matching  letters, using only very simple properties.
 	 * 
 	 * @param letterFilter
 	 */
-	public static void makeStraightLetterStream(String letterFilter) {
+	public void makeStraightLetterStream(String letterFilter) {
 		rule("A", POINT_COUNT, 5, letterFilter);
 		rule("A", LINE_COUNT, 5, letterFilter);
 		rule("A", HORIZONTAL_LINE_COUNT, 1, letterFilter);
@@ -200,7 +214,7 @@ public class LoadLetterStreams {
 		
 	}
 	
-	public static void makeAllLetterStream(String letterFilter) {
+	public void makeAllLetterStream(String letterFilter) {
 		//To test if rules with old syntax still works
 		rule("A", POINT_COUNT, "==", 5., letterFilter);
 		rule("A", HOLE_COUNT, "==", 1., letterFilter);
