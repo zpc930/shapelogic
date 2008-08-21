@@ -6,8 +6,11 @@ import java.awt.Rectangle;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorHypothesis;
@@ -40,7 +43,7 @@ import static org.shapelogic.imageutil.ImageJConstants.*;
  *
  */
 public class BaseParticleCounter extends BaseImageOperation 
-        implements IParticleCounter 
+        implements IParticleCounter, RecursiveContext
 {
 	//These defaults are not fine tuned yet
     final static protected int ITERATIONS_DEFAULTS = 2;
@@ -78,6 +81,9 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected Integer _referenceColor = _inputColor;
 	protected boolean _useReferenceAsBackground = true;
     
+	protected Map _context;
+	protected RecursiveContext _parentContext;
+	
 	public BaseParticleCounter()
 	{
 		super(DOES_8G+DOES_RGB+DOES_STACKS+SUPPORTS_MASKING);
@@ -227,17 +233,18 @@ public class BaseParticleCounter extends BaseImageOperation
      * @throws java.lang.Exception
      */
     protected void init() throws Exception {
-    		RootMap.clear(); //XXX Clear RootMap before use. Not sure if I should put results in the RootMap
-			SBSimpleCompare compare = ProcessingFactory.compareFactory(getImage());
-			compare.setModifying(_modifying);
-			_segmentation = new SBSegmentation();
-			_segmentation.setSLImage(getImage());
-			_segmentation.setPixelCompare(compare);
-			if (_saveArea)
-				_segmentation.setSegmentAreaFactory(ColorFactory.segmentAreaFactory(getImage()));
-			_segmentation.init();
-            _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, _maxDistance);
-            _colorHypothesisFinder.setIterations(_iterations);
+    	RootMap.clear();
+    	_context = RootMap.getInstance().getContext(); // new HashMap(); //XXX Clear RootMap before use. Not sure if I should put results in the RootMap
+		SBSimpleCompare compare = ProcessingFactory.compareFactory(getImage());
+		compare.setModifying(_modifying);
+		_segmentation = new SBSegmentation();
+		_segmentation.setSLImage(getImage());
+		_segmentation.setPixelCompare(compare);
+		if (_saveArea)
+			_segmentation.setSegmentAreaFactory(ColorFactory.segmentAreaFactory(getImage()));
+		_segmentation.init();
+        _colorHypothesisFinder = new DistanceBasedColorHypothesisFinder(_arg, _image, _maxDistance);
+        _colorHypothesisFinder.setIterations(_iterations);
     }
 	
     @Override
@@ -382,5 +389,15 @@ public class BaseParticleCounter extends BaseImageOperation
 
 	public void setUseReferenceAsBackground(boolean referenceAsBackground) {
 		_useReferenceAsBackground = referenceAsBackground;
+	}
+	
+	@Override
+	public Map getContext() {
+		return _context;
+	}
+
+	@Override
+	public RecursiveContext getParentContext() {
+		return _parentContext;
 	}
 }

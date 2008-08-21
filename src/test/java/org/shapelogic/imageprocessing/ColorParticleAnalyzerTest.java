@@ -92,8 +92,9 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertNotNull(factory);
 		assertEquals(61,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage()); 
-		assertEquals(5,_particleCounter.getParticleCount()); 
-		NumberedStream<Number> ns = StreamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertEquals(5,_particleCounter.getParticleCount());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
 		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
 		assertClose(0.77, ns.get(1).doubleValue(), 0.1);
 	}

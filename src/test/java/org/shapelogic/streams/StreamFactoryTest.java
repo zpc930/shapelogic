@@ -9,17 +9,18 @@ public class StreamFactoryTest extends TestCase {
 	final static String naturalNumberStreamTo3String = "naturalNumberStreamTo3";
 	final static String interval1To2 = "interval1To2";
 	NumberedStream<Integer> naturalNumberStreamTo3;
-	
+	StreamFactory streamFactory;
 	
 	@Override
 	public void setUp() {
 		RootMap.clear();
 		naturalNumberStreamTo3 = new NaturalNumberStream(3);
 		RootMap.put(naturalNumberStreamTo3String, naturalNumberStreamTo3);
+		streamFactory = new StreamFactory(RootMap.getInstance()); 
 	}
 	
 	public void testAddToAndListStream0Arg0() {
-		StreamFactory.addToAndListStream0(interval1To2, 
+		streamFactory.addToAndListStream0(interval1To2, 
 				naturalNumberStreamTo3String,  
 				">", 
 				new Integer(0));
@@ -35,7 +36,7 @@ public class StreamFactoryTest extends TestCase {
 	}
 	
 	public void testAddToAndListStream0Arg1() {
-		StreamFactory.addToAndListStream0(interval1To2, 
+		streamFactory.addToAndListStream0(interval1To2, 
 				naturalNumberStreamTo3String,  
 				">", 
 				new Integer(0));
@@ -51,11 +52,11 @@ public class StreamFactoryTest extends TestCase {
 	}
 
 	public void testAddToAndListStream0Arg2() {
-		StreamFactory.addToAndListStream0(interval1To2, 
+		streamFactory.addToAndListStream0(interval1To2, 
 				naturalNumberStreamTo3String,  
 				">", 
 				new Integer(0));
-		StreamFactory.addToAndListStream0(interval1To2, 
+		streamFactory.addToAndListStream0(interval1To2, 
 				naturalNumberStreamTo3String,  
 				"<", 
 				new Integer(3));

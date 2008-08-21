@@ -3,6 +3,7 @@ package org.shapelogic.streamlogic;
 import static org.shapelogic.logic.CommonLogicExpressions.ASPECT_RATIO;
 
 import org.shapelogic.calculation.Calc1;
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorUtil;
@@ -24,6 +25,15 @@ import org.shapelogic.streams.StreamFactory;
  *
  */
 public class LoadParticleStreams {
+	public RecursiveContext recursiveContext = RootMap.getInstance();
+	private StreamFactory streamFactory;
+	LoadLetterStreams loadLetterStreams;
+
+	public LoadParticleStreams(RecursiveContext recursiveContext) {
+		this.recursiveContext = recursiveContext;
+		streamFactory = new StreamFactory(recursiveContext);
+		loadLetterStreams = new LoadLetterStreams(recursiveContext);
+	}
 
 	/** Helper method to create one rule in one letter. 
 	 * 
@@ -32,10 +42,10 @@ public class LoadParticleStreams {
 	 * @param value constraint value
 	 * @param letterFilter if only one rule should be generated this should be set to a letter 
 	 */
-	public static void rule(String letter, String streamName, int value, String letterFilter) {
+	public void rule(String letter, String streamName, int value, String letterFilter) {
 		if (letterFilter != null && !letterFilter.equalsIgnoreCase(letter))
 			return;
-		StreamFactory.addToAndListStream0(letter, streamName, "==",	value);
+		streamFactory.addToAndListStream0(letter, streamName, "==",	value);
 	}
 	
 	/** Load all the required streams for the letter matcher to work.
@@ -61,9 +71,9 @@ public class LoadParticleStreams {
 		loadColorStreams(particles, image);
 	}
 	
-	public static void loadStreamsRequiredForParticleMatch(SLImage image) {
+	public void loadStreamsRequiredForParticleMatch(SLImage image) {
 		//In order for this to work the particles have to be defined first
-		NumberedStream<IColorAndVariance> particles = StreamFactory.findNumberedStream(StreamNames.PARTICLES);
+		NumberedStream<IColorAndVariance> particles = StreamFactory.findNumberedStream(StreamNames.PARTICLES, recursiveContext);
 		loadStreamsRequiredForParticleMatch(particles, image);
 	}
 	
@@ -159,17 +169,17 @@ public class LoadParticleStreams {
 	 * This is not useful.<br /> 
 	 * Light and dark is turned around if inverted LUT is used.<br /> 
 	 */
-	public static void exampleMakeParticleStream() {
-		LoadLetterStreams.rule("Flat", ASPECT_RATIO, ">", 1.1, null);
+	public void exampleMakeParticleStream() {
+		loadLetterStreams.rule("Flat", ASPECT_RATIO, ">", 1.1, null);
 		
-		LoadLetterStreams.rule("Tall", ASPECT_RATIO, "<", 0.9, null);
+		loadLetterStreams.rule("Tall", ASPECT_RATIO, "<", 0.9, null);
 
-		LoadLetterStreams.rule("Light round", StreamNames.COLOR_GRAY, ">", 150, null);
-		LoadLetterStreams.rule("Light round", ASPECT_RATIO, "<", 1.1, null);
-		LoadLetterStreams.rule("Light round", ASPECT_RATIO, ">", 0.9, null);
+		loadLetterStreams.rule("Light round", StreamNames.COLOR_GRAY, ">", 150, null);
+		loadLetterStreams.rule("Light round", ASPECT_RATIO, "<", 1.1, null);
+		loadLetterStreams.rule("Light round", ASPECT_RATIO, ">", 0.9, null);
 
-		LoadLetterStreams.rule("Dark round", StreamNames.COLOR_GRAY, "<", 120, null);
-		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, "<", 1.1, null);
-		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, ">", 0.9, null);
+		loadLetterStreams.rule("Dark round", StreamNames.COLOR_GRAY, "<", 120, null);
+		loadLetterStreams.rule("Dark round", ASPECT_RATIO, "<", 1.1, null);
+		loadLetterStreams.rule("Dark round", ASPECT_RATIO, ">", 0.9, null);
 	}
 }

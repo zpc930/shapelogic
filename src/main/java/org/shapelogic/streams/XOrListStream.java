@@ -3,6 +3,7 @@ package org.shapelogic.streams;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.util.Constants;
 
 /** AndListStream takes a list of Boolean streams and create the and of them.
@@ -20,12 +21,12 @@ public class XOrListStream extends BaseListStreamList<Boolean,String> {
 	 * @param ohNames
 	 * @param maxLast
 	 */
-	public XOrListStream(List<String> ohNames, int maxLast) {
+	public XOrListStream(List<String> ohNames, RecursiveContext recursiveContext,int maxLast) {
 		super(null,maxLast);
 		_ohNames = ohNames;
 		_inputStream = new ArrayList(); 
 		for (String streamName: _ohNames) {
-			NumberedStream numberedStream = StreamFactory.findNumberedStream(streamName);
+			NumberedStream numberedStream = StreamFactory.findNumberedStream(streamName, recursiveContext);
 			if (numberedStream != null)
 				getInputStream().add(numberedStream);
 			else
@@ -33,17 +34,17 @@ public class XOrListStream extends BaseListStreamList<Boolean,String> {
 		}
 	}
 	
-	public XOrListStream(List<String> ohNames) {
-		this(ohNames,Constants.LAST_UNKNOWN);
+	public XOrListStream(List<String> ohNames, RecursiveContext recursiveContext) {
+		this(ohNames, recursiveContext, Constants.LAST_UNKNOWN);
 	}
 	
-	public XOrListStream(List<String> ohNames, List<NumberedStream<Boolean> > inputStream, int maxLast) {
+	public XOrListStream(List<String> ohNames, RecursiveContext recursiveContext, List<NumberedStream<Boolean> > inputStream, int maxLast) {
 		super(inputStream, maxLast);
 		_ohNames = ohNames;
 	}
 	
-	public XOrListStream(List<String> ohNames, List<NumberedStream<Boolean> > inputStream) {
-		this(ohNames,inputStream,Constants.LAST_UNKNOWN);
+	public XOrListStream(List<String> ohNames, RecursiveContext recursiveContext, List<NumberedStream<Boolean> > inputStream) {
+		this(ohNames,recursiveContext,inputStream,Constants.LAST_UNKNOWN);
 	}
 	
 	@Override

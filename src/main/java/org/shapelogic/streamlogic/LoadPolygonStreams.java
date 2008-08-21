@@ -7,6 +7,9 @@ import java.util.Set;
 
 import org.hsqldb.lib.Collection;
 import org.shapelogic.calculation.Calc1;
+import org.shapelogic.calculation.IQueryCalc;
+import org.shapelogic.calculation.QueryCalc;
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.streams.ListCalcStream1;
@@ -30,7 +33,15 @@ import org.shapelogic.streams.StreamFactory;
  *
  */
 public class LoadPolygonStreams {
+	static private IQueryCalc gueryCalc = QueryCalc.getInstance(); 
+	public RecursiveContext recursiveContext = RootMap.getInstance();
+	private StreamFactory streamFactory;
 
+	public LoadPolygonStreams(RecursiveContext recursiveContext) {
+		this.recursiveContext = recursiveContext;
+		streamFactory = new StreamFactory(recursiveContext);
+	}
+	
 	/** Helper method to create one rule in one letter. 
 	 * 
 	 * @param letter to define rule for
@@ -38,17 +49,17 @@ public class LoadPolygonStreams {
 	 * @param value constraint value
 	 * @param letterFilter if only one rule should be generated this should be set to a letter 
 	 */
-	public static void rule(String letter, String streamName, int value, String letterFilter) {
+	public void rule(String letter, String streamName, int value, String letterFilter) {
 		if (letterFilter != null && !letterFilter.equalsIgnoreCase(letter))
 			return;
-		StreamFactory.addToAndListStream0(letter, streamName, "==",	value);
+		streamFactory.addToAndListStream0(letter, streamName, "==",	value);
 	}
 	
 	/** Load all the required streams for the letter matcher to work.
 	 * <br />
 	 * In order for this to work the polygons have to be defined first.
 	 */
-	public static void loadStreamsRequiredForStraightLetterMatch(NumberedStream<Polygon> polygons) {
+	public void loadStreamsRequiredForStraightLetterMatch(NumberedStream<Polygon> polygons) {
 		
 		loadPointCountStream(polygons);
 		
@@ -65,7 +76,7 @@ public class LoadPolygonStreams {
 	 * <br />
 	 * In order for this to work the polygons have to be defined first.
 	 */
-	public static void loadStreamsRequiredForLetterMatch(NumberedStream<Polygon> polygons) {
+	public void loadStreamsRequiredForLetterMatch(NumberedStream<Polygon> polygons) {
 		
 		loadStreamsRequiredForStraightLetterMatch(polygons);
 		
@@ -96,13 +107,13 @@ public class LoadPolygonStreams {
 		loadStraightLineCountStream(polygons);
 	}
 	
-	public static void loadStreamsRequiredForLetterMatch() {
+	public void loadStreamsRequiredForLetterMatch() {
 		//In order for this to work the polygons have to be defined first
-		NumberedStream<Polygon> polygons = StreamFactory.findNumberedStream(StreamNames.POLYGONS);
+		NumberedStream<Polygon> polygons = StreamFactory.findNumberedStream(StreamNames.POLYGONS,recursiveContext);
 		loadStreamsRequiredForLetterMatch(polygons);
 	}
 	
-	private static void loadEndPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadEndPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> endPointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -111,10 +122,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> endPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(endPointCountCalc1,polygons); 
-		RootMap.put(END_POINT_COUNT,endPointCountStream);
+		gueryCalc.put(END_POINT_COUNT,endPointCountStream,recursiveContext);
 	}
 
-	private static void loadVerticalLineCountStream(
+	private void loadVerticalLineCountStream(
 			NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> verticalLineCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
@@ -124,10 +135,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> verticalLineCountStream = 
 			new ListCalcStream1<Polygon, Integer>(verticalLineCountCalc1,polygons); 
-		RootMap.put(VERTICAL_LINE_COUNT,verticalLineCountStream);
+		gueryCalc.put(VERTICAL_LINE_COUNT,verticalLineCountStream,recursiveContext);
 	}
 
-	private static void loadHorizontalLineCountStream(
+	private void loadHorizontalLineCountStream(
 			NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> horizontalLineCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
@@ -137,10 +148,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> horizontalLineCountStream = 
 			new ListCalcStream1<Polygon, Integer>(horizontalLineCountCalc1,polygons); 
-		RootMap.put(HORIZONTAL_LINE_COUNT,horizontalLineCountStream);
+		gueryCalc.put(HORIZONTAL_LINE_COUNT,horizontalLineCountStream,recursiveContext);
 	}
 
-	private static void loadLineCountStream(NumberedStream<Polygon> polygons) {
+	private void loadLineCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> lineCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -149,10 +160,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> lineCountStream = 
 			new ListCalcStream1<Polygon, Integer>(lineCountCalc1,polygons); 
-		RootMap.put(LINE_COUNT,lineCountStream);
+		gueryCalc.put(LINE_COUNT,lineCountStream,recursiveContext);
 	}
 
-	private static void loadPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> pointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -161,10 +172,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> pointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(pointCountCalc1,polygons); 
-		RootMap.put(POINT_COUNT,pointCountStream);
+		gueryCalc.put(POINT_COUNT,pointCountStream,recursiveContext);
 	}
 	
-	private static void loadHoleCountStream(NumberedStream<Polygon> polygons) {
+	private void loadHoleCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> holeCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -173,10 +184,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> holeCountStream = 
 			new ListCalcStream1<Polygon, Integer>(holeCountCalc1,polygons); 
-		RootMap.put(HOLE_COUNT,holeCountStream);
+		gueryCalc.put(HOLE_COUNT,holeCountStream,recursiveContext);
 	}
 	
-	private static void loadSoftPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadSoftPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> softPointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -185,10 +196,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> softPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(softPointCountCalc1,polygons); 
-		RootMap.put(SOFT_POINT_COUNT,softPointCountStream);
+		gueryCalc.put(SOFT_POINT_COUNT,softPointCountStream,recursiveContext);
 	}
 	
-	private static void loadHardPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadHardPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> hardPointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -197,10 +208,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> hardPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(hardPointCountCalc1,polygons); 
-		RootMap.put(HARD_CORNER_COUNT,hardPointCountStream);
+		gueryCalc.put(HARD_CORNER_COUNT,hardPointCountStream,recursiveContext);
 	}
 	
-	private static void loadUJunctionPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadUJunctionPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> uJunctionPointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -209,10 +220,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> uJunctionPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(uJunctionPointCountCalc1,polygons); 
-		RootMap.put(U_JUNCTION_POINT_COUNT,uJunctionPointCountStream);
+		gueryCalc.put(U_JUNCTION_POINT_COUNT,uJunctionPointCountStream,recursiveContext);
 	}
 	
-	private static void loadTJunctionPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadTJunctionPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> tJunctionPointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -221,10 +232,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> tJunctionPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(tJunctionPointCountCalc1,polygons); 
-		RootMap.put(T_JUNCTION_POINT_COUNT,tJunctionPointCountStream);
+		gueryCalc.put(T_JUNCTION_POINT_COUNT,tJunctionPointCountStream,recursiveContext);
 	}
 	
-	private static void loadYJunctionPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadYJunctionPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> yJunctionPointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -233,10 +244,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> yJunctionPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(yJunctionPointCountCalc1,polygons); 
-		RootMap.put(Y_JUNCTION_POINT_COUNT,yJunctionPointCountStream);
+		gueryCalc.put(Y_JUNCTION_POINT_COUNT,yJunctionPointCountStream,recursiveContext);
 	}
 	
-	private static void loadCurveArchCountStream(NumberedStream<Polygon> polygons) {
+	private void loadCurveArchCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> curveArchCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -245,10 +256,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> curveArchCountStream = 
 			new ListCalcStream1<Polygon, Integer>(curveArchCountCalc1,polygons); 
-		RootMap.put(CURVE_ARCH_COUNT,curveArchCountStream);
+		gueryCalc.put(CURVE_ARCH_COUNT,curveArchCountStream,recursiveContext);
 	}
 	
-	private static void multiLineCountStream(NumberedStream<Polygon> polygons) {
+	private void multiLineCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> curveArchCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -257,10 +268,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> curveArchCountStream = 
 			new ListCalcStream1<Polygon, Integer>(curveArchCountCalc1,polygons); 
-		RootMap.put(MULTI_LINE_COUNT,curveArchCountStream);
+		gueryCalc.put(MULTI_LINE_COUNT,curveArchCountStream,recursiveContext);
 	}
 	
-	private static void aspectRatioStream(NumberedStream<Polygon> polygons) {
+	private void aspectRatioStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Number> aspectRatioCalc1 = new Calc1<Polygon, Number>() {
 			@Override
 			public Number invoke(Polygon input) {
@@ -269,10 +280,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Number> aspectRatioStream = 
 			new ListCalcStream1<Polygon, Number>(aspectRatioCalc1,polygons); 
-		RootMap.put(ASPECT_RATIO,aspectRatioStream);
+		gueryCalc.put(ASPECT_RATIO,aspectRatioStream,recursiveContext);
 	}
 	
-	private static void loadInflectionPointCountStream(NumberedStream<Polygon> polygons) {
+	private void loadInflectionPointCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> inflectionPointCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -281,10 +292,10 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> inflectionPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(inflectionPointCountCalc1,polygons); 
-		RootMap.put(INFLECTION_POINT_COUNT,inflectionPointCountStream);
+		gueryCalc.put(INFLECTION_POINT_COUNT,inflectionPointCountStream,recursiveContext);
 	}
 	
-	private static void loadStraightLineCountStream(NumberedStream<Polygon> polygons) {
+	private void loadStraightLineCountStream(NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> straightLineCountCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
 			public Integer invoke(Polygon input) {
@@ -293,13 +304,13 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> straightLineCountStream = 
 			new ListCalcStream1<Polygon, Integer>(straightLineCountCalc1,polygons); 
-		RootMap.put(STRAIGHT_LINE_COUNT,straightLineCountStream);
+		gueryCalc.put(STRAIGHT_LINE_COUNT,straightLineCountStream,recursiveContext);
 	}
 	
 	
 //--------------------------Filter methods------------------------------------
 	
-	public static void loadFilterStream(String streamName, final String filterExpression, 
+	public void loadFilterStream(String streamName, final String filterExpression, 
 			NumberedStream<Polygon> polygons) {
 		Calc1<Polygon, Integer> filterCalc1 = new Calc1<Polygon, Integer>() {
 			@Override
@@ -309,7 +320,7 @@ public class LoadPolygonStreams {
 		};
 		ListStream<Integer> endPointCountStream = 
 			new ListCalcStream1<Polygon, Integer>(filterCalc1,polygons); 
-		RootMap.put(streamName,endPointCountStream);
+		gueryCalc.put(streamName,endPointCountStream,recursiveContext);
 	}
 	
 	//Point location related
@@ -336,7 +347,7 @@ public class LoadPolygonStreams {
 	public static String BOTTOM_RIGHT_THIRD = "bottomRightThird";
 //	public static String  = "";
 	
-	public static void loadAllPointFilterStreams(NumberedStream<Polygon> polygons) {
+	public void loadAllPointFilterStreams(NumberedStream<Polygon> polygons) {
 		loadFilterStream( LEFT_HALF, LEFT_HALF_EX, polygons);
 		loadFilterStream( LEFT_THIRD, LEFT_THIRD_EX, polygons);
 		loadFilterStream( RIGHT_HALF, RIGHT_HALF_EX, polygons);
@@ -362,7 +373,7 @@ public class LoadPolygonStreams {
 	}
 	
 //Point location and annotation related
-	public static void loadAllAnnotatedPointFilterStreams(NumberedStream<Polygon> polygons) {
+	public void loadAllAnnotatedPointFilterStreams(NumberedStream<Polygon> polygons) {
 		loadFilterStream( T_JUNCTION_LEFT_POINT_COUNT, T_JUNCTION_LEFT_POINT_COUNT_EX, polygons);
 		loadFilterStream( T_JUNCTION_RIGHT_POINT_COUNT, T_JUNCTION_RIGHT_POINT_COUNT_EX, polygons);
 		loadFilterStream( U_JUNCTION_RIGHT_POINT_COUNT, U_JUNCTION_RIGHT_POINT_COUNT_EX, polygons);

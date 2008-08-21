@@ -53,8 +53,9 @@ public class LoadLetterStreamsTest extends TestCase
 		assertNotNull(rawPolygon);
 		System.out.println("rawPolygon: " + rawPolygon);
 		assertTrue(rawPolygon instanceof Polygon);
-		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
-		LoadLegacyLetterStreams.makeStraightLetterStream(null); 
+		LoadLegacyLetterStreams loadLegacyLetterStreams = new LoadLegacyLetterStreams(RootMap.getInstance());
+		loadLegacyLetterStreams.loadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		loadLegacyLetterStreams.makeStraightLetterStream(null); 
 		//LoadLetterStreams.makeStraightLetterStream("A"); //To only test one letter
     	NamedNumberedStream<Polygon> rawPolygonsFromRoot = 
     		new NamedNumberedStream<Polygon>(RAW_POLYGON);
@@ -75,14 +76,16 @@ public class LoadLetterStreamsTest extends TestCase
 		RootMap.clear();
 		final String fileName = FILE_DIR + "/" + letter + ".svg";
 		makeRawPolygonsStream(fileName);
-		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		LoadPolygonStreams loadPolygonStreams = new LoadPolygonStreams(RootMap.getInstance());
+		loadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		String letterFilter = null;
 		if (onlyMatchAgainstSelf)
 			letterFilter = letter;
-		LoadLegacyLetterStreams.loadStraightLetterStream(letterFilter);
+		LoadLegacyLetterStreams loadLegacyLetterStreams = new LoadLegacyLetterStreams(RootMap.getInstance());
+		loadLegacyLetterStreams.loadStraightLetterStream(letterFilter);
     	NamedNumberedStream<Boolean> aStreamFromRoot = 
     		new NamedNumberedStream<Boolean>(letter);
-    	LoadLegacyLetterStreams.makeStraightLetterXOrStream();
+    	loadLegacyLetterStreams.makeStraightLetterXOrStream();
     	assertTrue(aStreamFromRoot.get(0));
 		ListStream<String> letterString = (ListStream<String>) RootMap.get(StreamNames.LETTERS);
     	assertEquals(letter,letterString.get(0));
@@ -92,14 +95,16 @@ public class LoadLetterStreamsTest extends TestCase
 		RootMap.clear();
 		final String fileName = FILE_DIR + "/" + letter + ".svg";
 		makeRawPolygonsStream(fileName);
-		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		LoadPolygonStreams loadPolygonStreams = new LoadPolygonStreams(RootMap.getInstance());
+		LoadLetterStreams loadLetterStreams = new LoadLetterStreams(RootMap.getInstance());
+		loadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		String letterFilter = null;
 		if (onlyMatchAgainstSelf)
 			letterFilter = letter;
-		LoadLetterStreams.loadLetterStream(letterFilter);
+		loadLetterStreams.loadLetterStream(letterFilter);
     	NamedNumberedStream<Boolean> aStreamFromRoot = 
     		new NamedNumberedStream<Boolean>(letter);
-    	LoadLetterStreams.makeXOrStream(StreamNames.LETTERS,LETTERS_TO_TEST);
+    	loadLetterStreams.makeXOrStream(StreamNames.LETTERS,LETTERS_TO_TEST);
     	assertTrue("Bad match for: " + letter,aStreamFromRoot.get(0));
 		ListStream<String> letterString = (ListStream<String>) RootMap.get(StreamNames.LETTERS);
     	assertEquals(letter,letterString.get(0));

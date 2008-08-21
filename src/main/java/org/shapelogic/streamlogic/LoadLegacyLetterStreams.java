@@ -9,6 +9,9 @@ import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.shapelogic.calculation.IQueryCalc;
+import org.shapelogic.calculation.QueryCalc;
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.streams.XOrListStream;
@@ -32,6 +35,17 @@ public class LoadLegacyLetterStreams {
 	final static public String[] straightLettersArray = 
 	{"A","E","F","H","I","K","L","M","N","T","V","W","X","Y","Z"};
 
+	private static IQueryCalc queryCalc = QueryCalc.getInstance();
+	RecursiveContext recursiveContext = RootMap.getInstance();
+	StreamFactory streamFactory;
+	LoadPolygonStreams loadPolygonStreams;
+	
+	public LoadLegacyLetterStreams(RecursiveContext recursiveContext) {
+		this.recursiveContext = recursiveContext;
+		streamFactory = new StreamFactory(recursiveContext);
+		loadPolygonStreams = new LoadPolygonStreams(recursiveContext);
+	}
+	
 	/** Helper method to create one rule in one letter. 
 	 * 
 	 * @param letter to define rule for
@@ -39,18 +53,18 @@ public class LoadLegacyLetterStreams {
 	 * @param value constraint value
 	 * @param letterFilter if only one rule should be generated this should be set to a letter 
 	 */
-	public static void rule(String letter, String streamName, int value, String letterFilter) {
+	public void rule(String letter, String streamName, int value, String letterFilter) {
 		if (letterFilter != null && !letterFilter.equalsIgnoreCase(letter))
 			return;
-		StreamFactory.addToAndListStream0(letter, streamName, "==",	value);
+		streamFactory.addToAndListStream0(letter, streamName, "==",	value);
 	}
 	
-	public static void makeStraightLetterXOrStream() {
+	public void makeStraightLetterXOrStream() {
 		List<String> straightLetters = new ArrayList<String>();
 		for (String letter: straightLettersArray)
 			straightLetters.add(letter);
 //		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(Constants.POLYGONS);
-		XOrListStream letterMatchStream = new XOrListStream( straightLetters);
+		XOrListStream letterMatchStream = new XOrListStream( straightLetters, recursiveContext);
 		RootMap.put(StreamNames.LETTERS, letterMatchStream);
 	}
 
@@ -58,18 +72,18 @@ public class LoadLegacyLetterStreams {
 	 * 
 	 * Requirements streams: polygons.
 	 *  */
-	public static void loadStraightLetterStream(String letterFilter) {
-		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+	public void loadStraightLetterStream(String letterFilter) {
+		loadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		letterFilter = null;
-		LoadLegacyLetterStreams.makeStraightLetterStream(letterFilter);
-    	LoadLegacyLetterStreams.makeStraightLetterXOrStream();
+		makeStraightLetterStream(letterFilter);
+    	makeStraightLetterXOrStream();
 	}
 	
 	/** Rules for matching straight letters, using only very simple properties.
 	 * 
 	 * @param letterFilter
 	 */
-	public static void makeStraightLetterStream(String letterFilter) {
+	public void makeStraightLetterStream(String letterFilter) {
 		rule("A", POINT_COUNT, 5, letterFilter);
 		rule("A", LINE_COUNT, 5, letterFilter);
 		rule("A", HORIZONTAL_LINE_COUNT, 1, letterFilter);
