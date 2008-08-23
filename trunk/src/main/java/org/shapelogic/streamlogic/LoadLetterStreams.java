@@ -53,7 +53,7 @@ import org.shapelogic.streams.XOrListStream;
 public class LoadLetterStreams {
 	
 	private static IQueryCalc queryCalc = QueryCalc.getInstance();
-	RecursiveContext recursiveContext = RootMap.getInstance();
+	RecursiveContext recursiveContext;
 	StreamFactory streamFactory;
 	public LoadPolygonStreams loadPolygonStreams;
 	

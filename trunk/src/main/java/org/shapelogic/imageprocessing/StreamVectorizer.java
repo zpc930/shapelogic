@@ -1,9 +1,9 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.shapelogic.calculation.RecursiveContext;
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NumberedStream;
@@ -16,7 +16,7 @@ import org.shapelogic.streams.StreamFactory;
  *
  */
 public class StreamVectorizer extends BaseMaxDistanceVectorizer implements RecursiveContext {
-	protected Map _context = RootMap.getInstance().getContext();
+	protected Map _context = new HashMap();
 	protected LoadLetterStreams loadLetterStreams;
 
 	/** This does really not belong in a vectorizer. */
@@ -46,7 +46,8 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	 */
 	@Override
 	public void init() {
-		RootMap.clear();
+//		RootMap.clear();
+		_context.clear();
 		super.init();
 //		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
 		_context.put(StreamNames.POLYGONS, getStream());

@@ -3,6 +3,8 @@ package org.shapelogic.streamlogic;
 import static org.shapelogic.logic.CommonLogicExpressions.ASPECT_RATIO;
 
 import org.shapelogic.calculation.Calc1;
+import org.shapelogic.calculation.IQueryCalc;
+import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.ColorFactory;
@@ -25,7 +27,8 @@ import org.shapelogic.streams.StreamFactory;
  *
  */
 public class LoadParticleStreams {
-	public RecursiveContext recursiveContext = RootMap.getInstance();
+	IQueryCalc queryCalc = QueryCalc.getInstance();
+	public RecursiveContext recursiveContext;
 	private StreamFactory streamFactory;
 	LoadLetterStreams loadLetterStreams;
 
@@ -52,7 +55,7 @@ public class LoadParticleStreams {
 	 * <br />
 	 * In order for this to work the polygons have to be defined first.
 	 */
-	public static void loadColorStreams(NumberedStream<IColorAndVariance> particles, 
+	public void loadColorStreams(NumberedStream<IColorAndVariance> particles, 
 			SLImage image) 
 	{
 		loadColorRStream(particles);
@@ -65,7 +68,7 @@ public class LoadParticleStreams {
 	 * <br />
 	 * In order for this to work the particles have to be defined first.
 	 */
-	public static void loadStreamsRequiredForParticleMatch(NumberedStream<IColorAndVariance> particles, 
+	public void loadStreamsRequiredForParticleMatch(NumberedStream<IColorAndVariance> particles, 
 			SLImage image) 
 	{
 		loadColorStreams(particles, image);
@@ -77,7 +80,7 @@ public class LoadParticleStreams {
 		loadStreamsRequiredForParticleMatch(particles, image);
 	}
 	
-	private static void loadColorRStream(NumberedStream<IColorAndVariance> particle) {
+	private void loadColorRStream(NumberedStream<IColorAndVariance> particle) {
 		Calc1<IColorAndVariance, Integer> redCalc1 = new Calc1<IColorAndVariance, Integer>() {
 			@Override
 			public Integer invoke(IColorAndVariance input) {
@@ -87,10 +90,10 @@ public class LoadParticleStreams {
 		};
 		ListStream<Integer> colorRStream = 
 			new ListCalcStream1<IColorAndVariance, Integer>(redCalc1,particle); 
-		RootMap.put(StreamNames.COLOR_R,colorRStream);
+		queryCalc.put(StreamNames.COLOR_R,colorRStream, recursiveContext);
 	}
 
-	private static void loadColorGStream(NumberedStream<IColorAndVariance> particles) {
+	private void loadColorGStream(NumberedStream<IColorAndVariance> particles) {
 		Calc1<IColorAndVariance, Integer> greenCalc1 = new Calc1<IColorAndVariance, Integer>() {
 			@Override
 			public Integer invoke(IColorAndVariance input) {
@@ -100,10 +103,10 @@ public class LoadParticleStreams {
 		};
 		ListStream<Integer> colorGStream = 
 			new ListCalcStream1<IColorAndVariance, Integer>(greenCalc1,particles); 
-		RootMap.put(StreamNames.COLOR_G,colorGStream);
+		queryCalc.put(StreamNames.COLOR_G,colorGStream, recursiveContext);
 	}
 
-	private static void loadColorBStream(NumberedStream<IColorAndVariance> particles) {
+	private void loadColorBStream(NumberedStream<IColorAndVariance> particles) {
 		Calc1<IColorAndVariance, Integer> blueCalc1 = new Calc1<IColorAndVariance, Integer>() {
 			@Override
 			public Integer invoke(IColorAndVariance input) {
@@ -113,11 +116,11 @@ public class LoadParticleStreams {
 		};
 		ListStream<Integer> colorBStream = 
 			new ListCalcStream1<IColorAndVariance, Integer>(blueCalc1,particles); 
-		RootMap.put(StreamNames.COLOR_R,colorBStream);
+		queryCalc.put(StreamNames.COLOR_B,colorBStream, recursiveContext);
 	}
 	
 	/** I should probably make a stream for each HSB channel. */
-	private static void loadColorGrayValueStream(NumberedStream<IColorAndVariance> particles, 
+	private void loadColorGrayValueStream(NumberedStream<IColorAndVariance> particles, 
 			final boolean rgb) {
 		Calc1<IColorAndVariance, Integer> grayCalc1 = new Calc1<IColorAndVariance, Integer>() {
 			@Override
@@ -130,7 +133,7 @@ public class LoadParticleStreams {
 		};
 		ListStream<Integer> colorGrayStream = 
 			new ListCalcStream1<IColorAndVariance, Integer>(grayCalc1,particles); 
-		RootMap.put(StreamNames.COLOR_GRAY,colorGrayStream);
+		queryCalc.put(StreamNames.COLOR_GRAY,colorGrayStream, recursiveContext);
 	}
 	
 	/** Make stream for the distance to a reference color.<br />
@@ -141,7 +144,7 @@ public class LoadParticleStreams {
 	 * @param streamName What to call the stream that is created
 	 * @return 
 	 */
-	private static ListStream<Double> loadCustomColorDistanceStream(NumberedStream<IColorAndVariance> particle, 
+	private ListStream<Double> loadCustomColorDistanceStream(NumberedStream<IColorAndVariance> particle, 
 			int referenceColor, SLImage image, String streamName) {
 		final IColorDistance colorDistance = ColorFactory.makeColorDistance(image);
 		colorDistance.setReferenceColor(referenceColor);
@@ -155,7 +158,7 @@ public class LoadParticleStreams {
 		ListStream<Double> colorStream = 
 			new ListCalcStream1<IColorAndVariance, Double>(blueCalc1,particle); 
 		if (streamName != null)
-			RootMap.put(streamName,colorStream);
+			queryCalc.put(streamName,colorStream, recursiveContext);
 		return colorStream;
 	}
 
