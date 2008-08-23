@@ -7,7 +7,6 @@ import org.shapelogic.calculation.CalcIndex1;
 import org.shapelogic.calculation.IQueryCalc;
 import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.calculation.RecursiveContext;
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.predicate.BinaryPredicate;
 import org.shapelogic.predicate.BinaryPredicateFactory;
 import org.shapelogic.scripting.FunctionCalc1;
@@ -21,7 +20,7 @@ import org.shapelogic.util.Constants;
  */
 public class StreamFactory {
 	private static IQueryCalc queryCalc = QueryCalc.getInstance();
-	RecursiveContext recursiveContext = RootMap.getInstance(); //XXX should not be static
+	RecursiveContext recursiveContext;
 	
 	public StreamFactory(RecursiveContext recursiveContext) {
 		this.recursiveContext = recursiveContext;
@@ -116,7 +115,7 @@ public class StreamFactory {
 				binaryPredicate, compareObject, language, functionName);
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
 			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
-		RootMap.put(name, calcStream1);
+		queryCalc.put(name, calcStream1, recursiveContext);
 		return calcStream1;
 	}
 
@@ -230,7 +229,7 @@ public class StreamFactory {
 		final ListCalcStream1<In0,Boolean> calcStream1 = 
 			new ListCalcStream1<In0,Boolean>(calcBoolean,input);
 		if (name != null)
-			RootMap.put(name, calcStream1);
+			queryCalc.put(name, calcStream1, recursiveContext);
 		return calcStream1;
 	}
 
@@ -239,14 +238,14 @@ public class StreamFactory {
 			final BinaryPredicate<In1, In2> binaryPredicate, 
 			final In2 compareObject, String language)
 	{
-		Object obj = RootMap.get(andName);
+		Object obj = queryCalc.get(andName,recursiveContext);
 		AndListStream andListStream = null;
 		if (partName == null) {
 			partName = andName + "_" + inputName;
 		}
 		if (obj == null) {
 			andListStream = new AndListStream();
-			RootMap.put(andName, andListStream);
+			queryCalc.put(andName, andListStream, recursiveContext);
 		}
 		else if (!(obj instanceof AndListStream)) 
 			throw new RuntimeException("Wrong type of object: " + obj);
@@ -273,14 +272,14 @@ public class StreamFactory {
 			final BinaryPredicate<In1, In2> binaryPredicate, 
 			final In2 compareObject)
 	{
-		Object obj = RootMap.get(andName);
+		Object obj = queryCalc.get(andName,recursiveContext);
 		AndListStream andListStream = null;
 //		if (partName == null) {
 //			partName = andName + "_" + inputName;
 //		}
 		if (obj == null) {
 			andListStream = new AndListStream();
-			RootMap.put(andName, andListStream);
+			queryCalc.put(andName, andListStream, recursiveContext);
 		}
 		else if (!(obj instanceof AndListStream)) 
 			throw new RuntimeException("Wrong type of object: " + obj);

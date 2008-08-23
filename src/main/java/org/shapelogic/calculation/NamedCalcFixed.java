@@ -12,10 +12,10 @@ final public class NamedCalcFixed<T> implements CalcValue<T> {
 	final private String _key;
 	final private T _value;
 	
-	public NamedCalcFixed(String key, T value) {
+	public NamedCalcFixed(String key, T value, RecursiveContext recursiveContext) {
 		_key = key;
 		_value = value;
-		RootMap.put(key, value);
+		QueryCalc.getInstance().put(key, value, recursiveContext);
 	}
 	
 	@Override

@@ -4,7 +4,9 @@ import junit.framework.TestCase;
 
 import org.shapelogic.calculation.NamedCalcFixed;
 import org.shapelogic.calculation.QueryCalc;
+import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.RootMap;
+import org.shapelogic.calculation.SimpleRecursiveContext;
 import org.shapelogic.mathematics.NaturalNumberStream;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.Stream;
@@ -24,12 +26,13 @@ public class NamedCalcFixedTest extends TestCase {
 	}
 
 	public void testGetValue() {
-		NamedCalcFixed<Integer> calc = new NamedCalcFixed<Integer>("number42",42);
+		RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+		NamedCalcFixed<Integer> calc = new NamedCalcFixed<Integer>("number42",42, recursiveContext);
 		assertEquals(new Integer(42), calc.getValue());
 	}
 	
 	public void testGetValueInRootMap() {
-		assertEquals(new Integer(42), RootMap.get("number42"));
+		assertEquals(null, RootMap.get("number42"));
 	}
 	
 	public void testGetValueInRootMap42() {
@@ -43,13 +46,17 @@ public class NamedCalcFixedTest extends TestCase {
 	
 	/** The value survives in the RootMap */
 	public void testGetValueInRootMap42WithQueryCalc() {
-		assertEquals(new Integer(42), QueryCalc.getInstance().get("number42", RootMap.getInstance()));
+		RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+		NamedCalcFixed<Integer> calc = new NamedCalcFixed<Integer>("number42",42, recursiveContext);
+		assertEquals(new Integer(42), QueryCalc.getInstance().get("number42", recursiveContext));
 	}
 
 	public void testGetNaturalNumbers() {
+		RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
 		NamedCalcFixed<NumberedStream<Integer>> calc = 
-			new NamedCalcFixed<NumberedStream<Integer>>("naturalNumbers",new NaturalNumberStream());
-		assertNotNull(RootMap.get("naturalNumbers"));
+			new NamedCalcFixed<NumberedStream<Integer>>("naturalNumbers",
+					new NaturalNumberStream(), recursiveContext);
+		assertNotNull(recursiveContext.getContext().get("naturalNumbers"));
 		NumberedStream<Integer> result = calc.getValue();
 		assertEquals(new Integer(0), result.next());
 	}
@@ -77,11 +84,13 @@ public class NamedCalcFixedTest extends TestCase {
 	 * since there are interpreted as a value, and evaluated.
 	 * */
 	public void testGetValueInNaturalNumbersWithQueryCalc() {
+		RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
 		NamedCalcFixed<NumberedStream<Integer>> calc = 
-			new NamedCalcFixed<NumberedStream<Integer>>("naturalNumbers",new NaturalNumberStream());
-		assertNotNull(RootMap.get("naturalNumbers"));
-		assertTrue(RootMap.get("naturalNumbers") instanceof Stream);
-		assertTrue(QueryCalc.getInstance().get("naturalNumbers", RootMap.getInstance() ) instanceof Stream);
+			new NamedCalcFixed<NumberedStream<Integer>>("naturalNumbers",
+					new NaturalNumberStream(), recursiveContext);
+		assertNotNull(recursiveContext.getContext().get("naturalNumbers"));
+		assertTrue(recursiveContext.getContext().get("naturalNumbers") instanceof Stream);
+		assertTrue(QueryCalc.getInstance().get("naturalNumbers", recursiveContext ) instanceof Stream);
 	}
 
 }

@@ -10,7 +10,6 @@ import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.IQueryCalc;
 import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.calculation.RecursiveContext;
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
@@ -34,7 +33,7 @@ import org.shapelogic.streams.StreamFactory;
  */
 public class LoadPolygonStreams {
 	static private IQueryCalc gueryCalc = QueryCalc.getInstance(); 
-	public RecursiveContext recursiveContext = RootMap.getInstance();
+	public RecursiveContext recursiveContext;
 	private StreamFactory streamFactory;
 
 	public LoadPolygonStreams(RecursiveContext recursiveContext) {

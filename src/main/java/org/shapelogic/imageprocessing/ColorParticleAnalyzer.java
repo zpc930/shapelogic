@@ -85,7 +85,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected void categorizeStreams() {
 		loadParticleStreams.exampleMakeParticleStream();
     	loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
-    	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
+    	_categorizer = (XOrListStream) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
 	}
 	
 	/** Define extra streams.*/

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.shapelogic.calculation.RecursiveContext;
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorHypothesis;
 import org.shapelogic.color.ColorUtil;
@@ -233,8 +232,7 @@ public class BaseParticleCounter extends BaseImageOperation
      * @throws java.lang.Exception
      */
     protected void init() throws Exception {
-    	RootMap.clear();
-    	_context = RootMap.getInstance().getContext(); // new HashMap(); //XXX Clear RootMap before use. Not sure if I should put results in the RootMap
+    	_context = new HashMap();
 		SBSimpleCompare compare = ProcessingFactory.compareFactory(getImage());
 		compare.setModifying(_modifying);
 		_segmentation = new SBSegmentation();

@@ -2,7 +2,8 @@ package org.shapelogic.streams;
 
 import java.util.List;
 
-import org.shapelogic.calculation.RootMap;
+import org.shapelogic.calculation.QueryCalc;
+import org.shapelogic.calculation.RecursiveContext;
 
 /** Wraps a stream around a list.<br />
  * 
@@ -15,9 +16,9 @@ public class WrappedListStream<E> extends BaseListCommonStream<E> {
 		setList(inputList);
 	}
 
-	public WrappedListStream(List<E> inputList, String name) {
+	public WrappedListStream(List<E> inputList, String name, RecursiveContext recursiveContext) {
 		this(inputList);
-		RootMap.put(name, this);
+		QueryCalc.getInstance().put(name, inputList, recursiveContext);
 	}
 
 	@Override
