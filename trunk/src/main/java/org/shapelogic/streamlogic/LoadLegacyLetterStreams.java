@@ -36,7 +36,7 @@ public class LoadLegacyLetterStreams {
 	{"A","E","F","H","I","K","L","M","N","T","V","W","X","Y","Z"};
 
 	private static IQueryCalc queryCalc = QueryCalc.getInstance();
-	RecursiveContext recursiveContext = RootMap.getInstance();
+	RecursiveContext recursiveContext;
 	StreamFactory streamFactory;
 	LoadPolygonStreams loadPolygonStreams;
 	
@@ -65,7 +65,7 @@ public class LoadLegacyLetterStreams {
 			straightLetters.add(letter);
 //		NumberedStream<Polygon> polygons = (NumberedStream<Polygon>) RootMap.get(Constants.POLYGONS);
 		XOrListStream letterMatchStream = new XOrListStream( straightLetters, recursiveContext);
-		RootMap.put(StreamNames.LETTERS, letterMatchStream);
+		queryCalc.put(StreamNames.LETTERS, letterMatchStream, recursiveContext);
 	}
 
 	/** Setup all the stream for a straight letter match.<br />
