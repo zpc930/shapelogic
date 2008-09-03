@@ -42,7 +42,7 @@ Compatibility Changes
   plugin using a wrapper class. DigitStreamVectorizer was also a wrapper class
   around StreamVectorizer that got expanded as an anonymous class.
   
-  Is now directly sub classed from the StreamVectorizer so it is both an 
+  Now it is directly sub classed from the StreamVectorizer so it is both an 
   ImageOperation and a ImageJ plugin.
   
   
