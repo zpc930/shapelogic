@@ -1,0 +1,40 @@
+            ------
+            C++ Port
+            ------
+            Sami Badawi
+            ------
+            2008/09/03
+            ------
+
+C++ Port
+  
+  Advances in the C++ language and tools has inspired an experimental port of 
+  ShapeLogic algorithms from Java to C++. Started in September 2008.
+  Bjarne Stroustrup the creator of C++ gave an 
+  {{{http://www.devx.com/SpecialReports/Article/38813}interview about the new features in the C++0x standard}} 
+  and TR1. C++ now has a lot of innovating programming constructs e.g. template 
+  meta programming, lambda functions, concepts and traits.
+  
+* Goal
+  
+  The algorithms in ShapeLogic are not using anything too languages specific so
+  they should be portable to similar languages say C++ and C#.
+  
+  The idea with ShapeLogic is that it should be a declarative framework for
+  vision and you should be able to have rules in a database. In principle you
+  should be able to use the same database regardless of what language you are
+  using.
+  
+* Warning
+  
+  This is an experimental port. If it turns out that it is hard to translate 
+  the constructs then it will not be completed. 
+  
+* Code
+  
+  The idea is to have the code live in a duplicate of the Java version, unless
+  that causes problems.
+  
+  There is a (((http://code.google.com/p/shapelogic-cpp} separate Google Code project}} 
+  for the ShapeLogic C++ port. No code have been checked in yet. 
+  

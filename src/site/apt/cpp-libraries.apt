@@ -1,0 +1,55 @@
+            ------
+            C++ Libraries
+            ------
+            Sami Badawi
+            ------
+            2008/09/03
+            ------
+
+C++ Libraries
+  
+* Image libraries  
+  
+  * OpenCV
+  
+  * OpenFrameworks
+  
+  * GIL
+  
+  []
+  
+** OpenCV
+  
+  Simple and has a lot of algorithms.
+  
+** OpenFrameworks
+  
+  This is a Processing languages built on top of OpenCV.
+  
+  Seem to be in a very early stage but people are getting work done in it.
+  
+** GIL, Generic Image Library
+  
+  {{{http://opensource.adobe.com/wiki/display/gil/Generic+Image+Library} Generic Image Library}} 
+  is Elegant and comes with {{{http://www.boost.org/} Boost}}.
+  
+  Should be able to run with OpenCV.
+  
+* GUI options
+  
+  * wxWidget
+  
+  * FLTK
+  
+  []
+  
+** wxWidget
+
+  Close to Windows MFC programming. It seems to be somewhat heavy to work with.
+  
+** FLTK Fast Light Toolkit
+  
+  Light to work with. Maybe it will be enough for the need of ShapeLogic C++ port.
+  
+  
+  
