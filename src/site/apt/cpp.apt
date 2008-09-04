@@ -35,6 +35,6 @@ C++ Port
   The idea is to have the code live in a duplicate of the Java version, unless
   that causes problems.
   
-  There is a (((http://code.google.com/p/shapelogic-cpp} separate Google Code project}} 
+  There is a {{{http://code.google.com/p/shapelogic-cpp} separate Google Code project}} 
   for the ShapeLogic C++ port. No code have been checked in yet. 
   
