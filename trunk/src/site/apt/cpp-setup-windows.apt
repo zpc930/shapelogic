@@ -8,9 +8,27 @@
 
 C++ Setup
   
+  ShapeLogic is made to have as few dependencies as possible. 
+  Since it will use template code from Boost will require a relatively modern C++
+  compiler. 
+  
+  
 * Setup of GCC under windows
   
-  Use MinGW.
+  There are 2 ways to run GCC under Windows CygWin and MinGW.
+  
+* Cygwin
+  
+  Is a Linux emulation under windows, translating system calls. 
+  All program made Cygwin with will have to be GPL.
+  
+* MinGW
+  
+  Compiles directly to Windows and will be a better solution for most people.
+  
+  {{{http://nuwen.net/mingw.html}Nuwen's MinGW distribution}} contains the 
+  newest version GCC and other libraries: GCC 4.2.1 and Boost 1.36. 
+  This should be an easy way to get started.
   
 * Setup with Eclipse
   

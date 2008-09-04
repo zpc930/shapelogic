@@ -41,6 +41,8 @@ C++ Libraries
   
   * FLTK
   
+  * GIMP plugin
+  
   []
   
 ** wxWidget
@@ -51,5 +53,10 @@ C++ Libraries
   
   Light to work with. Maybe it will be enough for the need of ShapeLogic C++ port.
   
+** GIMP plugin
+  
+  It is important that it is easy to try out the algorithms. ShapeLogic cannot 
+  be linked to GIMP since it is GPL, but you could have a wrapper around plugins
+  in order to access them as GIMP plugins.
   
   
