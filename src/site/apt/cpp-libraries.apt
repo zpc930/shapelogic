@@ -29,15 +29,15 @@ C++ Libraries
   processing tool for artists, close to {{{http://processing.org/} Processing}} 
   that is written in Java. This is built on top of OpenCV.
   
-  Seem to be in a very early stage but people are getting work done in it.
+  Seems to be in a very early stage but people are using it.
   
 ** GIL, Generic Image Library
   
   {{{http://opensource.adobe.com/wiki/display/gil/Generic+Image+Library} Generic Image Library}} 
   was developed by Adobe but a part of {{{http://www.boost.org/} Boost}} since
-  1.35.  This uses template programming and is written so you can write one
+  1.35.  This uses template programming and is written so that you can write an
   algorithm once and have it be implemented efficiently for many different 
-  image types.  This is something that you cannot do on ImageJ. The price is 
+  image types.  This is something that you cannot do in ImageJ. The price is 
   that it is programmed with advanced templates.
   
   Should be able to run with OpenCV.
@@ -59,8 +59,8 @@ C++ Libraries
 
   ImageJ serves full fledged workbench in Java.  
 
-  Here are some options for GUI, the ShapeLogic could work with more than one.
-  E.g. one lightweight gui for a rudimentary workbench and GIMP for full fledged
+  Here are some options for GUI.  ShapeLogic could work with more than one, 
+  e.g. a lightweight gui for a rudimentary workbench, and GIMP for a full fledged
   workbench.
 
   * FLTK
@@ -103,14 +103,14 @@ C++ Libraries
   {{{http://www.adobe.com/products/photoshop/index.html} Adobe Photoshop}} 
   would be a full fledged workbench.
   
-  PhotoShop is not open source but there should not be any problems with using 
+  PhotoShop is not open source but there should not be any problem when using 
   it as a platform.
   Since PhotoShop is the standard image manipulation tool, this could be a good
   way to make ShapeLogic algorithms available to a wider audience.
 
 ** HighGui from OpenCV
   
-  Very lightweight. There are some functionality for displaying images and 
+  Very lightweight. There is some functionality for displaying images and an
   event handler for mouse events. 
   
 * Boost
