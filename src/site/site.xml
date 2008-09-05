@@ -71,6 +71,8 @@
           <item name="C++ libraries" href="cpp-libraries.html"/>
           <item name="C++ setup Windows" href="cpp-setup-windows.html"/>
           <item name="C++ setup UNIX" href="cpp-setup-unix.html"/>
+          <item name="C++ java mappings" href="cpp-java-mappings.html"/>
+		  <item name="Google Code Hosting" href="http://code.google.com/p/shapelogic-cpp"/>
       </item>
     </menu>
 

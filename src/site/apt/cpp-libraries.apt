@@ -18,45 +18,141 @@ C++ Libraries
   
   []
   
-** OpenCV
+** OpenCV, Open Computer Vision
   
-  Simple and has a lot of algorithms.
+  {{{http://opencvlibrary.sourceforge.net/} OpenCV}} is written by Intel. 
+  It is simple to use and comes with a lot of algorithms.
   
 ** OpenFrameworks
   
-  This is a Processing languages built on top of OpenCV.
+  {{{http://www.openframeworks.cc/} OpenFrameworks}} is a C++ based image 
+  processing tool for artists, close to {{{http://processing.org/} Processing}} 
+  that is written in Java. This is built on top of OpenCV.
   
   Seem to be in a very early stage but people are getting work done in it.
   
 ** GIL, Generic Image Library
   
   {{{http://opensource.adobe.com/wiki/display/gil/Generic+Image+Library} Generic Image Library}} 
-  is Elegant and comes with {{{http://www.boost.org/} Boost}}.
+  was developed by Adobe but a part of {{{http://www.boost.org/} Boost}} since
+  1.35.  This uses template programming and is written so you can write one
+  algorithm once and have it be implemented efficiently for many different 
+  image types.  This is something that you cannot do on ImageJ. The price is 
+  that it is programmed with advanced templates.
   
   Should be able to run with OpenCV.
   
-* GUI options
+* GUI workbench options
   
-  * wxWidget
+  It is important to have a workbench where it is easy to try out the 
+  algorithms. It can either be rudimentary so you can load an image and run a 
+  sequence of image operation using a menu system or it can be full fledged
+  workbench:
+
+  * Run image operations do loading of several file formats
+
+  * Drawing 
+
+  * Comes with a whole set up image processing operations
   
+  []
+
+  ImageJ serves full fledged workbench in Java.  
+
+  Here are some options for GUI, the ShapeLogic could work with more than one.
+  E.g. one lightweight gui for a rudimentary workbench and GIMP for full fledged
+  workbench.
+
   * FLTK
   
   * GIMP plugin
   
-  []
+  * PhotoShop plugin
   
-** wxWidget
+  * wxWidget
 
-  Close to Windows MFC programming. It seems to be somewhat heavy to work with.
+  * HighGui from OpenCV
+  
+  []
   
 ** FLTK Fast Light Toolkit
   
-  Light to work with. Maybe it will be enough for the need of ShapeLogic C++ port.
+  {{{http://www.fltk.org/} FLTK}} is light to work with. This is built on top of
+  Windows API or X11.
+  Could be enough for a simple workbench for a ShapeLogic C++ port.
+  
+** wxWidget
+
+  {{{http://www.wxwidgets.org/} wxWidgets}} is a full featured GUI toolkit, built
+  on top of native toolkits: Win32, Mac OS X, GTK+, X11, Motif, WinCE and more.
+  The programming style is close to Windows MFC programming.  
+  It seems a little heavier than FLTK.
   
 ** GIMP plugin
   
-  It is important that it is easy to try out the algorithms. ShapeLogic cannot 
-  be linked to GIMP since it is GPL, but you could have a wrapper around plugins
-  in order to access them as GIMP plugins.
+  {{{http://www.gimp.org/} GIMP - The GNU Image Manipulation Program}}
+  is an open source drawing program that works with external plugins.
+
+  This would be a full fledged workbench.
+
+  ShapeLogic cannot be linked to GIMP since it is GPL, but you could have a 
+  wrapper around plugins in order to access them as GIMP plugins.
+  
+** PhotoShop plugin
+  
+  {{{http://www.adobe.com/products/photoshop/index.html} Adobe Photoshop}} 
+  would be a full fledged workbench.
+  
+  PhotoShop is not open source but there should not be any problems with using 
+  it as a platform.
+  Since PhotoShop is the standard image manipulation tool, this could be a good
+  way to make ShapeLogic algorithms available to a wider audience.
+
+** HighGui from OpenCV
+  
+  Very lightweight. There are some functionality for displaying images and 
+  event handler for mouse events. 
+  
+* Boost
+  
+  {{{http://www.boost.org} Boost}} 
+  is a collection of open source C++ libraries, a place where new features of
+  C++ is implemented and tried before becoming part of the C++ standard.
+  
+  This makes use of some very advanced and new programming techniques e.g.
+  
+  * Template meta programming
+  
+  * Lambda functions
+
+  * Concepts 
+
+  * Traits
+  
+  []
+  
+** Problems with Boost
+
+  * Boost is a good stress test for your compiler. Some classes in boost would 
+  crash GCC 3.1 and 3.2. 
+
+  * You would not catch all errors at compile time for template code. Concepts is
+  a new way to alleviate this problem.
+
+  * Template code it has been hard to debug.
+  
+  []
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
