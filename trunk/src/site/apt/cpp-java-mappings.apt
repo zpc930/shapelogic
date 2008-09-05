@@ -15,7 +15,7 @@ C++ Java Mappings
   
 ** Color models in Java / ImageJ
 
-  ImageJ have strategically chosen only to work with a very simple color model:
+  ImageJ has strategically chosen only to work with a very simple color model:
   
   * int representing RGB or RGBA
   
@@ -36,14 +36,14 @@ C++ Java Mappings
   
   The only abstraction that can be made on this would be a pixel coordinate.
 
-  There could be an interface for whether a pixel satisfy a given predicate. 
+  There could be an interface for whether a pixel satisfies a given predicate. 
   In Java this gives an extra layer of indirection.
   
   Another option is to constrain the color models that can be handled.
   
 * Java Interface
   
-  The simple mapping would be just to create abstract C++ classes and use 
+  The simple mapping would be to create abstract C++ classes and use 
   multiple inheritance.
 
   For some algorithms the new C++ concepts might work well.

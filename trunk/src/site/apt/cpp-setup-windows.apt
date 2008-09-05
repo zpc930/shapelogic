@@ -9,7 +9,7 @@
 C++ Setup
   
   ShapeLogic is made to have as few dependencies as possible. 
-  Since it will use template code from Boost will require a relatively modern C++
+  Since it will use template code from Boost it will require a relatively modern C++
   compiler. 
   
 * Setup of GCC under windows

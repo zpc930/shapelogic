@@ -27,7 +27,7 @@ sudo apt-get install build-essential
 
   It will detect header files in the standard places.
   
-  You can do builds in different ways either by supplying at Make file or 
+  You can do builds in different ways, either by supplying the Make file, or 
   Eclipse can do the build for you.
 
   
