@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="shapelogic">
+  <bannerLeft>
+    <name>shapelogic</name>
+    <src>./images/logos/shapelogicsmalltransparent.png</src>
+    <href>./index.html</href>
+  </bannerLeft>
+  <bannerRight>
+  	<src>./images/logos/rightbanner.png</src>
+  </bannerRight>
+  <body>
+    <links>
+      <item name="ImageJ" href="http://rsb.info.nih.gov/ij/"/>
+      <item name="Maven 2" href="http://maven.apache.org/maven2/"/>
+    </links>
+
+    <menu name="shapelogic">
+      <item name="Home" href="index.html"/>
+      <item name="Examples" href="index.html" collapse="true">
+		  <item name="Letter Match" href="letter-match.html"/>
+      </item>
+      <item name="Developer Resources" href="index.html" collapse="true">
+		  <item name="Pixel types" href="pixel-types.html"/>
+		  <item name="Point type" href="point-type.html"/>
+		  <item name="Line type" href="line-type.html"/>
+		  <item name="Code Guidelines" href="code-guidelines.html"/>
+      </item>
+      <item name="Architecture" href="index.html" collapse="true">
+	      <item name="Declarative logic" href="declarative-logic.html"/>
+      </item>
+      <item name="API Documentation" href="index.html" collapse="true">
+	      <item name="Java Doc for sources" href="apidocs/index.html"/>
+	      <item name="Java Doc for tests" href="testapidocs/index.html"/>
+      </item>
+	  <item name="Getting Started" href="getting-started.html"/>
+	  <item name="Google code hosting" href="http://code.google.com/p/shapelogic"/>
+	  <item name="Download" href="http://code.google.com/p/shapelogic/downloads/list"/>
+      <item name="FAQ" href="faq.html"/>
+      <item name="Issue Tracking" href="http://code.google.com/p/shapelogic/issues/list"/>
+      <item name="Team" href="team.html"/>
+      <item name="Release Notes" href="release-notes.html"/>
+      <item name="Road Map" href="roadmap.html"/>
+    </menu>
+
+    <menu ref="reports"/>
+
+  </body>
+</project>

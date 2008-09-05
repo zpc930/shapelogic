@@ -1,0 +1,2 @@
+Copyright by Sami Badawi 2007
+MIT license
