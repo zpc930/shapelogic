@@ -1,0 +1,172 @@
+            ------
+            Letter Match
+            ------
+            Sami Badawi
+            ------
+            2007/08/06
+            ------
+
+Letter Match Example
+
+  ShapeLogic comes with a test application for letter matching, the purpose
+  of which is to show how to use the ShapeLogic framework on a simple well defined problem.
+  
+  Currently 2 sets of rules have been defined:
+  
+  [[1]] Recognition of straight capital letters in ShapeLogic 0.2
+  
+  [[1]] Recognition of all capital letters starting in ShapeLogic 0.7
+  
+  []
+  
+  The matching example is not very robust yet, and is 
+  made to match letter in sans serif typefaces, e.g. Ariel or Helvetica.
+ 
+  Unit test exist for all capital letters. 
+  
+  Matched images can be found in this directory:
+  
+  shapelogic/src/test/resources/images/smallThinLetters
+
+* How to see letter recognition in action
+
+  See the {{{getting-started.html} Getting Started page}}.
+  
+Recognition of all capital letters in ShapeLogic 0.7
+
+  Lines and points are annotated in order to match curves, circle arches or Bezier curves are not used.
+  Lines and points can be filtered according to both position in the bounding box for a 
+  polygon, and point and line annotations. 
+
+* Rules for the letter A in ShapeLogic 0.7
+  
++------------------------------------------+
+new NumericRule("A", POINT_COUNT, polygon, POINT_COUNT_EX, 5.,COUNT_COLLECTION_TASK),
+new NumericRule("A", HOLE_COUNT, polygon, HOLE_COUNT_EX, 1., SIMPLE_NUMERIC_TASK),
+new NumericRule("A", T_JUNCTION_LEFT_POINT_COUNT, polygon, T_JUNCTION_LEFT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
+new NumericRule("A", T_JUNCTION_RIGHT_POINT_COUNT, polygon, T_JUNCTION_RIGHT_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
+new NumericRule("A", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 2.,FILTER_COUNT_TASK),
+new NumericRule("A", HORIZONTAL_LINE_COUNT, polygon, HORIZONTAL_LINE_COUNT_EX, 1.,SIMPLE_NUMERIC_TASK),
+new NumericRule("A", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
+new NumericRule("A", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
+new NumericRule("A", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,SIMPLE_NUMERIC_TASK),
++------------------------------------------+
+
+  The meaning of the rules for A is:
+  
+  [[1]] There are 5 points
+   
+  [[1]] There is 1 hole
+   
+  [[1]] There is one T junction on the left half of the bounding box
+
+  [[1]] There is one T junction on the right half of the bounding box
+
+  [[1]] The number of end points in the bottom half is 2
+
+  [[1]] There is one horizontal line
+
+  [[1]] There are 0 vertical lines
+
+  [[1]] The total number of end points is 2
+
+  [[1]] There are no soft points
+
+  []
+
+* Rules for the letter C in ShapeLogic 0.7
+
++------------------------------------------+
+new NumericRule("C", HOLE_COUNT, polygon, HOLE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
+new NumericRule("C", T_JUNCTION_POINT_COUNT, polygon, T_JUNCTION_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
+new NumericRule("C", END_POINT_BOTTOM_POINT_COUNT, polygon, END_POINT_BOTTOM_POINT_COUNT_EX, 1.,FILTER_COUNT_TASK),
+new NumericRule("C", MULTI_LINE_COUNT, polygon, MULTI_LINE_COUNT_EX, 1.,COUNT_COLLECTION_TASK),
+new NumericRule("C", VERTICAL_LINE_COUNT, polygon, VERTICAL_LINE_COUNT_EX, 0.,SIMPLE_NUMERIC_TASK),
+new NumericRule("C", END_POINT_COUNT, polygon, END_POINT_COUNT_EX, 2.,SIMPLE_NUMERIC_TASK),
+new NumericRule("C", INFLECTION_POINT_COUNT, polygon, INFLECTION_POINT_COUNT_EX, 0.,COUNT_COLLECTION_TASK),
+new NumericRule("C", CURVE_ARCH_COUNT, polygon, CURVE_ARCH_COUNT_EX, 1.,NUMERIC_GREATER_TASK),
+new NumericRule("C", HARD_POINT_COUNT, polygon, HARD_POINT_COUNT_EX, 0.,FILTER_COUNT_TASK),
+new NumericRule("C", SOFT_POINT_COUNT, polygon, SOFT_POINT_COUNT_EX2, 0.,NUMERIC_GREATER_TASK),
++------------------------------------------+
+
+  The meaning of the rules for C is:
+  
+  [[1]] There is no holes
+   
+  [[1]] There is no T junction
+
+  [[1]] There is 1 multi line
+
+  [[1]] There are no vertical lines
+
+  [[1]] There are 2 end points
+
+  [[1]] There are 0 inflections points
+
+  [[1]] The there are more than 1 line that is annotated with curved arch 
+
+  [[1]] There are no hard corners
+
+  [[1]] There are more than 0 soft points
+
+  []
+
+* Line annotation in LineType
+
++------------------------------------------+
+	/** Before a type is determined */
+	UNKNOWN,
+	
+	/** Not completely straight */
+	STRAIGHT, //only a start and an end point
+
+	/** only on one side of a line between the start and end point */
+	CURVE_ARCH,
+
+	/** On both sides of a line between the start and end point 
+	 * this is the rest category for lines */
+	WAVE,
+
+	/** Means that this is an arch and that it is concave compared to 1 or both 
+	 * neighbor points, meaning they are on the same side of the line as the 
+	 * arch */
+	CONCAVE_ARCH,
+	
+	/** This line contains an inflection point, meaning the end points have 
+	 * different signed direction changes */
+	INFLECTION_POINT,
+	
+	/** For multi lines, if 2 lines are added together */
+	STRAIGHT_MULTI_LINE, 
++------------------------------------------+
+
+* Point annotation in PointType
+
++------------------------------------------+
+	/** Before a type is determined */
+	UNKNOWN,
+	
+	/** If the point has a sharp angle for now 30 degrees is set as the limit */
+	HARD_CORNER,
+
+	/** If it is not a hard point */
+	SOFT_POINT,
+	
+	/** 3 or more lines meets, U is for unknown */
+	U_JUNCTION,
+	
+	/** 3 lines meet 2 are collinear and the last is somewhat orthogonal */
+	T_JUNCTION,
+
+	/** 3 lines meet less than 180 degrees between all of them */
+	ARROW_JUNCTION,
+
+	/** 3 lines meet, not a T junction */
+	Y_JUNCTION,
+	
+	/** point is an end point, 
+	 * maybe later there should be a distinction between end points and have 
+	 * nothing else close by and end points that have close neighbors */
+	END_POINT,
++------------------------------------------+
+

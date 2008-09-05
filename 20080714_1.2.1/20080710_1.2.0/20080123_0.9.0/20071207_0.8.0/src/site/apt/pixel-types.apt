@@ -1,0 +1,142 @@
+            ------
+            Pixel types
+            ------
+            Sami Badawi
+            ------
+            2007/12/01
+            ------
+
+Pixel types
+  
+  A central problem in vectorizing is how to handle the junction.
+  
+  The approach that ShapeLogic is taking is to have a somewhat extensive 
+  catalogue of different type of pixels.
+  
+* Pixel types catalogue 
+
+  * P: Normal point, 2 neighbors, cross index of 4
+  
+  * E: End or extreme point, 1 neighbors, cross index of 2
+  
+  * N: More neighbors, more than 2 neighbors, cross index of 4
+  
+  * J: Junction point, more than cross index of 4
+   
+  * L: L corner, 2 neighbors with modulo distance either 2 or 6, cross index of 4
+  
+  * V: A corner, 2 neighbors, cross index of 2, should always be next to a junction
+  
+  * B: Border of solid, cross index of 2
+  
+  * S: Solid, 8 neighbors or 7 where the last on is an even number.
+  
+  []
+  
+Pixel types examples
+  
+* Junctions
+
+------------------------
+ P P    P 
+  J     P
+  P     N
+  P   PNJNP
+  E     N
+------------------------
+
+* Corners
+  
+------------------------
+ P      
+  N     
+ VJNPP
+
+ P
+ N
+ LNP
+------------------------
+
+  
+------------------------
+ P      
+  N     
+ VJNPP
+------------------------
+  
+  
+* V points
+
+------------------------
+   P     
+  N     
+ VJNPPE
+
+   P     
+  N     
+ VJNPPE
+  N
+   P
+
+   P     
+  N     
+ VJNPPE
+ NN 
+ P P
+------------------------
+
+
+** Problematic V point 
+
+------------------------
+  P  P    
+  N P    
+  JN
+  V
+------------------------
+  
+* N points blobs
+
+  Is points that has more neighbors but really are only can be traversed in one way.
+  
+------------------------
+ P  P
+  NN
+  NN
+ P  P
+
+ P P
+ NN
+ NN
+ P P
+------------------------
+
+
+* Edge and inner points
+  
+  Edge and inner points are not handled in ShapeLogic yet.
+    
+------------------------
+ BBBB      
+ BSSB     
+ BBBB
+------------------------
+
+------------------------
+ BBB      
+ BSSB     
+ BBBB
+------------------------
+  
+------------------------
+ BBB B      
+ BSSBB     
+ BBBBB
+------------------------
+
+------------------------
+ BBBBB      
+ BB BB     
+ BBBBB
+------------------------
+
