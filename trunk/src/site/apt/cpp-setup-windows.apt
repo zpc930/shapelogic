@@ -12,7 +12,6 @@ C++ Setup
   Since it will use template code from Boost will require a relatively modern C++
   compiler. 
   
-  
 * Setup of GCC under windows
   
   There are 2 ways to run GCC under Windows CygWin and MinGW.
@@ -30,8 +29,21 @@ C++ Setup
   newest version GCC and other libraries: GCC 4.2.1 and Boost 1.36. 
   This should be an easy way to get started.
   
+* OpenCV
+  
+  Here are the general 
+  {{{http://opencvlibrary.sourceforge.net/InstallGuide_Linux} installation instruction.}}
+
+  Under Ubuntu you can install it using Synaptic.
+
 * Setup with Eclipse
   
-  Eclipse CDT works very.
+  {{{http://www.eclipse.org/cdt/} Eclipse CDT}} works very for both build and 
+  debugging. 
+
+  It will detect header files in the standard places.
   
+  You can do builds in different ways either by supplying at Make file or 
+  Eclipse can do the build for you.
+
   

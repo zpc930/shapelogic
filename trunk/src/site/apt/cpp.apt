@@ -21,15 +21,51 @@ C++ Port
   they should be portable to similar languages say C++ and C#.
   
   The idea with ShapeLogic is that it should be a declarative framework for
-  vision and you should be able to have rules in a database. In principle you
-  should be able to use the same database regardless of what language you are
-  using.
+  vision and you should be able to get work done by making rules instead of 
+  regular procedural or object oriented programming.
+  For example should be able to make a list of rules for categorizing 
+  the shape of a particle in a particle analyzer. You put them in a database or 
+  a flat file and the same rules should work for C++ and Java version of ShapeLogic.
+  
+  It is a design goal of ShapeLogic to be 
+
+  * Loosly coupled
+
+  * Have few external dependencies
+
+  * Introduce external few dependencies
+
+  * Work with many external libraries
+  
+  []
+  
+  If the port is successful you should be able to chose the language that has
+  libraries that you need for the give purpose, say C++ for face detection or
+  Java for medical image processing.  Then you can setup rules based on them.
   
 * Warning
   
-  This is an experimental port. If it turns out that it is hard to translate 
-  the constructs then it will not be completed. 
-  
+  This is an experimental port.   
+  There are constructs used in ShapeLogic that are missing or less convenient in 
+  C++
+
+  * Uniform cross platform GUI
+
+  * Dynamic cross platform libraries
+
+  * HashTable
+
+  * Reflection
+
+  * Garbage collection
+
+  * {{{http://antlr.org/} Antlr}} for parsing logic language  
+
+  []
+
+  If it turns out that it is hard to translate the constructs then this port 
+  will not be completed. 
+
 * Code
   
   The idea is to have the code live in a duplicate of the Java version, unless

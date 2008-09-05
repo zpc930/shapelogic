@@ -1,3 +1,4 @@
+
             ------
             ShapeLogic
             ------
@@ -166,6 +167,19 @@ ShapeLogic
   []
 
 * News
+
+** 2008/09/03 Start of experimental port from Java to C++
+  
+  An {{{cpp.html} experimental port of ShapeLogic to C++}} has begun.
+  The algorithms in ShapeLogic are not using anything too languages specific so
+  they should be portable to similar languages say C++ and C#.
+  The idea with ShapeLogic is that it should be a declarative framework for
+  vision and you should be able to get work done by making rules instead of 
+  regular procedural or object oriented programming.
+  For example should be able to make a list of rules for categorizing 
+  the shape of a particle in a particle analyzer. You put them in a database or 
+  a flat file and the same rules should work for C++ and Java version of 
+  ShapeLogic.
 
 ** 2008/08/02 ShapeLogic v 1.3 released
   
