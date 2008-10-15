@@ -1,0 +1,60 @@
+            ------
+            Computer vision and language links
+            ------
+            Sami Badawi
+            ------
+            2008/09/12
+            ------
+
+Computer vision and language links
+  
+  Here are a few relevant links
+
+* General C++
+  
+  * {{{http://www.mindview.net/Books/TICPP/ThinkingInCPP2e.html}Thinking in C++ 2nd Edition by Bruce Eckel}}
+
+  * {{{http://www.devx.com/SpecialReports/Article/38813}Bjarne Stroustrup on new features in the C++0x standard and TR1}}
+
+  * {{{http://www.faqs.org/docs/artu/ch19s02.html}Best Practices for Working with Open-Source Developers}}
+
+  * {{{http://seul.org/docs/autotut/}GNU tools}}
+
+  * {{{http://www.gnu.org/software/libtool/manual/libtool.html}libtool}}
+
+  * {{{http://www.gnu.org/prep/standards/html_node/index.html}GNU Coding Standards}}
+
+  []
+
+* C++ libraries
+  
+  * {{{http://www.boost.org}Boost}}
+
+  * {{{http://code.google.com/p/googletest/wiki/GoogleTestDevGuide}Google C++ Testing Framework}}
+
+  []
+
+* Java libraries and tools
+  
+  * {{{http://maven.apache.org/}Maven build tool}}
+
+  []
+
+* General image processing and computer vision
+  
+  * {{{http://www.ph.tn.tudelft.nl/Courses/FIP/noframes/fip.html}Image Processing Fundamentals}}
+
+  * {{{http://homepages.inf.ed.ac.uk/rbf/CVonline/books.htm}CV online books}}
+  
+  []
+
+* Image Processing and computer vision libraries
+  
+  * {{{http://rsb.info.nih.gov/ij/}ImageJ}}
+
+  * {{{http://opensource.adobe.com/wiki/display/gil/Generic+Image+Library}Generic Image Library}}
+
+  * {{{http://opencvlibrary.sourceforge.net/}OpenCV}}
+
+  []
+

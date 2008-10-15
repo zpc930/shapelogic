@@ -8,6 +8,57 @@
 
 C++ Libraries
   
+  The goal is to find libraries that can compete with ImageJ in both features
+  and simplicity. More specific it needs to be:
+
+  * Cross platform
+
+  * Close to ImageJ in functionality
+  
+  * Simple to program
+  
+  * Do not require too much duck tape to work together
+  
+  * Do not have a steep learning curve
+  
+  * Do not have a complex build process
+  
+  []
+  
+  This page will investigate some pro and cons for different libraries based on
+  how they satisfy the above criteria.
+  
+* First libraries choice 
+  
+  * OpenCV for vision algorithms
+  
+  * GIL for writing new image processing plugin
+
+  * Google C++ Testing Framework
+
+  * Boost for all other libraries
+  
+  []
+  
+** GUI idea 1: GTK and GIMP plugin
+
+  * GTK or GTKMM for a rudimentary workbench
+  
+  * GIMP plugin for a full featured workbench with macro languages
+  
+  []
+  
+** GUI idea 2: FLTK and Adobe PhotoShop plugin
+
+  * FLTK for a rudimentary workbench
+  
+  * Adobe PhotoShop plugin for a full featured workbench with macro languages
+  
+  []
+  
+  If this is a successful combination that should be pretty equivalent to what
+  you have in ImageJ, but a little harder to work with.
+  
 * Image libraries  
   
   * OpenCV
@@ -63,16 +114,20 @@ C++ Libraries
   e.g. a lightweight gui for a rudimentary workbench, and GIMP for a full fledged
   workbench.
 
-  * FLTK
+  * GTK+ GIMP toolkit
+  
+  * GTKMM C++ wrapper around GTK+
   
   * GIMP plugin
+  
+  * FLTK
+  
+  * HighGui from OpenCV
   
   * PhotoShop plugin
   
   * wxWidget
 
-  * HighGui from OpenCV
-  
   []
   
 ** FLTK Fast Light Toolkit
@@ -85,7 +140,10 @@ C++ Libraries
 
   {{{http://www.wxwidgets.org/} wxWidgets}} is a full featured GUI toolkit, built
   on top of native toolkits: Win32, Mac OS X, GTK+, X11, Motif, WinCE and more.
-  The programming style is close to Windows MFC programming.  
+  The programming style is close to Windows MFC programming.
+
+*** Issues
+
   It seems a little heavier than FLTK.
   
 ** GIMP plugin
@@ -95,8 +153,32 @@ C++ Libraries
 
   This would be a full fledged workbench.
 
+*** Issues
+
   ShapeLogic cannot be linked to GIMP since it is GPL, but you could have a 
   wrapper around plugins in order to access them as GIMP plugins.
+  
+  The plugin works with tiles, which gives good performance, but does not fit
+  well with either the way OpenCV or GIL are processing images.
+  
+** GTK, GIMP toolkit
+
+  {{{http://www.gtk.org/} GTK}} is a full featured GUI toolkit working on most 
+  platforms. 
+
+*** Issues
+
+  It is written in C and has a homegrown object system, which is not type safe.
+
+** GTKMM, GIMP toolkit with C++ wrapper
+
+  {{{http://www.gtkmm.org}GTKMM}} is a C++ wrapper around GTK. Programming in
+  GTKMM is a lot more natural to C++ programmers.
+
+*** Issues
+
+  The class hierarchy is somewhat deep since it is build on top of GTK.
+  It seems a little heavier than FLTK.
   
 ** PhotoShop plugin
   
@@ -108,11 +190,25 @@ C++ Libraries
   Since PhotoShop is the standard image manipulation tool, this could be a good
   way to make ShapeLogic algorithms available to a wider audience.
 
+*** Issues
+  
+  The PhotoShop API is not freely available, you have to apply to get it.
+  
 ** HighGui from OpenCV
   
   Very lightweight. There is some functionality for displaying images and an
   event handler for mouse events. 
+
+*** Issues
   
+  It does not seem to have a menu system, which is essential for a rudimentary workbench.
+  
+* Google C++ Testing Framework
+  
+  {{{http://code.google.com/p/googletest/}Google C++ Testing Framework}} is a
+  framework for writing C++ unit tests. Based on the xUnit architecture.
+  It has a strong focus on simplicity and terse code.
+
 * Boost
   
   {{{http://www.boost.org} Boost}} 
@@ -131,6 +227,9 @@ C++ Libraries
   
   []
   
+  It contains a lot of functional programming features that should be helpful 
+  for the lazy stream library.
+  
 ** Problems with Boost
 
   * Boost is a good stress test for your compiler. Some classes in boost would 
@@ -139,7 +238,7 @@ C++ Libraries
   * You would not catch all errors at compile time for template code. Concepts is
   a new way to alleviate this problem.
 
-  * Template code it has been hard to debug.
+  * Template code has been hard to debug.
   
   []
   
