@@ -67,7 +67,7 @@
       <item name="Team Blogs" href="index.html" collapse="true">
           <item name="Sami Badawi" href="http://samibadawi.blogspot.com"/>
       </item>
-      <item name="Experimental C++ port" href="index.html" collapse="true">
+      <item name="ShapeLogic C++" href="index.html" collapse="true">
           <item name="C++ port" href="cpp.html"/>
           <item name="C++ libraries" href="cpp-libraries.html"/>
           <item name="C++ organization" href="cpp-organization.html"/>
