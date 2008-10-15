@@ -1,0 +1,103 @@
+            ------
+            C++ organization
+            ------
+            Sami Badawi
+            ------
+            2008/09/10
+            ------
+
+C++ organization
+  
+  This page is about how the code is organized.  This is work in progress and
+  only interesting for programmers looking at the code.
+
+  The main organization issues are:
+  
+  * How should the code be grouped
+
+  * What unit test framework should be used
+
+  * How should the unit tests be setup
+  
+  * What GUI should ShapeLogic work with
+  
+  * What is the best way to keep the algorithms loosely coupled with GUI
+  
+  * Should the ShapeLogic code be compiled into an application a static or dynamic library
+  
+  * How can you use ShapeLogic as a plugin for other programs
+  
+  []
+  
+  The overall idea is to try to simplest solutions first, and go to a better or 
+  harder solution later.
+  Source code cannot be checked into SVN before these issues have been resolved,
+  but snapshots might be uploaded to 
+  {{{http://code.google.com/p/shapelogic-cpp/}http://code.google.com/p/shapelogic-cpp/}}.
+
+* Directory structure
+  
+  Traditionally Java has a lot of classes and packages in their own directory,
+  where C++ have fewer.  It is a goal to keep the structure of the Java and C++
+  version of ShapeLogic as close.
+  The first version will use the same directory structure as Java did.
+
+* Unit test framework
+
+  Unlike Java where JUnit is both very simple and ubiquitous C++ has a lot of 
+  competing unit test framework. Since ShapeLogic tries to have as few 
+  external dependencies it will start by using Boost.test from 
+  {{{http://www.boost.org}Boost}}.
+  
+  Boost.test is not as simple as JUnit, it can run in several different modes:
+  
+  * All the sources that are used in Boost.test are compiled and linked with the unit tests
+
+  * Boost.test are compiled into a library and linked with the unit tests
+  
+  * There is a minimal header only version
+
+  []
+
+* GUI
+  
+  First version of ShapeLogic C++ will only run with the very lightweight GUI 
+  toolkit FLTK.
+
+  Later version could run as either plugins for PhotoShop or GIMP.
+
+* Compiling and linking
+  
+  Here are 3 methods for how to compile and link the code, starting with simple 
+  ending with elegant:
+
+** Compiling and linking 1: Make a ShapeLogic application
+
+  * Have one ShapeLogic executable that includes FLTK
+
+  * Boost.test is linked in as a library, but ShapeLogic test code is compiled each time
+
+  []
+
+** Compiling and linking 2: Make a ShapeLogic lib and a GUI wrapper
+  
+  * Create a ShapeLogic library for all the algorithms
+
+  * Have a lightweight GUI FLTK wrapper
+
+  * The unit tests are also calling the ShapeLogic library
+
+  []
+
+** Compiling and linking 3: Make a ShapeLogic lib and a GUI and plugin wrapper
+
+  * Separate plugin runner program in FLTK
+
+  * Compile ShapeLogic as a static or shared library to be used as a plugin
+
+  * Possibly also compile a second library that can be run as plugin from either PhotoShop or GIMP
+
+  []
+
+
+
