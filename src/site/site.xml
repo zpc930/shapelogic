@@ -28,6 +28,7 @@
           <item name="Compatibility Changes" href="compatibility.html"/>
           <item name="Road Map" href="roadmap.html"/>
           <item name="Contacts" href="team.html"/>
+          <item name="Links" href="links.html"/>
           <item name="Site revisions" href="site-revisions.html"/>
       </item>
       <item name="Applications" href="index.html" collapse="true">
@@ -69,6 +70,7 @@
       <item name="Experimental C++ port" href="index.html" collapse="true">
           <item name="C++ port" href="cpp.html"/>
           <item name="C++ libraries" href="cpp-libraries.html"/>
+          <item name="C++ organization" href="cpp-organization.html"/>
           <item name="C++ setup Windows" href="cpp-setup-windows.html"/>
           <item name="C++ setup UNIX" href="cpp-setup-unix.html"/>
           <item name="C++ java mappings" href="cpp-java-mappings.html"/>
