@@ -8,8 +8,8 @@
 
 C++ Libraries
   
-  The goal is to find libraries that can compete with ImageJ in both features
-  and simplicity. More specific it needs to be:
+  The demand to libraries is that they can compete with ImageJ in both features
+  and simplicity. More specific they need to be:
 
   * Cross platform
 
@@ -25,8 +25,8 @@ C++ Libraries
   
   []
   
-  This page will investigate some pro and cons for different libraries based on
-  how they satisfy the above criteria.
+  This page will will give a short description of the libraries and some 
+  possible future development.
   
 * Current libraries choice 
   
@@ -106,6 +106,9 @@ C++ Libraries
   framework for writing C++ unit tests. Based on the xUnit architecture.
   It has a strong focus on simplicity and terse code.
   
+** Boost Build / Bjam
+  
+  Cross platform Make replacement. 
 
 * Libraries that might be integrated in the future
 
