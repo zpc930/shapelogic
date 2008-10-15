@@ -25,6 +25,9 @@ ShapeLogic
   for announcements, questions, bug reports, suggestions and feature requests.
   You can help improving the stability of ShapeLogic by filing a bug report.
   
+  The first ShapeLogic implementation is in Java.  {{{cpp.html}ShapeLogic C++}}
+  was started in September 2008.
+  
 * Main ideas and motivation
 
   ShapeLogic is a library for
