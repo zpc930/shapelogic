@@ -6,7 +6,7 @@
             2008/09/03
             ------
 
-ShapeLogic C++ Port
+ShapeLogic C++ Home
   
   ShapeLogic C++ is an open source toolkit for declarative programming, image 
   processing and computer vision. Optimized for simplicity of programming.
@@ -88,7 +88,7 @@ ShapeLogic C++ Port
 
   * Same code runs under both Windows and Linux 
   
-  * Contains a some image processing code
+  * Contains some image processing algorithms
   
   * Unit test are setup
   
