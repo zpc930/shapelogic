@@ -68,7 +68,7 @@
           <item name="Sami Badawi" href="http://samibadawi.blogspot.com"/>
       </item>
       <item name="ShapeLogic C++" href="index.html" collapse="true">
-          <item name="C++ port" href="cpp.html"/>
+          <item name="C++ home" href="cpp.html"/>
           <item name="C++ libraries" href="cpp-libraries.html"/>
           <item name="C++ organization" href="cpp-organization.html"/>
           <item name="C++ setup Windows" href="cpp-setup-windows.html"/>
