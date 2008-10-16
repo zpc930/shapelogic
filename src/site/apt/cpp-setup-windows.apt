@@ -82,9 +82,24 @@ C++ Setup
   
   This will both build executables, libraries, run unit test, create distributions. 
   
+  The Jamfile and Jamroot are documented and it should be easy to modify them
+  to fit your needs.
+  
   Eventually the same Jamfile and Jamroot will be used for Windows and other 
   operating systems, but for now there are a Jamfile.msvc and a Jamroot.msvc.
   In order to build rename them to Jamfile and Jamroot.  
+  
+** Directory structure of libraries
+  
+  Currently it is assumed that some of the libraries are located relative to 
+  the shapelogic-cpp directory in a directory called src.
+  The relative path from shapelogic-cpp to boost would then be:
+   
++---------------------------+  
+../src/boost_1_36_0/
++---------------------------+  
+  
+  This may change.
   
 * Setup with Eclipse
   

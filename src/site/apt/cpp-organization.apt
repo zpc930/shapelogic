@@ -42,44 +42,35 @@ C++ organization
   version of ShapeLogic as close.
   The first version will use the same directory structure as Java did.
 
-* Unit test framework
+* Google C++ Testing Framework
 
-  Unlike Java where JUnit is both very simple and ubiquitous C++ has a lot of 
-  competing unit test framework. Since ShapeLogic tries to have as few 
-  external dependencies it will start by using Boost.test from 
-  {{{http://www.boost.org}Boost}}.
+  {{{http://code.google.com/p/googletest/}Google C++ Testing Framework}} is a
+  framework for writing C++ unit tests. Based on the xUnit architecture.
+  It has a strong focus on simplicity and terse code.
   
-  Boost.test is not as simple as JUnit, it can run in several different modes:
+  To begin with there is only one directory for all the unit tests:
+  shapelogic-cpp/src/test/cpp/
   
-  * All the sources that are used in Boost.test are compiled and linked with the unit tests
-
-  * Boost.test are compiled into a library and linked with the unit tests
+  You can run them from command line using Bjam. Either from the test dir
+  or from shapelogic-cpp/
   
-  * There is a minimal header only version
-
-  []
-
-* GUI
+  If you are using Eclipse as an IDE then you change the main() function call
+  the tests, by changing a flag and un-commenting the test code there. 
   
-  First version of ShapeLogic C++ will only run with the very lightweight GUI 
-  toolkit FLTK.
-
-  Later version could run as either plugins for PhotoShop or GIMP.
-
 * Compiling and linking
   
-  Here are 3 methods for how to compile and link the code, starting with simple 
-  ending with elegant:
+  Here are 2 methods for how to compile and link the code one used when the 
+  application is build with Eclipse and one when it it build with Bjam:
 
-** Compiling and linking 1: Make a ShapeLogic application
+** Eclipse: Make a ShapeLogic application
 
   * Have one ShapeLogic executable that includes FLTK
 
-  * Boost.test is linked in as a library, but ShapeLogic test code is compiled each time
+  * Google test is is enabled by changing a flag in main()
 
   []
 
-** Compiling and linking 2: Make a ShapeLogic lib and a GUI wrapper
+** Boot build: Make a ShapeLogic lib and a GUI wrapper
   
   * Create a ShapeLogic library for all the algorithms
 
@@ -88,16 +79,4 @@ C++ organization
   * The unit tests are also calling the ShapeLogic library
 
   []
-
-** Compiling and linking 3: Make a ShapeLogic lib and a GUI and plugin wrapper
-
-  * Separate plugin runner program in FLTK
-
-  * Compile ShapeLogic as a static or shared library to be used as a plugin
-
-  * Possibly also compile a second library that can be run as plugin from either PhotoShop or GIMP
-
-  []
-
-
 
