@@ -33,6 +33,7 @@
       </item>
       <item name="Applications" href="index.html" collapse="true">
 		  <item name="Particle Analyzer" href="particle.html"/>
+		  <item name="Colocalization" href="colocalization.html"/>
 		  <item name="Cell Categorizer" href="cell.html"/>
       </item>
       <item name="Examples" href="index.html" collapse="true">
