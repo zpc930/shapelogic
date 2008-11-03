@@ -6,7 +6,7 @@
             2008/09/03
             ------
 
-ShapeLogic C++ Home
+ShapeLogic C++
   
   ShapeLogic C++ is an open source toolkit for declarative programming, image 
   processing and computer vision. Optimized for simplicity of programming.
@@ -96,6 +96,50 @@ ShapeLogic C++ Home
   
   []
 
+* News
+  
+** 2008/10/31 ShapeLogic C++ 0.3 released
+  
+  * Added 3 first brushes: Pen, Sample color, Point info
+    
+  * Fixed bugs causing ShapeLogic? to crash
+     
+  []
+  
+** 2008/10/22 ShapeLogic C++ 0.2 released
+  
+  * Save images using GIL
+
+  * Scroll big images
+
+  * Display file name in window frame
+
+  []
+
+** 2008/10/16 ShapeLogic C++ 0.1 released
+  
+  * Integrate FLTK, Boost, GIL, Google C++ Testing Frameworks, Boost Build
+  
+  * Minimalist GUI to load images and run image processing operations
+  
+  * Image processing code written in GIL
+  
+  * Tested on Windows and Linux
+  
+  []  
+  
+* Future plans for ShapeLogic
+  
+** ShapeLogic C++ 0.4 soon to be released
+  
+  * Read and save images using OpenCV 
+  
+  * Make OpenCV image processing algorithm available in menus
+  
+  * Make Boost Build Jamfiles that works both on Windows and other operating systems
+  
+  []  
+  
 * Reason for port from Java to C++
   
   * C++ still seems to be the main language for computer vision
