@@ -12,44 +12,25 @@ ShapeLogic C++
   processing and computer vision. Optimized for simplicity of programming.
   Started September 2008.
   
-* Image processing under Java and ImageJ
-
-  It is very simple to get started with image processing in Java due to the
-  excellent open source software {{{http://rsb.info.nih.gov/ij/}ImageJ}}. It
-  has these features:
-  
-  * Writing code is simple, you can focus on the algorithm the GUI just works
-  
-  * It is simple to test code in the cross platform GUI
-  
-  * Simple to compile on any platform 
-  
-  * Comes with a lot of image processing algorithms
-  
-  * Powerful macro system
-  
-  * Very non restrictive open source license
-  
-  []
-  
 * Goal
   
-  Simplicity of programming is a main concern.  
-  It did not appear that there were a environment similar to ImageJ for C++. 
-  ShapeLogic C++ is trying to fill some of the functions that ImageJ did for 
-  Java.
+  It is very simple to get started with image processing in Java due to the
+  excellent open source software {{{http://rsb.info.nih.gov/ij/}ImageJ}}. 
+  An environment similar to ImageJ for C++ does not seem to currently exist.
+  ShapeLogic C++ is trying to flesh out some of the functions that ImageJ did for Java.
+  Simplicity of programming is a main concern.
   
-  The idea with ShapeLogic is that it should be a declarative framework for
-  vision and you should be able to get work done through rules instead of 
+  ShapeLogic is intended as a declarative framework for
+  vision so that the user can get work done through rules instead of 
   regular procedural or object oriented programming.
   For example, one should be able to make a list of rules for categorizing 
   the shape of a particle in the particle analyzer. You put them in a database or 
-  a flat file and the same rules should work for the C++ and Java versions of 
+  a flat file, and the same rules should work for the C++ and Java versions of 
   ShapeLogic.
   
-  You should be able to choose the programming language that has
-  the libraries you require for your given purpose, e.g. C++ for face detection or
-  Java for medical image processing.  Then you can setup rules based on them.
+  One should be able to choose the programming language that has
+  the libraries required for your given purpose, e.g. C++ for face detection or
+  Java for medical image processing.  Then rules can be set up using the chosen library.
   
 *  Cross platform 
   
@@ -89,6 +70,8 @@ ShapeLogic C++
   * Same code runs under both Windows and Linux 
   
   * Contains some image processing algorithms
+  
+  * Contains a few brushes for drawing, sampling and point info
   
   * Unit test are setup
   
@@ -136,7 +119,7 @@ ShapeLogic C++
   
   * Make OpenCV image processing algorithm available in menus
   
-  * Make Boost Build Jamfiles that works both on Windows and other operating systems
+  * Create Boost Build Jamfiles that works both on Windows and other operating systems
   
   []  
   
@@ -144,7 +127,7 @@ ShapeLogic C++
   
   * C++ still seems to be the main language for computer vision
   
-  * There are a lot of good vision code written in C++ 
+  * There is a lot of good vision code written in C++ 
   
   * C++ is faster than Java for number crunching
   
@@ -174,8 +157,8 @@ ShapeLogic C++
 
   []
 
-  If it turns out that it is hard to translate the constructs ShapeLogic C++
-  will not get the same functionality as ShapeLogic Java. 
+  If it turns out that it is hard to translate constructs, ShapeLogic C++
+  will not have the same functionality as ShapeLogic Java. 
 
 * Organizing code under C++
   
