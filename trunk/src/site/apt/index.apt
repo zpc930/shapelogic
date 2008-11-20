@@ -169,7 +169,63 @@ ShapeLogic
 
   []
 
+* ShapeLogic C++
+  
+[images/screenshots/shapelogic-cpp-linux.jpg] 
+  
+  {{{cpp.html}ShapeLogic C++}} started as an attempt to port some algorithms 
+  from ShapeLogic Java. 
+  ImageJ makes image processing programming very accessible under Java.
+  While there are great open source libraries in C++ there did not appear to be 
+  anything like ImageJ with an commercially friendly OSS license.
+  Before algorithms could be ported from ShapeLogic Java some of the 
+  functionality of ImageJ had to be established.
+  Simplicity of programming is a main concern.
+  
+  This was mainly a question of finding the best OSS C++ libraries and getting 
+  them to work together. After a good deal of experimenting this was the 
+  libraries that were chosen: 
+
+  * {{{http://www.boost.org}Boost}} the C++ library
+  
+  * {{{http://opensource.adobe.com/wiki/display/gil/Generic+Image+Library} Generic Image Library}}
+  for writing new image processing code
+  
+  * {{{http://opencvlibrary.sourceforge.net} OpenCV}} for existing computer vision algorithms
+  
+  * {{{http://www.fltk.org/} FLTK, Fast Light Toolkit}} lightweight cross platform GUI
+  
+  * {{{http://code.google.com/p/googletest/} Google Testing Framework}}
+  
+  * {{{http://www.boost.org/doc/tools/build/index.html} Boost.build v2}} for command line based build system
+  
+  []
+  
 * News
+
+** 2008/11/14 ShapeLogic C++ 0.4 released
+
+  * Images are now internally stored in OpenCV's IplImage format
+  
+  * More image formats: BMP, DIB, JPEG, JPG, JPE, PNG, PBM, PGM, PPM, SR, RAS, TIFF, TIF
+  
+  * Made a few OpenCV image processing algorithm available:
+  
+    * Canny edge detector
+    
+    * Flip RB color
+    
+    * Flip horizontally
+    
+    * Flip vertically
+    
+    []
+    
+  * Made Boost Build Jamfiles that works both on Windows and other operating systems
+  
+  * First release with development status Alpha
+  
+  []
 
 ** 2008/10/31 ShapeLogic C++ 0.3 released
   
@@ -178,31 +234,6 @@ ShapeLogic
   * Fixed bugs causing ShapeLogic? to crash
      
   []
-  
-** 2008/10/22 ShapeLogic C++ 0.2 released
-  
-  * Save images using GIL
-
-  * Scroll big images
-
-  * Display file name in window frame
-
-  []
-
-** 2008/10/16 ShapeLogic C++ 0.1 released
-  
-  First release of {{{cpp.html} ShapeLogic C++}}. It does not share any code
-  with ShapeLogic Java yet.
-  
-  * Integrate FLTK, Boost, GIL, Google C++ Testing Frameworks, Boost Build
-  
-  * Minimalist GUI to load images and run image processing operations
-  
-  * Image processing code written in GIL
-  
-  * Tested on Windows and Linux
-  
-  []  
   
 ** 2008/08/02 ShapeLogic v 1.3 released
   
@@ -229,17 +260,26 @@ ShapeLogic
   
   []
 
-** ShapeLogic C++ 0.4 soon to be released
+** ShapeLogic v 1.4 with a few requests from the ImageJ mailing list soon to be released
+
+  * Write out information about point in skeletonized image
   
-  * Read and save images using OpenCV 
+  * In Color Particle Analyzer write out average color in R, G and B channels, 
+  to handle particles in co-localization images better  
   
-  * Make OpenCV image processing algorithm available in menus
+  * Change annotation of points and lines to be on individual images instead of global 
   
-  * Make Boost Build Jamfiles that works both on Windows and other operating systems
+  []
+
+** ShapeLogic C++ 0.5 soon to be released
+  
+  * Make OpenCV more image processing algorithm available in menus
+
+  * Make generic dialog to get parameters for algorithms
   
   []  
-
-** ShapeLogic v 1.4 with specific cell recognition particle analyzer soon to be released
+  
+** ShapeLogic v 1.5 with specific cell recognition particle analyzer
 
   * {{{component.html}Component framework}} for hybrid and complex vision problems
   
@@ -259,7 +299,7 @@ ShapeLogic
   
   []
 
-  The test images are taken from the sample images from ImageJ
+** The test images are taken from the sample images from ImageJ
   
 [images/particles/blobs.gif] 
 

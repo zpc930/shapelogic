@@ -87,18 +87,23 @@ C++ Libraries
   image types.  This is something that you cannot do in ImageJ. The price is 
   that it is programmed with advanced templates.
   
-  Should be able to run with OpenCV.
+  GIL makes wrappers around other images classes.  This works fine with both 
+  FLTK images class: Fl_Image and OpenCV images: IplImage.
   
 ** OpenCV, Open Computer Vision
   
   {{{http://opencvlibrary.sourceforge.net/} OpenCV}} is written by Intel. 
   It is simple to use and comes with a lot of algorithms.
   
+  Images are read, written and internally stored as OpenCV images: IplImage.
+  One issue is that this is using BGR byte order opposed to RGB as Fl_Image.
+  After reading and before writing the R and B colors are swapped.  
+  
 ** FLTK Fast Light Toolkit
   
   {{{http://www.fltk.org/} FLTK}} is light to work with. This is built on top of
   Windows API or X11.
-  This is used for the simple workbench for ShapeLogic C++.
+  This is currently used as the GUI framework in ShapeLogic C++.
   
 ** Google C++ Testing Framework
   

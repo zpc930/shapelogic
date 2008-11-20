@@ -16,7 +16,10 @@ C++ Setup
   the same version of the same compiler, since linker format can be different
   between different compiler and version of a compiler.
   
-* MicroSoft Visual C++
+* Microsoft Visual C++
+  
+  Microsoft Visual C++ is the compiler that has been used for development of
+  ShapeLogic C++ under Windows.
   
   {{{http://www.microsoft.com/express/vc/}MS VC++ Express Edition}} is a free
   version.
@@ -54,7 +57,7 @@ C++ Setup
   FLTK comes with a Makefile and should compile using MinGW.
   In order to get the Makefile to work you also need to install MSYS, which
   is a minimalistic shell.
-  This was not trivial to get to work.
+  This is not trivial to get to work.
   
 * OpenCV
   
@@ -85,8 +88,9 @@ C++ Setup
   The Jamfile and Jamroot are documented and it should be easy to modify them
   to fit your needs.
   
-  Eventually the same Jamfile and Jamroot will be used for Windows and other 
-  operating systems, but for now there are a Jamfile.msvc and a Jamroot.msvc.
+  As of ShapeLogic C++ 0.4 the same Jamfile and Jamroot is be used for Windows 
+  and other operating systems. If you are trying to build an earlier version 
+  there are a Jamfile.msvc and a Jamroot.msvc.
   In order to build rename them to Jamfile and Jamroot.  
   
 ** Directory structure of libraries
@@ -101,14 +105,8 @@ C++ Setup
   
   This may change.
   
-* Setup with Eclipse
+* IDE under Windows
   
-  {{{http://www.eclipse.org/cdt/} Eclipse CDT}} works very for both build and 
-  debugging. 
-
-  It will detect header files in the standard places.
-  
-  You can do builds in different ways either by supplying at Make file or 
-  Eclipse can do the build for you.
-
-  
+  Eclipse works well under UNIX, but for Windows development using Microsoft 
+  Visual C++, might be better.
+   
