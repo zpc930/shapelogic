@@ -65,9 +65,6 @@
 	      <item name="Java Doc for sources" href="apidocs/index.html"/>
 	      <item name="Java Doc for tests" href="testapidocs/index.html"/>
       </item>
-      <item name="Team Blogs" href="index.html" collapse="true">
-          <item name="Sami Badawi" href="http://samibadawi.blogspot.com"/>
-      </item>
       <item name="ShapeLogic C++" href="index.html" collapse="true">
           <item name="C++ home" href="cpp.html"/>
           <item name="C++ libraries" href="cpp-libraries.html"/>
@@ -75,7 +72,13 @@
           <item name="C++ setup Windows" href="cpp-setup-windows.html"/>
           <item name="C++ setup UNIX" href="cpp-setup-unix.html"/>
           <item name="C++ java mappings" href="cpp-java-mappings.html"/>
-		  <item name="Google Code Hosting" href="http://code.google.com/p/shapelogic-cpp"/>
+		  <item name="C++ download" href="http://code.google.com/p/shapelogic-cpp/downloads/list"/>
+      </item>
+      <item name="Project Blog" href="index.html" collapse="true">
+          <item name="Sami Badawi" href="http://samibadawi.blogspot.com"/>
+      </item>
+      <item name="Consulting" href="index.html" collapse="true">
+          <item name="Vision consulting" href="consulting.html"/>
       </item>
     </menu>
 
