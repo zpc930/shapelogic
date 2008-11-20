@@ -81,4 +81,8 @@ public class AbstractImageProcessingTests extends TestCase {
 		}
 	}
 	
+	/** To prevent waring when running all tests. */
+	public void dummyTest() {
+		assertTrue(true);
+	}
 }
