@@ -31,9 +31,6 @@ C++ organization
   
   The overall idea is to try to simplest solutions first, and go to a better or 
   harder solution later.
-  Source code cannot be checked into SVN before these issues have been resolved,
-  but snapshots might be uploaded to 
-  {{{http://code.google.com/p/shapelogic-cpp/}http://code.google.com/p/shapelogic-cpp/}}.
 
 * Directory structure
   
@@ -42,6 +39,11 @@ C++ organization
   version of ShapeLogic as close.
   The first version will use the same directory structure as Java did.
 
+  Code can be browsed at: 
+  
+  {{{http://code.google.com/p/shapelogic-cpp/source/browse/}
+  http://code.google.com/p/shapelogic-cpp/source/browse/}}.
+  
 * Google C++ Testing Framework
 
   {{{http://code.google.com/p/googletest/}Google C++ Testing Framework}} is a
