@@ -147,12 +147,32 @@ ShapeLogic C++
   
 ** ShapeLogic C++ 0.5 soon to be released
   
-  * Make OpenCV more image processing algorithm available in menus
+  * Make more OpenCV image processing algorithm available in menus
+    
+    * Adaptive threshold
+    
+    * Binary mathematical morphology
+    
+    []
 
   * Make generic dialog to get parameters for algorithms
   
   []  
   
+** Low hanging fruits for ShapeLogic C++
+  
+  * Optimize draw
+
+  * Draw continues line instead of points
+  
+  * More pen sizes for draw
+  
+  * Change brushes to to have a class each brush, that takes parameters
+  
+  * Macro system
+  
+  []    
+    
 * Reason for port from Java to C++
   
   * C++ still seems to be the main language for computer vision
