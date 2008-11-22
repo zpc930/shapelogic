@@ -21,6 +21,9 @@ public class GrayAreaTest extends TestCase {
 		assertEquals(10., grayArea.getPixelArea().getBoundingBox().maxVal.getX());
 		assertEquals(20., grayArea.getPixelArea().getBoundingBox().maxVal.getY());
 		assertEquals(100, grayArea.getMeanGray());
+		assertEquals(100, grayArea.getMeanRed());
+		assertEquals(100, grayArea.getMeanGreen());
+		assertEquals(100, grayArea.getMeanBlue());
 	}
 
 	public void test2Points() {
@@ -35,6 +38,9 @@ public class GrayAreaTest extends TestCase {
 		assertEquals(40., grayArea.getPixelArea().getBoundingBox().maxVal.getX());
 		assertEquals(30., grayArea.getPixelArea().getBoundingBox().maxVal.getY());
 		assertEquals(50, grayArea.getMeanGray());
+		assertEquals(50, grayArea.getMeanRed());
+		assertEquals(50, grayArea.getMeanGreen());
+		assertEquals(50, grayArea.getMeanBlue());
 	}
 
 	public void testFactory() {
