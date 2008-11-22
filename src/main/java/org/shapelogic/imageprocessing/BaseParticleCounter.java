@@ -70,6 +70,8 @@ public class BaseParticleCounter extends BaseImageOperation
     protected int _minPixelsInArea = MIN_PIXELS_IN_AREA_DEFAULTS;
     protected int _maxPixelsInArea = MAX_PIXELS_IN_AREA_DEFAULTS;
 	protected boolean _displayTable = true;
+	protected boolean _countOnly = false;
+	protected boolean _toMask = false;
     
     protected List<IColorAndVariance> _particlesOrig = new ArrayList<IColorAndVariance>();
     protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
@@ -95,14 +97,18 @@ public class BaseParticleCounter extends BaseImageOperation
             findColorHypothesis();
 			segment();
 			globalFilter();
-			defaultColumnDefinitions();
-			customColumnDefinitions();
-			defaultStreamDefinitions();
-			customStreamDefinitions();
-			categorizeStreams();
-			populateResultsTable();
+            if (_toMask)
+                turnImageIntoMask();
+            if (!_countOnly) {
+                defaultColumnDefinitions();
+                customColumnDefinitions();
+                defaultStreamDefinitions();
+                customStreamDefinitions();
+                categorizeStreams();
+                populateResultsTable();
+            }
 			showResultDialog();
-			if (_displayTable) {
+			if (_displayTable && !_countOnly) {
 				displayResultsTable();
 			}
 		}
@@ -174,7 +180,15 @@ public class BaseParticleCounter extends BaseImageOperation
     	}
     	
     }
-    
+
+    /** In order to understand what is going on or to use it for futher
+     * processing turn the image into a black and white mask. Where the
+     * particles are black and the background is white.
+     */
+    public void turnImageIntoMask() {
+
+    }
+
     /** Define extra streams and also extra columns.*/
     protected void defaultStreamDefinitions() {
     	
@@ -397,5 +411,5 @@ public class BaseParticleCounter extends BaseImageOperation
 	@Override
 	public RecursiveContext getParentContext() {
 		return _parentContext;
-	}
+	}    
 }

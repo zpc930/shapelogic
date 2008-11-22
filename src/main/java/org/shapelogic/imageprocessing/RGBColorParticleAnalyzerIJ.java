@@ -20,6 +20,8 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
 	protected static int _gStatic = 0;
 	protected static int _bStatic = 0;
 	protected static boolean _backgroundStatic = true;
+    protected static boolean _countOnlyStatic = false;
+    protected static boolean _toMaskStatic = false;
 	
 	
 	@Override
@@ -32,6 +34,8 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         _gd.addNumericField("RGB_G: ", _gStatic, 0);
         _gd.addNumericField("RGB_B / Gray: ", _bStatic, 0);
         _gd.addCheckbox("Background", _backgroundStatic);
+        _gd.addCheckbox("CountOnly: ", _countOnlyStatic);
+        _gd.addCheckbox("ToMask: ", _toMaskStatic);
         
         _gd.showDialog();
         if (_gd.wasCanceled()) {
@@ -46,6 +50,8 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         int rgbValue = ColorUtil.packColors( r, g, b);
         _inputColor = rgbValue;
         _useReferenceAsBackground = _backgroundStatic = _gd.getNextBoolean();
+        _countOnly = _countOnlyStatic = _gd.getNextBoolean();
+        _toMask = _toMaskStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 

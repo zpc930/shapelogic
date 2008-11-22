@@ -7,7 +7,6 @@ import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
 import ij.process.ImageProcessor;
 
-import org.shapelogic.color.ColorAndVariance;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.IJGui;
 import org.shapelogic.imageutil.IJImage;
@@ -35,6 +34,8 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
     protected static double _maxDistanceStatic = MAX_DISTANCE_DEFAULTS;
     protected static int _minPixelsInAreaStatic = MIN_PIXELS_IN_AREA_DEFAULTS;
     protected static int _maxPixelsInAreaStatic = MAX_PIXELS_IN_AREA_DEFAULTS;
+    protected static boolean _countOnlyStatic = false;
+    protected static boolean _toMaskStatic = false;
     
 	@Override
 	public void run(ImageProcessor ip) {
@@ -66,6 +67,8 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _gd.addNumericField("Min_pixels: ", _minPixelsInAreaStatic, 0);
         _gd.addNumericField("Max_pixels: ", _maxPixelsInAreaStatic, 0);
         _gd.addNumericField("Iterations: ", _iterationsStatic, 0);
+        _gd.addCheckbox("CountOnly: ", _countOnlyStatic);
+        _gd.addCheckbox("ToMask: ", _toMaskStatic);
         _gd.showDialog();
         if (_gd.wasCanceled()) {
             return DONE;
@@ -74,6 +77,8 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _minPixelsInArea = _minPixelsInAreaStatic = (int)_gd.getNextNumber();
         _maxPixelsInArea = _maxPixelsInAreaStatic = (int)_gd.getNextNumber();
         _iterations = _iterationsStatic = (int)_gd.getNextNumber();
+        _countOnly = _countOnlyStatic = _gd.getNextBoolean();
+        _toMask = _toMaskStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 
