@@ -2,7 +2,6 @@ package org.shapelogic.color;
 
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.mathematics.ArrayOperations;
-import org.shapelogic.mathematics.StorelessDiscriptiveStatistic;
 
 /** ColorEdgeArea holds the information.
  * <br />
