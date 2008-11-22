@@ -7,8 +7,8 @@ import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
 import ij.process.ImageProcessor;
 
+import org.shapelogic.color.ColorAndVariance;
 import org.shapelogic.color.IColorAndVariance;
-import org.shapelogic.imageprocessing.ColorParticleAnalyzer;
 import org.shapelogic.imageutil.IJGui;
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.PixelArea;
@@ -83,6 +83,11 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 		_rt.setDefaultHeadings();
 		_rt.getFreeColumn(Headings.COLOR);
 		_rt.getFreeColumn(Headings.COLOR_STD_DEV);
+        if (getImage().isRgb()) {
+            _rt.getFreeColumn(Headings.COLOR_RED);
+            _rt.getFreeColumn(Headings.COLOR_GREEN);
+            _rt.getFreeColumn(Headings.COLOR_BLUE);
+        }
 		_rt.getFreeColumn(Headings.PERIMETER);
 		_rt.getFreeColumn(Headings.CIRCULARITY);
 		_rt.getFreeColumn(Headings.ASPECT_RATIO);
@@ -104,6 +109,11 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         	_rt.addValue(ResultsTable.AREA, particle.getArea());
         	_rt.addValue(Headings.COLOR_STD_DEV, particle.getStandardDeviation());
         	_rt.addValue(Headings.COLOR, particle.getMeanColor());
+            if (getImage().isRgb()) {
+                _rt.addValue(Headings.COLOR_RED, particle.getMeanRed());
+                _rt.addValue(Headings.COLOR_GREEN, particle.getMeanGreen());
+                _rt.addValue(Headings.COLOR_BLUE, particle.getMeanBlue());
+            }
         	PixelArea pixelArea = particle.getPixelArea();
         	if (pixelArea != null) {
             	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
