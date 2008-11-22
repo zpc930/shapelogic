@@ -79,6 +79,21 @@ public class GrayAndVariance implements IColorAndVariance {
 	}
     
     @Override
+    public int getMeanRed() {
+		return (int)_grayStatistic.getMean();
+    }
+
+    @Override
+    public int getMeanGreen() {
+		return (int)_grayStatistic.getMean();
+    }
+
+    @Override
+    public int getMeanBlue() {
+		return (int)_grayStatistic.getMean();
+    }
+
+    @Override
     public PixelArea getPixelArea() {
         return _pixelArea;
     }
@@ -95,4 +110,5 @@ public class GrayAndVariance implements IColorAndVariance {
             result += channel + ", ";
         return result;
     }
+
 }
