@@ -24,13 +24,18 @@ import org.shapelogic.color.IColorDistance;
  * @author Sami Badawi
  */
 public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
-    private int _flags = DOES_ALL|SUPPORTS_MASKING|PARALLELIZE_STACKS;
     private static double _maxDistance = 15.0;
+    protected static boolean _toMaskStatic = false;
+    protected static int FOREGROUND_MASK = 0;
+    protected static int BACKGROUND_MASK = 0xffffff;
+
+    private int _flags = DOES_ALL|SUPPORTS_MASKING|PARALLELIZE_STACKS;
     private int _referenceColor = 1;
 	protected static int _rStatic = 0;
 	protected static int _gStatic = 0;
 	protected static int _bStatic = 0;
     protected IColorDistance _colorDistance;
+    protected boolean _toMask;
 
     GenericDialog _gd;
     PlugInFilterRunner _pfr;
@@ -43,6 +48,7 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
         _gd.addNumericField("RGB_R: ", _rStatic, 0);
         _gd.addNumericField("RGB_G: ", _gStatic, 0);
         _gd.addNumericField("RGB_B / Gray: ", _bStatic, 0);
+        _gd.addCheckbox("ToMask: ", _toMaskStatic);
         _gd.addPreviewCheckbox(pfr);
         _gd.addDialogListener(this);
         _gd.showDialog();
@@ -59,6 +65,7 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
         int b = _bStatic = (int)_gd.getNextNumber();
         _referenceColor= ColorUtil.packColors( r, g, b);
         _colorDistance.setReferenceColor(_referenceColor);
+        _toMask = _toMaskStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _flags);
     }
 
@@ -89,6 +96,7 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
         int b = _bStatic = (int)_gd.getNextNumber();
         _referenceColor= ColorUtil.packColors( r, g, b);
         _colorDistance.setReferenceColor(_referenceColor);
+        _toMask = _toMaskStatic = _gd.getNextBoolean();
         return true;
     }
 
@@ -112,12 +120,17 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
     		endX = imageProcessor.getWidth();
     		endLine = imageProcessor.getHeight();
         }
+        int closeColor = _referenceColor;
+        if (_toMask)
+            closeColor = FOREGROUND_MASK;
     	for (int y = startLine; y < endLine; y++) {
         	for (int x = startX; x < endX; x++) {
         		currentColor = imageProcessor.get(x, y);
         		if (_colorDistance.distanceToReferenceColor(currentColor) < _maxDistance) {
-        			imageProcessor.set(x, y,_referenceColor);
+        			imageProcessor.set(x, y, closeColor);
         		}
+                else if (_toMask)
+        			imageProcessor.set(x, y, BACKGROUND_MASK);
         	}
     	}
     }
