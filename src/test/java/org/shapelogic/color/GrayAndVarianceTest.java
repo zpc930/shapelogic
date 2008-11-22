@@ -30,6 +30,9 @@ public class GrayAndVarianceTest extends TestCase {
 		aggregator.handlePixelArea(grayAndVariance, 0, 0, 1, 1);
 		assertEquals(1,grayAndVariance.getArea());
 		assertEquals(0,grayAndVariance.getMeanColor());
+		assertEquals(0,grayAndVariance.getMeanRed());
+		assertEquals(0,grayAndVariance.getMeanGreen());
+		assertEquals(0,grayAndVariance.getMeanBlue());
 		assertEquals(0.,grayAndVariance.getStandardDeviation());
 	}
 	
@@ -39,6 +42,9 @@ public class GrayAndVarianceTest extends TestCase {
 		aggregator.handleAllPixels(grayAndVariance);
 		assertEquals(1,grayAndVariance.getArea());
 		assertEquals(0,grayAndVariance.getMeanColor());
+		assertEquals(0,grayAndVariance.getMeanRed());
+		assertEquals(0,grayAndVariance.getMeanGreen());
+		assertEquals(0,grayAndVariance.getMeanBlue());
 		assertEquals(0.,grayAndVariance.getStandardDeviation());
 	}
 	
@@ -48,6 +54,9 @@ public class GrayAndVarianceTest extends TestCase {
 		aggregator.handlePixelArea(grayAndVariance, 0, 0, 30, 30);
 		assertEquals(900,grayAndVariance.getArea());
 		assertEquals(205,grayAndVariance.getMeanColor());
+		assertEquals(205,grayAndVariance.getMeanRed());
+		assertEquals(205,grayAndVariance.getMeanGreen());
+		assertEquals(205,grayAndVariance.getMeanBlue());
 		assertEquals(99,(int)grayAndVariance.getStandardDeviation());
 	}
 	
@@ -57,6 +66,9 @@ public class GrayAndVarianceTest extends TestCase {
 		aggregator.handleAllPixels(grayAndVariance);
 		assertEquals(900,grayAndVariance.getArea());
 		assertEquals(205,grayAndVariance.getMeanColor());
+		assertEquals(205,grayAndVariance.getMeanRed());
+		assertEquals(205,grayAndVariance.getMeanGreen());
+		assertEquals(205,grayAndVariance.getMeanBlue());
 		assertEquals(99,(int)grayAndVariance.getStandardDeviation());
 	}
 	
@@ -66,6 +78,9 @@ public class GrayAndVarianceTest extends TestCase {
 		aggregator.handlePixelArea(grayAndVariance, 0, 0, 30, 1);
 		assertEquals(30,grayAndVariance.getArea());
 		assertEquals(255,grayAndVariance.getMeanColor());
+		assertEquals(255,grayAndVariance.getMeanRed());
+		assertEquals(255,grayAndVariance.getMeanGreen());
+		assertEquals(255,grayAndVariance.getMeanBlue());
 		assertEquals(0.,grayAndVariance.getStandardDeviation());
 	}
 	
