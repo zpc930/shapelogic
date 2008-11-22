@@ -22,4 +22,9 @@ public interface IColorAndVariance extends PixelHandler, ColorChannels, HasArea,
 	
 	int getMeanColor();
 	
+    int getMeanRed();
+
+    int getMeanGreen();
+
+    int getMeanBlue();
 }
