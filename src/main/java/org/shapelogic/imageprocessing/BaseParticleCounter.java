@@ -11,10 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.shapelogic.calculation.RecursiveContext;
+import org.shapelogic.color.ColorDistance1;
+import org.shapelogic.color.ColorDistance1RGB;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorHypothesis;
 import org.shapelogic.color.ColorUtil;
 import org.shapelogic.color.IColorAndVariance;
+import org.shapelogic.color.IColorDistance;
 import org.shapelogic.color.IColorHypothesisFinder;
 import org.shapelogic.imageutil.BaseImageOperation;
 
@@ -160,7 +163,18 @@ public class BaseParticleCounter extends BaseImageOperation
             //segment all the remaining
             if (_particleImage != null && _particleImage) {
                 _segmentation.setMaxDistance(1000000000);//Everything get lumped together
-                _segmentation.segmentAll();
+                int effectiveColor = 0xffffff; //Background
+                while (_segmentation.hasNext()) {
+                    ArrayList<SBPendingVertical> lines = _segmentation.next();
+                if (_minPixelsInArea <= _segmentation.getCurrentArea() &&
+                        _segmentation.getCurrentArea() < _maxPixelsInArea)
+                    effectiveColor = 0; //Foreground
+                else
+                    effectiveColor = 0xffffff;
+                    if (_toMask) {
+                        _segmentation.paintSegment(lines, effectiveColor);
+                    }
+                }
             }
         }
 	}
@@ -186,7 +200,14 @@ public class BaseParticleCounter extends BaseImageOperation
      * particles are black and the background is white.
      */
     public void turnImageIntoMask() {
-
+        IColorDistance colorDistance = null;
+        if (getImage().isRgb()) {
+            colorDistance = new ColorDistance1RGB();
+        }
+        else {
+            colorDistance = new ColorDistance1();
+        }
+        colorDistance.setReferenceColor(_backgroundColor);
     }
 
     /** Define extra streams and also extra columns.*/
