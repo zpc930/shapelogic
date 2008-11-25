@@ -246,4 +246,12 @@ public class MultiLine extends BaseAnnotatedShape
 	public void setClosedLineClockWise(Boolean lineClockWise) {
 		_closedLineClockWise = lineClockWise;
 	}
+
+    public String internalInfo(StringBuffer sb) {
+        sb.append("\nMultiLine:\n");
+        for (IPoint2D point: _points)
+            sb.append(point.toString()).append("\n");
+        return sb.toString();
+    }
+
 }

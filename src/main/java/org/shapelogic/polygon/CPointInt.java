@@ -144,4 +144,9 @@ public class CPointInt extends Point implements IPoint2D {
 		}
 		return newPoint;
 	}
+
+	@Override
+    public String toString() {
+        return "[CPointInt " + x + ", " + y + "]";
+    }
 }
