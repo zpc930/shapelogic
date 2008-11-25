@@ -135,7 +135,7 @@
     <dependency>
       <groupId>imagej</groupId>
       <artifactId>imagej</artifactId>
-      <version>1.40.g</version>
+      <version>1.41</version>
     </dependency>
     <dependency>
       <groupId>commons-math</groupId>
