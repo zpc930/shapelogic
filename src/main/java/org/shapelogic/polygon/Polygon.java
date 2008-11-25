@@ -475,7 +475,9 @@ public class Polygon extends BaseAnnotatedShape
 	}
 
     public String internalInfo(StringBuffer sb) {
-        sb.append("Class: ").append(getClass().getSimpleName()).append("\n");
+        sb.append("\n\n=====Class: ").append(getClass().getSimpleName()).append("=====\n");
+        if (null != _bBox)
+            sb.append(_bBox.toString());
         if (null != _currentMultiLine)
             _currentMultiLine.internalInfo(sb);
         else {

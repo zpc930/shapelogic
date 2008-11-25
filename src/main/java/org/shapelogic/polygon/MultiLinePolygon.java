@@ -86,6 +86,7 @@ public class MultiLinePolygon extends Polygon {
 
     @Override
     public String internalInfo(StringBuffer sb) {
+        sb.append("\n\n=====Class: ").append(getClass().getSimpleName()).append("=====\n");
         for (MultiLine multiLine: _multiLines) {
             multiLine.internalInfo(sb);
         }
