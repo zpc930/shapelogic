@@ -97,6 +97,7 @@ public abstract class BaseVectorizer extends BaseImageOperation
 	
 	protected int _yForUnporcessedPixel;
 	protected int _nextCount;
+    protected boolean _displayInternalInfo = true;
 	
 	public BaseVectorizer() {
 		super(ImageJConstants.DOES_8G+ImageJConstants.SUPPORTS_MASKING);
@@ -349,7 +350,7 @@ public abstract class BaseVectorizer extends BaseImageOperation
 		_polygon = null; //Cause lazy creation of a new polygon
 		findAllLines();
 		if (_currentPoint != null) {
-			if (_nextCount == 1) //XXX maybe make a better logging system or take out
+			if (_nextCount == 1 && !_displayInternalInfo) //XXX maybe make a better logging system or take out
                 showMessage(getClass().getSimpleName(),
 					"Last line point is: " + _currentPoint + "\n" +
 					"_numberOfPointsInLine: " + _numberOfPointsInAllLines+ "\n" +
