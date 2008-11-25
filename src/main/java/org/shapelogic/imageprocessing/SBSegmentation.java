@@ -3,6 +3,7 @@ package org.shapelogic.imageprocessing;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 
+import java.util.Iterator;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
@@ -14,7 +15,7 @@ import org.shapelogic.imageutil.SLImage;
  * @author Sami Badawi
  *
  */
-public class SBSegmentation {
+public class SBSegmentation implements Iterator<ArrayList<SBPendingVertical> > {
 	private SLImage _slImage;
 	private ArrayList<SBPendingVertical> _vPV;
 	private SBPixelCompare _pixelCompare;
@@ -32,6 +33,13 @@ public class SBSegmentation {
 	private boolean _slowTestMode = false;
 	private boolean _farFromReferenceColor = false;
 		
+    private int _nextX = 0;
+    private int _nextY = 0;
+    private ArrayList<SBPendingVertical> _currentList;
+    private int _currentArea;
+	private int _referenceColor;
+	private int _paintColor = -1;
+
 	public SBSegmentation() {
 		_vPV = new ArrayList<SBPendingVertical>();
 	}
@@ -94,7 +102,7 @@ public class SBSegmentation {
 			for (int y=_min_y;y<=_max_y;y++) {
 				if (!_pixelCompare.isHandled(pointToIndex(x, y))) {
 					_pixelCompare.grabColorFromPixel(x, y);
-					segment(x, y);
+					segment(x, y, false);
 				}
 			}
 		}
@@ -106,14 +114,15 @@ public class SBSegmentation {
      */
 	public void segmentAll(int color)
 	{
-        _pixelCompare.setCurrentColor(color);
+        _referenceColor = color;
+        _pixelCompare.setCurrentColor(_referenceColor);
 		for (int y=_min_y;y<=_max_y;y++) {
 			int lineStart = pointToIndex(0, y);;
     		for (int x=_min_x;x<=_max_x;x++) {
                 int index = lineStart + x;
 				if (!_pixelCompare.isHandled(index) &&
                         _pixelCompare.similar(index)) {
-					segment(x, y);
+					segment(x, y, true);
 				}
 			}
 		}
@@ -126,11 +135,16 @@ public class SBSegmentation {
 	 * @param x
 	 * @param y
 	 */
-	public void segment(int x, int y)
+	public void segment(int x, int y, boolean useReferenceColor)
 	{
+        _currentList = new ArrayList();
+        _currentArea = 0;
 		int index = pointToIndex(x,y);
+        int effectiveColor = _referenceColor;
+        if (!useReferenceColor)
+            effectiveColor = _pixelCompare.getColorAsInt(index);
 		if (_segmentAreaFactory != null)
-			_currentSegmentArea = _segmentAreaFactory.makePixelArea(x,y, _pixelCompare.getColorAsInt(index));
+			_currentSegmentArea = _segmentAreaFactory.makePixelArea(x,y, effectiveColor);
 		if (!_pixelCompare.newSimilar(index)){
 			_status = "First pixel did not match. Segmentation is empty.";
 			return;
@@ -149,6 +163,8 @@ public class SBSegmentation {
 			SBPendingVertical curLine = (SBPendingVertical) obj;
 			fullLineTreatment(curLine);
 		}
+//        if (useReferenceColor)
+//            paintSegment(_currentList,_paintColor);
 		_pixelCompare.getNumberOfPixels();
 	}
 	
@@ -226,6 +242,7 @@ public class SBSegmentation {
 				continue;
 			if (!_pixelCompare.isHandled(offset + i)) {
 				_pixelCompare.action(offset + i);
+                _currentArea++;
 				_pixelCompare.setHandled(offset + i);
 				if (_currentSegmentArea != null)
 					_currentSegmentArea.putPixel(i,y,_pixelCompare.getColorAsInt(offset + i));
@@ -350,6 +367,7 @@ public class SBSegmentation {
 	void storeLine(SBPendingVertical curLine){
 		if (_slowTestMode && !checkLine(curLine))
 			checkLine(curLine); //for debugging
+        _currentList.add(curLine);
 		_vPV.add(curLine);
 	}
 
@@ -373,4 +391,50 @@ public class SBSegmentation {
 		_farFromReferenceColor = farFromColor;
 		_pixelCompare.setFarFromReferencColor(farFromColor);
 	}
+
+    public boolean hasNext() {
+        if (_nextY < _slImage.getHeight()-1) return true;
+        if (_nextY == _slImage.getHeight()-1 && _nextX < _slImage.getWidth()-1) return true;
+        return false;
+    }
+
+    public ArrayList<SBPendingVertical> next() {
+        while (true) {
+            if (!hasNext())
+                return null;
+            if (_nextX < _slImage.getWidth()-1)
+                _nextX++;
+            else {
+                _nextY++;
+                _nextX = 0;
+            }
+            if (!_pixelCompare.isHandled(pointToIndex(_nextX, _nextY) ) ) {
+                segment(_nextX, _nextY, true);
+                return _currentList;
+            }
+        }
+    }
+
+    public void remove() {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    public void setReferenceColor(int referenceColor) {
+        _referenceColor = referenceColor;
+    }
+
+    public int getCurrentArea() {
+        return _currentArea;
+    }
+
+    public void paintSegment(ArrayList<SBPendingVertical> lines, int paintColor) {
+        if (null != lines) {
+            for (SBPendingVertical line: lines) {
+                for (int i = line.xMin; i <= line.xMax; i++ ) {
+                    _slImage.set(i, line.y, paintColor);
+                }
+            }
+        }
+    }
+
 }
