@@ -475,14 +475,19 @@ public class Polygon extends BaseAnnotatedShape
 	}
 
     public String internalInfo(StringBuffer sb) {
-		sb.append("Lines:\n");
-		for (CLine line: getLines()) {
-			sb.append(line);
-		}
-		sb.append("\nPoints:\n");
-		for (IPoint2D point: getPoints()) {
-			sb.append(point);
-		}
+        sb.append("Class: ").append(getClass().getSimpleName()).append("\n");
+        if (null != _currentMultiLine)
+            _currentMultiLine.internalInfo(sb);
+        else {
+            sb.append("Lines:\n");
+            for (CLine line: getLines()) {
+                sb.append(line);
+            }
+            sb.append("\nPoints:\n");
+            for (IPoint2D point: getPoints()) {
+                sb.append(point);
+            }
+        }
         return sb.toString();
     }
 

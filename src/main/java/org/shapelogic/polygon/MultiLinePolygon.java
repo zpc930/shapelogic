@@ -84,6 +84,7 @@ public class MultiLinePolygon extends Polygon {
 		return replacedPolygon;
 	}
 
+    @Override
     public String internalInfo(StringBuffer sb) {
         for (MultiLine multiLine: _multiLines) {
             multiLine.internalInfo(sb);
