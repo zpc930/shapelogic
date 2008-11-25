@@ -169,12 +169,12 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
     public void displayInternalInfo() {
         StringBuffer result = new StringBuffer();
         result.append(
-            "\n\n============================DisplayInternalInfo============================\n\n");
+            "\n=====================Internal info about polygons outline of particle=====================\n");
         result.append("Number of particles found: ").append(_particlesFiltered.size()).append("\n");
         for (int i = 0; i < _particlesFiltered.size(); i++) {
             Polygon polygon = _polygonStream.get(i);
             if (null != polygon)
-                result.append("\n==============Polygon==============\n" + polygon.toString());
+                result.append(polygon.toString());
         }
         IJ.log(result.toString());
     }
