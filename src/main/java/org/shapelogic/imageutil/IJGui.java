@@ -9,6 +9,8 @@ import ij.IJ;
  */
 public class IJGui implements GuiWrapper {
 	
+    public static final int MAX_LENGTH_BEFORE_USING_LOG_WINDOW = 1000;
+
 	public static final IJGui INSTANCE = new IJGui();
 	
 	protected IJGui() {
@@ -16,7 +18,10 @@ public class IJGui implements GuiWrapper {
 	
 	@Override
 	public void showMessage(String title, String text) {
-		IJ.showMessage(title,text);
+        if (text != null && MAX_LENGTH_BEFORE_USING_LOG_WINDOW < text.length())
+            IJ.log(text);
+        else
+    		IJ.showMessage(title,text);
 	}
 
 }
