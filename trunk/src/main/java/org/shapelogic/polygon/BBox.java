@@ -85,9 +85,12 @@ public class BBox implements GeometricShape2D {
     public String toString() {
     	StringBuffer sb = new StringBuffer("bbox:");
         sb.append("min=");
-        sb.append(minVal.toString());
-        sb.append("max=");
-        sb.append(maxVal.toString());
+        if (null != minVal)
+            sb.append(minVal.toString());
+        sb.append(" max=");
+        if (null != maxVal)
+            sb.append(maxVal.toString());
+        sb.append("\n");
         return sb.toString();
     }
 
