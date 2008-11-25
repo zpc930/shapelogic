@@ -87,6 +87,9 @@ public class BaseParticleCounter extends BaseImageOperation
     
 	protected Map _context;
 	protected RecursiveContext _parentContext;
+
+    protected int _paintForground = 0;
+    protected int _paintBackground = 0xffffff;
 	
 	public BaseParticleCounter()
 	{
@@ -160,17 +163,24 @@ public class BaseParticleCounter extends BaseImageOperation
         	}
             //count how many components and how much area the background takes up
             findBackground();
+            //Run over all set point and set them to background color
+            if (_toMask) {
+                int pixelsInImage = getImage().getHeight() * getImage().getWidth();
+                for (int i = 0; i < pixelsInImage; i++)
+                    if (_segmentation.pixelIsHandled(i))
+                        getImage().set(i, _paintBackground);
+            }
             //segment all the remaining
             if (_particleImage != null && _particleImage) {
                 _segmentation.setMaxDistance(1000000000);//Everything get lumped together
-                int effectiveColor = 0xffffff; //Background
+                int effectiveColor = _paintBackground; //Background
                 while (_segmentation.hasNext()) {
                     ArrayList<SBPendingVertical> lines = _segmentation.next();
                 if (_minPixelsInArea <= _segmentation.getCurrentArea() &&
                         _segmentation.getCurrentArea() < _maxPixelsInArea)
-                    effectiveColor = 0; //Foreground
+                    effectiveColor = _paintForground;
                 else
-                    effectiveColor = 0xffffff;
+                    effectiveColor = _paintBackground;
                     if (_toMask) {
                         _segmentation.paintSegment(lines, effectiveColor);
                     }
@@ -198,7 +208,10 @@ public class BaseParticleCounter extends BaseImageOperation
     /** In order to understand what is going on or to use it for futher
      * processing turn the image into a black and white mask. Where the
      * particles are black and the background is white.
+     *
+     * XXX This can not be done here, need to be in segmentation
      */
+    @Deprecated
     public void turnImageIntoMask() {
         IColorDistance colorDistance = null;
         if (getImage().isRgb()) {
