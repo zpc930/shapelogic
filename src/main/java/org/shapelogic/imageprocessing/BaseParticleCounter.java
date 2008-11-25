@@ -430,5 +430,9 @@ public class BaseParticleCounter extends BaseImageOperation
 	@Override
 	public RecursiveContext getParentContext() {
 		return _parentContext;
-	}    
+	}
+
+    public void setToMask(boolean toMask) {
+        _toMask = toMask;
+    }
 }
