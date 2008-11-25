@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.shapelogic.calculation.RecursiveContext;
+import org.shapelogic.polygon.Polygon;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NumberedStream;
@@ -22,10 +23,12 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	/** This does really not belong in a vectorizer. */
 	@Override
 	protected void matchLines() {
-//		_matchingOH = LetterTaskFactory.matchPolygonToLetterUsingTask(
-//				getPolygon(), _cleanedupPolygon, _rulesArrayForLetterMatching);
 		NumberedStream<String> letters = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
 		String message = "";
+        StringBuffer internalInfo = new StringBuffer();
+        if (_displayInternalInfo) {
+            internalInfo.append("\n===================Internal info for skeletonized lines===================\n");
+        }
 		for (int i = 0; hasNext(); i++)
 		{
 			String currentMatch = letters.next();
@@ -34,22 +37,27 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 			message += currentMatch;
 			if (currentMatch == null || "".equals(currentMatch))
 				System.out.println("\n\nMatch failed for this:\n" + _cleanedupPolygon);
+            if (_displayInternalInfo) {
+                Polygon currentPolygon = _stream.get(i);
+                internalInfo.append(currentPolygon.toString());
+            }
 		}
 		_matchingOH = message;
 		if (_matchingOH == null) {
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}
 		showMessage("","Letter match result: " + _matchingOH);
+        if (_displayInternalInfo) {
+            showMessage("InternalInfo for skeletonized lines",internalInfo.toString());
+        }
 	}
 	
 	/** Use this to setup all the needed streams.
 	 */
 	@Override
 	public void init() {
-//		RootMap.clear();
 		_context.clear();
 		super.init();
-//		NumberedStream<Polygon> polygons = new NamedNumberedStreamLazySetup<Polygon>(StreamNames.POLYGONS);
 		_context.put(StreamNames.POLYGONS, getStream());
 		loadLetterStreams = new LoadLetterStreams(this);
 		matchSetup();
@@ -59,13 +67,11 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	 */
 	public void matchSetup() {
 		loadLetterStreams.loadLetterStream(null);
-		
 	}
 	
 	@Override
 	public void run() {
 		init();
-//		next();
 		matchLines();
 	}
 
