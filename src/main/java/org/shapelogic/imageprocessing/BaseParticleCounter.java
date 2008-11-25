@@ -11,13 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.shapelogic.calculation.RecursiveContext;
-import org.shapelogic.color.ColorDistance1;
-import org.shapelogic.color.ColorDistance1RGB;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorHypothesis;
 import org.shapelogic.color.ColorUtil;
 import org.shapelogic.color.IColorAndVariance;
-import org.shapelogic.color.IColorDistance;
 import org.shapelogic.color.IColorHypothesisFinder;
 import org.shapelogic.imageutil.BaseImageOperation;
 
@@ -103,8 +100,6 @@ public class BaseParticleCounter extends BaseImageOperation
             findColorHypothesis();
 			segment();
 			globalFilter();
-            if (_toMask)
-                turnImageIntoMask();
             if (!_countOnly) {
                 defaultColumnDefinitions();
                 customColumnDefinitions();
@@ -203,24 +198,6 @@ public class BaseParticleCounter extends BaseImageOperation
     			_particlesFiltered.add( particle );
     	}
     	
-    }
-
-    /** In order to understand what is going on or to use it for futher
-     * processing turn the image into a black and white mask. Where the
-     * particles are black and the background is white.
-     *
-     * XXX This can not be done here, need to be in segmentation
-     */
-    @Deprecated
-    public void turnImageIntoMask() {
-        IColorDistance colorDistance = null;
-        if (getImage().isRgb()) {
-            colorDistance = new ColorDistance1RGB();
-        }
-        else {
-            colorDistance = new ColorDistance1();
-        }
-        colorDistance.setReferenceColor(_backgroundColor);
     }
 
     /** Define extra streams and also extra columns.*/
