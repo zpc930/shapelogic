@@ -47,8 +47,9 @@ public class SegmentCounter extends BaseImageOperation {
 			if (_doAll)
 				_segmentation.segmentAll();
 			else
-				_segmentation.segment(startX, startY);
-			showMessage(_pluginName, getStatus());
+				_segmentation.segment(startX, startY, false);
+            if (getStatus() != null || 0 < getStatus().trim().length())
+    			showMessage(_pluginName, getStatus());
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
