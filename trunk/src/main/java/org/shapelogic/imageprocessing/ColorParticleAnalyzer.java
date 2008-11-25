@@ -5,7 +5,6 @@ import java.util.List;
 import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.IQueryCalc;
 import org.shapelogic.calculation.QueryCalc;
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.logic.CommonLogicExpressions;

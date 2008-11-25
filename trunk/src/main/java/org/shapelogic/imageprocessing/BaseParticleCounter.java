@@ -72,6 +72,7 @@ public class BaseParticleCounter extends BaseImageOperation
 	protected boolean _displayTable = true;
 	protected boolean _countOnly = false;
 	protected boolean _toMask = false;
+    protected boolean _displayInternalInfo = false;
     
     protected List<IColorAndVariance> _particlesOrig = new ArrayList<IColorAndVariance>();
     protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
@@ -111,6 +112,9 @@ public class BaseParticleCounter extends BaseImageOperation
 			showResultDialog();
 			if (_displayTable && !_countOnly) {
 				displayResultsTable();
+			}
+			if (_displayInternalInfo && !_countOnly) {
+				displayInternalInfo();
 			}
 		}
 		catch (Exception ex) {
@@ -251,7 +255,11 @@ public class BaseParticleCounter extends BaseImageOperation
     protected void showResultDialog() {
 		showMessage(getClass().getSimpleName(), getStatus());
     }
+
+    public void displayInternalInfo() {
     
+    }
+
 	/** Setup all the needed factory methods based on what type the image has.
      * 
      * @throws java.lang.Exception

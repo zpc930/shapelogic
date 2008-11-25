@@ -36,6 +36,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
     protected static int _maxPixelsInAreaStatic = MAX_PIXELS_IN_AREA_DEFAULTS;
     protected static boolean _countOnlyStatic = false;
     protected static boolean _toMaskStatic = false;
+    protected static boolean _displayInternalInfoStatic = false;
     
 	@Override
 	public void run(ImageProcessor ip) {
@@ -48,7 +49,6 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 		if (imp == null)
 			return setup(arg, (SLImage)null);
 		return setup(arg, new IJImage(imp));
-		
 	}
 	
 	@Override
@@ -69,6 +69,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _gd.addNumericField("Iterations: ", _iterationsStatic, 0);
         _gd.addCheckbox("CountOnly: ", _countOnlyStatic);
         _gd.addCheckbox("ToMask: ", _toMaskStatic);
+        _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
         _gd.showDialog();
         if (_gd.wasCanceled()) {
             return DONE;
@@ -79,6 +80,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _iterations = _iterationsStatic = (int)_gd.getNextNumber();
         _countOnly = _countOnlyStatic = _gd.getNextBoolean();
         _toMask = _toMaskStatic = _gd.getNextBoolean();
+        _displayInternalInfo = _displayInternalInfoStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 
@@ -162,5 +164,19 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 			return false;
 		}
 	}
+
+	@Override
+    public void displayInternalInfo() {
+        StringBuffer result = new StringBuffer();
+        result.append(
+            "\n\n============================DisplayInternalInfo============================\n\n");
+        result.append("Number of particles found: ").append(_particlesFiltered.size()).append("\n");
+        for (int i = 0; i < _particlesFiltered.size(); i++) {
+            Polygon polygon = _polygonStream.get(i);
+            if (null != polygon)
+                result.append("\n==============Polygon==============\n" + polygon.toString());
+        }
+        IJ.log(result.toString());
+    }
 }
 
