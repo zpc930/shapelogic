@@ -469,21 +469,31 @@ public class Polygon extends BaseAnnotatedShape
 	@Override
 	public String toString() {
 		StringBuffer result = new StringBuffer();
-		result.append("Lines:\n");
+        internalInfo(result);
+        printAnnotation(result);
+		return result.toString();
+	}
+
+    public String internalInfo(StringBuffer sb) {
+		sb.append("Lines:\n");
 		for (CLine line: getLines()) {
-			result.append(line);
+			sb.append(line);
 		}
-		result.append("\nPoints:\n");
+		sb.append("\nPoints:\n");
 		for (IPoint2D point: getPoints()) {
-			result.append(point);
+			sb.append(point);
 		}
+        return sb.toString();
+    }
+
+    public String printAnnotation(StringBuffer result) {
 		result.append("\nAnnotations:\n");
 		Map<Object, Set<GeometricShape2D>> map = getAnnotatedShape().getMap();
 		for (Entry<Object, Set<GeometricShape2D>> entry: map.entrySet())
 			result.append(entry.getKey() +":\n" + entry.getValue() + "\n");
 		result.append("\naspectRatio: " + getBBox().getAspectRatio());
 		return result.toString();
-	}
+    }
 
 	public Double getPerimeter() {
 		return _perimeter;
