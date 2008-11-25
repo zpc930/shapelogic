@@ -437,4 +437,7 @@ public class SBSegmentation implements Iterator<ArrayList<SBPendingVertical> > {
         }
     }
 
+    public boolean pixelIsHandled(int index) {
+        return _pixelCompare.isHandled(index);
+    }
 }
