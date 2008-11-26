@@ -144,21 +144,20 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 	
 	/** Get next element without advancing _current.  */
 	@Override
-	public E get(int arg0) {
-		if ( _last != LAST_UNKNOWN && _last < arg0)
+	public E get(int inputIndex) {
+		if ( _last != LAST_UNKNOWN && _last < inputIndex)
 			return null;
 		if (isRandomAccess()) {
-			E result = _list.get(arg0);
+			E result = _list.get(inputIndex);
 			if (result == null) {
-				int index = _list.size();
-				result = invokeIndex(index);
+				result = invokeIndex(inputIndex);
 				if (result != null && isCached()) 
-					_list.set(arg0,result);
+					_list.set(inputIndex,result);
 			}
 			return result;
 		}
-		if (arg0 >= _list.size()) {
-			for (int i = _list.size(); i <= arg0; i++) {
+		if (inputIndex >= _list.size()) {
+			for (int i = _list.size(); i <= inputIndex; i++) {
 				E element = invokeIndex(i);
 				if (element != null)
 					_list.add(element);
@@ -169,7 +168,7 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 				}
 			}
 		}
-		return _list.get(arg0);
+		return _list.get(inputIndex);
 	}
 	
 	@Override
