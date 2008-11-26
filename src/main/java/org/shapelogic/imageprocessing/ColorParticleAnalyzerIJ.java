@@ -15,6 +15,7 @@ import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.BBox;
 import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.Polygon;
+import org.shapelogic.util.Constants;
 import org.shapelogic.util.Headings;
 
 /** Automatic particle counter for 24 bit RGB and 8 bit Gray.
@@ -171,7 +172,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         result.append(
             "\n=====================Internal info about polygons outline of particle=====================\n");
         result.append("Number of particles found: ").append(_particlesFiltered.size()).append("\n");
-        for (int i = 0; i < _particlesFiltered.size(); i++) {
+        for (int i = 0; _polygonStream.getLast() == Constants.LAST_UNKNOWN || i < _polygonStream.getLast(); i++) {
             Polygon polygon = _polygonStream.get(i);
             if (null != polygon)
                 result.append(polygon.toString());
