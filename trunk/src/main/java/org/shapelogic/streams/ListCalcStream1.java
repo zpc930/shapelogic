@@ -12,7 +12,6 @@ import org.shapelogic.util.Constants;
  */
 public class ListCalcStream1<In, E> extends BaseListStream1<In, E> {
 	protected Calc1<In, E> _calc;
-    protected boolean _nullLegalValue = true;
 	
 	public ListCalcStream1(Calc1<In, E> calc, NumberedStream<In> inputStream, int maxLast) {
 		super(inputStream, maxLast);
@@ -34,13 +33,4 @@ public class ListCalcStream1<In, E> extends BaseListStream1<In, E> {
 	public E invoke(In input) {
 		return _calc.invoke(input);
 	}
-
-	@Override
-	public boolean isNullLegalValue() {
-        return _nullLegalValue;
-    }
-
-	public void setNullLegalValue(boolean nullLegalValue) {
-        _nullLegalValue = nullLegalValue;
-    }
 }
