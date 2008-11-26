@@ -68,8 +68,12 @@ public class BBox implements GeometricShape2D {
     }
 
     public IPoint2D getDiagonalVector() {
-    	IPoint2D diagonal = maxVal.copy().minus(minVal);
-    	return diagonal;
+        if (null != maxVal && null != minVal) {
+            IPoint2D diagonal = maxVal.copy().minus(minVal);
+            return diagonal;
+        }
+        else
+            return new CPointInt(0,0);
     }
 
     /** A point on the diagonal line 
