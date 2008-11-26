@@ -49,7 +49,13 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         int r = _rStatic = (int)_gd.getNextNumber();
         int g = _gStatic = (int)_gd.getNextNumber();
         int b = _bStatic = (int)_gd.getNextNumber();
-        int rgbValue = ColorUtil.packColors( r, g, b);
+        int rgbValue = 0;
+        if (getImage().isGray()) {
+        //If only b is set use that as gray else
+                rgbValue = ColorUtil.blueOrRgbToGray(r, g, b);
+        }
+        else
+            rgbValue = ColorUtil.packColors( r, g, b);
         _inputColor = rgbValue;
         _useReferenceAsBackground = _backgroundStatic = _gd.getNextBoolean();
         _countOnly = _countOnlyStatic = _gd.getNextBoolean();
