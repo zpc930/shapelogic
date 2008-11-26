@@ -72,6 +72,8 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 
 	protected RecursiveContext _parentContext;
 
+    protected boolean _nullLegalValue = true;
+    
 	/** Calculate the value at an index.
 	 * <br />
 	 * So it gets the needed input value and call the appropriate invoke function.<br /> 
@@ -95,7 +97,7 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 		int index = _list.size();
 		E element = invokeIndex(index);
 		//XXX this should not always be the case
-		if (element != null) {
+		if ((element != null) || isNullLegalValue()) {
 			_list.add(element);
 			return true;
 		}
@@ -213,8 +215,12 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 	}
 	
 	@Override
-    public boolean isNullLegalValue() {
-        return true;
+	public boolean isNullLegalValue() {
+        return _nullLegalValue;
+    }
+
+	public void setNullLegalValue(boolean nullLegalValue) {
+        _nullLegalValue = nullLegalValue;
     }
 
 	public int getCurrentSize() {
