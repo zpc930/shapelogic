@@ -29,5 +29,26 @@ Declarative programming in ShapeLogic is build on the following:
 
 </p>
 
+<h2>Streams</h2>
+
+<h3>Definitions</h3>
+
+<p>
+<b>last</b> the last element of a stream, set to LAST_UNKNOWN, before it is
+know. This value can get lower as calculation progress.
+<p></p>
+<b>maxLast</b> maually set max value for last. The real last value might be
+lower.
+</p>
+
+<h3>How can an calculation of stream end?</h3>
+
+<ul>
+    <li>If null is not a legal value when finding a null</li>
+    <li>If an exception is thrown during a calculation</li>
+    <li>By setting a top maxLast value</li>
+</ul>
+
+
 </body>
 </html>
