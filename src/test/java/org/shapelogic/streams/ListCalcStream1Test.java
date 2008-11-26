@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import org.shapelogic.calculation.Calc1;
 import org.shapelogic.mathematics.NaturalNumberStream;
+import org.shapelogic.util.Constants;
 
 /** Test of TransformerStream.
  * 
@@ -35,15 +36,19 @@ public class ListCalcStream1Test extends TestCase {
 			}
 		};
 		even = 
-			new ListCalcStream1<Integer, Integer>(times2,(NumberedStream<Integer>)natural); 
+			new ListCalcStream1<Integer, Integer>(times2,(NumberedStream<Integer>)natural);
+        even.setNullLegalValue(false);
 	}
 	
 	public void testWithNext() {
+        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
 		assertEquals(new Integer(0), even.next());
 		assertEquals(new Integer(2), even.next());
 		assertEquals(new Integer(4), even.next());
 		assertEquals(new Integer(6), even.next());
+        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
 		assertFalse(even.hasNext());
+        assertEquals(3, even.getLast());
 		assertNull(even.next());
 	}
 	
@@ -53,5 +58,37 @@ public class ListCalcStream1Test extends TestCase {
 		assertEquals(new Integer(4), even.get(2));
 		assertEquals(new Integer(6), even.get(3));
 		assertNull(even.get(4));
+	}
+
+
+	public void testGetTwiceWithSameResult() {
+		assertEquals(new Integer(0), even.get(0));
+		assertEquals(new Integer(2), even.get(1));
+		assertEquals(new Integer(4), even.get(2));
+		assertEquals(new Integer(6), even.get(3));
+		assertNull(even.get(4));
+		assertEquals(new Integer(0), even.get(0));
+		assertEquals(new Integer(2), even.get(1));
+		assertEquals(new Integer(4), even.get(2));
+		assertEquals(new Integer(6), even.get(3));
+		assertNull(even.get(4));
+	}
+
+	public void testIterateTwiceWithSameResult() {
+        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
+		assertEquals(new Integer(0), even.get(0));
+		assertEquals(new Integer(2), even.get(1));
+		assertEquals(new Integer(4), even.get(2));
+		assertEquals(new Integer(6), even.get(3));
+        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
+		assertNull(even.get(4));
+        assertEquals(3, even.getLast());
+		assertEquals(new Integer(0), even.get(0));
+		assertEquals(new Integer(2), even.get(1));
+		assertEquals(new Integer(4), even.get(2));
+		assertEquals(new Integer(6), even.get(3));
+        assertEquals(3, even.getLast());
+		assertNull(even.get(4));
+        assertEquals(3, even.getLast());
 	}
 }
