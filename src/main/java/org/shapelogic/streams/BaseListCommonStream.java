@@ -151,8 +151,12 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 			E result = _list.get(inputIndex);
 			if (result == null) {
 				result = invokeIndex(inputIndex);
-				if (result != null && isCached()) 
+				if (result != null) {
+//                      if (isCached())
 					_list.set(inputIndex,result);
+                }
+                else if (!isNullLegalValue() && _last != LAST_UNKNOWN && inputIndex < _last )
+                    _last = inputIndex;
 			}
 			return result;
 		}
@@ -162,8 +166,13 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 				if (element != null)
 					_list.add(element);
 				else {
-					_last = i - 1;
-					_dirty = false;
+                    if (!isNullLegalValue()) {
+                        if (_last == LAST_UNKNOWN)
+                            _last = i - 1;
+                        else
+                            _last = Math.min(i - 1,_last);
+                        _dirty = false;
+                    }
 					return null;
 				}
 			}
