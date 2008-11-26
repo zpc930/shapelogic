@@ -78,6 +78,17 @@ public class ColorUtil {
     	return (int)brightness;
     }
 
+    /** When you have RGB input but need a gray result.
+     *
+     * If only the blue is set use that, otherwise do normal color transform.
+     * Based on the perceived contribution to the brightness.
+     *  */
+    static public int blueOrRgbToGray(int red, int green, int blue) {
+        if (0 == red && 0 == green)
+        	return blue;
+        return (30*red + 59*green + 11*blue) / 100;
+    }
+
 	static public String colorToString(int color, boolean rgb) {
 		String result = null;
 		if (rgb) {
