@@ -7,7 +7,8 @@ package org.shapelogic.streams;
  */
 public interface NumberedStream<E> extends Stream<E> {
 
-	/** Get the calculate value for index based on the previous stream
+	/** Get the calculate value for index based on the previous stream. <br />
+     * <br />
 	 * So it just calls 
 	 * invoke(getInputStream().get(index), index) 
 	 * 
@@ -19,10 +20,19 @@ public interface NumberedStream<E> extends Stream<E> {
 	/** Index of last successfully processed element. */
 	int getIndex();
 	
-	/** Last possible element. */
+	/** Last possible element. <br />
+     *
+     * If last is not known then this is set to LAST_UNKNOWN.<br />
+     * When you add a new element this will not grow.<br />
+     * When maxLast is set so it this, but this can can get lower.<br />
+     * Set when you find the end.<br />
+     * <br />
+     * If you use this for iteration you need to call the function at each
+     * iteration.
+     */
 	int getLast();
 
-	/** Set a max value for last possible element. */
+	/** Manually set max value for last possible element. */
 	int getMaxLast();
 
 	/** Set a max value for last possible element. */
