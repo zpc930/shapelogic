@@ -181,6 +181,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 	public void findAccumulatedDirectionChange() {
 		_accumulatedDirectionChange = 0;
 		_accumulatedAbsoluteDirectionChange = 0;
+        if (_lastChain < 0) //Empty list
+            return;
 		byte lastDirection = _chainCodeForMultiLine[_lastChain];
 		int lastDirectionChange = 0;
 		for (int i = 0; i <= _lastChain; i++) {
@@ -225,6 +227,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		CPointInt nextPoint = null;
 		if (isClosed()) {
 			lastPointNumber--;
+            if (lastPointNumber < 1)
+                return;
 			lastPoint = (CPointInt) points.get(lastPointNumber - 1);
 		}
 		for (int i=firstPointNumber; i<lastPointNumber; i++) {
@@ -315,6 +319,8 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		List<? extends IPoint2D> points = _multiLine.getPoints();
 		int numberOfPoints = points.size();
 		numberOfPoints--; //Start point also end point
+        if (numberOfPoints < 1)
+            return;
 		_linePropertiesList.set(Constants.ZERO,_linePropertiesList.get(numberOfPoints));
 		_pointPropertiesList.set(Constants.ZERO,_pointPropertiesList.get(numberOfPoints));
 	}
@@ -328,9 +334,13 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 		CPointInt lastPoint = null;
 		List<? extends IPoint2D> points = _multiLine.getPoints();
 		int numberOfPoints = points.size();
+        if (numberOfPoints == 0)
+            return;
 		int firstPointNumber = 0;
 		if (isClosed()) {
 			numberOfPoints--; //Start point also end point
+            if (numberOfPoints == 0)
+                return;
 			lastPoint = (CPointInt) points.get(numberOfPoints-1);
 		}
 		for (int i=firstPointNumber; i < numberOfPoints; i++) {
