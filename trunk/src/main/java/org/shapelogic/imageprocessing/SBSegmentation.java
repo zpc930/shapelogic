@@ -314,6 +314,21 @@ public class SBSegmentation implements Iterator<ArrayList<SBPendingVertical> > {
 	 */
 	public void setSLImage(SLImage ip) {
 		this._slImage = ip;
+        Rectangle roi = ip.getRoi();
+        if (roi != null) {
+            _min_x = roi.x;
+            _max_x = roi.x + roi.width;
+            _min_y = roi.y;
+            _max_y = roi.x + roi.width;
+        }
+        else {
+            _min_x = 0;
+            _max_x = ip.getWidth() - 1;
+            _min_y = 0;
+            _max_y = ip.getHeight() - 1;
+        }
+        _nextX = _min_x;
+        _nextY = _min_y;
 	}
 
 	public SLImage getSLImage() {
@@ -393,8 +408,8 @@ public class SBSegmentation implements Iterator<ArrayList<SBPendingVertical> > {
 	}
 
     public boolean hasNext() {
-        if (_nextY < _slImage.getHeight()-1) return true;
-        if (_nextY == _slImage.getHeight()-1 && _nextX < _slImage.getWidth()-1) return true;
+        if (_nextY < _max_y) return true;
+        if (_nextY == _max_y && _nextX < _max_x) return true;
         return false;
     }
 
@@ -402,7 +417,7 @@ public class SBSegmentation implements Iterator<ArrayList<SBPendingVertical> > {
         while (true) {
             if (!hasNext())
                 return null;
-            if (_nextX < _slImage.getWidth()-1)
+            if (_nextX <  _max_x)
                 _nextX++;
             else {
                 _nextY++;
