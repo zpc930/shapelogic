@@ -48,4 +48,11 @@ public class ColorUtilTest extends TestCase {
 		
 	}
 
+    public void testBlueOrRgbToGray() {
+        int value = 190;
+        assertEquals(value, blueOrRgbToGray(0, 0, value));
+        assertEquals(value, blueOrRgbToGray(value, value, value));            
+        assertTrue(value != blueOrRgbToGray(value, 0, value));
+    }
+
 }
