@@ -164,6 +164,14 @@ public class BaseParticleCounter extends BaseImageOperation
             findBackground();
             //Run over all set point and set them to background color
             if (_toMask) {
+                if (getImage().isInvertedLut()) {
+                    _paintBackground = 0;
+                    _paintForground = 255;
+                }
+                else {
+                    _paintBackground = 0xffffff;
+                    _paintForground = 0;
+                }
                 int pixelsInImage = getImage().getHeight() * getImage().getWidth();
                 for (int i = 0; i < pixelsInImage; i++)
                     if (_segmentation.pixelIsHandled(i))
