@@ -31,6 +31,7 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
 
     private int _flags = DOES_ALL|SUPPORTS_MASKING|PARALLELIZE_STACKS;
     private int _referenceColor = 1;
+    private int _referenceGrayColor = 1;
 	protected static int _rStatic = 0;
 	protected static int _gStatic = 0;
 	protected static int _bStatic = 0;
@@ -64,7 +65,7 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
         int g = _gStatic = (int)_gd.getNextNumber();
         int b = _bStatic = (int)_gd.getNextNumber();
         _referenceColor= ColorUtil.packColors( r, g, b);
-        _colorDistance.setReferenceColor(_referenceColor);
+        _referenceGrayColor = ColorUtil.blueOrRgbToGray(r, g, b);
         _toMask = _toMaskStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _flags);
     }
@@ -75,12 +76,6 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
 
     @Override
     public int setup(String arg, ImagePlus imp) {
-        if (imp.getProcessor() instanceof ColorProcessor) {
-        	_colorDistance = new ColorDistance1RGB();
-        }
-        else {
-        	_colorDistance = new ColorDistance1();
-        }
         return _flags;
     }
 
@@ -95,7 +90,7 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
         int g = _gStatic = (int)_gd.getNextNumber();
         int b = _bStatic = (int)_gd.getNextNumber();
         _referenceColor= ColorUtil.packColors( r, g, b);
-        _colorDistance.setReferenceColor(_referenceColor);
+        _referenceGrayColor = ColorUtil.blueOrRgbToGray(r, g, b);
         _toMask = _toMaskStatic = _gd.getNextBoolean();
         return true;
     }
@@ -120,6 +115,14 @@ public class ColorReplacer implements ExtendedPlugInFilter, DialogListener {
     		endX = imageProcessor.getWidth();
     		endLine = imageProcessor.getHeight();
         }
+        if (imageProcessor instanceof ColorProcessor) {
+        	_colorDistance = new ColorDistance1RGB();
+        }
+        else {
+        	_colorDistance = new ColorDistance1();
+            _referenceColor = _referenceGrayColor;
+        }
+        _colorDistance.setReferenceColor(_referenceColor);
         int closeColor = _referenceColor;
         if (_toMask)
             closeColor = FOREGROUND_MASK;
