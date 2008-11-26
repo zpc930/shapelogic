@@ -194,12 +194,21 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 		return false;
 	}
 
-	/** If there is a list that contains all the results. */
+	/** If there is a list that contains all the results.
+     *
+     * I would think that this should always happen for a ListStream,
+     * but it could happen for other streams as well.
+     */
 	@Override
 	public boolean isCached() {
 		return true;
 	}
 	
+	@Override
+    public boolean isNullLegalValue() {
+        return true;
+    }
+
 	public int getCurrentSize() {
 		return _list.size();
 	}
@@ -240,11 +249,6 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 	@Override
 	public E getValue() {
 		return _value;
-	}
-
-	@Override
-	public boolean isContextBased() {
-		return false;
 	}
 
 	@Override
