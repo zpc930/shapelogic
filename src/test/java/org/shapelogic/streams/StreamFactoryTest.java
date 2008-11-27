@@ -66,8 +66,7 @@ public class StreamFactoryTest extends TestCase {
 		assertEquals(Boolean.TRUE,stream.next());
 		assertEquals(Boolean.TRUE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
+		assertNull(stream.next());
 		
 	}
 }
