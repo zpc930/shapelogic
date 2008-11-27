@@ -1,9 +1,7 @@
 package org.shapelogic.streams;
 
 import java.util.List;
-import java.util.Map;
-
-import org.shapelogic.calculation.InContexts;
+import org.shapelogic.util.Constants;
 
 
 /** Implementation of ListStream. <br />
@@ -46,6 +44,9 @@ implements IndexedInputStream1<In, E> {
 	
 	public BaseListIndexedStream1(NumberedStream<In> inputStream){
 		_inputStream = inputStream;
+        if (_inputStream != null) {
+            setMaxLast(_inputStream.getMaxLast());
+        }
 	}
 	
 	public BaseListIndexedStream1(){
@@ -53,7 +54,8 @@ implements IndexedInputStream1<In, E> {
 
 	@Override
 	public E invokeIndex(int index){
-		return invoke(getInput(index),index);
+        In inputObj = getInput(index);
+		return invoke(inputObj, index);
 	}
 	
 	public List<E> getList() { 
@@ -74,7 +76,25 @@ implements IndexedInputStream1<In, E> {
 	public In getInput(int index) {
 		if (getInputStream() == null)
 			return null;
-		return getInputStream().get(index);
+		In inputObj = getInputStream().get(index);
+        if (inputObj == null && (getInputStream().getLast() < index)) {
+            if (_last == Constants.LAST_UNKNOWN)
+                _last = getInputStream().getLast();
+            else
+                _last = Math.min(_last, getInputStream().getLast());
+        }
+        return inputObj;
 	}
 
+	@Override
+	public boolean hasNext() {
+        if (_last != Constants.LAST_UNKNOWN && _last <= _current )
+            return false;
+		if (getInputStream() != null) {
+            int inputLast = getInputStream().getLast();
+            if (inputLast != Constants.LAST_UNKNOWN && inputLast <= _current )
+                return false;
+        }
+		return true;
+	}
 }
