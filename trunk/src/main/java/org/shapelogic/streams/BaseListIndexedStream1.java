@@ -77,24 +77,25 @@ implements IndexedInputStream1<In, E> {
 		if (getInputStream() == null)
 			return null;
 		In inputObj = getInputStream().get(index);
-        if (inputObj == null && (getInputStream().getLast() < index)) {
-            if (_last == Constants.LAST_UNKNOWN)
-                _last = getInputStream().getLast();
-            else
-                _last = Math.min(_last, getInputStream().getLast());
-        }
+        setLastFromInput();
         return inputObj;
 	}
 
 	@Override
 	public boolean hasNext() {
-        if (_last != Constants.LAST_UNKNOWN && _last <= _current )
-            return false;
-		if (getInputStream() != null) {
-            int inputLast = getInputStream().getLast();
-            if (inputLast != Constants.LAST_UNKNOWN && inputLast <= _current )
-                return false;
-        }
-		return true;
+        setLastFromInput();
+         return _last == Constants.LAST_UNKNOWN || _current < _last;
 	}
+
+    protected void setLastFromInput() {
+		if (getInputStream() == null)
+			return;
+        int inputLast = getInputStream().getLast();
+        if (inputLast != Constants.LAST_UNKNOWN) {
+            if (_last == Constants.LAST_UNKNOWN)
+                _last = inputLast;
+            else
+                _last = Math.min(_last, inputLast);
+        }
+    }
 }
