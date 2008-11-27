@@ -1,6 +1,7 @@
 package org.shapelogic.streams;
 
 import java.util.List;
+import org.shapelogic.util.Constants;
 
 /** Implementation of ListStream. <br />
  * 
@@ -70,7 +71,26 @@ implements InputStream1<In, E> {
 	public In getInput(int index) {
 		if (getInputStream() == null)
 			return null;
-		return getInputStream().get(index);
+		In inputObj = getInputStream().get(index);
+        setLastFromInput();
+        return inputObj;
 	}
 
+	@Override
+	public boolean hasNext() {
+        setLastFromInput();
+        return _last == Constants.LAST_UNKNOWN || _current < _last;
+	}
+
+    protected void setLastFromInput() {
+		if (getInputStream() == null)
+			return;
+        int inputLast = getInputStream().getLast();
+        if (inputLast != Constants.LAST_UNKNOWN) {
+            if (_last == Constants.LAST_UNKNOWN)
+                _last = inputLast;
+            else
+                _last = Math.min(_last, inputLast);
+        }
+    }
 }
