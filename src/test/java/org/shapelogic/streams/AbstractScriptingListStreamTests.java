@@ -41,10 +41,10 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		assertEquals(Boolean.TRUE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
-//		assertFalse(stream.hasNext()); //XXX should work
-//		assertNull(stream.next()); //XXX should work
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
+		assertFalse(stream.hasNext()); //XXX should work
+		assertNull(stream.next()); //XXX should work
+//		assertEquals(Boolean.FALSE,stream.next());
+//		assertEquals(Boolean.FALSE,stream.next());
 	}
 	
 	/** Take a named input stream and make a filter based on a scripting function.
@@ -67,10 +67,10 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		assertEquals(Boolean.TRUE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
-//		assertFalse(stream.hasNext()); //XXX should work
-//		assertNull(stream.next()); //XXX should work
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
+		assertFalse(stream.hasNext()); //XXX should work
+		assertNull(stream.next()); //XXX should work
+//		assertEquals(Boolean.FALSE,stream.next());
+//		assertEquals(Boolean.FALSE,stream.next());
 	}
 
 	public void testAddListStream0() {
@@ -94,10 +94,10 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		assertEquals(Boolean.TRUE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
-//		assertFalse(stream.hasNext()); //XXX should work
-//		assertNull(stream.next()); //XXX should work
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
+		assertFalse(stream.hasNext()); //XXX should work
+		assertNull(stream.next()); //XXX should work
+//		assertEquals(Boolean.FALSE,stream.next());
+//		assertEquals(Boolean.FALSE,stream.next());
 	}
 
 	public void testAddListStream0NoPartName() {
@@ -121,10 +121,10 @@ abstract public class AbstractScriptingListStreamTests extends AbstractListStrea
 		assertEquals(Boolean.TRUE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
 		assertEquals(Boolean.FALSE,stream.next());
-//		assertFalse(stream.hasNext()); //XXX should work
-//		assertNull(stream.next()); //XXX should work
-		assertEquals(Boolean.FALSE,stream.next());
-		assertEquals(Boolean.FALSE,stream.next());
+		assertFalse(stream.hasNext()); //XXX should work
+		assertNull(stream.next()); //XXX should work
+//		assertEquals(Boolean.FALSE,stream.next());
+//		assertEquals(Boolean.FALSE,stream.next());
 	}
 
 	/** Take a named input stream and make a filter based on a scripting function.
