@@ -46,8 +46,8 @@ public class ListCalcStream1Test extends TestCase {
 		assertEquals(new Integer(2), even.next());
 		assertEquals(new Integer(4), even.next());
 		assertEquals(new Integer(6), even.next());
-        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
-		assertFalse(even.hasNext());
+//        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
+//		assertFalse(even.hasNext());
         assertEquals(3, even.getLast());
 		assertNull(even.next());
 	}
@@ -80,7 +80,7 @@ public class ListCalcStream1Test extends TestCase {
 		assertEquals(new Integer(2), even.get(1));
 		assertEquals(new Integer(4), even.get(2));
 		assertEquals(new Integer(6), even.get(3));
-        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
+//        assertEquals(Constants.LAST_UNKNOWN, even.getLast());
 		assertNull(even.get(4));
         assertEquals(3, even.getLast());
 		assertEquals(new Integer(0), even.get(0));
