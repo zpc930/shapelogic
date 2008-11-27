@@ -1,7 +1,6 @@
 package org.shapelogic.streams;
 
 import org.shapelogic.calculation.CalcIndex1;
-import org.shapelogic.streams.ListCalcIndexStream1;
 
 /** Test of TransformerStream.
  * 
