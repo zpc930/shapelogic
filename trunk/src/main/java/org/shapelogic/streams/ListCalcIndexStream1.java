@@ -20,6 +20,11 @@ public class ListCalcIndexStream1<In, E> extends BaseListIndexedStream1<In, E> {
 		_calc = calc;
 	}
 
+	public ListCalcIndexStream1(CalcIndex1<In, E> calc, NumberedStream<In> inputStream) {
+		super(inputStream, inputStream.getMaxLast());
+		_calc = calc;
+	}
+
 	public ListCalcIndexStream1(CalcIndex1<In, E> transformer) {
 		this(transformer,null, Constants.LAST_UNKNOWN);
 	}
