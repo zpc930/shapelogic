@@ -1,8 +1,5 @@
 package org.shapelogic.streams;
 
-import org.shapelogic.streams.StreamFactory;
-import org.shapelogic.streams.ListStream;
-
 
 /** Test of FunctionStream.
  * 
@@ -13,6 +10,7 @@ import org.shapelogic.streams.ListStream;
  */
 public class FunctionJavaScriptStreamTest extends AbstractScriptingListStreamTests {
 
+    @Override
 	public void setUp() throws Exception {
 		super.setUp();
 		fibonacciNumbersAtStart = 2;
