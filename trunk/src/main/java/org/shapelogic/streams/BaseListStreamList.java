@@ -74,6 +74,7 @@ implements InputStreamList<In, E> {
 	public List<In> getInput(int index) {
 		if (getInputStream() == null)
 			return null;
+        setLastFromInput();
 		List<In> result = new ArrayList<In>(getDimension());
 		boolean notNull = false;
 		for (int i = 0; i < getDimension(); i++) {
@@ -91,4 +92,25 @@ implements InputStreamList<In, E> {
 	public int getDimension() {
 		return _inputStream.size();
 	}
+
+	@Override
+	public boolean hasNext() {
+        setLastFromInput();
+        return _last == Constants.LAST_UNKNOWN || _current < _last;
+	}
+
+    protected void setLastFromInput() {
+		if (getInputStream() == null)
+			return;
+		for (int i = 0; i < getDimension(); i++) {
+			NumberedStream<In> currentInputStream = _inputStream.get(i);
+            int inputLast = currentInputStream.getLast();
+            if (inputLast != Constants.LAST_UNKNOWN) {
+                if (_last == Constants.LAST_UNKNOWN)
+                    _last = inputLast;
+                else
+                    _last = Math.min(_last, inputLast);
+            }
+        }
+    }
 }
