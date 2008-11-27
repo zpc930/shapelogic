@@ -1,12 +1,5 @@
 package org.shapelogic.streams;
 
-import org.shapelogic.calculation.Calc1;
-import org.shapelogic.calculation.RootMap;
-import org.shapelogic.mathematics.NaturalNumberStream;
-import org.shapelogic.predicate.BinaryEqualPredicate;
-import org.shapelogic.predicate.BinaryPredicate;
-import org.shapelogic.streams.ListStream;
-import org.shapelogic.util.Constants;
 
 import junit.framework.TestCase;
 
