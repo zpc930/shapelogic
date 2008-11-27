@@ -14,8 +14,9 @@ public class AddListStream extends BaseListStreamList<Integer,Integer> {
 		int sum = 0;
 		if (input == null)
 			return sum;
-		for (int element: input)
-			sum += element;
+		for (Integer element: input)
+            if (input != null)
+    			sum += element;
 		return sum;
 	}
 }
