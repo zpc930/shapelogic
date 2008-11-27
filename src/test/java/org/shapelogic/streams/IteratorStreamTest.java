@@ -2,8 +2,6 @@ package org.shapelogic.streams;
 
 import java.util.Iterator;
 
-import org.shapelogic.streams.StreamFactory;
-import org.shapelogic.streams.ListStream;
 
 /** Test of IteratorStream.
  * 
