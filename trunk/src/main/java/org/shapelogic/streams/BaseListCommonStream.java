@@ -112,7 +112,8 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 		if (isCached()) { 
 			if (_current < _list.size() - 1) 
 				return true;
-			else if ((_last != LAST_UNKNOWN && _last <= _current )) {
+            setLastFromInput();
+			if ((_last != LAST_UNKNOWN && _last <= _current )) {
 				return false;
 			} 
 			else {
@@ -120,9 +121,15 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 			}
 			return _current < _list.size() - 1;
 		}
-		else 
-			return (_maxLast != LAST_UNKNOWN && _current < _maxLast);
+		else {
+            setLastFromInput();
+            return _last == Constants.LAST_UNKNOWN || _current < _last;
+        }
 	}
+
+    protected void setLastFromInput() {
+
+    }
 
 	/** Get next element and advance _current. */
 	@Override
@@ -157,8 +164,12 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 //                      if (isCached())
 					_list.set(inputIndex,result);
                 }
-                else if (!isNullLegalValue() && _last != LAST_UNKNOWN && inputIndex < _last )
-                    _last = inputIndex;
+                else if (!isNullLegalValue() && _last != LAST_UNKNOWN && inputIndex < _last ) {
+                    if (_last == LAST_UNKNOWN)
+                        _last = inputIndex - 1;
+                    else
+                        _last = Math.min(inputIndex - 1,_last);
+                }
 			}
 			return result;
 		}
@@ -175,6 +186,8 @@ implements ListStream<E>, StreamProperties, ContextGettable {
                             _last = Math.min(i - 1,_last);
                         _dirty = false;
                     }
+                    else if (_last == LAST_UNKNOWN || inputIndex <= _last)
+    					_list.add(element);
 					return null;
 				}
 			}
