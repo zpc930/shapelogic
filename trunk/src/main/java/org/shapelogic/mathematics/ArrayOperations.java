@@ -16,6 +16,8 @@ public class ArrayOperations {
 	 */
 	static public long product(int[] numberArray) {
 		long result = 1;
+        if (numberArray == null)
+            return result; // 1 is the neutral element for multiplication
 		for (int element: numberArray) {
 			result *= element;
 		}
