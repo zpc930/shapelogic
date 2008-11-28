@@ -34,7 +34,6 @@ import java.util.List;
 import org.shapelogic.calculation.IQueryCalc;
 import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.calculation.RecursiveContext;
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.streams.XOrListStream;
 
