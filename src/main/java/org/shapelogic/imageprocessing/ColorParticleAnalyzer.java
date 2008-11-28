@@ -55,11 +55,13 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		IQueryCalc queryCalc = QueryCalc.getInstance();
     	_particleStream = new WrappedListStream<IColorAndVariance>(_particlesFiltered);
         int traceColor = _paintForground;
+        boolean traceCloseToColor = true;
         if (!_toMask) {
             traceColor = _referenceColor;
+            traceCloseToColor = false;
         }
     	_edgeTracer = new EdgeTracer(_image, traceColor,
-    			_maxDistance, false);
+    			_maxDistance, traceCloseToColor);
 		Calc1<IColorAndVariance, Polygon> chainCodeCalc1 = 
 			new Calc1<IColorAndVariance, Polygon>() {
 				@Override
