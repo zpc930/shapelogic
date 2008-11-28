@@ -38,16 +38,17 @@ abstract public class BaseListFilterStream<E> extends BaseListIndexedStream1<E,E
 		return null;
 	}
 	
+	@Override
 	public boolean hasNext() {
 		return _inputStream.hasNext(); //XXX not right fix
 	}
 	
 	@Override
-	public E get(int arg0) {
-		if ( _last != LAST_UNKNOWN && _last < arg0)
+	public E get(int index) {
+		if ( _last != LAST_UNKNOWN && _last < index)
 			return null;
-		if (arg0 >= _list.size()) {
-			for (int i = _list.size(); i <= arg0; i++) {
+		if (index >= _list.size()) {
+			for (int i = _list.size(); i <= index; i++) {
 				if (hasNext()) {
 					E element = next();
 				}
@@ -58,6 +59,6 @@ abstract public class BaseListFilterStream<E> extends BaseListIndexedStream1<E,E
 				}
 			}
 		}
-		return _list.get(arg0);
+		return _list.get(index);
 	}
 }
