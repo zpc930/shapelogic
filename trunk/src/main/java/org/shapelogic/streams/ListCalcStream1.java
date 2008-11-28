@@ -1,7 +1,6 @@
 package org.shapelogic.streams;
 
 import org.shapelogic.calculation.Calc1;
-import org.shapelogic.util.Constants;
 
 /** Make a stream that is using a Calc1 class to do a calculation.
  * <br />
@@ -19,7 +18,7 @@ public class ListCalcStream1<In, E> extends BaseListStream1<In, E> {
 	}
 
 	public ListCalcStream1(Calc1<In, E> calc, NumberedStream<In> inputStream) {
-		this(calc,inputStream, Constants.LAST_UNKNOWN);
+		this(calc,inputStream, inputStream.getMaxLast());
 	}
 
 	public ListCalcStream1() {
