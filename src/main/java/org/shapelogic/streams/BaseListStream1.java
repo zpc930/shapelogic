@@ -76,12 +76,6 @@ implements InputStream1<In, E> {
         return inputObj;
 	}
 
-	@Override
-	public boolean hasNext() {
-        setLastFromInput();
-        return _last == Constants.LAST_UNKNOWN || _current < _last;
-	}
-
     protected void setLastFromInput() {
 		if (getInputStream() == null)
 			return;
