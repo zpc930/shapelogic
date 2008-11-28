@@ -274,9 +274,6 @@ public class StreamFactory {
 	{
 		Object obj = queryCalc.get(andName,recursiveContext);
 		AndListStream andListStream = null;
-//		if (partName == null) {
-//			partName = andName + "_" + inputName;
-//		}
 		if (obj == null) {
 			andListStream = new AndListStream();
 			queryCalc.put(andName, andListStream, recursiveContext);
