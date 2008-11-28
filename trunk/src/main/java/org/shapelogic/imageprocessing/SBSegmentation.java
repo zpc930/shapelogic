@@ -327,8 +327,8 @@ public class SBSegmentation implements Iterator<ArrayList<SBPendingVertical> > {
             _min_y = 0;
             _max_y = ip.getHeight() - 1;
         }
-        _nextX = _min_x;
-        _nextY = _min_y;
+        _nextX = _max_x;
+        _nextY = _min_y-1;
 	}
 
 	public SLImage getSLImage() {
@@ -421,7 +421,7 @@ public class SBSegmentation implements Iterator<ArrayList<SBPendingVertical> > {
                 _nextX++;
             else {
                 _nextY++;
-                _nextX = 0;
+                _nextX = _min_x;
             }
             if (!_pixelCompare.isHandled(pointToIndex(_nextX, _nextY) ) ) {
                 segment(_nextX, _nextY, true);
