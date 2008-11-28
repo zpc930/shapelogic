@@ -5,6 +5,7 @@ import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.polygon.BBox;
+import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 
@@ -94,7 +95,7 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 5 particles for this setting.", 5,_particleCounter.getParticleCount());
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
-		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+//		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
 //		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
 //		assertClose(0.77, ns.get(1).doubleValue(), 0.1);
 	}
@@ -111,6 +112,13 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(30,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
+		assertClose(1., ns.get(1).doubleValue(), 0.1);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.PARTICLES);
+		assertEquals("Dark round", letterStream.get(0));
+		assertEquals("Dark round", letterStream.get(1));
     }
 
 	public void testEmbryosToMask() {
@@ -127,6 +135,13 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(30,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
+		assertClose(1., ns.get(1).doubleValue(), 0.1);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.PARTICLES);
+		assertEquals("Dark round", letterStream.get(0));
+		assertEquals("Dark round", letterStream.get(1));
 	}
 
 	public void assertClose(double expected, double found, double precision) {
