@@ -64,10 +64,6 @@ implements IndexedInputStream2<In0, In1, E>
 		return invoke(getInput0(index),getInput1(index),index);
 	}
 	
-	@Override
-	public boolean hasNext() {
-		return hasNextBase();
-	}
 	
 	/** Try to calculate one more, independent of the _current.
 	 */
@@ -77,7 +73,7 @@ implements IndexedInputStream2<In0, In1, E>
 		int[] indexes = _cartesianIndex.get(index);
 		E element = invoke(getInput0(indexes[0]),getInput1(indexes[1]),index);
 		//XXX this should not always be the case
-		if (element != null) {
+		if (element != null || isNullLegalValue()) {
 			_list.add(element);
 			return true;
 		}
