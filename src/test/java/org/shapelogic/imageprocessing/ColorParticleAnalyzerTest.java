@@ -74,9 +74,42 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
 		assertEquals(65,factory.getStore().size()); 
-//		assertTrue(_particleCounter.isParticleImage()); 
-//		assertEquals(30,_particleCounter.getParticleCount()); 
-//		assertTrue(bp.isInvertedLut());
+		assertTrue(_particleCounter.isParticleImage()); 
+		assertEquals(62,_particleCounter.getParticleCount()); 
+		assertTrue(bp.isInvertedLut());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
+		assertClose(2, ns.get(1).doubleValue(), 0.1);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.PARTICLES);
+		assertEquals("Tall", letterStream.get(0));
+		assertEquals("Flat", letterStream.get(1));
+	}
+
+	public void testBlobsGifToMask() {
+		String fileName = "blobs";
+        _particleCounter.setMaxDistance(100);
+        _particleCounter.setMinPixelsInArea(7);
+        _particleCounter.setIterations(3);
+        _particleCounter.setToMask(true);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName), _particleCounter);
+		assertEquals(256,bp.getWidth());
+		assertEquals(65024,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(0,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(65,factory.getStore().size()); 
+		assertTrue(_particleCounter.isParticleImage()); 
+		assertEquals(62,_particleCounter.getParticleCount()); 
+		assertTrue(bp.isInvertedLut());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
+		assertClose(2, ns.get(1).doubleValue(), 0.1);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.PARTICLES);
+		assertEquals("Tall", letterStream.get(0));
+		assertEquals("Flat", letterStream.get(1));
 	}
 
 	public void testEmbryos() {
@@ -94,10 +127,6 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(61,factory.getStore().size()); //XXX should be 2
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 5 particles for this setting.", 5,_particleCounter.getParticleCount());
-		StreamFactory streamFactory = new StreamFactory(_particleCounter);
-//		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
-//		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
-//		assertClose(0.77, ns.get(1).doubleValue(), 0.1);
 	}
 	
 	public void testEmbryosDefaultSettings() {
