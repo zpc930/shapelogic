@@ -148,6 +148,8 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.PARTICLES);
 		assertEquals("Dark round", letterStream.get(0));
 		assertEquals("Dark round", letterStream.get(1));
+		StringBuffer internalInfo = _particleCounter.getInternalInfo();
+		assertTrue(500 < internalInfo.length());
     }
 
 	public void testEmbryosToMask() {
