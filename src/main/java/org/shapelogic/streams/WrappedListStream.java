@@ -23,11 +23,17 @@ public class WrappedListStream<E> extends BaseListCommonStream<E> {
 
 	@Override
 	public E invokeIndex(int index) {
-		return _list.get(index);
+		if (index < _list.size())
+			return _list.get(index);
+		_last = _list.size() -1;
+		return null;
 	}
 
 	@Override
 	public boolean hasNext() {
-		return _current < _list.size() -1;
+		boolean result = _current < _list.size() -1;
+		if (!result)
+			_last = _list.size() -1;
+		return result;
 	}
 }
