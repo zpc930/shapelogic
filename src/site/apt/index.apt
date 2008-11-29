@@ -203,6 +203,29 @@ ShapeLogic
   
 * News
 
+** ShapeLogic Java 1.4 with a few requests from the ImageJ mailing list soon to be released
+
+  * Added mask option to {{{particle.html} particle analyzer}}
+  
+  * Write out information about points and lines in vectorizer working on skeletonized image
+  
+  * In Color Particle Analyzer write out average color in R, G and B channels, 
+  to handle particles in co-localization images better  
+  
+  * Improve the color replacer plugin, to take separate RGB values as input
+  
+  * Change annotation of points and lines to be on individual images instead of global
+  
+  * Improved stability of {{{particle.html} particle analyzer}}
+  
+  * Improved stability of lazy stream library: fixed bugs and added unit tests
+  
+  * Built for JDK 1.5 / Java 5 so it should work on the Mac without updates
+  
+  []
+
+  Documentation will soon be updated to reflect ShapeLogic 1.4.
+  
 ** 2008/11/14 ShapeLogic C++ 0.4 released
 
   * Images are now internally stored in OpenCV's IplImage format
@@ -227,21 +250,6 @@ ShapeLogic
   
   []
 
-** 2008/08/02 ShapeLogic Java 1.3 released
-  
-  * {{{particle.html} Particle analyzer}} now has a {{{particle.html#rgb} manual color mode}}, 
-  where you can set either the foreground or background color, in addition to 
-  the automatic mode introduced in v 1.2
-  
-  * New edge tracer for particle analyzer, in v 1.2 the wrong perimeter lengths 
-  are sometimes found  
-  
-  * Built for JDK 1.5 / Java 5 so it should work on the Mac without updates
-  
-  []
-  
-  Documentation will soon be updated to reflect ShapeLogic 1.3.
-  
 * Future plans for ShapeLogic
   
   For more up to date information on ongoing development work look at these 
@@ -249,19 +257,6 @@ ShapeLogic
   * Blog {{{http://samibadawi.blogspot.com} Declarative Computer Vision}} 
   
   * {{{roadmap.html} Roadmap}}
-  
-  []
-
-** ShapeLogic Java 1.4 with a few requests from the ImageJ mailing list soon to be released
-
-  * Write out information about points and lines in vectorizer working on skeletonized image
-  
-  * In Color Particle Analyzer write out average color in R, G and B channels, 
-  to handle particles in co-localization images better  
-  
-  * Improve the color replacer plugin, to take separate RGB values as input
-  
-  * Change annotation of points and lines to be on individual images instead of global 
   
   []
 
