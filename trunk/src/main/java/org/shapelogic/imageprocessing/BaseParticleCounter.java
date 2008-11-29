@@ -267,6 +267,10 @@ public class BaseParticleCounter extends BaseImageOperation
     public void displayInternalInfo() {
     
     }
+    
+	public StringBuffer getInternalInfo() {
+		return null;
+	}
 
 	/** Setup all the needed factory methods based on what type the image has.
      * 
