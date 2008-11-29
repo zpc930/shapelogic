@@ -131,7 +131,11 @@ Handling libraries that are not in Maven repository
   https://scripting.dev.java.net/servlets/ProjectDocumentList
   
   After that you have to unpack it, and install it into the Maven repository:
-  
+
+* Installing ImageJ jar, source and doc into local Maven repository
+
+  Download jar, source and doc from {{{http://rsb.info.nih.gov/ij/download.html}ImageJ download}}.
+    
 +-------------------------------------+
 mvn install:install-file -Dfile=groovy-engine.jar -DgeneratePom=true -DgroupId=org.codehaus.groovy -DartifactId=groovy-engine -Dversion=1.5.1 -Dpackaging=jar
 +-------------------------------------+
@@ -154,9 +158,6 @@ mvn install:install-file -Dfile=ij141o-src.zip -DgeneratePom=true -DgroupId=imag
 mvn install:install-file -Dfile=api.zip -DgeneratePom=true -DgroupId=imagej -DartifactId=imagej -Dversion=1.41 -Dclassifier=javadoc -Dpackaging=jar
 +-------------------------------------+
 
-  Download the source file and move it to 
-  .m2/repository/imagej/imagej/1.40.g/imagej-1.40.g-source.jar
-  
 How ShapeLogic was set up for Maven and Eclipse
   
   You will not need to do this, since ShapeLogic is already setup when down loaded.
