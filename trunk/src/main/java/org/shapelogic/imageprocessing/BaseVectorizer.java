@@ -97,7 +97,7 @@ public abstract class BaseVectorizer extends BaseImageOperation
 	
 	protected int _yForUnporcessedPixel;
 	protected int _nextCount;
-    protected boolean _displayInternalInfo = true;
+    protected boolean _displayInternalInfo = false;
 	
 	public BaseVectorizer() {
 		super(ImageJConstants.DOES_8G+ImageJConstants.SUPPORTS_MASKING);

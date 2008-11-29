@@ -61,6 +61,9 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 		_context.put(StreamNames.POLYGONS, getStream());
 		loadLetterStreams = new LoadLetterStreams(this);
 		matchSetup();
+        if (_arg != null && _arg.indexOf("InternalInfo") != -1) {
+        	_displayInternalInfo = true; 
+        }
 	}
 	
 	/** In order to match a different alphabet override this. 
