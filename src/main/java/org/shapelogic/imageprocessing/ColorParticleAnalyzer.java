@@ -18,6 +18,7 @@ import org.shapelogic.streams.ListStream;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.WrappedListStream;
 import org.shapelogic.streams.XOrListStream;
+import org.shapelogic.util.Constants;
 
 /** Analyzes a particle image in gray or RGB and group the particles according 
  * to shape rules.<br />
@@ -66,6 +67,8 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 			new Calc1<IColorAndVariance, Polygon>() {
 				@Override
 				public Polygon invoke(IColorAndVariance input) {
+					if (input == null)
+						return null;
 					PixelArea pixelArea = input.getPixelArea();
 					return _edgeTracer.autoOutline(pixelArea.getStartX(), pixelArea.getStartY());
 				}
@@ -119,4 +122,16 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
     	}
 	}
 
+	public StringBuffer getInternalInfo() {
+	    StringBuffer result = new StringBuffer();
+	    result.append(
+	        "\n=====================Internal info about polygons outline of particle=====================\n");
+	    result.append("Number of particles found: ").append(_particlesFiltered.size()).append("\n");
+	    for (int i = 0; _polygonStream.getLast() == Constants.LAST_UNKNOWN || i <= _polygonStream.getLast(); i++) {
+	        Polygon polygon = _polygonStream.get(i);
+	        if (null != polygon)
+	            result.append(polygon.toString());
+	    }
+	    return result;
+	}
 }
