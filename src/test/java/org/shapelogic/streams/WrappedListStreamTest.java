@@ -3,6 +3,8 @@ package org.shapelogic.streams;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.shapelogic.util.Constants;
+
 import junit.framework.TestCase;
 
 /** Test WrappedListStream.<br />
@@ -24,6 +26,18 @@ public class WrappedListStreamTest extends TestCase {
 		
 	}
 
+	public void testLastModifiedWithHasNext() {
+		assertEquals(Constants.LAST_UNKNOWN, wrappedListStream.getLast());
+		wrappedListStream.hasNext();
+		assertEquals(listLength-1, wrappedListStream.getLast());
+	}
+	
+	public void testLastModifiedWithGet() {
+		assertEquals(Constants.LAST_UNKNOWN, wrappedListStream.getLast());
+		wrappedListStream.get(0);
+		assertEquals(listLength-1, wrappedListStream.getLast());
+	}
+	
 	public void testIterator() {
 		assertNotNull(wrappedListStream);
 		for (int i=0;i<listLength;i++) {
@@ -35,15 +49,12 @@ public class WrappedListStreamTest extends TestCase {
 
 	public void testGet() {
 		assertNotNull(wrappedListStream);
-		for (int i=0;i<listLength;i++) {
+		for (int i=0;wrappedListStream.getLast() != Constants.LAST_UNKNOWN ||
+		i <= wrappedListStream.getLast();i++) {
 			assertTrue(wrappedListStream.hasNext());
 			assertEquals(new Integer(i), wrappedListStream.get(i));
 		}
 		assertEquals(-1,wrappedListStream.getIndex());
-		try {
-			assertNull(wrappedListStream.get(listLength)); //XXX should throw an exception
-			fail();
-		} catch (RuntimeException e) {
-		}
+		assertNull(wrappedListStream.get(listLength)); //XXX should throw an exception
 	}
 }
