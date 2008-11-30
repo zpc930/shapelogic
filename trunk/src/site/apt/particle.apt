@@ -76,7 +76,9 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 [images/particles/embryos6mask.jpg] 
   
   Check ToMask check box in order to better see what particles was found and to 
-  post process it with other tools say the build in particle analyzer in ImageJ
+  post process it with other tools. 
+  The build in particle analyzer in ImageJ contains functionality that is not
+  available here e.g. an ellipse matcher. 
 
 ** Summary result dialog
 
