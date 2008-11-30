@@ -10,15 +10,39 @@ Menu overview under ImageJ
   
   When running ShapeLogic as an ImageJ plugin there are 2 menus 
   
-  * ShapeLogic: current commands 
+  * {{ShapeLogic}} current commands 
    
-  * ShapeLogicOld: deprecated commands left for backwards compatibility  
+  * {{ShapeLogicOld}} deprecated commands left for backwards compatibility  
   
   []
+
+* {ShapeLogic} menu
   
 [images/particles/shapelogicmenu.png] 
    
-*  CapitalLetterMatch
+  * {{CapitalLetterMatch}}
+  
+  * {{DigiMatch}} 
+  
+  * {{Segment}}
+  
+  * {{ParticleCounter}}
+  
+  * {{{#Particle}Color Particle Analyzer}}
+  
+  * {{{#RGB} RGB Color Particle Analyzer}}
+  
+  * {{{#Vectorizer}Stream Vectorizer}}
+  
+  * {{{#Information}Vectorize Information}}
+  
+  * {{{#Digi}Digi Match Stream Vectorizer}}
+  
+  * {{{#Replacer}Color Replacer}}
+
+  []
+  
+* {CapitalLetterMatch}
   
   This is a macro that:
   
@@ -30,22 +54,17 @@ Menu overview under ImageJ
   
   []
   
-* CustomParticleAnalyzer
-  
-  This is an example of how to customize the ColorParticleAnalyzer plugin.
-  It is not doing anything interesting.
-  
-* DigiMatch 
+* {DigiMatch} 
   
   It is a macro that does almost the same as CapitalLetterMatch, call the digit
   match plugin Digi Match Stream Vectorizer
   
-* Segment
+* {Segment}
   
   Segment is a 4 connect color segmentation algorithm. 
   Currently you cannot set the color distance in an input dialog.
   
-* ParticleCounter
+* {ParticleCounter}
   
   This will count particles in a color image, but not do any edge tracing and
   analysis afterwards.
@@ -60,17 +79,17 @@ Menu overview under ImageJ
   
   []
   
-* Color Particle Analyzer
+* Color {Particle} Analyzer
   
   {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
   black and white images. The background color is found automatically.
   
-* RGB Color Particle Analyzer
+* {RGB} Color Particle Analyzer
   
   {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
   black and white images. The background color is set by the user. 
   
-* Stream Vectorizer
+* Stream {Vectorizer}
   
   Is a plugin that takes a line image with thin or skeletonized lines and 
   vectorize them analyzed them and match them to letters.
@@ -90,7 +109,7 @@ Menu overview under ImageJ
   
   []
   
-* Vectorize Information
+* Vectorize {Information}
   
   Does the same as Stream Vectorizer, but also write out all the internal
   information that is used in the process:
@@ -105,45 +124,61 @@ Menu overview under ImageJ
   
   []
   
-* Digi Match Stream Vectorizer
+* {Digi} Match Stream Vectorizer
   
   Is a plugin to take a line image with thin or skeletonized lines and 
   vectorize them analyzed them and match them to digits.
   
-* Color Replacer
+* Color {Replacer}
   
   Is a plugin where you select a color and change all the pixels in the image
   that are close to this into that color. You can also turn it into a black and
   white mask.
   
   
-ShapeLogicOld 
+{ShapeLogicOld}
   
   Deprecated commands left for backwards compatibility
+
+[images/screenshots/shapelogicoldmenu.png] 
+
+  * {{{#Line}Line Vectorizer}}
   
-* Line Vectorizer
+  * {{{#Direction}Direction Based Vectorizer}} 
+  
+  * {{{#Distance}Max Distance Vectorizer}} 
+  
+  * {{{#hypothesis}Find color hypothesis}}
+  
+  * {{StraightCapitalLetterMatch}}
+  
+  * {{TaskBasedCapitalLetterMatch}}
+  
+  []
+  
+* {Line} Vectorizer
   
   First approach to vectorizing lines. Based on splitting lines into pieces 
   that are 5 pixels long. This was pretty unstable.
   
-* Direction Based Vectorizer 
+* {Direction} Based Vectorizer 
   
   Second approach to vectorizing lines. Based on special handling of the 
   intersection points. More stable.
   
-* Max Distance Vectorizer 
+* Max {Distance} Vectorizer 
   
   Third approach to vectorizing lines. Standard approach to vectorizer trace 
   full line between intersection and split it up based on max distance from a
   line between the end points. This is stable. This implementation only handles
   the first found polygon. Same approach that is used in Stream Vectorizer.
   
-* Find color hypothesis
+* Find color {hypothesis}
   
   This is the algorithm that is used to find the background in the 
   Color Particle Analyzer.
   
-* StraightCapitalLetterMatch
+* {StraightCapitalLetterMatch}
   
   First very crude OCR, that can only recognize one straight capital letter.
   Based on 
@@ -154,7 +189,7 @@ ShapeLogicOld
   
   []
   
-* TaskBasedCapitalLetterMatch
+* {TaskBasedCapitalLetterMatch}
   
   Second crude OCR, that can recognize one capital letter. 
   Based on 
