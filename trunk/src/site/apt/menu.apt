@@ -1,0 +1,170 @@
+            ------
+            Functionality under ImageJ
+            ------
+            Sami Badawi
+            ------
+            2008/11/29
+            ------
+
+Menu overview under ImageJ
+  
+  When running ShapeLogic as an ImageJ plugin there are 2 menus 
+  
+  * ShapeLogic: current commands 
+   
+  * ShapeLogicOld: deprecated commands left for backwards compatibility  
+  
+  []
+  
+[images/particles/shapelogicmenu.png] 
+   
+*  CapitalLetterMatch
+  
+  This is a macro that:
+  
+  * Turns an image into a black and white image
+  
+  * Run a skeletonize operation, turning line into thin lines
+  
+  * Run the Stream Vectorizer plugin described below
+  
+  []
+  
+* CustomParticleAnalyzer
+  
+  This is an example of how to customize the ColorParticleAnalyzer plugin.
+  It is not doing anything interesting.
+  
+* DigiMatch 
+  
+  It is a macro that does almost the same as CapitalLetterMatch, call the digit
+  match plugin Digi Match Stream Vectorizer
+  
+* Segment
+  
+  Segment is a 4 connect color segmentation algorithm. 
+  Currently you cannot set the color distance in an input dialog.
+  
+* ParticleCounter
+  
+  This will count particles in a color image, but not do any edge tracing and
+  analysis afterwards.
+  The particle analyzer can now be called with the count only option, so this
+  will give you a little more options. 
+  
+  * Set the background or foreground color 
+  
+  * Print out internal information
+  
+  * Turn image into a black and white mask 
+  
+  []
+  
+* Color Particle Analyzer
+  
+  {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
+  black and white images. The background color is found automatically.
+  
+* RGB Color Particle Analyzer
+  
+  {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
+  black and white images. The background color is set by the user. 
+  
+* Stream Vectorizer
+  
+  Is a plugin that takes a line image with thin or skeletonized lines and 
+  vectorize them analyzed them and match them to letters.
+  
+  Third approach to vectorizing lines. Standard approach to vectorizer trace 
+  full line between intersection and split it up based on max distance from a
+  line between the end points. This is stable. This implementation handles the 
+  all polygons in the image. 
+  
+  Based on:
+  
+  * Lazy stream declarative programming 
+  
+  * Language to describe annotations and locations 
+  
+  * Max Distance Vectorizer 
+  
+  []
+  
+* Vectorize Information
+  
+  Does the same as Stream Vectorizer, but also write out all the internal
+  information that is used in the process:
+  
+  * Points
+  
+  * Multi lines
+  
+  * Polygons
+  
+  * Annotations for all of these
+  
+  []
+  
+* Digi Match Stream Vectorizer
+  
+  Is a plugin to take a line image with thin or skeletonized lines and 
+  vectorize them analyzed them and match them to digits.
+  
+* Color Replacer
+  
+  Is a plugin where you select a color and change all the pixels in the image
+  that are close to this into that color. You can also turn it into a black and
+  white mask.
+  
+  
+ShapeLogicOld 
+  
+  Deprecated commands left for backwards compatibility
+  
+* Line Vectorizer
+  
+  First approach to vectorizing lines. Based on splitting lines into pieces 
+  that are 5 pixels long. This was pretty unstable.
+  
+* Direction Based Vectorizer 
+  
+  Second approach to vectorizing lines. Based on special handling of the 
+  intersection points. More stable.
+  
+* Max Distance Vectorizer 
+  
+  Third approach to vectorizing lines. Standard approach to vectorizer trace 
+  full line between intersection and split it up based on max distance from a
+  line between the end points. This is stable. This implementation only handles
+  the first found polygon. Same approach that is used in Stream Vectorizer.
+  
+* Find color hypothesis
+  
+  This is the algorithm that is used to find the background in the 
+  Color Particle Analyzer.
+  
+* StraightCapitalLetterMatch
+  
+  First very crude OCR, that can only recognize one straight capital letter.
+  Based on 
+  
+  * Goal driven declarative programming
+  
+  * Direction Based Vectorizer 
+  
+  []
+  
+* TaskBasedCapitalLetterMatch
+  
+  Second crude OCR, that can recognize one capital letter. 
+  Based on 
+  
+  * Goal driven declarative programming 
+  
+  * Language to describe annotations and locations 
+  
+  * Max Distance Vectorizer 
+  
+  []
+  
+  
