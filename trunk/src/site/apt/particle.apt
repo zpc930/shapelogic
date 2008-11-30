@@ -71,6 +71,13 @@ _minPixelsInArea = 30; // Minimum number of pixels in particle
 _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 +-------------------------------------------------------------+
 
+** Output image if ToMask is set
+
+[images/particles/embryos6mask.jpg] 
+  
+  Check ToMask check box in order to better see what particles was found and to 
+  post process it with other tools say the build in particle analyzer in ImageJ
+
 ** Summary result dialog
 
   A summary result is shown in a dialog, with the following information:
