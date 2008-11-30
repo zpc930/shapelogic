@@ -139,7 +139,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   In order to categorize particles the user should define geometric rules for
   each particle type.
 
-  ShapeLogic v 1.3 will come with predefined rules to {{{cell.html}categorize certain cells}}.
+  ShapeLogic v 1.5 will come with predefined rules to {{{cell.html}categorize certain cells}}.
 
 * Particle analyzer in manual {rgb} modes
   
@@ -179,14 +179,14 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   []
   
-* Current status of the particle analyzer in ShapeLogic v 1.3 
+* Current status of the particle analyzer in ShapeLogic v 1.4 
   
-  The particle analyzer in ShapeLogic v 1.3 has gone through limited testing 
+  The particle analyzer in ShapeLogic v 1.4 has gone through limited testing 
   and seems to work well. 
   
 * Framework to build more advanced particle counters and particle analyzers
   
-  The particle counter algorithm in ShapeLogic 1.3 is relatively simple. It is 
+  The particle counter algorithm in ShapeLogic 1.4 is relatively simple. It is 
   setup to be expanded to handle more advanced algorithms. Here is the flow.
   
   * If either foreground or background color is set you are done
@@ -210,7 +210,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   []
 
-* Defining rules for categories in ShapeLogic 1.3
+* Defining rules for categories in ShapeLogic 1.4
   
   This is done by sub classing ColorParticleAnalyzer or ColorParticleAnalyzerIJ.
   Override the categorizeStreams() method.
@@ -315,10 +315,10 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 
   []
 
-* Plans for ShapeLogic v 1.4
+* Plans for ShapeLogic v 1.5
   
   * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.3 the user has to make rules themselves.
+  In v 1.4 the user has to make rules themselves.
   
   * Make it easier to select what particle properties to print out, now a 
   random selection of somewhat useful properties have been selected.
