@@ -7,6 +7,27 @@
 
 Release notes for releases with development status beta
 
+* 2008/11/28 ShapeLogic Java 1.4 released 
+
+  * Added mask option to {{{particle.html} particle analyzer}}
+  
+  * Write out information about points and lines in vectorizer working on skeletonized image
+  
+  * In Color Particle Analyzer write out average color in R, G and B channels, 
+  to handle particles in co-localization images better  
+  
+  * Improve the color replacer plugin, to take separate RGB values as input
+  
+  * Change annotation of points and lines to be on individual images instead of global
+  
+  * Improved stability of {{{particle.html} particle analyzer}}
+  
+  * Improved stability of lazy stream library: fixed bugs and added unit tests
+  
+  * Built for JDK 1.5 / Java 5 so it should work on the Mac without updates
+  
+  []
+
 * 2008/08/02 ShapeLogic v 1.3 released AKA New modes for particle analyzer
   
   * {{{particle.html} Particle analyzer}} now has a {{{particle.html#rgb} manual color mode}}, 
