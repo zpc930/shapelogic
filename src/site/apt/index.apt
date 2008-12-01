@@ -205,9 +205,9 @@ ShapeLogic
 
 ** 2008/11/28 ShapeLogic Java 1.4 released 
 
-  * Added mask option to {{{particle.html} particle analyzer}}
+  * Added mask option to {{{particle.html#mask} particle analyzer}}
   
-  * {{{utilities.html#Vectorize}Vectorize skeletonized}} image, output points, 
+  * {{{utilities.html#Information}Vectorize skeletonized}} image, output points, 
   lines, polygons and annotations, e.g. T-junction
   
   * In Color Particle Analyzer output average color in R, G and B channels,

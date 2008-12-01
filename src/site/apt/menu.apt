@@ -50,7 +50,7 @@ ShapeLogic menu when run with ImageJ
   
   * Skeletonizes an image, turning line into thin lines
   
-  * Runs the Stream Vectorizer plugin described below
+  * Runs the {{{#Vectorizer}Stream Vectorizer}} plugin described below
   
   []
   
@@ -60,7 +60,7 @@ ShapeLogic menu when run with ImageJ
   
   Main command for digit recognition.
   It is a macro similar to the CapitalLetterMatch but for digits, it calls the digit
-  match plugin Digi Match Stream Vectorizer.
+  match plugin Digi Match {{{#Vectorizer}Stream Vectorizer}}.
   
   {{{getting-started.html#letter}Usage instruction}}
   
@@ -121,8 +121,8 @@ ShapeLogic menu when run with ImageJ
   
 * Vectorize {Information}
   
-  Does the same as Stream Vectorizer, but also writes out all the internal
-  information that is used in the process:
+  Does the same as {{{#Vectorizer}Stream Vectorizer}}, but also writes out all 
+  the internal information that is used in the process:
   
   * Points
   

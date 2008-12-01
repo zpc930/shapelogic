@@ -8,14 +8,17 @@
 
 Utilities
   
-*  Color {Replacer}
+  This page give a little more details to commands that have not been covered.
   
-  Little utility plugin to isolate color or gray interval.
-  You select a color and change all the pixels in the image
-  that are close to this into that color. You can also turn it into a black and
-  white mask.
+[images/particles/shapelogicmenu.png] 
+
+  * {{{#Information}Vectorize Information}}
   
-* {Vectorize} information
+  * {{{#Replacer}Color Replacer}}
+
+  []
+  
+* Vectorize {Information}
   
   Vectorize skeletonized image, output points, lines, polygons and annotations, 
   e.g. T-junction.
@@ -135,3 +138,11 @@ SOFT_POINT:
 aspectRatio: 0.9047619047619048
 
 +-----------------------------------------------+
+
+*  Color {Replacer}
+  
+  Little utility plugin to isolate color or gray interval.
+  You select a color and change all the pixels in the image
+  that are close to this into that color. You can also turn it into a black and
+  white mask.
+  
