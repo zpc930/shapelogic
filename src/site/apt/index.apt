@@ -306,7 +306,10 @@ ShapeLogic
   
   []
 
-** The test images are taken from the sample images from ImageJ
+** The test images for the particle analyzer
+  
+  Here are 2 other test image for the particle analyzer. 
+  They are taken from the sample images from ImageJ.
   
 [images/particles/blobs.gif] 
 
@@ -316,10 +319,6 @@ ShapeLogic
 
   Cell_Colony.jpg
 
-[images/particles/embryos.jpg] 
-
-  embryos.jpg
-  
 * Examples applications
   
   [[1]] Automatic color and gray scale {{{particle.html}particle counter and analyzer}}, 
