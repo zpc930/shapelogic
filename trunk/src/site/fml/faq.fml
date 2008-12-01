@@ -22,7 +22,7 @@
       </answer>
     </faq>
     <faq id="problemRunningOnMac">
-      <title>Problem running ShapeLogic on a Max</title>
+      <title>Problem running ShapeLogic on a Mac</title>
       <question>Why won't ShapeLogic run as a plug-in for ImageJ on my Mac?</question>
       <answer>
         <p>
@@ -153,6 +153,18 @@
 
   <part id="ImageJ">
     <title>ImageJ</title>
+    <faq id="ImageJ141">
+      <question>Problems closing images when running under ImageJ 1.41, Linux and AMD64</question>
+      <answer>
+         This does not just affect ShapeLogic plugin, but also build in plugins.<br />
+         Workarounds:
+          <lu>
+            <li>Save to a dummy image</li>
+            <li>Start ImageJ 1.41 from a terminal then you can just kill it</li>
+          </lu>
+      </answer>
+    </faq>
+
     <faq id="other1">
       <question>Does ShapeLogic work with other plug-ins for ImageJ?</question>
       <answer>
