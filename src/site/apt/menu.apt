@@ -134,7 +134,7 @@ ShapeLogic menu when run with ImageJ
   
   []
   
-  {{{getting-started.html#letter}Usage instruction}}
+  {{{utilities.html#vectorize}Usage instruction}}
   
 * {Digi} Match Stream Vectorizer
   
@@ -150,6 +150,8 @@ ShapeLogic menu when run with ImageJ
   You select a color and change all the pixels in the image
   that are close to this into that color. You can also turn it into a black and
   white mask.
+  
+  {{{utilities.html#Replacer}Usage instruction}}
   
   
 {ShapeLogicOld}
