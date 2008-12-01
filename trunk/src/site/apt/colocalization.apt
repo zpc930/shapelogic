@@ -12,7 +12,7 @@ Colocalization
   
 * Analyzing particles present in more than one channel 
   
-  Chose "RGB Color Particle Analyzer" from the ShapeLogic menu.
+  Choose "RGB Color Particle Analyzer" from the ShapeLogic menu.
   
 [images/particles/shapelogicmenu.png] 
   
@@ -41,13 +41,13 @@ Colocalization
   containing only one or 2 particles that you are interested in, the the output
   is a little less overwhelming.
   
-** Finding what RGB channels are in a particle 
+** Finding RGB channels in a particle before ShapeLogic 1.4 
   
-  The output is not very user friendly, it is returning an average color as 1 
+  The output was not very user friendly, it is returning an average color as 1 
   number. If you want to get the average R G and B values you will have to 
   break that number up yourself. 
   
-  This will be fix this in ShapeLogic 1.4 there will be an average value for
+  This have been fixed in ShapeLogic 1.4 where there is be an average value for
   R G and B. 
   
   If you need to know what channels are present export the result to Excel and 

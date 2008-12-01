@@ -71,14 +71,16 @@ _minPixelsInArea = 30; // Minimum number of pixels in particle
 _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 +-------------------------------------------------------------+
 
-** Output image if ToMask is set
+** Output image if ToMask option is set
 
 [images/particles/embryos6mask.jpg] 
   
-  Check ToMask check box in order to better see what particles was found and to 
+  Check ToMask check box in order to better see what particles were found and to 
   post process it with other tools. 
-  The build in particle analyzer in ImageJ contains functionality that is not
-  available here e.g. an ellipse matcher. 
+  The built in particle analyzer in ImageJ contains functionality that is not
+  available here e.g. an ellipse matcher or find outline add numbers. 
+
+[images/particles/embryos6numbered_outline.png]
 
 ** Summary result dialog
 
@@ -139,6 +141,8 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   * Number of curve arches
   
   []
+  
+  For color images it will also write out average R, G and B channels.
   
   The particle analyzer finds many more geometric properties that are not shown
   on the above example, it is easy to print them if desired.

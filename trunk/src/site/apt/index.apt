@@ -165,7 +165,7 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 32,000 lines of Java code including 480 unit tests.
+  * ShapeLogic currently consists of 33,000 lines of Java code including 500 unit tests.
 
   []
 
