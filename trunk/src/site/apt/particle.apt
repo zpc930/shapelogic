@@ -62,12 +62,18 @@ Particle Counter and Analyzer
   
   Iterations: {{{http://en.wikipedia.org/wiki/K-means_algorithm}K-mean}} iterations for color hypothesis
   
+  CountOnly: Only count particles, do not trace edge, vectorize, annotate and match
+  
+  ToMask: Turns the image into a black and white mask, with black particles
+  
+  DisplayInternalInfo: Print out polygon, points and their annotations
+  
   These are the default values and the name of the parameters in Java.
   
 +-------------------------------------------------------------+
 _iterations = 2; // K-mean iterations for color hypothesis
 _maxDistance = 50; // Distance between color in same color bucket
-_minPixelsInArea = 30; // Minimum number of pixels in particle
+_minPixelsInArea = 5; // Minimum number of pixels in particle
 _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 +-------------------------------------------------------------+
 
