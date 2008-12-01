@@ -54,10 +54,14 @@ Menu overview under ImageJ
   
   []
   
+  {{{getting-started.html#letter}Usage instruction}}
+  
 * {DigiMatch} 
   
   It is a macro that does almost the same as CapitalLetterMatch, call the digit
   match plugin Digi Match Stream Vectorizer
+  
+  {{{getting-started.html#letter}Usage instruction}}
   
 * {Segment}
   
@@ -79,15 +83,21 @@ Menu overview under ImageJ
   
   []
   
+  {{{particle.html}Usage instruction}}
+  
 * Color {Particle} Analyzer
   
   {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
   black and white images. The background color is found automatically.
   
+  {{{particle.html}Usage instruction}}
+  
 * {RGB} Color Particle Analyzer
   
   {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
   black and white images. The background color is set by the user. 
+  
+  {{{particle.html#rgb}Usage instruction}}
   
 * Stream {Vectorizer}
   
@@ -109,6 +119,8 @@ Menu overview under ImageJ
   
   []
   
+  {{{getting-started.html#letter}Usage instruction}}
+  
 * Vectorize {Information}
   
   Does the same as Stream Vectorizer, but also write out all the internal
@@ -124,14 +136,19 @@ Menu overview under ImageJ
   
   []
   
+  {{{getting-started.html#letter}Usage instruction}}
+  
 * {Digi} Match Stream Vectorizer
   
   Is a plugin to take a line image with thin or skeletonized lines and 
   vectorize them analyzed them and match them to digits.
   
+  {{{getting-started.html#letter}Usage instruction}}
+  
 * Color {Replacer}
   
-  Is a plugin where you select a color and change all the pixels in the image
+  Little utility plugin to isolate color or gray interval.
+  You select a color and change all the pixels in the image
   that are close to this into that color. You can also turn it into a black and
   white mask.
   
@@ -161,6 +178,8 @@ Menu overview under ImageJ
   First approach to vectorizing lines. Based on splitting lines into pieces 
   that are 5 pixels long. This was pretty unstable.
   
+  
+  
 * {Direction} Based Vectorizer 
   
   Second approach to vectorizing lines. Based on special handling of the 
@@ -183,7 +202,7 @@ Menu overview under ImageJ
   First very crude OCR, that can only recognize one straight capital letter.
   Based on 
   
-  * Goal driven declarative programming
+  * {{{goal-driven.html}Goal driven}} declarative programming
   
   * Direction Based Vectorizer 
   
@@ -194,7 +213,7 @@ Menu overview under ImageJ
   Second crude OCR, that can recognize one capital letter. 
   Based on 
   
-  * Goal driven declarative programming 
+  * {{{goal-driven.html}Goal driven}} declarative programming 
   
   * Language to describe annotations and locations 
   
