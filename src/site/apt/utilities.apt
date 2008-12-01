@@ -1,0 +1,137 @@
+            ------
+            Computer visions and image processing consulting
+            ------
+            Sami Badawi
+            ------
+            2008/12/01
+            ------
+
+Utilities
+  
+*  Color {Replacer}
+  
+  Little utility plugin to isolate color or gray interval.
+  You select a color and change all the pixels in the image
+  that are close to this into that color. You can also turn it into a black and
+  white mask.
+  
+* {Vectorize} information
+  
+  Vectorize skeletonized image, output points, lines, polygons and annotations, 
+  e.g. T-junction.
+  Based on the same code as {{{menu.html#Vectorizer}Stream Vectorizer}}, 
+  the main Java code for letter recognition, but with the addition of 
+  outputting all the internal information:
+  
+  * Points
+  
+  * Multi lines
+  
+  * Polygons
+  
+  * Annotations for all of these
+  
+  []
+
+  The input image needs to be skeletonized image.
+  
+** Example
+
+[images/letters/ABC.png]
+
+  Image ABC.gif from the ShapeLogic unit tests
+  
+  Output internal information:
+  
++-----------------------------------------------+
+
+===================Internal info for skeletonized lines===================
+
+
+=====Class: MultiLinePolygon=====
+
+MultiLine:
+[CPointInt 22, 17]
+[CPointInt 14, 3]
+[CPointInt 7, 17]
+
+Annotations:
+U_JUNCTION:
+[[CPointInt 7, 17], [CPointInt 22, 17]]
+END_POINT:
+[[CPointInt 2, 26], [CPointInt 27, 26]]
+PIXEL_LINE_END:
+[[CPointInt 2, 26], [CPointInt 27, 26]]
+HARD_CORNER:
+[[CPointInt 14, 3]]
+STRAIGHT:
+[[Line: [CPointInt 22, 17],[CPointInt 27, 26]], [Line: [CPointInt 7, 17],[CPointInt 14, 3]], 
+[Line: [CPointInt 2, 26],[CPointInt 7, 17]], [Line: [CPointInt 7, 17],[CPointInt 22, 17]], 
+[Line: [CPointInt 14, 3],[CPointInt 22, 17]]]
+T_JUNCTION:
+[[CPointInt 7, 17], [CPointInt 22, 17]]
+PIXEL_JUNCTION:
+[[CPointInt 7, 17], [CPointInt 22, 17]]
+
+aspectRatio: 1.0869565217391304
+
+=====Class: MultiLinePolygon=====
+
+MultiLine:
+[CPointInt 45, 14]
+[CPointInt 47, 6]
+[CPointInt 44, 3]
+[CPointInt 34, 3]
+[CPointInt 33, 14]
+
+MultiLine:
+[CPointInt 33, 14]
+[CPointInt 34, 26]
+[CPointInt 48, 23]
+[CPointInt 45, 14]
+
+Annotations:
+WAVE:
+[[Line: [CPointInt 44, 3],[CPointInt 47, 6]]]
+U_JUNCTION:
+[[CPointInt 33, 14], [CPointInt 45, 14]]
+HARD_CORNER:
+[[CPointInt 34, 3], [CPointInt 34, 26]]
+STRAIGHT:
+[[Line: [CPointInt 33, 14],[CPointInt 34, 3]], [Line: [CPointInt 34, 3],[CPointInt 44, 3]], 
+[Line: [CPointInt 45, 14],[CPointInt 47, 6]], [Line: [CPointInt 45, 14],[CPointInt 48, 23]], 
+[Line: [CPointInt 34, 26],[CPointInt 48, 23]], [Line: [CPointInt 33, 14],[CPointInt 45, 14]], 
+[Line: [CPointInt 33, 14],[CPointInt 34, 26]]]
+T_JUNCTION:
+[[CPointInt 33, 14], [CPointInt 45, 14]]
+PIXEL_JUNCTION:
+[[CPointInt 33, 14], [CPointInt 45, 14]]
+SOFT_POINT:
+[[CPointInt 44, 3], [CPointInt 48, 23], [CPointInt 47, 6]]
+
+aspectRatio: 0.6521739130434783
+
+=====Class: MultiLinePolygon=====
+
+MultiLine:
+[CPointInt 80, 5]
+[CPointInt 67, 5]
+[CPointInt 63, 16]
+[CPointInt 72, 26]
+[CPointInt 82, 22]
+
+Annotations:
+CURVE_ARCH:
+[[Line: [CPointInt 67, 5],[CPointInt 80, 5]], [Line: [CPointInt 63, 16],[CPointInt 72, 26]]]
+END_POINT:
+[[CPointInt 82, 22], [CPointInt 80, 5]]
+PIXEL_LINE_END:
+[[CPointInt 82, 22], [CPointInt 80, 5]]
+STRAIGHT:
+[[Line: [CPointInt 72, 26],[CPointInt 82, 22]], [Line: [CPointInt 63, 16],[CPointInt 67, 5]]]
+SOFT_POINT:
+[[CPointInt 67, 5], [CPointInt 63, 16], [CPointInt 72, 26]]
+
+aspectRatio: 0.9047619047619048
+
++-----------------------------------------------+
