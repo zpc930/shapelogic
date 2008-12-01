@@ -1,12 +1,12 @@
             ------
-            Functionality under ImageJ
+            Menu overview
             ------
             Sami Badawi
             ------
             2008/11/29
             ------
 
-Menu overview under ImageJ
+ShapeLogic menu when run with ImageJ
   
   When running ShapeLogic as an ImageJ plugin there are 2 menus 
   
@@ -44,13 +44,13 @@ Menu overview under ImageJ
   
 * {CapitalLetterMatch}
   
-  This is a macro that:
+  Main command for letter recognition. This is a macro that:
   
   * Turns an image into a black and white image
   
-  * Run a skeletonize operation, turning line into thin lines
+  * Skeletonizes an image, turning line into thin lines
   
-  * Run the Stream Vectorizer plugin described below
+  * Runs the Stream Vectorizer plugin described below
   
   []
   
@@ -58,22 +58,24 @@ Menu overview under ImageJ
   
 * {DigiMatch} 
   
-  It is a macro that does almost the same as CapitalLetterMatch, call the digit
-  match plugin Digi Match Stream Vectorizer
+  Main command for digit recognition.
+  It is a macro similar to the CapitalLetterMatch but for digits, it calls the digit
+  match plugin Digi Match Stream Vectorizer.
   
   {{{getting-started.html#letter}Usage instruction}}
   
 * {Segment}
   
   Segment is a 4 connect color segmentation algorithm. 
-  Currently you cannot set the color distance in an input dialog.
+  Currently the color distance can only be set in the code, but 
+  an input dialog may be added in the future.
   
 * {ParticleCounter}
   
-  This will count particles in a color image, but not do any edge tracing and
-  analysis afterwards.
-  The particle analyzer can now be called with the count only option, so this
-  will give you a little more options. 
+  This will count particles in a color image but cannot do any edge tracing or
+  analysis.
+  The particle analyzer (see below) can also be called with a count only option and has the
+  following advantages over the particle counter:
   
   * Set the background or foreground color 
   
@@ -95,20 +97,16 @@ Menu overview under ImageJ
 * {RGB} Color Particle Analyzer
   
   {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
-  black and white images. The background color is set by the user. 
+  black and white images. The background or foreground color is set by the user. 
   
-  {{{particle.html#rgb}Usage instruction}}
+  {{{particle.html#rgb}Usage instruction}} and {{{colocalization.html}co-localization images}}.
   
 * Stream {Vectorizer}
   
-  Is a plugin that takes a line image with thin or skeletonized lines and 
-  vectorize them analyzed them and match them to letters.
-  
-  Third approach to vectorizing lines. Standard approach to vectorizer trace 
-  full line between intersection and split it up based on max distance from a
-  line between the end points. This is stable. This implementation handles the 
-  all polygons in the image. 
-  
+  Main Java code for letter recognition.
+  It is a plugin that takes a line image with thin or skeletonized lines and 
+  vectorizes and analyzes them then matches them to letters.
+   
   Based on:
   
   * Lazy stream declarative programming 
@@ -123,7 +121,7 @@ Menu overview under ImageJ
   
 * Vectorize {Information}
   
-  Does the same as Stream Vectorizer, but also write out all the internal
+  Does the same as Stream Vectorizer, but also writes out all the internal
   information that is used in the process:
   
   * Points
@@ -140,8 +138,9 @@ Menu overview under ImageJ
   
 * {Digi} Match Stream Vectorizer
   
-  Is a plugin to take a line image with thin or skeletonized lines and 
-  vectorize them analyzed them and match them to digits.
+  Main Java code for digit recognition.
+  This is a plugin to take a line image with thin or skeletonized lines and 
+  vectorize and analyze them, then match them to digits.
   
   {{{getting-started.html#letter}Usage instruction}}
   
