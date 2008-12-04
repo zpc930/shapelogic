@@ -36,9 +36,12 @@ Declarative programming in ShapeLogic is build on the following:
 <p>
 <b>last</b> the last element of a stream, set to LAST_UNKNOWN, before it is
 know. This value can get lower as calculation progress.
-<p></p>
-<b>maxLast</b> maually set max value for last. The real last value might be
+</p><p>
+<b>maxLast</b> manually set max value for last. The real last value might be
 lower.
+</p><p>
+<b>nullLegalValue</b> if this is false then the stream will end when the first
+null value is encountered.
 </p>
 
 <h3>How can an calculation of stream end?</h3>

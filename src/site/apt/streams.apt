@@ -53,3 +53,71 @@ Lazy Data Streams
   
   []
   
+* Definitions
+
+  * <<last>> the last element of a stream, set to LAST_UNKNOWN, before it is know. 
+  This value can get lower as calculation progress.
+
+  * <<maxLast>> manually set max value for last. The real last value might be lower.
+  
+  * <<nullLegalValue>> if this is false then the stream will end when the first
+  null value is encountered.
+  
+  []
+
+* How can an calculation of stream end?
+
+  * If null is not a legal value when finding a null
+  
+  * If an exception is thrown during a calculation
+  
+  * By setting a top maxLast value
+  
+  []
+
+* How to iterate over a stream
+
+** For loop
+  
++-----------------------------------------------------------------------------+
+Stream stream; 
+for (int i=0; 
+     stream.getLast() != Constants.LAST_UNKNOWN || i <= stream.getLast(); 
+     i++) 
+{
+	stream.hasNext();
+	Object = stream.get(i);
+}
++-----------------------------------------------------------------------------+  
+
+** While loop
+
++-----------------------------------------------------------------------------+  
+Stream stream; 
+while (stream.hasNext())
+{
+	Object stream.get(i);
+}
++-----------------------------------------------------------------------------+  
+
+* Stream hierarchy
+  
+  There is a quite extensive hierarchy of streams. Here are the most important:
+  
+  * <<Stream>> top interface. Mainly just an Iterator. 
+  
+  * <<NumberedStream>> interface. Stream that can be accessed with an index.
+  
+  * <<ListStream>> interface. Stream that stores result in a List.
+  
+  * <<BaseListCommonStream>> base class for most implementations.
+  
+  []
+  
+* Links for more info
+  
+  * {{{apidocs/org/shapelogic/streams/package-summary.html}Javadoc}}
+  
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/streams/}Sources on Google Code }}
+  
+  []
