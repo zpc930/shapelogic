@@ -1,0 +1,57 @@
+<html>
+<body>
+<h2>Streams</h2>
+
+New library for functional programming style streams / lazy lists.<br />
+<br />
+
+
+<h2>Dependency</h2>
+<p>
+<ul>
+<li>This package can depend on util, calculation, scripting.</li> 
+<li>There is no dependency of any image processing code or any external libraries outside Java 6.</li> 
+<li>This can be used in a Java application, just by adding shapelogic_.jar.</li> 
+</ul>
+</p>
+
+<h2>Declarative programming</h2>
+<p>
+Declarative programming in ShapeLogic is build on the following: 
+<br />
+<ul>
+<li>Rule database that can access Java object using Scripting languages or JEXL</li> 
+<li>Streams / lazy lists</li> 
+<li>Lazy calculations</li> 
+<li>Goal driven tasks</li> 
+<li>Maybe later IoC</li> 
+</ul>
+
+</p>
+
+<h2>Streams</h2>
+
+<h3>Definitions</h3>
+
+<p>
+<b>last</b> the last element of a stream, set to LAST_UNKNOWN, before it is
+know. This value can get lower as calculation progress.
+</p><p>
+<b>maxLast</b> manually set max value for last. The real last value might be
+lower.
+</p><p>
+<b>nullLegalValue</b> if this is false then the stream will end when the first
+null value is encountered.
+</p>
+
+<h3>How can an calculation of stream end?</h3>
+
+<ul>
+    <li>If null is not a legal value when finding a null</li>
+    <li>If an exception is thrown during a calculation</li>
+    <li>By setting a top maxLast value</li>
+</ul>
+
+
+</body>
+</html>

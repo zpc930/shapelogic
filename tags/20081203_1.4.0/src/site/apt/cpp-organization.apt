@@ -1,0 +1,84 @@
+            ------
+            C++ organization
+            ------
+            Sami Badawi
+            ------
+            2008/09/10
+            ------
+
+C++ organization
+  
+  This page is about how the code is organized.  This is work in progress and
+  only interesting for programmers looking at the code.
+
+  The main organization issues are:
+  
+  * How should the code be grouped
+
+  * What unit test framework should be used
+
+  * How should the unit tests be setup
+  
+  * What GUI should ShapeLogic work with
+  
+  * What is the best way to keep the algorithms loosely coupled with GUI
+  
+  * Should the ShapeLogic code be compiled into an application a static or dynamic library
+  
+  * How can you use ShapeLogic as a plugin for other programs
+  
+  []
+  
+  The overall idea is to try to simplest solutions first, and go to a better or 
+  harder solution later.
+
+* Directory structure
+  
+  Traditionally Java has a lot of classes and packages in their own directory,
+  where C++ have fewer.  It is a goal to keep the structure of the Java and C++
+  version of ShapeLogic as close.
+  The first version will use the same directory structure as Java did.
+
+  Code can be browsed at: 
+  
+  {{{http://code.google.com/p/shapelogic-cpp/source/browse/}
+  http://code.google.com/p/shapelogic-cpp/source/browse/}}.
+  
+* Google C++ Testing Framework
+
+  {{{http://code.google.com/p/googletest/}Google C++ Testing Framework}} is a
+  framework for writing C++ unit tests. Based on the xUnit architecture.
+  It has a strong focus on simplicity and terse code.
+  
+  To begin with there is only one directory for all the unit tests:
+  shapelogic-cpp/src/test/cpp/
+  
+  You can run them from command line using Bjam. Either from the test dir
+  or from shapelogic-cpp/
+  
+  If you are using Eclipse as an IDE then you change the main() function call
+  the tests, by changing a flag and un-commenting the test code there. 
+  
+* Compiling and linking
+  
+  Here are 2 methods for how to compile and link the code one used when the 
+  application is build with Eclipse and one when it it build with Bjam:
+
+** Eclipse: Make a ShapeLogic application
+
+  * Have one ShapeLogic executable that includes FLTK
+
+  * Google test is is enabled by changing a flag in main()
+
+  []
+
+** Boot build: Make a ShapeLogic lib and a GUI wrapper
+  
+  * Create a ShapeLogic library for all the algorithms
+
+  * Have a lightweight GUI FLTK wrapper
+
+  * The unit tests are also calling the ShapeLogic library
+
+  []
+

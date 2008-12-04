@@ -1,0 +1,398 @@
+            ------
+            Particle Counter and Analyzer
+            ------
+            Sami Badawi
+            ------
+            2008/03/09
+            ------
+
+Particle Counter and Analyzer
+
+  Starting in 1.2 ShapeLogic contains both an automatic color and gray scale particle
+  counter and a particle analyzer working without manual user intervention.
+  The goal is to be able to recognize different cells on a relatively uniform 
+  background and be able to extract a lot of geometric information.
+  
+  See {{{cell.html}Cell Categorizer}} for images types that can be handled by
+  the current particle analyzer, and for future plans.
+  
+  ShapeLogic 1.3 introduced 2 new modes for the particle analyzer: one where 
+  you set the foreground color of the particles and one where you set the
+  background color. They will always find a particle image and will not fail,
+  unlike the automatic particle analyzer.
+  
+* Common functionality for particle counter and particle analyzer 
+  
+  * Take input parameters, e.g. min and max size for particles 
+  
+  * Find background color
+  
+  * Find particles
+  
+  * Extract geometric properties of the particles
+  
+  * Print a report to a result table that can be exported to Excel
+  
+  []
+  
+* Usage
+  
+  {Test} on example particle image embryos.jpg
+    
+[images/particles/embryos.jpg] 
+
+  Under ImageJ Plugins ShapeLogic menu click 
+  "Particle Counter", "Color Particle Analyzer" or "RGB Color Particle Analyzer".
+  
+[images/particles/shapelogicmenu.png] 
+  
+** Input parameters dialog
+  
+  Select input parameters in dialog
+  
+[images/particles/particleInputDialog.png] 
+  
+  The parameters 
+  
+  Max distance: Distance between color in same color bucket
+  
+  Min pixels: Minimum number of pixels in particle
+  
+  Max pixels: Maximum number of pixels in particle
+  
+  Iterations: {{{http://en.wikipedia.org/wiki/K-means_algorithm}K-mean}} iterations for color hypothesis
+  
+  CountOnly: Only count particles, do not trace edge, vectorize, annotate and match
+  
+  ToMask: Turns the image into a black and white mask, with black particles
+  
+  DisplayInternalInfo: Print out polygon, points and their annotations
+  
+  These are the default values and the name of the parameters in Java.
+  
++-------------------------------------------------------------+
+_iterations = 2; // K-mean iterations for color hypothesis
+_maxDistance = 50; // Distance between color in same color bucket
+_minPixelsInArea = 5; // Minimum number of pixels in particle
+_maxPixelsInArea = 10000; // Maximum number of pixels in particle
++-------------------------------------------------------------+
+
+** Output image if {mask} option is set
+
+[images/particles/embryos6mask.jpg] 
+  
+  Check ToMask check box in order to better see what particles were found and to 
+  post process it with other tools. 
+  The built in particle analyzer in ImageJ contains functionality that is not
+  available here e.g. 
+  
+  * Ellipse fitter
+
+  * Outline and add numbers
+  
+  []
+  
+  Here is the result of running outline and add numbers 
+  
+[images/particles/embryos6numbered_outline.png]
+
+  The numbering scheme used in ImageJ particle analyzer is the same as the one
+  used in ShapeLogic. Start from top left corner.
+
+** Summary result dialog
+
+  A summary result is shown in a dialog, with the following information:
+  
+[images/particles/particleCountDialog.png] 
+
+  A report of each particle's properties is sent to an ImageJ result table, 
+  which can be exported to Excel.
+  Reports are different for the particle counter and analyzer. 
+  
+* Particle counter information for each particle 
+  
+  The particle counter finds and prints basic geometric properties of the particles
+  
+[images/particles/particleCounterResult.png]
+
+  * Area 
+  
+  * Center of gravity 
+  
+  * Color
+  
+  * Std dev for color
+  
+  []
+  
+* Particle analyzer information for each particle
+
+  The particle analyzer traces the edge of each particle. It finds and prints 
+  more advanced geometric properties of the particles
+  
+[images/particles/particleAnalyzerResult.png]
+  
+  * Area 
+  
+  * Center of gravity 
+  
+  * Color
+  
+  * Std dev for color
+  
+  * Length of perimeter
+  
+  * Circularity
+  
+  * Gray value brightness
+  
+  * Bounding box
+  
+  * Number of hard corners
+  
+  * Number of inflection points
+  
+  * Number of curve arches
+  
+  []
+  
+  For color images it will also write out average R, G and B channels.
+  
+  The particle analyzer finds many more geometric properties that are not shown
+  on the above example, it is easy to print them if desired.
+  
+  This the particle analyzer can also select and categorize particles based 
+  on all of the above properties.
+  In order to categorize particles the user should define geometric rules for
+  each particle type.
+
+  ShapeLogic v 1.5 will come with predefined rules to {{{cell.html}categorize certain cells}}.
+  
+  If you want more detailed information mark check box DisplayInternalInfo.
+
+* Particle analyzer in manual {rgb} modes
+  
+  ShapeLogic 1.3 introduces 2 new color modes for the particle analyzer.
+  
+  You find them under the menu item: RGB Color Particle Analyzer.
+  
+  One will set the background color the other sets the foreground color.
+  
+[images/particles/rgb_particleInputDialog.png]
+  
+** Set foreground color mode
+  
+  This is useful for
+  
+  * Particles with different colors, where you are only interested in one 
+  
+  * Particles in {{{colocalization.html}co-localization}} images 
+  
+  * Images that are not particle images
+  
+  []
+   
+  Here is an example
+  
+[images/particles/legionella_pneumophila10157.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10157 legionella pneumophila
+  
+  The setting in the dialog was to find the purple bacteria.
+  
+** Set background color mode
+  
+  This is useful for
+  
+  * Close up of a particle where the background color is not the most frequent 
+  
+  * You are working on a small ROI region of interest
+  
+  []
+  
+* Current status of the particle analyzer in ShapeLogic v 1.4 
+  
+  The particle analyzer in ShapeLogic v 1.4 has gone through limited testing 
+  and seems to work well. 
+  
+* Framework to build more advanced particle counters and particle analyzers
+  
+  The particle counter algorithm in ShapeLogic 1.4 is relatively simple. It is 
+  setup to be expanded to handle more advanced algorithms. Here is the flow.
+  
+  * If either foreground or background color is set you are done
+  
+  * Else find one or more color hypothesis automatically
+  
+    * Color clustering using K-mean algorithm
+  
+    * Background color finder
+  
+    * Check that image is a particle image, if it is not stop
+    
+    []
+  
+  * Run over the image again find the individual particles based on the color 
+  hypothesis
+  
+  * Collect color and area information for each particle
+  
+  * Filter particles based on size
+  
+  []
+
+* Defining rules for categories in ShapeLogic 1.4
+  
+  This is done by sub classing ColorParticleAnalyzer or ColorParticleAnalyzerIJ.
+  Override the categorizeStreams() method.
+  
+  Use ColorParticleAnalyzerIJ if you work with ImageJ and ColorParticleAnalyzer 
+  if you work without.
+
+  Here is the current categorize code. It is only there to serve as an example: 
+  
+  The {{{logic-language.html#syntax} rule syntax}} is very straightforward. 
+  There are a lot of numeric streams
+  with one lazy calculated number for each particle. E.g. aspect ratio stream.
+  Then you define one rule for each constraint you want to put on a given
+  category.
+  
+  In order to belong to the category Flat the aspect ratio for a particle just 
+  has to greater than 1.1.
+  
+  In order to belong to the category "Light round" the aspect ratio for a particle just 
+  has to between 0.9 and 1.1 and the brightness have to be greater than 150.
+  
+  Note that a particle that satisfy more categories will not belong to any of them.
+  
++-----------------------------------+
+	@Override
+	protected void categorizeStreams() {
+		LoadParticleStreams.exampleMakeParticleStream();
+    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+    	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
+	}
+	
+	
+	final static public String[] EXAMPLE_PARTICLE_ARRAY = 
+	{"Flat","Tall","Light round", "Dark round"};	
+	
+	/** This shows what to do to define rules for the color particle analyzer.<br />
+	 * 
+	 * This is not useful.<br /> 
+	 * Light and dark is turned around if inverted LUT is used.<br /> 
+	 */
+	public static void exampleMakeParticleStream() {
+		LoadLetterStreams.rule("Flat", ASPECT_RATIO, ">", 1.1, null);
+		
+		LoadLetterStreams.rule("Tall", ASPECT_RATIO, "<", 0.9, null);
+
+		LoadLetterStreams.rule("Light round", StreamNames.COLOR_GRAY, ">", 150, null);
+		LoadLetterStreams.rule("Light round", ASPECT_RATIO, "<", 1.1, null);
+		LoadLetterStreams.rule("Light round", ASPECT_RATIO, ">", 0.9, null);
+
+		LoadLetterStreams.rule("Dark round", StreamNames.COLOR_GRAY, "<", 120, null);
+		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, "<", 1.1, null);
+		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, ">", 0.9, null);
+	}
++-----------------------------------+
+
+ 
+* How to make your own particle analyzer category rules
+  
+  This example only has 2 categories Flat and Non flat. 
+  It is flat if it twice as wide as it is high.
+  
+  Copy the following text into a file called CustomParticleAnalyzer_.java:
+
++-----------------------------------+
+import org.shapelogic.calculation.RootMap;
+import org.shapelogic.imageprocessing.ColorParticleAnalyzerIJ;
+import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.streamlogic.LoadLetterStreams;
+import org.shapelogic.streamlogic.StreamNames;
+import org.shapelogic.streams.XOrListStream;
+
+public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
+	@Override
+	protected void categorizeStreams() {
+	    
+		LoadLetterStreams.rule("Flat", CommonLogicExpressions.ASPECT_RATIO, ">", 2, null);
+		
+		LoadLetterStreams.rule("Non flat", CommonLogicExpressions.ASPECT_RATIO, "<", 2, null);
+
+    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, new String[] {"Flat", "Non flat"});
+    	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
+	}
+}
++-----------------------------------+
+  
+** Compile from within ImageJ
+
+  * Place the CustomParticleAnalyzer_.java into ImageJ/plugin/ShapeLogic directory.
+  
+  * Compile it from within ImageJ, by going to Plugin -> Compile and Run ...
+
+  []
+  
+** Compile from outside ImageJ
+
+  * Compile CustomParticleAnalyzer_.java someplace else using Eclipse,
+  NetBeans or javac and take the resulting class file:
+
+  CustomParticleAnalyzer_.class 
+  
+  * Move it into ImageJ/plugin/ShapeLogic directory.
+
+  []
+
+* Plans for ShapeLogic 1.5
+  
+  * Make custom rules to recognize specific {{{cell.html}cells}}. 
+  In v 1.4 the user has to make rules themselves.
+  
+  * Make it easier to select what particle properties to print out, now a 
+  random selection of somewhat useful properties have been selected.
+  
+  * HSV mode for the particle analyzer
+  
+  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
+  1 layered neural network for rules for particle analyzer
+  
+  []
+  
+* Possible future plans for particle analyzer beyond ShapeLogic v 1.4
+  
+  * ShapeLogic 1.5 may come with predefined rules for certain cells
+  
+  * Create rule for recognizing cells using neural networks or machine learning techniques
+
+  * Be able to handle a background that is not uniform, and cell organelles
+
+  * Incorporate reasoning under uncertainty using the lazy stream library
+  
+  * Extend to do tracking of particles in a video sequence
+  
+  * Find overlapping particles and distinguish them as separate 
+  
+  []
+  
+** Create rule for recognizing cells using neural networks or machine learning techniques
+  
+  In order to do this the user will have to select the properties that should 
+  be used to train the network or use the machine learning on.
+  
+  It is probably easiest to export all the properties to a spreadsheet, add a 
+  result field, and run an external neural network or machine learning program.
+  The result will then be put back into a ShapeLogic stream.
+  
+  Right now the classifier stream is an Exclusive Or stream. 
+  There need to be streams that 
+  
+  * Do weighted 1 and 2 layer computations.
+  
+  * Do binary decisions based on properties.
+  
+  []
+  
+  

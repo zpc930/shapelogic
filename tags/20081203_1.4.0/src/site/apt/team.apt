@@ -1,0 +1,71 @@
+            ------
+            ShapeLogic Team and Contacts
+            ------
+            Sami Badawi
+            ------
+            2007/12/04
+            ------
+
+ShapeLogic project
+  
+  The {{{http://www.python.org}Python language}} is a great inspiration.
+  
+* Python is the model for ShapeLogic
+  
+  * It is a real OSS community with a lot of development activity
+  
+  * The core is kept small and clean
+  
+  * The core is production quality
+  
+  * Anybody can start a Python project without asking for permission
+  
+  * Useful projects are migrated into the core
+  
+  * Decisions are reached via mailing list discussions 
+  
+  * In case of an unresolved dispute Guido van Rossum has the final word
+  
+  []
+  
+* Red tape and legal issues
+  
+  The intention with ShapeLogic is that it will turn into a real OSS community, 
+  unfortunately this involves some red tape and there are a few legal issues.
+  They are described in the book: "Producing open source software,"
+  you can find the whole text online at {{http://producingoss.com}}.
+
+  The main point is that if somebody challenges your OSS project in court, there 
+  needs to be an entity that can defend it. This is described here:
+  {{http://producingoss.com/en/producingoss.html#legal}}
+  
+* Joining the ShapeLogic team
+  
+  A Google Code Hosting project called 
+  {{{http://code.google.com/p/shapelogicapps}shapelogicapps}} has been setup. 
+  Anybody can join shapelogicapps.
+  
+  If you are interested in contributing to ShapeLogic, start by making your 
+  contribution in shapelogicapps. If the contribution fits, it will be code 
+  reviewed, and it can be migrated into the core ShapeLogic toolkit.
+  
+  When you have some experience and if you are interested, you can become a
+  member of the core ShapeLogic team.
+  
+  If you are interested in joining the ShapeLogic development  
+  please contact Sami Badawi:
+  
+[images/logos/sami.png] 
+
+Members
+
+* Sami Badawi
+
+  * Cubicle dweller, mathematician
+
+  * Computer vision has been my big passion since 1989
+
+  * Created ShapeLogic in 2007
+  
+  []
+

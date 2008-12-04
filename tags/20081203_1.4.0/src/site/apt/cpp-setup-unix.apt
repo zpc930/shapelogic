@@ -1,0 +1,51 @@
+            ------
+            C++ Setup
+            ------
+            Sami Badawi
+            ------
+            2008/09/03
+            ------
+
+C++ Setup
+  
+* GCC under Linux
+  
+  Not all Linux distributions come with the development headers installed.
+  
+** Installing build-essential under Ubuntu
+  
+  You can either use Synaptic or run:
+
++----------------------------------------+
+sudo apt-get install build-essential 
++----------------------------------------+
+
+* Setup with Eclipse
+  
+  {{{http://www.eclipse.org/cdt/} Eclipse CDT}} works very for both build and 
+  debugging. 
+
+  It will detect header files in the standard places.
+  
+  You can do builds in different ways, either by supplying the Make file, or 
+  Eclipse can do the build for you.
+
+* Installing Google C++ Testing Framework
+  
+  This was released in July 2008 and may not be included in your Linux 
+  distribution yet. In order to install it manually:
+  Download {{{http://code.google.com/p/googletest/downloads/list}Google C++ Testing Framework}}
+  
+  Here are the
+  {{{http://googletest.googlecode.com/svn/tags/release-1.0.1/README}install instructions}}.
+  
+  This will build the library files into /usr/local/lib. 
+  When you want to run a unit test you need to set the environment variable: LD_LIBRARY_PATH
+  in order to pick up the shared lib.
+
++-----------------------------------------------+
+export LD_LIBRARY_PATH=/usr/lib:/usr/local/lib
++-----------------------------------------------+
+  
+  If running from Eclipse you have to set this in the Run Configuration dialog.
+
