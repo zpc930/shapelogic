@@ -1,0 +1,74 @@
+            ------
+            Machine learning
+            ------
+            Sami Badawi
+            ------
+            2008/12/09
+            ------
+
+Machine learning
+  
+  Starting in 1.5 ShapeLogic will move towards combining the declarative 
+  programming framework with machine learning techniques.
+  First step is do train a multi layer feed forward neural network externally
+  but run it internally.
+  
+* Machine learning techniques
+  
+  Machine learning is by now a well established field that has been around for 
+  decades. Here are a few techniques:
+  
+  * Perceptron network
+  
+  * Multi layer back propagation / feed forward neural network
+  
+  * Learning Decision Trees
+  
+  []
+  
+
+* Open source implementations of neural networks with language and license
+  
+  * {{{http://www.jooneworld.com/}Joone}} Java, LGPL
+  
+  * {{{http://www.simbrain.net/}simbrain}} Java, GPL
+  
+  * {{{http://www.geocities.com/adotsaha/NNinExcel.html}NNinExcel}} Excel, ?
+
+  []
+  
+  {{{http://www.jooneworld.com/}Joone}}
+  is a very user friendly system that takes input and produces output in 
+  several different formats: Database, Excel and flat file  
+  
+* Process for training network
+  
+  * Select list of input features
+  
+  * Run one or more images and save result table as a spreadsheet
+  
+  * If more than one concatenate the spreadsheets to one spreadsheet 
+  
+  * Make a list of matches
+  
+  * Train a multi layer neural network externally using e.g. Joone
+  
+  * If successful network can be found use it otherwise chose new list of input features  
+  
+  * Save weights to flat file or database 
+  
+  []
+  
+  When running the network load the weights from flat file or database.
+  
+* Needed changes to the declarative programming framework
+  
+  * A multi named input multi named output stream
+  
+  * A fully connected feed forward neural network
+  
+  * Dependent streams should be defined in the database or flat file 
+  
+  []
+  
+  
