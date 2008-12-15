@@ -261,6 +261,35 @@ ShapeLogic
   
   []
 
+** ShapeLogic 1.5 Java combining machine learning and declarative programming
+
+  * Start combining {{{machine-learning.html}machine learning}} and declarative
+  programming
+  
+  * Multi-layer feed forward neural network with external learning
+  
+  * Make it easier to select which particle properties to print out, currently a 
+  random selection of somewhat useful properties has been selected.
+  
+  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
+  1 layered neural network for rules for particle analyzer
+  
+  []
+
+** Low hanging fruits for ShapeLogic Java
+  
+  * Expand OCR to cover lower case letters using neural network matching
+  
+  * Make custom rules to recognize specific {{{cell.html}cells}}. 
+  In v 1.4 the user has to make rules themselves. Mainly pending finding a 
+  relevant test case.
+  
+  * {{{component.html}Component framework}} for hybrid and complex vision problems
+  
+  * HSV mode for the particle analyzer
+  
+  []
+  
 ** ShapeLogic C++ 0.5 soon to be released
   
   * Make more OpenCV image processing algorithm available in menus
@@ -289,24 +318,6 @@ ShapeLogic
   
   []    
   
-** ShapeLogic 1.5 Java with specific cell recognition particle analyzer
-
-  * {{{component.html}Component framework}} for hybrid and complex vision problems
-  
-  * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.4 the user has to make rules themselves. Mainly pending finding a 
-  relevant test case.
-  
-  * Make it easier to select which particle properties to print out, currently a 
-  random selection of somewhat useful properties has been selected.
-  
-  * HSV mode for the particle analyzer
-  
-  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
-  1 layered neural network for rules for particle analyzer
-  
-  []
-
 ** The test images for the particle analyzer
   
   Here are 2 other test image for the particle analyzer. 

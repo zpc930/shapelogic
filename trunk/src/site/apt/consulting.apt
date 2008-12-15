@@ -41,8 +41,30 @@ Computer vision and image processing consulting
   * <<Languages>> Java, C++, C, Mathematica, Python, Perl, Slang, Scala, 
   Ab Initio, VBA
   
+  * <<Methodology>> OO, Design Patterns, Test Driven Development, IoC, 
+  Functional and Declarative Programming
+  
   * <<Image processing libraries>> ImageJ, Java2D, Generic Image Library, 
   OpenCV, VXL
+  
+  * <<Math>> Advanced analysis: functional analysis, distributions, topology, 
+  measure theory. Metric, Banach, Hilbert and Sobolev spaces.
+  Probability, optimization, stochastic calculus used in option pricing. 
+  Logic, set theory, foundation of mathematics, information theory
+
+  * <<Statistics>> MLE based fitting of distribution in Mathematica, 
+  implemented 10 distributions in Java
+  
+  * <<Graphics programming>> 3D transformations, splines, quarternion, 
+  3D collision detection
+  
+  * <<Artificial intelligence>> Machine learning, feed forward neural networks, 
+  goal driven tree searches
+  
+  * <<Computational physics>> Classical mechanics, Lagrange's equation
+  
+  * <<Finance theory>> Value at Risk, Monte Carlo simulations. Familiar with 
+  asset pricing and Black-Scholes
   
   * <<GUI libraries>> Java Swing, FLTK, MFC, Motif, C++ Builder
   
@@ -59,24 +81,8 @@ Computer vision and image processing consulting
 
   * <<IDE>> Eclipse, NetBeans, Visual Studio, emacs
 
-  * <<Methodology>> OO, Design Patterns, Test Driven Development, IoC, Aspect 
-  Oriented Programming
-  
   * <<J2EE>> Servlets, JSP, Struts, Google Guise IoC
 
-  * <<Math>> Advanced analysis: functional analysis, distributions, topology, 
-  measure theory. Metric, Banach, Hilbert and Sobolev spaces.
-  Probability, optimization, stochastic calculus used in option pricing. 
-  Logic, set theory, foundation of mathematics, information theory
-
-  * <<Statistics>> MLE based fitting of distribution in Mathematica, 
-  implemented 10 distributions in Java
-  
-  * <<Graphics programming>> 3D transformations, splines, quarternion, 
-  3D collision detection
-  
-  * <<Computational physics>> Classical mechanics, Lagrange's equation
-  
   []
   
 * Education
