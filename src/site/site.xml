@@ -40,7 +40,7 @@
       </item>
       <item name="Examples" href="index.html" collapse="true">
 		  <item name="Project Euler" href="project-euler.html"/>
-		  <item name="Letter Match" href="letter-match.html"/>
+		  <item name="OCR Letter Match" href="letter-match.html"/>
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Annotations" href="annotations.html"/>
