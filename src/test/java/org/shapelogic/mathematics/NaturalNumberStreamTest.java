@@ -1,7 +1,5 @@
 package org.shapelogic.mathematics;
 
-import org.shapelogic.mathematics.NaturalNumberStream;
-
 import junit.framework.TestCase;
 
 /** Test NaturalNumberStream.
