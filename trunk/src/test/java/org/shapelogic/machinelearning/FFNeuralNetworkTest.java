@@ -14,11 +14,14 @@ public class FFNeuralNetworkTest extends TestCase {
     final static double[][] WEIGHTS_FOR_XOR = {
         {
             -0.04987729759969203, 0.043065103789957926, -0.09799030765920698,
-            -0.1732212620281772,    0.18873333446145452,    -0.06691055475908447,
-            -0.182843680965388,     -0.11767688078014925,   0.02648590823005495
+            //Bias first hidden layer
+
+            -0.1732212620281772,  0.18873333446145452,  -0.06691055475908447,
+            -0.182843680965388,  -0.11767688078014925,   0.02648590823005495
         },
         {
-            0.11006835154877193,
+            0.11006835154877193, //Bias secone hidden layer
+
             0.08510015837536089,
             0.04260661544776684,
             0.13925520732807045
@@ -40,5 +43,8 @@ public class FFNeuralNetworkTest extends TestCase {
         assertEquals(3, xOrNn.getLayerNodesInTopLayer());
         assertTrue(xOrNn.addLayer(WEIGHTS_FOR_XOR[1]));
         assertEquals(1, xOrNn.getLayerNodesInTopLayer());
+        double[] result = xOrNn.calc(new double[]{0.,0.});
+        assertNotNull(result);
+        assertEquals(1, result.length);
     }
 }

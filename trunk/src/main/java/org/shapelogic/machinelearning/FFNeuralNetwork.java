@@ -15,6 +15,7 @@ public class FFNeuralNetwork {
     protected ArrayList<Integer> _layerNodes = new ArrayList();
     protected ArrayList<double[]> _layerWeights = new ArrayList();
     protected String _message;
+    protected int _biasWeight = -1;
 
     public FFNeuralNetwork(int nInput, int nOutput) {
         nInputNodes = nInput;
@@ -24,7 +25,16 @@ public class FFNeuralNetwork {
     }
 
     public double[] calc(double[] input) {
-        return input;
+        if (getLayerNodesInTopLayer() != nOutputNodes)
+            return null;
+        if (input.length != nInputNodes)
+            return null;
+        double[] lastResult = input;
+        double[] result = null;
+        for (int i = 0; i < _layerNodes.size(); i++) {
+            result = new double[_layerNodes.get(i)];
+        }
+        return result;
     }
 
     public boolean addLayer(double[] layer) {
