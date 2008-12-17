@@ -15,7 +15,14 @@ public class FFNeuralNetwork {
     protected ArrayList<Integer> _layerNodes = new ArrayList();
     protected ArrayList<double[]> _layerWeights = new ArrayList();
     protected String _message;
-    protected int _biasWeight = -1;
+
+    /** There is not agreement about whether the bias should be 1 or -1.<br />
+     * <br />
+     * In Joone it seems to be 1, so for now it is set to 1 here. <br />
+     * <br />
+     * It might be changed to be ajudstable.<br />
+     */
+    protected int _biasWeight = 1;
 
     public FFNeuralNetwork(int nInput, int nOutput) {
         nInputNodes = nInput;
