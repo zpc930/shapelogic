@@ -13,25 +13,24 @@ public class FFNeuralNetworkTest extends TestCase {
     /** Weights found using the Joone Neural Networks.  */
     final static double[][] WEIGHTS_FOR_XOR = {
         {
-            -0.04987729759969203, 0.043065103789957926, -0.09799030765920698,
-            //Bias first hidden layer
+            2.7388686085992333, 5.505721328606976, 4.235258932026585, //bias
 
-            -0.1732212620281772,  0.18873333446145452,  -0.06691055475908447,
-            -0.182843680965388,  -0.11767688078014925,   0.02648590823005495
+            -6.598582463774703, -3.678198637390036, -2.9604962169635076,
+            -6.59030690954159, -3.7790406961228347, -2.845930422442215
         },
         {
-            0.11006835154877193, //Bias secone hidden layer
+            -5.27100082610628,  //Bias secone hidden layer
 
-            0.08510015837536089,
-            0.04260661544776684,
-            0.13925520732807045
+            -10.45330943056037,
+            6.582922049952558,
+            4.7139611039662945
         }
     };
 
     /** Weights found using the Joone Neural Networks.  */
     final static double[][] WEIGHTS_FOR_AND = {
         {
-            1.5, //Bias first hidden layer
+            -1.5, //Bias first hidden layer
 
             1.,
             1.
@@ -41,7 +40,7 @@ public class FFNeuralNetworkTest extends TestCase {
     /** Weights found using the Joone Neural Networks.  */
     final static double[][] WEIGHTS_FOR_OR = {
         {
-            0.5, //Bias first hidden layer
+            -0.5, //Bias first hidden layer
 
             1.,
             1.
@@ -51,7 +50,7 @@ public class FFNeuralNetworkTest extends TestCase {
     /** Weights found using the Joone Neural Networks.  */
     final static double[][] WEIGHTS_FOR_NOT = {
         {
-            -0.5, //Bias first hidden layer
+            0.5, //Bias first hidden layer
 
             -1.
         }
