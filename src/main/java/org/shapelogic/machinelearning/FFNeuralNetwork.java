@@ -33,6 +33,7 @@ public class FFNeuralNetwork {
         double[] result = null;
         for (int i = 1; i < _layerNodes.size(); i++) {
             result = calcLayer(lastResult, i);
+            lastResult = result;
         }
         return result;
     }
@@ -40,13 +41,14 @@ public class FFNeuralNetwork {
     public double[] calcLayer(double[] lastResult,
             int layerNumber)
     {
-        double[] result = new double[_layerNodes.get(layerNumber)];
-        double[] currentWeights = _layerWeights.get(layerNumber);
         int currentNumberOfNodes = _layerNodes.get(layerNumber);
+        double[] result = new double[currentNumberOfNodes];
+        double[] currentWeights = _layerWeights.get(layerNumber);
         for (int i = 0; i < result.length; i++) {
             result[i] += currentWeights[i] * _biasWeight;
             for (int j = 0; j < lastResult.length; j++) {
-                result[i] += currentWeights[i + (j+1)*currentNumberOfNodes] * lastResult[j];
+                int index = i + (j+1)*currentNumberOfNodes;
+                result[i] += currentWeights[index] * lastResult[j];
             }
             result[i] = transform(result[i]);
         }
