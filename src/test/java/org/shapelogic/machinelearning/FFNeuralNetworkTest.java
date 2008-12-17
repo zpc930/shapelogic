@@ -34,7 +34,14 @@ public class FFNeuralNetworkTest extends TestCase {
         assertEquals(1,nn.nOutputNodes);
     }
 
-    public void testXORNeuralNetwork() {
+    private FFNeuralNetwork makeXORNN() {
+        FFNeuralNetwork xOrNn = new FFNeuralNetwork(2,1);
+        xOrNn.addLayer(WEIGHTS_FOR_XOR[0]);
+        xOrNn.addLayer(WEIGHTS_FOR_XOR[1]);
+        return xOrNn;
+    }
+
+    public void testXORNeuralNetwork00() {
         FFNeuralNetwork xOrNn = new FFNeuralNetwork(2,1);
         assertEquals(2, xOrNn.nInputNodes);
         assertEquals(1, xOrNn.nOutputNodes);
@@ -46,5 +53,35 @@ public class FFNeuralNetworkTest extends TestCase {
         double[] result = xOrNn.calc(new double[]{0.,0.});
         assertNotNull(result);
         assertEquals(1, result.length);
+        assertNNFalse(result[0]);
+    }
+
+    public void testXORNeuralNetwork01() {
+        FFNeuralNetwork xOrNn = makeXORNN();
+        assertNNTrue( xOrNn.calc(new double[]{0.,1.})[0]);
+    }
+
+    public void testXORNeuralNetwork10() {
+        FFNeuralNetwork xOrNn = makeXORNN();
+        assertNNTrue( xOrNn.calc(new double[]{1.,0.})[0]);
+    }
+
+    public void testXORNeuralNetwork11() {
+        FFNeuralNetwork xOrNn = makeXORNN();
+        assertNNFalse( xOrNn.calc(new double[]{1.,1.})[0]);
+    }
+
+    public void assertNNTrue(double input) {
+        boolean result = 0.5 < input;
+        if (!result)
+            System.out.println("input: " + input);
+        assertTrue(result);
+    }
+
+    public void assertNNFalse(double input) {
+        boolean result = input <= 0.5;
+        if (!result)
+            System.out.println("input: " + input);
+        assertTrue(result);
     }
 }

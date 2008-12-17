@@ -46,7 +46,7 @@ public class FFNeuralNetwork {
         for (int i = 0; i < result.length; i++) {
             result[i] += currentWeights[i] * _biasWeight;
             for (int j = 0; j < lastResult.length; j++) {
-                result[i] += currentWeights[i + j*currentNumberOfNodes] * lastResult[j];
+                result[i] += currentWeights[i + (j+1)*currentNumberOfNodes] * lastResult[j];
             }
             result[i] = transform(result[i]);
         }
@@ -69,7 +69,7 @@ public class FFNeuralNetwork {
     }
 
     public double transform(double input) {
-        return 1 / (1 + Math.exp(input));
+        return 1 / (1 + Math.exp(-input));
     }
 
 //=============== Getters and setters ===============
