@@ -71,6 +71,13 @@ public class FFNeuralNetworkTest extends TestCase {
         assertNNFalse( xOrNn.calc(new double[]{1.,1.})[0]);
     }
 
+    public void testSigmoidFunction() {
+        FFNeuralNetwork xOrNn = makeXORNN();
+        assertEquals( 0.5, xOrNn.transform(0));
+        assertEquals( 0.9999546021312976, xOrNn.transform(10));
+        assertEquals( 4.5397868702434395E-5, xOrNn.transform(-10));
+    }
+
     public void assertNNTrue(double input) {
         boolean result = 0.5 < input;
         if (!result)
