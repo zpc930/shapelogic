@@ -28,6 +28,16 @@ public class FFNeuralNetworkTest extends TestCase {
         }
     };
 
+    /** Weights found using the Joone Neural Networks.  */
+    final static double[][] WEIGHTS_FOR_AND = {
+        {
+            1.5, //Bias first hidden layer
+
+            1.,
+            1.
+        }
+    };
+
     public void testConstructor() {
         FFNeuralNetwork nn = new FFNeuralNetwork(2,1);
         assertEquals(2,nn.nInputNodes);
@@ -40,6 +50,14 @@ public class FFNeuralNetworkTest extends TestCase {
         xOrNn.addLayer(WEIGHTS_FOR_XOR[1]);
         return xOrNn;
     }
+
+    private FFNeuralNetwork makeAndNN() {
+        FFNeuralNetwork andNn = new FFNeuralNetwork(2,1);
+        andNn.addLayer(WEIGHTS_FOR_AND[0]);
+        return andNn;
+    }
+
+//======================XOR NN======================
 
     public void testXORNeuralNetwork00() {
         FFNeuralNetwork xOrNn = new FFNeuralNetwork(2,1);
@@ -70,6 +88,30 @@ public class FFNeuralNetworkTest extends TestCase {
         FFNeuralNetwork xOrNn = makeXORNN();
         assertNNFalse( xOrNn.calc(new double[]{1.,1.})[0]);
     }
+
+//======================AND NN======================
+
+    public void testAndNeuralNetwork00() {
+        FFNeuralNetwork xOrNn = makeAndNN();
+        assertNNFalse( xOrNn.calc(new double[]{0.,0.})[0]);
+    }
+
+    public void testAndNeuralNetwork01() {
+        FFNeuralNetwork xOrNn = makeAndNN();
+        assertNNFalse( xOrNn.calc(new double[]{0.,1.})[0]);
+    }
+
+    public void testAndNeuralNetwork10() {
+        FFNeuralNetwork xOrNn = makeAndNN();
+        assertNNFalse( xOrNn.calc(new double[]{1.,0.})[0]);
+    }
+
+    public void testAndNeuralNetwork11() {
+        FFNeuralNetwork xOrNn = makeAndNN();
+        assertNNTrue( xOrNn.calc(new double[]{1.,1.})[0]);
+    }
+
+
 
     public void testSigmoidFunction() {
         FFNeuralNetwork xOrNn = makeXORNN();
