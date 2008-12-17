@@ -31,10 +31,20 @@ public class FFNeuralNetwork {
             return null;
         double[] lastResult = input;
         double[] result = null;
-        for (int i = 0; i < _layerNodes.size(); i++) {
+        for (int i = 1; i < _layerNodes.size(); i++) {
             result = new double[_layerNodes.get(i)];
+            arrayMultiplication(result, _biasWeight, _layerWeights.get(i), 0);
+
         }
         return result;
+    }
+
+    public void arrayMultiplication(double[] result, double factor,
+            double[] inputArray, int startIndex)
+    {
+        for (int i = 0; i < result.length; i++) {
+            result[i] += inputArray[startIndex + i] * factor;
+        }
     }
 
     public boolean addLayer(double[] layer) {
