@@ -18,9 +18,9 @@ Machine learning
   Machine learning is by now a well established field that has been around for 
   decades. Here are a few techniques:
   
-  * Perceptron network
-  
-  * Multi layer back propagation / feed forward neural network
+  * Multi layer feed forward neural network (error back propagation)
+
+  * Perceptron network (simple 1 layered feed forward neural network)
   
   * Learning Decision Trees
   
@@ -60,6 +60,18 @@ Machine learning
   []
   
   When running the network load the weights from flat file or database.
+  
+* Export the weights from Joone
+
+  Joone seperate the weights from the the bias. While ShapeLogic
+  used the bias as the first weights.
+
+  You can export the weights from Joone, by going in an inspecting both the
+  synapses and the layers. Do a copy and pase them to a spreadsheet or a text
+  file.
+
+  The copy does not work under all versions of Linux, but it works fine under
+  Windows.
   
 * Needed changes to the declarative programming framework
   
