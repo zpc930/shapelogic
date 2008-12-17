@@ -38,6 +38,25 @@ public class FFNeuralNetworkTest extends TestCase {
         }
     };
 
+    /** Weights found using the Joone Neural Networks.  */
+    final static double[][] WEIGHTS_FOR_OR = {
+        {
+            0.5, //Bias first hidden layer
+
+            1.,
+            1.
+        }
+    };
+
+    /** Weights found using the Joone Neural Networks.  */
+    final static double[][] WEIGHTS_FOR_NOT = {
+        {
+            -0.5, //Bias first hidden layer
+
+            -1.
+        }
+    };
+
     public void testConstructor() {
         FFNeuralNetwork nn = new FFNeuralNetwork(2,1);
         assertEquals(2,nn.nInputNodes);
@@ -55,6 +74,18 @@ public class FFNeuralNetworkTest extends TestCase {
         FFNeuralNetwork andNn = new FFNeuralNetwork(2,1);
         andNn.addLayer(WEIGHTS_FOR_AND[0]);
         return andNn;
+    }
+
+    private FFNeuralNetwork makeOrNN() {
+        FFNeuralNetwork orNn = new FFNeuralNetwork(2,1);
+        orNn.addLayer(WEIGHTS_FOR_OR[0]);
+        return orNn;
+    }
+
+    private FFNeuralNetwork makeNotNN() {
+        FFNeuralNetwork notNn = new FFNeuralNetwork(1,1);
+        notNn.addLayer(WEIGHTS_FOR_NOT[0]);
+        return notNn;
     }
 
 //======================XOR NN======================
@@ -112,6 +143,39 @@ public class FFNeuralNetworkTest extends TestCase {
     }
 
 
+//======================OR NN======================
+
+    public void testOrNeuralNetwork00() {
+        FFNeuralNetwork xOrNn = makeOrNN();
+        assertNNFalse( xOrNn.calc(new double[]{0.,0.})[0]);
+    }
+
+    public void testOrNeuralNetwork01() {
+        FFNeuralNetwork xOrNn = makeOrNN();
+        assertNNTrue( xOrNn.calc(new double[]{0.,1.})[0]);
+    }
+
+    public void testOrNeuralNetwork10() {
+        FFNeuralNetwork xOrNn = makeOrNN();
+        assertNNTrue( xOrNn.calc(new double[]{1.,0.})[0]);
+    }
+
+    public void testOrNeuralNetwork11() {
+        FFNeuralNetwork xOrNn = makeOrNN();
+        assertNNTrue( xOrNn.calc(new double[]{1.,1.})[0]);
+    }
+
+//======================OR NN======================
+
+    public void testNotNeuralNetwork0() {
+        FFNeuralNetwork xOrNn = makeNotNN();
+        assertNNTrue( xOrNn.calc(new double[]{0.})[0]);
+    }
+
+    public void testNotNeuralNetwork1() {
+        FFNeuralNetwork xOrNn = makeNotNN();
+        assertNNFalse( xOrNn.calc(new double[]{1.})[0]);
+    }
 
     public void testSigmoidFunction() {
         FFNeuralNetwork xOrNn = makeXORNN();
