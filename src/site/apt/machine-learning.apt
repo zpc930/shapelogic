@@ -10,8 +10,8 @@ Machine learning
   
   Starting in 1.5 ShapeLogic will move towards combining the declarative 
   programming framework with machine learning techniques.
-  First step is do train a multi layer feed forward neural network externally
-  but run it internally.
+  First machine learning technique is a multi layer feed forward neural network
+  that is trained externally but run internally.
   
 * Machine learning techniques
   
@@ -82,5 +82,10 @@ Machine learning
   * Dependent streams should be defined in the database or flat file 
   
   []
+  
+* Implementation of neural networks in ShapeLogic
+  
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/FFNeuralNetwork.java}
+  FFNeuralNetwork}} is the multi-layer feed forward neural network.
   
   
