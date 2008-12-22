@@ -42,7 +42,7 @@ public class RootMapTest extends TestCase {
 	 */
 	public void testEvenFilter() {
 		RootMap.put("naturalNumbers", new NaturalNumberStream(5));
-		ListStream<Integer> naturalNumbers = (ListStream<Integer>) RootMap.get("naturalNumbers");
+		NumberedStream<Integer> naturalNumbers = (NumberedStream<Integer>) RootMap.get("naturalNumbers");
 
 		BaseListFilterStream<Integer> evenNumbers = new BaseListFilterStream<Integer>(naturalNumbers) {
 			@Override
@@ -63,8 +63,8 @@ public class RootMapTest extends TestCase {
 	public void testMultipleInputsByNameInSurrondingClass() {
 		RootMap.put("naturalNumbers1", new NaturalNumberStream(5));
 		RootMap.put("naturalNumbers2", new NaturalNumberStream(6,12));
-		final ListStream<Integer> naturalNumbers1 = (ListStream<Integer>) RootMap.get("naturalNumbers1");
-		final ListStream<Integer> naturalNumbers2 = (ListStream<Integer>) RootMap.get("naturalNumbers2");
+		final NumberedStream<Integer> naturalNumbers1 = (NumberedStream<Integer>) RootMap.get("naturalNumbers1");
+		final NumberedStream<Integer> naturalNumbers2 = (NumberedStream<Integer>) RootMap.get("naturalNumbers2");
 		ListStream<Integer> sum = new BaseListStream0<Integer>(6) {
 			@Override
 			public Integer invoke(int index) {
@@ -81,8 +81,8 @@ public class RootMapTest extends TestCase {
 		RootMap.put("naturalNumbers1", new NaturalNumberStream(5));
 		RootMap.put("naturalNumbers2", new NaturalNumberStream(6,12));
 		ListStream<Integer> sum = new BaseListStream0<Integer>(6) {
-			final ListStream<Integer> naturalNumbers1 = (ListStream<Integer>) RootMap.get("naturalNumbers1");
-			final ListStream<Integer> naturalNumbers2 = (ListStream<Integer>) RootMap.get("naturalNumbers2");
+			final NumberedStream<Integer> naturalNumbers1 = (NumberedStream<Integer>) RootMap.get("naturalNumbers1");
+			final NumberedStream<Integer> naturalNumbers2 = (NumberedStream<Integer>) RootMap.get("naturalNumbers2");
 			@Override
 			public Integer invoke(int index) {
 				
@@ -99,8 +99,8 @@ public class RootMapTest extends TestCase {
 		ListStream<Integer> sum = new BaseListStream0<Integer>(6) {
 			@Override
 			public Integer invoke(int index) {
-				ListStream<Integer> naturalNumbers1 = (ListStream<Integer>) RootMap.get("naturalNumbers1");
-				ListStream<Integer> naturalNumbers2 = (ListStream<Integer>) RootMap.get("naturalNumbers2");
+				NumberedStream<Integer> naturalNumbers1 = (NumberedStream<Integer>) RootMap.get("naturalNumbers1");
+				NumberedStream<Integer> naturalNumbers2 = (NumberedStream<Integer>) RootMap.get("naturalNumbers2");
 				return naturalNumbers1.get(index) + naturalNumbers2.get(index);
 			}
 		}; 
@@ -114,8 +114,8 @@ public class RootMapTest extends TestCase {
 		ListStream<Integer> sum = new BaseListStream0<Integer>(6) {
 			@Override
 			public Integer invoke(int index) {
-				ListStream<Integer> naturalNumbers1 = (ListStream<Integer>) RootMap.get("naturalNumbers1");
-				ListStream<Integer> naturalNumbers2 = (ListStream<Integer>) RootMap.get("naturalNumbers2");
+				NumberedStream<Integer> naturalNumbers1 = (NumberedStream<Integer>) RootMap.get("naturalNumbers1");
+				NumberedStream<Integer> naturalNumbers2 = (NumberedStream<Integer>) RootMap.get("naturalNumbers2");
 				return naturalNumbers1.get(index) + naturalNumbers2.get(index);
 			}
 		}; 
