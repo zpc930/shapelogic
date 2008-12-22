@@ -14,7 +14,7 @@ import static org.shapelogic.util.Constants.LAST_UNKNOWN;
 abstract public class BaseListFilterStream<E> extends BaseListIndexedStream1<E,E> implements
 		ListFilterStream<E> {
 	
-	public BaseListFilterStream(ListStream<E> inputStream) {
+	public BaseListFilterStream(NumberedStream<E> inputStream) {
 		_inputStream = inputStream;
 	}
 	
