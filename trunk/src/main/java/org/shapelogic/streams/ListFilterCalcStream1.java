@@ -19,7 +19,7 @@ public class ListFilterCalcStream1<E, Out> extends BaseListStream1<E,Entry<E,Out
 {
 	protected final Calc1<E, Out> _calc1;
 	
-	public ListFilterCalcStream1(ListStream<E> inputStream, Calc1<E, Out> calc1) {
+	public ListFilterCalcStream1(NumberedStream<E> inputStream, Calc1<E, Out> calc1) {
 		_inputStream = inputStream;
 		_calc1 = calc1;
 	}

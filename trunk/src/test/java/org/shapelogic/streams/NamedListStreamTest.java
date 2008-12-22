@@ -1,7 +1,6 @@
 package org.shapelogic.streams;
 
 import org.shapelogic.calculation.RootMap;
-import org.shapelogic.mathematics.NaturalNumberStream;
 
 import junit.framework.TestCase;
 
@@ -17,7 +16,15 @@ public class NamedListStreamTest extends TestCase {
 	
 	@Override
 	public void setUp() {
-		ListStream<Integer> naturalNumbersTo3 = new NaturalNumberStream(3);
+		ListStream<Integer> naturalNumbersTo3 = new BaseListStream0<Integer>() {
+            {
+                setMaxLast(3);
+            }
+            public Integer invoke(int index) {
+                return new Integer(index);
+            }
+            
+        };
 		RootMap.put("naturalNumbersTo3", naturalNumbersTo3);
 	}
 	
