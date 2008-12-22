@@ -17,7 +17,7 @@ public class NamedNumberedStreamTest extends TestCase {
 	
 	@Override
 	public void setUp() {
-		ListStream<Integer> naturalNumbersTo3 = new NaturalNumberStream(3);
+		NumberedStream<Integer> naturalNumbersTo3 = new NaturalNumberStream(3);
 		RootMap.put("naturalNumbersTo3", naturalNumbersTo3);
 	}
 	
