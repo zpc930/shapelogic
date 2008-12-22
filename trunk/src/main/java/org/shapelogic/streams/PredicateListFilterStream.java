@@ -12,7 +12,7 @@ public class PredicateListFilterStream<E> extends BaseListFilterStream<E>
 {
 	final protected Predicate<E> _predicate;
 	
-	public PredicateListFilterStream(ListStream<E> inputStream, Predicate<E> predicate) {
+	public PredicateListFilterStream(NumberedStream<E> inputStream, Predicate<E> predicate) {
 		super(inputStream);
 		_predicate = predicate;
 	}
