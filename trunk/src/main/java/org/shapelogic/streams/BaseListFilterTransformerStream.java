@@ -22,7 +22,7 @@ import java.util.Map.Entry;
  */
 abstract public class BaseListFilterTransformerStream<E, Out> extends BaseListStream1<E,Entry<E,Out> > 
 implements FilterTransformerStream<E, Out> {
-	public BaseListFilterTransformerStream(ListStream<E> inputStream) {
+	public BaseListFilterTransformerStream(NumberedStream<E> inputStream) {
 		_inputStream = inputStream;
 	}
 	
