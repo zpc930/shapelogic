@@ -2,9 +2,9 @@ package org.shapelogic.scripting;
 
 import org.shapelogic.calculation.RootMap;
 import org.shapelogic.mathematics.NaturalNumberStream;
-import org.shapelogic.streams.ListStream;
 
 import junit.framework.TestCase;
+import org.shapelogic.streams.NumberedStream;
 
 /** Test FunctionCalcIndex0.
  * 
@@ -25,7 +25,7 @@ public class FunctionCalcIndex0Test extends TestCase {
 	 */
 	public void testAccessToNamedStream() {
 		RootMap.put("naturalNumbers", new NaturalNumberStream(5));
-		final ListStream<Integer> naturalNumbers = (ListStream<Integer>) RootMap.get("naturalNumbers");
+		final NumberedStream<Integer> naturalNumbers = (NumberedStream<Integer>) RootMap.get("naturalNumbers");
 		
 		FunctionCalcIndex0<Integer> functionTransform = 
 			new FunctionCalcIndex0<Integer>("naturalNumbers_FUNCTION_",
@@ -36,7 +36,7 @@ public class FunctionCalcIndex0Test extends TestCase {
 
 	public void testAccessToNamedStream2() {
 		RootMap.put("naturalNumbers", new NaturalNumberStream(5));
-		final ListStream<Integer> naturalNumbers = (ListStream<Integer>) RootMap.get("naturalNumbers");
+		final NumberedStream<Integer> naturalNumbers = (NumberedStream<Integer>) RootMap.get("naturalNumbers");
 		
 		FunctionCalcIndex0<Integer> functionTransform = 
 			new FunctionCalcIndex0<Integer>("evenNumbers_FUNCTION_",
@@ -48,7 +48,7 @@ public class FunctionCalcIndex0Test extends TestCase {
 	/** You can do imports before inside the methods. */
 	public void testAccessToNamedStream3() {
 		RootMap.put("naturalNumbers", new NaturalNumberStream(5));
-		final ListStream<Integer> naturalNumbers = (ListStream<Integer>) RootMap.get("naturalNumbers");
+		final NumberedStream<Integer> naturalNumbers = (NumberedStream<Integer>) RootMap.get("naturalNumbers");
 		
 		FunctionCalcIndex0<Integer> functionTransform = 
 			new FunctionCalcIndex0<Integer>("naturalNumbers_FUNCTION_",
