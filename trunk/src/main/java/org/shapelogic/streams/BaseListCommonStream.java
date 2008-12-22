@@ -3,12 +3,7 @@ package org.shapelogic.streams;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.shapelogic.calculation.ContextGettable;
-import org.shapelogic.calculation.IQueryCalc;
-import org.shapelogic.calculation.QueryCalc;
-import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.util.Constants;
 
 import static org.shapelogic.util.Constants.LAST_UNKNOWN;
@@ -40,40 +35,10 @@ import static org.shapelogic.util.Constants.LAST_UNKNOWN;
  * @author Sami Badawi
  *
  */
-abstract public class BaseListCommonStream<E> 
-implements ListStream<E>, StreamProperties, ContextGettable {
+abstract public class BaseListCommonStream<E> extends BaseCommonStream<E>
+implements ListStream<E> {
 	protected List<E> _list = new ArrayList<E>();
 	
-	/** The last value that was calculated and looked at
-	 * So if you want to see that again use this for a lookup
-	 */
-	protected int _current = -1;
-	
-	/** Last value that can be calculated.
-	 * When _maxLast is set then _last should first be set to the same.
-	 * If lower limit is found move down.
-	 */
-	protected int _last = LAST_UNKNOWN;
-	
-	/** Highest value that last can take.
-	 */
-	protected int _maxLast = LAST_UNKNOWN;
-	
-	/** Does not always exist. */
-	protected String _name;
-	
-	protected boolean _dirty = true;
-	
-	protected E _value = null;
-	
-	protected Map _context;
-
-	protected IQueryCalc _query;
-
-	protected RecursiveContext _parentContext;
-
-    protected boolean _nullLegalValue = true;
-    
 	/** Calculate the value at an index.
 	 * <br />
 	 * So it gets the needed input value and call the appropriate invoke function.<br /> 
@@ -196,23 +161,6 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 	}
 	
 	@Override
-	public int getLast() {
-		return _last;
-	}
-
-	@Override
-	public int getMaxLast() {
-		return _maxLast;
-	}
-
-	/** Set a max value for last possible element. This also set last. */
-	public void setMaxLast(int maxLast) {
-		_maxLast = maxLast;
-		if (maxLast < _last || _last == Constants.LAST_UNKNOWN)
-			_last = maxLast;
-	}
-	
-	@Override
 	public boolean isRandomAccess() {
 		return false;
 	}
@@ -227,15 +175,6 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 		return true;
 	}
 	
-	@Override
-	public boolean isNullLegalValue() {
-        return _nullLegalValue;
-    }
-
-	public void setNullLegalValue(boolean nullLegalValue) {
-        _nullLegalValue = nullLegalValue;
-    }
-
 	public int getCurrentSize() {
 		return _list.size();
 	}
@@ -250,62 +189,11 @@ implements ListStream<E>, StreamProperties, ContextGettable {
 	}
 	
 	@Override
-	public int getIndex() {
-		return _current;
-	}
-
-	@Override
-	public String getName() {
-		return _name;
-	}
-
-	@Override
-	public void setup() {
-	}
-
-	@Override
-	public Map getContext() {
-		return _context;
-	}
-
-	@Override
-	public RecursiveContext getParentContext() {
-		return _parentContext;
-	}
-	
-	@Override
-	public E getValue() {
-		return _value;
-	}
-
-	@Override
-	public boolean isDeterministic() {
-		return true;
-	}
-
-	@Override
-	public boolean isDirty() {
-		return _dirty;
-	}
-
-	@Override
-	/** XXX not sure if I can do this
-	 */
-	public void remove() {
-	}
-
-	@Override
 	/** XXX Should maybe be changed to create new independent iterators on each call.
 	 * All referring back to this, but with a different index  
 	 */
 	public Iterator<E> iterator() {
 		return this; //XXX works
 		//return _list.iterator();//XXX lazy init does not work
-	}
-
-	public Object getInContext(Object key){
-		if (_query == null)
-			_query = new QueryCalc();
-		return _query.get(key, this);
 	}
 }
