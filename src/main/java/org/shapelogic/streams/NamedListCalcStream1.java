@@ -69,4 +69,8 @@ public class NamedListCalcStream1<In, E> extends BaseListStream1<In, E>
             setup();
 		return _inputStream;
 	}
+
+    public void setCalc(Calc1<In, E> calc) {
+        _calc = calc;
+    }
 }
