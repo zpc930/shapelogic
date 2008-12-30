@@ -42,7 +42,8 @@ import static org.shapelogic.util.Constants.LAST_UNKNOWN;
  *
  */
 abstract public class BaseCommonStream<E> 
-implements NumberedStream<E>, StreamProperties, ContextGettable {
+implements NumberedStream<E>, StreamProperties, ContextGettable, RecursiveContext
+{
 	
 
 	/** The last value that was calculated and looked at
