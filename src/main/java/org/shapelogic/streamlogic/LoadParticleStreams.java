@@ -6,7 +6,6 @@ import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.IQueryCalc;
 import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.calculation.RecursiveContext;
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.color.ColorFactory;
 import org.shapelogic.color.ColorUtil;
 import org.shapelogic.color.IColorAndVariance;
