@@ -21,14 +21,14 @@ public class ArrayOutputListStreamTest extends TestCase {
 	@Override
 	public void setUp() {
         _context = new SimpleRecursiveContext(null);
-		_naturalNumberStream = new NaturalNumberStream();
-		_naturalNumberStream1to3 = new NaturalNumberStream(1,3);
-        _context.getContext().put("naturalNumberStream", _naturalNumberStream);
-        _context.getContext().put("naturalNumberStream1to3", _naturalNumberStream1to3);
         _names = new ArrayList();
         _names.add("naturalNumberStream");
         _names.add("naturalNumberStream1to3");
         _arrayOutputListStream = new ArrayOutputListStream(_names, _context);
+		_naturalNumberStream = new NaturalNumberStream();
+		_naturalNumberStream1to3 = new NaturalNumberStream(1,3);
+        _context.getContext().put("naturalNumberStream", _naturalNumberStream);
+        _context.getContext().put("naturalNumberStream1to3", _naturalNumberStream1to3);
 	}
 	
 	public void testArrayInputListStreamGet() {

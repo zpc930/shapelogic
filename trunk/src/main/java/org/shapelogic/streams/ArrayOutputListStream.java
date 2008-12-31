@@ -17,7 +17,8 @@ public class ArrayOutputListStream extends BaseListStreamList<Number,double[]> {
 	
 	/** Parallel to the NumberedStream. */
 	protected List<String> _ohNames;
-	
+    protected boolean _setupRun = false;
+
 	/** Use the ohName to also be the name of the input stream. <br />
 	 * 
 	 * @param ohNames
@@ -26,16 +27,24 @@ public class ArrayOutputListStream extends BaseListStreamList<Number,double[]> {
 	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext,int maxLast) {
 		super(null,maxLast);
 		_ohNames = ohNames;
+        _context = recursiveContext.getContext();
+        _parentContext = recursiveContext.getParentContext();
 		_inputStream = new ArrayList(); 
+	}
+	
+	@Override
+	public void setup() {
+        _setupRun = true;
 		for (String streamName: _ohNames) {
-			NumberedStream numberedStream = StreamFactory.findNumberedStream(streamName, recursiveContext);
+			NumberedStream numberedStream = StreamFactory.findNumberedStream(streamName, this);
 			if (numberedStream != null)
 				getInputStream().add(numberedStream);
 			else
-				throw new RuntimeException("No stream found for name: " + ohNames);
+				throw new RuntimeException("No stream found for name: " + _ohNames);
 		}
+        _setupRun = true;
 	}
-	
+
 	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext) {
 		this(ohNames, recursiveContext, Constants.LAST_UNKNOWN);
 	}
@@ -60,4 +69,10 @@ public class ArrayOutputListStream extends BaseListStreamList<Number,double[]> {
 		return result;
 	}
 
+	@Override
+	public List<NumberedStream<Number> > getInputStream() {
+        if (!_setupRun)
+            setup();
+		return _inputStream;
+	}
 }
