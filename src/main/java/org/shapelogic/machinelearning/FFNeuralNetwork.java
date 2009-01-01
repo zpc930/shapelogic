@@ -2,13 +2,16 @@ package org.shapelogic.machinelearning;
 
 import java.util.ArrayList;
 
+import org.shapelogic.calculation.Calc1;
+
 /** Feed Forward Neural Network with external training. <br />
  *
  * The bias is considered the zeroth element of the synaptic weight.
  *
  * @author Sami Badawi
  */
-public class FFNeuralNetwork {
+public class FFNeuralNetwork implements Calc1<double[], double[]>
+{
 
     final public int nInputNodes;
     final public int nOutputNodes;
@@ -31,7 +34,7 @@ public class FFNeuralNetwork {
         _layerWeights.add(new double[0]);
     }
 
-    public double[] calc(double[] input) {
+    public double[] invoke(double[] input) {
         if (getLayerNodesInTopLayer() != nOutputNodes)
             return null;
         if (input.length != nInputNodes)
