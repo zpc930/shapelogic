@@ -98,7 +98,7 @@ public class FFNeuralNetworkTest extends TestCase {
         assertEquals(3, xOrNn.getLayerNodesInTopLayer());
         assertTrue(xOrNn.addLayer(WEIGHTS_FOR_XOR[1]));
         assertEquals(1, xOrNn.getLayerNodesInTopLayer());
-        double[] result = xOrNn.calc(new double[]{0.,0.});
+        double[] result = xOrNn.invoke(new double[]{0.,0.});
         assertNotNull(result);
         assertEquals(1, result.length);
         assertNNFalse(result[0]);
@@ -106,39 +106,39 @@ public class FFNeuralNetworkTest extends TestCase {
 
     public void testXORNeuralNetwork01() {
         FFNeuralNetwork xOrNn = makeXORNN();
-        assertNNTrue( xOrNn.calc(new double[]{0.,1.})[0]);
+        assertNNTrue( xOrNn.invoke(new double[]{0.,1.})[0]);
     }
 
     public void testXORNeuralNetwork10() {
         FFNeuralNetwork xOrNn = makeXORNN();
-        assertNNTrue( xOrNn.calc(new double[]{1.,0.})[0]);
+        assertNNTrue( xOrNn.invoke(new double[]{1.,0.})[0]);
     }
 
     public void testXORNeuralNetwork11() {
         FFNeuralNetwork xOrNn = makeXORNN();
-        assertNNFalse( xOrNn.calc(new double[]{1.,1.})[0]);
+        assertNNFalse( xOrNn.invoke(new double[]{1.,1.})[0]);
     }
 
 //======================AND NN======================
 
     public void testAndNeuralNetwork00() {
         FFNeuralNetwork xOrNn = makeAndNN();
-        assertNNFalse( xOrNn.calc(new double[]{0.,0.})[0]);
+        assertNNFalse( xOrNn.invoke(new double[]{0.,0.})[0]);
     }
 
     public void testAndNeuralNetwork01() {
         FFNeuralNetwork xOrNn = makeAndNN();
-        assertNNFalse( xOrNn.calc(new double[]{0.,1.})[0]);
+        assertNNFalse( xOrNn.invoke(new double[]{0.,1.})[0]);
     }
 
     public void testAndNeuralNetwork10() {
         FFNeuralNetwork xOrNn = makeAndNN();
-        assertNNFalse( xOrNn.calc(new double[]{1.,0.})[0]);
+        assertNNFalse( xOrNn.invoke(new double[]{1.,0.})[0]);
     }
 
     public void testAndNeuralNetwork11() {
         FFNeuralNetwork xOrNn = makeAndNN();
-        assertNNTrue( xOrNn.calc(new double[]{1.,1.})[0]);
+        assertNNTrue( xOrNn.invoke(new double[]{1.,1.})[0]);
     }
 
 
@@ -146,34 +146,34 @@ public class FFNeuralNetworkTest extends TestCase {
 
     public void testOrNeuralNetwork00() {
         FFNeuralNetwork xOrNn = makeOrNN();
-        assertNNFalse( xOrNn.calc(new double[]{0.,0.})[0]);
+        assertNNFalse( xOrNn.invoke(new double[]{0.,0.})[0]);
     }
 
     public void testOrNeuralNetwork01() {
         FFNeuralNetwork xOrNn = makeOrNN();
-        assertNNTrue( xOrNn.calc(new double[]{0.,1.})[0]);
+        assertNNTrue( xOrNn.invoke(new double[]{0.,1.})[0]);
     }
 
     public void testOrNeuralNetwork10() {
         FFNeuralNetwork xOrNn = makeOrNN();
-        assertNNTrue( xOrNn.calc(new double[]{1.,0.})[0]);
+        assertNNTrue( xOrNn.invoke(new double[]{1.,0.})[0]);
     }
 
     public void testOrNeuralNetwork11() {
         FFNeuralNetwork xOrNn = makeOrNN();
-        assertNNTrue( xOrNn.calc(new double[]{1.,1.})[0]);
+        assertNNTrue( xOrNn.invoke(new double[]{1.,1.})[0]);
     }
 
 //======================OR NN======================
 
     public void testNotNeuralNetwork0() {
         FFNeuralNetwork xOrNn = makeNotNN();
-        assertNNTrue( xOrNn.calc(new double[]{0.})[0]);
+        assertNNTrue( xOrNn.invoke(new double[]{0.})[0]);
     }
 
     public void testNotNeuralNetwork1() {
         FFNeuralNetwork xOrNn = makeNotNN();
-        assertNNFalse( xOrNn.calc(new double[]{1.})[0]);
+        assertNNFalse( xOrNn.invoke(new double[]{1.})[0]);
     }
 
     public void testSigmoidFunction() {
