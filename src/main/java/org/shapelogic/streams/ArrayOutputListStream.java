@@ -24,12 +24,33 @@ public class ArrayOutputListStream extends BaseListStreamList<Number,double[]> {
 	 * @param ohNames
 	 * @param maxLast
 	 */
-	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext,int maxLast) {
+	public ArrayOutputListStream(List<String> ohNames, 
+            RecursiveContext recursiveContext, String name, int maxLast) {
 		super(null,maxLast);
 		_ohNames = ohNames;
         _context = recursiveContext.getContext();
         _parentContext = recursiveContext.getParentContext();
-		_inputStream = new ArrayList(); 
+		_inputStream = new ArrayList();
+        if (name != null)
+            _context.put(name, this);
+        _name = name;
+	}
+	
+	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext,int maxLast) {
+        this (ohNames, recursiveContext, (String) null, maxLast);
+    }
+
+	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext) {
+		this(ohNames, recursiveContext, Constants.LAST_UNKNOWN);
+	}
+	
+	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext, List<NumberedStream<Number> > inputStream, int maxLast) {
+		super(inputStream, maxLast);
+		_ohNames = ohNames;
+	}
+	
+	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext, List<NumberedStream<Number> > inputStream) {
+		this(ohNames,recursiveContext,inputStream,Constants.LAST_UNKNOWN);
 	}
 	
 	@Override
@@ -45,19 +66,6 @@ public class ArrayOutputListStream extends BaseListStreamList<Number,double[]> {
         _setupRun = true;
 	}
 
-	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext) {
-		this(ohNames, recursiveContext, Constants.LAST_UNKNOWN);
-	}
-	
-	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext, List<NumberedStream<Number> > inputStream, int maxLast) {
-		super(inputStream, maxLast);
-		_ohNames = ohNames;
-	}
-	
-	public ArrayOutputListStream(List<String> ohNames, RecursiveContext recursiveContext, List<NumberedStream<Number> > inputStream) {
-		this(ohNames,recursiveContext,inputStream,Constants.LAST_UNKNOWN);
-	}
-	
 	@Override
 	public double[] invoke(List<Number> input) {
         double[] result = new double[input.size()];
