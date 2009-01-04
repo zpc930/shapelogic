@@ -6,6 +6,7 @@ import org.shapelogic.calculation.RecursiveContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import org.shapelogic.util.Constants;
 
 /** FFNeuralNetworkStream a feed forward neural network wrapped in a stream.<br />
@@ -34,47 +35,64 @@ import org.shapelogic.util.Constants;
  *
  * @author Sami Badawi
  */
-public class FFNeuralNetworkStream extends NamedListCalcStream1 {
+public class FFNeuralNetworkStream {
     public final static String DEFAULT_RESULT_NAME = "result";
     public final static String DEFAULT_INPUT_NAME = "FFNeuralNetworkStreamInput";
+    public final static String DEFAULT_OUTPUT_NAME = "FFNeuralNetworkStreamOutput";
 
     ListStream<double[]> _featureStream;
     ListCalcStream1<double[], double[]> _neuralNetworkStream;
     ListCalcStream1<double[], String> _outputStream;
+    RecursiveContext _recursiveContext;
 
     public FFNeuralNetworkStream(List<String> featureList, List<String> ohList,
-            double[][] weights, String inputName,
-            RecursiveContext recursiveContext, String outputName, int maxLast
+            double[][] weights, String[] streamNames,
+            RecursiveContext recursiveContext, int maxLast
             )
     {
-        super(null, inputName != null ? inputName : DEFAULT_INPUT_NAME,
-                recursiveContext, outputName, maxLast);
+        _recursiveContext = recursiveContext;
+        Map context = _recursiveContext.getContext();
         if (ohList == null || ohList.size() == 0) {
             ohList = new ArrayList<String>();
             ohList.add(DEFAULT_RESULT_NAME);
         }
-        if (inputName == null)
-            inputName = DEFAULT_INPUT_NAME;
+        if (streamNames == null || 0 == streamNames.length ) {
+            streamNames = new String[3];
+            streamNames[2] = DEFAULT_OUTPUT_NAME;
+        }
+        if (streamNames.length < 3)
+            throw new RuntimeException("Too few arguments for streamNames: " + streamNames.length);
 
-        _featureStream =
-                new ArrayOutputListStream(featureList, recursiveContext, inputName, Constants.LAST_UNKNOWN);
+// Setup stream 1
+        _featureStream =  new ArrayOutputListStream(featureList,
+                recursiveContext, streamNames[0], Constants.LAST_UNKNOWN);
 
-        FFNeuralNetwork fFNeuralNetwork = new FFNeuralNetwork(featureList.size(), ohList.size());
+// Setup stream 2
+        FFNeuralNetwork fFNeuralNetwork =
+                new FFNeuralNetwork(featureList.size(), ohList.size());
         for (double[] weight: weights)
             fFNeuralNetwork.addLayer(weight);
-        setCalc(fFNeuralNetwork);
-        _neuralNetworkStream = new ListCalcStream1<double[], double[]>(fFNeuralNetwork, _featureStream);
-        ConfidenceArraySelector confidenceArraySelector = new ConfidenceArraySelector(ohList);
-        _outputStream = new ListCalcStream1<double[], String>(confidenceArraySelector, _neuralNetworkStream);
+        _neuralNetworkStream = new ListCalcStream1<double[], double[]>(
+                fFNeuralNetwork, _featureStream);
+        if (streamNames[1] != null)
+            context.put(streamNames[1], _neuralNetworkStream);
+        
+// Setup stream 3
+        ConfidenceArraySelector confidenceArraySelector =
+                new ConfidenceArraySelector(ohList);
+        _outputStream = new ListCalcStream1<double[], String>(
+                confidenceArraySelector, _neuralNetworkStream);
+        if (streamNames[2] != null)
+            context.put(streamNames[2], _outputStream);
     }
     
     public FFNeuralNetworkStream(String[] featureList, String[] ohList,
-            double[][] weights, String inputName,
-            RecursiveContext recursiveContext, String outputName, int maxLast
+            double[][] weights, String[] streamNames,
+            RecursiveContext recursiveContext, int maxLast
             )
     {
         this(Arrays.asList(featureList), Arrays.asList(ohList), weights,
-                inputName, recursiveContext, outputName, maxLast );
+                streamNames, recursiveContext, maxLast );
     }
 
     public ListStream<double[]> getFeatureStream() {
