@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 public class FFNeuralNetworkTest extends TestCase {
 
     /** Weights found using the Joone Neural Networks.  */
-    final static double[][] WEIGHTS_FOR_XOR = {
+    public final static double[][] WEIGHTS_FOR_XOR = {
         {
             2.7388686085992333, 5.505721328606976, 4.235258932026585, //bias
 
@@ -28,7 +28,7 @@ public class FFNeuralNetworkTest extends TestCase {
     };
 
     /** Weights found using the Joone Neural Networks.  */
-    final static double[][] WEIGHTS_FOR_AND = {
+    public final static double[][] WEIGHTS_FOR_AND = {
         {
             -1.5, //Bias first hidden layer
 
@@ -38,7 +38,7 @@ public class FFNeuralNetworkTest extends TestCase {
     };
 
     /** Weights found using the Joone Neural Networks.  */
-    final static double[][] WEIGHTS_FOR_OR = {
+    public final static double[][] WEIGHTS_FOR_OR = {
         {
             -0.5, //Bias first hidden layer
 
@@ -48,7 +48,7 @@ public class FFNeuralNetworkTest extends TestCase {
     };
 
     /** Weights found using the Joone Neural Networks.  */
-    final static double[][] WEIGHTS_FOR_NOT = {
+    public final static double[][] WEIGHTS_FOR_NOT = {
         {
             0.5, //Bias first hidden layer
 
