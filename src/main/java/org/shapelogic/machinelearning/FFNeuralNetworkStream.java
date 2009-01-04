@@ -38,6 +38,10 @@ public class FFNeuralNetworkStream extends NamedListCalcStream1 {
     public final static String DEFAULT_RESULT_NAME = "result";
     public final static String DEFAULT_INPUT_NAME = "FFNeuralNetworkStreamInput";
 
+    ListStream<double[]> _featureStream;
+    ListCalcStream1<double[], double[]> _neuralNetworkStream;
+    ListCalcStream1<double[], String> _outputStream;
+
     public FFNeuralNetworkStream(List<String> featureList, List<String> ohList,
             double[][] weights, String inputName,
             RecursiveContext recursiveContext, String outputName, int maxLast
@@ -49,17 +53,19 @@ public class FFNeuralNetworkStream extends NamedListCalcStream1 {
             ohList = new ArrayList<String>();
             ohList.add(DEFAULT_RESULT_NAME);
         }
+        if (inputName == null)
+            inputName = DEFAULT_INPUT_NAME;
+
+        _featureStream =
+                new ArrayOutputListStream(featureList, recursiveContext, inputName, Constants.LAST_UNKNOWN);
+
         FFNeuralNetwork fFNeuralNetwork = new FFNeuralNetwork(featureList.size(), ohList.size());
         for (double[] weight: weights)
             fFNeuralNetwork.addLayer(weight);
         setCalc(fFNeuralNetwork);
-        if (inputName == null)
-            inputName = DEFAULT_INPUT_NAME;
-        ArrayOutputListStream arrayOutputListStream =
-                new ArrayOutputListStream(featureList, recursiveContext, inputName, Constants.LAST_UNKNOWN);
-
-//        ConfidenceArrayListStream confidenceArrayListStream =
-//                new ConfidenceArrayListStream( );
+        _neuralNetworkStream = new ListCalcStream1<double[], double[]>(fFNeuralNetwork, _featureStream);
+        ConfidenceArraySelector confidenceArraySelector = new ConfidenceArraySelector(ohList);
+        _outputStream = new ListCalcStream1<double[], String>(confidenceArraySelector, _neuralNetworkStream);
     }
     
     public FFNeuralNetworkStream(String[] featureList, String[] ohList,
