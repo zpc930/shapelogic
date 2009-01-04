@@ -76,4 +76,16 @@ public class FFNeuralNetworkStream extends NamedListCalcStream1 {
         this(Arrays.asList(featureList), Arrays.asList(ohList), weights,
                 inputName, recursiveContext, outputName, maxLast );
     }
+
+    public ListStream<double[]> getFeatureStream() {
+        return _featureStream;
+    }
+
+    public ListCalcStream1<double[], double[]> getNeuralNetworkStream() {
+        return _neuralNetworkStream;
+    }
+
+    public ListCalcStream1<double[], String> getOutputStream() {
+        return _outputStream;
+    }
 }
