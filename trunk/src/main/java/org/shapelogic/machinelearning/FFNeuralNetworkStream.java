@@ -36,8 +36,7 @@ import org.shapelogic.util.Constants;
  * @author Sami Badawi
  */
 public class FFNeuralNetworkStream {
-    public final static String DEFAULT_RESULT_NAME = "result";
-    public final static String DEFAULT_INPUT_NAME = "FFNeuralNetworkStreamInput";
+    public final static String DEFAULT_RESULT_NAME = "Result";
     public final static String DEFAULT_OUTPUT_NAME = "FFNeuralNetworkStreamOutput";
 
     ListStream<double[]> _featureStream;
@@ -86,6 +85,24 @@ public class FFNeuralNetworkStream {
             context.put(streamNames[2], _outputStream);
     }
     
+    public FFNeuralNetworkStream(List<String> featureList, List<String> ohList,
+            double[][] weights, String[] streamNames,
+            RecursiveContext recursiveContext)
+    {
+        this(featureList, ohList, weights, streamNames, recursiveContext,
+                Constants.LAST_UNKNOWN);
+    }
+
+    public FFNeuralNetworkStream(List<String> featureList, List<String> ohList,
+            double[][] weights, RecursiveContext recursiveContext)
+    {
+        this(featureList, ohList, weights, null, recursiveContext,
+                Constants.LAST_UNKNOWN);
+    }
+
+
+//Constructors using String[] instead of List<String>
+    
     public FFNeuralNetworkStream(String[] featureList, String[] ohList,
             double[][] weights, String[] streamNames,
             RecursiveContext recursiveContext, int maxLast
@@ -93,6 +110,22 @@ public class FFNeuralNetworkStream {
     {
         this(Arrays.asList(featureList), Arrays.asList(ohList), weights,
                 streamNames, recursiveContext, maxLast );
+    }
+
+    public FFNeuralNetworkStream(String[] featureList, String[] ohList,
+            double[][] weights, String[] streamNames,
+            RecursiveContext recursiveContext
+            )
+    {
+        this(Arrays.asList(featureList), Arrays.asList(ohList), weights,
+                streamNames, recursiveContext, Constants.LAST_UNKNOWN );
+    }
+
+    public FFNeuralNetworkStream(String[] featureList, String[] ohList,
+            double[][] weights, RecursiveContext recursiveContext)
+    {
+        this(Arrays.asList(featureList), Arrays.asList(ohList), weights,
+                null, recursiveContext, Constants.LAST_UNKNOWN );
     }
 
     public ListStream<double[]> getFeatureStream() {
