@@ -7,60 +7,60 @@
             ------
 
 Machine learning
-  
-  Starting in 1.5 ShapeLogic will move towards combining the declarative 
+
+  Starting in 1.5 ShapeLogic will move towards combining the declarative
   programming framework with machine learning techniques.
   First machine learning technique is a multi layer feed forward neural network
   that is trained externally but run internally.
-  
+
 * Machine learning techniques
-  
-  Machine learning is by now a well established field that has been around for 
+
+  Machine learning is by now a well established field that has been around for
   decades. Here are a few techniques:
-  
+
   * Multi layer feed forward neural network (error back propagation)
 
   * Perceptron network (simple 1 layered feed forward neural network)
-  
+
   * Learning Decision Trees
-  
+
   []
-  
+
 
 * Open source implementations of neural networks with language and license
-  
+
   * {{{http://www.jooneworld.com/}Joone}} Java, LGPL
-  
+
   * {{{http://www.simbrain.net/}simbrain}} Java, GPL
-  
+
   * {{{http://www.geocities.com/adotsaha/NNinExcel.html}NNinExcel}} Excel, ?
 
   []
-  
+
   {{{http://www.jooneworld.com/}Joone}}
-  is a very user friendly system that takes input and produces output in 
-  several different formats: Database, Excel and flat file  
-  
+  is a very user friendly system that takes input and produces output in
+  several different formats: Database, Excel and flat file
+
 * Process for training network
-  
+
   * Select list of input features
-  
+
   * Run one or more images and save result table as a spreadsheet
-  
-  * If more than one concatenate the spreadsheets to one spreadsheet 
-  
+
+  * If more than one concatenate the spreadsheets to one spreadsheet
+
   * Make a list of matches
-  
+
   * Train a multi layer neural network externally using e.g. Joone
-  
-  * If successful network can be found use it otherwise chose new list of input features  
-  
-  * Save weights to flat file or database 
-  
+
+  * If successful network can be found use it otherwise chose new list of input features
+
+  * Save weights to flat file or database
+
   []
-  
+
   When running the network load the weights from flat file or database.
-  
+
 * Export the weights from Joone
 
   Joone seperate the weights from the the bias. While ShapeLogic
@@ -72,20 +72,26 @@ Machine learning
 
   The copy does not work under all versions of Linux, but it works fine under
   Windows.
-  
-* Needed changes to the declarative programming framework
-  
-  * A multi named input multi named output stream
-  
-  * A fully connected feed forward neural network
-  
-  * Dependent streams should be defined in the database or flat file 
-  
+
+* Integrating neural networks into declarative programming framework
+
+  The implementation a feed forward neural networks into declarative programming
+  framework under ShapeLogic is called:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/FFNeuralNetworkStream.java}FFNeuralNetworkStream}}
+
+  It consists of 3 linked streams, the 2 last streams are created by attaching a
+  Calc1 to the stream before it:
+
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/streams/ArrayOutputListStream.java}ArrayOutputListStream}}
+  takes a list of names of features a produces a ListStream of double array
+
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/FFNeuralNetwork.java}FFNeuralNetwork}}
+  is a Calc1 from double array to double array representing a fully connected
+  feed forward neural network
+
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/ConfidenceArraySelector.java}ConfidenceArraySelector}}
+  is a Calc1 this turns the double array into a String result
+
   []
-  
-* Implementation of neural networks in ShapeLogic
-  
-  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/FFNeuralNetwork.java}
-  FFNeuralNetwork}} is the multi-layer feed forward neural network.
-  
-  
+
+  Dependent streams should be defined in the database or flat file
