@@ -49,8 +49,7 @@ public class FFNeuralNetworkStreamTest extends TestCase {
 
     public void testXOrNeuralNetworkStream() {
         FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
-                RESULT_ARRAY , WEIGHTS_FOR_XOR, null, _recursiveContext,
-                Constants.LAST_UNKNOWN);
+                RESULT_ARRAY , WEIGHTS_FOR_XOR, _recursiveContext);
         ListStream<String> output = nn.getOutputStream();
         assertEquals( NOTHING, output.next());
         assertEquals( RESULT, output.next());
@@ -62,8 +61,7 @@ public class FFNeuralNetworkStreamTest extends TestCase {
 
     public void testAndNeuralNetworkStream() {
         FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
-                RESULT_ARRAY , WEIGHTS_FOR_AND, null, _recursiveContext, 
-                Constants.LAST_UNKNOWN);
+                RESULT_ARRAY , WEIGHTS_FOR_AND, null, _recursiveContext);
         ListStream<String> output = nn.getOutputStream();
         assertEquals( NOTHING, output.next());
         assertEquals( NOTHING, output.next());
