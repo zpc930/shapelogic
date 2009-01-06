@@ -43,7 +43,7 @@ public class XOrListStreamTest extends TestCase {
 		List<String > listOfNames = new ArrayList<String>();
 		String greaterThan1Name = "greaterThan1Stream";
 		listOfNames.add(greaterThan1Name);
-		XOrListStream xorListStream = new XOrListStream(listOfNames, RootMap.getInstance(), listOfStreams);
+		ListStream<String> xorListStream = new XOrListStream(listOfNames, RootMap.getInstance(), listOfStreams);
 		
 		assertEquals("",xorListStream.get(0));
 		assertEquals("",xorListStream.get(1));
