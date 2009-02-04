@@ -20,7 +20,7 @@ import org.shapelogic.imageutil.BaseImageOperation;
 
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.polygon.BBox;
-import org.shapelogic.streams.XOrListStream;
+import org.shapelogic.streams.ListStream;
 
 import static org.shapelogic.imageutil.ImageJConstants.*;
 
@@ -77,7 +77,7 @@ public class BaseParticleCounter extends BaseImageOperation
     protected List<IColorAndVariance> _particlesOrig = new ArrayList<IColorAndVariance>();
     protected List<IColorAndVariance> _particlesFiltered = new ArrayList<IColorAndVariance>();
     
-    protected XOrListStream _categorizer;
+    protected ListStream<String> _categorizer;
 	protected Integer _inputColor;
 	protected Integer _backgroundColor;
 	protected Integer _referenceColor = _inputColor;
