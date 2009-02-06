@@ -15,7 +15,6 @@ import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.BBox;
 import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.Polygon;
-import org.shapelogic.util.Constants;
 import org.shapelogic.util.Headings;
 
 /** Automatic particle counter for 24 bit RGB and 8 bit Gray.
