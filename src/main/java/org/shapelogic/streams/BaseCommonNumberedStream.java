@@ -112,7 +112,8 @@ abstract public class BaseCommonNumberedStream<E> extends BaseCommonStream<E>
 		if ( _last != LAST_UNKNOWN && _last < inputIndex) 
 			return null;
         result = invokeIndex(inputIndex);
-        if (!isNullLegalValue() && _last != LAST_UNKNOWN && inputIndex < _last )
+        if (result == null && !isNullLegalValue() &&
+                _last != LAST_UNKNOWN && inputIndex < _last )
             setLast(inputIndex);
         return result;
 	}
