@@ -13,11 +13,13 @@ import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.LoadParticleStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
 import org.shapelogic.streamlogic.StreamNames;
+import org.shapelogic.streams.CalcNumberedStream1;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.WrappedListStream;
 import org.shapelogic.util.Constants;
+import org.shapelogic.util.Headings;
 
 /** Analyzes a particle image in gray or RGB and group the particles according 
  * to shape rules.<br />
@@ -42,6 +44,10 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected LoadPolygonStreams loadPolygonStreams;
 	protected LoadParticleStreams loadParticleStreams; 
 	protected LoadLetterStreams loadLetterStreams;
+	protected NumberedStream<Double> _xMinStream;
+	protected NumberedStream<Double> _yMinStream;
+	protected NumberedStream<Double> _xMaxStream;
+	protected NumberedStream<Double> _yMaxStream;
 	
 	@Override
 	public void init() throws Exception {
@@ -82,6 +88,62 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
     	_hardCornerCountStream = (NumberedStream<Integer>) queryCalc.get(CommonLogicExpressions.HARD_CORNER_COUNT, this);
     	_inflectionPointCountStream = (NumberedStream<Integer>) queryCalc.get(CommonLogicExpressions.INFLECTION_POINT_COUNT, this);
     	_curveArchCountStream = (NumberedStream<Integer>) queryCalc.get(CommonLogicExpressions.CURVE_ARCH_COUNT, this);
+        makeBBoxStreams();
+    }
+
+    protected void makeBBoxStreams() {
+        Calc1<IColorAndVariance, Double> xMinCalc1 =
+			new Calc1<IColorAndVariance, Double>() {
+				@Override
+				public Double invoke(IColorAndVariance input) {
+					if (input == null)
+						return null;
+					PixelArea pixelArea = input.getPixelArea();
+					return pixelArea.getBoundingBox().minVal.getX();
+				}
+		};
+        _xMinStream = new CalcNumberedStream1(xMinCalc1, _particleStream);
+        _context.put(Headings.BOUNDING_BOX_X_MIN, _xMinStream);
+
+        Calc1<IColorAndVariance, Double> yMinCalc1 =
+			new Calc1<IColorAndVariance, Double>() {
+				@Override
+				public Double invoke(IColorAndVariance input) {
+					if (input == null)
+						return null;
+					PixelArea pixelArea = input.getPixelArea();
+					return pixelArea.getBoundingBox().minVal.getY();
+				}
+		};
+        _yMinStream = new CalcNumberedStream1(yMinCalc1, _particleStream);
+        _context.put(Headings.BOUNDING_BOX_Y_MIN, _yMinStream);
+
+        Calc1<IColorAndVariance, Double> xMaxCalc1 =
+			new Calc1<IColorAndVariance, Double>() {
+				@Override
+				public Double invoke(IColorAndVariance input) {
+					if (input == null)
+						return null;
+					PixelArea pixelArea = input.getPixelArea();
+					return pixelArea.getBoundingBox().maxVal.getX();
+				}
+		};
+        _xMaxStream = new CalcNumberedStream1(xMaxCalc1, _particleStream);
+        _context.put(Headings.BOUNDING_BOX_X_MAX, _xMaxStream);
+
+        Calc1<IColorAndVariance, Double> yMaxCalc1 =
+			new Calc1<IColorAndVariance, Double>() {
+				@Override
+				public Double invoke(IColorAndVariance input) {
+					if (input == null)
+						return null;
+					PixelArea pixelArea = input.getPixelArea();
+					return pixelArea.getBoundingBox().maxVal.getY();
+				}
+		};
+        _yMaxStream = new CalcNumberedStream1(yMaxCalc1, _particleStream);
+        _context.put(Headings.BOUNDING_BOX_Y_MAX, _yMaxStream);
+
     }
     
 	/** Analyzes particles and group them.<br />
