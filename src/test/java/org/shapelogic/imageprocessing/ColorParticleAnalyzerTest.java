@@ -9,6 +9,7 @@ import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 
+import org.shapelogic.util.Headings;
 import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
 
 /** Test ParticleCounter. <br />
@@ -155,6 +156,10 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(new Integer(105), redStream.get(0));
 		assertEquals(new Integer(102), redStream.get(1));
 
+        //Test min x bounding box for 2 first particles
+		NumberedStream<Double> xMinStream = streamFactory.findNumberedStream(Headings.BOUNDING_BOX_X_MIN);
+		assertEquals(new Double(155), xMinStream.get(0));
+		assertEquals(new Double(171), xMinStream.get(1));
     }
 
 	public void testEmbryosToMask() {
