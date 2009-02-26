@@ -196,6 +196,7 @@ public class BaseParticleCounter extends BaseImageOperation
         }
 	}
     
+    /** Filter particles on size and other global criteria. */
     protected void globalFilter() {
     	_particlesOrig.clear();
     	final List<IColorAndVariance> store = _segmentation.getSegmentAreaFactory().getStore();
