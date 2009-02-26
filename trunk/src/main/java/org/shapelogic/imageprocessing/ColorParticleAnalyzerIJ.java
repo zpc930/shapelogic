@@ -128,10 +128,10 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
             	BBox bBox = pixelArea.getBoundingBox();
             	IPoint2D minPoint = bBox.minVal;
             	IPoint2D maxPoint = bBox.maxVal;
-            	_rt.addValue(Headings.BOUNDING_BOX_X_MIN, minPoint.getX());
-            	_rt.addValue(Headings.BOUNDING_BOX_Y_MIN, minPoint.getY());
-            	_rt.addValue(Headings.BOUNDING_BOX_X_MAX, maxPoint.getX());
-            	_rt.addValue(Headings.BOUNDING_BOX_Y_MAX, maxPoint.getY());
+            	_rt.addValue(Headings.BOUNDING_BOX_X_MIN, _xMinStream.get(index));
+            	_rt.addValue(Headings.BOUNDING_BOX_Y_MIN, _yMinStream.get(index));
+            	_rt.addValue(Headings.BOUNDING_BOX_X_MAX, _xMaxStream.get(index));
+            	_rt.addValue(Headings.BOUNDING_BOX_Y_MAX, _yMaxStream.get(index));
         	}
 			_rt.addValue(Headings.ASPECT_RATIO, _aspectRatioStream.get(index));
 			Polygon polygon = _polygonStream.get(index); 
