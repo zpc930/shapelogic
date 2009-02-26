@@ -11,6 +11,7 @@ import org.shapelogic.color.ColorUtil;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.IColorDistance;
 import org.shapelogic.imageutil.SLImage;
+import org.shapelogic.streams.CalcNumberedStream1;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
 import org.shapelogic.streams.NumberedStream;
@@ -87,8 +88,8 @@ public class LoadParticleStreams {
 				return ColorUtil.splitRed(color);
 			}
 		};
-		ListStream<Integer> colorRStream = 
-			new ListCalcStream1<IColorAndVariance, Integer>(redCalc1,particle); 
+		NumberedStream<Integer> colorRStream =
+			new CalcNumberedStream1<IColorAndVariance, Integer>(redCalc1,particle);
 		queryCalc.put(StreamNames.COLOR_R,colorRStream, recursiveContext);
 	}
 
