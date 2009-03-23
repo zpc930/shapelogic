@@ -176,6 +176,8 @@ C++ Libraries
   
   * HighGui from OpenCV
   
+  * Qt
+
   * wxWidget
 
   []
@@ -217,6 +219,17 @@ C++ Libraries
 *** Issues
   
   It does not seem to have a menu system, which is essential for a rudimentary workbench.
+
+** Qt
+
+  Qt is a very strong GUI framework with lots of high quality tools.
+  Since 4.5 Qt has been LGPL and therefor compatible with ShapeLogic C++.
+
+*** Issues
+
+  Qt is using a lot of Qt specific classes e.g. QString and QList.
+
+  Powerful but non standard concept of slot and signal.
 
 ** wxWidget
 
