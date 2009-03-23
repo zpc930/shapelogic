@@ -89,6 +89,26 @@ ShapeLogic C++
 
 * News
   
+** 2009/03/22 ShapeLogic C++ 0.5 released
+
+  * Added binary thresholds operations
+
+    * Threshold with fixed limit of 127
+
+    * Adaptive threshold with a small block size of 3
+
+    []
+
+  * Added morphological operations
+
+    * Dilate
+
+    * Erode
+
+    []
+
+  []
+
 ** 2008/11/14 ShapeLogic C++ 0.4 released
 
   * Images are now internally stored in OpenCV's IplImage format
@@ -145,7 +165,7 @@ ShapeLogic C++
   
 * Future plans for ShapeLogic
   
-** ShapeLogic C++ 0.5 soon to be released
+** ShapeLogic C++ 0.6 soon to be released
   
   * Make more OpenCV image processing algorithm available in menus
     
