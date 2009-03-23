@@ -171,7 +171,7 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 34,000 lines of Java code including 530 unit tests.
+  * ShapeLogic currently consists of 34,000 lines of Java code including 540 unit tests.
 
   []
 
@@ -208,6 +208,26 @@ ShapeLogic
   []
   
 * News
+
+** 2009/03/22 ShapeLogic C++ 0.5 released
+
+  * Added binary thresholds operations
+
+    * Threshold with fixed limit of 127
+
+    * Adaptive threshold with a small block size of 3
+
+    []
+
+  * Added morphological operations
+
+    * Dilate
+
+    * Erode
+
+    []
+
+  []
 
 ** 2008/11/28 ShapeLogic Java 1.4 released 
 
@@ -296,7 +316,7 @@ ShapeLogic
   
   []
   
-** ShapeLogic C++ 0.5 soon to be released
+** ShapeLogic C++ 0.6 soon to be released
   
   * Make more OpenCV image processing algorithm available in menus
     
