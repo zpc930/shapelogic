@@ -11,10 +11,10 @@ import org.shapelogic.streams.NumberedStream;
  * @author Sami Badawi
  */
 public class TableDefinitionTest extends TestCase {
-    public static final String streamName0 = "streamName0";
-    public static final String streamName1 = "streamName1";
-    public static final String streamName2 = "streamName2";
-    public static final String columnName0 = "columnName0";
+    public static final String STREAM_NAME0 = "streamName0";
+    public static final String STREAM_NAME1 = "streamName1";
+    public static final String STREAM_NAME2 = "streamName2";
+    public static final String COLUMN_NAME0 = "columnName0";
 
     public void testOneColumnNoContext() {
         String[] inputArray = {"streamName", "columnName"};
@@ -29,14 +29,14 @@ public class TableDefinitionTest extends TestCase {
 
     static public TableDefinition makeTableDefinition(RecursiveContext recursiveContext) {
         String[] inputArray = {
-            streamName0, columnName0,
-            streamName1, "columnName2",
-            streamName2, null,
+            STREAM_NAME0, COLUMN_NAME0,
+            STREAM_NAME1, "columnName2",
+            STREAM_NAME2, null,
         };
         NumberedStream<Integer> naturalNumberStream0 = new NaturalNumberStream(2);
-        recursiveContext.getContext().put(streamName0, naturalNumberStream0);
-        NumberedStream<Integer> naturalNumberStream2 = new NaturalNumberStream(2);
-        recursiveContext.getContext().put(streamName2, naturalNumberStream2);
+        recursiveContext.getContext().put(STREAM_NAME0, naturalNumberStream0);
+        NumberedStream<Integer> naturalNumberStream2 = new NaturalNumberStream(3);
+        recursiveContext.getContext().put(STREAM_NAME2, naturalNumberStream2);
         TableDefinition tableDefinition = new TableDefinition(inputArray);
         return tableDefinition;
     }
@@ -51,12 +51,12 @@ public class TableDefinitionTest extends TestCase {
 
         ColumnDefinition columnDefinition0 = tableDefinition.getColumnDefinition().get(0);
         assertNotNull(columnDefinition0);
-        assertEquals(streamName0, columnDefinition0.getStreamName());
-        assertEquals(columnName0, columnDefinition0.getColumnName());
+        assertEquals(STREAM_NAME0, columnDefinition0.getStreamName());
+        assertEquals(COLUMN_NAME0, columnDefinition0.getColumnName());
         ColumnDefinition columnDefinition1 = tableDefinition.getColumnDefinition().get(1);
         assertNotNull(columnDefinition1);
-        assertEquals(streamName2, columnDefinition1.getStreamName());
-        assertEquals(streamName2, columnDefinition1.getColumnName());
+        assertEquals(STREAM_NAME2, columnDefinition1.getStreamName());
+        assertEquals(STREAM_NAME2, columnDefinition1.getColumnName());
     }
 
 }
