@@ -25,7 +25,7 @@ public class BaseTableBuilder {
     }
 
     public void buildHeadlineElement(int column) {
-        _outputList.set(column, _tableDefinition.getColumnDefinition().get(column).getColumnName());
+        _outputList.add(column, _tableDefinition.getColumnDefinition().get(column).getColumnName());
     }
 
     public void buildHeadline() {
