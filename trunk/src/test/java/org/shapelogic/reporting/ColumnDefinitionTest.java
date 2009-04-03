@@ -37,4 +37,15 @@ public class ColumnDefinitionTest extends TestCase {
         assertFalse(columnDefinition.findStream(null));
     }
 
+    public void testDirectStreams() {
+        String columnName = "columnName";
+        NumberedStream<Integer> naturalNumberStream = new NaturalNumberStream(2);
+        ColumnDefinition columnDefinition = new ColumnDefinition(naturalNumberStream, columnName);
+        assertNotNull(columnDefinition);
+        assertEquals(null, columnDefinition.getStreamName());
+        assertEquals(columnName, columnDefinition.getColumnName());
+        assertNull(columnDefinition.isEmpty());
+        assertTrue(columnDefinition.findStream(null));
+    }
+
 }

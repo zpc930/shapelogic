@@ -1,5 +1,8 @@
 package org.shapelogic.reporting;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import junit.framework.TestCase;
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.SimpleRecursiveContext;
@@ -41,6 +44,22 @@ public class TableDefinitionTest extends TestCase {
         return tableDefinition;
     }
 
+    static public TableDefinition makeTableDefinitionDirectStream(RecursiveContext recursiveContext) {
+        String[] inputArray = {
+            STREAM_NAME0, COLUMN_NAME0,
+            STREAM_NAME1, "columnName2",
+        };
+        List inputList = new ArrayList();
+        inputList.addAll(Arrays.asList(inputArray));
+        NumberedStream<Integer> naturalNumberStream0 = new NaturalNumberStream(2);
+        recursiveContext.getContext().put(STREAM_NAME0, naturalNumberStream0);
+        NumberedStream<Integer> naturalNumberStream2 = new NaturalNumberStream(3);
+        inputList.add(naturalNumberStream2);
+        inputList.add(STREAM_NAME2);
+        TableDefinition tableDefinition = new TableDefinition(inputList);
+        return tableDefinition;
+    }
+
     public void testOneColumnWithContext() {
         RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
         TableDefinition tableDefinition = makeTableDefinition(recursiveContext);
@@ -59,4 +78,21 @@ public class TableDefinitionTest extends TestCase {
         assertEquals(STREAM_NAME2, columnDefinition1.getColumnName());
     }
 
+    public void testOneColumnWithContextDirectStream() {
+        RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+        TableDefinition tableDefinition = makeTableDefinitionDirectStream(recursiveContext);
+        assertNotNull(tableDefinition);
+        assertEquals(3, tableDefinition.getRawColumnDefinition().size());
+        tableDefinition.findNonEmptyColumns(recursiveContext);
+        assertEquals(2, tableDefinition.getColumnDefinition().size());
+
+        ColumnDefinition columnDefinition0 = tableDefinition.getColumnDefinition().get(0);
+        assertNotNull(columnDefinition0);
+        assertEquals(STREAM_NAME0, columnDefinition0.getStreamName());
+        assertEquals(COLUMN_NAME0, columnDefinition0.getColumnName());
+        ColumnDefinition columnDefinition1 = tableDefinition.getColumnDefinition().get(1);
+        assertNotNull(columnDefinition1);
+        assertEquals(null, columnDefinition1.getStreamName());
+        assertEquals(STREAM_NAME2, columnDefinition1.getColumnName());
+    }
 }
