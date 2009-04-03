@@ -19,6 +19,11 @@ class ColumnDefinition {
         _columnName = columnName;
     }
 
+    public ColumnDefinition(NumberedStream stream, String columnName) {
+        _stream = stream;
+        _columnName = columnName;
+    }
+
     public String getStreamName() {
         return _streamName;
     }
@@ -32,6 +37,10 @@ class ColumnDefinition {
     }
 
     public boolean findStream(RecursiveContext _recursiveContext) {
+        if (_stream != null) {
+            _empty = Boolean.FALSE;
+            return !_empty;
+        }
         if (_recursiveContext == null)
             return false;
         Object obj = _recursiveContext.getContext().get(_streamName);
