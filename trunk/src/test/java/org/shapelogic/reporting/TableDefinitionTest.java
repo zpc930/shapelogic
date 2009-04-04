@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
+import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.SimpleRecursiveContext;
 import org.shapelogic.mathematics.NaturalNumberStream;
@@ -60,6 +61,23 @@ public class TableDefinitionTest extends TestCase {
         return tableDefinition;
     }
 
+    static public TableDefinition makeTableDefinitionDirectCalc(RecursiveContext recursiveContext) {
+        String[] inputArray = {
+            STREAM_NAME0, COLUMN_NAME0,
+            STREAM_NAME1, "columnName2",
+        };
+        NumberedStream<Integer> naturalNumberStream0 = new NaturalNumberStream(2);
+        recursiveContext.getContext().put(STREAM_NAME0, naturalNumberStream0);
+        TableDefinition tableDefinition = new TableDefinition(inputArray);
+        Calc1 identity = new Calc1<Integer,Integer>() {
+            public Integer invoke(Integer input) {
+                return input;
+            }
+        };
+        tableDefinition.addClosureDefinition(naturalNumberStream0, identity, STREAM_NAME2);
+        return tableDefinition;
+    }
+
     public void testOneColumnWithContext() {
         RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
         TableDefinition tableDefinition = makeTableDefinition(recursiveContext);
@@ -81,6 +99,24 @@ public class TableDefinitionTest extends TestCase {
     public void testOneColumnWithContextDirectStream() {
         RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
         TableDefinition tableDefinition = makeTableDefinitionDirectStream(recursiveContext);
+        assertNotNull(tableDefinition);
+        assertEquals(3, tableDefinition.getRawColumnDefinition().size());
+        tableDefinition.findNonEmptyColumns(recursiveContext);
+        assertEquals(2, tableDefinition.getColumnDefinition().size());
+
+        ColumnDefinition columnDefinition0 = tableDefinition.getColumnDefinition().get(0);
+        assertNotNull(columnDefinition0);
+        assertEquals(STREAM_NAME0, columnDefinition0.getStreamName());
+        assertEquals(COLUMN_NAME0, columnDefinition0.getColumnName());
+        ColumnDefinition columnDefinition1 = tableDefinition.getColumnDefinition().get(1);
+        assertNotNull(columnDefinition1);
+        assertEquals(null, columnDefinition1.getStreamName());
+        assertEquals(STREAM_NAME2, columnDefinition1.getColumnName());
+    }
+
+    public void testOneColumnWithContextDirectCalc() {
+        RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+        TableDefinition tableDefinition = makeTableDefinitionDirectCalc(recursiveContext);
         assertNotNull(tableDefinition);
         assertEquals(3, tableDefinition.getRawColumnDefinition().size());
         tableDefinition.findNonEmptyColumns(recursiveContext);
