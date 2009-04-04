@@ -12,8 +12,6 @@ import org.shapelogic.imageutil.IJGui;
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.imageutil.SLImage;
-import org.shapelogic.polygon.BBox;
-import org.shapelogic.polygon.IPoint2D;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.util.Headings;
 
@@ -125,9 +123,6 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         	if (pixelArea != null) {
             	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
             	_rt.addValue(ResultsTable.Y_CENTER_OF_MASS, pixelArea.getCenterPoint().getY());
-            	BBox bBox = pixelArea.getBoundingBox();
-            	IPoint2D minPoint = bBox.minVal;
-            	IPoint2D maxPoint = bBox.maxVal;
             	_rt.addValue(Headings.BOUNDING_BOX_X_MIN, _xMinStream.get(index));
             	_rt.addValue(Headings.BOUNDING_BOX_Y_MIN, _yMinStream.get(index));
             	_rt.addValue(Headings.BOUNDING_BOX_X_MAX, _xMaxStream.get(index));
