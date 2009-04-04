@@ -3,7 +3,9 @@ package org.shapelogic.reporting;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RecursiveContext;
+import org.shapelogic.streams.CalcNumberedStream1;
 import org.shapelogic.streams.NumberedStream;
 
 /** TableDefinition contains a list of ColumnDefinition. <br />
@@ -21,6 +23,10 @@ public class TableDefinition {
 
     public TableDefinition(List doubleList) {
         _rawColumnDefinition = new ArrayList<ColumnDefinition>();
+        addDefinition(doubleList);
+    }
+
+    public void addDefinition(List doubleList) {
         if (doubleList == null)
             return;
         for (int i = 0; i < doubleList.size()/2; i++) {
@@ -42,13 +48,25 @@ public class TableDefinition {
                 columnName = streamName;
             else if (columnObject instanceof String)
                 columnName = (String) columnObject;
-            ColumnDefinition columnDefinition = null; 
+            ColumnDefinition columnDefinition = null;
             if (streamName != null)
                 columnDefinition = new ColumnDefinition(streamName, columnName);
             else
                 columnDefinition = new ColumnDefinition(stream, columnName);
             _rawColumnDefinition.add(columnDefinition);
         }
+    }
+
+    /** Create a stream based on another stream and a calc.<br />
+     *
+     * @param baseStream
+     * @param calc
+     * @param columnName
+     */
+    public void addClosureDefinition(NumberedStream baseStream, Calc1 calc, String columnName) {
+        CalcNumberedStream1 stream = new CalcNumberedStream1(calc, baseStream);
+        ColumnDefinition columnDefinition = new ColumnDefinition(stream, columnName);
+        _rawColumnDefinition.add(columnDefinition);
     }
 
     public List<ColumnDefinition> getColumnDefinition() {
