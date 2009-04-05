@@ -13,6 +13,7 @@ import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.polygon.Polygon;
+import org.shapelogic.reporting.IJTableBuilder;
 import org.shapelogic.util.Headings;
 
 /** Automatic particle counter for 24 bit RGB and 8 bit Gray.
@@ -83,7 +84,12 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 	}
 
 	@Override
-	protected void defaultColumnDefinitions() {
+	protected void setupTableBuilder() {
+	    _rt = new ResultsTable();
+        _tableBuilder = new IJTableBuilder(_tableDefinition, _rt);
+    }
+
+	protected void defaultColumnDefinitionsOld() {
 	    _rt = new ResultsTable();
 		_rt.setDefaultHeadings();
 		_rt.getFreeColumn(Headings.COLOR);
@@ -106,6 +112,19 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 
 	@Override
 	protected boolean populateResultsTableRow(int index) {
+		try {
+            _tableBuilder.buildLine(index);
+			return true;
+		} catch (RuntimeException e) {
+			String errorMessage = "Error: " + e.getMessage();
+			_rt.addLabel(Headings.CATEGORY, errorMessage);
+			System.out.println(errorMessage);
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	protected boolean populateResultsTableRowOld(int index) {
 		try {
     		IColorAndVariance particle = _particleStream.get(index);
         	if (particle == null)
@@ -153,7 +172,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 			return true;
 		} catch (RuntimeException e) {
 			String errorMessage = "Error: " + e.getMessage();
-			_rt.addLabel("Label", errorMessage);
+			_rt.addLabel(Headings.CATEGORY, errorMessage);
 			System.out.println(errorMessage);
 			e.printStackTrace();
 			return false;
