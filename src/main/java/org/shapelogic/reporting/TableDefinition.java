@@ -1,7 +1,6 @@
 package org.shapelogic.reporting;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RecursiveContext;
@@ -17,13 +16,31 @@ public class TableDefinition {
     protected List<ColumnDefinition> _columnDefinition;
     protected List<ColumnDefinition> _rawColumnDefinition;
 
-    public TableDefinition(String[] doubleArray) {
-        this(Arrays.asList(doubleArray));
-    }
-
     public TableDefinition(List doubleList) {
         _rawColumnDefinition = new ArrayList<ColumnDefinition>();
         addDefinition(doubleList);
+    }
+
+    public void addDefinition(Object streamObject, String columnName) {
+            String streamName = null;
+            NumberedStream stream = null;
+            if (streamObject == null)
+                throw new RuntimeException("Missing stream for column name: " + columnName);
+            if (streamObject instanceof String)
+                streamName = (String) streamObject;
+            else if (streamObject instanceof NumberedStream)
+                stream = (NumberedStream) streamObject;
+            else
+                throw new RuntimeException("Bad type column name: " + columnName +
+                        " class: " + streamObject.getClass().getCanonicalName());
+            if (columnName == null)
+                columnName = streamName;
+            ColumnDefinition columnDefinition = null;
+            if (streamName != null)
+                columnDefinition = new ColumnDefinition(streamName, columnName);
+            else
+                columnDefinition = new ColumnDefinition(stream, columnName);
+            _rawColumnDefinition.add(columnDefinition);
     }
 
     public void addDefinition(List doubleList) {
@@ -32,28 +49,7 @@ public class TableDefinition {
         for (int i = 0; i < doubleList.size()/2; i++) {
             Object streamObject = doubleList.get(i*2);
             Object columnObject = doubleList.get(i*2 + 1);
-            String streamName = null;
-            NumberedStream stream = null;
-            String columnName = null;
-            if (streamObject == null)
-                throw new RuntimeException("Missing stream for element: " + i);
-            if (streamObject instanceof String)
-                streamName = (String) streamObject;
-            else if (streamObject instanceof NumberedStream)
-                stream = (NumberedStream) streamObject;
-            else
-                throw new RuntimeException("Bad type for element: " + i +
-                        " class: " + streamObject.getClass().getCanonicalName());
-            if (columnObject == null)
-                columnName = streamName;
-            else if (columnObject instanceof String)
-                columnName = (String) columnObject;
-            ColumnDefinition columnDefinition = null;
-            if (streamName != null)
-                columnDefinition = new ColumnDefinition(streamName, columnName);
-            else
-                columnDefinition = new ColumnDefinition(stream, columnName);
-            _rawColumnDefinition.add(columnDefinition);
+            addDefinition(streamObject, (String) columnObject);
         }
     }
 
