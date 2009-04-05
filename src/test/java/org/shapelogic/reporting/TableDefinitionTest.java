@@ -22,7 +22,7 @@ public class TableDefinitionTest extends TestCase {
 
     public void testOneColumnNoContext() {
         String[] inputArray = {"streamName", "columnName"};
-        TableDefinition tableDefinition = new TableDefinition(inputArray);
+        TableDefinition tableDefinition = new TableDefinition(Arrays.asList(inputArray));
         assertNotNull(tableDefinition);
         ColumnDefinition columnDefinition = tableDefinition.getRawColumnDefinition().get(0);
         assertNotNull(columnDefinition);
@@ -41,7 +41,7 @@ public class TableDefinitionTest extends TestCase {
         recursiveContext.getContext().put(STREAM_NAME0, naturalNumberStream0);
         NumberedStream<Integer> naturalNumberStream2 = new NaturalNumberStream(3);
         recursiveContext.getContext().put(STREAM_NAME2, naturalNumberStream2);
-        TableDefinition tableDefinition = new TableDefinition(inputArray);
+        TableDefinition tableDefinition = new TableDefinition(Arrays.asList(inputArray));
         return tableDefinition;
     }
 
@@ -68,7 +68,7 @@ public class TableDefinitionTest extends TestCase {
         };
         NumberedStream<Integer> naturalNumberStream0 = new NaturalNumberStream(2);
         recursiveContext.getContext().put(STREAM_NAME0, naturalNumberStream0);
-        TableDefinition tableDefinition = new TableDefinition(inputArray);
+        TableDefinition tableDefinition = new TableDefinition(Arrays.asList(inputArray));
         Calc1 identity = new Calc1<Integer,Integer>() {
             public Integer invoke(Integer input) {
                 return input;
