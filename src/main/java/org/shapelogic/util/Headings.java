@@ -7,7 +7,8 @@ package org.shapelogic.util;
  */
 public class Headings {
 
-	//XXX move to a constants or headings class
+	public static final String AREA = "Area";
+	public static final String CATEGORY = "Category";
 	public static final String COLOR = "Color";
 	public static final String COLOR_STD_DEV = "ColorStdDev";
 	public static final String COLOR_RED = "Red";
@@ -24,5 +25,6 @@ public class Headings {
 	public static final String HARD_CORNERS = "HardCorners";
 	public static final String INFLECTION_POINT_COUNT = "InflectionPoints";
 	public static final String CURVE_ARCH_COUNT = "CurveArchs";
-
+	public static final String X_CENTER_OF_MASS = "XCenter";
+	public static final String Y_CENTER_OF_MASS = "YCenter";
 }
