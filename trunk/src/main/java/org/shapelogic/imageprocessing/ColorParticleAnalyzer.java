@@ -9,6 +9,8 @@ import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.polygon.Polygon;
+import org.shapelogic.reporting.BaseTableBuilder;
+import org.shapelogic.reporting.TableDefinition;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.LoadParticleStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
@@ -48,7 +50,11 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected NumberedStream<Double> _yMinStream;
 	protected NumberedStream<Double> _xMaxStream;
 	protected NumberedStream<Double> _yMaxStream;
+
+    protected TableDefinition _tableDefinition;
 	
+    protected BaseTableBuilder _tableBuilder;
+
 	@Override
 	public void init() throws Exception {
 		super.init();
@@ -60,6 +66,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected void defaultStreamDefinitions() {
 		IQueryCalc queryCalc = QueryCalc.getInstance();
     	_particleStream = new WrappedListStream<IColorAndVariance>(_particlesFiltered);
+		_context.put(StreamNames.PARTICLES, _particleStream);
         int traceColor = _paintForground;
         boolean traceCloseToColor = true;
         if (!_toMask) {
@@ -175,13 +182,120 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	}
 
 	@Override
+	protected void defaultColumnDefinitions() {
+        _tableDefinition = new TableDefinition(null);
+        _tableDefinition.addDefinition(_categorizer, Headings.CATEGORY);
+
+        Calc1<IColorAndVariance, Integer> areaClosure = new Calc1<IColorAndVariance, Integer>() {
+            public Integer invoke(IColorAndVariance input) {
+                return input.getArea();
+            }
+        };
+        _tableDefinition.addClosureDefinition(_particleStream,areaClosure, Headings.AREA);
+
+        Calc1<IColorAndVariance, Double> standardDeviantion = new Calc1<IColorAndVariance, Double>() {
+            public Double invoke(IColorAndVariance input) {
+                return input.getStandardDeviation();
+            }
+        };
+        _tableDefinition.addClosureDefinition(_particleStream,standardDeviantion, Headings.COLOR_STD_DEV);
+
+        Calc1<IColorAndVariance, Integer> meanColor = new Calc1<IColorAndVariance, Integer>() {
+            public Integer invoke(IColorAndVariance input) {
+                return input.getMeanColor();
+            }
+        };
+        _tableDefinition.addClosureDefinition(_particleStream, meanColor, Headings.COLOR);
+
+        if (getImage().isRgb()) {
+
+            Calc1<IColorAndVariance, Integer> meanRed = new Calc1<IColorAndVariance, Integer>() {
+                public Integer invoke(IColorAndVariance input) {
+                    return input.getMeanRed();
+                }
+            };
+            _tableDefinition.addClosureDefinition(_particleStream, meanRed, Headings.COLOR_RED);
+
+            Calc1<IColorAndVariance, Integer> meanGreen = new Calc1<IColorAndVariance, Integer>() {
+                public Integer invoke(IColorAndVariance input) {
+                    return input.getMeanGreen();
+                }
+            };
+            _tableDefinition.addClosureDefinition(_particleStream, meanGreen, Headings.COLOR_GREEN);
+
+            Calc1<IColorAndVariance, Integer> meanBlue = new Calc1<IColorAndVariance, Integer>() {
+                public Integer invoke(IColorAndVariance input) {
+                    return input.getMeanBlue();
+                }
+            };
+            _tableDefinition.addClosureDefinition(_particleStream, meanBlue, Headings.COLOR_BLUE);
+        }
+
+        Calc1<IColorAndVariance, Double> xCenterOfMass = new Calc1<IColorAndVariance, Double>() {
+            public Double invoke(IColorAndVariance input) {
+                PixelArea pixelArea = input.getPixelArea();
+                if (pixelArea == null) return null;
+                return pixelArea.getCenterPoint().getX();
+            }
+        };
+        _tableDefinition.addClosureDefinition(_particleStream, xCenterOfMass, Headings.X_CENTER_OF_MASS);
+
+        Calc1<IColorAndVariance, Double> yCenterOfMass = new Calc1<IColorAndVariance, Double>() {
+            public Double invoke(IColorAndVariance input) {
+                PixelArea pixelArea = input.getPixelArea();
+                if (pixelArea == null) return null;
+                return pixelArea.getCenterPoint().getY();
+            }
+        };
+        _tableDefinition.addClosureDefinition(_particleStream, yCenterOfMass, Headings.Y_CENTER_OF_MASS);
+
+        _tableDefinition.addDefinition(_xMinStream, Headings.BOUNDING_BOX_X_MIN);
+        _tableDefinition.addDefinition(_yMinStream, Headings.BOUNDING_BOX_Y_MIN);
+        _tableDefinition.addDefinition(_xMaxStream, Headings.BOUNDING_BOX_X_MAX);
+        _tableDefinition.addDefinition(_yMaxStream, Headings.BOUNDING_BOX_Y_MAX);
+
+        _tableDefinition.addDefinition(_aspectRatioStream, Headings.ASPECT_RATIO);
+
+        Calc1<Polygon, Double> perimeterCalc = new Calc1<Polygon, Double>() {
+            public Double invoke(Polygon input) {
+                if (input == null) return null;
+                return input.getPerimeter();
+            }
+        };
+        _tableDefinition.addClosureDefinition(_polygonStream, perimeterCalc, Headings.PERIMETER);
+
+//XXX This used 2 different input streams and does not fit with
+        Calc1<Polygon, Double> circularityCalc = new Calc1<Polygon, Double>() {
+            public Double invoke(Polygon polygon) {
+//                    if (polygon == null) return null;
+//                    double perimeter = polygon.getPerimeter();
+//                    return perimeter==0?0.0:4.0*Math.PI*particle.getArea()/(perimeter*perimeter);//XXX fix me
+                return 1.;
+            }
+        };
+
+        _tableDefinition.addDefinition(_xMinStream, Headings.CIRCULARITY); //XXX fix me
+        _tableDefinition.addDefinition(_grayValueStream, Headings.GRAY_VALUE);
+        _tableDefinition.addDefinition(_hardCornerCountStream, Headings.HARD_CORNERS);
+        _tableDefinition.addDefinition(_inflectionPointCountStream, Headings.INFLECTION_POINT_COUNT);
+        _tableDefinition.addDefinition(_curveArchCountStream, Headings.CURVE_ARCH_COUNT);
+	}
+
+	@Override
 	protected void populateResultsTable(){
     	List<IColorAndVariance> particles = _particlesFiltered;
+        _tableDefinition.findNonEmptyColumns(this);
+        _tableBuilder.buildHeadline();
     	for (int i=0;i<particles.size();i++) {
     		if (populateResultsTableRow(i))
     			populateResultsTableRowCustom(i);
     	}
 	}
+
+	@Override
+	protected void setupTableBuilder() {
+        _tableBuilder = new BaseTableBuilder(_tableDefinition);
+    }
 
 	public StringBuffer getInternalInfo() {
 	    StringBuffer result = new StringBuffer();

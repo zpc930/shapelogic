@@ -102,11 +102,11 @@ public class BaseParticleCounter extends BaseImageOperation
 			segment();
 			globalFilter();
             if (!_countOnly) {
-                defaultColumnDefinitions();
-                customColumnDefinitions();
                 defaultStreamDefinitions();
                 customStreamDefinitions();
                 categorizeStreams();
+                defaultColumnDefinitions();
+                setupTableBuilder();
                 populateResultsTable();
             }
 			showResultDialog();
@@ -222,6 +222,10 @@ public class BaseParticleCounter extends BaseImageOperation
     protected void customStreamDefinitions() {
     	
     }
+
+    protected void setupTableBuilder() {
+
+    }
     
 	/** Analyzes particles and group them.<br />*/
     protected void categorizeStreams() {
@@ -230,11 +234,6 @@ public class BaseParticleCounter extends BaseImageOperation
     
     /** Setup all the stream and other needed things. */
     protected void defaultColumnDefinitions() {
-    	
-    }
-    
-    /** Define extra streams and also extra columns.*/
-    protected void customColumnDefinitions() {
     	
     }
     
