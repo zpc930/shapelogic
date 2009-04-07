@@ -66,7 +66,6 @@ public class FFNeuralNetwork implements Calc1<double[], double[]>
     }
 
     public boolean addLayer(double[] layer) {
-//        if (_layerWeights.size() == 0) {}
         int lastNumberOfNodes = _layerNodes.get(_layerNodes.size()-1);
         int currentNumberOfNodes = layer.length / (lastNumberOfNodes+1);
         _layerWeights.add(layer);
@@ -77,6 +76,14 @@ public class FFNeuralNetwork implements Calc1<double[], double[]>
                     "Values found \n" +
                     "number of weight in layer = " + layer.length +
                     "\nnumber of nodes in last layer = " + lastNumberOfNodes;
+        return true;
+    }
+
+    public boolean addLayers(double[][] layers) {
+        for (double[] layer: layers) {
+            if  (!addLayer(layer))
+                return false;
+        }
         return true;
     }
 
