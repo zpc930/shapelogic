@@ -4,6 +4,10 @@ import junit.framework.TestCase;
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.calculation.SimpleRecursiveContext;
 import org.shapelogic.mathematics.NumericTruthTableStream;
+import org.shapelogic.streams.ListStream;
+import org.shapelogic.util.Constants;
+import static org.shapelogic.machinelearning.FFNeuralNetworkTest.WEIGHTS_FOR_NOT;
+import static org.shapelogic.machinelearning.FFNeuralNetworkTest.WEIGHTS_FOR_XOR;
 
 /** Test of ExampleNeuralNetwork Stream with external training. <br />
  *
@@ -56,13 +60,13 @@ public class ExampleNeuralNetworkTest extends TestCase {
     public void testGreaterThanNeuralNetworkGreater() {
         double limit = 10;
         FFNeuralNetwork xOrNn = makeGreaterThanNeuralNetwork(limit);
-        FFNeuralNetworkTest.assertNNTrue( xOrNn.invoke(new double[]{limit + 1})[0]);
+        FFNeuralNetworkTest.assertNNTrue( xOrNn.invoke(new double[]{limit + 0.1})[0]);
     }
 
     public void testGreaterThanNeuralNetworkSmaller() {
         double limit = 10;
         FFNeuralNetwork xOrNn = makeGreaterThanNeuralNetwork(limit);
-        FFNeuralNetworkTest.assertNNFalse( xOrNn.invoke(new double[]{limit - 1})[0]);
+        FFNeuralNetworkTest.assertNNFalse( xOrNn.invoke(new double[]{limit - 0.1})[0]);
     }
 
 //======================SmallerThanNeuralNetwork NN======================
@@ -70,13 +74,36 @@ public class ExampleNeuralNetworkTest extends TestCase {
     public void testSmallerThanNeuralNetworkGreater() {
         double limit = 10;
         FFNeuralNetwork xOrNn = makeSmallerThanNeuralNetwork(limit);
-        FFNeuralNetworkTest.assertNNFalse( xOrNn.invoke(new double[]{limit + 1})[0]);
+        FFNeuralNetworkTest.assertNNFalse( xOrNn.invoke(new double[]{limit + 0.1})[0]);
     }
 
     public void testSmallerThanNeuralNetworkSmaller() {
         double limit = 10;
         FFNeuralNetwork xOrNn = makeSmallerThanNeuralNetwork(limit);
-        FFNeuralNetworkTest.assertNNTrue( xOrNn.invoke(new double[]{limit - 1})[0]);
+        FFNeuralNetworkTest.assertNNTrue( xOrNn.invoke(new double[]{limit - 0.1})[0]);
+    }
+
+//======================XOR NN======================
+
+    public void testXOrNeuralNetworkStream() {
+        FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
+                RESULT_ARRAY , WEIGHTS_FOR_XOR, _recursiveContext);
+        ListStream<String> output = nn.getOutputStream();
+        assertEquals( NOTHING, output.next());
+        assertEquals( RESULT, output.next());
+        assertEquals( RESULT, output.next());
+        assertEquals( NOTHING, output.next());
+    }
+
+//======================NOT NN======================
+
+    public void testNotNeuralNetworkStream() {
+        FFNeuralNetworkStream nn = new FFNeuralNetworkStream(new String[] {ONE},
+                RESULT_ARRAY , WEIGHTS_FOR_NOT, null, _recursiveContext,
+                Constants.LAST_UNKNOWN);
+        ListStream<String> output = nn.getOutputStream();
+        assertEquals( RESULT, output.next());
+        assertEquals( NOTHING, output.next());
     }
 
 }
