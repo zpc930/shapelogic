@@ -13,13 +13,14 @@ public class FFNeuralNetworkTest extends TestCase {
     /** Weights found using the Joone Neural Networks.  */
     public final static double[][] WEIGHTS_FOR_XOR = {
         {
+            //Output 0        , 1                , 2
             2.7388686085992333, 5.505721328606976, 4.235258932026585, //bias
-
-            -6.598582463774703, -3.678198637390036, -2.9604962169635076,
-            -6.59030690954159, -3.7790406961228347, -2.845930422442215
+                                                                         //Input
+            -6.598582463774703, -3.678198637390036, -2.9604962169635076, // 0
+            -6.59030690954159, -3.7790406961228347, -2.845930422442215   // 1
         },
         {
-            -5.27100082610628,  //Bias secone hidden layer
+            -5.27100082610628,  //Bias for hidden second layer
 
             -10.45330943056037,
             6.582922049952558,
@@ -62,10 +63,16 @@ public class FFNeuralNetworkTest extends TestCase {
         assertEquals(1,nn.nOutputNodes);
     }
 
-    private FFNeuralNetwork makeXORNN() {
+    private FFNeuralNetwork makeXORNNIndividual() {
         FFNeuralNetwork xOrNn = new FFNeuralNetwork(2,1);
         xOrNn.addLayer(WEIGHTS_FOR_XOR[0]);
         xOrNn.addLayer(WEIGHTS_FOR_XOR[1]);
+        return xOrNn;
+    }
+
+    private FFNeuralNetwork makeXORNN() {
+        FFNeuralNetwork xOrNn = new FFNeuralNetwork(2,1);
+        xOrNn.addLayers(WEIGHTS_FOR_XOR);
         return xOrNn;
     }
 
@@ -105,7 +112,7 @@ public class FFNeuralNetworkTest extends TestCase {
     }
 
     public void testXORNeuralNetwork01() {
-        FFNeuralNetwork xOrNn = makeXORNN();
+        FFNeuralNetwork xOrNn = makeXORNNIndividual();
         assertNNTrue( xOrNn.invoke(new double[]{0.,1.})[0]);
     }
 
