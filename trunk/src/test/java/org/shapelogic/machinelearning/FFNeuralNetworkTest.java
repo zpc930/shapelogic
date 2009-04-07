@@ -190,14 +190,14 @@ public class FFNeuralNetworkTest extends TestCase {
         assertEquals( 4.5397868702434395E-5, xOrNn.transform(-10));
     }
 
-    public void assertNNTrue(double input) {
+    public static void assertNNTrue(double input) {
         boolean result = 0.5 < input;
         if (!result)
             System.out.println("input: " + input);
         assertTrue(result);
     }
 
-    public void assertNNFalse(double input) {
+    public static void assertNNFalse(double input) {
         boolean result = input <= 0.5;
         if (!result)
             System.out.println("input: " + input);
