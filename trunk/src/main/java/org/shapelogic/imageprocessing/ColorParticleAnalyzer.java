@@ -8,6 +8,8 @@ import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.machinelearning.ExampleNeuralNetwork;
+import org.shapelogic.machinelearning.FFNeuralNetworkStream;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.reporting.BaseTableBuilder;
 import org.shapelogic.reporting.TableDefinition;
@@ -52,8 +54,11 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected NumberedStream<Double> _yMaxStream;
 
     protected TableDefinition _tableDefinition;
-	
     protected BaseTableBuilder _tableBuilder;
+
+    protected boolean _useNeuralNetwork;
+
+    protected FFNeuralNetworkStream _nn;
 
 	@Override
 	public void init() throws Exception {
@@ -160,8 +165,16 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	@Override
 	protected void categorizeStreams() {
 		loadParticleStreams.exampleMakeParticleStream();
-    	loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
-    	_categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
+        if (_useNeuralNetwork) {
+                _nn = new FFNeuralNetworkStream(new String[] {StreamNames.ASPECT},
+                new String[] {"Flat", "Tall"}, ExampleNeuralNetwork.makeSamllerThanGreaterThanNeuralNetwork(0.8),
+                this);
+            _categorizer = _nn.getOutputStream();
+        }
+        else {
+            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+            _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
+        }
 	}
 	
 	/** Define extra streams.*/
@@ -179,6 +192,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		_aspectRatioStream = 
 			new ListCalcStream1<IColorAndVariance, Double>(aspectRatioCalc1,_particleStream); 
 		_aspectRatioStream.setup();
+        _context.put(StreamNames.ASPECT, _aspectRatioStream);
 	}
 
 	@Override
