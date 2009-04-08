@@ -14,5 +14,6 @@ public class StreamNames {
 	static public String COLOR_G = "colorG";
 	static public String COLOR_B = "colorB";
 	static public String COLOR_GRAY = "colorGray";
+    static public String ASPECT = "aspect";
 
 }
