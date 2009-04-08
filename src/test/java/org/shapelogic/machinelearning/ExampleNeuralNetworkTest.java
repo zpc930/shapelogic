@@ -14,10 +14,13 @@ import org.shapelogic.streams.ListStream;
  */
 public class ExampleNeuralNetworkTest extends TestCase {
     final static String ONE = "1";
-    final static String RESULT = "RESULT";
+    final static String SMALLER = "SMALLER";
+    final static String GREATER = "GREATER";
     final static String NOTHING = "";
     final static String[] INPUT_ARRAY = { ONE };
-    final static String[] RESULT_ARRAY = {RESULT};
+    final static String[] GREATER_RESULT_ARRAY = {GREATER};
+    final static String[] SMALLER_RESULT_ARRAY = {SMALLER};
+    final static String[] SMALLER_GREATER_RESULT_ARRAY = {SMALLER, GREATER};
 
     RecursiveContext _recursiveContext;
     NumericTruthTableStream numericTruthTableStream1;
@@ -49,6 +52,12 @@ public class ExampleNeuralNetworkTest extends TestCase {
         return nn;
     }
 
+    public FFNeuralNetwork makeSmallerThanGreaterThanNeuralNetwork(double limit) {
+        FFNeuralNetwork nn = new FFNeuralNetwork(1,1);
+        nn.addLayers(ExampleNeuralNetwork.makeSamllerThanGreaterThanNeuralNetwork(limit));
+        return nn;
+    }
+
 //======================GreaterThanNeuralNetwork NN======================
 
     public void testGreaterThanNeuralNetworkGreater() {
@@ -77,26 +86,37 @@ public class ExampleNeuralNetworkTest extends TestCase {
         FFNeuralNetworkTest.assertNNTrue( xOrNn.invoke(new double[]{limit - 0.1})[0]);
     }
 
-//======================XOR NN======================
+//======================GREATER NN======================
 
     public void testGreterThanNeuralNetworkStream() {
         FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
-                RESULT_ARRAY , ExampleNeuralNetwork.makeGreaterThanNeuralNetwork(0.8),
+                GREATER_RESULT_ARRAY , ExampleNeuralNetwork.makeGreaterThanNeuralNetwork(0.8),
                 _recursiveContext);
         ListStream<String> output = nn.getOutputStream();
         assertEquals( NOTHING, output.next());
-        assertEquals( RESULT, output.next());
+        assertEquals( GREATER, output.next());
     }
 
-//======================NOT NN======================
+//======================SMALLER NN======================
 
     public void testSmallerThanNeuralNetworkStream() {
         FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
-                RESULT_ARRAY , ExampleNeuralNetwork.makeSmallerThanNeuralNetwork(0.8),
+                SMALLER_RESULT_ARRAY , ExampleNeuralNetwork.makeSmallerThanNeuralNetwork(0.8),
                 _recursiveContext);
         ListStream<String> output = nn.getOutputStream();
-        assertEquals( RESULT, output.next());
+        assertEquals( SMALLER, output.next());
         assertEquals( NOTHING, output.next());
+    }
+
+//======================SMALLER GREATER NN======================
+
+    public void testSmallerThanGreaterThanNeuralNetworkStream() {
+        FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
+                SMALLER_GREATER_RESULT_ARRAY, ExampleNeuralNetwork.makeSamllerThanGreaterThanNeuralNetwork(0.8),
+                _recursiveContext);
+        ListStream<String> output = nn.getOutputStream();
+        assertEquals( SMALLER, output.next());
+        assertEquals( GREATER, output.next());
     }
 
 }
