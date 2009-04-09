@@ -54,7 +54,7 @@ public class ExampleNeuralNetworkTest extends TestCase {
 
     public FFNeuralNetwork makeSmallerThanGreaterThanNeuralNetwork(double limit) {
         FFNeuralNetwork nn = new FFNeuralNetwork(1,1);
-        nn.addLayers(ExampleNeuralNetwork.makeSamllerThanGreaterThanNeuralNetwork(limit));
+        nn.addLayers(ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(limit));
         return nn;
     }
 
@@ -112,7 +112,7 @@ public class ExampleNeuralNetworkTest extends TestCase {
 
     public void testSmallerThanGreaterThanNeuralNetworkStream() {
         FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
-                SMALLER_GREATER_RESULT_ARRAY, ExampleNeuralNetwork.makeSamllerThanGreaterThanNeuralNetwork(0.8),
+                SMALLER_GREATER_RESULT_ARRAY, ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(0.8),
                 _recursiveContext);
         ListStream<String> output = nn.getOutputStream();
         assertEquals( SMALLER, output.next());
