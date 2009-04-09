@@ -61,7 +61,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 
     protected boolean _useNeuralNetwork;
 
-    protected FFNeuralNetworkStream _nn;
+    protected FFNeuralNetworkStream _neuralNetworkStream;
 
 	@Override
 	public void init() throws Exception {
@@ -169,15 +169,26 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected void categorizeStreams() {
 		loadParticleStreams.exampleMakeParticleStream();
         if (_useNeuralNetwork) {
-                _nn = new FFNeuralNetworkStream(new String[] {StreamNames.ASPECT},
-                new String[] {"Tall", "Flat"}, ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.),
-                this);
-            _categorizer = _nn.getOutputStream();
+                defineNeuralNetwork();
         }
         else {
             loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
             _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
         }
+	}
+
+	/** Method to override if you want to.<br />  
+	 * 
+	 * The default network is very simple it is marking particles Tall, Flat
+	 * based on their aspect ratio.
+	 */
+	private void defineNeuralNetwork() {
+		String[] objectHypotheses = new String[] {"Tall", "Flat"};
+		String[] inputStreamName = {StreamNames.ASPECT};
+		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
+		_neuralNetworkStream = new FFNeuralNetworkStream(
+				inputStreamName,objectHypotheses, weights,this);
+         _categorizer = _neuralNetworkStream.getOutputStream();
 	}
 	
 	/** Define extra streams.*/
