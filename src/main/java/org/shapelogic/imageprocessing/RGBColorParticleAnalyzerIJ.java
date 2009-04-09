@@ -23,6 +23,7 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
     protected static boolean _countOnlyStatic = false;
     protected static boolean _toMaskStatic = false;
     protected static boolean _displayInternalInfoStatic = false;
+    protected static boolean _useNeuralNetworkStatic = false;
 	
 	
 	@Override
@@ -38,6 +39,7 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         _gd.addCheckbox("CountOnly: ", _countOnlyStatic);
         _gd.addCheckbox("ToMask: ", _toMaskStatic);
         _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
+        _gd.addCheckbox("UseNeuralNetwork: ", _useNeuralNetworkStatic);
         
         _gd.showDialog();
         if (_gd.wasCanceled()) {
@@ -61,6 +63,7 @@ public class RGBColorParticleAnalyzerIJ extends ColorParticleAnalyzerIJ {
         _countOnly = _countOnlyStatic = _gd.getNextBoolean();
         _toMask = _toMaskStatic = _gd.getNextBoolean();
         _displayInternalInfo = _displayInternalInfoStatic = _gd.getNextBoolean();
+        _useNeuralNetwork = _useNeuralNetworkStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 

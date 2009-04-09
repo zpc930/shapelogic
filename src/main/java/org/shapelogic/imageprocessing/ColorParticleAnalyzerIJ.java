@@ -7,12 +7,9 @@ import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
 import ij.process.ImageProcessor;
 
-import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.imageutil.IJGui;
 import org.shapelogic.imageutil.IJImage;
-import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.imageutil.SLImage;
-import org.shapelogic.polygon.Polygon;
 import org.shapelogic.reporting.IJTableBuilder;
 import org.shapelogic.util.Headings;
 
@@ -36,6 +33,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
     protected static boolean _countOnlyStatic = false;
     protected static boolean _toMaskStatic = false;
     protected static boolean _displayInternalInfoStatic = false;
+    protected static boolean _useNeuralNetworkStatic = false;
     
 	@Override
 	public void run(ImageProcessor ip) {
@@ -69,6 +67,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _gd.addCheckbox("CountOnly: ", _countOnlyStatic);
         _gd.addCheckbox("ToMask: ", _toMaskStatic);
         _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
+        _gd.addCheckbox("UseNeuralNetwork: ", _useNeuralNetworkStatic);
         _gd.showDialog();
         if (_gd.wasCanceled()) {
             return DONE;
@@ -80,6 +79,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _countOnly = _countOnlyStatic = _gd.getNextBoolean();
         _toMask = _toMaskStatic = _gd.getNextBoolean();
         _displayInternalInfo = _displayInternalInfoStatic = _gd.getNextBoolean();
+        _useNeuralNetwork = _useNeuralNetworkStatic = _gd.getNextBoolean();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 
@@ -88,27 +88,6 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 	    _rt = new ResultsTable();
         _tableBuilder = new IJTableBuilder(_tableDefinition, _rt);
     }
-
-	protected void defaultColumnDefinitionsOld() {
-	    _rt = new ResultsTable();
-		_rt.setDefaultHeadings();
-		_rt.getFreeColumn(Headings.COLOR);
-		_rt.getFreeColumn(Headings.COLOR_STD_DEV);
-        if (getImage().isRgb()) {
-            _rt.getFreeColumn(Headings.COLOR_RED);
-            _rt.getFreeColumn(Headings.COLOR_GREEN);
-            _rt.getFreeColumn(Headings.COLOR_BLUE);
-        }
-		_rt.getFreeColumn(Headings.PERIMETER);
-		_rt.getFreeColumn(Headings.CIRCULARITY);
-		_rt.getFreeColumn(Headings.ASPECT_RATIO);
-		_rt.getFreeColumn(Headings.GRAY_VALUE);
-    	_rt.getFreeColumn(Headings.BOUNDING_BOX_X_MIN);
-    	_rt.getFreeColumn(Headings.BOUNDING_BOX_Y_MIN);
-    	_rt.getFreeColumn(Headings.BOUNDING_BOX_X_MAX);
-    	_rt.getFreeColumn(Headings.BOUNDING_BOX_Y_MAX);
-    	_rt.getFreeColumn(Headings.HARD_CORNERS);
-	}
 
 	@Override
 	protected boolean populateResultsTableRow(int index) {
@@ -124,61 +103,6 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 		}
 	}
 
-	protected boolean populateResultsTableRowOld(int index) {
-		try {
-    		IColorAndVariance particle = _particleStream.get(index);
-        	if (particle == null)
-        		return false;
-        	_rt.incrementCounter();
-        	_rt.addValue(ResultsTable.AREA, particle.getArea());
-        	_rt.addValue(Headings.COLOR_STD_DEV, particle.getStandardDeviation());
-        	_rt.addValue(Headings.COLOR, particle.getMeanColor());
-            if (getImage().isRgb()) {
-                _rt.addValue(Headings.COLOR_RED, particle.getMeanRed());
-                _rt.addValue(Headings.COLOR_GREEN, particle.getMeanGreen());
-                _rt.addValue(Headings.COLOR_BLUE, particle.getMeanBlue());
-            }
-        	PixelArea pixelArea = particle.getPixelArea();
-        	if (pixelArea != null) {
-            	_rt.addValue(ResultsTable.X_CENTER_OF_MASS, pixelArea.getCenterPoint().getX());
-            	_rt.addValue(ResultsTable.Y_CENTER_OF_MASS, pixelArea.getCenterPoint().getY());
-            	_rt.addValue(Headings.BOUNDING_BOX_X_MIN, _xMinStream.get(index));
-            	_rt.addValue(Headings.BOUNDING_BOX_Y_MIN, _yMinStream.get(index));
-            	_rt.addValue(Headings.BOUNDING_BOX_X_MAX, _xMaxStream.get(index));
-            	_rt.addValue(Headings.BOUNDING_BOX_Y_MAX, _yMaxStream.get(index));
-        	}
-			_rt.addValue(Headings.ASPECT_RATIO, _aspectRatioStream.get(index));
-			Polygon polygon = _polygonStream.get(index); 
-			if (polygon == null) {
-				_rt.addLabel("Label", "Missing polygon.");
-			}
-			else {
-				double perimeter = polygon.getPerimeter();
-				_rt.addValue(Headings.PERIMETER, perimeter);
-				double circularity = perimeter==0?0.0:4.0*Math.PI*particle.getArea()/(perimeter*perimeter);
-				_rt.addValue(Headings.CIRCULARITY, circularity);
-			}
-			if (_categorizer != null) {
-				String category = _categorizer.get(index);
-				if (category != null && !"".equals(category.trim()))
-					_rt.addLabel("Label", category);
-				else
-					_rt.addLabel("Label", "NA");
-			}
-			_rt.addValue(Headings.GRAY_VALUE, _grayValueStream.get(index));
-			_rt.addValue(Headings.HARD_CORNERS, _hardCornerCountStream.get(index));
-			_rt.addValue(Headings.INFLECTION_POINT_COUNT, _inflectionPointCountStream.get(index));
-			_rt.addValue(Headings.CURVE_ARCH_COUNT, _curveArchCountStream.get(index));
-			return true;
-		} catch (RuntimeException e) {
-			String errorMessage = "Error: " + e.getMessage();
-			_rt.addLabel(Headings.CATEGORY, errorMessage);
-			System.out.println(errorMessage);
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
 	@Override
     public void displayInternalInfo() {
 		StringBuffer result = getInternalInfo();
