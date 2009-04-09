@@ -26,7 +26,7 @@ public class ExampleNeuralNetwork {
         };
     }
 
-    public static double[][] makeSamllerThanGreaterThanNeuralNetwork(double limit) {
+    public static double[][] makeSmallerThanGreaterThanNeuralNetwork(double limit) {
         return new double[][] {
             {
                 limit, -limit, //Bias first hidden layer
