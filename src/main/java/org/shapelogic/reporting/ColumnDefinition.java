@@ -1,5 +1,6 @@
 package org.shapelogic.reporting;
 
+import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.streams.NumberedStream;
 
@@ -43,7 +44,7 @@ class ColumnDefinition {
         }
         if (_recursiveContext == null)
             return false;
-        Object obj = _recursiveContext.getContext().get(_streamName);
+        Object obj = QueryCalc.getInstance().get(_streamName, _recursiveContext);
         if (obj != null && obj instanceof NumberedStream) {
             _stream = (NumberedStream) obj;
             _empty = Boolean.FALSE;
