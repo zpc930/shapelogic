@@ -209,6 +209,18 @@ ShapeLogic
   
 * News
 
+** 2009/04/09 ShapeLogic Java 1.5 machine learning released 
+
+  * Start combining {{{machine-learning.html}machine learning}} and declarative
+  programming
+  
+  * Multi-layer feed forward neural network with external learning, can be used
+  with color particle analyzer
+  
+  * Make it easier to select which particle properties to print out
+  
+  []
+
 ** 2009/03/22 ShapeLogic C++ 0.5 released
 
   * Added binary thresholds operations
@@ -287,18 +299,11 @@ ShapeLogic
   
   []
 
-** ShapeLogic 1.5 Java combining machine learning and declarative programming
+** ShapeLogic 1.6 Java improve neural network
 
-  * Start combining {{{machine-learning.html}machine learning}} and declarative
-  programming
+  * Extend Multi-layer feed forward neural network to work with letter matcher
   
-  * Multi-layer feed forward neural network with external learning
-  
-  * Make it easier to select which particle properties to print out, currently a 
-  random selection of somewhat useful properties has been selected.
-  
-  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
-  1 layered neural network for rules for particle analyzer
+  * Add functionality to load neural network from file
   
   []
 

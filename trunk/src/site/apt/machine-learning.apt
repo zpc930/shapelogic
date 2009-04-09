@@ -8,11 +8,51 @@
 
 Machine learning
 
-  Starting in 1.5 ShapeLogic will move towards combining the declarative
+  Started in 1.5 ShapeLogic combines the declarative
   programming framework with machine learning techniques.
   First machine learning technique is a multi layer feed forward neural network
   that is trained externally but run internally.
 
+
+* Neural network in ShapeLogic 1.5
+
+  ShapeLogic 1.5 implement a multi layer feed forward neural network.
+
+  The default network is very simple it is marking particles Tall, Flat based 
+  on their aspect ratio. This is the code for it in 
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzer.java}ColorParticleAnalyzer.java}}.
+
++----------------------------------------------------------------------+
+private void defineNeuralNetwork() {
+	String[] objectHypotheses = new String[] {"Tall", "Flat"};
+	String[] inputStreamName = {StreamNames.ASPECT};
+	double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
+	_neuralNetworkStream = new FFNeuralNetworkStream(
+			inputStreamName,objectHypotheses, weights,this);
+     _categorizer = _neuralNetworkStream.getOutputStream();
+}
++----------------------------------------------------------------------+
+  
+  
+  The method makeSmallerThanGreaterThanNeuralNetwork(double limit) is
+  very simple and returns :
+  
++----------------------------------------------------------------------+
+new double[][] {
+    {
+        1, -1, //Bias first hidden layer
+        -1., 1
+    },
+};
++----------------------------------------------------------------------+
+  
+  I you want to use your own neural network in ShapeLogic 1.5. You have to 
+  subclass ColorParticleAnalyzer and override: defineNeuralNetwork().
+  
+  In ShapeLogic 1.6 will be able to load this in a more convenient way either
+  from a flat file with a simple syntax or from a database and the neural 
+  network will be extended to work with letter matcher.
+  
 * Machine learning techniques
 
   Machine learning is by now a well established field that has been around for
