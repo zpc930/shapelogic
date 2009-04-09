@@ -39,9 +39,10 @@ private void defineNeuralNetwork() {
   
 +----------------------------------------------------------------------+
 new double[][] {
-    {
-        1, -1, //Bias first hidden layer
-        -1., 1
+    {  //Fist layer
+       //First output   Second output
+         1,            -1, //Bias first hidden layer
+        -1.,            1  //First and only input is multiplied with this 
     },
 };
 +----------------------------------------------------------------------+
@@ -52,6 +53,52 @@ new double[][] {
   In ShapeLogic 1.6 will be able to load this in a more convenient way either
   from a flat file with a simple syntax or from a database and the neural 
   network will be extended to work with letter matcher.
+
+  
+* More examples of weights
+
+  Here are a few more examples taken from
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/java/org/shapelogic/machinelearning/FFNeuralNetworkTest.java}FFNeuralNetworkTest.java}}.
+  
++----------------------------------------------------------------------+
+public final static double[][] WEIGHTS_FOR_OR = {
+    { //First and only layer
+        //First output
+        -0.5, //Bias first hidden layer
+
+        1., //First input is multiplied with this
+        1.  //Second input is multiplied with this
+    }
+};
+
+public final static double[][] WEIGHTS_FOR_NOT = {
+    {
+        0.5, //Bias first hidden layer
+
+        -1.
+    }
+};
+
+/** Weights found using the Joone Neural Networks.  */
+public final static double[][] WEIGHTS_FOR_XOR = {
+    { //First layer 2 input 3 output
+        //Output 0        , 1                , 2
+        2.7388686085992333, 5.505721328606976, 4.235258932026585, //bias
+                                                                     
+        -6.598582463774703, -3.678198637390036, -2.9604962169635076, //Input 0
+        -6.59030690954159, -3.7790406961228347, -2.845930422442215   //Input 1
+    },
+    { //Second layer 3 input and 1 output
+        //Output 0
+        -5.27100082610628,  //Bias for hidden second layer
+
+        -10.45330943056037, //Input 0
+        6.582922049952558,  //Input 1
+        4.7139611039662945  //Input 2
+    }
+};
++----------------------------------------------------------------------+
+  
   
 * Machine learning techniques
 
