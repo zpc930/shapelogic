@@ -167,7 +167,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		loadParticleStreams.exampleMakeParticleStream();
         if (_useNeuralNetwork) {
                 _nn = new FFNeuralNetworkStream(new String[] {StreamNames.ASPECT},
-                new String[] {"Flat", "Tall"}, ExampleNeuralNetwork.makeSamllerThanGreaterThanNeuralNetwork(0.8),
+                new String[] {"Tall", "Flat"}, ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.),
                 this);
             _categorizer = _nn.getOutputStream();
         }
