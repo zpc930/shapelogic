@@ -59,10 +59,11 @@ public class TableDefinition {
      * @param calc
      * @param columnName
      */
-    public void addClosureDefinition(NumberedStream baseStream, Calc1 calc, String columnName) {
+    public NumberedStream addClosureDefinition(NumberedStream baseStream, Calc1 calc, String columnName) {
         CalcNumberedStream1 stream = new CalcNumberedStream1(calc, baseStream);
         ColumnDefinition columnDefinition = new ColumnDefinition(stream, columnName);
         _rawColumnDefinition.add(columnDefinition);
+        return stream;
     }
 
     public List<ColumnDefinition> getColumnDefinition() {
