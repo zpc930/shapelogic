@@ -17,6 +17,7 @@ import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.LoadParticleStreams;
 import org.shapelogic.streamlogic.LoadPolygonStreams;
 import org.shapelogic.streamlogic.StreamNames;
+import org.shapelogic.streams.BaseCommonNumberedStream;
 import org.shapelogic.streams.CalcNumberedStream1;
 import org.shapelogic.streams.ListCalcStream1;
 import org.shapelogic.streams.ListStream;
@@ -52,6 +53,8 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected NumberedStream<Double> _yMinStream;
 	protected NumberedStream<Double> _xMaxStream;
 	protected NumberedStream<Double> _yMaxStream;
+    protected NumberedStream<Double> _perimeterStream;
+    protected NumberedStream<Integer> _areaStream;
 
     protected TableDefinition _tableDefinition;
     protected BaseTableBuilder _tableBuilder;
@@ -205,7 +208,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
                 return input.getArea();
             }
         };
-        _tableDefinition.addClosureDefinition(_particleStream,areaClosure, Headings.AREA);
+        _areaStream = _tableDefinition.addClosureDefinition(_particleStream,areaClosure, Headings.AREA);
 
         Calc1<IColorAndVariance, Double> standardDeviantion = new Calc1<IColorAndVariance, Double>() {
             public Double invoke(IColorAndVariance input) {
@@ -276,19 +279,28 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
                 return input.getPerimeter();
             }
         };
-        _tableDefinition.addClosureDefinition(_polygonStream, perimeterCalc, Headings.PERIMETER);
+        _perimeterStream =
+                _tableDefinition.addClosureDefinition(_polygonStream, perimeterCalc, Headings.PERIMETER);
 
-//XXX This used 2 different input streams and does not fit with
-        Calc1<Polygon, Double> circularityCalc = new Calc1<Polygon, Double>() {
-            public Double invoke(Polygon polygon) {
-//                    if (polygon == null) return null;
-//                    double perimeter = polygon.getPerimeter();
-//                    return perimeter==0?0.0:4.0*Math.PI*particle.getArea()/(perimeter*perimeter);//XXX fix me
-                return 1.;
+// This is how you can make a stream that is using 2 other streams as input.
+// Note that the input streams have to be defined at this point.
+        BaseCommonNumberedStream<Double> circularityStream =
+                new BaseCommonNumberedStream<Double>() {
+            final NumberedStream<Double> _perimeterStreamInner = _perimeterStream;
+            final NumberedStream<Integer> _areaStreamInner = _areaStream;
+
+            @Override
+            public Double invokeIndex(int index) {
+                Double perimeter = _perimeterStreamInner.get(index);
+                Integer area = _areaStreamInner.get(index);
+                if (perimeter == null || area == null)
+                    return null;
+                return perimeter==0?0.0:4.0*Math.PI*area/(perimeter*perimeter);
             }
+
         };
 
-        _tableDefinition.addDefinition(_xMinStream, Headings.CIRCULARITY); //XXX fix me
+        _tableDefinition.addDefinition(circularityStream, Headings.CIRCULARITY);
         _tableDefinition.addDefinition(_grayValueStream, Headings.GRAY_VALUE);
         _tableDefinition.addDefinition(_hardCornerCountStream, Headings.HARD_CORNERS);
         _tableDefinition.addDefinition(_inflectionPointCountStream, Headings.INFLECTION_POINT_COUNT);
