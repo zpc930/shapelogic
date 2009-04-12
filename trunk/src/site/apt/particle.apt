@@ -210,14 +210,14 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   []
   
-* Current status of the particle analyzer in ShapeLogic v 1.4 
+* Current status of the particle analyzer in ShapeLogic v 1.5 
   
-  The particle analyzer in ShapeLogic v 1.4 has gone through limited testing 
+  The particle analyzer in ShapeLogic v 1.5 has gone through limited testing 
   and seems to work well. 
   
 * Framework to build more advanced particle counters and particle analyzers
   
-  The particle counter algorithm in ShapeLogic 1.4 is relatively simple. It is 
+  The particle counter algorithm in ShapeLogic 1.5 is relatively simple. It is 
   setup to be expanded to handle more advanced algorithms. Here is the flow.
   
   * If either foreground or background color is set you are done
@@ -241,7 +241,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   []
 
-* Defining rules for categories in ShapeLogic 1.4
+* Defining rules for categories in ShapeLogic 1.5
   
   This is done by sub classing ColorParticleAnalyzer or ColorParticleAnalyzerIJ.
   Override the categorizeStreams() method.
@@ -349,7 +349,7 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 * Plans for ShapeLogic 1.5
   
   * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.4 the user has to make rules themselves.
+  In v 1.5 the user has to make rules themselves.
   
   * Make it easier to select what particle properties to print out, now a 
   random selection of somewhat useful properties have been selected.
@@ -361,9 +361,9 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
   
   []
   
-* Possible future plans for particle analyzer beyond ShapeLogic v 1.4
+* Possible future plans for particle analyzer beyond ShapeLogic v 1.5
   
-  * ShapeLogic 1.5 may come with predefined rules for certain cells
+  * ShapeLogic 1.6 may come with predefined rules for certain cells
   
   * Create rule for recognizing cells using neural networks or machine learning techniques
 

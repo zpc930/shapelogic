@@ -8,11 +8,10 @@
 
 Machine learning
 
-  Started in 1.5 ShapeLogic combines the declarative
-  programming framework with machine learning techniques.
+  Started in 1.5 ShapeLogic combines the declarative programming framework 
+  with machine learning techniques.
   First machine learning technique is a multi layer feed forward neural network
   that is trained externally but run internally.
-
 
 * Neural network in ShapeLogic 1.5
 
@@ -33,7 +32,6 @@ private void defineNeuralNetwork() {
 }
 +----------------------------------------------------------------------+
   
-  
   The method makeSmallerThanGreaterThanNeuralNetwork(double limit) is
   very simple and returns :
   
@@ -47,17 +45,32 @@ new double[][] {
 };
 +----------------------------------------------------------------------+
   
-  I you want to use your own neural network in ShapeLogic 1.5. You have to 
-  subclass ColorParticleAnalyzer and override: defineNeuralNetwork().
-  
-  In ShapeLogic 1.6 will be able to load this in a more convenient way either
-  from a flat file with a simple syntax or from a database and the neural 
-  network will be extended to work with letter matcher.
+* Process for training neural network in ShapeLoigc 1.5
 
-  
-* More examples of weights
+  * Select list of input features, defined as named lazy data streams
 
-  Here are a few more examples taken from
+  * Run one or more images and save result table as a spreadsheet
+
+  * If more than one concatenate the spreadsheets to one spreadsheet
+
+  * Make a list of categories for each particle or polygon
+
+  * Train a multi layer neural network externally using e.g. Joone
+
+  * If successful network can be found use it otherwise chose new list of input features
+  
+  * Subclass ColorParticleAnalyzerIJ or RGBColorParticleAnalyzer and override 
+  defineNeuralNetwork()
+
+  * Starting in ShapeLogic 1.6 you will be able save the weights to flat file or 
+  database, and ShapeLogic will load them
+
+  []
+
+* More examples of weights for feed forward neural network
+
+  Here are a few more examples of the format of the neural network weights 
+  taken from:
   {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/java/org/shapelogic/machinelearning/FFNeuralNetworkTest.java}FFNeuralNetworkTest.java}}.
   
 +----------------------------------------------------------------------+
@@ -81,14 +94,14 @@ public final static double[][] WEIGHTS_FOR_NOT = {
 
 /** Weights found using the Joone Neural Networks.  */
 public final static double[][] WEIGHTS_FOR_XOR = {
-    { //First layer 2 input 3 output
+    { //First layer: 2 input 3 output
         //Output 0        , 1                , 2
         2.7388686085992333, 5.505721328606976, 4.235258932026585, //bias
                                                                      
         -6.598582463774703, -3.678198637390036, -2.9604962169635076, //Input 0
         -6.59030690954159, -3.7790406961228347, -2.845930422442215   //Input 1
     },
-    { //Second layer 3 input and 1 output
+    { //Second layer: 3 input and 1 output
         //Output 0
         -5.27100082610628,  //Bias for hidden second layer
 
@@ -100,20 +113,6 @@ public final static double[][] WEIGHTS_FOR_XOR = {
 +----------------------------------------------------------------------+
   
   
-* Machine learning techniques
-
-  Machine learning is by now a well established field that has been around for
-  decades. Here are a few techniques:
-
-  * Multi layer feed forward neural network (error back propagation)
-
-  * Perceptron network (simple 1 layered feed forward neural network)
-
-  * Learning Decision Trees
-
-  []
-
-
 * Open source implementations of neural networks with language and license
 
   * {{{http://www.jooneworld.com/}Joone}} Java, LGPL
@@ -126,27 +125,8 @@ public final static double[][] WEIGHTS_FOR_XOR = {
 
   {{{http://www.jooneworld.com/}Joone}}
   is a very user friendly system that takes input and produces output in
-  several different formats: Database, Excel and flat file
-
-* Process for training network
-
-  * Select list of input features
-
-  * Run one or more images and save result table as a spreadsheet
-
-  * If more than one concatenate the spreadsheets to one spreadsheet
-
-  * Make a list of matches
-
-  * Train a multi layer neural network externally using e.g. Joone
-
-  * If successful network can be found use it otherwise chose new list of input features
-
-  * Save weights to flat file or database
-
-  []
-
-  When running the network load the weights from flat file or database.
+  several different formats: Database, Excel and flat file. This need to be 
+  put in the format described above. 
 
 * Export the weights from Joone
 
@@ -160,7 +140,7 @@ public final static double[][] WEIGHTS_FOR_XOR = {
   The copy does not work under all versions of Linux, but it works fine under
   Windows.
 
-* Integrating neural networks into declarative programming framework
+* Neural networks implementations in ShapeLogic
 
   The implementation a feed forward neural networks into declarative programming
   framework under ShapeLogic is called:
@@ -182,3 +162,17 @@ public final static double[][] WEIGHTS_FOR_XOR = {
   []
 
   Dependent streams should be defined in the database or flat file
+
+* Machine learning techniques list
+
+  Machine learning is by now a well established field that has been around for
+  decades. Here are a few techniques:
+
+  * Multi layer feed forward neural network (error back propagation)
+
+  * Perceptron network (simple 1 layered feed forward neural network)
+
+  * Learning Decision Trees
+
+  []
+
