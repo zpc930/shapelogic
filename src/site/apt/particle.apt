@@ -21,6 +21,8 @@ Particle Counter and Analyzer
   background color. They will always find a particle image and will not fail,
   unlike the automatic particle analyzer.
   
+  ShapeLogic 1.5 introduced neural network machine learning.
+  
 * Common functionality for particle counter and particle analyzer 
   
   * Take input parameters, e.g. min and max size for particles 
@@ -166,7 +168,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   In order to categorize particles the user should define geometric rules for
   each particle type.
 
-  ShapeLogic v 1.5 will come with predefined rules to {{{cell.html}categorize certain cells}}.
+  ShapeLogic v 1.6 will come with predefined rules to {{{cell.html}categorize certain cells}}.
   
   If you want more detailed information mark check box DisplayInternalInfo.
 
@@ -306,23 +308,34 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   Copy the following text into a file called CustomParticleAnalyzer_.java:
 
 +-----------------------------------+
-import org.shapelogic.calculation.RootMap;
 import org.shapelogic.imageprocessing.ColorParticleAnalyzerIJ;
 import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.machinelearning.ExampleNeuralNetwork;
+import org.shapelogic.machinelearning.FFNeuralNetworkStream;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.XOrListStream;
 
 public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
+	
 	@Override
 	protected void categorizeStreams() {
-	    
-		LoadLetterStreams.rule("Flat", CommonLogicExpressions.ASPECT_RATIO, ">", 2, null);
-		
-		LoadLetterStreams.rule("Non flat", CommonLogicExpressions.ASPECT_RATIO, "<", 2, null);
-
-    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, new String[] {"Flat", "Non flat"});
-    	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
+		loadParticleStreams.exampleMakeParticleStream();
+        if (_useNeuralNetwork) { //Override neural network
+        		String[] objectHypotheses = new String[] {"Dark", "Light"};
+        		String[] inputStreamName = {StreamNames.COLOR_GRAY};
+        		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(128.); 
+        		_neuralNetworkStream = new FFNeuralNetworkStream(
+        				inputStreamName,objectHypotheses, weights,this);
+                 _categorizer = _neuralNetworkStream.getOutputStream();
+        }
+        else { //Override declarative rule 
+        	LoadLetterStreams loadLetterStreams = new LoadLetterStreams(this);
+            loadLetterStreams.rule("Flat", CommonLogicExpressions.ASPECT_RATIO, ">", 2, null);
+            loadLetterStreams.rule("Non flat", CommonLogicExpressions.ASPECT_RATIO, "<", 2, null);
+            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, new String[] {"Flat", "Non flat"});
+            _categorizer = (XOrListStream) getContext().get(StreamNames.PARTICLES);
+        }
 	}
 }
 +-----------------------------------+
