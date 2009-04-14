@@ -13,20 +13,15 @@ Road map
   For more up to date information on ongoing development work look at this blog 
   {{{http://samibadawi.blogspot.com} Declarative Computer Vision}}.
 
-* ShapeLogic v 1.5 with specific cell recognition particle analyzer soon to be released
+* ShapeLogic 1.6 Java improve neural network
 
-  * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.3 the user has to make rules themselves.
+  * Extend Multi-layer feed forward neural network to work with letter matcher
   
-  * Make it easier to select what particle properties to print out, now a 
-  random selection of somewhat useful properties have been selected.
+  * Add functionality to load neural network from file
   
+  * Train a neural network to {{{cell.html}categorize specific cells}}
+    
   * HSV mode for the particle analyzer
-  
-  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
-  1 layered neural network for rules for particle analyzer
-  
-  * Improve the color replacer plugin, to take separate RGB values as input
   
   []
   

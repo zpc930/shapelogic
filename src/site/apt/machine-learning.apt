@@ -45,6 +45,9 @@ new double[][] {
 };
 +----------------------------------------------------------------------+
   
+  Here is a code example that shows of how to {{{particle.html#override}override}} 
+  this with your own neural network.
+  
 * Process for training neural network in ShapeLoigc 1.5
 
   * Select list of input features, defined as named lazy data streams
