@@ -315,14 +315,30 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 	}
 +-----------------------------------+
 
-  This will be re factored so there a protected defineNeuralNetwork() and a 
-  defineRules().
+  Currently you have to override categorizeStreams() to customize neural 
+  network or rule set, this will be re factored so there are 2 protected 
+  methods that can be overridden: 
   
-* How to make your own particle analyzer category rules
+  * defineNeuralNetwork()
+   
+  * defineRules()
   
+  []
+  
+* How to {override} Color Particle Analyzer category rules
+  
+  Here is a very simple example that overrides both the rule set and the neural 
+  network:
+    
+** Overriding rule set example
+
   This example only has 2 categories Flat and Non flat. 
   It is flat if it twice as wide as it is high.
   
+** Overriding neural network example
+  
+  This example only has 2 categories Light and Dark. 
+
   Copy the following text into a file called CustomParticleAnalyzer_.java:
 
 +-----------------------------------+

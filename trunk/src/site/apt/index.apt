@@ -308,6 +308,8 @@ ShapeLogic
   
   * Add functionality to load neural network from file
   
+  * Train a neural network to {{{cell.html}categorize specific cells}}
+  
   []
 
 ** Low hanging fruits for ShapeLogic Java
