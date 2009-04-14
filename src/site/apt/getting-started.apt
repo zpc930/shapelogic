@@ -235,8 +235,9 @@ Development mode
   This makes several build tasks very easy, and is recommended,
   but the code should run fine without Maven.
 
-  Currently the project is set up to work directly with Eclipse 3.3, NetBeans
-  6.0 \- 6.1, Java 1.5, but you can use: IntelliJ, JBuilder, emacs or vi.
+  Currently the project is set up to work directly with Eclipse 3.3 - 3.4, 
+  NetBeans 6.0 - 6.5, Java 1.5, but you can use: IntelliJ, JBuilder, emacs or 
+  vi.
 
   *  Steps to compile and run unit tests
    
