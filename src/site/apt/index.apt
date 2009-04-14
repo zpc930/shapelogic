@@ -214,13 +214,18 @@ ShapeLogic
   * Start combining {{{machine-learning.html}machine learning}} and declarative
   programming
   
-  * Multi-layer feed forward neural network with external learning, can be used
-  with color particle analyzer
-  
-  * Make it easier to select which particle properties to print out
-  
+  * The categorize in Color Particle Analyzer can now either use rules or a 
+  multi-layer feed forward neural network, and it easier to select which 
+  particle properties to print out
+    
   []
 
+  The neural network need to be trained externally and you need override a 
+  class to import the weights. This override is simple but does require some 
+  knowledge of Java.  
+
+  Documentation will soon be updated to reflect ShapeLogic 1.5.
+  
 ** 2009/03/22 ShapeLogic C++ 0.5 released
 
   * Added binary thresholds operations
@@ -263,8 +268,6 @@ ShapeLogic
   
   []
 
-  Documentation will soon be updated to reflect ShapeLogic 1.4.
-  
 ** 2008/11/14 ShapeLogic C++ 0.4 released
 
   * Images are now internally stored in OpenCV's IplImage format

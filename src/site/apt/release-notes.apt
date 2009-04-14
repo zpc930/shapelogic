@@ -7,6 +7,27 @@
 
 Release notes for releases with development status beta
 
+* 2009/04/09 ShapeLogic Java 1.5 with machine learning released 
+
+  * Start combining {{{machine-learning.html}machine learning}} and declarative
+  programming
+  
+  * The categorize in Color Particle Analyzer can now either use rules or a 
+  multi-layer feed forward neural network, and it easier to select which 
+  particle properties to print out
+    
+  * Built for JDK 1.5 / Java 5 so it should work on the Mac without updates
+  
+  * 35000 lines of Java code
+
+  * 550 unit test that all works on local machine
+
+  []
+
+  The neural network need to be trained externally and you need override a 
+  class to import the weights. This override is simple but does require some 
+  knowledge of Java.  
+
 * 2008/11/28 ShapeLogic Java 1.4 released 
 
   * Added mask option to {{{particle.html#mask} particle analyzer}}
