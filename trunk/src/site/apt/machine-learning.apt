@@ -45,8 +45,8 @@ new double[][] {
 };
 +----------------------------------------------------------------------+
   
-  Here is a code example that shows of how to {{{particle.html#override}override}} 
-  this with your own neural network.
+  Link to {{{particle.html#override}override code example}} 
+  that shows you how to override this with your own neural network.
   
 * Process for training neural network in ShapeLoigc 1.5
 

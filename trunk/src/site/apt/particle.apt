@@ -327,8 +327,8 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
 * How to {override} Color Particle Analyzer category rules
   
-  Here is a very simple example that overrides both the rule set and the neural 
-  network:
+  Here is a very simple example that overrides both the declarative rule set 
+  and the neural network:
     
 ** Overriding rule set example
 
@@ -338,6 +338,8 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 ** Overriding neural network example
   
   This example only has 2 categories Light and Dark. 
+  
+  Link to {{{machine-learning.html}neural network and machine learning}}.
 
   Copy the following text into a file called CustomParticleAnalyzer_.java:
 
@@ -352,25 +354,27 @@ import org.shapelogic.streams.XOrListStream;
 
 public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 	
-	@Override
-	protected void categorizeStreams() {
-		loadParticleStreams.exampleMakeParticleStream();
-        if (_useNeuralNetwork) { //Override neural network
-        		String[] objectHypotheses = new String[] {"Dark", "Light"};
-        		String[] inputStreamName = {StreamNames.COLOR_GRAY};
-        		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(128.); 
-        		_neuralNetworkStream = new FFNeuralNetworkStream(
-        				inputStreamName,objectHypotheses, weights,this);
-                 _categorizer = _neuralNetworkStream.getOutputStream();
+    @Override
+    protected void categorizeStreams() {
+        loadParticleStreams.exampleMakeParticleStream();
+        if (_useNeuralNetwork) {  
+            //----------Override neural network----------
+            String[] objectHypotheses = new String[] {"Dark", "Light"};
+            String[] inputStreamName = {StreamNames.COLOR_GRAY};
+            double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(128.); 
+            _neuralNetworkStream = new FFNeuralNetworkStream(
+                inputStreamName,objectHypotheses, weights,this);
+             _categorizer = _neuralNetworkStream.getOutputStream();
         }
-        else { //Override declarative rule 
-        	LoadLetterStreams loadLetterStreams = new LoadLetterStreams(this);
+        else { //
+            //----------Override declarative rule set----------
+            LoadLetterStreams loadLetterStreams = new LoadLetterStreams(this);
             loadLetterStreams.rule("Flat", CommonLogicExpressions.ASPECT_RATIO, ">", 2, null);
             loadLetterStreams.rule("Non flat", CommonLogicExpressions.ASPECT_RATIO, "<", 2, null);
             loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, new String[] {"Flat", "Non flat"});
             _categorizer = (XOrListStream) getContext().get(StreamNames.PARTICLES);
         }
-	}
+    }
 }
 +-----------------------------------+
   
