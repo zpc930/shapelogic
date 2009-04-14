@@ -267,12 +267,28 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   Note that a particle that satisfy more categories will not belong to any of them.
   
+  ** Default rules and neural network for categories in ShapeLogic 1.5
+  
 +-----------------------------------+
 	@Override
 	protected void categorizeStreams() {
-		LoadParticleStreams.exampleMakeParticleStream();
-    	LoadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
-    	_categorizer = (XOrListStream) RootMap.get(StreamNames.PARTICLES);
+		loadParticleStreams.exampleMakeParticleStream();
+        if (_useNeuralNetwork) {
+                defineNeuralNetwork();
+        }
+        else {
+            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+            _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
+        }
+	}
+
+	private void defineNeuralNetwork() {
+		String[] objectHypotheses = new String[] {"Tall", "Flat"};
+		String[] inputStreamName = {StreamNames.ASPECT};
+		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
+		_neuralNetworkStream = new FFNeuralNetworkStream(
+				inputStreamName,objectHypotheses, weights,this);
+         _categorizer = _neuralNetworkStream.getOutputStream();
 	}
 	
 	
@@ -299,7 +315,9 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 	}
 +-----------------------------------+
 
- 
+  This will be re factored so there a protected defineNeuralNetwork() and a 
+  defineRules().
+  
 * How to make your own particle analyzer category rules
   
   This example only has 2 categories Flat and Non flat. 
