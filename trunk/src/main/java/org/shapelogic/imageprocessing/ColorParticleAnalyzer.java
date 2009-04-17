@@ -167,22 +167,31 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	 */
 	@Override
 	protected void categorizeStreams() {
-		loadParticleStreams.exampleMakeParticleStream();
         if (_useNeuralNetwork) {
-                defineNeuralNetwork();
+        	defineNeuralNetwork();
         }
         else {
-            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
-            _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
+        	defineRules();
         }
 	}
-
-	/** Method to override if you want to.<br />  
+	
+	
+	/** Method to override if you want to define your own rule set.<br />  
 	 * 
 	 * The default network is very simple it is marking particles Tall, Flat
 	 * based on their aspect ratio.
 	 */
-	private void defineNeuralNetwork() {
+	protected void defineRules() {		
+		loadParticleStreams.exampleMakeParticleStream();
+        loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+        _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
+	}
+
+	/** Method to override if you want to define your own neural network.<br />  
+	 * 
+	 * The default network is very simple it is marking particles Dark or Light.
+	 */
+	protected void defineNeuralNetwork() {
 		String[] objectHypotheses = new String[] {"Tall", "Flat"};
 		String[] inputStreamName = {StreamNames.ASPECT};
 		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
