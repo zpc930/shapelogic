@@ -1,0 +1,43 @@
+            ------
+            Code guidelines
+            ------
+            Sami Badawi
+            ------
+            2007/12/06
+
+Code guidelines for ShapeLogic
+  
+  There is nothing revolutionary about these code guidelines,
+  they are common sense and follow current best practices, but are
+  meant to establish a culture or style for ShapeLogic.
+  
+* KISS, Keep it simple stupid
+  
+  This is the most important principle. When trying to solve a complex problem,
+  it is important to try to keep code as simple as possible.
+  
+  For a good description see {{{http://www.python.org/dev/culture.html} Python culture}}.
+  
+* TDD, Test driven development
+  
+  It is best to start by writing the test class before writing the class. 
+  
+  When a bug is found write a new test case for it. 
+  Let the test fail, then make corrections to the code.
+  
+  All classes should have a test class assigned.
+  
+  Do not check code into SVN that does not pass all unit tests.
+  
+* Use Javadoc
+  
+  Create Javadoc for all classes and packages,   
+  but do not make it for obvious functions or parameters.
+  
+* Use loose coupling
+  
+  Be very selective in the use of extra libraries, and
+  try to avoid cyclic package dependencies.
+  
+  Be very cautious about deep object hierarchies, they introduce tight 
+  coupling, and break encapsulation.

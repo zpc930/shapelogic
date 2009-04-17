@@ -1,0 +1,181 @@
+            ------
+            Machine learning
+            ------
+            Sami Badawi
+            ------
+            2008/12/09
+            ------
+
+Machine learning
+
+  Started in 1.5 ShapeLogic combines the declarative programming framework 
+  with machine learning techniques.
+  First machine learning technique is a multi layer feed forward neural network
+  that is trained externally but run internally.
+
+* Neural network in ShapeLogic 1.5
+
+  ShapeLogic 1.5 implement a multi layer feed forward neural network.
+
+  The default network is very simple it is marking particles Tall, Flat based 
+  on their aspect ratio. This is the code for it in 
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzer.java}ColorParticleAnalyzer.java}}.
+
++----------------------------------------------------------------------+
+private void defineNeuralNetwork() {
+	String[] objectHypotheses = new String[] {"Tall", "Flat"};
+	String[] inputStreamName = {StreamNames.ASPECT};
+	double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
+	_neuralNetworkStream = new FFNeuralNetworkStream(
+			inputStreamName,objectHypotheses, weights,this);
+     _categorizer = _neuralNetworkStream.getOutputStream();
+}
++----------------------------------------------------------------------+
+  
+  The method makeSmallerThanGreaterThanNeuralNetwork(double limit) is
+  very simple and returns :
+  
++----------------------------------------------------------------------+
+new double[][] {
+    {  //Fist layer
+       //First output   Second output
+         1,            -1, //Bias first hidden layer
+        -1.,            1  //First and only input is multiplied with this 
+    },
+};
++----------------------------------------------------------------------+
+  
+  Link to {{{particle.html#override}override code example}} 
+  that shows you how to override this with your own neural network.
+  
+* Process for training neural network in ShapeLoigc 1.5
+
+  * Select list of input features, defined as named lazy data streams
+
+  * Run one or more images and save result table as a spreadsheet
+
+  * If more than one concatenate the spreadsheets to one spreadsheet
+
+  * Make a list of categories for each particle or polygon
+
+  * Train a multi layer neural network externally using e.g. Joone
+
+  * If successful network can be found use it otherwise chose new list of input features
+  
+  * Subclass ColorParticleAnalyzerIJ or RGBColorParticleAnalyzer and override 
+  defineNeuralNetwork()
+
+  * Starting in ShapeLogic 1.6 you will be able save the weights to flat file or 
+  database, and ShapeLogic will load them
+
+  []
+
+* More examples of weights for feed forward neural network
+
+  Here are a few more examples of the format of the neural network weights 
+  taken from:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/java/org/shapelogic/machinelearning/FFNeuralNetworkTest.java}FFNeuralNetworkTest.java}}.
+  
++----------------------------------------------------------------------+
+public final static double[][] WEIGHTS_FOR_OR = {
+    { //First and only layer
+        //First output
+        -0.5, //Bias first hidden layer
+
+        1., //First input is multiplied with this
+        1.  //Second input is multiplied with this
+    }
+};
+
+public final static double[][] WEIGHTS_FOR_NOT = {
+    {
+        0.5, //Bias first hidden layer
+
+        -1.
+    }
+};
+
+/** Weights found using the Joone Neural Networks.  */
+public final static double[][] WEIGHTS_FOR_XOR = {
+    { //First layer: 2 input 3 output
+        //Output 0        , 1                , 2
+        2.7388686085992333, 5.505721328606976, 4.235258932026585, //bias
+                                                                     
+        -6.598582463774703, -3.678198637390036, -2.9604962169635076, //Input 0
+        -6.59030690954159, -3.7790406961228347, -2.845930422442215   //Input 1
+    },
+    { //Second layer: 3 input and 1 output
+        //Output 0
+        -5.27100082610628,  //Bias for hidden second layer
+
+        -10.45330943056037, //Input 0
+        6.582922049952558,  //Input 1
+        4.7139611039662945  //Input 2
+    }
+};
++----------------------------------------------------------------------+
+  
+  
+* Open source implementations of neural networks with language and license
+
+  * {{{http://www.jooneworld.com/}Joone}} Java, LGPL
+
+  * {{{http://www.simbrain.net/}simbrain}} Java, GPL
+
+  * {{{http://www.geocities.com/adotsaha/NNinExcel.html}NNinExcel}} Excel, ?
+
+  []
+
+  {{{http://www.jooneworld.com/}Joone}}
+  is a very user friendly system that takes input and produces output in
+  several different formats: Database, Excel and flat file. This need to be 
+  put in the format described above. 
+
+* Export the weights from Joone
+
+  Joone seperate the weights from the the bias. While ShapeLogic
+  used the bias as the first weights.
+
+  You can export the weights from Joone, by going in an inspecting both the
+  synapses and the layers. Do a copy and pase them to a spreadsheet or a text
+  file.
+
+  The copy does not work under all versions of Linux, but it works fine under
+  Windows.
+
+* Neural networks implementations in ShapeLogic
+
+  The implementation a feed forward neural networks into declarative programming
+  framework under ShapeLogic is called:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/FFNeuralNetworkStream.java}FFNeuralNetworkStream}}
+
+  It consists of 3 linked streams, the 2 last streams are created by attaching a
+  Calc1 to the stream before it:
+
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/streams/ArrayOutputListStream.java}ArrayOutputListStream}}
+  takes a list of names of features a produces a ListStream of double array
+
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/FFNeuralNetwork.java}FFNeuralNetwork}}
+  is a Calc1 from double array to double array representing a fully connected
+  feed forward neural network
+
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/machinelearning/ConfidenceArraySelector.java}ConfidenceArraySelector}}
+  is a Calc1 this turns the double array into a String result
+
+  []
+
+  Dependent streams should be defined in the database or flat file
+
+* Machine learning techniques list
+
+  Machine learning is by now a well established field that has been around for
+  decades. Here are a few techniques:
+
+  * Multi layer feed forward neural network (error back propagation)
+
+  * Perceptron network (simple 1 layered feed forward neural network)
+
+  * Learning Decision Trees
+
+  []
+

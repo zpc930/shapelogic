@@ -1,0 +1,112 @@
+            ------
+            C++ Setup
+            ------
+            Sami Badawi
+            ------
+            2008/09/03
+            ------
+
+C++ Setup
+  
+  ShapeLogic is made to have as few dependencies as possible. 
+  Since it will use template code from Boost it will require a relatively modern C++
+  compiler. 
+  
+  When building ShapeLogic try to compile the libraries and ShapeLogic with 
+  the same version of the same compiler, since linker format can be different
+  between different compiler and version of a compiler.
+  
+* Microsoft Visual C++
+  
+  Microsoft Visual C++ is the compiler that has been used for development of
+  ShapeLogic C++ under Windows.
+  
+  {{{http://www.microsoft.com/express/vc/}MS VC++ Express Edition}} is a free
+  version.
+  
+** Compile the libraries
+  
+  FLTK comes with a MSVC project file. The VC 2005 project file compiled with 
+  MS VC++ Express Edition 2008.
+  
+** Compile ShapeLogic C++
+
+  Bjam will automatically set the toolset to msvc, so it is not necessary to
+  have a user-config.jam file in the home directory.  
+  
+* Setup of GCC under windows
+  
+  There are 2 ways to run GCC under Windows CygWin and MinGW.
+  
+* Cygwin
+  
+  Is a Linux emulation under windows, translating system calls. 
+  All program made Cygwin with will have to be GPL.
+  
+* MinGW
+  
+  MinGW is a collection of programs, libraries and utilities.
+  Compiles directly to Windows and will be a better solution for most people.
+  
+  {{{http://nuwen.net/mingw.html}Nuwen's MinGW distribution}} contains the 
+  newest version GCC and other libraries: GCC 4.2.1 and Boost 1.36. 
+  This is an easy way to get started.
+  
+** Compiling FLTK under MinGW 
+  
+  FLTK comes with a Makefile and should compile using MinGW.
+  In order to get the Makefile to work you also need to install MSYS, which
+  is a minimalistic shell.
+  This is not trivial to get to work.
+  
+* OpenCV
+  
+  Here are the general 
+  {{{http://opencvlibrary.sourceforge.net/InstallGuide_Linux} installation instruction.}}
+
+  Under Ubuntu you can install it using Synaptic.
+
+* Boost and GIL
+  
+  Currently all the libraries that are used are based only on include files.
+  
+* Boost Build / Bjam
+  
+  {{{http://www.boost.org/doc/tools/build/doc/html/index.html}Boost Build}}
+  is a cross platform Make replacement.
+  
+  Using Boost Build / Bjam is very simple, at command line just type 
+
++---------------------------+  
+  bjam
+  
+  bjam <target name>
++---------------------------+  
+  
+  This will both build executables, libraries, run unit test, create distributions. 
+  
+  The Jamfile and Jamroot are documented and it should be easy to modify them
+  to fit your needs.
+  
+  As of ShapeLogic C++ 0.4 the same Jamfile and Jamroot is be used for Windows 
+  and other operating systems. If you are trying to build an earlier version 
+  there are a Jamfile.msvc and a Jamroot.msvc.
+  In order to build rename them to Jamfile and Jamroot.  
+  
+** Directory structure of libraries
+  
+  Currently it is assumed that some of the libraries are located relative to 
+  the shapelogic-cpp directory in a directory called src.
+  The relative path from shapelogic-cpp to boost would then be:
+   
++---------------------------+  
+../src/boost_1_36_0/
++---------------------------+  
+  
+  This may change.
+  
+* IDE under Windows
+  
+  Eclipse works well under UNIX, but for Windows development using Microsoft 
+  Visual C++, might be better.
+   

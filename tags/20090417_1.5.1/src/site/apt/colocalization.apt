@@ -1,0 +1,56 @@
+            ------
+            Colocalization
+            ------
+            Sami Badawi
+            ------
+            2008/10/30
+            ------
+
+Colocalization
+  
+  Use of ShapeLogic on colocalization images. 
+  
+* Analyzing particles present in more than one channel 
+  
+  Choose "RGB Color Particle Analyzer" from the ShapeLogic menu.
+  
+[images/particles/shapelogicmenu.png] 
+  
+  This will bring up this dialog:
+  
+[images/particles/rgb_particleInputDialog.png]
+  
+  The default setting is a good starting point but you might have to change
+  Max distance setting.
+  
+** Technical explanation
+
+  The way it works is that you set the background color 0, 0, 0 and add the 
+  distance of all the R, G and B channels together and divide them by 3.
+
+  If you only have one channel the max distance you can get is 255/3=85. 
+  So if you set the Max distance to 86 that should ensure you that you need at 
+  least 2 channels.
+
+** Max distance settings
+
+  You might have to experiment a little with Max distance settings if you 
+  have noise in your image or a weak signal.
+  
+  A good way to see how the algorithm works is to select a limited ROI rectangle 
+  containing only one or 2 particles that you are interested in, the the output
+  is a little less overwhelming.
+  
+** Finding RGB channels in a particle before ShapeLogic 1.4 
+  
+  The output was not very user friendly, it is returning an average color as 1 
+  number. If you want to get the average R G and B values you will have to 
+  break that number up yourself. 
+  
+  This have been fixed in ShapeLogic 1.4 where there is be an average value for
+  R G and B. 
+  
+  If you need to know what channels are present export the result to Excel and 
+  write simple Excel macro breaks the R G and B values out.
+  
+  

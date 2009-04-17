@@ -1,0 +1,41 @@
+<html>
+<body>
+<h2>Goal driven logic</h2>
+
+This are tasks with subtasks, they can create an AI choice tree if there are 
+choices that cannot be made.<br />
+There are simple rules at the lowest level e.g.<br />
+polygon.holeCount = 1<br />
+<br />
+At higher level these are grouped into clusters with AndTasks.<br />
+To make choices use an XORTask.<br />
+It is currently not super well integrated with the stream package that was 
+introduced in ShapeLogic 0.9.<br />
+This should be addressed in ShapeLogic 1.0.
+
+<h2>Dependency</h2>
+<p>
+There is no dependency of any image processing code
+<ul>
+<li>This package can depend on util, calculation, scripting.</li> 
+<li>There is no dependency of any image processing</li> 
+<li>Depends on JEXL, Antlr and other external libraries</li> 
+</ul>
+</p>
+
+<h2>Declarative programming</h2>
+<p>
+Declarative programming in ShapeLogic is build on the following: 
+<br />
+<ul>
+<li>Rule database that can access Java object using Scripting languages or JEXL</li> 
+<li>Streams / lazy lists</li> 
+<li>Lazy calculations</li> 
+<li>Goal driven tasks</li> 
+<li>Maybe later IoC</li> 
+</ul>
+
+</p>
+
+</body>
+</html>
