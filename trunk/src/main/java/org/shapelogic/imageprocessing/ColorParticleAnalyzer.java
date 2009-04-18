@@ -61,8 +61,6 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 
     protected boolean _useNeuralNetwork;
 
-    protected FFNeuralNetworkStream _neuralNetworkStream;
-
 	@Override
 	public void init() throws Exception {
 		super.init();
@@ -195,9 +193,9 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		String[] objectHypotheses = new String[] {"Tall", "Flat"};
 		String[] inputStreamName = {StreamNames.ASPECT};
 		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
-		_neuralNetworkStream = new FFNeuralNetworkStream(
+		FFNeuralNetworkStream neuralNetworkStream = new FFNeuralNetworkStream(
 				inputStreamName,objectHypotheses, weights,this);
-         _categorizer = _neuralNetworkStream.getOutputStream();
+         _categorizer = neuralNetworkStream.getOutputStream();
 	}
 	
 	/** Define extra streams.*/
