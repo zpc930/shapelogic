@@ -5,9 +5,8 @@ import ij.process.ImageProcessor;
 
 import org.shapelogic.imageprocessing.StreamVectorizer;
 import org.shapelogic.imageutil.IJImage;
-import org.shapelogic.streamlogic.LoadLetterStreams;
-import org.shapelogic.streamlogic.LoadPolygonStreams;
 import org.shapelogic.streamlogic.StreamNames;
+import org.shapelogic.streams.StreamFactory;
 
 /** Class running StreamVectorizer and matching polygons to digits.<br />
  * <p>
@@ -21,10 +20,11 @@ import org.shapelogic.streamlogic.StreamNames;
 public class DigitStreamVectorizer_ extends StreamVectorizer implements PlugInFilter {
 	
 	@Override
-	public void matchSetup() {
+	protected void defineRules() {		
 		loadDigitStream();
+		_categorizer = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
 	}
-	
+		
 	public void loadDigitStream() {
 		loadLetterStreams.loadPolygonStreams.loadStreamsRequiredForLetterMatch();
 		makeDigitStream();
@@ -142,6 +142,7 @@ public class DigitStreamVectorizer_ extends StreamVectorizer implements PlugInFi
 
 	@Override
 	public int setup(String arg, ImagePlus imp) {
+		_useNeuralNetwork = false;
 		return setup(arg, new IJImage(imp));
 	}
 }
