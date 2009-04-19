@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.shapelogic.calculation.RecursiveContext;
+import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.machinelearning.ExampleNeuralNetwork;
+import org.shapelogic.machinelearning.FFNeuralNetworkStream;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
@@ -19,11 +22,15 @@ import org.shapelogic.streams.StreamFactory;
 public class StreamVectorizer extends BaseMaxDistanceVectorizer implements RecursiveContext {
 	protected Map _context = new HashMap();
 	protected LoadLetterStreams loadLetterStreams;
-
+	protected NumberedStream<String> _categorizer;
+	
+    protected boolean _useNeuralNetwork;
+    
 	/** This does really not belong in a vectorizer. */
 	@Override
 	protected void matchLines() {
-		NumberedStream<String> letters = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
+		if (_categorizer == null) //To be backwards compatible
+			_categorizer = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
 		String message = "";
         StringBuffer internalInfo = new StringBuffer();
         if (_displayInternalInfo) {
@@ -31,7 +38,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
         }
 		for (int i = 0; hasNext(); i++)
 		{
-			String currentMatch = letters.next();
+			String currentMatch = _categorizer.next();
 			if (i != 0)
 				message += "; ";
 			message += currentMatch;
@@ -52,6 +59,30 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
         }
 	}
 	
+	/** Method to override if you want to define your own rule set.<br />  
+	 * 
+	 * The default network is very simple it is marking particles Tall, Flat
+	 * based on their aspect ratio.
+	 */
+	protected void defineRules() {		
+		loadLetterStreams.loadLetterStream(null);
+		_categorizer = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
+	}
+
+	/** Method to override if you want to define your own neural network.<br />  
+	 * 
+	 * The default network is very simple it is marking particles Dark or Light.
+	 */
+	protected void defineNeuralNetwork() {
+		loadLetterStreams.loadLetterStream(null);
+		String[] objectHypotheses = new String[] {"No holes", "Holes"};
+		String[] inputStreamName = {CommonLogicExpressions.HOLE_COUNT};
+		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(0.9); 
+		FFNeuralNetworkStream _neuralNetworkStream = new FFNeuralNetworkStream(
+				inputStreamName,objectHypotheses, weights,this);
+         _categorizer = _neuralNetworkStream.getOutputStream();
+	}
+	
 	/** Use this to setup all the needed streams.
 	 */
 	@Override
@@ -69,7 +100,12 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	/** In order to match a different alphabet override this. 
 	 */
 	public void matchSetup() {
-		loadLetterStreams.loadLetterStream(null);
+        if (_useNeuralNetwork) {
+        	defineNeuralNetwork();
+        }
+        else {
+        	defineRules();
+        }
 	}
 	
 	@Override
