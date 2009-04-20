@@ -29,7 +29,7 @@ public class FFNeuralNetworkWeightsParser {
 
     public FFNeuralNetworkWeights parse(Reader input) throws ParseException {
     	_scanner = new Scanner(input);
-    	FFNeuralNetworkWeights result = new FFNeuralNetworkWeights();
+    	FFNeuralNetworkWeights nnWeights = new FFNeuralNetworkWeights();
     	_scanner.next(BLOCK_START);
     	_scanner.next(FEATURES);
     	_scanner.nextLine();
@@ -40,11 +40,23 @@ public class FFNeuralNetworkWeightsParser {
     		feature = _scanner.next();
     		if (feature == null || BLOCK_START.equalsIgnoreCase(feature))
     			break;
-    		result.getFeatureList().add(feature);
+    		nnWeights.getFeatureList().add(feature);
     	}
     	while (true);
     	
-    	return result;
+    	String result;
+    	_scanner.next(RESULTS);
+    	do {
+    		if (!_scanner.hasNext())
+    			break;
+    		result = _scanner.next();
+    		if (result == null || BLOCK_START.equalsIgnoreCase(result))
+    			break;
+    		nnWeights.getOhList().add(result);
+    	}
+    	while (true);
+    	
+    	return nnWeights;
     }
     
 }

@@ -16,12 +16,16 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 	public void test() {
 		String inputString = "========== FEATURES\n" +
 				"input1\n" +
-				"input2 input3\n";
+				"input2 input3\n" +
+				"========== RESULTS\n" +
+				"output1\n" +
+				"output2 output3\n";
 		Reader input = new StringReader(inputString); 
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 		FFNeuralNetworkWeights result = parser.parse(input);
 		assertNotNull(result);
 		assertEquals(3, result.getFeatureList().size());
+		assertEquals(3, result.getOhList().size());
 	}
 
 }
