@@ -44,6 +44,15 @@ public class FFNeuralNetworkStream {
     ListCalcStream1<double[], String> _outputStream;
     RecursiveContext _recursiveContext;
 
+    /** FFNeuralNetworkStream is not a normal stream, 3 streams are created here.<br /> 
+     * 
+     * @param featureList Names of feature input streams 
+     * @param ohList Names of output
+     * @param weights Weights of neural network 
+     * @param streamNames if this is given then add 3 new streams as named streams to the context
+     * @param recursiveContext RecursiveContext to look for streams 
+     * @param maxLast Set fixed length of stream
+     */
     public FFNeuralNetworkStream(List<String> featureList, List<String> ohList,
             double[][] weights, String[] streamNames,
             RecursiveContext recursiveContext, int maxLast
