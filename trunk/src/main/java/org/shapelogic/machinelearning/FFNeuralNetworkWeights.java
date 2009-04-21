@@ -11,7 +11,7 @@ import java.util.List;
 public class FFNeuralNetworkWeights {
 	protected List<String> _featureList = new ArrayList<String>(); 
 	protected List<String> _ohList = new ArrayList<String>();
-	protected double[][] _weights;
+	protected double[][] _weights = new double[0][0];
 	
 	public List<String> getFeatureList() {
 		return _featureList;
