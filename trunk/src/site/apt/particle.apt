@@ -399,7 +399,30 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 
   []
 
-* Plans for ShapeLogic 1.5
+* Loading neural network from text file in ShapeLogic 1.6
+  
+  Starting in ShapeLogic 1.6 you can load the neural network from external text
+  files.  
+  
+  ShapeLogic has an example file:
+  shapelogic/src/test/resources/data/neuralnetwork/default_particle_nn.txt
+  with this content:
+  
++-----------------------------------+
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== WEIGHTS
+1. -1. 
+-1. 1.
++-----------------------------------+
+  
+  It will produce the same effect as the default color particle analyzer 
+  neural network. Except for the categories not being capitalized.
+  
+* Plans for ShapeLogic 1.6
   
   * Make custom rules to recognize specific {{{cell.html}cells}}. 
   In v 1.5 the user has to make rules themselves.
