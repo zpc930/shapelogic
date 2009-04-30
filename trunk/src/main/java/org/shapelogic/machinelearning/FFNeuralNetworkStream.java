@@ -137,6 +137,14 @@ public class FFNeuralNetworkStream {
                 null, recursiveContext, Constants.LAST_UNKNOWN );
     }
 
+    public FFNeuralNetworkStream(FFNeuralNetworkWeights fFNeuralNetworkWeights, 
+    		RecursiveContext recursiveContext)
+    {
+        this(fFNeuralNetworkWeights.getFeatureList(), 
+        		fFNeuralNetworkWeights.getOhList(), 
+        		fFNeuralNetworkWeights.getWeights(), null, recursiveContext);
+    }
+    
     public ListStream<double[]> getFeatureStream() {
         return _featureStream;
     }

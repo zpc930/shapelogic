@@ -1,5 +1,8 @@
 package org.shapelogic.machinelearning;
 
+import java.io.Reader;
+import java.io.StringReader;
+
 /** ExampleNeuralNetwork for use in default neural network.<br />
  *
  * @author Sami Badawi
@@ -35,5 +38,16 @@ public class ExampleNeuralNetwork {
             },
         };
     }
+    
+	public final static String DEFAULT_NETWORK = 
+		"========== FEATURES\n" +
+		"aspect\n" +
+		"========== RESULTS\n" +
+		"Tall\n" +
+		"Flat\n" +
+		"========== WEIGHTS\n" +
+		"1. -1. \n" +
+		"-1. 1. \n";
+
 
 }
