@@ -1,5 +1,6 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.shapelogic.calculation.Calc1;
@@ -10,6 +11,8 @@ import org.shapelogic.imageutil.PixelArea;
 import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.machinelearning.ExampleNeuralNetwork;
 import org.shapelogic.machinelearning.FFNeuralNetworkStream;
+import org.shapelogic.machinelearning.FFNeuralNetworkWeights;
+import org.shapelogic.machinelearning.FFNeuralNetworkWeightsParser;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.reporting.BaseTableBuilder;
 import org.shapelogic.reporting.TableDefinition;
@@ -60,6 +63,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
     protected BaseTableBuilder _tableBuilder;
 
     protected boolean _useNeuralNetwork;
+    protected String _neuralNetworkFile;
 
 	@Override
 	public void init() throws Exception {
@@ -190,11 +194,27 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	 * The default network is very simple it is marking particles Dark or Light.
 	 */
 	protected void defineNeuralNetwork() {
-		String[] objectHypotheses = new String[] {"Tall", "Flat"};
-		String[] inputStreamName = {StreamNames.ASPECT};
-		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
+		FFNeuralNetworkWeights fFNeuralNetworkWeights = null;
+		if (_neuralNetworkFile != null && 0 < _neuralNetworkFile.trim().length() ) {
+			FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+			try {
+				fFNeuralNetworkWeights = parser.parse(_neuralNetworkFile);
+			} catch (Exception e) {
+				//Ignore it for now and use default instead.
+				fFNeuralNetworkWeights = null;
+			}
+		}
+		if (fFNeuralNetworkWeights == null) {
+			String[] objectHypotheses = new String[] {"Tall", "Flat"};
+			String[] inputStreamName = {StreamNames.ASPECT};
+			double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.);
+			fFNeuralNetworkWeights = new FFNeuralNetworkWeights(
+					Arrays.asList(inputStreamName),
+					Arrays.asList(objectHypotheses), 
+					weights);
+		}
 		FFNeuralNetworkStream neuralNetworkStream = new FFNeuralNetworkStream(
-				inputStreamName,objectHypotheses, weights,this);
+				fFNeuralNetworkWeights,this);
          _categorizer = neuralNetworkStream.getOutputStream();
 	}
 	

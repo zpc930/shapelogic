@@ -1,5 +1,8 @@
 package org.shapelogic.machinelearning;
 
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +41,23 @@ public class FFNeuralNetworkWeightsParser {
     protected Scanner _scanner;
     protected FFNeuralNetworkWeights nnWeights;
 
+    public FFNeuralNetworkWeights parse(String path) throws Exception {
+    	return parse(open(path));
+    }
+    
+	/** Opens URLs as well. */  
+	protected Reader open(String path) throws Exception {
+		InputStream inputStream = null;
+		if (0 == path.indexOf("http://")) {  
+			inputStream = new java.net.URL(path).openStream();
+			return new InputStreamReader(inputStream);
+		}
+		return new FileReader(path);
+	}
+
     public FFNeuralNetworkWeights parse(Reader input) throws ParseException {
+    	if (input == null)
+    		throw new ParseException("Input to FFNeuralNetworkWeightsParser is null.",0);
     	_scanner = new Scanner(input);
     	nnWeights = new FFNeuralNetworkWeights();
     	blockStart();

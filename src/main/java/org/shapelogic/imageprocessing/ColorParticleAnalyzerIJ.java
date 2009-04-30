@@ -34,6 +34,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
     protected static boolean _toMaskStatic = false;
     protected static boolean _displayInternalInfoStatic = false;
     protected static boolean _useNeuralNetworkStatic = false;
+    protected static String _neuralNetworkFileStatic = null;
     
 	@Override
 	public void run(ImageProcessor ip) {
@@ -60,14 +61,15 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
 	@Override
 	public int showDialog(ImagePlus imp, String command, PlugInFilterRunner pfr) {
         _gd = new GenericDialog(getClass().getSimpleName(), IJ.getInstance());
-        _gd.addNumericField("Max_distance: ", _maxDistanceStatic, 0);
-        _gd.addNumericField("Min_pixels: ", _minPixelsInAreaStatic, 0);
-        _gd.addNumericField("Max_pixels: ", _maxPixelsInAreaStatic, 0);
-        _gd.addNumericField("Iterations: ", _iterationsStatic, 0);
-        _gd.addCheckbox("CountOnly: ", _countOnlyStatic);
-        _gd.addCheckbox("ToMask: ", _toMaskStatic);
+        _gd.addNumericField("Max_distance", _maxDistanceStatic, 0);
+        _gd.addNumericField("Min_pixels", _minPixelsInAreaStatic, 0);
+        _gd.addNumericField("Max_pixels", _maxPixelsInAreaStatic, 0);
+        _gd.addNumericField("Iterations", _iterationsStatic, 0);
+        _gd.addCheckbox("CountOnly", _countOnlyStatic);
+        _gd.addCheckbox("ToMask", _toMaskStatic);
         _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
-        _gd.addCheckbox("UseNeuralNetwork: ", _useNeuralNetworkStatic);
+        _gd.addCheckbox("UseNeuralNetwork", _useNeuralNetworkStatic);
+        _gd.addStringField("NeuralNetworkFile", _neuralNetworkFileStatic, 50); 
         _gd.showDialog();
         if (_gd.wasCanceled()) {
             return DONE;
@@ -80,6 +82,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _toMask = _toMaskStatic = _gd.getNextBoolean();
         _displayInternalInfo = _displayInternalInfoStatic = _gd.getNextBoolean();
         _useNeuralNetwork = _useNeuralNetworkStatic = _gd.getNextBoolean();
+        _neuralNetworkFile = _neuralNetworkFileStatic = _gd.getNextString();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 
