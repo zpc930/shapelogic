@@ -70,6 +70,30 @@ new double[][] {
 
   []
 
+* Loading neural network from text file in ShapeLogic 1.6
+  
+  Starting in ShapeLogic 1.6 you can load the neural network from external text
+  files.  
+  
+  ShapeLogic has an example file:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/default_particle_nn.txt}
+  shapelogic/src/test/resources/data/neuralnetwork/default_particle_nn.txt}}
+  with this content:
+  
++-----------------------------------+
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== WEIGHTS
+1. -1. 
+-1. 1.
++-----------------------------------+
+  
+  It will produce the same effect as the default color particle analyzer 
+  neural network. Except for the categories not being capitalized.
+  
 * More examples of weights for feed forward neural network
 
   Here are a few more examples of the format of the neural network weights 

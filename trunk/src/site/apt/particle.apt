@@ -405,7 +405,8 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
   files.  
   
   ShapeLogic has an example file:
-  shapelogic/src/test/resources/data/neuralnetwork/default_particle_nn.txt
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/default_particle_nn.txt}
+  shapelogic/src/test/resources/data/neuralnetwork/default_particle_nn.txt}}
   with this content:
   
 +-----------------------------------+
