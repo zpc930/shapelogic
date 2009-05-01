@@ -59,6 +59,7 @@ public class FFNeuralNetworkWeightsParser {
     	if (input == null)
     		throw new ParseException("Input to FFNeuralNetworkWeightsParser is null.",0);
     	_scanner = new Scanner(input);
+//    	_scanner.skip("#*.$");//To filter out comments starting with #, not sure if this is the best
     	nnWeights = new FFNeuralNetworkWeights();
     	blockStart();
     	features();
