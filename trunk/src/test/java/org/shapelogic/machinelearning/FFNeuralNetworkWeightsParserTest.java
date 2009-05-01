@@ -12,18 +12,26 @@ import junit.framework.TestCase;
  */
 public class FFNeuralNetworkWeightsParserTest extends TestCase {
 	
+	public static final String INPUT_NO_PRINT = "========== FEATURES\n" +
+	"input1\n" +
+	"input2 input3\n" +
+	"========== RESULTS\n" +
+	"output1\n" +
+	"output2 output3\n" +
+	"========== WEIGHTS\n" +
+	"1. 2. 3.\n" +
+	"========== WEIGHTS\n" +
+	"4. 5.";
 	
-	public void testString() {
-		String inputString = "========== FEATURES\n" +
-				"input1\n" +
-				"input2 input3\n" +
-				"========== RESULTS\n" +
-				"output1\n" +
-				"output2 output3\n" +
-				"========== WEIGHTS\n" +
-				"1. 2. 3.\n" +
-				"========== WEIGHTS\n" +
-				"4. 5.";
+	public static final String INPUT_ONLY_PRINT = "========== PRINTS\n" +
+	"input1\n" +
+	"input3\n";
+	
+	public static final String INPUT_BLOCK_START = "========== ";
+	
+	
+	public void testNoPrintNormalSequence() {
+		String inputString = INPUT_NO_PRINT;
 		Reader input = new StringReader(inputString); 
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 		FFNeuralNetworkWeights result = parser.parse(input);
@@ -38,6 +46,23 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		assertEquals(5., result.getWeights()[1][1]);
 	}
 
+	public void testNormalSequence() {
+		String inputString = INPUT_ONLY_PRINT + INPUT_NO_PRINT;
+		Reader input = new StringReader(inputString); 
+		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+		FFNeuralNetworkWeights result = parser.parse(input);
+		assertNotNull(result);
+		assertEquals(3, result.getFeatureList().size());
+		assertEquals(3, result.getOhList().size());
+		assertEquals(2, result.getPrintList().size());
+		assertEquals(2, result.getWeights().length);
+		assertEquals(1., result.getWeights()[0][0]);
+		assertEquals(2., result.getWeights()[0][1]);
+		assertEquals(3., result.getWeights()[0][2]);
+		assertEquals(4., result.getWeights()[1][0]);
+		assertEquals(5., result.getWeights()[1][1]);
+	}
+	
 	public void testFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 		String path = "src/test/resources/data/neuralnetwork/default_particle_nn.txt";
