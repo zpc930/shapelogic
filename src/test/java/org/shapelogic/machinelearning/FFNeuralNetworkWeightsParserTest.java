@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 public class FFNeuralNetworkWeightsParserTest extends TestCase {
 	
 	
-	public void test() {
+	public void testString() {
 		String inputString = "========== FEATURES\n" +
 				"input1\n" +
 				"input2 input3\n" +
@@ -36,6 +36,20 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		assertEquals(3., result.getWeights()[0][2]);
 		assertEquals(4., result.getWeights()[1][0]);
 		assertEquals(5., result.getWeights()[1][1]);
+	}
+
+	public void testFile() throws Exception {
+		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+		String path = "src/test/resources/data/neuralnetwork/default_particle_nn.txt";
+		FFNeuralNetworkWeights result = parser.parse(path);
+		assertNotNull(result);
+		assertEquals(1, result.getFeatureList().size());
+		assertEquals(2, result.getOhList().size());
+		assertEquals(1, result.getWeights().length);
+		assertEquals(1., result.getWeights()[0][0]);
+		assertEquals(-1., result.getWeights()[0][1]);
+		assertEquals(-1., result.getWeights()[0][2]);
+		assertEquals(1., result.getWeights()[0][3]);
 	}
 
 }
