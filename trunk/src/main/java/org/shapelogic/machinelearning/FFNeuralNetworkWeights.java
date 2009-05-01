@@ -12,6 +12,7 @@ public class FFNeuralNetworkWeights {
 	protected List<String> _featureList = new ArrayList<String>(); 
 	protected List<String> _ohList = new ArrayList<String>();
 	protected double[][] _weights = new double[0][0];
+	protected List<String> _printList = new ArrayList<String>();
 	
 	public FFNeuralNetworkWeights() {}
 	
@@ -39,5 +40,11 @@ public class FFNeuralNetworkWeights {
 	}
 	public void setWeights(double[][] _weights) {
 		this._weights = _weights;
+	}
+	public List<String> getPrintList() {
+		return _printList;
+	}
+	public void setPrintList(List<String> list) {
+		_printList = list;
 	}
 }

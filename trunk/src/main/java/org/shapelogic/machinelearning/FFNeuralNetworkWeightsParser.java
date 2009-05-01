@@ -14,6 +14,8 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 /** FFNeuralNetworkWeightsParser parses FFNeuralNetworkWeights.<br />
  * 
+ * I need a lookahead for the block line. <br />
+ * 
  * syntax: 
  * BLOCK_START 
  * 
@@ -24,6 +26,10 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
  * "RESULTS"
  * string +
  * BLOCK_START 
+ * 
+ * [ "PRINTS"
+ * string +
+ * BLOCK_START ] 
  * 
  * ("WEIGHTS" number + BLOCK_START ) * 
  * "WEIGHTS" number
@@ -37,9 +43,11 @@ public class FFNeuralNetworkWeightsParser {
     final static public String FEATURES = "FEATURES";
     final static public String RESULTS = "RESULTS";
     final static public String WEIGHTS = "WEIGHTS";
+    final static public String PRINTS = "PRINTS";
     
     protected Scanner _scanner;
     protected FFNeuralNetworkWeights nnWeights;
+    protected String blockLookahead;
 
     public FFNeuralNetworkWeights parse(String path) throws Exception {
     	return parse(open(path));
@@ -59,12 +67,21 @@ public class FFNeuralNetworkWeightsParser {
     	if (input == null)
     		throw new ParseException("Input to FFNeuralNetworkWeightsParser is null.",0);
     	_scanner = new Scanner(input);
-//    	_scanner.skip("#*.$");//To filter out comments starting with #, not sure if this is the best
     	nnWeights = new FFNeuralNetworkWeights();
     	blockStart();
-    	features();
-    	results();
-    	while (weights());
+    	while (true) {
+    		blockLookahead = null;
+			if (_scanner.hasNext()) {
+				blockLookahead = _scanner.next();
+				_scanner.nextLine();
+			}
+			else
+				break;
+	    	if (FEATURES.equalsIgnoreCase(blockLookahead)) parseStringList(nnWeights.getFeatureList());
+	    	else if (RESULTS.equalsIgnoreCase(blockLookahead)) parseStringList(nnWeights.getOhList());
+	    	else if (PRINTS.equalsIgnoreCase(blockLookahead)) parseStringList(nnWeights.getPrintList());
+	    	else if (WEIGHTS.equalsIgnoreCase(blockLookahead)) weights();
+    	}
     	return nnWeights;
     }
     
@@ -72,39 +89,19 @@ public class FFNeuralNetworkWeightsParser {
     	_scanner.next(BLOCK_START);    	
     }
     
-    protected void features() {
-    	_scanner.next(FEATURES);
-    	_scanner.nextLine();
-    	String feature;
-    	do {
+    protected void parseStringList(List<String> outputList) {
+    	while (true) {
     		if (!_scanner.hasNext())
     			break;
-    		feature = _scanner.next();
-    		if (feature == null || BLOCK_START.equalsIgnoreCase(feature))
+    		String word = _scanner.next();
+    		if (word == null || BLOCK_START.equalsIgnoreCase(word))
     			break;
-    		nnWeights.getFeatureList().add(feature);
+    		outputList.add(word);
     	}
-    	while (true);
     }
     
-    protected void results() {
-    	String result;
-    	_scanner.next(RESULTS);
-    	do {
-    		if (!_scanner.hasNext())
-    			break;
-    		result = _scanner.next();
-    		if (result == null || BLOCK_START.equalsIgnoreCase(result))
-    			break;
-    		nnWeights.getOhList().add(result);
-    	}
-    	while (true);
-    }
-    
-    protected boolean weights() {
+    protected void weights() {
     	List<Double> weight = new ArrayList<Double>();
-    	_scanner.next(WEIGHTS);
-    	_scanner.nextLine();
     	while (_scanner.hasNextDouble())
     		weight.add(_scanner.nextDouble());
     	double[][] currentArray = nnWeights.getWeights();
@@ -116,10 +113,6 @@ public class FFNeuralNetworkWeightsParser {
     	newArray[newArray.length-1] = newLayer;
     	if (_scanner.hasNext(BLOCK_START)) {
     		_scanner.next(BLOCK_START);
-    		return true;
-    	}
-    	else {
-        	return false;
     	}
     }
     
