@@ -70,7 +70,7 @@ new double[][] {
 
   []
 
-* Loading neural network from text file in ShapeLogic 1.6
+* Loading neural network from configuration file in ShapeLogic 1.6
   
   Starting in ShapeLogic 1.6 you can load the neural network from external text
   files.  
@@ -93,6 +93,35 @@ flat
   
   It will produce the same effect as the default color particle analyzer 
   neural network. Except for the categories not being capitalized.
+  
+** Print column selection in the configuration file
+
+  Here is a configuration file
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/particle_nn_with_print.txt}
+  shapelogic/src/test/resources/data/neuralnetwork/particle_nn_with_print.txt}}
+  that does the same except it manually set the columns that are written to
+  the result table to be Category and AspectRatio. 
+  When selecting columns you can both use:
+  
+  * Name that the stream is stored under in the context 
+  
+  * Name of the column's headline
+  
+  []
+  
++-----------------------------------+
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== PRINTS
+Category
+AspectRatio
+========== WEIGHTS
+1. -1. 
+-1. 1.
++-----------------------------------+
   
 * More examples of weights for feed forward neural network
 
