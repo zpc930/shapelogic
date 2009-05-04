@@ -47,7 +47,7 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 		return setup(arg, new IJImage(imp));
 	}
 	
-//	@Override
+	@Override
 	protected void displayResultsTable() {
     	_rt.show("Polygon properties");
 	}
@@ -74,13 +74,13 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
 
-//	@Override
+	@Override
 	protected void setupTableBuilder() {
 	    _rt = new ResultsTable();
         _tableBuilder = new IJTableBuilder(_tableDefinition, _rt);
     }
 
-//	@Override
+	@Override
 	protected boolean populateResultsTableRow(int index) {
 		try {
             _tableBuilder.buildLine(index);
