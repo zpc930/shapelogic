@@ -8,6 +8,8 @@ import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.machinelearning.ExampleNeuralNetwork;
 import org.shapelogic.machinelearning.FFNeuralNetworkStream;
 import org.shapelogic.polygon.Polygon;
+import org.shapelogic.reporting.BaseTableBuilder;
+import org.shapelogic.reporting.TableDefinition;
 import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NumberedStream;
@@ -24,7 +26,12 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	protected LoadLetterStreams loadLetterStreams;
 	protected NumberedStream<String> _categorizer;
 	
+    protected boolean _useInputDilog = true;
     protected boolean _useNeuralNetwork;
+    protected String _neuralNetworkFile;
+    
+    protected BaseTableBuilder _tableBuilder;
+    protected TableDefinition _tableDefinition;
     
 	/** This does really not belong in a vectorizer. */
 	@Override
@@ -94,6 +101,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 		matchSetup();
         if (_arg != null && _arg.indexOf("InternalInfo") != -1) {
         	_displayInternalInfo = true; 
+        	_useInputDilog = true;
         }
 	}
 	
