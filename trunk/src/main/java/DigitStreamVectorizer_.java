@@ -1,9 +1,27 @@
-import static org.shapelogic.logic.CommonLogicExpressions.*;
+import static org.shapelogic.logic.CommonLogicExpressions.ASPECT_RATIO;
+import static org.shapelogic.logic.CommonLogicExpressions.CURVE_ARCH_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_CENTER_THIRD_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_LEFT_THIRD_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_RIGHT_THIRD_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_LEFT_THIRD_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_TOP_RIGHT_THIRD_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.HARD_CORNER_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.HOLE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.MULTI_LINE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.SOFT_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.U_JUNCTION_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
 import ij.ImagePlus;
-import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
 
-import org.shapelogic.imageprocessing.StreamVectorizer;
+import org.shapelogic.imageprocessing.StreamVectorizerIJ;
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.StreamFactory;
@@ -17,7 +35,7 @@ import org.shapelogic.streams.StreamFactory;
  * @author Sami Badawi
  *
  */
-public class DigitStreamVectorizer_ extends StreamVectorizer implements PlugInFilter {
+public class DigitStreamVectorizer_ extends StreamVectorizerIJ {
 	
 	@Override
 	protected void defineRules() {		
