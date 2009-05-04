@@ -40,6 +40,8 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 	@Override
 	public int setup(String arg, ImagePlus imp) {
 		_guiWrapper = IJGui.INSTANCE;
+        if (arg != null && arg.indexOf("InternalInfo") != -1)
+        	_useInputDilog = true;
 		if (imp == null)
 			return setup(arg, (SLImage)null);
 		return setup(arg, new IJImage(imp));
