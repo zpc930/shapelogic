@@ -18,6 +18,7 @@ import org.shapelogic.streamlogic.LoadLetterStreams;
 import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
+import org.shapelogic.util.Headings;
 
 /** Same vectorizer as MaxDistanceVectorizer, but logic implemented with streams.
  * <br />
@@ -142,6 +143,8 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	public void run() {
 		init();
 		matchLines();
+		if (_displayInternalInfo)
+			printTable();
 	}
 
 	@Override
@@ -152,5 +155,52 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	@Override
 	public RecursiveContext getParentContext() {
 		return null;
+	}
+
+	public void printTable() {
+        defaultStreamDefinitions();
+        customStreamDefinitions();
+        categorizeStreams();
+        defaultColumnDefinitions();
+        setupTableBuilder();
+        populateResultsTable();
+		displayResultsTable();
+	}
+
+	protected void defaultStreamDefinitions() {
+	}
+	
+	protected void categorizeStreams() {
+	}
+
+	protected void customStreamDefinitions() {
+        _tableDefinition = new TableDefinition(null);
+        _tableDefinition.addDefinition(_categorizer, Headings.CATEGORY);
+	}
+
+	protected void defaultColumnDefinitions() {
+	}
+
+	protected void setupTableBuilder() {
+	}
+
+	protected void populateResultsTable(){
+    	List<Polygon> polygons = _stream.getList();
+        _tableDefinition.findNonEmptyColumns(this);
+        if (_printListOverwrite != null)
+        	_tableDefinition.sort(_printListOverwrite, this);
+        _tableBuilder.buildHeadline();
+    	for (int i=0;i<polygons.size();i++) {
+    		if (populateResultsTableRow(i))
+    			;
+    	}
+	}
+
+	protected void displayResultsTable() {
+        _tableBuilder = new BaseTableBuilder(_tableDefinition);
+	}
+
+	protected boolean populateResultsTableRow(int index) {
+		return true;
 	}
 }
