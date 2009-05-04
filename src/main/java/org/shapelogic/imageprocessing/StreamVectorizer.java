@@ -1,12 +1,16 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.machinelearning.ExampleNeuralNetwork;
 import org.shapelogic.machinelearning.FFNeuralNetworkStream;
+import org.shapelogic.machinelearning.FFNeuralNetworkWeights;
+import org.shapelogic.machinelearning.FFNeuralNetworkWeightsParser;
 import org.shapelogic.polygon.Polygon;
 import org.shapelogic.reporting.BaseTableBuilder;
 import org.shapelogic.reporting.TableDefinition;
@@ -32,6 +36,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
     
     protected BaseTableBuilder _tableBuilder;
     protected TableDefinition _tableDefinition;
+    protected List<String> _printListOverwrite;
     
 	/** This does really not belong in a vectorizer. */
 	@Override
@@ -82,12 +87,30 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	 */
 	protected void defineNeuralNetwork() {
 		loadLetterStreams.loadLetterStream(null);
-		String[] objectHypotheses = new String[] {"No holes", "Holes"};
-		String[] inputStreamName = {CommonLogicExpressions.HOLE_COUNT};
-		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(0.9); 
-		FFNeuralNetworkStream _neuralNetworkStream = new FFNeuralNetworkStream(
-				inputStreamName,objectHypotheses, weights,this);
-         _categorizer = _neuralNetworkStream.getOutputStream();
+ 		FFNeuralNetworkWeights fFNeuralNetworkWeights = null;
+		if (_neuralNetworkFile != null && 0 < _neuralNetworkFile.trim().length() ) {
+			FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+			try {
+				fFNeuralNetworkWeights = parser.parse(_neuralNetworkFile);
+			} catch (Exception e) {
+				//Ignore it for now and use default instead.
+				fFNeuralNetworkWeights = null;
+			}
+		}
+		if (fFNeuralNetworkWeights == null) {
+			String[] objectHypotheses = new String[] {"No holes", "Holes"};
+			String[] inputStreamName = {CommonLogicExpressions.HOLE_COUNT};
+			double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.);
+			fFNeuralNetworkWeights = new FFNeuralNetworkWeights(
+					Arrays.asList(inputStreamName),
+					Arrays.asList(objectHypotheses), 
+					weights);
+		}
+		FFNeuralNetworkStream neuralNetworkStream = new FFNeuralNetworkStream(
+				fFNeuralNetworkWeights,this);
+         _categorizer = neuralNetworkStream.getOutputStream();
+ 		if (0 < fFNeuralNetworkWeights.getPrintList().size())
+ 			_printListOverwrite = fFNeuralNetworkWeights.getPrintList();
 	}
 	
 	/** Use this to setup all the needed streams.
