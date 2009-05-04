@@ -176,6 +176,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	protected void customStreamDefinitions() {
         _tableDefinition = new TableDefinition(null);
         _tableDefinition.addDefinition(_categorizer, Headings.CATEGORY);
+        _tableDefinition.addDefinition(CommonLogicExpressions.POINT_COUNT,"Points");
 	}
 
 	protected void defaultColumnDefinitions() {
