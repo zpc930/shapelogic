@@ -1,5 +1,14 @@
 package org.shapelogic.imageprocessing;
 
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.HOLE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.SOFT_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT;
+import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -177,6 +186,15 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
         _tableDefinition = new TableDefinition(null);
         _tableDefinition.addDefinition(_categorizer, Headings.CATEGORY);
         _tableDefinition.addDefinition(CommonLogicExpressions.POINT_COUNT,"Points");
+		_tableDefinition.addDefinition(CommonLogicExpressions.HOLE_COUNT, "Holes");
+		_tableDefinition.addDefinition(CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT,"T_left");
+		_tableDefinition.addDefinition(CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT,"T_right");
+		_tableDefinition.addDefinition(CommonLogicExpressions.END_POINT_BOTTOM_POINT_COUNT, "End_bottom");
+		_tableDefinition.addDefinition(CommonLogicExpressions.HORIZONTAL_LINE_COUNT, "Horizontal");
+		_tableDefinition.addDefinition(CommonLogicExpressions.VERTICAL_LINE_COUNT, "Vertical");
+		_tableDefinition.addDefinition(CommonLogicExpressions.END_POINT_COUNT, null);
+		_tableDefinition.addDefinition(CommonLogicExpressions.SOFT_POINT_COUNT, null);
+
 	}
 
 	protected void defaultColumnDefinitions() {
