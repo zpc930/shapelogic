@@ -64,6 +64,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 
     protected boolean _useNeuralNetwork;
     protected String _neuralNetworkFile;
+    protected List<String> _printListOverwrite;
 
 	@Override
 	public void init() throws Exception {
@@ -216,12 +217,14 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		FFNeuralNetworkStream neuralNetworkStream = new FFNeuralNetworkStream(
 				fFNeuralNetworkWeights,this);
          _categorizer = neuralNetworkStream.getOutputStream();
+ 		if (0 < fFNeuralNetworkWeights.getPrintList().size())
+ 			_printListOverwrite = fFNeuralNetworkWeights.getPrintList();
 	}
 	
 	/** Define extra streams.*/
 	@Override
 	protected void customStreamDefinitions() {
-		//XXX this is just a test definition, aspect ratio is already defined
+		//This is just an example definition, aspect ratio is already defined
 		Calc1<IColorAndVariance, Double> aspectRatioCalc1 = 
 			new Calc1<IColorAndVariance, Double>() {
 				@Override
@@ -349,6 +352,8 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	protected void populateResultsTable(){
     	List<IColorAndVariance> particles = _particlesFiltered;
         _tableDefinition.findNonEmptyColumns(this);
+        if (_printListOverwrite != null)
+        	_tableDefinition.sort(_printListOverwrite, this);
         _tableBuilder.buildHeadline();
     	for (int i=0;i<particles.size();i++) {
     		if (populateResultsTableRow(i))
