@@ -1,14 +1,5 @@
 package org.shapelogic.imageprocessing;
 
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_BOTTOM_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.END_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HOLE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.HORIZONTAL_LINE_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.SOFT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT;
-import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -132,9 +123,6 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 		_context.put(StreamNames.POLYGONS, getStream());
 		loadLetterStreams = new LoadLetterStreams(this);
 		matchSetup();
-        if (_arg != null && _arg.indexOf("InternalInfo") != -1) {
-        	_displayInternalInfo = true; 
-        }
 	}
 	
 	/** In order to match a different alphabet override this. 
@@ -186,6 +174,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
         _tableDefinition = new TableDefinition(null);
         _tableDefinition.addDefinition(_categorizer, Headings.CATEGORY);
         _tableDefinition.addDefinition(CommonLogicExpressions.POINT_COUNT,"Points");
+        _tableDefinition.addDefinition(CommonLogicExpressions.LINE_COUNT,"Lines");
 		_tableDefinition.addDefinition(CommonLogicExpressions.HOLE_COUNT, "Holes");
 		_tableDefinition.addDefinition(CommonLogicExpressions.T_JUNCTION_LEFT_POINT_COUNT,"T_left");
 		_tableDefinition.addDefinition(CommonLogicExpressions.T_JUNCTION_RIGHT_POINT_COUNT,"T_right");
