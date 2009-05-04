@@ -1,5 +1,4 @@
-import org.shapelogic.imageprocessing.StreamVectorizer;
-import org.shapelogic.imageutil.PlugInFilterAdapter;
+import org.shapelogic.imageprocessing.StreamVectorizerIJ;
 
 /** Thin wrapper around StreamVectorizer.
  * <br />
@@ -8,8 +7,5 @@ import org.shapelogic.imageutil.PlugInFilterAdapter;
  * @author Sami Badawi
  *
  */
-public class StreamVectorizer_ extends PlugInFilterAdapter {
-	public StreamVectorizer_() {
-		super(new StreamVectorizer());
-	}
+public class StreamVectorizer_ extends StreamVectorizerIJ {
 }
