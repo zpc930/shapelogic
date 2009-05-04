@@ -30,7 +30,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	protected LoadLetterStreams loadLetterStreams;
 	protected NumberedStream<String> _categorizer;
 	
-    protected boolean _useInputDilog = true;
+    protected boolean _useInputDilog;
     protected boolean _useNeuralNetwork;
     protected String _neuralNetworkFile;
     
@@ -124,7 +124,6 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 		matchSetup();
         if (_arg != null && _arg.indexOf("InternalInfo") != -1) {
         	_displayInternalInfo = true; 
-        	_useInputDilog = true;
         }
 	}
 	
