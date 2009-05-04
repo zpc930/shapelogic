@@ -18,7 +18,9 @@ public class TableDefinitionTest extends TestCase {
     public static final String STREAM_NAME0 = "streamName0";
     public static final String STREAM_NAME1 = "streamName1";
     public static final String STREAM_NAME2 = "streamName2";
+    public static final String STREAM_NAME3 = "streamName3";
     public static final String COLUMN_NAME0 = "columnName0";
+    public static final String COLUMN_NAME1 = "columnName1";
 
     public void testOneColumnNoContext() {
         String[] inputArray = {"streamName", "columnName"};
@@ -34,7 +36,7 @@ public class TableDefinitionTest extends TestCase {
     static public TableDefinition makeTableDefinition(RecursiveContext recursiveContext) {
         String[] inputArray = {
             STREAM_NAME0, COLUMN_NAME0,
-            STREAM_NAME1, "columnName2",
+            STREAM_NAME1, COLUMN_NAME1,
             STREAM_NAME2, null,
         };
         NumberedStream<Integer> naturalNumberStream0 = new NaturalNumberStream(2);
@@ -48,7 +50,7 @@ public class TableDefinitionTest extends TestCase {
     static public TableDefinition makeTableDefinitionDirectStream(RecursiveContext recursiveContext) {
         String[] inputArray = {
             STREAM_NAME0, COLUMN_NAME0,
-            STREAM_NAME1, "columnName2",
+            STREAM_NAME1, COLUMN_NAME1,
         };
         List inputList = new ArrayList();
         inputList.addAll(Arrays.asList(inputArray));
@@ -112,6 +114,80 @@ public class TableDefinitionTest extends TestCase {
         assertNotNull(columnDefinition1);
         assertEquals(null, columnDefinition1.getStreamName());
         assertEquals(STREAM_NAME2, columnDefinition1.getColumnName());
+    }
+
+    public void testOneColumnWithContextDirectStreamSortedSameOrder() {
+        RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+        TableDefinition tableDefinition = makeTableDefinitionDirectStream(recursiveContext);
+        assertNotNull(tableDefinition);
+        assertEquals(3, tableDefinition.getRawColumnDefinition().size());
+        tableDefinition.findNonEmptyColumns(recursiveContext);
+        String[] sortOrder = {STREAM_NAME0, STREAM_NAME2}; 
+        tableDefinition.sort(Arrays.asList(sortOrder), recursiveContext);
+        assertEquals(2, tableDefinition.getColumnDefinition().size());
+
+        ColumnDefinition columnDefinition0 = tableDefinition.getColumnDefinition().get(0);
+        assertNotNull(columnDefinition0);
+        assertEquals(STREAM_NAME0, columnDefinition0.getStreamName());
+        assertEquals(COLUMN_NAME0, columnDefinition0.getColumnName());
+        ColumnDefinition columnDefinition1 = tableDefinition.getColumnDefinition().get(1);
+        assertNotNull(columnDefinition1);
+        assertEquals(null, columnDefinition1.getStreamName());
+        assertEquals(STREAM_NAME2, columnDefinition1.getColumnName());
+    }
+
+    public void testOneColumnWithContextDirectStreamSortedReverseOrder() {
+        RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+        TableDefinition tableDefinition = makeTableDefinitionDirectStream(recursiveContext);
+        assertNotNull(tableDefinition);
+        assertEquals(3, tableDefinition.getRawColumnDefinition().size());
+        tableDefinition.findNonEmptyColumns(recursiveContext);
+        String[] sortOrder = {STREAM_NAME2, STREAM_NAME0}; 
+        tableDefinition.sort(Arrays.asList(sortOrder), recursiveContext);
+        assertEquals(2, tableDefinition.getColumnDefinition().size());
+
+        ColumnDefinition columnDefinition0 = tableDefinition.getColumnDefinition().get(0);
+        assertNotNull(columnDefinition0);
+        assertEquals(null, columnDefinition0.getStreamName());
+        assertEquals(STREAM_NAME2, columnDefinition0.getColumnName());
+        ColumnDefinition columnDefinition1 = tableDefinition.getColumnDefinition().get(1);
+        assertNotNull(columnDefinition1);
+        assertEquals(STREAM_NAME0, columnDefinition1.getStreamName());
+        assertEquals(COLUMN_NAME0, columnDefinition1.getColumnName());
+    }
+
+    public void testOneColumnWithContextDirectStreamSortedSelelectOne() {
+        RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+        TableDefinition tableDefinition = makeTableDefinitionDirectStream(recursiveContext);
+        assertNotNull(tableDefinition);
+        assertEquals(3, tableDefinition.getRawColumnDefinition().size());
+        tableDefinition.findNonEmptyColumns(recursiveContext);
+        String[] sortOrder = {STREAM_NAME0}; 
+        tableDefinition.sort(Arrays.asList(sortOrder), recursiveContext);
+        assertEquals(1, tableDefinition.getColumnDefinition().size());
+
+        ColumnDefinition columnDefinition0 = tableDefinition.getColumnDefinition().get(0);
+        assertNotNull(columnDefinition0);
+        assertEquals(STREAM_NAME0, columnDefinition0.getStreamName());
+        assertEquals(COLUMN_NAME0, columnDefinition0.getColumnName());
+    }
+
+    public void testOneColumnWithContextDirectStreamSortedSelelectOneNew() {
+        RecursiveContext recursiveContext = new SimpleRecursiveContext(null);
+        TableDefinition tableDefinition = makeTableDefinitionDirectStream(recursiveContext);
+        NumberedStream<Integer> naturalNumberStream3 = new NaturalNumberStream(2);
+        recursiveContext.getContext().put(STREAM_NAME3, naturalNumberStream3);
+        assertNotNull(tableDefinition);
+        assertEquals(3, tableDefinition.getRawColumnDefinition().size());
+        tableDefinition.findNonEmptyColumns(recursiveContext);
+        String[] sortOrder = {STREAM_NAME3}; 
+        tableDefinition.sort(Arrays.asList(sortOrder), recursiveContext);
+        assertEquals(1, tableDefinition.getColumnDefinition().size());
+
+        ColumnDefinition columnDefinition0 = tableDefinition.getColumnDefinition().get(0);
+        assertNotNull(columnDefinition0);
+        assertEquals(STREAM_NAME3, columnDefinition0.getStreamName());
+        assertEquals(STREAM_NAME3, columnDefinition0.getColumnName());
     }
 
     public void testOneColumnWithContextDirectCalc() {
