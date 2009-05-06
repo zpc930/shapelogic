@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import org.shapelogic.streamlogic.RulePredicate;
+
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 
@@ -29,7 +31,12 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
  * 
  * [ "PRINTS"
  * string +
- * BLOCK_START ] 
+ * BLOCK_START ]
+ * 
+ * [ "RULES_PREDICATE" BLOCK_START
+ * ( def string
+ * (string relation number) * BLOCK_START )*
+ * ]
  * 
  * ("WEIGHTS" number + BLOCK_START ) * 
  * "WEIGHTS" number
@@ -44,10 +51,12 @@ public class FFNeuralNetworkWeightsParser {
     final static public String RESULTS = "RESULTS";
     final static public String WEIGHTS = "WEIGHTS";
     final static public String PRINTS = "PRINTS";
+    final static public String RULES_PREDICATE = "RULES_PREDICATE";
+    final static public String DEFINITION = "def";
     
     protected Scanner _scanner;
-    protected FFNeuralNetworkWeights nnWeights;
-    protected String blockLookahead;
+    protected FFNeuralNetworkWeights _nnWeights;
+    protected String _blockLookahead;
 
     public FFNeuralNetworkWeights parse(String path) throws Exception {
     	return parse(open(path));
@@ -67,22 +76,28 @@ public class FFNeuralNetworkWeightsParser {
     	if (input == null)
     		throw new ParseException("Input to FFNeuralNetworkWeightsParser is null.",0);
     	_scanner = new Scanner(input);
-    	nnWeights = new FFNeuralNetworkWeights();
+    	_nnWeights = new FFNeuralNetworkWeights();
     	blockStart();
     	while (true) {
-    		blockLookahead = null;
+    		_blockLookahead = null;
 			if (_scanner.hasNext()) {
-				blockLookahead = _scanner.next();
+				_blockLookahead = _scanner.next();
 				_scanner.nextLine();
 			}
 			else
 				break;
-	    	if (FEATURES.equalsIgnoreCase(blockLookahead)) parseStringList(nnWeights.getFeatureList());
-	    	else if (RESULTS.equalsIgnoreCase(blockLookahead)) parseStringList(nnWeights.getOhList());
-	    	else if (PRINTS.equalsIgnoreCase(blockLookahead)) parseStringList(nnWeights.getPrintList());
-	    	else if (WEIGHTS.equalsIgnoreCase(blockLookahead)) weights();
+	    	if (FEATURES.equalsIgnoreCase(_blockLookahead)) parseStringList(_nnWeights.getFeatureList());
+	    	else if (RESULTS.equalsIgnoreCase(_blockLookahead)) parseStringList(_nnWeights.getOhList());
+	    	else if (PRINTS.equalsIgnoreCase(_blockLookahead)) parseStringList(_nnWeights.getPrintList());
+	    	else if (WEIGHTS.equalsIgnoreCase(_blockLookahead)) weights();
+	    	else if (RULES_PREDICATE.equalsIgnoreCase(_blockLookahead)) parsePredicateRules();
+	    	else if (DEFINITION.equalsIgnoreCase(_blockLookahead)) parseDefinition(_nnWeights.getRulePredicates());
+	    	else {
+	    		throw new ParseException("Unexpected symbol after " + 
+	    				BLOCK_START + ": " + _blockLookahead, 0); 
+	    	}
     	}
-    	return nnWeights;
+    	return _nnWeights;
     }
     
     protected void blockStart() {
@@ -100,13 +115,41 @@ public class FFNeuralNetworkWeightsParser {
     	}
     }
     
+    /** If there are more type of rules this define what the current type of rules are.<br />
+     * 
+     * There is not so currently this is empty. 
+     * */
+    protected void parsePredicateRules() throws ParseException {
+    }
+    
+    protected void parseDefinition(List<RulePredicate> rulePredicates) throws ParseException {
+		String definitionName = _scanner.next();
+		_scanner.nextLine();
+    	while (true) {
+    		if (!_scanner.hasNext())
+    			break;
+    		String streamName = _scanner.next();
+    		if (streamName == null || BLOCK_START.equalsIgnoreCase(streamName))
+    			break;
+    		String relation = _scanner.next();
+    		if (!("==".equals(relation) || "<".equals(relation) || ">".equals(relation)))
+    			new ParseException(
+    					"Relation has to have the form ==, < or >, but found: "
+    					+ relation, 0);
+    		double number = _scanner.nextDouble();
+    		RulePredicate rule = new RulePredicate(definitionName, streamName, relation, number);
+    		rulePredicates.add(rule);
+    		System.out.println("rulePredicates: " + rulePredicates.size());
+    	}
+    }
+    
     protected void weights() {
     	List<Double> weight = new ArrayList<Double>();
     	while (_scanner.hasNextDouble())
     		weight.add(_scanner.nextDouble());
-    	double[][] currentArray = nnWeights.getWeights();
+    	double[][] currentArray = _nnWeights.getWeights();
     	double[][] newArray = Arrays.copyOf(currentArray, currentArray.length+1);
-    	nnWeights.setWeights(newArray);
+    	_nnWeights.setWeights(newArray);
     	double[] newLayer = new double[weight.size()];
     	for (int i = 0; i < newLayer.length; i++)
     		newLayer[i] = weight.get(i);
