@@ -73,19 +73,19 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	}
 	
     protected FFNeuralNetworkWeights readFFNeuralNetworkWeights() {
-		if (_neuralNetworkFile != null && 0 < _neuralNetworkFile.trim().length() ) {
-			FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
-			try {
-                _neuralNetworkFile = _neuralNetworkFile.trim();
-				return parser.parse(_neuralNetworkFile);
-			} catch (Exception e) {
-				//Ignore it for now and use default instead.
-        		showMessage("Parsing error","File: " + _neuralNetworkFile +
-                        " has error: " + e.getMessage());
-				return null;
-			}
-		}
-        return null;
+        FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+        try {
+            FFNeuralNetworkWeights result = parser.parse(_neuralNetworkFile);
+            if (result == null)
+                showMessage("Parsing error","File: " + _neuralNetworkFile +
+                    " has error, it returns FFNeuralNetworkWeights == null.");
+            return result;
+        } catch (Exception e) {
+            //Ignore it for now and use default instead.
+            showMessage("Parsing error","File: " + _neuralNetworkFile +
+                    " has error: " + e.getMessage());
+            return null;
+        }
     }
 
 	/** Method to override if you want to define your own rule set.<br />  
