@@ -5,6 +5,8 @@ import java.io.StringReader;
 
 import junit.framework.TestCase;
 
+import org.shapelogic.streamlogic.RulePredicate;
+
 /** Test of FFNeuralNetworkWeightsParser.<br />
  * 
  * @author Sami Badawi
@@ -74,7 +76,20 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		FFNeuralNetworkWeights result = parser.parse(input);
 		assertNotNull(result);
 		assertEquals(3, result.getRulePredicates().size());
-	}
+        RulePredicate rule0 = result.getRulePredicates().get(0);
+        assertEquals("A",rule0.matchName);
+        assertEquals("POINT_COUNT",rule0.streamName);
+        assertEquals(5.,rule0.value);
+        RulePredicate rule1 = result.getRulePredicates().get(1);
+        assertEquals("A",rule1.matchName);
+        assertEquals("LINE_COUNT",rule1.streamName);
+        assertEquals(5.,rule1.value);
+
+        RulePredicate rule2 = result.getRulePredicates().get(2);
+        assertEquals("A",rule2.matchName);
+        assertEquals("HOLE_COUNT",rule2.streamName);
+        assertEquals(1.,rule2.value);
+    }
 	
 	public void testFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
