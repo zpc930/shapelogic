@@ -30,9 +30,9 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 	public static final String INPUT_BLOCK_START = "========== ";
 	
 	public static final String INPUT_RULES = "========== def A \n"+ 
-		"POINT_COUNT == 5 ";// +
-//		"LINE_COUNT == 5 \n" +
-//		"HOLE_COUNT == 1 \n";
+		"POINT_COUNT == 5 " +
+		"LINE_COUNT == 5 \n" +
+		"HOLE_COUNT == 1 \n";
 	
 	public void testNoPrintNormalSequence() {
 		String inputString = INPUT_NO_PRINT;
@@ -73,7 +73,7 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 		FFNeuralNetworkWeights result = parser.parse(input);
 		assertNotNull(result);
-		assertEquals(0, result.getRulePredicates().size()); //XXX
+		assertEquals(3, result.getRulePredicates().size());
 	}
 	
 	public void testFile() throws Exception {
