@@ -29,11 +29,15 @@ import static org.shapelogic.logic.CommonLogicExpressions.VERTICAL_LINE_COUNT;
 import static org.shapelogic.logic.CommonLogicExpressions.Y_JUNCTION_POINT_COUNT;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import java.util.Set;
+import java.util.TreeSet;
 import org.shapelogic.calculation.IQueryCalc;
 import org.shapelogic.calculation.QueryCalc;
 import org.shapelogic.calculation.RecursiveContext;
+import org.shapelogic.machinelearning.FFNeuralNetworkWeights;
 import org.shapelogic.streams.StreamFactory;
 import org.shapelogic.streams.XOrListStream;
 
@@ -96,9 +100,21 @@ public class LoadLetterStreams {
 		streamFactory.addToAndListStream0(letter, streamName, predicate, value);
 	}
 	
+	public void rule(RulePredicate ruleP) {
+		streamFactory.addToAndListStream0(ruleP.matchName, ruleP.streamName, ruleP.predicate, ruleP.value);
+	}
+
 	public void makeXOrStream(String streamName, String[] symbolStreamArray) {
 		List<String> symbols = new ArrayList<String>();
 		for (String symbol: symbolStreamArray)
+			symbols.add(symbol);
+		XOrListStream letterMatchStream = new XOrListStream( symbols, recursiveContext);
+		queryCalc.put(streamName, letterMatchStream, recursiveContext);
+	}
+
+	public void makeXOrStream(String streamName, Collection<String> symbolStreamCollection) {
+		List<String> symbols = new ArrayList<String>();
+		for (String symbol: symbolStreamCollection)
 			symbols.add(symbol);
 		XOrListStream letterMatchStream = new XOrListStream( symbols, recursiveContext);
 		queryCalc.put(streamName, letterMatchStream, recursiveContext);
@@ -115,6 +131,20 @@ public class LoadLetterStreams {
     	makeXOrStream(StreamNames.LETTERS, lettersArray);
 	}
 	
+	/** Setup all the stream for a  letter match.<br />
+	 *
+	 * Requirements streams: polygons.
+	 *  */
+	public void loadUserDefinedSymbolStreams(FFNeuralNetworkWeights fFNeuralNetworkWeights) {
+		loadPolygonStreams.loadStreamsRequiredForLetterMatch();
+        Set<String> matchSymbols = new TreeSet<String>();
+        for (RulePredicate ruleP: fFNeuralNetworkWeights.getRulePredicates()) {
+             rule(ruleP);
+             matchSymbols.add(ruleP.matchName);
+        }
+    	makeXOrStream(StreamNames.LETTERS, matchSymbols);
+	}
+
 	/** Rules for matching  letters, using only very simple properties.
 	 * 
 	 * @param letterFilter
