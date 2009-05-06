@@ -82,7 +82,7 @@ public class FFNeuralNetworkWeightsParser {
     		_blockLookahead = null;
 			if (_scanner.hasNext()) {
 				_blockLookahead = _scanner.next();
-				_scanner.nextLine();
+//				_scanner.nextLine(); //This causes a problem if there are more than one word
 			}
 			else
 				break;
