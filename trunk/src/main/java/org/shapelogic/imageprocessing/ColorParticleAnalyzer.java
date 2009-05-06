@@ -193,12 +193,12 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 				fFNeuralNetworkWeights = parser.parse(_neuralNetworkFile);
                 if (fFNeuralNetworkWeights == null)
                     showMessage("Parsing error","File: " + _neuralNetworkFile +
-                        " has error, it returns FFNeuralNetworkWeights == null.");
+                        "\n has error, it returns FFNeuralNetworkWeights == null.");
                 else
                     loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights, StreamNames.PARTICLES);
 			} catch (Exception e) {
                 showMessage("Parsing error","File: " + _neuralNetworkFile +
-                        " has error: " + e.getMessage());
+                        "\n has error: " + e.getMessage());
 				fFNeuralNetworkWeights = null;
 			}
 		}
