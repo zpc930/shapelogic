@@ -72,13 +72,34 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
         }
 	}
 	
+    protected FFNeuralNetworkWeights readFFNeuralNetworkWeights() {
+		if (_neuralNetworkFile != null && 0 < _neuralNetworkFile.trim().length() ) {
+			FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+			try {
+                _neuralNetworkFile = _neuralNetworkFile.trim();
+				return parser.parse(_neuralNetworkFile);
+			} catch (Exception e) {
+				//Ignore it for now and use default instead.
+        		showMessage("Parsing error","File: " + _neuralNetworkFile +
+                        " has error: " + e.getMessage());
+				return null;
+			}
+		}
+        return null;
+    }
+
 	/** Method to override if you want to define your own rule set.<br />  
 	 * 
 	 * The default network is very simple it is marking particles Tall, Flat
 	 * based on their aspect ratio.
 	 */
-	protected void defineRules() {		
-		loadLetterStreams.loadLetterStream(null);
+	protected void defineRules() {
+ 		FFNeuralNetworkWeights fFNeuralNetworkWeights =
+                readFFNeuralNetworkWeights();
+        if (fFNeuralNetworkWeights != null)
+            loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights);
+        else
+    		loadLetterStreams.loadLetterStream(null);
 		_categorizer = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
 	}
 
@@ -88,16 +109,8 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	 */
 	protected void defineNeuralNetwork() {
 		loadLetterStreams.loadLetterStream(null);
- 		FFNeuralNetworkWeights fFNeuralNetworkWeights = null;
-		if (_neuralNetworkFile != null && 0 < _neuralNetworkFile.trim().length() ) {
-			FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
-			try {
-				fFNeuralNetworkWeights = parser.parse(_neuralNetworkFile);
-			} catch (Exception e) {
-				//Ignore it for now and use default instead.
-				fFNeuralNetworkWeights = null;
-			}
-		}
+ 		FFNeuralNetworkWeights fFNeuralNetworkWeights = 
+                readFFNeuralNetworkWeights();
 		if (fFNeuralNetworkWeights == null) {
 			String[] objectHypotheses = new String[] {"No holes", "Holes"};
 			String[] inputStreamName = {CommonLogicExpressions.HOLE_COUNT};
