@@ -111,7 +111,7 @@ public class FFNeuralNetworkWeightsParser {
     		if (!_scanner.hasNext())
     			break;
     		String word = _scanner.next();
-    		if (word == null || BLOCK_START.equalsIgnoreCase(word))
+    		if (endOfBlock(word))
     			break;
     		outputList.add(word);
     	}
@@ -131,7 +131,7 @@ public class FFNeuralNetworkWeightsParser {
     		if (!_scanner.hasNext())
     			break;
     		String streamName = _scanner.next();
-    		if (streamName == null || BLOCK_START.equalsIgnoreCase(streamName))
+    		if (endOfBlock(streamName))
     			break;
     		String relation = _scanner.next();
     		if (!("==".equals(relation) || "<".equals(relation) || ">".equals(relation)))
@@ -143,6 +143,14 @@ public class FFNeuralNetworkWeightsParser {
     		rulePredicates.add(rule);
     		System.out.println("rulePredicates: " + rulePredicates.size());
     	}
+    }
+
+    protected boolean endOfBlock(String lookahead) throws ParseException {
+        if (lookahead == null || BLOCK_START.equalsIgnoreCase(lookahead))
+            return true;
+        if (lookahead.indexOf("===") != -1)
+            throw new ParseException("Illegal word: " + lookahead + " Block start is ========== ", 0);
+        return false;
     }
     
     protected void weights() {

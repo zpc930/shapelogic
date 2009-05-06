@@ -78,12 +78,12 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
             FFNeuralNetworkWeights result = parser.parse(_neuralNetworkFile);
             if (result == null)
                 showMessage("Parsing error","File: " + _neuralNetworkFile +
-                    " has error, it returns FFNeuralNetworkWeights == null.");
+                    "\n has error, it returns FFNeuralNetworkWeights == null.");
             return result;
         } catch (Exception e) {
             //Ignore it for now and use default instead.
             showMessage("Parsing error","File: " + _neuralNetworkFile +
-                    " has error: " + e.getMessage());
+                    "\n has error: " + e.getMessage());
             return null;
         }
     }
