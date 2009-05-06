@@ -3,18 +3,27 @@ package org.shapelogic.machinelearning;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.shapelogic.streamlogic.RulePredicate;
+
 /** FFNeuralNetworkWeights represent a trained feed forward neural network.<br />
  * 
  * @author Sami Badawi
  *
  */
 public class FFNeuralNetworkWeights {
-	protected List<String> _featureList = new ArrayList<String>(); 
-	protected List<String> _ohList = new ArrayList<String>();
-	protected double[][] _weights = new double[0][0];
-	protected List<String> _printList = new ArrayList<String>();
+	protected List<String> _featureList;// = new ArrayList<String>(); 
+	protected List<String> _ohList;// = new ArrayList<String>();
+	protected double[][] _weights;// = new double[0][0];
+	protected List<String> _printList;// = new ArrayList<String>();
+	private List<RulePredicate> _rulePredicates;// = new ArrayList<RulePredicate>();
 	
-	public FFNeuralNetworkWeights() {}
+	public FFNeuralNetworkWeights() {
+		_featureList = new ArrayList<String>();
+		_ohList = new ArrayList<String>();
+		_weights = new double[0][0];
+		_printList = new ArrayList<String>();
+		_rulePredicates = new ArrayList<RulePredicate>();
+	}
 	
 	public FFNeuralNetworkWeights(List<String> featureList, 
 			List<String> ohList, double[][] weights) {
@@ -46,5 +55,8 @@ public class FFNeuralNetworkWeights {
 	}
 	public void setPrintList(List<String> list) {
 		_printList = list;
-	}
+	}	
+    public List<RulePredicate> getRulePredicates() {
+        return _rulePredicates;
+    }
 }
