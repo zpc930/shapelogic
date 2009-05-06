@@ -135,14 +135,17 @@ public class LoadLetterStreams {
 	 *
 	 * Requirements streams: polygons.
 	 *  */
-	public void loadUserDefinedSymbolStreams(FFNeuralNetworkWeights fFNeuralNetworkWeights) {
+	public void loadUserDefinedSymbolStreams(
+            FFNeuralNetworkWeights fFNeuralNetworkWeights,
+            String categorizerStreamName)
+    {
 		loadPolygonStreams.loadStreamsRequiredForLetterMatch();
         Set<String> matchSymbols = new TreeSet<String>();
         for (RulePredicate ruleP: fFNeuralNetworkWeights.getRulePredicates()) {
              rule(ruleP);
              matchSymbols.add(ruleP.matchName);
         }
-    	makeXOrStream(StreamNames.LETTERS, matchSymbols);
+    	makeXOrStream(categorizerStreamName, matchSymbols);
 	}
 
 	/** Rules for matching  letters, using only very simple properties.

@@ -97,7 +97,8 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
  		FFNeuralNetworkWeights fFNeuralNetworkWeights =
                 readFFNeuralNetworkWeights();
         if (fFNeuralNetworkWeights != null)
-            loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights);
+            loadLetterStreams.loadUserDefinedSymbolStreams(
+                    fFNeuralNetworkWeights, StreamNames.LETTERS);
         else
     		loadLetterStreams.loadLetterStream(null);
 		_categorizer = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);

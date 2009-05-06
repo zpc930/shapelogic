@@ -186,7 +186,25 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	 */
 	protected void defineRules() {		
 		loadParticleStreams.exampleMakeParticleStream();
-        loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+		FFNeuralNetworkWeights fFNeuralNetworkWeights = null;
+		if (_neuralNetworkFile != null && 0 < _neuralNetworkFile.trim().length() ) {
+			FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+			try {
+				fFNeuralNetworkWeights = parser.parse(_neuralNetworkFile);
+                if (fFNeuralNetworkWeights == null)
+                    showMessage("Parsing error","File: " + _neuralNetworkFile +
+                        " has error, it returns FFNeuralNetworkWeights == null.");
+                else
+                    loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights, StreamNames.PARTICLES);
+			} catch (Exception e) {
+                showMessage("Parsing error","File: " + _neuralNetworkFile +
+                        " has error: " + e.getMessage());
+				fFNeuralNetworkWeights = null;
+			}
+		}
+		if (fFNeuralNetworkWeights == null) {
+            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+        }
         _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
 	}
 
@@ -200,8 +218,12 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 			FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 			try {
 				fFNeuralNetworkWeights = parser.parse(_neuralNetworkFile);
+                if (fFNeuralNetworkWeights == null)
+                    showMessage("Parsing error","File: " + _neuralNetworkFile +
+                        " has error, it returns FFNeuralNetworkWeights == null.");
 			} catch (Exception e) {
-				//Ignore it for now and use default instead.
+                showMessage("Parsing error","File: " + _neuralNetworkFile +
+                        " has error: " + e.getMessage());
 				fFNeuralNetworkWeights = null;
 			}
 		}
