@@ -59,7 +59,9 @@ public class FFNeuralNetworkWeightsParser {
     protected String _blockLookahead;
 
     public FFNeuralNetworkWeights parse(String path) throws Exception {
-    	return parse(open(path));
+        if ((path == null) || (path.trim().length() == 0))
+            return null;
+    	return parse(open(path.trim()));
     }
     
 	/** Opens URLs as well. */  
