@@ -1,0 +1,13 @@
+========== def NoHoles
+holeCount == 0
+
+========== def Holes
+holeCount > 0
+
+========== PRINTS
+Category
+Points
+lineCount
+holeCount
+
+========== 
