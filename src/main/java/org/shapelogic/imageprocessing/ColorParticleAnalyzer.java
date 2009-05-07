@@ -195,7 +195,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
                     showMessage("Parsing error","File: " + _neuralNetworkFile +
                         "\n has error, it returns FFNeuralNetworkWeights == null.");
                 else
-                    loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights, StreamNames.PARTICLES);
+                    loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights, StreamNames.CATEGORIES);
 			} catch (Exception e) {
                 showMessage("Parsing error","File: " + _neuralNetworkFile +
                         "\n has error: " + e.getMessage());
@@ -203,9 +203,9 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 			}
 		}
 		if (fFNeuralNetworkWeights == null) {
-            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+            loadLetterStreams.makeXOrStream(StreamNames.CATEGORIES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
         }
-        _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
+        _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.CATEGORIES, this);
 	}
 
 	/** Method to override if you want to define your own neural network.<br />  
@@ -239,6 +239,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		FFNeuralNetworkStream neuralNetworkStream = new FFNeuralNetworkStream(
 				fFNeuralNetworkWeights,this);
          _categorizer = neuralNetworkStream.getOutputStream();
+         _context.put(StreamNames.CATEGORIES, _categorizer);
  		if (0 < fFNeuralNetworkWeights.getPrintList().size())
  			_printListOverwrite = fFNeuralNetworkWeights.getPrintList();
 	}
@@ -404,4 +405,9 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
     public void setNeuralNetworkFile(String neuralNetworkFile) {
         _neuralNetworkFile = neuralNetworkFile;
     }
+
+    public void setUseNeuralNetwork(boolean useNeuralNetwork) {
+        _useNeuralNetwork = useNeuralNetwork;
+    }
+
 }
