@@ -400,4 +400,8 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 	    }
 	    return result;
 	}
+
+    public void setNeuralNetworkFile(String neuralNetworkFile) {
+        _neuralNetworkFile = neuralNetworkFile;
+    }
 }
