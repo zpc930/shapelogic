@@ -2,11 +2,13 @@ package org.shapelogic.imageprocessing;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
+import ij.io.OpenDialog;
 import ij.measure.ResultsTable;
 import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
 import ij.process.ImageProcessor;
 
+import java.io.File;
 import org.shapelogic.imageutil.IJGui;
 import org.shapelogic.imageutil.IJImage;
 import org.shapelogic.imageutil.SLImage;
@@ -69,6 +71,7 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _gd.addCheckbox("ToMask", _toMaskStatic);
         _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
         _gd.addCheckbox("UseNeuralNetwork", _useNeuralNetworkStatic);
+        _gd.addCheckbox("ShowFileDialog", false);
         _gd.addStringField("NeuralNetworkFile", _neuralNetworkFileStatic, 50); 
         _gd.showDialog();
         if (_gd.wasCanceled()) {
@@ -82,9 +85,29 @@ public class ColorParticleAnalyzerIJ extends ColorParticleAnalyzer implements Ex
         _toMask = _toMaskStatic = _gd.getNextBoolean();
         _displayInternalInfo = _displayInternalInfoStatic = _gd.getNextBoolean();
         _useNeuralNetwork = _useNeuralNetworkStatic = _gd.getNextBoolean();
-        _neuralNetworkFile = _neuralNetworkFileStatic = _gd.getNextString();
+        boolean showFileDialog = _gd.getNextBoolean();
+        String tempFilePath = null;
+        if (showFileDialog) {
+            OpenDialog od = new OpenDialog("Choose a .txt config file", null);
+            tempFilePath = getFilePath(od);
+            if (tempFilePath != null)
+                _neuralNetworkFile = _neuralNetworkFileStatic = tempFilePath;
+        }
+        if (tempFilePath == null)
+            _neuralNetworkFile = _neuralNetworkFileStatic = _gd.getNextString();
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
+
+    public static String getFilePath(OpenDialog od) {
+        String dir = od.getDirectory();
+        String fileName = od.getFileName();
+        if (dir != null && fileName != null) {
+            File file = new File(dir, fileName);
+            return file.getPath();
+        }
+        else
+            return null;
+    }
 
 	@Override
 	protected void setupTableBuilder() {
