@@ -2,6 +2,7 @@ package org.shapelogic.imageprocessing;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.GenericDialog;
+import ij.io.OpenDialog;
 import ij.measure.ResultsTable;
 import ij.plugin.filter.ExtendedPlugInFilter;
 import ij.plugin.filter.PlugInFilterRunner;
@@ -62,6 +63,7 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 	        _gd = new GenericDialog(getClass().getSimpleName(), IJ.getInstance());
 	        _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
 	        _gd.addCheckbox("UseNeuralNetwork", _useNeuralNetworkStatic);
+            _gd.addCheckbox("ShowFileDialog", false);
 	        _gd.addStringField("NeuralNetworkFile", _neuralNetworkFileStatic, 50); 
 	        _gd.showDialog();
 	        if (_gd.wasCanceled()) {
@@ -69,7 +71,16 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 	        }
 	        _displayInternalInfo = _displayInternalInfoStatic = _gd.getNextBoolean();
 	        _useNeuralNetwork = _useNeuralNetworkStatic = _gd.getNextBoolean();
-	        _neuralNetworkFile = _neuralNetworkFileStatic = _gd.getNextString();
+            boolean showFileDialog = _gd.getNextBoolean();
+            String tempFilePath = null;
+            if (showFileDialog) {
+                OpenDialog od = new OpenDialog("Choose a .txt config file", null);
+                tempFilePath = ColorParticleAnalyzerIJ.getFilePath(od);
+                if (tempFilePath != null)
+                    _neuralNetworkFile = _neuralNetworkFileStatic = tempFilePath;
+            }
+            if (tempFilePath == null)
+                _neuralNetworkFile = _neuralNetworkFileStatic = _gd.getNextString();
 		}
         return IJ.setupDialog(imp, _setupReturnValue);
 	}
