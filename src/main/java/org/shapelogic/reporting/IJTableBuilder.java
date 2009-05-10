@@ -11,7 +11,9 @@ public class IJTableBuilder extends BaseTableBuilder {
     protected ResultsTable _resultsTable;
 
     public IJTableBuilder(TableDefinition tableDefinition, ResultsTable rt) {
-        super(tableDefinition);
+        super(tableDefinition, true);
+        //XXX this is inefficient creates a list of object containing everything
+        //in the table, done for testing purposes, could have different configurations
         _resultsTable = rt;
     }
 
@@ -32,6 +34,7 @@ public class IJTableBuilder extends BaseTableBuilder {
             else
                 _resultsTable.addLabel(Headings.CATEGORY, "NA");
         }
+        super.buildLineElement(column, line);
     }
 
     @Override
@@ -44,5 +47,6 @@ public class IJTableBuilder extends BaseTableBuilder {
     public void buildHeadlineElement(int column) {
         if (column != 0) //First column is a the cagegorizer lable, maybe also test heading
             _resultsTable.getFreeColumn(_tableDefinition.getColumnDefinition().get(column).getColumnName());
+        super.buildHeadlineElement(column);
     }
 }
