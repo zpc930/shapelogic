@@ -3,6 +3,7 @@ package org.shapelogic.machinelearning;
 import java.io.Reader;
 import java.io.StringReader;
 
+import java.util.List;
 import junit.framework.TestCase;
 
 import org.shapelogic.streamlogic.RulePredicate;
@@ -91,7 +92,7 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
         assertEquals(1.,rule2.value);
     }
 	
-	public void testFile() throws Exception {
+	public void testDefaultParticleNNFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 		String path = "src/test/resources/data/neuralnetwork/default_particle_nn.txt";
 		FFNeuralNetworkWeights result = parser.parse(path);
@@ -105,4 +106,57 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		assertEquals(1., result.getWeights()[0][3]);
 	}
 
+	public void testParticleWithRulesNNFile() throws Exception {
+		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+		String path = "src/test/resources/data/neuralnetwork/particle_nn_with_rules.txt";
+		FFNeuralNetworkWeights result = parser.parse(path);
+		assertNotNull(result);
+		assertEquals(1, result.getFeatureList().size());
+		assertEquals(2, result.getOhList().size());
+		assertEquals(2, result.getRulePredicates().size());
+		assertEquals(0, result.getPrintList().size());
+		assertEquals(1, result.getWeights().length);
+		assertEquals(1., result.getWeights()[0][0]);
+		assertEquals(-1., result.getWeights()[0][1]);
+		assertEquals(-1., result.getWeights()[0][2]);
+		assertEquals(1., result.getWeights()[0][3]);
+	}
+
+	public void testParticleWithPrintsNNFile() throws Exception {
+		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+		String path = "src/test/resources/data/neuralnetwork/particle_nn_with_print.txt";
+		FFNeuralNetworkWeights result = parser.parse(path);
+		assertNotNull(result);
+		assertEquals(1, result.getFeatureList().size());
+		assertEquals(2, result.getOhList().size());
+		assertEquals(0, result.getRulePredicates().size());
+        List<String> printList = result.getPrintList();
+		assertEquals("Category", printList.get(0));
+		assertEquals("AspectRatio", printList.get(1)); //this is aspectRatio in file
+		assertEquals(2, result.getPrintList().size());
+		assertEquals(1, result.getWeights().length);
+		assertEquals(1., result.getWeights()[0][0]);
+		assertEquals(-1., result.getWeights()[0][1]);
+		assertEquals(-1., result.getWeights()[0][2]);
+		assertEquals(1., result.getWeights()[0][3]);
+	}
+
+	public void testParticleWithRulesPrintsNNFile() throws Exception {
+		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+		String path = "src/test/resources/data/neuralnetwork/particle_nn_with_rules_print.txt";
+		FFNeuralNetworkWeights result = parser.parse(path);
+		assertNotNull(result);
+		assertEquals(1, result.getFeatureList().size());
+		assertEquals(2, result.getOhList().size());
+		assertEquals(2, result.getRulePredicates().size());
+        List<String> printList = result.getPrintList();
+		assertEquals("Category", printList.get(0));
+		assertEquals("aspectRatio", printList.get(1));
+		assertEquals(2, result.getPrintList().size());
+		assertEquals(1, result.getWeights().length);
+		assertEquals(1., result.getWeights()[0][0]);
+		assertEquals(-1., result.getWeights()[0][1]);
+		assertEquals(-1., result.getWeights()[0][2]);
+		assertEquals(1., result.getWeights()[0][3]);
+	}
 }
