@@ -195,17 +195,17 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
                     showMessage("Parsing error","File: " + _neuralNetworkFile +
                         "\n has error, it returns FFNeuralNetworkWeights == null.");
                 else
-                    loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights, StreamNames.CATEGORIES);
+                    loadLetterStreams.loadUserDefinedSymbolStreams(fFNeuralNetworkWeights, StreamNames.CATEGORY);
 			} catch (Exception e) {
                 showMessage("Parsing error","File: " + _neuralNetworkFile +
                         "\n has error: " + e.getMessage());
 				fFNeuralNetworkWeights = null;
 			}
 		}
-		if (fFNeuralNetworkWeights == null) {
-            loadLetterStreams.makeXOrStream(StreamNames.CATEGORIES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+		if (fFNeuralNetworkWeights == null || fFNeuralNetworkWeights.getRulePredicates().size() == 0) {
+            loadLetterStreams.makeXOrStream(StreamNames.CATEGORY, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
         }
-        _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.CATEGORIES, this);
+        _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.CATEGORY, this);
 	}
 
 	/** Method to override if you want to define your own neural network.<br />  
@@ -239,7 +239,7 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 		FFNeuralNetworkStream neuralNetworkStream = new FFNeuralNetworkStream(
 				fFNeuralNetworkWeights,this);
          _categorizer = neuralNetworkStream.getOutputStream();
-         _context.put(StreamNames.CATEGORIES, _categorizer);
+         _context.put(StreamNames.CATEGORY, _categorizer);
  		if (0 < fFNeuralNetworkWeights.getPrintList().size())
  			_printListOverwrite = fFNeuralNetworkWeights.getPrintList();
 	}
@@ -408,6 +408,13 @@ public class ColorParticleAnalyzer extends BaseParticleCounter {
 
     public void setUseNeuralNetwork(boolean useNeuralNetwork) {
         _useNeuralNetwork = useNeuralNetwork;
+    }
+
+    /** This is only for testing the result table. <br />
+     * This is empty when running from ColorParticleAnalyzerIJ.
+     */
+    public List getTableBuilderOutputList() {
+        return _tableBuilder.getOutputList();
     }
 
 }
