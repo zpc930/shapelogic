@@ -30,9 +30,11 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
     protected static boolean _noMatchStatic = false;
     protected static boolean _toMaskStatic = false;
     protected static boolean _displayInternalInfoStatic = false;
+    protected static boolean _displayResultTableStatic = true;
+    protected static boolean _displayInputDialogStatic = true;
     protected static boolean _useNeuralNetworkStatic = false;
     protected static String _neuralNetworkFileStatic = null;
-    
+
 	@Override
 	public void run(ImageProcessor ip) {
 		run();
@@ -41,8 +43,9 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 	@Override
 	public int setup(String arg, ImagePlus imp) {
 		_guiWrapper = IJGui.INSTANCE;
-        if (arg != null && arg.indexOf("InternalInfo") != -1)
-        	_useInputDilog = true;
+        if (arg != null && arg.indexOf("InternalInfo") != -1) {
+            _displayAll = true;
+        }
 		if (imp == null)
 			return setup(arg, (SLImage)null);
 		return setup(arg, new IJImage(imp));
@@ -59,8 +62,10 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 
 	@Override
 	public int showDialog(ImagePlus imp, String command, PlugInFilterRunner pfr) {
-		if (_useInputDilog) {
+		if (_displayInputDialogStatic || _displayAll) {
 	        _gd = new GenericDialog(getClass().getSimpleName(), IJ.getInstance());
+	        _gd.addCheckbox("DisplayInputDialog: ", _displayInputDialogStatic);
+	        _gd.addCheckbox("DisplayResultTable: ", _displayResultTableStatic);
 	        _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
 	        _gd.addCheckbox("UseNeuralNetwork", _useNeuralNetworkStatic);
             _gd.addCheckbox("ShowFileDialog", false);
@@ -69,6 +74,8 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 	        if (_gd.wasCanceled()) {
 	            return DONE;
 	        }
+            _displayInputDialogStatic = _gd.getNextBoolean();
+            _displayResultTable = _displayResultTableStatic = _gd.getNextBoolean();
 	        _displayInternalInfo = _displayInternalInfoStatic = _gd.getNextBoolean();
 	        _useNeuralNetwork = _useNeuralNetworkStatic = _gd.getNextBoolean();
             boolean showFileDialog = _gd.getNextBoolean();
@@ -76,10 +83,10 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
             if (showFileDialog) {
                 OpenDialog od = new OpenDialog("Choose a .txt config file", null);
                 tempFilePath = ColorParticleAnalyzerIJ.getFilePath(od);
-                if (tempFilePath != null)
+                if (tempFilePath != null && 0 < tempFilePath.trim().length())
                     _neuralNetworkFile = _neuralNetworkFileStatic = tempFilePath;
             }
-            if (tempFilePath == null)
+            if (tempFilePath == null || tempFilePath.trim().length() == 0)
                 _neuralNetworkFile = _neuralNetworkFileStatic = _gd.getNextString();
 		}
         return IJ.setupDialog(imp, _setupReturnValue);

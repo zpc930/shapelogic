@@ -31,13 +31,15 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	protected LoadLetterStreams loadLetterStreams;
 	protected NumberedStream<String> _categorizer;
 	
-    protected boolean _useInputDilog;
     protected boolean _useNeuralNetwork;
     protected String _neuralNetworkFile;
     
     protected BaseTableBuilder _tableBuilder;
     protected TableDefinition _tableDefinition;
     protected List<String> _printListOverwrite;
+    
+    protected boolean _displayAll = false;
+    protected boolean _displayResultTable = false;
     
 	/** This does really not belong in a vectorizer. */
 	@Override
@@ -46,7 +48,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 			_categorizer = StreamFactory.findNumberedStream(StreamNames.LETTERS, this);
 		String message = "";
         StringBuffer internalInfo = new StringBuffer();
-        if (_displayInternalInfo) {
+        if (_displayInternalInfo || _displayAll) {
             internalInfo.append("\n===================Internal info for skeletonized lines===================\n");
         }
 		for (int i = 0; hasNext(); i++)
@@ -57,7 +59,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 			message += currentMatch;
 			if (currentMatch == null || "".equals(currentMatch))
 				System.out.println("\n\nMatch failed for this:\n" + _cleanedupPolygon);
-            if (_displayInternalInfo) {
+            if (_displayInternalInfo || _displayAll) {
                 Polygon currentPolygon = _stream.get(i);
                 internalInfo.append(currentPolygon.toString());
             }
@@ -67,7 +69,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 			System.out.println("\n\nLetter matched failed for this:\n" + _cleanedupPolygon);
 		}
 		showMessage("","Letter match result: " + _matchingOH);
-        if (_displayInternalInfo) {
+        if (_displayInternalInfo || _displayAll) {
             showMessage("InternalInfo for skeletonized lines",internalInfo.toString());
         }
 	}
@@ -75,6 +77,8 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
     protected FFNeuralNetworkWeights readFFNeuralNetworkWeights() {
         FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
         try {
+            if (_neuralNetworkFile == null || _neuralNetworkFile.trim().length() == 0)
+                return null;
             FFNeuralNetworkWeights result = parser.parse(_neuralNetworkFile);
             if (result == null)
                 showMessage("Parsing error","File: " + _neuralNetworkFile +
@@ -154,7 +158,7 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	public void run() {
 		init();
 		matchLines();
-		if (_displayInternalInfo)
+		if (_displayResultTable || _displayAll)
 			printTable();
 	}
 
