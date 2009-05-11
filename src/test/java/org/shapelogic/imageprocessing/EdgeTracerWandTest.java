@@ -17,7 +17,7 @@ public class EdgeTracerWandTest extends EdgeTracerTests {
 	
 	@Override
 	public void setUp() {
-		boxPerimeter = 24.;
-		iPerimeter = 58.;
+		boxPerimeter = 21.65685424949238;
+		iPerimeter =   56.828427124746185;
 	}
 }
