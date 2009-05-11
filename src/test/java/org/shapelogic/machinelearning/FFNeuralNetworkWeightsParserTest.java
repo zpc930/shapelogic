@@ -37,9 +37,30 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		"LINE_COUNT == 5 \n" +
 		"HOLE_COUNT == 1 \n";
 	
+	public static final String COMMENTS = "========== COMMENT \n"+
+		"You can have one or more lines of\n" +
+		"comments\n" +
+		"They are just ignored\n";
+
 	public void testNoPrintNormalSequence() {
 		String inputString = INPUT_NO_PRINT;
 		Reader input = new StringReader(inputString); 
+		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+		FFNeuralNetworkWeights result = parser.parse(input);
+		assertNotNull(result);
+		assertEquals(3, result.getFeatureList().size());
+		assertEquals(3, result.getOhList().size());
+		assertEquals(2, result.getWeights().length);
+		assertEquals(1., result.getWeights()[0][0]);
+		assertEquals(2., result.getWeights()[0][1]);
+		assertEquals(3., result.getWeights()[0][2]);
+		assertEquals(4., result.getWeights()[1][0]);
+		assertEquals(5., result.getWeights()[1][1]);
+	}
+
+	public void testNoPrintNormalSequenceWithComments() {
+		String inputString = COMMENTS + INPUT_NO_PRINT;
+		Reader input = new StringReader(inputString);
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 		FFNeuralNetworkWeights result = parser.parse(input);
 		assertNotNull(result);

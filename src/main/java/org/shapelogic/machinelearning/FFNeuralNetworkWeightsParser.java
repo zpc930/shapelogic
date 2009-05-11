@@ -47,12 +47,13 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 public class FFNeuralNetworkWeightsParser {
     
     final static public String BLOCK_START = "==========";
-    final static public String FEATURES = "FEATURES";
-    final static public String RESULTS = "RESULTS";
-    final static public String WEIGHTS = "WEIGHTS";
-    final static public String PRINTS = "PRINTS";
-    final static public String RULES_PREDICATE = "RULES_PREDICATE";
+    final static public String COMMENT = "COMMENT";
     final static public String DEFINITION = "def";
+    final static public String FEATURES = "FEATURES";
+    final static public String PRINTS = "PRINTS";
+    final static public String RESULTS = "RESULTS";
+    final static public String RULES_PREDICATE = "RULES_PREDICATE";
+    final static public String WEIGHTS = "WEIGHTS";
     
     protected Scanner _scanner;
     protected FFNeuralNetworkWeights _nnWeights;
@@ -94,6 +95,8 @@ public class FFNeuralNetworkWeightsParser {
 	    	else if (WEIGHTS.equalsIgnoreCase(_blockLookahead)) weights();
 	    	else if (RULES_PREDICATE.equalsIgnoreCase(_blockLookahead)) parsePredicateRules();
 	    	else if (DEFINITION.equalsIgnoreCase(_blockLookahead)) parseDefinition(_nnWeights.getRulePredicates());
+	    	else if (COMMENT.equalsIgnoreCase(_blockLookahead)) parseStringList(null);
+
 	    	else {
 	    		throw new ParseException("Unexpected symbol after " + 
 	    				BLOCK_START + ": " + _blockLookahead, 0); 
@@ -113,7 +116,8 @@ public class FFNeuralNetworkWeightsParser {
     		String word = _scanner.next();
     		if (endOfBlock(word))
     			break;
-    		outputList.add(word);
+            if (outputList != null)
+        		outputList.add(word);
     	}
     }
     
@@ -141,7 +145,6 @@ public class FFNeuralNetworkWeightsParser {
     		double number = _scanner.nextDouble();
     		RulePredicate rule = new RulePredicate(definitionName, streamName, relation, number);
     		rulePredicates.add(rule);
-    		System.out.println("rulePredicates: " + rulePredicates.size());
     	}
     }
 
