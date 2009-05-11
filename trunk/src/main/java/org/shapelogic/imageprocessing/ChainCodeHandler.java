@@ -46,6 +46,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 	protected TreeMap<Integer,CPointInt> _pointMap = new TreeMap<Integer,CPointInt>();
 	protected int _accumulatedDirectionChange;
 	protected int _accumulatedAbsoluteDirectionChange;
+	protected int _diagonalElementCount = 0;
 	
 	/** What should happen to the last point if the first and the last point is 
 	 * the same.
@@ -185,6 +186,7 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
             return;
 		byte lastDirection = _chainCodeForMultiLine[_lastChain];
 		int lastDirectionChange = 0;
+        boolean lastDiagonal = false;
 		for (int i = 0; i <= _lastChain; i++) {
 			byte direction = _chainCodeForMultiLine[i];
 			if ((direction & 1) != 0)//Odd number
@@ -199,6 +201,14 @@ public class ChainCodeHandler extends BaseAnnotatedShape implements CalcInvoke<M
 			//-4 and 4 are both correct, so you have to look at the last direction
 			if (4 == directionChange && 0 < lastDirectionChange)
 				directionChange -= 8;
+            // To prevent over counting perimiter 
+            boolean diagonal = ((direction & 1) == 0) && (directionChange == 2 || directionChange == -2);
+            if (diagonal && !lastDiagonal) {
+                _perimeter += SQRT_2 - 2;
+                lastDiagonal = true;
+            }
+            else
+                lastDiagonal = false;
 			lastDirectionChange = directionChange; 
 			_accumulatedDirectionChange += directionChange;
 			_accumulatedAbsoluteDirectionChange  += Math.abs(directionChange);
