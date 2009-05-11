@@ -22,7 +22,7 @@ import org.shapelogic.util.PointType;
 abstract public class EdgeTracerTests extends TestCase {
 	final static String _dirURL = "./src/test/resources/images/particles";
 	final static String _fileFormat = ".gif";
-	protected Double boxPerimeter = 20.; //
+	protected Double boxPerimeter = 17.656854249492383; //
 	protected Double iPerimeter = 54.;
 	
 	String filePath(String fileName) {
@@ -96,7 +96,7 @@ abstract public class EdgeTracerTests extends TestCase {
 		assertEquals(foregroundColor, image.get(2, 2)); //Foreground
 		IEdgeTracer edgeTracer = getInstance(image,foregroundColor,10,true);
 		Polygon cch = edgeTracer.autoOutline(5,5);
-		assertEquals(boxPerimeter,cch.getPerimeter());
+		assertClose(boxPerimeter, cch.getPerimeter());
 	}
 
 	public void testI() {
@@ -125,5 +125,12 @@ abstract public class EdgeTracerTests extends TestCase {
 	public void testNegativeModulus() {
 		assertEquals(-4, -4 % 8);
 	}
-	
+
+    public void assertClose(Double expected, Double actual) {
+        double absolute = 1;
+        double difference = Math.abs(expected - actual);
+        boolean far = absolute < difference;
+        if (far)
+            assertFalse("Expected: " + expected + " not close to actual: " + actual, true);
+    }
 }
