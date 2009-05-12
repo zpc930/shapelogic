@@ -30,6 +30,8 @@ public class FFNeuralNetworkWeights {
 		_featureList = featureList;
 		_ohList = ohList;
 		_weights = weights;
+		_printList = new ArrayList<String>();
+		_rulePredicates = new ArrayList<RulePredicate>();
 	}
 	
 	public List<String> getFeatureList() {

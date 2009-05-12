@@ -100,6 +100,12 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	protected void defineRules() {
  		FFNeuralNetworkWeights fFNeuralNetworkWeights =
                 readFFNeuralNetworkWeights();
+		if (fFNeuralNetworkWeights != null &&
+                fFNeuralNetworkWeights.getRulePredicates().size() == 0) {
+            showMessage("Missing rules","File: " + _neuralNetworkFile +
+                    "\n has missing letter definition rules, using default instead.");
+            fFNeuralNetworkWeights = null;
+        }
         if (fFNeuralNetworkWeights != null)
             loadLetterStreams.loadUserDefinedSymbolStreams(
                     fFNeuralNetworkWeights, StreamNames.LETTERS);
@@ -116,14 +122,24 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 		loadLetterStreams.loadLetterStream(null);
  		FFNeuralNetworkWeights fFNeuralNetworkWeights = 
                 readFFNeuralNetworkWeights();
+		if (fFNeuralNetworkWeights != null &&
+                fFNeuralNetworkWeights.getWeights().length == 0) {
+            showMessage("Missing weights","File: " + _neuralNetworkFile +
+                    "\n has missing neural network weights, using default instead.");
+            fFNeuralNetworkWeights = null;
+        }
 		if (fFNeuralNetworkWeights == null) {
 			String[] objectHypotheses = new String[] {"No holes", "Holes"};
 			String[] inputStreamName = {CommonLogicExpressions.HOLE_COUNT};
-			double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.);
+			double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(0.5);
 			fFNeuralNetworkWeights = new FFNeuralNetworkWeights(
 					Arrays.asList(inputStreamName),
 					Arrays.asList(objectHypotheses), 
 					weights);
+            String[] printArray = {"Category", "Points", "lineCount", "holeCount"};
+            List<String> printList = fFNeuralNetworkWeights.getPrintList();
+            for (String element: printArray)
+                printList.add(element);
 		}
 		FFNeuralNetworkStream neuralNetworkStream = new FFNeuralNetworkStream(
 				fFNeuralNetworkWeights,this);
