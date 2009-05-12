@@ -153,4 +153,24 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
         simpleDigit("9");
     }
 
+    public void testAWithMissingNeuralNetwork()
+    {
+        String fileName = "A";
+        String dataFileName = "polygon_digit_recognizer_with_rules_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(true);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		assertEquals("Holes",vectorizer.getMatchingOH());
+	}
+
+    public void testAWithNeuralNetwork()
+    {
+        String fileName = "A";
+        String dataFileName = "polygon_nn_with_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(true);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		assertEquals("Holes",vectorizer.getMatchingOH());
+	}
+
 }
