@@ -1,0 +1,32 @@
+========== COMMENT
+This is doing the same as the old digit matcher. Currently only for the digits:
+0 and 1.
+
+========== def 0
+holeCount == 1
+tJunctionCount == 0
+endPointCount == 0
+multiLineCount == 1
+curveArchCount > 0
+hardPointCount == 0
+softPointCount > 0
+
+========== def 1
+holeCount == 0
+tJunctionLeftCount == 0
+tJunctionRightCount == 0
+endpointBottomPointCount == 1
+horizontalLineCount == 0
+verticalLineCount == 1
+endPointCount == 2
+multiLineCount == 0
+softPointCount == 0
+aspectRatio < 0.4
+
+========== PRINTS
+Category
+Points
+lineCount
+holeCount
+
+========== 
