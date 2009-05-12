@@ -137,4 +137,20 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 //        simpleDigit("5");
     }
 
+	public void test6() {
+        simpleDigit("6");
+    }
+
+	public void test7() {
+//        simpleDigit("7");
+    }
+
+	public void test8() {
+        simpleDigit("8");
+    }
+
+	public void test9() {
+        simpleDigit("9");
+    }
+
 }
