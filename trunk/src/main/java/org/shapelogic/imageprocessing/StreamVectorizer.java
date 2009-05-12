@@ -229,4 +229,13 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	protected boolean populateResultsTableRow(int index) {
 		return true;
 	}
+
+    public void setUseNeuralNetwork(boolean useNeuralNetwork) {
+        _useNeuralNetwork = useNeuralNetwork;
+    }
+
+    public void setNeuralNetworkFile(String neuralNetworkFile) {
+        _neuralNetworkFile = neuralNetworkFile;
+    }
+
 }
