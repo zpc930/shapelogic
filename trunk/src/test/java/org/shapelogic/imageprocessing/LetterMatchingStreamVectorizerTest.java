@@ -112,4 +112,29 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		assertEquals("1",vectorizer.getMatchingOH());
 	}
 
+    public void simpleDigit(String fileName)
+    {
+        String dataFileName = "polygon_digit_recognizer_with_rules_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(false);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		assertEquals(fileName,vectorizer.getMatchingOH());
+	}
+
+	public void test2() {
+        simpleDigit("2");
+    }
+
+	public void test3() {
+        simpleDigit("3");
+    }
+
+	public void test4() {
+//        simpleDigit("4");
+    }
+
+	public void test5() {
+//        simpleDigit("5");
+    }
+
 }
