@@ -92,4 +92,24 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		assertEquals("Holes; Holes; NoHoles",vectorizer.getMatchingOH());
 	}
 
+	public void test0() //The digit 0
+    {
+		String fileName = "O"; //This is actually the letter
+        String dataFileName = "polygon_digit_recognizer_with_rules_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(false);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		assertEquals("0",vectorizer.getMatchingOH());
+	}
+
+	public void test1() //The digit 1
+    {
+		String fileName = "I"; //This is actually the letter
+        String dataFileName = "polygon_digit_recognizer_with_rules_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(false);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		assertEquals("1",vectorizer.getMatchingOH());
+	}
+
 }
