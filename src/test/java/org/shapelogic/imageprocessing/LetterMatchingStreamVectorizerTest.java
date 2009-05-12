@@ -130,11 +130,11 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
     }
 
 	public void test4() {
-//        simpleDigit("4");
+        simpleDigit("4");
     }
 
 	public void test5() {
-//        simpleDigit("5");
+        simpleDigit("5");
     }
 
 	public void test6() {
@@ -142,7 +142,7 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
     }
 
 	public void test7() {
-//        simpleDigit("7");
+        simpleDigit("7");
     }
 
 	public void test8() {
