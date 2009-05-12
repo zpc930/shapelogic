@@ -23,10 +23,13 @@ import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnImage;
  */
 public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDistanceVectorizerTests {
 
+    StreamVectorizer _streamVectorizer;
+    String _dataDir = "src/test/resources/data/neuralnetwork";
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		vectorizer = new StreamVectorizer();
+        vectorizer = _streamVectorizer = new StreamVectorizer();
 	}
 	
 	public void testABC() {
@@ -45,6 +48,27 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		printAnnotaions(polygon);
 		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
 		assertEquals("A; B; C",vectorizer.getMatchingOH());
+	}
+
+	public void testABC_LettersForHolesWithNeuralNetwork() {
+		String fileName = "ABC";
+        String dataFileName = "polygon_nn_with_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(true);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		int pixel = bp.get(0,0);
+		assertEquals(PixelType.BACKGROUND_POINT.color,pixel);
+		Polygon polygon = vectorizer.getPolygon();
+		Polygon improvedPolygon = polygon.improve();
+		AnnotatedShape annotations = improvedPolygon.getAnnotatedShape();
+		Set<GeometricShape2D> endPoints = annotations.getShapesForAnnotation(PointType.END_POINT);
+		System.out.println("End points: " + endPoints);
+//		assertEquals(2, endPoints.size());
+		Set<GeometricShape2D> inflectionPoints = annotations.getShapesForAnnotation(LineType.INFLECTION_POINT);
+		assertEmptyCollection(inflectionPoints);
+		printAnnotaions(polygon);
+		Polygon cleanedPolygon = vectorizer.getCleanedupPolygon();
+		assertEquals("Holes; Holes; No_holes",vectorizer.getMatchingOH());
 	}
 
 }
