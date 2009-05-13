@@ -1,6 +1,6 @@
 ========== COMMENT
-This is doing the same as the old digit matcher. Currently only for the digits:
-0 and 1.
+This categorizer setup file is doing the same as the old digit matcher, 
+DigitStreamVectorizer_.
 
 ========== def 0
 holeCount == 1

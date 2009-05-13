@@ -16,4 +16,160 @@ Programming rules and neural networks
   occasionally you might sill need to do this. It is not too complicated but
   does requires knowledge of Java. 
   
+* Defining rules for categories in ShapeLogic 1.5
+  
+  This description has been moved to {{{programming.html}programming}} page. 
+  
+  This is done by sub classing ColorParticleAnalyzer or ColorParticleAnalyzerIJ.
+  Override the categorizeStreams() method.
+  
+  Use ColorParticleAnalyzerIJ if you work with ImageJ and ColorParticleAnalyzer 
+  if you work without.
+
+  Here is the current categorize code. It is only there to serve as an example: 
+  
+  The {{{logic-language.html#syntax} rule syntax}} is very straightforward. 
+  There are a lot of numeric streams
+  with one lazy calculated number for each particle. E.g. aspect ratio stream.
+  Then you define one rule for each constraint you want to put on a given
+  category.
+  
+  In order to belong to the category Flat the aspect ratio for a particle just 
+  has to greater than 1.1.
+  
+  In order to belong to the category "Light round" the aspect ratio for a particle just 
+  has to between 0.9 and 1.1 and the brightness have to be greater than 150.
+  
+  Note that a particle that satisfy more categories will not belong to any of them.
+  
+  ** Default rules and neural network for categories in ShapeLogic 1.5
+  
++-----------------------------------+
+	@Override
+	protected void categorizeStreams() {
+		loadParticleStreams.exampleMakeParticleStream();
+        if (_useNeuralNetwork) {
+                defineNeuralNetwork();
+        }
+        else {
+            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, LoadParticleStreams.EXAMPLE_PARTICLE_ARRAY);
+            _categorizer = (ListStream<String>) QueryCalc.getInstance().get(StreamNames.PARTICLES, this);
+        }
+	}
+
+	private void defineNeuralNetwork() {
+		String[] objectHypotheses = new String[] {"Tall", "Flat"};
+		String[] inputStreamName = {StreamNames.ASPECT};
+		double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
+		_neuralNetworkStream = new FFNeuralNetworkStream(
+				inputStreamName,objectHypotheses, weights,this);
+         _categorizer = _neuralNetworkStream.getOutputStream();
+	}
+	
+	
+	final static public String[] EXAMPLE_PARTICLE_ARRAY = 
+	{"Flat","Tall","Light round", "Dark round"};	
+	
+	/** This shows what to do to define rules for the color particle analyzer.<br />
+	 * 
+	 * This is not useful.<br /> 
+	 * Light and dark is turned around if inverted LUT is used.<br /> 
+	 */
+	public static void exampleMakeParticleStream() {
+		LoadLetterStreams.rule("Flat", ASPECT_RATIO, ">", 1.1, null);
+		
+		LoadLetterStreams.rule("Tall", ASPECT_RATIO, "<", 0.9, null);
+
+		LoadLetterStreams.rule("Light round", StreamNames.COLOR_GRAY, ">", 150, null);
+		LoadLetterStreams.rule("Light round", ASPECT_RATIO, "<", 1.1, null);
+		LoadLetterStreams.rule("Light round", ASPECT_RATIO, ">", 0.9, null);
+
+		LoadLetterStreams.rule("Dark round", StreamNames.COLOR_GRAY, "<", 120, null);
+		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, "<", 1.1, null);
+		LoadLetterStreams.rule("Dark round", ASPECT_RATIO, ">", 0.9, null);
+	}
++-----------------------------------+
+
+  Currently you have to override categorizeStreams() to customize neural 
+  network or rule set, this will be re factored so there are 2 protected 
+  methods that can be overridden: 
+  
+  * defineNeuralNetwork()
+   
+  * defineRules()
+  
+  []
+  
+* How to {override} Color Particle Analyzer category rules
+  
+  Here is a very simple example that overrides both the declarative rule set 
+  and the neural network:
+    
+** Overriding rule set example
+
+  This example only has 2 categories Flat and Non flat. 
+  It is flat if it twice as wide as it is high.
+  
+** Overriding neural network example
+  
+  This example only has 2 categories Light and Dark. 
+  
+  Link to {{{machine-learning.html}neural network and machine learning}}.
+
+  Copy the following text into a file called CustomParticleAnalyzer_.java:
+
++-----------------------------------+
+import org.shapelogic.imageprocessing.ColorParticleAnalyzerIJ;
+import org.shapelogic.logic.CommonLogicExpressions;
+import org.shapelogic.machinelearning.ExampleNeuralNetwork;
+import org.shapelogic.machinelearning.FFNeuralNetworkStream;
+import org.shapelogic.streamlogic.LoadLetterStreams;
+import org.shapelogic.streamlogic.StreamNames;
+import org.shapelogic.streams.XOrListStream;
+
+public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
+	
+    @Override
+    protected void categorizeStreams() {
+        loadParticleStreams.exampleMakeParticleStream();
+        if (_useNeuralNetwork) {  
+            //----------Override neural network----------
+            String[] objectHypotheses = new String[] {"Dark", "Light"};
+            String[] inputStreamName = {StreamNames.COLOR_GRAY};
+            double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(128.); 
+            _neuralNetworkStream = new FFNeuralNetworkStream(
+                inputStreamName,objectHypotheses, weights,this);
+             _categorizer = _neuralNetworkStream.getOutputStream();
+        }
+        else { //
+            //----------Override declarative rule set----------
+            LoadLetterStreams loadLetterStreams = new LoadLetterStreams(this);
+            loadLetterStreams.rule("Flat", CommonLogicExpressions.ASPECT_RATIO, ">", 2, null);
+            loadLetterStreams.rule("Non flat", CommonLogicExpressions.ASPECT_RATIO, "<", 2, null);
+            loadLetterStreams.makeXOrStream(StreamNames.PARTICLES, new String[] {"Flat", "Non flat"});
+            _categorizer = (XOrListStream) getContext().get(StreamNames.PARTICLES);
+        }
+    }
+}
++-----------------------------------+
+  
+** Compile from within ImageJ
+
+  * Place the CustomParticleAnalyzer_.java into ImageJ/plugin/ShapeLogic directory.
+  
+  * Compile it from within ImageJ, by going to Plugin -> Compile and Run ...
+
+  []
+  
+** Compile from outside ImageJ
+
+  * Compile CustomParticleAnalyzer_.java someplace else using Eclipse,
+  NetBeans or javac and take the resulting class file:
+
+  CustomParticleAnalyzer_.class 
+  
+  * Move it into ImageJ/plugin/ShapeLogic directory.
+
+  []
+
   
