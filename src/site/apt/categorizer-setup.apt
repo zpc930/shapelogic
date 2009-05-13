@@ -1,0 +1,16 @@
+            ------
+            Categorizer file for loading rules and neural networks
+            ------
+            Sami Badawi
+            ------
+            2009/05/13
+            ------
+
+Categorizer setup for loading rules and neural networks
+
+  If the user wanted to customizing rules or neural networks for either the 
+  Color Particle Analyzer or for the letter matcher it demanded some 
+  {{{programming.html}programming}} until ShapeLogic 1.6. Now you can do most of this by 
+  loading a categorizer file.  
+  
+  

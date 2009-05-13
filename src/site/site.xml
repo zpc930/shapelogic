@@ -44,12 +44,14 @@
       </item>
       <item name="Developer Resources" href="index.html" collapse="true">
 		  <item name="Annotations" href="annotations.html"/>
+		  <item name="Categorizer Setup" href="categorizer-setup.html"/>
 		  <item name="Component Framework" href="component.html"/>
 		  <item name="Image Formats" href="image-formats.html"/>
 		  <item name="Lazy Data Streams" href="streams.html"/>
 		  <item name="Line Type" href="line-type.html"/>
 		  <item name="Pixel Types" href="pixel-types.html"/>
 		  <item name="Point Type" href="point-type.html"/>
+		  <item name="Programming" href="programming.html"/>
 		  <item name="Scripting" href="scripting.html"/>
       </item>
       <item name="Meta ShapeLogic" href="index.html" collapse="true">
@@ -79,9 +81,6 @@
       </item>
       <item name="Project Blog" href="index.html" collapse="true">
           <item name="Sami Badawi" href="http://samibadawi.blogspot.com"/>
-      </item>
-      <item name="Support" href="index.html" collapse="true">
-          <item name="Vision consulting" href="consulting.html"/>
       </item>
     </menu>
 

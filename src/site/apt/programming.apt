@@ -1,0 +1,19 @@
+            ------
+            Programming rules and neural networks
+            ------
+            Sami Badawi
+            ------
+            2009/05/13
+            ------
+
+Programming rules and neural networks
+
+  If the user wanted to customizing rules or neural networks for either the 
+  Color Particle Analyzer or for the letter matcher it demanded some 
+  programming until ShapeLogic 1.6. Now you can do most of this by 
+  loading a {{{categorizer-setup.html}categorizer setup}} file. 
+  In most cases this should be a lot simpler, but
+  occasionally you might sill need to do this. It is not too complicated but
+  does requires knowledge of Java. 
+  
+  
