@@ -162,6 +162,30 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		assertEquals(1., result.getWeights()[0][3]);
 	}
 
+	public void testParticleNNMultiLayerFile() throws Exception {
+		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
+		String path = "src/test/resources/data/neuralnetwork/particle_nn_multi_layer.txt";
+		FFNeuralNetworkWeights result = parser.parse(path);
+		assertNotNull(result);
+		assertEquals(1, result.getFeatureList().size());
+		assertEquals(2, result.getOhList().size());
+		assertEquals(0, result.getRulePredicates().size());
+        List<String> printList = result.getPrintList();
+		assertEquals("Category", printList.get(0));
+		assertEquals("AspectRatio", printList.get(1)); //this is aspectRatio in file
+		assertEquals(2, result.getPrintList().size());
+		assertEquals(2, result.getWeights().length);
+		assertEquals(1., result.getWeights()[0][0]);
+		assertEquals(-1., result.getWeights()[0][1]);
+		assertEquals(-1., result.getWeights()[0][2]);
+		assertEquals(1., result.getWeights()[0][3]);
+
+		assertEquals(0., result.getWeights()[1][0]);
+		assertEquals(0., result.getWeights()[1][1]);
+		assertEquals(1., result.getWeights()[1][2]);
+		assertEquals(1., result.getWeights()[1][3]);
+	}
+
 	public void testParticleWithRulesPrintsNNFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
 		String path = "src/test/resources/data/neuralnetwork/particle_nn_with_rules_print.txt";
