@@ -1,0 +1,16 @@
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== PRINTS
+Category
+AspectRatio
+========== WEIGHTS
+1. -1. 
+-1. 1.
+========== WEIGHTS
+0. 0. 
+1. 1.
+========== 
+
