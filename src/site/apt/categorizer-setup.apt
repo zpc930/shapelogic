@@ -11,6 +11,77 @@ Categorizer setup for loading rules and neural networks
   If the user wanted to customizing rules or neural networks for either the 
   Color Particle Analyzer or for the letter matcher it demanded some 
   {{{programming.html}programming}} until ShapeLogic 1.6. Now you can do most of this by 
-  loading a categorizer file.  
+  loading a categorizer file.
   
+  Here is a directory with example files:
+  {{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/}}
+  
+  There is a simple one to one mapping of rule definition:
+  
+* Defining digit categorizer with a setup file
+
+  Done in this file:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/polygon_digit_recognizer_with_rules_print.txt}
+  shapelogic/src/test/resources/data/neuralnetwork/polygon_digit_recognizer_with_rules_print.txt}}:
+  
+  
++---------------------------------------------------------+
+
+========== COMMENT
+This categorizer setup file is doing the same as the old digit matcher, 
+DigitStreamVectorizer_.
+
+========== def 0
+holeCount == 1
+tJunctionCount == 0
+endPointCount == 0
+multiLineCount == 1
+curveArchCount > 0
+hardPointCount == 0
+softPointCount > 0
+
+========== def 1
+holeCount == 0
+tJunctionLeftCount == 0
+tJunctionRightCount == 0
+endpointBottomPointCount == 1
+horizontalLineCount == 0
+verticalLineCount == 1
+endPointCount == 2
+multiLineCount == 0
+softPointCount == 0
+aspectRatio < 0.4
+
++---------------------------------------------------------+
+  
+  The biggest problem is to find the right names for the geometric feature.
+  
+  Currently it only understand 3 relations \>, \< and \=\=. 
+  
+  
+* Defining digit categorizer in DigitStreamVectorizer_ 
+  
++---------------------------------------------------------+
+public void makeDigitStream() {
+
+	rule("0", HOLE_COUNT, "==", 1.);
+	rule("0", T_JUNCTION_POINT_COUNT, "==", 0.);
+	rule("0", END_POINT_COUNT, "==", 0.);
+	rule("0", MULTI_LINE_COUNT, "==", 1.);
+	rule("0", CURVE_ARCH_COUNT, ">", 0.);
+	rule("0", HARD_CORNER_COUNT, "==", 0.);
+	rule("0", SOFT_POINT_COUNT, ">", 0.);
+
+	rule("1", HOLE_COUNT, "==", 0.);
+	rule("1", T_JUNCTION_LEFT_POINT_COUNT, "==", 0.);
+	rule("1", T_JUNCTION_RIGHT_POINT_COUNT, "==", 0.);
+	rule("1", END_POINT_BOTTOM_POINT_COUNT, "==", 1.);
+	rule("1", HORIZONTAL_LINE_COUNT, "==", 0.);
+	rule("1", VERTICAL_LINE_COUNT, "==", 1.);
+	rule("1", END_POINT_COUNT, "==", 2.);
+	rule("1", MULTI_LINE_COUNT, "==", 0.);
+	rule("1", SOFT_POINT_COUNT, "==", 0.);
+	rule("1", ASPECT_RATIO, "<", 0.4);
+		
++---------------------------------------------------------+
   
