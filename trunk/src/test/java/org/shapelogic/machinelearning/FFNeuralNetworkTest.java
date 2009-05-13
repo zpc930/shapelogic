@@ -28,7 +28,7 @@ public class FFNeuralNetworkTest extends TestCase {
         }
     };
 
-    /** Weights found using the Joone Neural Networks.  */
+    /** Logic And as a neural network.  */
     public final static double[][] WEIGHTS_FOR_AND = {
         {
             -1.5, //Bias first hidden layer
@@ -38,7 +38,7 @@ public class FFNeuralNetworkTest extends TestCase {
         }
     };
 
-    /** Weights found using the Joone Neural Networks.  */
+    /** Logic Or as a neural network.  */
     public final static double[][] WEIGHTS_FOR_OR = {
         {
             -0.5, //Bias first hidden layer
@@ -48,12 +48,36 @@ public class FFNeuralNetworkTest extends TestCase {
         }
     };
 
-    /** Weights found using the Joone Neural Networks.  */
+    /** Logic Not as a neural network.  */
     public final static double[][] WEIGHTS_FOR_NOT = {
         {
             0.5, //Bias first hidden layer
 
             -1.
+        }
+    };
+
+    /** Logic Identity as a neural network.  */
+    public final static double[][] WEIGHTS_IDENTITY_1_1 = {
+        {
+            0., //Bias first hidden layer
+
+            1.
+        }
+    };
+
+    /** Logic Or as a neural network.  */
+    public final static double[][] WEIGHTS_FOR_OR_MULTI_LAYER = {
+        {
+            -0.5, //Bias first hidden layer
+
+            1.,
+            1.
+        },
+        {
+            -0.5, //Bias second hidden layer, not that it is not the identity
+
+            1.
         }
     };
 
@@ -68,6 +92,13 @@ public class FFNeuralNetworkTest extends TestCase {
         xOrNn.addLayer(WEIGHTS_FOR_XOR[0]);
         xOrNn.addLayer(WEIGHTS_FOR_XOR[1]);
         return xOrNn;
+    }
+
+    static public FFNeuralNetwork makeORNNMultiLayeredFlawed() {
+        FFNeuralNetwork orNn = new FFNeuralNetwork(2,1);
+        orNn.addLayer(WEIGHTS_FOR_OR[0]);
+        orNn.addLayer(WEIGHTS_IDENTITY_1_1[0]);
+        return orNn;
     }
 
     private FFNeuralNetwork makeXORNN() {
@@ -171,7 +202,29 @@ public class FFNeuralNetworkTest extends TestCase {
         assertNNTrue( xOrNn.invoke(new double[]{1.,1.})[0]);
     }
 
-//======================OR NN======================
+  //======================OR and Identity layer, does not produce an OR ======================
+
+    public void testOrMultiLayeredNeuralNetwork00() {
+        FFNeuralNetwork xOrNn = makeORNNMultiLayeredFlawed();
+        assertNNTrue( xOrNn.invoke(new double[]{0.,0.})[0]);
+    }
+
+    public void testOrMultiLayeredNeuralNetwork01() {
+        FFNeuralNetwork xOrNn = makeORNNMultiLayeredFlawed();
+        assertNNTrue( xOrNn.invoke(new double[]{0.,1.})[0]);
+    }
+
+    public void testOrMultiLayeredNeuralNetwork10() {
+        FFNeuralNetwork xOrNn = makeORNNMultiLayeredFlawed();
+        assertNNTrue( xOrNn.invoke(new double[]{1.,0.})[0]);
+    }
+
+    public void testOrMultiLayeredNeuralNetwork11() {
+        FFNeuralNetwork xOrNn = makeORNNMultiLayeredFlawed();
+        assertNNTrue( xOrNn.invoke(new double[]{1.,1.})[0]);
+    }
+
+//======================NOT NN======================
 
     public void testNotNeuralNetwork0() {
         FFNeuralNetwork xOrNn = makeNotNN();

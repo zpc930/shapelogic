@@ -180,10 +180,12 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		assertEquals(-1., result.getWeights()[0][2]);
 		assertEquals(1., result.getWeights()[0][3]);
 
-		assertEquals(0., result.getWeights()[1][0]);
-		assertEquals(0., result.getWeights()[1][1]);
+		assertEquals(-0.5, result.getWeights()[1][0]);
+		assertEquals(-0.5, result.getWeights()[1][1]);
 		assertEquals(1., result.getWeights()[1][2]);
-		assertEquals(1., result.getWeights()[1][3]);
+		assertEquals(0., result.getWeights()[1][3]);
+		assertEquals(0., result.getWeights()[1][4]);
+		assertEquals(1., result.getWeights()[1][5]);
 	}
 
 	public void testParticleWithRulesPrintsNNFile() throws Exception {

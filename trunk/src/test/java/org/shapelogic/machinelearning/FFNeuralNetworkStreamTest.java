@@ -10,6 +10,7 @@ import static org.shapelogic.machinelearning.FFNeuralNetworkTest.WEIGHTS_FOR_AND
 import static org.shapelogic.machinelearning.FFNeuralNetworkTest.WEIGHTS_FOR_OR;
 import static org.shapelogic.machinelearning.FFNeuralNetworkTest.WEIGHTS_FOR_NOT;
 import static org.shapelogic.machinelearning.FFNeuralNetworkTest.WEIGHTS_FOR_XOR;
+import static org.shapelogic.machinelearning.FFNeuralNetworkTest.WEIGHTS_FOR_OR_MULTI_LAYER;
 
 /** Test of Feed Forward Neural Network Stream with external training. <br />
  *
@@ -74,6 +75,19 @@ public class FFNeuralNetworkStreamTest extends TestCase {
     public void testOrNeuralNetworkStream() {
         FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
                 RESULT_ARRAY , WEIGHTS_FOR_OR, null, _recursiveContext,
+                Constants.LAST_UNKNOWN);
+        ListStream<String> output = nn.getOutputStream();
+        assertEquals( NOTHING, output.next());
+        assertEquals( RESULT, output.next());
+        assertEquals( RESULT, output.next());
+        assertEquals( RESULT, output.next());
+    }
+
+  //======================OR NN MULTI LAYER======================
+
+    public void testOrMultiLayeredNeuralNetworkStream() {
+        FFNeuralNetworkStream nn = new FFNeuralNetworkStream(INPUT_ARRAY,
+                RESULT_ARRAY , WEIGHTS_FOR_OR_MULTI_LAYER, null, _recursiveContext,
                 Constants.LAST_UNKNOWN);
         ListStream<String> output = nn.getOutputStream();
         assertEquals( NOTHING, output.next());
