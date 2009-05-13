@@ -209,6 +209,16 @@ ShapeLogic
   
 * News
 
+** 2009/05/13 ShapeLogic Java 1.6 improve neural network and rules
+  
+  * Extend Multi-layer feed forward neural network to work with letter matcher
+  
+  * Load neural network from file
+  
+  * Load categorizer rules from file
+  
+  []
+  
 ** 2009/04/09 ShapeLogic Java 1.5 with machine learning released 
 
   * Start combining {{{machine-learning.html}machine learning}} and declarative
@@ -296,19 +306,11 @@ ShapeLogic
   
   For more up to date information on ongoing development work look at these 
   
+  * Train a neural network to {{{cell.html}categorize specific cells}}
+  
   * Blog {{{http://samibadawi.blogspot.com} Declarative Computer Vision}} 
   
   * {{{roadmap.html} Roadmap}}
-  
-  []
-
-** ShapeLogic 1.6 Java improve neural network
-
-  * Extend Multi-layer feed forward neural network to work with letter matcher
-  
-  * Add functionality to load neural network from file
-  
-  * Train a neural network to {{{cell.html}categorize specific cells}}
   
   []
 
