@@ -42,7 +42,6 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		AnnotatedShape annotations = improvedPolygon.getAnnotatedShape();
 		Set<GeometricShape2D> endPoints = annotations.getShapesForAnnotation(PointType.END_POINT);
 		System.out.println("End points: " + endPoints);
-//		assertEquals(2, endPoints.size());
 		Set<GeometricShape2D> inflectionPoints = annotations.getShapesForAnnotation(LineType.INFLECTION_POINT);
 		assertEmptyCollection(inflectionPoints);
 		printAnnotaions(polygon);
@@ -118,7 +117,7 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
         _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
         _streamVectorizer.setUseNeuralNetwork(false);
 		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
-		assertEquals(fileName,vectorizer.getMatchingOH());
+		assertEquals(fileName, vectorizer.getMatchingOH());
 	}
 
 	public void test2() {
@@ -160,7 +159,7 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
         _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
         _streamVectorizer.setUseNeuralNetwork(true);
 		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
-		assertEquals("Holes",vectorizer.getMatchingOH());
+		assertEquals("Holes", vectorizer.getMatchingOH());
 	}
 
     public void testAWithNeuralNetwork()
@@ -170,7 +169,17 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
         _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
         _streamVectorizer.setUseNeuralNetwork(true);
 		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
-		assertEquals("Holes",vectorizer.getMatchingOH());
+		assertEquals("Holes", vectorizer.getMatchingOH());
+	}
+
+    public void testAWithMissingRules()
+    {
+        String fileName = "A";
+        String dataFileName = "polygon_nn_with_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(false);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		assertEquals(fileName, vectorizer.getMatchingOH());
 	}
 
 }
