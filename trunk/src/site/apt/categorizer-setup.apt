@@ -205,3 +205,7 @@ softPointCount > 0
 
 +---------------------------------------------------------+
 
+  holeCount is the name of the data feature stream of hole counts.
+  So the first line will filter away all polygons that do not have a hole count
+  equal to 0.
+  

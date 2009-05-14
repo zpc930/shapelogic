@@ -23,6 +23,9 @@ Particle Counter and Analyzer
   
   ShapeLogic 1.5 introduced neural network machine learning.
   
+  ShapeLogic 1.6 introduced categorizer setup file so you could define rules 
+  and neural network without doing any Java programming.
+  
 * Common functionality for particle counter and particle analyzer 
   
   * Take input parameters, e.g. min and max size for particles 
@@ -214,11 +217,6 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   []
   
-* Current status of the particle analyzer in ShapeLogic v 1.5 
-  
-  The particle analyzer in ShapeLogic v 1.5 has gone through limited testing 
-  and seems to work well. 
-  
 * Framework to build more advanced particle counters and particle analyzers
   
   The particle counter algorithm in ShapeLogic 1.5 is relatively simple. It is 
@@ -274,26 +272,18 @@ flat
   It will produce the same effect as the default color particle analyzer 
   neural network. Except for the categories not being capitalized.
   
-* Plans for ShapeLogic 1.6
+* User defined rules and neural networks
   
-  * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.5 the user has to make rules themselves.
+  If you have trained a neural network or made rules to recognize a certain 
+  type of particles you are encourage to upload text files to  
+  {{http://code.google.com/p/shapelogicapps/}} so other users can benefit from 
+  them.
   
-  * Make it easier to select what particle properties to print out, now a 
-  random selection of somewhat useful properties have been selected.
+* Possible future plans for particle analyzer beyond ShapeLogic v 1.6
   
   * HSV mode for the particle analyzer
   
-  * Possibly {{{http://ei.cs.vt.edu/~history/Perceptrons.Estebon.html}Perceptron styled}}
-  1 layered neural network for rules for particle analyzer
-  
-  []
-  
-* Possible future plans for particle analyzer beyond ShapeLogic v 1.5
-  
-  * ShapeLogic 1.6 may come with predefined rules for certain cells
-  
-  * Create rule for recognizing cells using neural networks or machine learning techniques
+  * Create rule or train neural networks for recognizing {{{cell.html}cells}}
 
   * Be able to handle a background that is not uniform, and cell organelles
 
@@ -304,23 +294,4 @@ flat
   * Find overlapping particles and distinguish them as separate 
   
   []
-  
-** Create rule for recognizing cells using neural networks or machine learning techniques
-  
-  In order to do this the user will have to select the properties that should 
-  be used to train the network or use the machine learning on.
-  
-  It is probably easiest to export all the properties to a spreadsheet, add a 
-  result field, and run an external neural network or machine learning program.
-  The result will then be put back into a ShapeLogic stream.
-  
-  Right now the classifier stream is an Exclusive Or stream. 
-  There need to be streams that 
-  
-  * Do weighted 1 and 2 layer computations.
-  
-  * Do binary decisions based on properties.
-  
-  []
-  
   
