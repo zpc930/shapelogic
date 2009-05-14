@@ -96,7 +96,7 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size());
 		assertTrue(_particleCounter.isParticleImage()); 
 		assertEquals(6,_particleCounter.getParticleCount()); 
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
@@ -122,7 +122,7 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size());
 		assertTrue(_particleCounter.isParticleImage()); 
 		assertEquals(6,_particleCounter.getParticleCount()); 
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
@@ -147,12 +147,37 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size());
 		assertTrue(_particleCounter.isParticleImage()); 
 		assertEquals(6,_particleCounter.getParticleCount()); 
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
 		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
 		assertEquals("tall", letterStream.get(0));
+		assertEquals("", letterStream.get(1));
+	}
+	
+	public void testEmbryosExternalRulesFile() {
+		String fileName = "embryos6";
+        _particleCounter.setMaxDistance(50);
+        _particleCounter.setMinPixelsInArea(5);
+        String neuralNetworkFile = "particle_nn_with_rules.txt";
+        _particleCounter.setNeuralNetworkFile(_dir+neuralNetworkFile);
+        _particleCounter.setUseNeuralNetwork(false);
+        int rgbValue = ColorUtil.packColors(186, 165, 88);
+        _particleCounter.setInputColor(rgbValue);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
+		assertEquals(256,bp.getWidth());
+		assertEquals(52480,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(12561501,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(30,factory.getStore().size());
+		assertTrue(_particleCounter.isParticleImage()); 
+		assertEquals(6,_particleCounter.getParticleCount()); 
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		assertEquals("TALL", letterStream.get(0));
 		assertEquals("", letterStream.get(1));
 	}
 	
@@ -272,7 +297,8 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(1.,bBox.getAspectRatio());
 	}
 
-	/** This gets opened as a byte interleaved and not as an int RGB
+	/** Test with default categorizer. <br />
+	 * This gets opened as a byte interleaved and not as an int RGB.
 	 */
 	public void testOvalCleanPng() {
 		String fileName = "oval1Clean";
@@ -294,5 +320,67 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(15.,bBox.getCenter().getX());
 		assertEquals(30.,bBox.getCenter().getY());
 		assertEquals(0.4827586206896552,bBox.getAspectRatio());
+	}
+
+	/**  Test with external rules categorizer. <br />
+	 * This gets opened as a byte interleaved and not as an int RGB.
+	 */
+	public void testOvalCleanPngExternalRules() {
+		String fileName = "oval1Clean";
+        String neuralNetworkFile = "particle_nn_with_rules.txt";
+        _particleCounter.setNeuralNetworkFile(_dir+neuralNetworkFile);
+        _particleCounter.setUseNeuralNetwork(false);
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _particleCounter);
+		assertEquals(30,bp.getWidth());
+		assertEquals(1800,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(0xffffff,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(2,factory.getStore().size()); 
+		assertEquals(1,_particleCounter.getParticleFiltered().size());
+		IColorAndVariance particle = _particleCounter.getParticleFiltered().get(0);
+		BBox bBox = particle.getPixelArea().getBoundingBox();
+		assertEquals(8.,bBox.minVal.getX());
+		assertEquals(16.,bBox.minVal.getY());
+		assertEquals(22.,bBox.maxVal.getX());
+		assertEquals(45.,bBox.maxVal.getY());
+		assertEquals(15.,bBox.getCenter().getX());
+		assertEquals(30.,bBox.getCenter().getY());
+		assertEquals(0.4827586206896552,bBox.getAspectRatio());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		assertEquals("TALL", letterStream.get(0));
+	}
+
+	/**  Test with neural network categorizer. <br />
+	 * This gets opened as a byte interleaved and not as an int RGB.
+	 */
+	public void testOvalCleanPngExternalNN() {
+		String fileName = "oval1Clean";
+        String neuralNetworkFile = "particle_nn_with_print.txt";
+        _particleCounter.setNeuralNetworkFile(_dir+neuralNetworkFile);
+        _particleCounter.setUseNeuralNetwork(true);
+		SLImage  bp = runPluginFilterOnBufferedImage(filePath(fileName,".png"), _particleCounter);
+		assertEquals(30,bp.getWidth());
+		assertEquals(1800,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(0xffffff,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(2,factory.getStore().size()); 
+		assertEquals(1,_particleCounter.getParticleFiltered().size());
+		IColorAndVariance particle = _particleCounter.getParticleFiltered().get(0);
+		BBox bBox = particle.getPixelArea().getBoundingBox();
+		assertEquals(8.,bBox.minVal.getX());
+		assertEquals(16.,bBox.minVal.getY());
+		assertEquals(22.,bBox.maxVal.getX());
+		assertEquals(45.,bBox.maxVal.getY());
+		assertEquals(15.,bBox.getCenter().getX());
+		assertEquals(30.,bBox.getCenter().getY());
+		assertEquals(0.4827586206896552,bBox.getAspectRatio());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		assertEquals("tall", letterStream.get(0));
 	}
 }
