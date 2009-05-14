@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.color.ColorFactory;
@@ -88,6 +89,7 @@ public class BaseParticleCounter extends BaseImageOperation
 
     protected int _paintForground = 0;
     protected int _paintBackground = 0xffffff;
+	protected String _errorMessage;
 	
 	public BaseParticleCounter()
 	{
@@ -116,6 +118,10 @@ public class BaseParticleCounter extends BaseImageOperation
 			if (_displayInternalInfo && !_countOnly) {
 				displayInternalInfo();
 			}
+		}
+		catch (NoSuchElementException ex) {
+			_errorMessage = ex.getMessage();
+            showMessage("Missing element", ex.getMessage());			
 		}
 		catch (Exception ex) {
 			String errorMessage = "Error in run: " + ex.toString();
@@ -446,5 +452,9 @@ public class BaseParticleCounter extends BaseImageOperation
 
     public void setToMask(boolean toMask) {
         _toMask = toMask;
+    }
+    
+    public String getErrorMessage() {
+    	return _errorMessage;
     }
 }

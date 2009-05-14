@@ -2,6 +2,8 @@ package org.shapelogic.reporting;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.streams.CalcNumberedStream1;
@@ -47,10 +49,10 @@ public class TableDefinition {
     public ColumnDefinition makeColumnDefinition(String streamName, RecursiveContext recursiveContext) {
         ColumnDefinition columnDefinition = null;
         if (streamName == null)
-            throw new RuntimeException("Missing stream for stream name = null");
+            throw new NoSuchElementException("Missing stream for stream name = null");
         columnDefinition = new ColumnDefinition(streamName, streamName);
         if (!columnDefinition.findStream(recursiveContext))
-            throw new RuntimeException("Missing stream for stream name: " + streamName);
+            throw new NoSuchElementException("Missing stream for stream name: " + streamName);
         _rawColumnDefinition.add(columnDefinition);
         return columnDefinition;
     }

@@ -1,5 +1,7 @@
 package org.shapelogic.imageprocessing;
 
+import java.util.NoSuchElementException;
+
 import org.shapelogic.color.IColorAndVariance;
 import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
@@ -360,7 +362,7 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size()); 
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
@@ -395,7 +397,7 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size()); 
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
@@ -430,7 +432,7 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size()); 
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
@@ -465,7 +467,7 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(12561501,pixel);
 		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
 		assertNotNull(factory);
-		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertEquals(30,factory.getStore().size()); 
 		assertTrue(_particleCounter.isParticleImage());
 		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
@@ -486,6 +488,79 @@ public class ColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		NumberedStream<Double> xMinStream = streamFactory.findNumberedStream(Headings.BOUNDING_BOX_X_MIN);
 		assertEquals(new Double(155), xMinStream.get(0));
 		assertEquals(new Double(171), xMinStream.get(1));
+    }
+
+	/** Called with bad file with missing streams.<br />
+	 * Should not throw an exception when running.<br />
+	 * But the category stream is not getting populated so is should throw exception here.
+	 */
+	public void testEmbryosReadRulesFileMissingStream() {
+		String fileName = "embryos6";
+        String neuralNetworkFile = "polygon_digit_recognizer_with_rules_print.txt";
+        _particleCounter.setNeuralNetworkFile(_dataFileDir +"/" + neuralNetworkFile);
+        _particleCounter.setUseNeuralNetwork(false);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
+		assertEquals(256,bp.getWidth());
+		assertEquals(52480,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(12561501,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(30,factory.getStore().size()); 
+		assertTrue(_particleCounter.isParticleImage());
+		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
+		assertClose(1., ns.get(1).doubleValue(), 0.1);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		assertEquals("", letterStream.get(0));
+		assertEquals("", letterStream.get(1));
+		StringBuffer internalInfo = _particleCounter.getInternalInfo();
+		assertTrue(500 < internalInfo.length());
+        //Test color red for 2 first particles
+		NumberedStream<Integer> redStream = streamFactory.findNumberedStream(StreamNames.COLOR_R);
+		assertEquals(new Integer(105), redStream.get(0));
+		assertEquals(new Integer(102), redStream.get(1));
+
+        //Test min x bounding box for 2 first particles
+		NumberedStream<Double> xMinStream = streamFactory.findNumberedStream(Headings.BOUNDING_BOX_X_MIN);
+		assertEquals(new Double(155), xMinStream.get(0));
+		assertEquals(new Double(171), xMinStream.get(1));
+    }
+
+	/** Called with bad file with missing streams.<br />
+	 * Should not throw an exception when running.<br />
+	 * But the category stream is not getting populated so is should throw exception here.
+	 */
+	public void testEmbryosReadNeuralNetworkFromFileMissingStream() {
+		String fileName = "embryos6";
+        String neuralNetworkFile = "missing_stream_nn.txt";
+        _particleCounter.setNeuralNetworkFile(_dataFileDir +"/" + neuralNetworkFile);
+        _particleCounter.setUseNeuralNetwork(true);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
+		assertEquals("Missing stream for stream name: Points",_particleCounter.getErrorMessage());
+		assertEquals(256,bp.getWidth());
+		assertEquals(52480,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(12561501,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(30,factory.getStore().size()); 
+		assertTrue(_particleCounter.isParticleImage());
+		assertEquals("Should have 6 particles for this setting.", 6,_particleCounter.getParticleCount());
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
+		assertClose(0.9, ns.get(0).doubleValue(), 0.1);
+		assertClose(1., ns.get(1).doubleValue(), 0.1);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		try {
+			assertEquals("tall", letterStream.get(0));
+			fail("NoSuchElementException should have been thrown.");
+		}
+		catch (NoSuchElementException ex) {
+			assertTrue(true);
+		}
     }
 
 }
