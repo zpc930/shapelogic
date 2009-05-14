@@ -1,5 +1,5 @@
             ------
-            Release Notes
+            Release Notes for ShapeLogic Java
             ------
             Sami Badawi
             ------
@@ -7,7 +7,23 @@
 
 Release notes for releases with development status beta
 
-* 2009/04/09 ShapeLogic Java 1.5 with machine learning released 
+* 2009/05/14 ShapeLogic 1.6 improve neural network and rules
+  
+  * Extend Multi-layer feed forward neural network to work with letter matcher
+  
+  * Load neural network from file
+  
+  * Load categorizer rules from file
+  
+  * Built for JDK 1.5 / Java 5 so it should work on the Mac without updates
+  
+  * 37000 lines of Java code
+
+  * 600 unit test that all works on build machine
+
+  []
+  
+* 2009/04/09 ShapeLogic 1.5 with machine learning released 
 
   * Start combining {{{machine-learning.html}machine learning}} and declarative
   programming
@@ -20,7 +36,7 @@ Release notes for releases with development status beta
   
   * 35000 lines of Java code
 
-  * 550 unit test that all works on local machine
+  * 550 unit test that all works on build machine
 
   []
 
@@ -28,7 +44,7 @@ Release notes for releases with development status beta
   class to import the weights. This override is simple but does require some 
   knowledge of Java.  
 
-* 2008/11/28 ShapeLogic Java 1.4 released 
+* 2008/11/28 ShapeLogic 1.4 released 
 
   * Added mask option to {{{particle.html#mask} particle analyzer}}
   
@@ -50,7 +66,7 @@ Release notes for releases with development status beta
   
   * 33000 lines of Java code
 
-  * 495 unit test that all works on local machine
+  * 495 unit test that all works on build machine
 
   []
 
@@ -69,7 +85,7 @@ Release notes for releases with development status beta
   
   * 32000 lines of Java code
 
-  * 480 unit test that all works on local machine
+  * 480 unit test that all works on build machine
 
   []
   
@@ -131,7 +147,7 @@ Release notes for releases with development status beta
 
   * 31000 lines of Java code
 
-  * 465 unit test that all works on local machine
+  * 465 unit test that all works on build machine
 
   []
 
@@ -169,7 +185,7 @@ Release notes for releases with development status beta
   
   * 29000 lines of Java code
 
-  * 440 unit test that all works on local machine
+  * 440 unit test that all works on build machine
 
   []
   
@@ -205,7 +221,7 @@ Release notes for releases with development status beta
 
   * There is around 25000 lines of Java code
 
-  * 385 unit test that all works on local machine
+  * 385 unit test that all works on build machine
 
   []
 
@@ -269,7 +285,7 @@ Releases with development status alpha
 
   * There is around 16000 lines of Java code
 
-  * 190 unit test that all works on my local machine 
+  * 190 unit test that all works on build machine 
 
   []
 
@@ -289,7 +305,7 @@ Releases with development status alpha
 
   * There is around 16000 lines of Java code
 
-  * 182 unit test that all works on my local machine
+  * 182 unit test that all works on build machine
 
   []
   
@@ -301,7 +317,7 @@ Releases with development status pre alpha
 
   * There is around 15000 lines of Java code
 
-  * 172 unit test that all works on my local machine
+  * 172 unit test that all works on build machine
 
   * Fixed problems with logic language for filters
 
@@ -327,7 +343,7 @@ Releases with development status pre alpha
 
   * There is around 14000 lines of Java code
 
-  * 159 unit test that all works on my local machine. 
+  * 159 unit test that all works on build machine. 
 
   * Color segmentation
 
