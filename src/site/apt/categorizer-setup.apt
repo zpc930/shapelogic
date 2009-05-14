@@ -52,6 +52,14 @@ multiLineCount == 0
 softPointCount == 0
 aspectRatio < 0.4
 
+========== PRINTS
+Category
+Points
+lineCount
+holeCount
+
+========== 
+
 +---------------------------------------------------------+
   
   The biggest problem is to find the right names for the geometric feature.
@@ -85,3 +93,115 @@ public void makeDigitStream() {
 		
 +---------------------------------------------------------+
   
+  
+* EBNF grammar for categorizer setup file
+  
++---------------------------------------------------------+
+BLOCK_START = "==========" ;
+
+comment-section = "COMMENT" ,  {string} , BLOCK_START ; 
+
+feature-section = "FEATURES" ,  {string} , BLOCK_START ; 
+
+print-section = "PRINTS" , {string} , BLOCK_START ; 
+
+result-section = "RESULTS" , {string} , BLOCK_START ; 
+
+weights-definition = "WEIGHTS" , {number} , BLOCK_START
+
+relation = "<" | ">" | "==" ;
+
+rule-definition = "def" , string , { string , relation , number } , BLOCK_START ;
+
+categorizer-definition = BLOCK_START , 
+    {comment-section | feature-section | print-section
+    | result-section | weights-definition | rule-definition } ;
+    
++---------------------------------------------------------+
+
+   It is hard to cause syntax errors in this grammar. But a sequence of 
+   characters starting with more \=\=\= will not be considered a string. 
+   
+Function of different sections
+
+* Comment section
+  
+  This is just a comment. 
+  
+* Feature section
+  
+  This is the the feature data streams that are needed as input for the neural
+  network. 
+  
+  They can take 2 different forms:
+  
+  * Name of the Stream
+  
+  * Headline if it has been defined for the stream  
+  
+  []
+  
+  The streams often have camel case names e.g. aspectRatio starting with lower
+  case. 
+  
+  The headline names are often short names and are often starting with upper 
+  case.
+  
+  This was chosen on purpose to be able to distinguish them.
+  
+* Result section
+  
+  A neural network produces a list of number from the last layer.
+  
+  If there is a match only one of these numbers should be over 0.5, and that 
+  is considered the result of the neural network.
+  
+  The result section assigns names to each of the outputs of this final list.
+  E.g for a digit match there will be 10 output number and they will have names
+  0, 1, 2, 4, 5, 6, 7, 8 and 9.
+  
+    
+  
+* Weights definition
+  
+  Here is an example of a neural network that explains how the weights are
+  organized:
+  
++---------------------------------------------------------+
+/** Weights found using the Joone Neural Networks.  */
+public final static double[][] WEIGHTS_FOR_XOR = {
+    {
+        //Output 0        , 1                , 2
+        2.7388686085992333, 5.505721328606976, 4.235258932026585, //bias
+                                                                     //Input
+        -6.598582463774703, -3.678198637390036, -2.9604962169635076, // 0
+        -6.59030690954159, -3.7790406961228347, -2.845930422442215   // 1
+    },
+    {   //Output 0
+        -5.27100082610628,  //Bias for hidden second layer
+                            //Input
+        -10.45330943056037, // 0
+        6.582922049952558,  // 1
+        4.7139611039662945  // 2
+    }
+};
++---------------------------------------------------------+
+
+   
+* Rule definition
+
+  Here is an example of the rules defining the digit 0:
+
++---------------------------------------------------------+
+
+========== def 0
+holeCount == 1
+tJunctionCount == 0
+endPointCount == 0
+multiLineCount == 1
+curveArchCount > 0
+hardPointCount == 0
+softPointCount > 0
+
++---------------------------------------------------------+
+
