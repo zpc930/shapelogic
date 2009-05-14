@@ -22,8 +22,6 @@ ShapeLogic menu when run with ImageJ
    
   * {{CapitalLetterMatch}}
   
-  * {{DigiMatch}} 
-  
   * {{Segment}}
   
   * {{ParticleCounter}}
@@ -33,10 +31,6 @@ ShapeLogic menu when run with ImageJ
   * {{{#RGB} RGB Color Particle Analyzer}}
   
   * {{{#Vectorizer}Stream Vectorizer}}
-  
-  * {{{#Information}Vectorize Information}}
-  
-  * {{{#Digi}Digi Match Stream Vectorizer}}
   
   * {{{#Replacer}Color Replacer}}
 
@@ -53,14 +47,6 @@ ShapeLogic menu when run with ImageJ
   * Runs the {{{#Vectorizer}Stream Vectorizer}} plugin described below
   
   []
-  
-  {{{getting-started.html#letter}Usage instruction}}
-  
-* {DigiMatch} 
-  
-  Main command for digit recognition.
-  It is a macro similar to the CapitalLetterMatch but for digits, it calls the digit
-  match plugin Digi Match {{{#Vectorizer}Stream Vectorizer}}.
   
   {{{getting-started.html#letter}Usage instruction}}
   
@@ -119,31 +105,6 @@ ShapeLogic menu when run with ImageJ
   
   {{{getting-started.html#letter}Usage instruction}}
   
-* Vectorize {Information}
-  
-  Does the same as {{{#Vectorizer}Stream Vectorizer}}, but also writes out all 
-  the internal information that is used in the process:
-  
-  * Points
-  
-  * Multi lines
-  
-  * Polygons
-  
-  * Annotations for all of these
-  
-  []
-  
-  {{{utilities.html#vectorize}Usage instruction}}
-  
-* {Digi} Match Stream Vectorizer
-  
-  Main Java code for digit recognition.
-  This is a plugin to take a line image with thin or skeletonized lines and 
-  vectorize and analyze them, then match them to digits.
-  
-  {{{getting-started.html#letter}Usage instruction}}
-  
 * Color {Replacer}
   
   Little utility plugin to isolate color or gray interval.
@@ -160,6 +121,8 @@ ShapeLogic menu when run with ImageJ
 
 [images/screenshots/shapelogicoldmenu.png] 
 
+  * {{DigiMatch}} 
+  
   * {{{#Line}Line Vectorizer}}
   
   * {{{#Direction}Direction Based Vectorizer}} 
@@ -170,9 +133,21 @@ ShapeLogic menu when run with ImageJ
   
   * {{StraightCapitalLetterMatch}}
   
+  * {{{#Information}Vectorize Information}}
+  
+  * {{{#Digi}Digi Match Stream Vectorizer}}
+  
   * {{TaskBasedCapitalLetterMatch}}
   
   []
+  
+* {DigiMatch} 
+  
+  Main command for digit recognition.
+  It is a macro similar to the CapitalLetterMatch but for digits, it calls the digit
+  match plugin Digi Match {{{#Vectorizer}Stream Vectorizer}}.
+  
+  {{{getting-started.html#letter}Usage instruction}}
   
 * {Line} Vectorizer
   
@@ -208,6 +183,31 @@ ShapeLogic menu when run with ImageJ
   * Direction Based Vectorizer 
   
   []
+  
+* Vectorize {Information}
+  
+  Does the same as {{{#Vectorizer}Stream Vectorizer}}, but also writes out all 
+  the internal information that is used in the process:
+  
+  * Points
+  
+  * Multi lines
+  
+  * Polygons
+  
+  * Annotations for all of these
+  
+  []
+  
+  {{{utilities.html#vectorize}Usage instruction}}
+  
+* {Digi} Match Stream Vectorizer
+  
+  Main Java code for digit recognition.
+  This is a plugin to take a line image with thin or skeletonized lines and 
+  vectorize and analyze them, then match them to digits.
+  
+  {{{getting-started.html#letter}Usage instruction}}
   
 * {TaskBasedCapitalLetterMatch}
   
