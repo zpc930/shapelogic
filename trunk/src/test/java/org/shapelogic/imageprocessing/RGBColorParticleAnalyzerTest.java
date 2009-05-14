@@ -6,6 +6,7 @@ import org.shapelogic.color.ValueAreaFactory;
 import org.shapelogic.imageutil.SLImage;
 import org.shapelogic.logic.CommonLogicExpressions;
 import org.shapelogic.polygon.BBox;
+import org.shapelogic.streamlogic.StreamNames;
 import org.shapelogic.streams.NumberedStream;
 import org.shapelogic.streams.StreamFactory;
 
@@ -21,7 +22,8 @@ import static org.shapelogic.imageutil.ImageUtil.runPluginFilterOnBufferedImage;
  *
  */
 public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
-	BaseParticleCounter _particleCounter;
+	ColorParticleAnalyzer _particleCounter;
+	String _dir = "src/test/resources/data/neuralnetwork/";
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -99,8 +101,59 @@ public class RGBColorParticleAnalyzerTest extends AbstractImageProcessingTests {
 		assertEquals(6,_particleCounter.getParticleCount()); 
 		StreamFactory streamFactory = new StreamFactory(_particleCounter);
 		NumberedStream<Number> ns = streamFactory.findNumberedStream(CommonLogicExpressions.ASPECT_RATIO);
-//		assertClose(1.17, ns.get(0).doubleValue(), 0.1);
+//		assertClose(1.17, ns.get(0).doubleValue(), 0.1); // aspect ratio stream is not defined
 //		assertClose(1., ns.get(1).doubleValue(), 0.1);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		assertEquals("Dark round", letterStream.get(0));
+		assertEquals("Dark round", letterStream.get(1));
+	}
+	
+	public void testEmbryosNeuralNetwor() {
+		String fileName = "embryos6";
+        _particleCounter.setMaxDistance(50);
+        _particleCounter.setMinPixelsInArea(5);
+        _particleCounter.setUseNeuralNetwork(true);
+        int rgbValue = ColorUtil.packColors(186, 165, 88);
+        _particleCounter.setInputColor(rgbValue);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
+		assertEquals(256,bp.getWidth());
+		assertEquals(52480,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(12561501,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertTrue(_particleCounter.isParticleImage()); 
+		assertEquals(6,_particleCounter.getParticleCount()); 
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		assertEquals("Tall", letterStream.get(0));
+		assertEquals("", letterStream.get(1));
+	}
+	
+	public void testEmbryosNeuralNetworFile() {
+		String fileName = "embryos6";
+        _particleCounter.setMaxDistance(50);
+        _particleCounter.setMinPixelsInArea(5);
+        String neuralNetworkFile = "particle_nn_with_print.txt";
+        _particleCounter.setNeuralNetworkFile(_dir+neuralNetworkFile);
+        _particleCounter.setUseNeuralNetwork(true);
+        int rgbValue = ColorUtil.packColors(186, 165, 88);
+        _particleCounter.setInputColor(rgbValue);
+		SLImage bp = runPluginFilterOnBufferedImage(filePath(fileName,".jpg"), _particleCounter);
+		assertEquals(256,bp.getWidth());
+		assertEquals(52480,bp.getPixelCount());
+		int pixel = bp.get(0,0);
+		assertEquals(12561501,pixel);
+		ValueAreaFactory factory = _particleCounter.getSegmentation().getSegmentAreaFactory();
+		assertNotNull(factory);
+		assertEquals(30,factory.getStore().size()); //XXX should be 2
+		assertTrue(_particleCounter.isParticleImage()); 
+		assertEquals(6,_particleCounter.getParticleCount()); 
+		StreamFactory streamFactory = new StreamFactory(_particleCounter);
+		NumberedStream<String> letterStream = streamFactory.findNumberedStream(StreamNames.CATEGORY);
+		assertEquals("tall", letterStream.get(0));
+		assertEquals("", letterStream.get(1));
 	}
 	
 	public void testEmbryosToMask() {
