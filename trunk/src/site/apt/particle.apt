@@ -75,6 +75,12 @@ Particle Counter and Analyzer
   
   UseNeuralNetwork: Use neural network for classification
   
+  ShowFileDialog: If this is checked the user will be prompted with a file 
+  dialog to select categorizer setup file
+  
+  CategorizerSetupFile: File path to the categorizer setup file containing
+  neural network, rules or column selection list
+  
   These are the default values and the name of the parameters in Java.
   
 +-------------------------------------------------------------+
