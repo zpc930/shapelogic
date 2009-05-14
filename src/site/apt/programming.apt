@@ -8,7 +8,8 @@
 
 Programming rules and neural networks
 
-  If the user wanted to customizing rules or neural networks for either the 
+  If the user wanted to customizing rules or 
+  {{{machine-learning.html}neural networks}} for either the 
   Color Particle Analyzer or for the letter matcher it demanded some 
   programming until ShapeLogic 1.6. Now you can do most of this by 
   loading a {{{categorizer-setup.html}categorizer setup}} file. 
@@ -17,8 +18,6 @@ Programming rules and neural networks
   does requires knowledge of Java. 
   
 * Defining rules for categories in ShapeLogic 1.5
-  
-  This description has been moved to {{{programming.html}programming}} page. 
   
   This is done by sub classing ColorParticleAnalyzer or ColorParticleAnalyzerIJ.
   Override the categorizeStreams() method.
