@@ -1,6 +1,7 @@
 package org.shapelogic.streams;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.shapelogic.calculation.Calc1;
 import org.shapelogic.calculation.CalcIndex1;
@@ -198,21 +199,23 @@ public class StreamFactory {
 		return calcBoolean;
 	}
 	
-	/** Factory for finding NumberedStream in RootMap.
+	/** Factory for finding NumberedStream in RecursiveContext.
 	 * 
 	 * @param <E>
 	 * @param name of the stream
 	 * @return
 	 */
-	static public <E> NumberedStream<E> findNumberedStream(String name, RecursiveContext recursiveContext) {
+	static public <E> NumberedStream<E> findNumberedStream(String name, 
+			RecursiveContext recursiveContext) throws NoSuchElementException 
+	{
 		Object obj = queryCalc.get(name, recursiveContext);
 		if (obj == null)
-			throw new RuntimeException("NumberedStream not found in RootMap for name: " 
-					+ name + ", nothing found.");
+			throw new NoSuchElementException("NumberedStream not found in context for name: \"" 
+					+ name + "\".\n Nothing found.");
 		if (obj instanceof NumberedStream)
 			return (NumberedStream<E>) obj;
-		throw new RuntimeException("NumberedStream not found in RootMap for name: " + name + 
-				", type: " + obj.getClass().getSimpleName());
+		throw new NoSuchElementException("NumberedStream not found in context for name: \"" + name + 
+				"\".\n Type: " + obj.getClass().getSimpleName());
 	}
 
 	public <E> NumberedStream<E> findNumberedStream(String name) {
