@@ -1,0 +1,117 @@
+========== COMMENT
+This categorizer setup file is doing the same as the old digit matcher, 
+DigitStreamVectorizer_.
+
+========== def 0
+holeCount == 1
+tJunctionCount == 0
+endPointCount == 0
+multiLineCount == 1
+curveArchCount > 0
+hardPointCount == 0
+softPointCount > 0
+
+========== def 1
+holeCount == 0
+tJunctionLeftCount == 0
+tJunctionRightCount == 0
+endpointBottomPointCount == 1
+horizontalLineCount == 0
+verticalLineCount == 1
+endPointCount == 2
+multiLineCount == 0
+softPointCount == 0
+aspectRatio < 0.4
+
+========== def 2
+holeCount == 0
+endpointTopLeftThirdPointCount == 1
+endpointBottomRightThirdPointCount == 1
+endPointCount > 1
+endPointCount < 4
+pointCount > 3
+aspectRatio > 0.5
+aspectRatio < 0.9
+
+========== def 3
+holeCount == 0
+tJunctionLeftCount == 0
+endpointTopLeftThirdPointCount == 1
+endpointBottomLeftThirdPointCount == 1
+endPointCount > 1
+endPointCount < 4
+softPointCount > 0
+pointCount > 5
+aspectRatio > 0.5
+aspectRatio < 0.9
+
+========== def 4
+holeCount == 1
+endpointBottomRightThirdPointCount == 1
+tJunctionRightCount > 0
+tJunctionRightCount < 4
+aspectRatio > 0.5
+aspectRatio < 0.9
+softPointCount < 2
+hardPointCount > 0
+
+========== def 5
+holeCount == 0
+endpointTopRightThirdPointCount == 1
+endpointBottomLeftThirdPointCount == 1
+endPointCount > 1
+endPointCount < 4
+pointCount > 3
+aspectRatio > 0.5
+aspectRatio < 0.9
+hardPointCount > 0
+softPointCount > 0
+
+========== def 6
+holeCount == 1
+endpointTopRightThirdPointCount == 1
+tJunctionLeftCount > 0
+tJunctionLeftCount < 4
+aspectRatio > 0.5
+aspectRatio < 0.9
+softPointCount > 0
+hardPointCount < 2
+
+========== def 7
+holeCount == 0
+endpointTopLeftThirdPointCount == 1
+endpointBottomCenterThirdPointCount == 1
+horizontalLineCount == 1
+endPointCount > 1
+endPointCount < 4
+pointCount > 2
+aspectRatio > 0.5
+aspectRatio < 0.9
+hardPointCount == 1
+
+========== def 8
+holeCount == 2
+endPointCount == 0
+uJunctionCount > 0
+aspectRatio > 0.5
+aspectRatio < 0.9
+softPointCount > 0
+hardPointCount < 2
+
+========== def 9
+holeCount == 1
+endpointBottomLeftThirdPointCount == 1
+tJunctionRightCount > 0
+tJunctionRightCount < 4
+aspectRatio > 0.5
+aspectRatio < 0.9
+softPointCount > 1
+hardPointCount < 2
+
+========== PRINTS
+Category
+Points
+lineCount
+holeCount
+
+========== 

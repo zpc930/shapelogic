@@ -1,0 +1,49 @@
+<html>
+<body>
+<h2>Machine Learning</h2>
+
+This package currently contains a simple feed forward neural network
+integrated into the lazy stream framework.<br />
+<br />
+The training of the neural network is done externally, but run internally.<br />
+
+Steps in supervised learning for the color particle analyzer.<br />
+
+To train the neural network you need a list of images each with one or more
+particles, here are some of the things you need to do:<br />
+
+<ul>
+<li>You have to assign different categories to the different particles</li>
+<li>You need to select which geometric property data streams you want as input</li>
+<li>This should be a minimal list otherwise you can get over fitting problems</li>
+<li>Possibly create new geometric property data streams</li>
+<li>Find out how many neural network layers you need</li>
+<li>Find out how many nodes in each layer you need</li>
+<li>Store this information so it can be reused</li>
+</ul>
+
+<p>
+The reason for not doing training inside ShapeLogic is:
+ImageJ has the simple and powerful PlugInFilter concept and it would be very
+hard to get all that functionality into a PlugInFilter without creating
+something that is quite complex.
+</p>
+
+<p>
+Joone - Java Object Oriented Neural Engine
+http://www.jooneworld.com/ is a great tool to train the neural network used in
+ShapeLogic.
+</p>
+
+
+<h2>Dependency</h2>
+<p>
+<ul>
+<li>This package can depend on util, calculation, streams.</li> 
+<li>There is no dependency of any image processing code or any external libraries outside Java 6.</li> 
+<li>This can be used in a Java application, just by adding shapelogic_.jar.</li> 
+</ul>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+========== FEATURES
+holeCount
+========== RESULTS
+No_holes 
+Holes
+========== PRINTS
+Category
+Points
+lineCount
+holeCount
+========== WEIGHTS
+0.5 -0.5
+-1. 1.
+========== 

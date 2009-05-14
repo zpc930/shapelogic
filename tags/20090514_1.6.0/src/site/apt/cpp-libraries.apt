@@ -1,0 +1,245 @@
+            ------
+            C++ Libraries
+            ------
+            Sami Badawi
+            ------
+            2008/09/03
+            ------
+
+C++ Libraries
+  
+  The demand to libraries is that they can compete with ImageJ in both features
+  and simplicity. More specific they need to be:
+
+  * Cross platform
+
+  * Close to ImageJ in functionality
+  
+  * Simple to program
+  
+  * Do not require too much duck tape to work together
+  
+  * Do not have a steep learning curve
+  
+  * Do not have a complex build process
+  
+  []
+  
+  This page will will give a short description of the libraries and some 
+  possible future development.
+  
+* Current libraries choice 
+  
+  * {{{http://www.boost.org}Boost}} the C++ library
+  
+  * {{{http://opensource.adobe.com/wiki/display/gil/Generic+Image+Library} Generic Image Library}}
+  for writing new image processing code
+  
+  * {{{http://opencvlibrary.sourceforge.net} OpenCV}} for existing computer vision algorithms
+  
+  * {{{http://www.fltk.org/} FLTK, Fast Light Toolkit}} lightweight cross platform GUI
+  
+  * {{{http://code.google.com/p/googletest/} Google Testing Framework}}
+  
+  * {{{http://www.boost.org/doc/tools/build/index.html} Boost.build v2}} for command line based build system
+  
+  []
+
+** Boost
+  
+  {{{http://www.boost.org} Boost}} 
+  is a collection of open source C++ libraries, a place where new features of
+  C++ is implemented and tried before becoming part of the C++ standard.
+  
+  This makes use of some very advanced and new programming techniques e.g.
+  
+  * Template meta programming
+  
+  * Lambda functions
+
+  * Concepts 
+
+  * Traits
+  
+  []
+  
+  It contains a lot of functional programming features that should be helpful 
+  for the lazy stream library.
+  
+*** Problems with Boost
+
+  * Boost is a good stress test for your compiler. Some classes in boost would 
+  crash GCC 3.1 and 3.2. 
+
+  * You would not catch all errors at compile time for template code. Concepts is
+  a new way to alleviate this problem.
+
+  * Template code has been hard to debug.
+  
+  []
+
+** GIL, Generic Image Library
+  
+  {{{http://opensource.adobe.com/wiki/display/gil/Generic+Image+Library} Generic Image Library}} 
+  was developed by Adobe but a part of {{{http://www.boost.org/} Boost}} since
+  1.35.  This uses template programming and is written so that you can write an
+  algorithm once and have it be implemented efficiently for many different 
+  image types.  This is something that you cannot do in ImageJ. The price is 
+  that it is programmed with advanced templates.
+  
+  GIL makes wrappers around other images classes.  This works fine with both 
+  FLTK images class: Fl_Image and OpenCV images: IplImage.
+  
+** OpenCV, Open Computer Vision
+  
+  {{{http://opencvlibrary.sourceforge.net/} OpenCV}} is written by Intel. 
+  It is simple to use and comes with a lot of algorithms.
+  
+  Images are read, written and internally stored as OpenCV images: IplImage.
+  One issue is that this is using BGR byte order opposed to RGB as Fl_Image.
+  After reading and before writing the R and B colors are swapped.  
+  
+** FLTK Fast Light Toolkit
+  
+  {{{http://www.fltk.org/} FLTK}} is light to work with. This is built on top of
+  Windows API or X11.
+  This is currently used as the GUI framework in ShapeLogic C++.
+  
+** Google C++ Testing Framework
+  
+  {{{http://code.google.com/p/googletest/}Google C++ Testing Framework}} is a
+  framework for writing C++ unit tests. Based on the xUnit architecture.
+  It has a strong focus on simplicity and terse code.
+  
+** Boost Build / Bjam
+  
+  Cross platform Make replacement. 
+
+* Libraries that might be integrated in the future
+
+** OpenFrameworks
+  
+  {{{http://www.openframeworks.cc/} OpenFrameworks}} is a C++ based image 
+  processing tool for artists, close to {{{http://processing.org/} Processing}} 
+  that is written in Java. This is built on top of OpenCV.
+  
+  Seems to be in a very early stage but people are using it.
+  
+* Possible integrations of ShapeLogic C++ as plugin
+
+  * Adobe PhotoShop plugin for a full featured workbench with macro languages
+  
+  * GIMP plugin for a full featured workbench with macro languages
+  
+  []
+  
+** PhotoShop plugin
+  
+  {{{http://www.adobe.com/products/photoshop/index.html} Adobe Photoshop}} 
+  would be a full fledged workbench.
+  
+  PhotoShop is not open source but there should not be any problem when using 
+  it as a platform.
+  Since PhotoShop is the standard image manipulation tool, this could be a good
+  way to make ShapeLogic algorithms available to a wider audience.
+
+*** Issues
+  
+  The PhotoShop API is not freely available, you have to apply to get it.
+  
+** GIMP plugin
+  
+  {{{http://www.gimp.org/} GIMP - The GNU Image Manipulation Program}}
+  is an open source drawing program that works with external plugins.
+
+  This would be a full fledged workbench.
+
+*** Issues
+
+  ShapeLogic cannot be linked to GIMP since it is GPL, but you could have a 
+  wrapper around plugins in order to access them as GIMP plugins.
+  
+  The plugin works with tiles, which gives good performance, but does not fit
+  well with either the way OpenCV or GIL are processing images.
+  
+* Possible alternatives to FLTK for rudimentary workbench
+
+  FLTK seems to be the simples cross platform GUI toolkit with an appropriate 
+  license, but it is a very sparse library.  If at some point a more full 
+  featured library is needed here are some alternatives.
+
+  * ASL, Adobe Source Library  
+  
+  * GTK+ GIMP toolkit
+  
+  * GTKMM C++ wrapper around GTK+
+  
+  * HighGui from OpenCV
+  
+  * Qt
+
+  * wxWidget
+
+  []
+  
+** ASL, Adobe Source Library  
+  
+  Framework for declarative definition of GUI. 
+
+*** Issues
+  
+  Currently only works on Windows and Mac.
+  
+  It is a relatively big frameworks, where ShapeLogic is trying to be a simple as possible.
+
+** GTK, GIMP toolkit
+
+  {{{http://www.gtk.org/} GTK}} is a full featured GUI toolkit working on most 
+  platforms. 
+
+*** Issues
+
+  It is written in C and has a homegrown object system, which is not type safe.
+
+** GTKMM, GIMP toolkit with C++ wrapper
+
+  {{{http://www.gtkmm.org}GTKMM}} is a C++ wrapper around GTK. Programming in
+  GTKMM is a lot more natural to C++ programmers.
+
+*** Issues
+
+  The class hierarchy is somewhat deep since it is build on top of GTK.
+  It seems a little heavier than FLTK.
+  
+** HighGui from OpenCV
+  
+  Very lightweight. There is some functionality for displaying images and an
+  event handler for mouse events. 
+
+*** Issues
+  
+  It does not seem to have a menu system, which is essential for a rudimentary workbench.
+
+** Qt
+
+  Qt is a very strong GUI framework with lots of high quality tools.
+  Since 4.5 Qt has been LGPL and therefor compatible with ShapeLogic C++.
+
+*** Issues
+
+  Qt is using a lot of Qt specific classes e.g. QString and QList.
+
+  Powerful but non standard concept of slot and signal.
+
+** wxWidget
+
+  {{{http://www.wxwidgets.org/} wxWidgets}} is a full featured GUI toolkit, built
+  on top of native toolkits: Win32, Mac OS X, GTK+, X11, Motif, WinCE and more.
+  The programming style is close to Windows MFC programming.
+
+*** Issues
+
+  It seems a little heavier than FLTK.
+  
+
+  

@@ -1,0 +1,303 @@
+            ------
+            Particle Counter and Analyzer
+            ------
+            Sami Badawi
+            ------
+            2008/03/09
+            ------
+
+Particle Counter and Analyzer
+
+  Starting in 1.2 ShapeLogic contains both an automatic color and gray scale particle
+  counter and a particle analyzer working without manual user intervention.
+  The goal is to be able to recognize different cells on a relatively uniform 
+  background and be able to extract a lot of geometric information.
+  
+  See {{{cell.html}Cell Categorizer}} for images types that can be handled by
+  the current particle analyzer, and for future plans.
+  
+  ShapeLogic 1.3 introduced 2 new modes for the particle analyzer: one where 
+  you set the foreground color of the particles and one where you set the
+  background color. They will always find a particle image and will not fail,
+  unlike the automatic particle analyzer.
+  
+  ShapeLogic 1.5 introduced neural network machine learning.
+  
+  ShapeLogic 1.6 introduced categorizer setup file so you could define rules 
+  and neural network without doing any Java programming.
+  
+* Common functionality for particle counter and particle analyzer 
+  
+  * Take input parameters, e.g. min and max size for particles 
+  
+  * Find background color
+  
+  * Find particles
+  
+  * Extract geometric properties of the particles
+  
+  * Print a report to a result table that can be exported to Excel
+  
+  []
+  
+* Usage
+  
+  {Test} on example particle image embryos.jpg
+    
+[images/particles/embryos.jpg] 
+
+  Under ImageJ Plugins ShapeLogic menu click 
+  "Particle Counter", "Color Particle Analyzer" or "RGB Color Particle Analyzer".
+  
+[images/particles/shapelogicmenu.png] 
+  
+** Input parameters dialog
+  
+  Select input parameters in dialog
+  
+[images/particles/particleInputDialog.png] 
+  
+  The parameters 
+  
+  Max distance: Distance between color in same color bucket
+  
+  Min pixels: Minimum number of pixels in particle
+  
+  Max pixels: Maximum number of pixels in particle
+  
+  Iterations: {{{http://en.wikipedia.org/wiki/K-means_algorithm}K-mean}} iterations for color hypothesis
+  
+  CountOnly: Only count particles, do not trace edge, vectorize, annotate and match
+  
+  ToMask: Turns the image into a black and white mask, with black particles
+  
+  DisplayInternalInfo: Print out polygon, points and their annotations
+  
+  UseNeuralNetwork: Use neural network for classification
+  
+  ShowFileDialog: If this is checked the user will be prompted with a file 
+  dialog to select categorizer setup file
+  
+  CategorizerSetupFile: File path to the categorizer setup file containing
+  neural network, rules or column selection list
+  
+  These are the default values and the name of the parameters in Java.
+  
++-------------------------------------------------------------+
+_iterations = 2; // K-mean iterations for color hypothesis
+_maxDistance = 50; // Distance between color in same color bucket
+_minPixelsInArea = 5; // Minimum number of pixels in particle
+_maxPixelsInArea = 10000; // Maximum number of pixels in particle
++-------------------------------------------------------------+
+
+** Output image if {mask} option is set
+
+[images/particles/embryos6mask.jpg] 
+  
+  Check ToMask check box in order to better see what particles were found and to 
+  post process it with other tools. 
+  The built in particle analyzer in ImageJ contains functionality that is not
+  available here e.g. 
+  
+  * Ellipse fitter
+
+  * Outline and add numbers
+  
+  []
+  
+  Here is the result of running outline and add numbers 
+  
+[images/particles/embryos6numbered_outline.png]
+
+  The numbering scheme used in ImageJ particle analyzer is the same as the one
+  used in ShapeLogic. Start from top left corner.
+
+** Summary result dialog
+
+  A summary result is shown in a dialog, with the following information:
+  
+[images/particles/particleCountDialog.png] 
+
+  A report of each particle's properties is sent to an ImageJ result table, 
+  which can be exported to Excel.
+  Reports are different for the particle counter and analyzer. 
+  
+* Particle counter information for each particle 
+  
+  The particle counter finds and prints basic geometric properties of the particles
+  
+[images/particles/particleCounterResult.png]
+
+  * Area 
+  
+  * Center of gravity 
+  
+  * Color
+  
+  * Std dev for color
+  
+  []
+  
+* Particle analyzer information for each particle
+
+  The particle analyzer traces the edge of each particle. It finds and prints 
+  more advanced geometric properties of the particles
+  
+[images/particles/particleAnalyzerResult.png]
+  
+  * Area 
+  
+  * Center of gravity 
+  
+  * Color
+  
+  * Std dev for color
+  
+  * Length of perimeter
+  
+  * Circularity
+  
+  * Gray value brightness
+  
+  * Bounding box
+  
+  * Number of hard corners
+  
+  * Number of inflection points
+  
+  * Number of curve arches
+  
+  []
+  
+  For color images it will also write out average R, G and B channels.
+  
+  The particle analyzer finds many more geometric properties that are not shown
+  on the above example, it is easy to print them if desired.
+  
+  This the particle analyzer can also select and categorize particles based 
+  on all of the above properties.
+  In order to categorize particles the user should define geometric rules for
+  each particle type.
+
+  ShapeLogic v 1.6 will come with predefined rules to {{{cell.html}categorize certain cells}}.
+  
+  If you want more detailed information mark check box DisplayInternalInfo.
+
+* Particle analyzer in manual {rgb} modes
+  
+  ShapeLogic 1.3 introduces 2 new color modes for the particle analyzer.
+  
+  You find them under the menu item: RGB Color Particle Analyzer.
+  
+  One will set the background color the other sets the foreground color.
+  
+[images/particles/rgb_particleInputDialog.png]
+  
+** Set foreground color mode
+  
+  This is useful for
+  
+  * Particles with different colors, where you are only interested in one 
+  
+  * Particles in {{{colocalization.html}co-localization}} images 
+  
+  * Images that are not particle images
+  
+  []
+   
+  Here is an example
+  
+[images/particles/legionella_pneumophila10157.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10157 legionella pneumophila
+  
+  The setting in the dialog was to find the purple bacteria.
+  
+** Set background color mode
+  
+  This is useful for
+  
+  * Close up of a particle where the background color is not the most frequent 
+  
+  * You are working on a small ROI region of interest
+  
+  []
+  
+* Framework to build more advanced particle counters and particle analyzers
+  
+  The particle counter algorithm in ShapeLogic 1.5 is relatively simple. It is 
+  setup to be expanded to handle more advanced algorithms. Here is the flow.
+  
+  * If either foreground or background color is set you are done
+  
+  * Else find one or more color hypothesis automatically
+  
+    * Color clustering using K-mean algorithm
+  
+    * Background color finder
+  
+    * Check that image is a particle image, if it is not stop
+    
+    []
+  
+  * Run over the image again find the individual particles based on the color 
+  hypothesis
+  
+  * Collect color and area information for each particle
+  
+  * Filter particles based on size
+  
+  []
+
+* Defining rules for categories in ShapeLogic 1.5
+  
+  This description has been moved to {{{programming.html}programming}} page. 
+  
+* Loading neural network from text file in ShapeLogic 1.6
+  
+  Starting in ShapeLogic 1.6 you can load the neural network from external text
+  files. This is described on the {{{categorizer-setup.html}categorizer setup}} 
+  page.  
+  
+  ShapeLogic has an example file:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/default_particle_nn.txt}
+  shapelogic/src/test/resources/data/neuralnetwork/default_particle_nn.txt}}
+  with this content:
+  
++-----------------------------------+
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== WEIGHTS
+1. -1. 
+-1. 1.
++-----------------------------------+
+  
+  It will produce the same effect as the default color particle analyzer 
+  neural network. Except for the categories not being capitalized.
+  
+* User defined rules and neural networks
+  
+  If you have trained a neural network or made rules to recognize a certain 
+  type of particles you are encourage to upload text files to  
+  {{http://code.google.com/p/shapelogicapps/}} so other users can benefit from 
+  them.
+  
+* Possible future plans for particle analyzer beyond ShapeLogic v 1.6
+  
+  * HSV mode for the particle analyzer
+  
+  * Create rule or train neural networks for recognizing {{{cell.html}cells}}
+
+  * Be able to handle a background that is not uniform, and cell organelles
+
+  * Incorporate reasoning under uncertainty using the lazy stream library
+  
+  * Extend to do tracking of particles in a video sequence
+  
+  * Find overlapping particles and distinguish them as separate 
+  
+  []
+  

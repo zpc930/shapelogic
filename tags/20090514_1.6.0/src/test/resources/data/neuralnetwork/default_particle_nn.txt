@@ -1,0 +1,9 @@
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== WEIGHTS
+1. -1. 
+-1. 1.
+

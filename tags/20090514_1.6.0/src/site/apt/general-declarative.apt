@@ -1,0 +1,99 @@
+            ------
+            General declarative programming
+            ------
+            Sami Badawi
+            ------
+            2008/01/04
+            ------
+
+Using ShapeLogic for general declarative programming
+  
+  The declarative logic system is being refined substantially in ShapeLogic 0.9.
+  
+  While the declarative logic system in ShapeLogic is geared towards
+  image processing and computer vision, the logic system is not dependent on the vision system and
+  it is possible to use ShapeLogic for other purposes.
+  
+  This page considers possible other uses.
+  
+* Current declarative programming system
+  
+  Here is a look at current systems using declarative programming sorted by 
+  popularity. This was done in a highly unscientific way, and the popularity 
+  grouping is not meant to judge the quality of the systems.
+  
+** Highly popular
+  
+  * <<SQL>> for storing and retrieving uniform data
+  
+  * <<Spreadsheet>> for simple calculations
+  
+  * {{{http://www.wolfram.com}<<Mathematica>>}} for advanced mathematics
+  
+  * {{{http://www.gnu.org/software/make}<<Make>>}} for compiling C and C++
+  
+  * {{{http://ant.apache.org}<<Ant>>}} for compiling Java
+  
+  []
+  
+** Somewhat popular
+  
+  * {{{http://www.hibernate.org}<<Hibernate>>}} and other ORM are starting to pick up steam
+  
+  * <<List comprehension>> from {{{http://www.haskell.org}Haskell}} is starting 
+  to make its way into main stream programming languages: Python, Scala, C#.
+  
+  * <<IoC, Inversion of Control frameworks>> like 
+  {{{http://www.springframework.org}Spring}} and 
+  {{{http://code.google.com/p/google-guice}Google Guice}}.
+  
+  []
+  
+** Not a lot of momentum
+  
+  * <<Expert systems>> popular in the 80ies
+  
+  * <<RETE engines>> e.g. {{{http://herzberg.ca.sandia.gov}Jess}} 
+  and {{{http://labs.jboss.com/drools}Drools}} get a little press coverage now
+  
+  * {{{http://en.wikipedia.org/wiki/Prolog}<<Prolog>>}} popular in the 80ies
+  
+  * {{{http://www.mozart-oz.org}<<Oz>>}} experimental functional and logic language
+  
+  * {{{http://www.cyc.com}<<CYC>>}} maybe the most advanced and ambitious system for declarative logic 
+  and programming
+  
+  []
+  
+* Is there room for another declarative programming system?
+  
+  Here are a few observations
+  
+  * Declarative programming is not a one size fits all field
+  
+  * The more powerful systems are not the most popular
+  
+  * Simplicity seem to be a big factor in success, but not exclusively, Prolog is 
+  very simple, but lost momentum
+  
+  * There is a place for custom systems
+  
+  []
+  
+* Goal for declarative programming in ShapeLogic
+  
+  ShapeLogic is not a general purpose system.
+  
+  It is meant as a simple system that will be able to do real work and 
+  be simple to learn and use.
+  
+* Domains suitable for ShapeLogic
+  
+  Domains where there are a limited number of objects with somewhat constant 
+  and limited sets of features.
+  
+* Is there room for ShapeLogic as a general declarative programming system?
+  
+  It is a long shot.
+  
+  

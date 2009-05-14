@@ -1,0 +1,48 @@
+            ------
+            Compatibility Changes
+            ------
+            Sami Badawi
+            ------
+            2008/08/20
+
+Compatibility Changes
+  
+  This page will describe changes that break some backwards compatibility. 
+  This will not necessarily affect the user program.  
+  
+* ShapeLogic v 1.4
+  
+** 2008/08 Multiple context
+  
+  A context is a map where you can store named calculations or streams.
+  
+  Before you could be in multiple context organized as an array of maps. 
+  This was not used.
+  
+  Now you can be in a RecursiveContext that has a map and a parent 
+  RecursiveContext. This is not used yet.
+  
+** 2008/08 Methods defining streams changed from static to non static
+  
+  Before all the stream factory methods defining the letter matching and 
+  particle matching were static and the stream was put in a global map living 
+  in the singleton RootMap. 
+  
+  Now this have been changed so that for these plugin filters are a 
+  RecursiveContext. All the stream factory methods now needs to 
+  know that context. This is done giving the stream factory class a 
+  RecursiveContext field and making all the factories non static. 
+  
+** DigitStreamVectorizer the digit matching example class
+  
+  Conceptually DigitStreamVectorizer is sub classed from StreamVectorizer the
+  letter matching example class. 
+  
+  Before: StreamVectorizer is a ImageOperation that got was turned into an ImageJ 
+  plugin using a wrapper class. DigitStreamVectorizer was also a wrapper class
+  around StreamVectorizer that got expanded as an anonymous class.
+  
+  Now it is directly sub classed from the StreamVectorizer so it is both an 
+  ImageOperation and a ImageJ plugin.
+  
+  

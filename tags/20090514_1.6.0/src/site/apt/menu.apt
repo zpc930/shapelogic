@@ -1,0 +1,225 @@
+            ------
+            Menu overview
+            ------
+            Sami Badawi
+            ------
+            2008/11/29
+            ------
+
+ShapeLogic menu when run with ImageJ
+  
+  When running ShapeLogic as an ImageJ plugin there are 2 menus 
+  
+  * {{ShapeLogic}} current commands 
+   
+  * {{ShapeLogicOld}} deprecated commands left for backwards compatibility  
+  
+  []
+
+* {ShapeLogic} menu
+  
+[images/particles/shapelogicmenu.png] 
+   
+  * {{CapitalLetterMatch}}
+  
+  * {{Segment}}
+  
+  * {{ParticleCounter}}
+  
+  * {{{#Particle}Color Particle Analyzer}}
+  
+  * {{{#RGB} RGB Color Particle Analyzer}}
+  
+  * {{{#Vectorizer}Stream Vectorizer}}
+  
+  * {{{#Replacer}Color Replacer}}
+
+  []
+  
+* {CapitalLetterMatch}
+  
+  Main command for letter recognition. This is a macro that:
+  
+  * Turns an image into a black and white image
+  
+  * Skeletonizes an image, turning line into thin lines
+  
+  * Runs the {{{#Vectorizer}Stream Vectorizer}} plugin described below
+  
+  []
+  
+  {{{getting-started.html#letter}Usage instruction}}
+  
+* {Segment}
+  
+  Segment is a 4 connect color segmentation algorithm. 
+  Currently the color distance can only be set in the code, but 
+  an input dialog may be added in the future.
+  
+* {ParticleCounter}
+  
+  This will count particles in a color image but cannot do any edge tracing or
+  analysis.
+  The particle analyzer (see below) can also be called with a count only option and has the
+  following advantages over the particle counter:
+  
+  * Set the background or foreground color 
+  
+  * Print out internal information
+  
+  * Turn image into a black and white mask 
+  
+  []
+  
+  {{{particle.html}Usage instruction}}
+  
+* Color {Particle} Analyzer
+  
+  {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
+  black and white images. The background color is found automatically.
+  
+  {{{particle.html}Usage instruction}}
+  
+* {RGB} Color Particle Analyzer
+  
+  {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
+  black and white images. The background or foreground color is set by the user. 
+  
+  {{{particle.html#rgb}Usage instruction}} and {{{colocalization.html}co-localization images}}.
+  
+* Stream {Vectorizer}
+  
+  Main Java code for letter recognition.
+  It is a plugin that takes a line image with thin or skeletonized lines and 
+  vectorizes and analyzes them then matches them to letters.
+   
+  Based on:
+  
+  * Lazy stream declarative programming 
+  
+  * Language to describe annotations and locations 
+  
+  * Max Distance Vectorizer 
+  
+  []
+  
+  {{{getting-started.html#letter}Usage instruction}}
+  
+* Color {Replacer}
+  
+  Little utility plugin to isolate color or gray interval.
+  You select a color and change all the pixels in the image
+  that are close to this into that color. You can also turn it into a black and
+  white mask.
+  
+  {{{utilities.html#Replacer}Usage instruction}}
+  
+  
+{ShapeLogicOld}
+  
+  Deprecated commands left for backwards compatibility
+
+[images/screenshots/shapelogicoldmenu.png] 
+
+  * {{DigiMatch}} 
+  
+  * {{{#Line}Line Vectorizer}}
+  
+  * {{{#Direction}Direction Based Vectorizer}} 
+  
+  * {{{#Distance}Max Distance Vectorizer}} 
+  
+  * {{{#hypothesis}Find color hypothesis}}
+  
+  * {{StraightCapitalLetterMatch}}
+  
+  * {{{#Information}Vectorize Information}}
+  
+  * {{{#Digi}Digi Match Stream Vectorizer}}
+  
+  * {{TaskBasedCapitalLetterMatch}}
+  
+  []
+  
+* {DigiMatch} 
+  
+  Main command for digit recognition.
+  It is a macro similar to the CapitalLetterMatch but for digits, it calls the digit
+  match plugin Digi Match {{{#Vectorizer}Stream Vectorizer}}.
+  
+  {{{getting-started.html#letter}Usage instruction}}
+  
+* {Line} Vectorizer
+  
+  First approach to vectorizing lines. Based on splitting lines into pieces 
+  that are 5 pixels long. This was pretty unstable.
+  
+  
+  
+* {Direction} Based Vectorizer 
+  
+  Second approach to vectorizing lines. Based on special handling of the 
+  intersection points. More stable.
+  
+* Max {Distance} Vectorizer 
+  
+  Third approach to vectorizing lines. Standard approach to vectorizer trace 
+  full line between intersection and split it up based on max distance from a
+  line between the end points. This is stable. This implementation only handles
+  the first found polygon. Same approach that is used in Stream Vectorizer.
+  
+* Find color {hypothesis}
+  
+  This is the algorithm that is used to find the background in the 
+  Color Particle Analyzer.
+  
+* {StraightCapitalLetterMatch}
+  
+  First very crude OCR, that can only recognize one straight capital letter.
+  Based on 
+  
+  * {{{goal-driven.html}Goal driven}} declarative programming
+  
+  * Direction Based Vectorizer 
+  
+  []
+  
+* Vectorize {Information}
+  
+  Does the same as {{{#Vectorizer}Stream Vectorizer}}, but also writes out all 
+  the internal information that is used in the process:
+  
+  * Points
+  
+  * Multi lines
+  
+  * Polygons
+  
+  * Annotations for all of these
+  
+  []
+  
+  {{{utilities.html#vectorize}Usage instruction}}
+  
+* {Digi} Match Stream Vectorizer
+  
+  Main Java code for digit recognition.
+  This is a plugin to take a line image with thin or skeletonized lines and 
+  vectorize and analyze them, then match them to digits.
+  
+  {{{getting-started.html#letter}Usage instruction}}
+  
+* {TaskBasedCapitalLetterMatch}
+  
+  Second crude OCR, that can recognize one capital letter. 
+  Based on 
+  
+  * {{{goal-driven.html}Goal driven}} declarative programming 
+  
+  * Language to describe annotations and locations 
+  
+  * Max Distance Vectorizer 
+  
+  []
+  
+  
