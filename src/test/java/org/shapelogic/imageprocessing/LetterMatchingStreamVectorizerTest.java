@@ -182,15 +182,33 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		assertEquals(fileName, vectorizer.getMatchingOH());
 	}
 
-    public void testAWithMissingStream()
+    /** This match is done with a bad categorizer setup file meant for particles.<br /> 
+     * It should not throw an exception.
+     */
+    public void testAWithMissingStreamNN()
     {
         String fileName = "A";
-        String dataFileName = "particle_nn_with_print.txt";
+        String dataFileName = "particle_nn_with_print.txt"; 
         _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
         _streamVectorizer.setUseNeuralNetwork(true);
 		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
 		String errorMessage = "NumberedStream not found in context for name: \"aspect\".\n Nothing found.";
 		assertEquals(errorMessage, vectorizer.getErrorMessage());
+		assertEquals(null, vectorizer.getMatchingOH());
+	}
+
+    /** This match is done with a bad categorizer setup file meant for particles.<br /> 
+     * It should not throw an exception.
+     */
+    public void testAWithMissingStreamRules()
+    {
+        String fileName = "A";
+        String dataFileName = "particle_nn_with_print.txt"; 
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(false);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		assertEquals(null, vectorizer.getErrorMessage());
+		assertEquals(fileName, vectorizer.getMatchingOH());
 	}
 
 }
