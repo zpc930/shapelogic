@@ -214,9 +214,11 @@ ShapeLogic
   
   * Extend Multi-layer feed forward neural network to work with letter matcher
   
-  * Load neural network from file
+  * Load neural network from {{{categorizer-setup.html}categorizer setup file}}
   
-  * Load categorizer rules from file
+  * Load categorizer rules from {{{categorizer-setup.html}categorizer setup file}}
+  
+  * Load columns for result table from {{{categorizer-setup.html}categorizer setup file}}
   
   []
   
