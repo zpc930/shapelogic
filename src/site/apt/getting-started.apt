@@ -103,9 +103,29 @@ Image processing user mode with ImageJ
     
   []
   
+** Input dialog
+
+  When you press CapitalLettersMatch or Stream Vectorizer an input dialog will 
+  prompt you for input:
+  
 [images/screenshots/stream_vectorizer_input_dialog.png] CapitalLettersMatch menu item
   
-
+  DisplayInputDialog: If you uncheck this next time run CapitalLettersMatch
+  this menu will not show up
+  
+  DisplayResultTable: If this is checked you will see a result table with 
+  geometric features for each polygon
+  
+  DisplayInternalInfo: Print out polygon, points and their annotations
+  
+  UseNeuralNetwork: Use neural network for classification
+  
+  ShowFileDialog: If this is checked the user will be prompted with a file 
+  dialog to select categorizer setup file
+  
+  CategorizerSetupFile: File path to the categorizer setup file containing
+  neural network, rules or column selection list
+  
 * Result of match
 
   Dialog with results of match
