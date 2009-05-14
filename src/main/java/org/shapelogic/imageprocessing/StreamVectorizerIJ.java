@@ -69,7 +69,7 @@ public class StreamVectorizerIJ extends StreamVectorizer implements ExtendedPlug
 	        _gd.addCheckbox("DisplayInternalInfo: ", _displayInternalInfoStatic);
 	        _gd.addCheckbox("UseNeuralNetwork", _useNeuralNetworkStatic);
             _gd.addCheckbox("ShowFileDialog", false);
-	        _gd.addStringField("NeuralNetworkFile", _neuralNetworkFileStatic, 50); 
+            _gd.addStringField("CategorizerSetupFile", _neuralNetworkFileStatic, 50); 
 	        _gd.showDialog();
 	        if (_gd.wasCanceled()) {
 	            return DONE;
