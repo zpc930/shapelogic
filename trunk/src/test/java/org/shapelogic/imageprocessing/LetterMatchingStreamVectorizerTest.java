@@ -182,4 +182,15 @@ public class LetterMatchingStreamVectorizerTest extends BaseLetterMatchingMaxDis
 		assertEquals(fileName, vectorizer.getMatchingOH());
 	}
 
+    public void testAWithMissingStream()
+    {
+        String fileName = "A";
+        String dataFileName = "particle_nn_with_print.txt";
+        _streamVectorizer.setNeuralNetworkFile(_dataDir + "/" + dataFileName);
+        _streamVectorizer.setUseNeuralNetwork(true);
+		SLImage bp =runPluginFilterOnImage(filePath(fileName), vectorizer);
+		String errorMessage = "NumberedStream not found in context for name: \"aspect\".\n Nothing found.";
+		assertEquals(errorMessage, vectorizer.getErrorMessage());
+	}
+
 }

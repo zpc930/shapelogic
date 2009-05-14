@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.shapelogic.calculation.RecursiveContext;
 import org.shapelogic.logic.CommonLogicExpressions;
@@ -172,10 +173,15 @@ public class StreamVectorizer extends BaseMaxDistanceVectorizer implements Recur
 	
 	@Override
 	public void run() {
-		init();
-		matchLines();
-		if (_displayResultTable || _displayAll)
-			printTable();
+		try {
+			init();
+			matchLines();
+			if (_displayResultTable || _displayAll)
+				printTable();
+		} catch (NoSuchElementException e) {
+			_errorMessage = e.getMessage();
+            showMessage("Missing element", e.getMessage());
+		}
 	}
 
 	@Override
