@@ -41,6 +41,8 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 		"You can have one or more lines of\n" +
 		"comments\n" +
 		"They are just ignored\n";
+	
+	protected String dir = "src/test/resources/data/neuralnetwork/"; 
 
 	public void testNoPrintNormalSequence() {
 		String inputString = INPUT_NO_PRINT;
@@ -115,7 +117,7 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 	
 	public void testDefaultParticleNNFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
-		String path = "src/test/resources/data/neuralnetwork/default_particle_nn.txt";
+		String path = dir + "default_particle_nn.txt";
 		FFNeuralNetworkWeights result = parser.parse(path);
 		assertNotNull(result);
 		assertEquals(1, result.getFeatureList().size());
@@ -129,7 +131,7 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 
 	public void testParticleWithRulesNNFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
-		String path = "src/test/resources/data/neuralnetwork/particle_nn_with_rules.txt";
+		String path = dir + "particle_nn_with_rules.txt";
 		FFNeuralNetworkWeights result = parser.parse(path);
 		assertNotNull(result);
 		assertEquals(1, result.getFeatureList().size());
@@ -145,7 +147,7 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 
 	public void testParticleWithPrintsNNFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
-		String path = "src/test/resources/data/neuralnetwork/particle_nn_with_print.txt";
+		String path = dir + "particle_nn_with_print.txt";
 		FFNeuralNetworkWeights result = parser.parse(path);
 		assertNotNull(result);
 		assertEquals(1, result.getFeatureList().size());
@@ -164,7 +166,7 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 
 	public void testParticleNNMultiLayerFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
-		String path = "src/test/resources/data/neuralnetwork/particle_nn_multi_layer.txt";
+		String path = dir + "particle_nn_multi_layer.txt";
 		FFNeuralNetworkWeights result = parser.parse(path);
 		assertNotNull(result);
 		assertEquals(1, result.getFeatureList().size());
@@ -190,7 +192,7 @@ public class FFNeuralNetworkWeightsParserTest extends TestCase {
 
 	public void testParticleWithRulesPrintsNNFile() throws Exception {
 		FFNeuralNetworkWeightsParser parser = new FFNeuralNetworkWeightsParser();
-		String path = "src/test/resources/data/neuralnetwork/particle_nn_with_rules_print.txt";
+		String path = dir + "particle_nn_with_rules_print.txt";
 		FFNeuralNetworkWeights result = parser.parse(path);
 		assertNotNull(result);
 		assertEquals(1, result.getFeatureList().size());
