@@ -50,6 +50,7 @@ ShapeLogic
   for image processing and computer vision, it is widely applicable.
   It is currently difficult to combine declarative programming and image processing.
   ShapeLogic is intended as basic plumbing software that turns a logic engine 
+  or a neural network
   into a simple plugin component to ease entry into vision and image 
   analysis. ShapeLogic also fills gaps missing from current Java image 
   processing libraries, and uses a commercially friendly license.
@@ -63,8 +64,8 @@ ShapeLogic
   
   * Specialized for the domain of image processing and computer vision
   
-  * The user can store rules in either a flat file or database, decreasing user 
-  reliance on Java programming
+  * The user can store rules in a flat file, decreasing user reliance on Java
+  programming
   
   * User rules are written with Java or the Java 6 Scripting interface JSR 223.   
   {{{http://groovy.codehaus.org}Groovy}}, 
@@ -90,7 +91,7 @@ ShapeLogic
 
 *  Particle analyzer
 
-  ShapeLogic 1.5 contains a {{{particle.html}color particle analyzer}}.
+  ShapeLogic 1.6 contains a {{{particle.html}color particle analyzer}}.
   
   Here is an example particle image embryos.jpg
     
@@ -103,10 +104,10 @@ ShapeLogic
   The categories for the particles are only examples, it is easy to 
   setup different rules for categorizing particles.
   
-  In ShapeLogic 1.6 train a neural network to  
+  In ShapeLogic 1.7 train a neural network to  
   {{{cell.html}categorize specific cells}}.
   
-  ShapeLogic 1.5 also contains the second version of a color particle counter. 
+  ShapeLogic 1.6 also contains the second version of a color particle counter. 
   It also prints a smaller report of the particle's properties.
   
 [images/particles/particleCounterResult.png]
@@ -171,7 +172,7 @@ ShapeLogic
 
   * Contains a framework for declarative and functional programming.
 
-  * ShapeLogic currently consists of 35,000 lines of Java code including 550 unit tests.
+  * ShapeLogic currently consists of 37,000 lines of Java code including 600 unit tests.
 
   []
 
@@ -209,7 +210,7 @@ ShapeLogic
   
 * News
 
-** 2009/05/13 ShapeLogic Java 1.6 improve neural network and rules
+** 2009/05/14 ShapeLogic Java 1.6 improve neural network and rules
   
   * Extend Multi-layer feed forward neural network to work with letter matcher
   
@@ -328,15 +329,9 @@ ShapeLogic
   
   []
   
-** ShapeLogic C++ 0.6 soon to be released
-  
-  * Make more OpenCV image processing algorithm available in menus
-    
-  * Make generic dialog to get parameters for algorithms
-  
-  []  
-  
 ** Low hanging fruits for ShapeLogic C++
+  
+  * Make generic dialog to get parameters for algorithms
   
   * Optimize draw
 

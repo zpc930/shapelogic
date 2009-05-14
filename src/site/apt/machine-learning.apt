@@ -13,16 +13,33 @@ Machine learning
   First machine learning technique is a multi layer feed forward neural network
   that is trained externally but run internally.
 
-* Neural network in ShapeLogic 1.5
+* Neural network in ShapeLogic 1.6
 
-  ShapeLogic 1.5 implement a multi layer feed forward neural network.
-
+  ShapeLogic 1.6 implement a multi layer feed forward neural network for 
+  color particle analyzer and for letter match.
+  
+  
   The default network is very simple it is marking particles Tall, Flat based 
-  on their aspect ratio. This is the code for it in 
-  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzer.java}ColorParticleAnalyzer.java}}.
+  on their aspect ratio. 
+  
+  This categorizer setup file creates the same effect:
 
 +----------------------------------------------------------------------+
-private void defineNeuralNetwork() {
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== WEIGHTS
+1. -1. 
+-1. 1.
++----------------------------------------------------------------------+
+
+  This is the code for it in 
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzer.java}ColorParticleAnalyzer.java}}.
+  
++----------------------------------------------------------------------+
+public void defineNeuralNetwork() {
 	String[] objectHypotheses = new String[] {"Tall", "Flat"};
 	String[] inputStreamName = {StreamNames.ASPECT};
 	double[][] weights = ExampleNeuralNetwork.makeSmallerThanGreaterThanNeuralNetwork(1.); 
@@ -48,7 +65,7 @@ new double[][] {
   Link to {{{particle.html#override}override code example}} 
   that shows you how to override this with your own neural network.
   
-* Process for training neural network in ShapeLoigc 1.5
+* Process for training neural network
 
   * Select list of input features, defined as named lazy data streams
 
@@ -62,11 +79,10 @@ new double[][] {
 
   * If successful network can be found use it otherwise chose new list of input features
   
-  * Subclass ColorParticleAnalyzerIJ or RGBColorParticleAnalyzer and override 
-  defineNeuralNetwork()
+  * You save the weights to flat file and ShapeLogic will load them
 
-  * Starting in ShapeLogic 1.6 you will be able save the weights to flat file or 
-  database, and ShapeLogic will load them
+  * In ShapeLoigc 1.5 you would subclass ColorParticleAnalyzerIJ or 
+  RGBColorParticleAnalyzer and override defineNeuralNetwork()
 
   []
 
