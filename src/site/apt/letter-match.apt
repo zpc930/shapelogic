@@ -95,7 +95,8 @@ Letter Match Example
   
   CategorizerSetupFile: File path to the 
   {{{categorizer-setup.html}categorizer setup file}} containing
-  {{{machine-learning.html}neural networks}}, rules or column selection list
+  {{{machine-learning.html}neural networks}}, 
+  {{{logic-language.html#syntax}rules}} or column selection list
   
 ** Result of match
 

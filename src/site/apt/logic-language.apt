@@ -12,6 +12,50 @@ Logic language
   
   For a broader introduction to the logic system see {{{declarative-logic.html} Declarative logic}}. 
 
+Logic expressions {syntax} in lazy stream approach
+  
+  To change the categorizers used for particle analyzer or letter matcher 
+  you can override a class:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} DigitStreamVectorizer}} 
+  is an example showing what is needed to define a match of the digits working 
+  as a plugin from ImageJ.
+  Starting in ShapeLogic 1.6 this could be done by using a 
+  {{{categorizer-setup.html}categorizer setup file}}:
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/polygon_digit_recognizer_with_rules_print.txt}
+  shapelogic/src/test/resources/data/neuralnetwork/polygon_digit_recognizer_with_rules_print.txt}}.
+  This has exactly the same effect.
+  
+* Define a rule for matching the letter A
+  
++--------------------------------------------+
+rule("A", POINT_COUNT, "==", 5.);
+rule("A", HOLE_COUNT, "==", 1.);
+rule("A", T_JUNCTION_LEFT_POINT_COUNT,"==", 1.);
+rule("A", T_JUNCTION_RIGHT_POINT_COUNT,"==", 1.);
+rule("A", END_POINT_BOTTOM_POINT_COUNT, "==", 2.);
+rule("A", HORIZONTAL_LINE_COUNT, "==", 1.);
+rule("A", VERTICAL_LINE_COUNT, "==", 0.);
+rule("A", END_POINT_COUNT, "==", 2.);
+rule("A", SOFT_POINT_COUNT, "==", 0.);
++--------------------------------------------+
+  
+  The "A" is saying apply this rule to the OH, object hypothesis, the letter A.
+  
+  The next is just names of streams that generate the point count and hole 
+  count for the polygons. Then there is the predicate and the comparison value.
+  
+* Idea behind lazy streams
+  
+  Lazy streams have the following features  
+  
+  * You can define a lazy stream based on other lazy streams
+  
+  * They works as a kind of UNIX pipes or Legos
+  
+  * They serves as your query construct, you can directly query them 
+  
+  []
+  
 Different types of declarative programming in ShapeLogic
   
   [[1]] Lazy calculations
@@ -62,41 +106,4 @@ Different types of declarative programming in ShapeLogic
   
   It is also possible to connect Groovy and Java outside Java 6 Scripting, but 
   then it would not be uniform.
-  
-Logic expressions {syntax} in lazy stream approach
-  
-  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} DigitStreamVectorizer}} 
-  is an example showing what is needed to define a match of the numbers working 
-  as a plugin from ImageJ.
-  
-* Define a rule for matching the letter A
-  
-+--------------------------------------------+
-rule("A", POINT_COUNT, "==", 5.);
-rule("A", HOLE_COUNT, "==", 1.);
-rule("A", T_JUNCTION_LEFT_POINT_COUNT,"==", 1.);
-rule("A", T_JUNCTION_RIGHT_POINT_COUNT,"==", 1.);
-rule("A", END_POINT_BOTTOM_POINT_COUNT, "==", 2.);
-rule("A", HORIZONTAL_LINE_COUNT, "==", 1.);
-rule("A", VERTICAL_LINE_COUNT, "==", 0.);
-rule("A", END_POINT_COUNT, "==", 2.);
-rule("A", SOFT_POINT_COUNT, "==", 0.);
-+--------------------------------------------+
-  
-  The "A" is saying apply this rule to the OH, object hypothesis, the letter A.
-  
-  The next is just names of streams that generate the point count and hole 
-  count for the polygons. Then there is the predicate and the comparison value.
-  
-* Idea behind lazy streams
-  
-  Lazy streams have the following features  
-  
-  * You can define a lazy stream based on other lazy streams
-  
-  * They works as a kind of UNIX pipes or Legos
-  
-  * They serves as your query construct, you can directly query them 
-  
-  []
   

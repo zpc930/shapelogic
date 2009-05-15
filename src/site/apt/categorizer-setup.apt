@@ -126,7 +126,10 @@ categorizer-definition = BLOCK_START ,
    characters starting with more \=\=\= will not be considered a string. 
    
 Function of different sections
-
+  
+  Here is a short description of what the different sections of the categorizer
+  setup files is doing:
+  
 * Comment section
   
   This is just a comment. 
