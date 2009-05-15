@@ -19,11 +19,14 @@ Categorizer setup for loading rules and neural networks
   There is a simple one to one mapping of rule definition:
   
 * Defining digit categorizer with a setup file
-
-  Done in this file:
+  
+  You can change the CapitalLetterMatch / Stream Vectorizer from a letter 
+  matcher to digit matcher by loading this file:
   {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/polygon_digit_recognizer_with_rules_print.txt}
   shapelogic/src/test/resources/data/neuralnetwork/polygon_digit_recognizer_with_rules_print.txt}}:
   
+  Here are the definitions of the digit 0 and 1 and a list of the geometric 
+  features you to get written out: 
   
 +---------------------------------------------------------+
 
