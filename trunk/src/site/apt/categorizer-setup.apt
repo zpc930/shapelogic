@@ -217,6 +217,9 @@ softPointCount > 0
 
 * Finding names of streams
   
+  A {{{stream-dictionary.html}stream-dictionary}} of what the different streams 
+  do and is called is being worked on now.
+  
   Finding names of streams takes a little digging. Here are a few places to 
   start digging:
   

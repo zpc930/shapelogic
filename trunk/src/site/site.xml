@@ -53,6 +53,7 @@
 		  <item name="Point Type" href="point-type.html"/>
 		  <item name="Programming" href="programming.html"/>
 		  <item name="Scripting" href="scripting.html"/>
+		  <item name="Stream Dictionary" href="stream-dictionary.html"/>
       </item>
       <item name="Meta ShapeLogic" href="index.html" collapse="true">
 		  <item name="Build and Debugging" href="setup.html"/>

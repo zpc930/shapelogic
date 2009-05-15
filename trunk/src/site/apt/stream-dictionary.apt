@@ -1,0 +1,28 @@
+            ------
+            Stream Dictionary
+            ------
+            Sami Badawi
+            ------
+            2009/05/15
+            ------
+
+Stream Dictionary work in progress
+
+  If the user wanted to customizing rule set or neural networks for either the 
+  {{{particle.html}Color Particle Analyzer}} or for the 
+  {{{letter-match.html}letter matcher}} it demands 
+  making a {{{categorizer-setup.html}categorizer setup file}} or
+  {{{programming.html}programming}}.
+  
+  In order to do this you need to understand what is in the different lazy data streams.
+  This page is a dictionary of them.
+  
+* Stream Dictionary in polygons
+  
+  * <<holeCount>> Number of holes enclosed by a polygon
+  
+  * <<lineCount>> Number of line segments in a polygon
+  
+  * <<tJunctionCount>> Number of T junction in a polygon
+  
+  []
