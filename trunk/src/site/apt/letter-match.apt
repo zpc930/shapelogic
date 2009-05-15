@@ -32,10 +32,81 @@ Letter Match Example
   
   shapelogic/src/test/resources/images/smallThinLetters
 
-* How to see letter recognition in action
+* Using letter recognition
 
-  See the {{{getting-started.html} Getting Started page}}.
+  This can also be found on the {{{getting-started.html} Getting Started page}}.  
+
+**  Testing ShapeLogic {letter} matching from within ImageJ
+
+  * Open ImageJ
   
+  * Create a new image, 100 x 100 pixels works well
+  
+  * Draw a letter in black on white background
+  
+  []
+
+[images/letters/Mdrawing.png] Mdrawing
+
+  * Go to the shapelogic menu and select CapitalLettersMatch, which does the following 
+
+    * Convert the image to a binary image
+
+    * Call ImageJ's build in Skeletonize
+
+    * Vectorize into bitmap into polygon
+
+    * Clean up the vectorized polygon
+
+    * Then annotate the polygon
+
+    * Then match the polygon against all the rules for all the capital letters
+
+    * With a little luck you will see a dialog box saying what letter was matched
+
+    * If more than one letter matches, the match will fail
+
+    * If the match fails then all the properties of the polygon will be written 
+    to the console for debugging
+    
+    []
+    
+  []
+  
+** Input dialog
+
+  When you press CapitalLettersMatch or Stream Vectorizer an input dialog will 
+  prompt you for input:
+  
+[images/screenshots/stream_vectorizer_input_dialog.png] CapitalLettersMatch menu item
+  
+  DisplayInputDialog: If you uncheck this next time run CapitalLettersMatch
+  this menu will not show up
+  
+  DisplayResultTable: If this is checked you will see a result table with 
+  geometric features for each polygon
+  
+  DisplayInternalInfo: Print out polygon, points and their annotations
+  
+  UseNeuralNetwork: Use neural network for classification
+  
+  ShowFileDialog: If this is checked the user will be prompted with a file 
+  dialog to select categorizer setup file
+  
+  CategorizerSetupFile: File path to the 
+  {{{categorizer-setup.html}categorizer setup file}} containing
+  {{{machine-learning.html}neural networks}}, rules or column selection list
+  
+** Result of match
+
+  Dialog with results of match
+  
+[images/letters/Mmatch.png] M match
+
+  Vectorized M with skeletonized letter in black and polygon in gray
+  
+[images/letters/Mvectorized.png] M vectorized
+
 Recognition of all capital letters in ShapeLogic 1.0
 
   Lines and points are annotated in order to match curves, circle arches or Bezier curves are not used.
