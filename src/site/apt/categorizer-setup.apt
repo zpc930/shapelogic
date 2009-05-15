@@ -214,4 +214,56 @@ softPointCount > 0
   holeCount is the name of the data feature stream of hole counts.
   So the first line will filter away all polygons that do not have a hole count
   equal to 0.
+
+* Finding names of streams
+  
+  Finding names of streams takes a little digging. Here are a few places to 
+  start digging:
+  
+  Look at the files where rules are defined. A good idea is to download the 
+  sources and open it using a modern IDE like Eclipse, IntelliJ, JBuilder, 
+  NetBeans. Then it is easier to maneuver to see where things are defined.
+  
+  Not that different streams are defined for the particle analyzer group and 
+  letter matcher group. 
+  
+** Letter matcher
+  
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/StreamVectorizerIJ.java}
+  src/main/java/org/shapelogic/imageprocessing/StreamVectorizerIJ.java}}
+  
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/StreamVectorizer.java}
+  src/main/java/org/shapelogic/imageprocessing/StreamVectorizer.java}}
+  
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} 
+  src/main/java/DigitStreamVectorizer_.java}}
+  
+** Color Particle Analyzer
+  
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzerIJ.java} 
+  src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzerIJ.java}}
+  
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzer.java} 
+  src/main/java/org/shapelogic/imageprocessing/ColorParticleAnalyzer.java}}
+  
+** Definition of basic streams
+
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/logic/CommonLogicExpressions.java} 
+  src/main/java/org/shapelogic/logic/CommonLogicExpressions.java}}
+  
+  In this directory
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/#shapelogic/streamlogic%3Fstate%3Dclosed}
+  src/main/java/org/shapelogic/streamlogic}}
+  there is several interesting file:
+  
+  * LoadLetterStreams.java
+  
+  * LoadParticleStreams.java
+  
+  * LoadPolygonStreams.java
+  
+  * StreamNames.java
+  
+  []
+  
   
