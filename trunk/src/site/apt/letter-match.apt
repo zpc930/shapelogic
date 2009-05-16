@@ -128,6 +128,21 @@ Recognition of all capital letters in ShapeLogic 1.0
   Lines and points can be filtered according to both position in the bounding box for a 
   polygon, and point and line annotations. 
 
+* Rules for the letter A in ShapeLogic 1.6
+
++------------------------------------------+
+========== def A
+pointCount == 5
+holeCount == 1
+tJunctionLeftCount == 1
+tJunctionRightCount == 1
+endpointBottomPointCount == 2
+horizontalLineCount == 1
+verticalLineCount == 0
+endPointCount == 2
+softPointCount == 0
++------------------------------------------+
+
 * Rules for the letter A in ShapeLogic 1.0
   
   For a better description of {{{logic-language.html} logic language syntax}}.
