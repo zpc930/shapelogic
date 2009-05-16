@@ -19,10 +19,39 @@ Stream Dictionary work in progress
   
 * Stream Dictionary in polygons
   
+  
+  * <<aspectRatio>> Aspect ratio of polygon, higher is wider, smaller is taller, 1 is even 
+  
+  * <<curveArchCount>> A line can either be straight or be a curve arch 
+  
+  * <<endPointCount>> Number of end points in a polygon 
+  
+  * <<endpointBottomPointCount>> Number of end point is the bottom (half?) 
+  
+  * <<endpointBottomRightThirdPointCount>> Number of end point is the bottom right third
+  
+  * <<endpointTopLeftThirdPointCount>> Number of end points in top left third 
+  
+  * <<hardPointCount>> A point can either hard corner or a soft point this is the count of hard corners 
+  
   * <<holeCount>> Number of holes enclosed by a polygon
+  
+  * <<horizontalLineCount>> Number of roughly horizontal lines in a polygon 
   
   * <<lineCount>> Number of line segments in a polygon
   
+  * <<multiLineCount>> A multi line is made up of 2 or more points, but with no Y junctions 
+  
+  * <<pointCount>> Number of points in a polygon
+  
   * <<tJunctionCount>> Number of T junction in a polygon
+  
+  * <<tJunctionLeftCount>> T junction in the left half of the bounding box
+  
+  * <<tJunctionRightCount>> T junction in the right half of the bounding box
+  
+  * <<uJunctionCount>> Number of undecided junctions that can be T junction or Y junction 
+  
+  * <<verticalLineCount>> Number of roughly vertical lines in a polygon
   
   []
