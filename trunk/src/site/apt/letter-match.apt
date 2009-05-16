@@ -6,12 +6,33 @@
             2007/08/06
             ------
 
-Letter Match Example
+Letter or Symbol Matcher
 
-  ShapeLogic comes with a test application for letter matching, the purpose
+  The Letter Matcher is really a general categorizer for skeletonized lines.
+  You can define you own rule set for you symbols or train a neural network for
+  it. 
+  
+  It comes with handwritten rules that will categorize the capital letters,
+  but this is not very robust, and is made to match letter in sans serif 
+  typefaces, e.g. Ariel or Helvetica. 
+  
+  Unit tests exist for all capital letters. 
+  
+  Matched images can be found in this directory:
+  
+  shapelogic/src/test/resources/images/smallThinLetters
+
+  For more robust matching you should train a neural network.
+  If you train a neural network and you think that it might be useful for 
+  others you can upload it to:
+  {{http://code.google.com/p/shapelogicapps/downloads/list}}
+  
+* History of the Letter Matcher
+    
+  The Letter Matcher started as a test application for letter matching, the purpose
   of which is to show how to use the ShapeLogic framework on a simple well defined problem.
   
-  Currently 4 sets of rules have been defined:
+  Currently 5 sets of rules have been defined:
   
   [[1]] Recognition of straight capital letters in ShapeLogic 0.2
   
@@ -19,22 +40,15 @@ Letter Match Example
   
   [[1]] Simplified syntax by adding a filter logic language starting in ShapeLogic 0.8
   
-  [[1]] Using lazy stream and filter logic language starting in ShapeLogic 1.0
+  [[1]] Using rules in lazy stream and filter logic language starting in ShapeLogic 1.0
+  
+  [[1]] Using neural networks in lazy stream and filter logic language starting in ShapeLogic 1.6
   
   []
   
-  The matching example is not very robust yet, and is 
-  made to match letter in sans serif typefaces, e.g. Ariel or Helvetica.
- 
-  Unit tests exist for all capital letters. 
-  
-  Matched images can be found in this directory:
-  
-  shapelogic/src/test/resources/images/smallThinLetters
-
 * Using letter recognition
 
-  This can also be found on the {{{getting-started.html} Getting Started page}}.  
+  This description can also be found on the {{{getting-started.html} Getting Started page}}.  
 
 **  Testing ShapeLogic {letter} matching from within ImageJ
 
