@@ -165,21 +165,11 @@ ShapeLogic C++
   
 * Future plans for ShapeLogic
   
-** ShapeLogic C++ 0.6 soon to be released
+** Low hanging fruits for ShapeLogic C++
   
   * Make more OpenCV image processing algorithm available in menus
     
-    * Adaptive threshold
-    
-    * Binary mathematical morphology
-    
-    []
-
   * Make generic dialog to get parameters for algorithms
-  
-  []  
-  
-** Low hanging fruits for ShapeLogic C++
   
   * Optimize draw
 
