@@ -11,9 +11,11 @@ Release notes for releases with development status beta
   
   * Extend Multi-layer feed forward neural network to work with letter matcher
   
-  * Load neural network from file
+  * Load neural network from {{{categorizer-setup.html}categorizer setup file}}
   
-  * Load categorizer rules from file
+  * Load categorizer rules from {{{categorizer-setup.html}categorizer setup file}}
+  
+  * Load columns for result table from {{{categorizer-setup.html}categorizer setup file}}
   
   * Built for JDK 1.5 / Java 5 so it should work on the Mac without updates
   
