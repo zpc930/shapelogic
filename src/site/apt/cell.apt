@@ -8,7 +8,7 @@
 
 Cell Categorizer
 
-  ShapeLogic v 1.5 contains a generic {{{particle.html} particle analyzer}}.
+  ShapeLogic v 1.6 contains a generic {{{particle.html} particle analyzer}}.
   This page illustrates a few examples of the types of images that can currently be 
   handled, and the types of images that the next versions of ShapeLogic should be able to
   handle.
@@ -27,7 +27,7 @@ Cell Categorizer
   to handle next you can leave a message on the 
   {{{http://groups.google.com/group/shapelogic}ShapeLogic mailing list}}
   
-ShapeLogic v 1.5 currently handles
+ShapeLogic v 1.6 currently handles
   
   Sparse cell images without categorizer
     
@@ -36,7 +36,7 @@ ShapeLogic v 1.5 currently handles
 [images/particles/embryos.jpg] 
 
   embryos.jpg a sample image from ImageJ. 
-  The un-tweaked particle counter or analyzer in ShapeLogic 1.5 worked with the 
+  The un-tweaked particle counter or analyzer in ShapeLogic 1.6 worked with the 
   default parameter values:
   
 +-------------------------------------------------------------+
@@ -66,7 +66,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   Cell_Colony.jpg a sample image from ImageJ works with the default parameters.
 
   It is hard for a human to count the particles in this image but ShapeLogic 
-  v 1.5 gave a reasonable result.
+  v 1.6 gave a reasonable result.
   
   Does not separate overlapping cells or categorize them.
   
@@ -78,7 +78,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
   You need to use {{{particle.html#rgb}particle analyzer in manual rgb modes}}.
   
-ShapeLogic v 1.6 aims to handle
+ShapeLogic v 1.7 aims to handle
 
   Sparse cell images with categorizer.
   These images are handled by the current particle analyzer by adding rules to categorize.
