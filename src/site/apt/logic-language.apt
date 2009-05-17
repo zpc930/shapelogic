@@ -25,7 +25,35 @@ Logic expressions {syntax} in lazy stream approach
   shapelogic/src/test/resources/data/neuralnetwork/polygon_digit_recognizer_with_rules_print.txt}}.
   This has exactly the same effect.
   
-* Define a rule for matching the letter A
+  
+* Define a rule for matching the letter A using categorizer setup file
+  
++--------------------------------------------+
+========== def A
+pointCount == 5
+holeCount == 1
+tJunctionLeftCount == 1
+tJunctionRightCount == 1
+endpointBottomPointCount == 2
+horizontalLineCount == 1
+verticalLineCount == 0
+endPointCount == 2
+softPointCount == 0
++--------------------------------------------+
+
+  The "def A" is saying apply this rule to the OH, object hypothesis, the letter A.
+  
+  Each line has 3 elements: 
+  
+  * Names of streams that generate the point count and hole count for the polygons 
+  
+  * Then there is the predicate \<, \> and \=\= 
+  
+  * The comparison value
+  
+  []
+  
+** Define a rule for matching the letter A using programming
   
 +--------------------------------------------+
 rule("A", POINT_COUNT, "==", 5.);
@@ -38,11 +66,6 @@ rule("A", VERTICAL_LINE_COUNT, "==", 0.);
 rule("A", END_POINT_COUNT, "==", 2.);
 rule("A", SOFT_POINT_COUNT, "==", 0.);
 +--------------------------------------------+
-  
-  The "A" is saying apply this rule to the OH, object hypothesis, the letter A.
-  
-  The next is just names of streams that generate the point count and hole 
-  count for the polygons. Then there is the predicate and the comparison value.
   
 * Idea behind lazy streams
   
