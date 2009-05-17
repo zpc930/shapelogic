@@ -23,8 +23,9 @@ Particle Counter and Analyzer
   
   ShapeLogic 1.5 introduced neural network machine learning.
   
-  ShapeLogic 1.6 introduced categorizer setup file so you could define rules 
-  and neural network without doing any Java programming.
+  ShapeLogic 1.6 introduced {{{categorizer-setup.html}categorizer setup file}} 
+  so you could define rules and neural network without doing any Java 
+  programming.
   
 * Common functionality for particle counter and particle analyzer 
   
