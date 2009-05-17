@@ -232,8 +232,6 @@ ShapeLogic
   class to import the weights. This override is simple but does require some 
   knowledge of Java.  
 
-  Documentation will soon be updated to reflect ShapeLogic 1.5.
-  
 ** 2009/03/22 ShapeLogic C++ 0.5 released
 
   * Added binary thresholds operations

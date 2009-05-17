@@ -16,8 +16,6 @@ Categorizer setup for loading rules and neural networks
   Here is a directory with example files:
   {{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/}}
   
-  There is a simple one to one mapping of rule definition:
-  
 * Defining digit categorizer with a setup file
   
   You can change the CapitalLetterMatch / Stream Vectorizer from a letter 
@@ -71,6 +69,8 @@ holeCount
   
   
 * Defining digit categorizer in DigitStreamVectorizer_ 
+  
+  There is a simple one to one mapping of rule definition above and below:
   
 +---------------------------------------------------------+
 public void makeDigitStream() {

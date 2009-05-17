@@ -55,3 +55,23 @@ Stream Dictionary work in progress
   * <<verticalLineCount>> Number of roughly vertical lines in a polygon
   
   []
+  
+* Tricky streams
+  
+** multiLineCount 
+  
+  A multi line is made up of 2 or more points, but with no T or Y junctions. 
+  This is an implementation dependent property, more than a pure
+  geometric property.
+  
+  The letter J would be traced into one piece and would have multiLineCount == 1.
+  
+  The letter I San-serif would be traced into one piece, but since it is a 
+  straight line that would be translated to a simple 2 point line and would 
+  have multiLineCount == 0.
+    
+  The letter Y would be split at a T or Y junction and would be split into 3 
+  pieces, but they could possibly be simple lines. 
+  
+  
+  

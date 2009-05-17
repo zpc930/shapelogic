@@ -18,7 +18,7 @@ Road map
   * Expand OCR to cover lower case letters using neural network matching
   
   * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.4 the user has to make rules themselves. Mainly pending finding a 
+  In v 1.6 the user has to make rules themselves. Mainly pending finding a 
   relevant test case.
   
   * HSV mode for the particle analyzer

@@ -51,8 +51,6 @@ Annotations
   
   * For a given property value find all the object that has this property.
   
-  * Right now when using JEXL it would be best if this does not use any static methods.
-  
   []
   
 * Fast access
