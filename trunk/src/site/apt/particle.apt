@@ -143,7 +143,8 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
 * Particle analyzer information for each particle
 
   The particle analyzer traces the edge of each particle. It finds and prints 
-  more advanced geometric properties of the particles
+  more advanced geometric properties of the particles. These are the default
+  properties to be printed:
   
 [images/particles/particleAnalyzerResult.png]
   
@@ -174,14 +175,15 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   For color images it will also write out average R, G and B channels.
   
   The particle analyzer finds many more geometric properties that are not shown
-  on the above example, it is easy to print them if desired.
+  on the above example, you can set what you want to print in a
+  {{{categorizer-setup.html}categorizer setup file}}. 
   
   This the particle analyzer can also select and categorize particles based 
   on all of the above properties.
   In order to categorize particles the user should define geometric rules for
   each particle type.
 
-  ShapeLogic v 1.6 will come with predefined rules to {{{cell.html}categorize certain cells}}.
+  ShapeLogic 1.7 will come with predefined rules to {{{cell.html}categorize certain cells}}.
   
   If you want more detailed information mark check box DisplayInternalInfo.
 
@@ -227,7 +229,7 @@ _maxPixelsInArea = 10000; // Maximum number of pixels in particle
   
 * Framework to build more advanced particle counters and particle analyzers
   
-  The particle counter algorithm in ShapeLogic 1.5 is relatively simple. It is 
+  The particle counter algorithm in ShapeLogic 1.6 is relatively simple. It is 
   setup to be expanded to handle more advanced algorithms. Here is the flow.
   
   * If either foreground or background color is set you are done
