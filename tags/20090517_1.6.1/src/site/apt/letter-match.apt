@@ -1,0 +1,295 @@
+            ------
+            Letter Match
+            ------
+            Sami Badawi
+            ------
+            2007/08/06
+            ------
+
+Letter or Symbol Matcher
+
+  The Letter Matcher is really a general categorizer for skeletonized lines.
+  You can define you own rule set for you symbols or train a neural network for
+  it. 
+  
+  It comes with handwritten rules that will categorize the capital letters,
+  but this is not very robust, and is made to match letter in sans serif 
+  typefaces, e.g. Ariel or Helvetica. 
+  
+  Unit tests exist for all capital letters. 
+  
+  Matched images can be found in this directory:
+  
+  shapelogic/src/test/resources/images/smallThinLetters
+
+  For more robust matching you should train a neural network.
+  If you train a neural network and you think that it might be useful for 
+  others you can upload it to:
+  {{http://code.google.com/p/shapelogicapps/downloads/list}}
+  
+* History of the Letter Matcher
+    
+  The Letter Matcher started as a test application for letter matching, the purpose
+  of which is to show how to use the ShapeLogic framework on a simple well defined problem.
+  
+  Currently 5 sets of rules have been defined:
+  
+  [[1]] Recognition of straight capital letters in ShapeLogic 0.2
+  
+  [[1]] Recognition of all capital letters starting in ShapeLogic 0.7
+  
+  [[1]] Simplified syntax by adding a filter logic language starting in ShapeLogic 0.8
+  
+  [[1]] Using rules in lazy stream and filter logic language starting in ShapeLogic 1.0
+  
+  [[1]] Using neural networks in lazy stream and filter logic language starting in ShapeLogic 1.6
+  
+  []
+  
+* Using letter recognition
+
+  This description can also be found on the {{{getting-started.html} Getting Started page}}.  
+
+**  Testing ShapeLogic {letter} matching from within ImageJ
+
+  * Open ImageJ
+  
+  * Create a new image, 100 x 100 pixels works well
+  
+  * Draw a letter in black on white background
+  
+  []
+
+[images/letters/Mdrawing.png] Mdrawing
+
+  Go to the shapelogic menu and select the macro CapitalLettersMatch, which 
+  does the following 
+
+  * Convert the image to a binary image
+
+  * Call ImageJ's build in Skeletonize
+
+  * Call the ShapeLogic plugin Stream Vectorizer
+  
+  []
+  
+  If you already have a skeletonized lines you can also call Stream Vectorizer 
+  directly, which does the following
+
+  * Vectorize into bitmap into polygon
+  
+  * Clean up the vectorized polygon
+
+  * Then annotate the polygon
+
+  * Then match the polygon against all the rules for all the capital letters
+
+  * With a little luck you will see a dialog box saying what letter was matched
+
+  * If more than one letter matches, the match will fail
+
+  * If the match fails then all the properties of the polygon will be written 
+    to the console for debugging
+    
+  []
+
+** Input dialog
+
+  When you press CapitalLettersMatch or Stream Vectorizer an input dialog will 
+  prompt you for input:
+  
+[images/screenshots/stream_vectorizer_input_dialog.png] CapitalLettersMatch menu item
+  
+  DisplayInputDialog: If you uncheck this next time run CapitalLettersMatch
+  this menu will not show up
+  
+  DisplayResultTable: If this is checked you will see a result table with 
+  geometric features for each polygon
+  
+  DisplayInternalInfo: Print out polygon, points and their annotations
+  
+  UseNeuralNetwork: Use neural network for classification otherwise a rule set 
+  will be used
+  
+  ShowFileDialog: If this is checked the user will be prompted with a file 
+  dialog to select categorizer setup file
+  
+  CategorizerSetupFile: File path to the 
+  {{{categorizer-setup.html}categorizer setup file}} containing
+  {{{machine-learning.html}neural networks}}, 
+  {{{logic-language.html#syntax}rules}} or column selection list
+  
+** Result of match
+
+  Dialog with results of match
+  
+[images/letters/Mmatch.png] M match
+
+  Vectorized M with skeletonized letter in black and polygon in gray
+  
+[images/letters/Mvectorized.png] M vectorized
+
+Recognition of all capital letters in ShapeLogic 1.0
+
+  Lines and points are annotated in order to match curves, circle arches or Bezier curves are not used.
+  Lines and points can be filtered according to both position in the bounding box for a 
+  polygon, and point and line annotations. 
+
+* Rules for the letter A in ShapeLogic 1.6
+  
+  The easiest way to define rule sets is to use a 
+  {{{categorizer-setup.html}categorizer setup file}}. 
+  Here is an 
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/polygon_letter_recognizer_with_rules_print.txt}example}} 
+  that contains a definition of the letter A:
+  
++------------------------------------------+
+========== def A
+pointCount == 5
+holeCount == 1
+tJunctionLeftCount == 1
+tJunctionRightCount == 1
+endpointBottomPointCount == 2
+horizontalLineCount == 1
+verticalLineCount == 0
+endPointCount == 2
+softPointCount == 0
++------------------------------------------+
+
+  The meaning of the rules for A is:
+  
+  [[1]] There are 5 points
+   
+  [[1]] There is 1 hole
+   
+  [[1]] There is 1 T junction on the left half of the bounding box
+
+  [[1]] There is one T junction on the right half of the bounding box
+
+  [[1]] The number of end points in the bottom half is 2
+
+  [[1]] There is one horizontal line
+
+  [[1]] There are 0 vertical lines
+
+  [[1]] The total number of end points is 2
+
+  [[1]] There are no soft points
+
+  []
+
+* Rules for the letter A in ShapeLogic 1.0
+  
+  The same rule set for defining A would take this form in in ShapeLogic 1.0. 
+  For a better description of {{{logic-language.html} logic language syntax}}.
+  
++------------------------------------------+
+rule("A", POINT_COUNT, "==", 5., letterFilter);
+rule("A", HOLE_COUNT, "==", 1., letterFilter);
+rule("A", T_JUNCTION_LEFT_POINT_COUNT,"==", 1., letterFilter);
+rule("A", T_JUNCTION_RIGHT_POINT_COUNT,"==", 1., letterFilter);
+rule("A", END_POINT_BOTTOM_POINT_COUNT, "==", 2., letterFilter);
+rule("A", HORIZONTAL_LINE_COUNT, "==", 1., letterFilter);
+rule("A", VERTICAL_LINE_COUNT, "==", 0., letterFilter);
+rule("A", END_POINT_COUNT, "==", 2., letterFilter);
+rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
++------------------------------------------+
+
+* Rules for the letter C in ShapeLogic 0.8
+
++------------------------------------------+
+new NumericRule("C", HOLE_COUNT, polygon, VAR + HOLE_COUNT_EX, "==", 0.),
+new NumericRule("C", T_JUNCTION_POINT_COUNT, polygon, filter(T_JUNCTION_POINT_COUNT_EX), "==",0.),
+new NumericRule("C", END_POINT_BOTTOM_POINT_COUNT, polygon, filter(END_POINT_BOTTOM_POINT_COUNT_EX), "==", 1.),
+new NumericRule("C", MULTI_LINE_COUNT, polygon, size(MULTI_LINE_COUNT_EX), "==", 1.),
+new NumericRule("C", VERTICAL_LINE_COUNT, polygon, size(VERTICAL_LINE_COUNT_EX), "==", 0.),
+new NumericRule("C", END_POINT_COUNT, polygon, VAR + END_POINT_COUNT_EX, "==", 2.),
+new NumericRule("C", INFLECTION_POINT_COUNT, polygon, size(INFLECTION_POINT_COUNT_EX), "==", 0.),
+new NumericRule("C", CURVE_ARCH_COUNT, polygon, size(CURVE_ARCH_COUNT_ANN_EX), ">",1.),
+new NumericRule("C", HARD_POINT_COUNT, polygon, filter(HARD_POINT_COUNT_EX), "==", 0.),
+new NumericRule("C", SOFT_POINT_COUNT, polygon, size(SOFT_POINT_COUNT_ANN_EX), ">", 0.),
++------------------------------------------+
+
+  The meaning of the rules for C is:
+  
+  [[1]] There is no holes
+   
+  [[1]] There is no T junction
+
+  [[1]] There is 1 end point in the bottom half of the bounding box
+
+  [[1]] There is 1 multi line
+
+  [[1]] There are no vertical lines
+
+  [[1]] There are 2 end points
+
+  [[1]] There are 0 inflections points
+
+  [[1]] The there are more than 1 line annotated with curved arch 
+
+  [[1]] There are no hard corners
+
+  [[1]] There are more than 0 soft points
+
+  []
+
+* Line annotation in LineType
+
++------------------------------------------+
+	/** Before a type is determined */
+	UNKNOWN,
+	
+	/** Not completely straight */
+	STRAIGHT, //only a start and an end point
+
+	/** only on one side of a line between the start and end point */
+	CURVE_ARCH,
+
+	/** On both sides of a line between the start and end point 
+	 * this is the rest category for lines */
+	WAVE,
+
+	/** Means that this is an arch and that it is concave compared to 1 or both 
+	 * neighbor points, meaning they are on the same side of the line as the 
+	 * arch */
+	CONCAVE_ARCH,
+	
+	/** This line contains an inflection point, meaning the end points have 
+	 * different signed direction changes */
+	INFLECTION_POINT,
+	
+	/** For multi lines, if 2 lines are added together */
+	STRAIGHT_MULTI_LINE, 
++------------------------------------------+
+
+* Point annotation in PointType
+
++------------------------------------------+
+	/** Before a type is determined */
+	UNKNOWN,
+	
+	/** If the point has a sharp angle for now 30 degrees is set as the limit */
+	HARD_CORNER,
+
+	/** If it is not a hard point */
+	SOFT_POINT,
+	
+	/** 3 or more lines meets, U is for unknown */
+	U_JUNCTION,
+	
+	/** 3 lines meet 2 are collinear and the last is somewhat orthogonal */
+	T_JUNCTION,
+
+	/** 3 lines meet less than 180 degrees between all of them */
+	ARROW_JUNCTION,
+
+	/** 3 lines meet, not a T junction */
+	Y_JUNCTION,
+	
+	/** point is an end point, 
+	 * maybe later there should be a distinction between end points and have 
+	 * nothing else close by and end points that have close neighbors */
+	END_POINT,
++------------------------------------------+
+

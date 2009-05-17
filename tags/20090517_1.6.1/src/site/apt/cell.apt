@@ -1,0 +1,159 @@
+            ------
+            Cell Categorizer
+            ------
+            Sami Badawi
+            ------
+            2008/07/19
+            ------
+
+Cell Categorizer
+
+  ShapeLogic v 1.6 contains a generic {{{particle.html} particle analyzer}}.
+  This page illustrates a few examples of the types of images that can currently be 
+  handled, and the types of images that the next versions of ShapeLogic should be able to
+  handle.
+  
+  All images are from 
+  
+  * {{{http://rsbweb.nih.gov/ij}ImageJ sample images}}
+  
+  * {{{http://phil.cdc.gov/phil}CDC's image lib}}
+  
+  []
+  
+* Seeking suggestions
+  
+  If you have a suggestion about what types of cell images would be important
+  to handle next you can leave a message on the 
+  {{{http://groups.google.com/group/shapelogic}ShapeLogic mailing list}}
+  
+ShapeLogic v 1.6 currently handles
+  
+  Sparse cell images without categorizer
+    
+* Color embryos
+  
+[images/particles/embryos.jpg] 
+
+  embryos.jpg a sample image from ImageJ. 
+  The un-tweaked particle counter or analyzer in ShapeLogic 1.6 worked with the 
+  default parameter values:
+  
++-------------------------------------------------------------+
+_iterations = 2; // K-mean iterations for color hypothesis
+_maxDistance = 50; // Distance between color in same color bucket
+_minPixelsInArea = 30; // Minimum number of pixels in particle
+_maxPixelsInArea = 10000; // Maximum number of pixels in particle
++-------------------------------------------------------------+
+
+  Does not separate overlapping embryos or categorize them.
+  
+* Gray scale medium dense blobs
+
+[images/particles/blobs.gif] 
+  
+  The particle counter or analyzer find 85 particles, which is consistent with
+  what you get by counting by hand.
+  
+  blobs.gif a sample image from ImageJ works with the default parameters.
+
+  Does not separate overlapping blobs or categorize them.
+
+* Gray scale medium dense cell colony 
+  
+[images/particles/Cell_Colony.jpg] 
+
+  Cell_Colony.jpg a sample image from ImageJ works with the default parameters.
+
+  It is hard for a human to count the particles in this image but ShapeLogic 
+  v 1.6 gave a reasonable result.
+  
+  Does not separate overlapping cells or categorize them.
+  
+* Particles with different colors, where you are only interested in one
+  
+[images/particles/legionella_pneumophila10157.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10157 legionella pneumophila
+  
+  You need to use {{{particle.html#rgb}particle analyzer in manual rgb modes}}.
+  
+ShapeLogic v 1.7 aims to handle
+
+  Sparse cell images with categorizer.
+  These images are handled by the current particle analyzer by adding rules to categorize.
+  This can be done by the users, but a few applications might be added.
+  
+* Sparse bacteria categorizer
+  
+  A low hanging fruit is a bacteria categorizer that can separate spherical 
+  bacteria, called cocci or rod-shaped, called bacilli. 
+  
+[images/particles/bacillus10067.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10067 bacillus
+  
+  This should be categorized as a bacillus or a rod bacteria.
+  
+  Making these rule should be simple, the big problem is that bacteria tend to 
+  lump together.
+  
+Cell with line shaped form or parts
+  
+  In the particle analyzer a particle's outline is found and turned into a 
+  polygon. While some cell parts or whole cell would be better described as
+  a line.
+  
+[images/particles/treponema_pallidum_bacterium_2333.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 2333, treponema pallidum bacterium
+  
+  If it turns out to be too hard to handle them as an outline ShapeLogic might
+  treat them as a line.
+    
+Images with overlap
+  
+  Bacteria, both cocci and bacilli, will often lump together. This make the 
+  problem of handling them a lot harder. Initially this will have to be handled
+  by specialized particle analyzers.
+  
+* Dense cocci categorizer
+  
+[images/particles/staphylococcus10048.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10048 staphylococcus
+
+* Dense bacilli categorizer
+  
+[images/particles/acinetobacter_rods10096.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10096, acinetobacter rods
+  
+* Blood with parasites
+  
+[images/particles/blood_trypanosoma_lewisi_flagellate_parasites10162.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10162, trypanosoma lewisi flagellate parasites
+  
+  It needs to recognize what is blood and what is not blood
+  
+Images with strong background gradient
+  
+  Some medical images have a strong background gradient. 
+  There are standard techniques for handling this problem, they have not been 
+  combined with the ShapeLogic particle analyzer yet. 
+  
+[images/particles/darkfield_microscopy_6631.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 6631, darkfield microscopy
+  
+Interior of a cell or virus
+  
+  This demands that the particle analyzer understand what is inside and what is 
+  outside a given cell or virus.
+
+[images/particles/visus10073.jpg]
+  
+  {{{http://phil.cdc.gov/phil}CDC image}} 10073 an influenza virus particle.
+  
+  

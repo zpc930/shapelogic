@@ -1,0 +1,123 @@
+            ------
+            Lazy Data Streams
+            ------
+            Sami Badawi
+            ------
+            2008/01/03
+            ------
+
+Lazy Data Streams
+  
+  A Lazy Data Stream is a mix between an iterator and a list. 
+  A stream can be expanded by lazy calculation of an extra member.
+  
+  Streams is a key component of the declarative programming engine 
+  in ShapeLogic starting from ShapeLogic 1.0.
+  
+* Using streams to solve mathematical problems
+  
+  {{{http://projecteuler.net}Project Euler}} 
+  is a list of 178 mathematical problems that can be solved by computers.
+  The first 10 {{{project-euler.html}mathematical problems}} have been solved 
+  in ShapeLogic using streams.
+  
+* History
+
+  Lazy Data Streams are used in different functional languages e.g.
+  
+  * Haskell 
+  
+  * Scala 
+  
+  * Scheme
+  
+  []
+  
+* The advantages of a lazy data stream are 
+  
+  * That you can use functional techniques on possible infinite streams of data 
+  
+  * You still have access to previous elements in a calculation by an iterator
+  
+  * You only calculate the necessary elements 
+  
+  [] 
+  
+* Examples of lazy infinite data streams 
+  
+  * Lazy Data Streams to calculate all Fibonacci numbers
+  
+  * All even Fibonacci numbers
+  
+  * All even Fibonacci numbers greater than 1000
+  
+  []
+  
+* Definitions
+
+  * <<last>> the last element of a stream, set to LAST_UNKNOWN, before it is know. 
+  This value can get lower as calculation progress.
+
+  * <<maxLast>> manually set max value for last. The real last value might be lower.
+  
+  * <<nullLegalValue>> if this is false then the stream will end when the first
+  null value is encountered.
+  
+  []
+
+* How can an calculation of stream end?
+
+  * If null is not a legal value when finding a null
+  
+  * If an exception is thrown during a calculation
+  
+  * By setting a top maxLast value
+  
+  []
+
+* How to iterate over a stream
+
+** For loop
+  
++-----------------------------------------------------------------------------+
+Stream stream; 
+for (int i=0; 
+     stream.getLast() != Constants.LAST_UNKNOWN || i <= stream.getLast(); 
+     i++) 
+{
+	stream.hasNext();
+	Object = stream.get(i);
+}
++-----------------------------------------------------------------------------+  
+
+** While loop
+
++-----------------------------------------------------------------------------+  
+Stream stream; 
+while (stream.hasNext())
+{
+	Object stream.get(i);
+}
++-----------------------------------------------------------------------------+  
+
+* Stream hierarchy
+  
+  There is a quite extensive hierarchy of streams. Here are the most important:
+  
+  * <<Stream>> top interface. Mainly just an Iterator. 
+  
+  * <<NumberedStream>> interface. Stream that can be accessed with an index.
+  
+  * <<ListStream>> interface. Stream that stores result in a List.
+  
+  * <<BaseListCommonStream>> base class for most implementations.
+  
+  []
+  
+* Links for more info
+  
+  * {{{apidocs/org/shapelogic/streams/package-summary.html}Javadoc}}
+  
+  * {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/org/shapelogic/streams/}Sources on Google Code }}
+  
+  []

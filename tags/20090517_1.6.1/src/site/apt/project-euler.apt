@@ -1,0 +1,257 @@
+            ------
+            Project Euler
+            ------
+            Sami Badawi
+            ------
+            2008/01/18
+            ------
+
+Project Euler
+
+  {{{http://projecteuler.net}Project Euler}} 
+  is a list of 193 mathematical problems that can be solved by computers.
+  They vary in complexity from simple to hard.
+  The goal is to test ShapeLogic's new declarative and functional constructs on real 
+  problems and make sure they are terse and intuitive.
+  
+* Remarks
+
+  Here is the Java file containing the 10 first problems, where each problem 
+  will be turned into a junit test:
+  {{http://shapelogic.googlecode.com/svn/trunk/src/test/java/org/shapelogic/euler/ProjectEuler1Test.java}}
+  
+  The best way to get familiar ShapeLogic's new functional constructs is to 
+  create a Java project with just this file. All you need for 
+  this to run is junit.jar and shapelogic_1.0.jar.
+  
+** Comparison to the Scala language
+  
+  The blog {{http://scala-blogs.org/2007/12/project-euler-fun-in-scala.html}} 
+  is showing off the strength of {{{http://www.scala-lang.org} Scala}} to solve 
+  some of the problems defined in Project Euler. This is as easy as it gets, however,
+  the APL, Erlang, Haskell, Mathematica, Perl and Python programmer will surely 
+  argue. These simple solutions are the benchmarks by which to measure ShapeLogic's success.
+  
+  The solution in Scala clearly use less code, but is not substantially simpler,
+  especially when you are using Eclipse which will generate the methods you have 
+  to override in order to customize the lazy stream constructs.
+  Java is inherently verbose, so it will never be that terse.
+  
+  This is the assessment based on a few first simple examples, maybe 
+  ShapeLogic will buckle under more complex examples.
+  
+** Commonly used classes
+  
+*** NaturalNumberBrick
+  
+  Generate a stream of natural numbers, can take a start and stop number 
+  
+*** BaseListFilterBrick
+  
+  A filter that takes an Iterator as input, and an evaluate method.
+  
+*** SumAccumulator
+  
+  An accumulator that run through an Iterator and add all the number in it.
+  
+* 1 Add all the natural numbers below 1000 that are multiples of 3 or 5
+  
+** Solution in ShapeLogic
+
++-----------------------------+
+NaturalNumberStream naturalNumberStream = new NaturalNumberStream(1,999);
+ListFilterStream<Integer> filter = new BaseListFilterStream<Integer>(naturalNumberStream) {
+    public boolean evaluate(Integer object) {return object % 3 == 0 || object % 5 == 0;}
+};
+SumAccumulator accumulator = new SumAccumulator(filter);
+System.out.println(accumulator.getValue());
++-----------------------------+
+  
+* 2 Find the sum of all the even-valued terms in the Fibonacci sequence which do not exceed one million
+
+** Solution in ShapeLogic
+
++-----------------------------+
+BaseListIndexedStream1<Object,Integer> fibonacci = new BaseListIndexedStream1<Object,Integer>(){
+    { _list.add(1); _list.add(2);}
+    public Integer invoke(Object input, int index) {return get(index-2) + get(index-1);}
+};
+ListFilterStream<Integer> filter = new BaseListFilterStream<Integer>(fibonacci) {
+    public boolean evaluate(Integer object) { return object % 2 == 0; }
+};
+SumAccumulator accumulator = new SumAccumulator(filter) {
+    {_inputElement = 0;}
+    public boolean hasNext(){ return _inputElement < 1000000; }
+};
+System.out.println(accumulator.getPreviousValue()); //Test fails after value go over 1000000
++-----------------------------+
+  
+* 3 Find the largest prime factor of 317584931803
+
++-----------------------------+
+NaturalNumberStream naturalNumberStream = new NaturalNumberStream(2,null);
+BaseAccumulator<Integer,Long> accumulator = new BaseAccumulator<Integer,Long>(naturalNumberStream) {
+    long theNumber = 317584931803l;
+    {_inputElement = 0;}
+    public Long accumulate(Integer element, Long out) {
+        while (theNumber % element == 0l) { theNumber /= element; }
+        return theNumber;
+    }
+    public boolean hasNext(){ return _inputElement <= theNumber; }
+};
+System.out.println(accumulator.getValue());
++-----------------------------+
+
+* 4 Find the largest palindrome made from the product of two 3-digit numbers
+
++-----------------------------+
+NaturalNumberStream naturalNumberStream = new NaturalNumberStream(1,999);
+BaseListStream2<Integer, Integer, Integer> cartesianProduct = 
+    new BaseListStream2<Integer, Integer, Integer>(naturalNumberStream, naturalNumberStream) {
+    public Integer invoke(Integer input0, Integer input1, int index) {return input0 * input1;}
+}; 
+ListFilterStream<Integer> filter = new BaseListFilterStream<Integer>(cartesianProduct) {
+    public boolean evaluate(Integer object) {return palindrome(object);}
+};
+MaxAccumulator accumulator = new MaxAccumulator(filter);
+System.out.println(accumulator.getValue());
++-----------------------------+
+
+* 5 What is the smallest number divisible by each of the numbers 1 to 20?
+
++-----------------------------+
+NaturalNumberStream naturalNumberStream = new NaturalNumberStream(2,20);
+final PrimeNumberStream primeNumberStream = new PrimeNumberStream();
+final AdvanceWhile<Integer> primesUnder20 = new AdvanceWhile<Integer>(primeNumberStream){
+    @Override
+    public boolean evaluate(Integer input) {
+        return input <= 20;
+    }
+};
+Accumulator<Integer, Map<Integer,Integer> > accumulator = 
+    new BaseAccumulator<Integer, Map<Integer,Integer> >(naturalNumberStream) {
+    {_value = new TreeMap<Integer,Integer>();}
+
+    @Override
+    public Map<Integer,Integer> accumulate(Integer element, Map<Integer,Integer> out) {
+        for (Integer prime: primeNumberStream.getList()) {
+            if (element < prime)
+                break;
+            int rank = rankOfDivisor(element,prime);
+            Integer currentRank = out.get(prime);
+            if (0 < rank && (currentRank == null || currentRank < rank))
+                out.put(prime,rank);
+        }
+        return out;
+    }
+};
+System.out.println(productWithPower(accumulator.getValue()));
++-----------------------------+
+
+* 6 What is the difference between the sum of the squares and the square of the sums?
+
++-----------------------------+
+NaturalNumberStream naturalNumberStream = new NaturalNumberStream(1,100);
+BaseListStream1<Integer, Integer> squaredStream = 
+	new BaseListStream1<Integer, Integer>(naturalNumberStream) {
+		public Integer invoke(Integer input, int index) {
+			if (input == null) return null;
+			return input * input;
+		}
+};
+SumAccumulator sumOfSquares = new SumAccumulator(squaredStream);
+SumAccumulator sumOfNumbers = new SumAccumulator(naturalNumberStream);
+long result = sumOfNumbers.getValue() * sumOfNumbers.getValue() - sumOfSquares.getValue(); 
+System.out.println(result);
++-----------------------------+
+
+* 7 Find the 10001st prime
+
++-----------------------------+
+PrimeNumberStream primeNumberStream = new PrimeNumberStream();
+long result = primeNumberStream.get(10000);
+System.out.println(result);
++-----------------------------+
+
+* 8 Discover the largest product of five consecutive digits in the 1000-digit number
+
++-----------------------------+
+final String inputNumbers = 
+    "73167176531330624919225119674426574742355349194934" +
+    "96983520312774506326239578318016984801869478851843" +
+    "85861560789112949495459501737958331952853208805511" +
+    "12540698747158523863050715693290963295227443043557" +
+    "66896648950445244523161731856403098711121722383113" +
+    "62229893423380308135336276614282806444486645238749" +
+    "30358907296290491560440772390713810515859307960866" +
+    "70172427121883998797908792274921901699720888093776" +
+    "65727333001053367881220235421809751254540594752243" +
+    "52584907711670556013604839586446706324415722155397" +
+    "53697817977846174064955149290862569321978468622482" +
+    "83972241375657056057490261407972968652414535100474" +
+    "82166370484403199890008895243450658541227588666881" +
+    "16427171479924442928230863465674813919123162824586" +
+    "17866458359124566529476545682848912883142607690042" +
+    "24219022671055626321111109370544217506941658960408" +
+    "07198403850962455444362981230987879927244284909188" +
+    "84580156166097919133875499200524063689912560717606" +
+    "05886116467109405077541002256983155200055935729725" +
+    "71636269561882670428252483600823257530420752963450";
+final int numberLength = inputNumbers.length()-1;
+BaseListStream0<Integer> inputNumberStream = 
+    new BaseListStream0<Integer>(numberLength) {
+        @Override
+        public Integer invoke(int index) {
+            char c = inputNumbers.charAt(index);
+            return Integer.parseInt(""+c);
+        }
+};
+BaseListIndexedStream1<Integer, Integer> productStream = 
+    new BaseListIndexedStream1<Integer, Integer>(inputNumberStream,numberLength) {//XXX you should not need to set length
+        public Integer invoke(Integer input, int index) {
+            if (index<4) return 0;
+            int result = 1;
+            for (int i=index-4; i<=index;i++) {result*=getInput(i);};
+            return result;
+        }
+};
+MaxAccumulator maxAccu = new MaxAccumulator(productStream);
+System.out.println(maxAccu.getValue());
++-----------------------------+
+
+* 9 Find the only Pythagorean triplet, {a, b, c}, for which a + b + c = 1000
+
++-----------------------------+
+NaturalNumberStream naturalNumberStream = new NaturalNumberStream(1,500);
+final int[] EMPTY_ARRAY = new int[0];
+BaseListStream2<Integer, Integer, int[]> cartesianProduct = 
+    new BaseListStream2<Integer, Integer, int[]>(naturalNumberStream, naturalNumberStream) {
+    public int[] invoke(Integer a, Integer b, int index) {
+            int c = 1000 - a - b;
+            if (b<=a) return EMPTY_ARRAY;
+            if (c*c == a*a + b*b) return new int[] {a,b,c};
+            else return EMPTY_ARRAY;
+        }
+}; 
+ListFilterStream<int[]> filter = new BaseListFilterStream<int[]>(cartesianProduct) {
+    public boolean evaluate(int[] object) {return EMPTY_ARRAY != object;}
+};
+int[] result = filter.next();
+long resultNumber = ArrayOperations.product(result);
+System.out.println("result: "+ ArrayOperations.product(result));
+System.out.println("a: " + result[0] + ", b: " + result[1] + ", c: " + result[2]);
++-----------------------------+
+
+* 10 Calculate the sum of all the primes below one million
+
++-----------------------------+
+PrimeNumberStream primeNumberStream = new PrimeNumberStream();
+final AdvanceWhile<Integer> primesUnder1000000 = new AdvanceWhile<Integer>(primeNumberStream){
+    public boolean evaluate(Integer input) {return input <= 1000000;}
+};
+primeNumberStream.setMaxLast(primeNumberStream.getList().size()-1); //XXX maybe change the accumulator
+System.out.println("Number of primes under 1000000: " + (primeNumberStream.getList().size()-1));
+SumAccumulator sumAccu = new SumAccumulator(primeNumberStream.getList().iterator());
+long result = sumAccu.getPreviousValue();
+System.out.println(result);
++-----------------------------+

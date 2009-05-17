@@ -1,0 +1,45 @@
+========== COMMENT
+This categorizer setup file is doing the same as the letter matcher, 
+StreamVectorizer. Currently only 3 letter have been setup.
+This is meant as an example it is not robust, for better result train a neural network.
+
+========== def A
+pointCount == 5
+holeCount == 1
+tJunctionLeftCount == 1
+tJunctionRightCount == 1
+endpointBottomPointCount == 2
+horizontalLineCount == 1
+verticalLineCount == 0
+endPointCount == 2
+softPointCount == 0
+
+========== def I
+holeCount == 0
+tJunctionLeftCount == 0
+tJunctionRightCount == 0
+endpointBottomPointCount == 1
+horizontalLineCount == 0
+verticalLineCount == 1
+endPointCount == 2
+multiLineCount == 0
+softPointCount == 0
+aspectRatio < 0.4
+
+========== def O
+holeCount == 1
+tJunctionCount == 0
+endPointCount == 0
+multiLineCount == 1
+curveArchCount > 0
+hardPointCount == 0
+softPointCount > 0
+
+
+========== PRINTS
+Category
+Points
+lineCount
+holeCount
+
+========== 

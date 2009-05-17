@@ -1,0 +1,40 @@
+            ------
+            Road map
+            ------
+            Sami Badawi
+            ------
+            2007/11/28
+
+Road map
+
+  This page is a about the direction that ShapeLogic might take, but it is not 
+  set in stone.
+  
+  For more up to date information on ongoing development work look at this blog 
+  {{{http://samibadawi.blogspot.com} Declarative Computer Vision}}.
+
+* Low hanging fruits for ShapeLogic Java
+  
+  * Expand OCR to cover lower case letters using neural network matching
+  
+  * Make custom rules to recognize specific {{{cell.html}cells}}. 
+  In v 1.6 the user has to make rules themselves. Mainly pending finding a 
+  relevant test case.
+  
+  * HSV mode for the particle analyzer
+  
+  * Make the annotation of shapes more loosely coupled
+
+  []
+
+*  Possible development for ShapeLogic Java
+  
+  * {{{component.html}Component framework}} for hybrid and complex vision problems
+  
+  * Use Inversion of Control, to create object. IoC framework 
+  {{{http://code.google.com/p/google-guice}Google Guice}}
+  
+  * Handle motion
+  
+  []
+

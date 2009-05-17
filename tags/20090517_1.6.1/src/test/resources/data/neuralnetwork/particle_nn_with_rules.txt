@@ -1,0 +1,14 @@
+========== FEATURES
+aspect
+========== RESULTS
+tall
+flat
+========== def TALL
+aspectRatio < 1
+========== def FLAT
+aspectRatio > 1
+========== WEIGHTS
+1. -1. 
+-1. 1.
+========== 
+

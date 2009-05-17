@@ -1,0 +1,77 @@
+            ------
+            Stream Dictionary
+            ------
+            Sami Badawi
+            ------
+            2009/05/15
+            ------
+
+Stream Dictionary work in progress
+
+  If the user wanted to customizing rule set or neural networks for either the 
+  {{{particle.html}Color Particle Analyzer}} or for the 
+  {{{letter-match.html}letter matcher}} it demands 
+  making a {{{categorizer-setup.html}categorizer setup file}} or
+  {{{programming.html}programming}}.
+  
+  In order to do this you need to understand what is in the different lazy data streams.
+  This page is a dictionary of them.
+  
+* Stream Dictionary in polygons
+  
+  
+  * <<aspectRatio>> Aspect ratio of polygon, higher is wider, smaller is taller, 1 is even 
+  
+  * <<curveArchCount>> A line can either be straight or be a curve arch 
+  
+  * <<endPointCount>> Number of end points in a polygon 
+  
+  * <<endpointBottomPointCount>> Number of end point is the bottom (half?) 
+  
+  * <<endpointBottomRightThirdPointCount>> Number of end point is the bottom right third
+  
+  * <<endpointTopLeftThirdPointCount>> Number of end points in top left third 
+  
+  * <<hardPointCount>> A point can either hard corner or a soft point this is the count of hard corners 
+  
+  * <<holeCount>> Number of holes enclosed by a polygon
+  
+  * <<horizontalLineCount>> Number of roughly horizontal lines in a polygon 
+  
+  * <<lineCount>> Number of line segments in a polygon
+  
+  * <<multiLineCount>> A multi line is made up of 2 or more points, but with no Y junctions 
+  
+  * <<pointCount>> Number of points in a polygon
+  
+  * <<tJunctionCount>> Number of T junction in a polygon
+  
+  * <<tJunctionLeftCount>> T junction in the left half of the bounding box
+  
+  * <<tJunctionRightCount>> T junction in the right half of the bounding box
+  
+  * <<uJunctionCount>> Number of undecided junctions that can be T junction or Y junction 
+  
+  * <<verticalLineCount>> Number of roughly vertical lines in a polygon
+  
+  []
+  
+* Tricky streams
+  
+** multiLineCount 
+  
+  A multi line is made up of 2 or more points, but with no T or Y junctions. 
+  This is an implementation dependent property, more than a pure
+  geometric property.
+  
+  The letter J would be traced into one piece and would have multiLineCount == 1.
+  
+  The letter I San-serif would be traced into one piece, but since it is a 
+  straight line that would be translated to a simple 2 point line and would 
+  have multiLineCount == 0.
+    
+  The letter Y would be split at a T or Y junction and would be split into 3 
+  pieces, but they could possibly be simple lines. 
+  
+  
+  
