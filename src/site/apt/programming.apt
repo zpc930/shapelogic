@@ -152,7 +152,67 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 }
 +-----------------------------------+
   
-** Compile from within ImageJ
+* How user can change Letter Matcher to recognize {numbers} instead
+
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/main/java/DigitStreamVectorizer_.java} DigitStreamVectorizer}} 
+  is an example showing what is needed to define a match of the numbers.
+  
+  To run this from ImageJ in the shapelogic menu select 
+  
+  * Digit Match Stream Vectorizer, to only do the vectorize and number match
+  
+  * DigitMatch, to also turn into binary and Skeletonize
+  
+  []
+  
++---------------------------------------------+
+
+public class DigitStreamVectorizer_ extends StreamVectorizer_ {
+
+	@Override
+	public void matchSetup(ImageProcessor ip) {
+		loadDigitStream();
+		
+	}
+	
+	public static void loadDigitStream() {
+		LoadPolygonStreams.loadStreamsRequiredForLetterMatch();
+		makeDigitStream();
+		String[] digits = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}; 
+    	LoadLetterStreams.makeLetterXOrStream(digits);
+	}
+
+	public static void makeDigitStream() {
+
+		rule("0", HOLE_COUNT, "==", 1.);
+		rule("0", T_JUNCTION_POINT_COUNT, "==", 0.);
+		rule("0", END_POINT_COUNT, "==", 0.);
+		rule("0", MULTI_LINE_COUNT, "==", 1.);
+		rule("0", CURVE_ARCH_COUNT, ">", 0.);
+		rule("0", HARD_CORNER_COUNT, "==", 0.);
+		rule("0", SOFT_POINT_COUNT, ">", 0.);
+
+		rule("1", HOLE_COUNT, "==", 0.);
+		rule("1", T_JUNCTION_LEFT_POINT_COUNT, "==", 0.);
+		rule("1", T_JUNCTION_RIGHT_POINT_COUNT, "==", 0.);
+		rule("1", END_POINT_BOTTOM_POINT_COUNT, "==", 1.);
+		rule("1", HORIZONTAL_LINE_COUNT, "==", 0.);
+		rule("1", VERTICAL_LINE_COUNT, "==", 1.);
+		rule("1", END_POINT_COUNT, "==", 2.);
+		rule("1", MULTI_LINE_COUNT, "==", 0.);
+		rule("1", SOFT_POINT_COUNT, "==", 0.);
+		rule("1", ASPECT_RATIO, "<", 0.4);
+		
+	}
+}
++---------------------------------------------+
+
+  This file is not defined inside the shapelogic package system.
+   
+  Users do not need to download the source file for ShapeLogic to use it, 
+  they only need shapelogic and other dependent jar files.
+  
+* Compile from within ImageJ
 
   * Place the CustomParticleAnalyzer_.java into ImageJ/plugin/ShapeLogic directory.
   
@@ -160,7 +220,7 @@ public class CustomParticleAnalyzer_ extends ColorParticleAnalyzerIJ {
 
   []
   
-** Compile from outside ImageJ
+* Compile from outside ImageJ
 
   * Compile CustomParticleAnalyzer_.java someplace else using Eclipse,
   NetBeans or javac and take the resulting class file:

@@ -12,8 +12,8 @@ ShapeLogic
   processing and computer vision.
   
   ShapeLogic has 2 applications: 
-  The {{{particle.html}Color Particle Analyzer}}. 
-  It will find and categorize particles on a relatively uniform background then 
+  The {{{particle.html}Color Particle Analyzer}} will find and categorize 
+  particles on a relatively uniform background then 
   make a report of geometric properties for each of the particles. The main 
   application is for recognizing cells in medical image processing.
   The {{{letter-match.html}Letter Matcher}} is a general categorizer for 
@@ -270,9 +270,14 @@ ShapeLogic
   
   * Expand OCR to cover lower case letters using neural network matching
   
-  * Make custom rules to recognize specific {{{cell.html}cells}}. 
-  In v 1.4 the user has to make rules themselves. Mainly pending finding a 
-  relevant test case.
+  * Make custom rule sets or train neural networks to recognize specific {{{cell.html}cells}}. 
+  Users can upload rule sets or neural networks to {{http://code.google.com/p/shapelogicapps/downloads/list}}
+  
+  * Add the ability of the user to define lazy data stream in the 
+  {{{categorizer-setup.html}categorizer setup file}}.
+  
+  * The rule sets and neural networks that are now defined in categorizer setup 
+  file could just as well be defined in a database.  
   
   * {{{component.html}Component framework}} for hybrid and complex vision problems
   
