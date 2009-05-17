@@ -211,9 +211,9 @@ ShapeLogic
   
   * Load neural network from {{{categorizer-setup.html}categorizer setup file}}
   
-  * Load categorizer rules from {{{categorizer-setup.html}categorizer setup file}}
+  * Load categorizer rules from categorizer setup file
   
-  * Load columns for result table from {{{categorizer-setup.html}categorizer setup file}}
+  * Load columns for result table from categorizer setup file
   
   []
   

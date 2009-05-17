@@ -75,14 +75,14 @@ ShapeLogic menu when run with ImageJ
   
 * Color {Particle} Analyzer
   
-  {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
+  {{{particle.html}Color Particle Analyzer}} is a plugin to analyze color or 
   black and white images. The background color is found automatically.
   
   {{{particle.html}Usage instruction}}
   
 * {RGB} Color Particle Analyzer
   
-  {{{Color Particle Analyzer}particle.html}} is a plugin to analyze color or 
+  {{{particle.html#rgb}RGB Color Particle Analyzer}} is a plugin to analyze color or 
   black and white images. The background or foreground color is set by the user. 
   
   {{{particle.html#rgb}Usage instruction}} and {{{colocalization.html}co-localization images}}.
