@@ -62,31 +62,37 @@ Letter or Symbol Matcher
 
 [images/letters/Mdrawing.png] Mdrawing
 
-  * Go to the shapelogic menu and select CapitalLettersMatch, which does the following 
+  Go to the shapelogic menu and select the macro CapitalLettersMatch, which 
+  does the following 
 
-    * Convert the image to a binary image
+  * Convert the image to a binary image
 
-    * Call ImageJ's build in Skeletonize
+  * Call ImageJ's build in Skeletonize
 
-    * Vectorize into bitmap into polygon
-
-    * Clean up the vectorized polygon
-
-    * Then annotate the polygon
-
-    * Then match the polygon against all the rules for all the capital letters
-
-    * With a little luck you will see a dialog box saying what letter was matched
-
-    * If more than one letter matches, the match will fail
-
-    * If the match fails then all the properties of the polygon will be written 
-    to the console for debugging
-    
-    []
-    
+  * Call the ShapeLogic plugin Stream Vectorizer
+  
   []
   
+  If you already have a skeletonized lines you can also call Stream Vectorizer 
+  directly, which does the following
+
+  * Vectorize into bitmap into polygon
+  
+  * Clean up the vectorized polygon
+
+  * Then annotate the polygon
+
+  * Then match the polygon against all the rules for all the capital letters
+
+  * With a little luck you will see a dialog box saying what letter was matched
+
+  * If more than one letter matches, the match will fail
+
+  * If the match fails then all the properties of the polygon will be written 
+    to the console for debugging
+    
+  []
+
 ** Input dialog
 
   When you press CapitalLettersMatch or Stream Vectorizer an input dialog will 
@@ -102,7 +108,8 @@ Letter or Symbol Matcher
   
   DisplayInternalInfo: Print out polygon, points and their annotations
   
-  UseNeuralNetwork: Use neural network for classification
+  UseNeuralNetwork: Use neural network for classification otherwise a rule set 
+  will be used
   
   ShowFileDialog: If this is checked the user will be prompted with a file 
   dialog to select categorizer setup file
@@ -129,7 +136,13 @@ Recognition of all capital letters in ShapeLogic 1.0
   polygon, and point and line annotations. 
 
 * Rules for the letter A in ShapeLogic 1.6
-
+  
+  The easiest way to define rule sets is to use a 
+  {{{categorizer-setup.html}categorizer setup file}}. 
+  Here is an 
+  {{{http://code.google.com/p/shapelogic/source/browse/trunk/src/test/resources/data/neuralnetwork/polygon_letter_recognizer_with_rules_print.txt}example}} 
+  that contains a definition of the letter A:
+  
 +------------------------------------------+
 ========== def A
 pointCount == 5
@@ -141,22 +154,6 @@ horizontalLineCount == 1
 verticalLineCount == 0
 endPointCount == 2
 softPointCount == 0
-+------------------------------------------+
-
-* Rules for the letter A in ShapeLogic 1.0
-  
-  For a better description of {{{logic-language.html} logic language syntax}}.
-  
-+------------------------------------------+
-rule("A", POINT_COUNT, "==", 5., letterFilter);
-rule("A", HOLE_COUNT, "==", 1., letterFilter);
-rule("A", T_JUNCTION_LEFT_POINT_COUNT,"==", 1., letterFilter);
-rule("A", T_JUNCTION_RIGHT_POINT_COUNT,"==", 1., letterFilter);
-rule("A", END_POINT_BOTTOM_POINT_COUNT, "==", 2., letterFilter);
-rule("A", HORIZONTAL_LINE_COUNT, "==", 1., letterFilter);
-rule("A", VERTICAL_LINE_COUNT, "==", 0., letterFilter);
-rule("A", END_POINT_COUNT, "==", 2., letterFilter);
-rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
 +------------------------------------------+
 
   The meaning of the rules for A is:
@@ -180,6 +177,23 @@ rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
   [[1]] There are no soft points
 
   []
+
+* Rules for the letter A in ShapeLogic 1.0
+  
+  The same rule set for defining A would take this form in in ShapeLogic 1.0. 
+  For a better description of {{{logic-language.html} logic language syntax}}.
+  
++------------------------------------------+
+rule("A", POINT_COUNT, "==", 5., letterFilter);
+rule("A", HOLE_COUNT, "==", 1., letterFilter);
+rule("A", T_JUNCTION_LEFT_POINT_COUNT,"==", 1., letterFilter);
+rule("A", T_JUNCTION_RIGHT_POINT_COUNT,"==", 1., letterFilter);
+rule("A", END_POINT_BOTTOM_POINT_COUNT, "==", 2., letterFilter);
+rule("A", HORIZONTAL_LINE_COUNT, "==", 1., letterFilter);
+rule("A", VERTICAL_LINE_COUNT, "==", 0., letterFilter);
+rule("A", END_POINT_COUNT, "==", 2., letterFilter);
+rule("A", SOFT_POINT_COUNT, "==", 0., letterFilter);
++------------------------------------------+
 
 * Rules for the letter C in ShapeLogic 0.8
 
